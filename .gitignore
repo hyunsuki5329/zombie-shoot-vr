@@ -1,0 +1,63 @@
+# Unity generated state (also applies to the nested Unity project).
+**/[Ll]ibrary/
+**/[Tt]emp/
+**/[Oo]bj/
+**/[Ll]ogs/
+**/[Uu]ser[Ss]ettings/
+**/[Bb]uild/
+**/[Bb]uilds/
+**/[Mm]emoryCaptures/
+**/[Rr]ecordings/
+**/[Aa]ssets/AssetStoreTools*
+**/[Aa]ssets/AddressableAssetsData/*/*.bin*
+**/[Aa]ssets/StreamingAssets/aa/
+
+# IDE, operating system, and transient test output.
+**/.vs/
+**/.idea/
+*.csproj
+*.sln
+*.slnx
+*.suo
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+*.log
+**/TestResults*.xml
+**/TestResults/
+**/coverage/
+.DS_Store
+Thumbs.db
+Desktop.ini
+__pycache__/
+*.py[cod]
+/tmp/
+
+# Local agent state, original conversation/course materials, and private captures.
+/.codex/
+/.agents/
+/docs/shared-chat-2026-09-18/
+**/RawCaptures/
+**/RawScans/
+**/Captures/
+
+# Credentials and local machine configuration.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.pfx
+*.p12
+*.keystore
+*.jks
+*.ulf
+*.unitypackage
+
+# Keep Unity source assets, their .meta files, Packages, and ProjectSettings.

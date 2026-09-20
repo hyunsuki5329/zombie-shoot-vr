@@ -1,0 +1,16 @@
+{
+  "verifiedAt": "2026-09-20T11:44:02.895686+09:00",
+  "documentBundleVersion": "1.1",
+  "xriManifest": "3.5.1",
+  "xriLock": "3.5.1",
+  "legacyXriReferencesInActiveDocs": 0,
+  "pdfPages": 4,
+  "pdfVisualReview": "All four pages rendered and visually reviewed; no visible clipping or broken Korean glyphs.",
+  "zipEntriesMatchingCurrentFiles": 13,
+  "localLinksChecked": 37,
+  "brokenLocalLinks": [],
+  "archivedFilesMatchingOriginalHashes": 30,
+  "baselineFilesUnchanged": 4,
+  "requirementsAndBalanceUnchanged": true,
+  "unityRuntimeTests": "Not run: documentation-only change."
+}

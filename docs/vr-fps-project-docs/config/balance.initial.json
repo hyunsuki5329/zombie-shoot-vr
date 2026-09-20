@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "status": "proposed_initial_values_not_measured",
+  "player": {"maxHealth":100,"healPerClear":20,"invulnerabilitySeconds":0.5,"moveMetersPerSecond":1.6,"turnDegreesPerSecond":60,"moveRange":[1.0,2.0],"turnRange":[30,90]},
+  "weapon": {"name":"K2","magazineCapacity":30,"shotsPerSecond":10,"bodyDamage":25,"headMultiplier":2,"rangeMeters":60,"twoHandsRequired":true,"rightHandPermanent":true},
+  "reload": {"hand":"left","infiniteSpareMagazines":true,"discardRemainingRounds":true,"chargingHandleRequired":false,"insertDistanceMeters":0.12,"insertAngleDegrees":35},
+  "wave": {"preparationSeconds":8,"firstQuota":6,"quotaIncrement":2,"quotaCap":60,"rangedStartWave":3,"rangedInitialFraction":0.10,"rangedFractionIncrement":0.02,"rangedFractionCap":0.30,"healthScaleIncrement":0.05,"healthScaleCap":2.0,"damageScaleIncrement":0.02,"damageScaleCap":1.5,"spawnIntervalSeconds":2,"visibleSpawnWarningSeconds":1.5},
+  "melee": {"health":100,"speedMetersPerSecond":1.1,"damage":10,"attackRangeMeters":1.2,"windupSeconds":0.65,"attackIntervalSeconds":1.5},
+  "ranged": {"health":80,"speedMetersPerSecond":0.85,"damage":15,"minRangeMeters":2.5,"maxRangeMeters":7,"windupSeconds":0.8,"attackIntervalSeconds":3.5,"projectileSpeedMetersPerSecond":3,"projectileLifetimeSeconds":4},
+  "maps": [{"mapId":"room","maxAlive":4,"maxRangedAlive":1,"minSpawnDistanceMeters":2},{"mapId":"classroom","maxAlive":6,"maxRangedAlive":2,"minSpawnDistanceMeters":3}],
+  "pools": {"droppedMagazines":8,"droppedMagazineLifetimeSeconds":12,"projectiles":12,"corpses":4,"corpseLifetimeSeconds":5,"effects":16},
+  "record": {"primary":"reachedWave","tieBreaker":"kills","perMap":true},
+  "performanceGoal": {"headsetHz":72,"cpuP95Milliseconds":12.5,"gpuP95Milliseconds":12.5,"measured":false}
+}

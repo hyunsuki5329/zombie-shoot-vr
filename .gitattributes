@@ -1,0 +1,32 @@
+* text=auto
+
+*.md text eol=lf
+*.cs text eol=lf
+*.json text eol=lf
+*.py text eol=lf
+*.shader text eol=lf
+*.cginc text eol=lf
+*.asmdef text eol=lf
+*.inputactions text eol=lf
+*.meta text eol=lf
+*.unity text eol=lf
+*.prefab text eol=lf
+*.mat text eol=lf
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.tga binary
+*.tif binary
+*.tiff binary
+*.exr binary
+*.fbx binary
+*.wav binary
+*.mp3 binary
+*.ogg binary
+*.webm binary
+*.mp4 binary
+*.ttf binary
+*.otf binary
+*.pdf binary
+*.zip binary
