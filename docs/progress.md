@@ -17,8 +17,9 @@
 - P03 전체 미완료: T03 기기 시험과 독립 리뷰가 남았다. 이전 독립 리뷰는 에이전트 사용량 제한으로 실패했으며 승인으로 취급하지 않는다. PR은 초안으로 유지한다.
 - P03-b 검증: EditMode 12/12, PlayMode 5/5 통과와 Windows Mono 재빌드 성공. 최초 수정의 정지 중 2cm 상승 회귀를 수평 보정으로 수정했다. [최신 시험·빌드 해시](evidence/p03-boundaries.json). 빌드 경로는 이전 P03-a와 같고 최신 파일로 갱신됐다.
 - P03-b 커밋: `7b39d48`, PR #2에 push 완료. 최신 기기 시험 결과는 대기 중이다.
-- P04-a: FireGate·RunPhase·K2FireControl과 P05의 순수 MagazineState 구현. 새 규칙 시험 17개 중 11개 실패 확인 후 구현했고 최종 EditMode 29/29 통과. [검증 증빙](evidence/p04-firing-rules.json). 실제 K2·손 입력·피해 Raycast·재장전 물체는 아직 연결하지 않았다. 이전 시험장 빌드에 사격 기능이 있다고 해석하지 않는다.
-- P05 실물 재장전 및 P06~P12: 미착수. 다음 실행은 K2Controller·임시 총 프리팹·앞부분 잡기와 벽 차단 통합 시험이다.
+- P04-a: `e13e10e`, FireGate·RunPhase·K2FireControl과 P05의 순수 MagazineState 구현. 최종 EditMode 29/29 통과. [검증 증빙](evidence/p04-firing-rules.json). [PR #3](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/3)은 P03에 의존하는 OPEN / Draft다.
+- P04-b: 오른손 고정 임시 총·왼손 앞부분 근접 잡기·오른손 트리거·피해 Raycast·총구 차단 연결. WorldSolid/Enemy/Weapon/PlayerBody 레이어 구성. 시험장에 명중 표적·잔탄 표시·재사용 트레이서 배치. EditMode 30/30, PlayMode 13/13 통과와 Windows Mono 빌드 성공. [최신 증빙](evidence/p04-weapon-lab.json). 실제 기기 T04/T05/T11과 독립 리뷰는 대기다.
+- P05 실물 재장전 및 P06~P12: 미착수. 다음 실행은 왼손 소유권·탄창 물체·허리 보급·삽입의 연결이다. 현재 시험장은 30발 소진 후 재시작해야 하며 이를 최종 재장전으로 대체하지 않는다.
 
 ## 확인한 환경과 증빙
 
