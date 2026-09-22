@@ -23,7 +23,7 @@
 
 ## 이번 기반 구성
 
-`Assets/VRFPS/Scenes/Tests/InteractionLab.unity`에는 설치된 XRI 3.5.1 Starter Assets의 XR Origin, 좌우 컨트롤러, XR Interaction Manager, 12m 바닥, 두 벽, 1m 큐브와 조명이 있다. 시작 위치 앞 3m에 큐브를 두어 크기·추적 확인에 사용한다.
+`Assets/VRFPS/Scenes/Tests/InteractionLab.unity`에는 설치된 XRI 3.5.1 Starter Assets의 XR Origin, 좌우 컨트롤러, XR Interaction Manager, 12m 바닥, 네 벽, 1m 큐브와 조명이 있다. 시작 위치 앞 3m에 큐브를 두어 크기·추적 확인에 사용한다.
 
 `Combat.unity`에는 같은 XR 기반만 있으며 `Bootstrap.unity`는 후속 메뉴·씬 로딩을 위한 빈 씬이다. 최종 게임 진입점이 아니다. Combat과 InteractionLab은 프로젝트의 `Prefabs/PlayerRig.prefab`과 `Input/VRFPS.inputactions`를 사용한다. 설치된 Starter Assets를 복제하여 입력 참조를 연결했다. P03-a에서 왼쪽 스틱 이동(1.6m/s)과 오른쪽 스틱 연속 회전(60도/s)을 프로젝트 제어기로 연결했다. 총기 조작은 후속 단계다. 사용자의 머리·양손 추적 확인은 이 입력 변경 이전 빌드에 대한 결과다.
 
@@ -65,8 +65,8 @@ $results.'test-run' | Select-Object result,total,passed,failed
 
 ## P03-a 빌드와 남은 T03 검증
 
-현재 `Builds/Windows/InteractionLab/InteractionLab.exe`는 P03-a 이동 구현을 포함한다. 런타임 DLL 해시는 [P03 증빙](../../docs/evidence/p03-locomotion.json)에 있다. 기존 XRI 이동·스냅·중력 공급자는 비활성화했으며 프로젝트 제어기 하나가 CharacterController를 움직인다. 입력 구성 재현 후 `VRFPS.Editor.PlayerLocomotionSetup.Configure`를 batchmode에서 실행하면 프리팹 설정을 재현할 수 있다.
+현재 `Builds/Windows/InteractionLab/InteractionLab.exe`는 P03-b 경계 보완까지 포함한다. 최신 런타임 DLL·씬 빌드 해시는 [P03-b 증빙](../../docs/evidence/p03-boundaries.json)에 있다. 기존 XRI 이동·스냅·중력 공급자는 비활성화했으며 프로젝트 제어기 하나가 CharacterController를 움직인다. 입력 구성 재현 후 `VRFPS.Editor.PlayerLocomotionSetup.Configure`를 batchmode에서 실행하면 프리팹 설정을 재현할 수 있다.
 
 기기에서 왼쪽 스틱 단독 이동, 오른쪽 스틱 단독 연속 회전, 두 스틱 동시 입력, 위·아래를 보며 이동, 숙이기, 큐브·기존 벽에 스틱으로 접근하는 순서로 T03을 확인한다. 기대 결과는 수직 이동 오류나 스냅 회전이 없고 스틱으로 벽을 통과하지 않는 것이다. 머리·양손 표시도 회귀 확인한다. 보고에는 각 동작의 결과와 빌드 식별자를 포함한다.
 
-현재 시험장은 벽이 두 면만 있다. 열린 바닥 경계와 실제 머리를 가상 벽 너머로 움직이는 경우의 대응은 미완성이므로 P03 전체 통과를 주장하지 않는다. 일시정지 인터페이스는 자동 시험으로 확인했지만 사용자 메뉴는 아직 없다.
+P03-b 소스에서는 네 면에 벽을 구성하고 실제 머리의 수평 이동 경로도 캡슐로 검사한다. 벽에 막힌 이동량만 XR 원점의 수평 위치로 보정하며 추적된 머리 local pose는 유지한다. 벽 밀착·기울이기·돌아오기·재중심 시 편안함과 양안 표시를 실제 기기에서 확인해야 한다. 물리 공간에서 사람을 멈추는 기능이 아니다. 일시정지 인터페이스는 자동 시험으로 확인했지만 사용자 메뉴는 아직 없다.

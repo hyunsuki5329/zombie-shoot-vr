@@ -1,0 +1,54 @@
+{
+  "date": "2026-09-22",
+  "scope": "P03-b: complete lab boundaries and sweep horizontal HMD tracking",
+  "baseCommit": "e959ef4f23b331fcd16e3219cedb98a2a643d405",
+  "red": {
+    "head": "1 of 5 failed: tracked head crossed thin wall",
+    "regression": "first green attempt failed pause-origin invariant by 0.02 m vertical depenetration; fixed by horizontal-only correction",
+    "boundary": "1 of 3 failed: missing back-facing boundary"
+  },
+  "tests": {
+    "play": {
+      "total": "5",
+      "sha256": "8576D9F284BA667915C2DDDCB61D53DC84CDD8E87040949B752D7F92B814EDA6",
+      "failed": "0",
+      "result": "Passed",
+      "xml": "tmp/p03-boundaries/final-play.xml",
+      "passed": "5"
+    },
+    "edit": {
+      "total": "12",
+      "sha256": "6A9FCBFD7EB33857010A596C4CF1312845251566C935C19C9D0BC45BBBF639D0",
+      "failed": "0",
+      "result": "Passed",
+      "xml": "tmp/p03-boundaries/final-edit.xml",
+      "passed": "12"
+    }
+  },
+  "build": {
+    "log": "tmp/p03-boundaries/build.log",
+    "result": "Succeeded",
+    "exitCode": 0,
+    "backend": "Windows x64 Mono development"
+  },
+  "hardware": "T03 and comfort/recenter acceptance pending",
+  "review": "Independent review still pending; earlier agent attempt failed on usage limit",
+  "hashes": [
+    {
+      "sha256": "1547824839AD82FB884C17183A5604BF1C39DBF6C0338A40E70747C89686D006",
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/Player/PlayerRigController.cs"
+    },
+    {
+      "sha256": "494CD0B57069048E798F06B9D8DBDA16C3810B675B1D8A1CC7165830B9E44C71",
+      "path": "Zombie Shoot VR/Assets/VRFPS/Scenes/Tests/InteractionLab.unity"
+    },
+    {
+      "sha256": "D4CA63D98CF83C769C1EB6265BDBA0F09188F197E91865B86F7F7ACADDECB52D",
+      "path": "Zombie Shoot VR/Builds/Windows/InteractionLab/InteractionLab_Data/Managed/VRFPS.Runtime.dll"
+    },
+    {
+      "sha256": "B5FE9DE5D15F0F0E24410A77F0C5CCC733EF8678B27EA07C3D0B3D3555D94AAF",
+      "path": "Zombie Shoot VR/Builds/Windows/InteractionLab/InteractionLab_Data/level0"
+    }
+  ]
+}

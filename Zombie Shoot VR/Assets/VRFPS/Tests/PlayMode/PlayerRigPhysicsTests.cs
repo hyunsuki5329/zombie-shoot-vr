@@ -52,6 +52,23 @@ namespace VRFPS.Tests
         }
 
         [Test]
+        public void PhysicalHeadMotionCannotCrossThinWallAndPreservesLocalTracking()
+        {
+            wall = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            wall.transform.position = new Vector3(0, 1.5f, 2);
+            wall.transform.localScale = new Vector3(10, 3, 0.2f);
+            movement.Tick(Vector2.zero, Vector2.zero, 1f / 60);
+            Physics.SyncTransforms();
+            head.localPosition = new Vector3(0, 1.7f, 4);
+            movement.Tick(Vector2.zero, Vector2.zero, 1f / 60);
+            Assert.That(head.position.z, Is.InRange(1.5f, 1.85f));
+            Assert.That(head.localPosition.z, Is.EqualTo(4));
+            var stopped = head.position.z;
+            movement.Tick(Vector2.zero, Vector2.zero, 1f / 60);
+            Assert.That(head.position.z, Is.EqualTo(stopped).Within(0.001f));
+        }
+
+        [Test]
         public void TurnIsContinuousAndKeepsOffsetHeadAtPivot()
         {
             head.localPosition = new Vector3(0.6f, 1.7f, -0.3f);

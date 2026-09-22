@@ -38,6 +38,16 @@ namespace VRFPS.Tests
                 Assert.That(scaleReference, Is.Not.Null);
                 Assert.That(scaleReference.GetComponent<BoxCollider>(), Is.Not.Null);
                 Assert.That(scaleReference.transform.localScale, Is.EqualTo(Vector3.one));
+                // The lab must stop locomotion before every edge of its 12 m floor.
+                foreach (var direction in new[] { Vector3.forward, Vector3.back, Vector3.left, Vector3.right })
+                {
+                    var ray = new Ray(new Vector3(0, 1.5f, 0), direction);
+                    Assert.That(scene.GetRootGameObjects()
+                        .SelectMany(root => root.GetComponentsInChildren<Collider>())
+                        .Any(collider => collider.enabled && !collider.isTrigger &&
+                            collider.Raycast(ray, out _, 6f)), Is.True,
+                        "Missing solid boundary in direction " + direction);
+                }
             }
             finally
             {

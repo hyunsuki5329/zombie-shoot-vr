@@ -43,6 +43,29 @@ namespace VRFPS.Player
             if (capsule == null) capsule = GetComponent<CharacterController>();
             var headLocal = transform.InverseTransformPoint(head.position);
             capsule.height = Mathf.Clamp(headLocal.y, capsule.radius * 2, 2.5f);
+            if (capsule.enabled)
+            {
+                // Sweep the physical tracking displacement from the previous capsule center.
+                // Cancel the requested origin translation afterwards: free tracking causes no
+                // origin motion, while blocked tracking offsets the origin by the collision error.
+                // The HMD's tracked local pose is never overwritten.
+                var trackingDelta = transform.TransformVector(new Vector3(
+                    headLocal.x - capsule.center.x, 0, headLocal.z - capsule.center.z));
+                capsule.center = new Vector3(capsule.center.x, capsule.height * 0.5f, capsule.center.z);
+                if (trackingDelta.sqrMagnitude > 0.00000001f)
+                {
+                    var originY = transform.position.y;
+                    var stepOffset = capsule.stepOffset;
+                    capsule.stepOffset = 0;
+                    capsule.Move(trackingDelta);
+                    capsule.stepOffset = stepOffset;
+                    var corrected = transform.position - trackingDelta;
+                    // Physical horizontal tracking must not apply step-up or floor depenetration
+                    // to the origin's height, especially while virtual locomotion is paused.
+                    corrected.y = originY;
+                    transform.position = corrected;
+                }
+            }
             capsule.center = new Vector3(headLocal.x, capsule.height * 0.5f, headLocal.z);
             if (!locomotionEnabled || deltaTime <= 0 || !capsule.enabled) return;
 
