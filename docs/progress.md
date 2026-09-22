@@ -1,24 +1,25 @@
 # Goal 실행 현황
 
-갱신: 2026-09-22. 전체 목표는 미완료이며 진행 중이다.
+갱신: 2026-09-23. 전체 목표는 미완료이며 진행 중이다.
 
 ## 현재 작업
 
 - 기준 커밋: `a400ecb194c40fd082ef549ea798ca512c4cd411`.
-- 브랜치: `codex/p04-two-hand-fire` (P03의 `7b39d48`에서 분기, P03 PR에 의존).
-- P01-a 구현 커밋: `5a8dc1d844bf5aacd53a522a894bca3eee7c91d3`. [PR #1](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/1)은 OPEN / Draft이며 병합하지 않았다. 로컬·원격 커밋 일치를 확인했다. GitHub CI는 없으며 로컬 Unity 검증 결과를 사용한다.
+- 브랜치: `codex/p05-manual-reload`. 원격 P04 병합 커밋 `ec79139`로 fast-forward했으며 파일 내용은 `800b562`와 동일함을 확인했다.
+- P01-a 구현 커밋: `5a8dc1d844bf5aacd53a522a894bca3eee7c91d3`. [PR #1](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/1)은 원격에서 main에 병합됨(`e0e3be2`). GitHub CI는 없으며 로컬 Unity 검증 결과를 사용한다.
 - P01-a 구현·자동 검증 완료: Unity 환경 확인, EditMode 시험 어셈블리와 InteractionLab 구성, Windows Mono 개발 빌드. 증빙: [시험·빌드·소스 해시](evidence/p01-foundation.json), [환경 및 실행 절차](../Zombie%20Shoot%20VR/Docs/environment.md).
 - P01 실기 확인: 사용자가 VR 실행과 머리·양손 추적 정상 동작을 확인했다(2026-09-22). [VD 설정·실기 보고](evidence/2026-09-22-vd-hardware-check.md). 전용 입력 구성과 양안 가림 등 후속 검증까지 완료한 것으로 확대하지 않는다.
 - P02 실제 촬영본과 기준 길이 2개: 대기. 촬영 경로를 확인하고 나면 작은 공간 검증을 진행한다.
 - P01-b: `47ceb4c`에서 프로젝트 전용 VRFPS.inputactions와 PlayerRig를 생성하고 Combat·InteractionLab에 연결했다. 입력 시험 3개가 연결 전 실패했고 연결 후 기존 시험을 포함한 EditMode 6/6이 통과했다. 아래 P03 빌드에도 포함되며 새 입력의 실기는 대기 중이다.
 - P03-a 구현·자동 검증: HMD 평면 방향 이동(1.6m/s), 머리 위치 중심 연속 회전(60도/s), CharacterController 높이·중심 갱신, 가상 이동 정지 인터페이스. 런타임·PlayMode 어셈블리 구성. EditMode 12/12, PlayMode 4/4 통과, Windows Mono 시험장 빌드 성공. [증빙](evidence/p03-locomotion.json).
-- P03-a 커밋: `e959ef4`, [PR #2](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/2) OPEN / Draft. P01 PR #1을 기반으로 하며 아직 병합하지 않았다.
+- P03-a 커밋: `e959ef4`, [PR #2](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/2)는 원격에서 codex/p01-environment에 병합됨(`9106a2d`). 해당 이동 변경을 main에 올리는 [PR #4](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/4)는 OPEN이다.
 - P03-b 진행: 실제 머리의 수평 이동을 캡슐로 sweep하고 막힌 이동량만 XR 원점에서 보정한다. HMD의 local pose는 변경하지 않는다. 시험장의 열린 두 면에 벽을 추가했다. 경계 누락과 얇은 벽을 통과하는 머리 이동의 재현 시험이 각각 실패함을 확인한 뒤 수정했다.
-- P03 전체 미완료: T03 기기 시험과 독립 리뷰가 남았다. 이전 독립 리뷰는 에이전트 사용량 제한으로 실패했으며 승인으로 취급하지 않는다. PR은 초안으로 유지한다.
+- P03 실기: 2026-09-23 사용자가 왼쪽 이동·오른쪽 연속 회전·두 스틱 동시·위아래 보며 이동을 확인했다. [실기 기록](evidence/2026-09-23-vr-movement-fire-check.md). 벽 밀착·복귀·재중심의 편안함과 독립 리뷰는 아직 남았다. 이전 리뷰의 사용량 제한 실패를 승인으로 취급하지 않으며 원격 병합 상태와 검증 상태를 구분한다.
 - P03-b 검증: EditMode 12/12, PlayMode 5/5 통과와 Windows Mono 재빌드 성공. 최초 수정의 정지 중 2cm 상승 회귀를 수평 보정으로 수정했다. [최신 시험·빌드 해시](evidence/p03-boundaries.json). 빌드 경로는 이전 P03-a와 같고 최신 파일로 갱신됐다.
-- P03-b 커밋: `7b39d48`, PR #2에 push 완료. 최신 기기 시험 결과는 대기 중이다.
-- P04-a: `e13e10e`, FireGate·RunPhase·K2FireControl과 P05의 순수 MagazineState 구현. 최종 EditMode 29/29 통과. [검증 증빙](evidence/p04-firing-rules.json). [PR #3](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/3)은 P03에 의존하는 OPEN / Draft다.
+- P03-b 커밋: `7b39d48`, PR #2에 포함됨. 위 실기 기록을 함께 따른다.
+- P04-a: `e13e10e`, FireGate·RunPhase·K2FireControl과 P05의 순수 MagazineState 구현. 최종 EditMode 29/29 통과. [검증 증빙](evidence/p04-firing-rules.json). [PR #3](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/3)은 원격에서 codex/p03-locomotion에 병합됨(`ec79139`). P04는 아직 main 및 PR #4의 head에 포함되지 않는다.
 - P04-b: 오른손 고정 임시 총·왼손 앞부분 근접 잡기·오른손 트리거·피해 Raycast·총구 차단 연결. WorldSolid/Enemy/Weapon/PlayerBody 레이어 구성. 시험장에 명중 표적·잔탄 표시·재사용 트레이서 배치. EditMode 30/30, PlayMode 13/13 통과와 Windows Mono 빌드 성공. [최신 증빙](evidence/p04-weapon-lab.json). 실제 기기 T04/T05/T11과 독립 리뷰는 대기다.
+- P04-b 실기: 2026-09-23 사용자가 양손 사격과 표적 명중을 확인했다. 위 P04-b 항목의 기기 대기는 당시 상태이며, 현재 남은 범위는 오른손 해제 시 고정·한 손 차단·앞부분 해제 차단·벽 차단과 독립 리뷰다.
 - P05 실물 재장전 및 P06~P12: 미착수. 다음 실행은 왼손 소유권·탄창 물체·허리 보급·삽입의 연결이다. 현재 시험장은 30발 소진 후 재시작해야 하며 이를 최종 재장전으로 대체하지 않는다.
 
 ## 확인한 환경과 증빙
