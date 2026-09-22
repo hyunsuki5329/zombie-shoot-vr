@@ -1,6 +1,6 @@
 # P01 환경과 시험장
 
-확인일: 2026-09-22. 전체 P01 및 실제 기기 인수 시험 T01은 아직 미완료다.
+확인일: 2026-09-22. 사용자가 VR 실행·머리·양손 추적 정상 동작을 확인했다. 전체 P01 구성과 후속 인수 검증은 진행 중이다.
 
 | 항목 | 확인값 |
 |---|---|
@@ -14,8 +14,12 @@
 | AI Navigation | 미설치, 후속 구성 필요 |
 | OpenXR ActiveRuntime | `C:/Program Files/Virtual Desktop Streamer/OpenXR/virtualdesktop-openxr.json` |
 | Virtual Desktop Streamer | 설치 실행 파일 버전 1.34.22.0 |
-| Quest Pro 연결 | 사용자 연결 가능 확인, 실제 실행 결과 미확인 |
-| 주사율·해상도·코덱·비트레이트·보간 | 실제 HMD 설정 미확인 |
+| Quest Pro 연결 | 사용자가 VR 실행·머리·양손 추적 정상 확인 |
+| VR 스트리밍 | High, 표시 해상도 2496×2688, 90Hz, 270Mbps |
+| 보간·업스케일 | SSW Always enabled, SGSR 켜짐 |
+| 코덱 | 제공된 사진에서 미확인 |
+
+상세 설정과 확인 범위는 [실기 증빙](../../docs/evidence/2026-09-22-vd-hardware-check.md)을 따른다. 현재 90Hz·SSW 켜짐 프로필을 계획의 72Hz·보간 끔 성능 검증과 혼동하지 않는다.
 
 ## 이번 기반 구성
 

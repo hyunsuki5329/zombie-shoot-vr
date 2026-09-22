@@ -8,7 +8,7 @@
 - 브랜치: `codex/p01-environment`.
 - P01-a 구현 커밋: `5a8dc1d844bf5aacd53a522a894bca3eee7c91d3`. [PR #1](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/1)은 OPEN / Draft이며 병합하지 않았다. 로컬·원격 커밋 일치를 확인했다. GitHub CI는 없으며 로컬 Unity 검증 결과를 사용한다.
 - P01-a 구현·자동 검증 완료: Unity 환경 확인, EditMode 시험 어셈블리와 InteractionLab 구성, Windows Mono 개발 빌드. 증빙: [시험·빌드·소스 해시](evidence/p01-foundation.json), [환경 및 실행 절차](../Zombie%20Shoot%20VR/Docs/environment.md).
-- P01 실기 완료 조건 T01: 대기. 실제 Quest Pro 양안·머리·양손 입력 시험을 아직 수행하지 않았다.
+- P01 실기 확인: 사용자가 VR 실행과 머리·양손 추적 정상 동작을 확인했다(2026-09-22). [VD 설정·실기 보고](evidence/2026-09-22-vd-hardware-check.md). 전용 입력 구성과 양안 가림 등 후속 검증까지 완료한 것으로 확대하지 않는다.
 - P02 실제 촬영본과 기준 길이 2개: 대기. 촬영 경로를 확인하고 나면 작은 공간 검증을 진행한다.
 - P03~P12: 미착수. 상세 체크리스트는 기존 구현 계획을 따른다.
 - 다음 실행: P01-b에서 프로젝트 전용 입력 자산과 런타임·PlayMode 어셈블리를 구성하고, 시험장의 실제 기기 결과를 반영한다. 촬영 대기 중에도 시험장에서 P03 이후 구현을 진행할 수 있다.
@@ -19,7 +19,7 @@
 - 기존 프로젝트의 batchmode 임포트·컴파일은 2026-09-22 정상 종료했다. 로컬 로그: `tmp/p01/baseline.log`, 끝의 반환 코드 0 확인.
 - Test Framework 1.6.0은 잠금 파일에 존재한다. AI Navigation은 아직 설치되지 않았다.
 - Windows OpenXR ActiveRuntime: Virtual Desktop의 `virtualdesktop-openxr.json`.
-- 설치된 Virtual Desktop Streamer 실행 파일 버전: 1.34.22.0. 실제 HMD 설정·연결·72Hz·해상도·코덱·비트레이트는 미확인.
+- Virtual Desktop Streamer 1.34.22.0, 헤드셋 앱 1.34.22 - 207. 사용자 화면: High, 표시 해상도 2496×2688, 90Hz, 270Mbps, SSW Always enabled, SGSR 켜짐. 코덱 미확인. 현재 프로필과 계획의 72Hz·보간 끔 성능 시험을 구분한다.
 - 지정된 `.github/agents/*_agent.prompt.md`와 `main_instruction.prompt.md`는 현재 저장소에 없다. 해당 파일의 규칙을 추측하지 않는다.
 
 ## 실행 판단 기록
@@ -27,7 +27,7 @@
 - Ruling: 기존 Unity 경로 유지와 필요한 경우에만 worktree를 사용하는 Goal 지침에 따라 현재 깨끗한 체크아웃의 작업 브랜치를 사용한다. 병렬 에디터는 실행하지 않는다. 비용: 같은 경로에서 사용자가 동시에 수정하면 충돌을 확인해야 한다.
 - Ruling: 실행 스킬의 task-start는 `Task 1` 헤더를 요구하지만 승인된 계획은 `P01` 헤더를 사용한다. 계획 원문을 바꾸지 않고 P 번호로 작업과 증빙을 기록한다. 비용: 스킬 자동 장부 대신 진행 문서를 직접 유지한다.
 - Ruling: Windows IL2CPP 모듈이 없어 시험장 빌드에 설치된 Mono를 사용한다. 빌드 메서드는 원래 백엔드를 복원한다. 비용: 최종 게임의 백엔드가 달라지면 해당 빌드로 성능·동작을 다시 검증해야 한다.
-- P01-a RED→GREEN: 전용 씬 부재로 환경 시험 3개 실패 후, 씬 생성으로 3개 통과. 리뷰 후 최종 EditMode 재실행도 3/3 통과. Windows Mono 개발 빌드 성공과 실행 파일을 확인했다. 실제 기기 실행 통과는 아직 주장하지 않는다.
+- P01-a RED→GREEN: 전용 씬 부재로 환경 시험 3개 실패 후, 씬 생성으로 3개 통과. 리뷰 후 최종 EditMode 재실행도 3/3 통과. Windows Mono 개발 빌드 성공과 실행 파일을 확인했다. 이후 사용자 회신으로 VR 실행·머리·양손 추적 정상 결과를 확보했다. 최초 자동 검증 JSON의 hardware 대기는 당시 상태이며 새 실기 증빙을 함께 읽는다.
 - 엔진 생성 변경: 빌드·시험의 URP 사전 계산·OpenXR 참조 갱신·UnityConnect 변경은 원래 파일을 백업 후 복원했다. 빌드 실패 중 일시 이동된 XR simulation 파일 4개도 원본 내용 일치를 확인하고 복원했다. 로컬 증빙은 `tmp/p01/`에 유지한다.
 - 리뷰: 중대한 지적 없음. 모든 열린 씬의 미저장 상태를 확인하도록 시험 보호를 보완했다. Minor deferred: `SharedSceneCanBeLoaded` 이름과 달리 해당 시험은 씬 자산의 존재를 확인한다. 실제 로드·XR 구성 검사는 별도 InteractionLab 시험이 담당한다.
 - 리뷰 범위 밖 판정: 실기·VD·편안함은 실제 기기 결과로 판정하고, 전용 입력·연속 회전·런타임·PlayMode 어셈블리·Bootstrap 동작은 후속 구현 대상으로 남긴다. 비용: P01 전체 완료나 최종 플레이 가능 상태로 해석해서는 안 된다. Mono 빌드와 엔진 생성 변경은 실행자가 최종 로그·diff로 확인한다.
