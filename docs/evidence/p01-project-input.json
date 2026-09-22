@@ -1,0 +1,45 @@
+{
+  "date": "2026-09-22",
+  "scope": "P01-b project-owned XRI input and PlayerRig",
+  "red": {
+    "failed": 3,
+    "total": 3,
+    "xml": "tmp/p01b/red-connected.xml"
+  },
+  "green": {
+    "passed": 6,
+    "failed": 0,
+    "sha256": "85BB9921AEE374C2FFD76323D46AB95A54DB6D7D4701333550CBDC122864F2BF",
+    "total": 6,
+    "xml": "tmp/p01b/green.xml"
+  },
+  "setup": {
+    "log": "tmp/p01b/setup-canonical.log",
+    "exitCode": 0
+  },
+  "repeatSetup": {
+    "exitCode": 0,
+    "inputPrefabAndSceneHashesUnchanged": true,
+    "log": "tmp/p01b/setup-repeat.log"
+  },
+  "sourceHashes": [
+    {
+      "sha256": "45D1726786785752863ED43001CFD50D13B277D4E0A74B8DDA2F0094B73F246A",
+      "path": "Zombie Shoot VR/Assets/VRFPS/Editor/ProjectInputSetup.cs"
+    },
+    {
+      "sha256": "4E7994F5D64D6BAB93B1D32200C54EDE710985284DDE43D572517AD252C1DBFD",
+      "path": "Zombie Shoot VR/Assets/VRFPS/Tests/EditMode/ProjectInputTests.cs"
+    },
+    {
+      "sha256": "DD4C6A56251E25304D792E7B74C9CB3F79848F644EE7E40CC4345396710B21FC",
+      "path": "Zombie Shoot VR/Assets/VRFPS/Input/VRFPS.inputactions"
+    },
+    {
+      "sha256": "166E451D35EBFC7D1AE15F5DCD163A15A99FD362B77CC5A8DC77127B3AB15341",
+      "path": "Zombie Shoot VR/Assets/VRFPS/Prefabs/PlayerRig.prefab"
+    }
+  ],
+  "hardware": "Not retested for this input revision; earlier user tracking result applies to prior build",
+  "build": "Not rebuilt for this input revision"
+}

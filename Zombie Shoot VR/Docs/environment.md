@@ -25,7 +25,7 @@
 
 `Assets/VRFPS/Scenes/Tests/InteractionLab.unity`에는 설치된 XRI 3.5.1 Starter Assets의 XR Origin, 좌우 컨트롤러, XR Interaction Manager, 12m 바닥, 두 벽, 1m 큐브와 조명이 있다. 시작 위치 앞 3m에 큐브를 두어 크기·추적 확인에 사용한다.
 
-`Combat.unity`에는 같은 XR 기반만 있으며 `Bootstrap.unity`는 후속 메뉴·씬 로딩을 위한 빈 씬이다. 최종 게임 진입점이 아니다. 현재 시험장 입력은 Starter Assets를 참조하며 전용 입력 자산·게임 조작은 후속 작업에서 연결한다.
+`Combat.unity`에는 같은 XR 기반만 있으며 `Bootstrap.unity`는 후속 메뉴·씬 로딩을 위한 빈 씬이다. 최종 게임 진입점이 아니다. Combat과 InteractionLab은 프로젝트의 `Prefabs/PlayerRig.prefab`과 `Input/VRFPS.inputactions`를 사용한다. 설치된 Starter Assets를 복제하여 입력 참조를 연결했으며, 연속 회전·총기 조작 등 게임 전용 동작은 후속 단계에서 구현한다. 사용자의 머리·양손 추적 확인은 이 입력 변경 이전 빌드에 대한 결과다.
 
 ## 재현 명령
 
@@ -44,6 +44,10 @@ $results.'test-run' | Select-Object result,total,passed,failed
 ```
 
 초기 씬이 없는 체크아웃에서만 `-batchmode -quit -executeMethod VRFPS.Editor.ProjectSetup.CreateFoundationScenes`로 생성할 수 있다. 기존 씬은 덮어쓰지 않는다. 이미 저장소에 있는 씬은 다시 생성할 필요가 없다.
+
+전용 입력 구성은 `-batchmode -nographics -quit -executeMethod VRFPS.Editor.ProjectInputSetup.Configure`에 같은 `-projectPath`와 별도 `-logFile`을 지정하여 재현한다. 기존 전용 자산은 유지하고, 수정된 샘플 리그의 자동 교체는 거부한다. 정상 입력 참조와 두 씬의 활성 입력 자산은 EditMode 시험으로 확인한다.
+
+이 도구의 최초 리그 교체는 현재의 초기 기반 씬 두 개에만 적용한다. 다른 객체가 리그·카메라·컨트롤러를 참조하거나 리그에 부모를 추가한 씬의 마이그레이션에는 사용하지 않는다. 해당 관계는 자동 보존하지 않는다. 현재 두 씬에는 이 관계가 없음을 리뷰에서 확인했다.
 
 시험장 Windows 개발 빌드는 `-batchmode -quit -buildTarget Win64 -executeMethod VRFPS.Editor.ProjectSetup.BuildInteractionLab`과 같은 `-projectPath`, 별도 `-logFile`을 사용한다. 현재 Windows IL2CPP 모듈이 없어 최초 빌드는 실패했다. 시험장 빌드 메서드는 설치된 Mono 백엔드를 명시적으로 사용하고 종료 시 기존 백엔드 설정을 복원한다. 최종 게임의 백엔드 선택을 확정한 것은 아니다.
 
