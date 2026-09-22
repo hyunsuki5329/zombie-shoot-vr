@@ -1,0 +1,55 @@
+{
+  "date": "2026-09-22",
+  "scope": "P04-a firing rules with P05 magazine state dependency",
+  "baseCommit": "7b39d4833fbac564e168af480501fd9636690a27",
+  "red": {
+    "failed": 11,
+    "xml": "tmp/p04/red.xml",
+    "passed": 6,
+    "total": 17
+  },
+  "green": {
+    "failed": 0,
+    "xml": "tmp/p04/green.xml",
+    "passed": 29,
+    "total": 29,
+    "sha256": "D36101B8DFE87315B1E5D72DD72B02512EF731D92488570B85FDB425844BF3CB"
+  },
+  "coverage": [
+    "Foregrip and active phase required",
+    "Missing magazine and empty magazine distinguished",
+    "Blocked muzzle and released trigger do not consume ammo",
+    "0.1 s cadence and no delayed catch-up burst",
+    "Partial reload discards remaining rounds",
+    "Duplicate insertion refused",
+    "Empty magazine remains inserted and never goes negative",
+    "Invalid clock leaves ammo and cadence unchanged"
+  ],
+  "pending": [
+    "K2Controller and actual left-hand input integration",
+    "WorldSolid raycast and damage integration",
+    "Physical magazine token ownership and socket checks",
+    "Weapon prefab and licensed model",
+    "Headset T04/T05/T11",
+    "Independent review"
+  ],
+  "build": "No new standalone build: runtime rules are not yet connected to scene weapon",
+  "hashes": [
+    {
+      "sha256": "50267AEC3403217A39EF9AEB0F9D09DA86D0638AFCC0F07A06451F3CFA968CCF",
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/Weapons/FireGate.cs"
+    },
+    {
+      "sha256": "9F1C0871BCA89EDA0E6EBD34855A3505A2D93C5316C6D5DAC49B2C9450353D1E",
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/Weapons/K2FireControl.cs"
+    },
+    {
+      "sha256": "66C767DC287072F4CD152711B1F360EBA56188EECD63FB038AF0A240126B8C45",
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/Weapons/MagazineState.cs"
+    },
+    {
+      "sha256": "3985F888C68BDE86B4CCDBDEF3C92608D1090B560B9F553E963D69665B129BE5",
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/Progression/RunPhase.cs"
+    }
+  ]
+}
