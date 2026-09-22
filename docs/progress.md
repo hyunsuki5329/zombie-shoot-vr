@@ -6,10 +6,12 @@
 
 - 기준 커밋: `a400ecb194c40fd082ef549ea798ca512c4cd411`.
 - 브랜치: `codex/p01-environment`.
+- P01-a 구현 커밋: `5a8dc1d844bf5aacd53a522a894bca3eee7c91d3`. [PR #1](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/1)은 OPEN / Draft이며 병합하지 않았다. 로컬·원격 커밋 일치를 확인했다. GitHub CI는 없으며 로컬 Unity 검증 결과를 사용한다.
 - P01-a 구현·자동 검증 완료: Unity 환경 확인, EditMode 시험 어셈블리와 InteractionLab 구성, Windows Mono 개발 빌드. 증빙: [시험·빌드·소스 해시](evidence/p01-foundation.json), [환경 및 실행 절차](../Zombie%20Shoot%20VR/Docs/environment.md).
 - P01 실기 완료 조건 T01: 대기. 실제 Quest Pro 양안·머리·양손 입력 시험을 아직 수행하지 않았다.
 - P02 실제 촬영본과 기준 길이 2개: 대기. 촬영 경로를 확인하고 나면 작은 공간 검증을 진행한다.
 - P03~P12: 미착수. 상세 체크리스트는 기존 구현 계획을 따른다.
+- 다음 실행: P01-b에서 프로젝트 전용 입력 자산과 런타임·PlayMode 어셈블리를 구성하고, 시험장의 실제 기기 결과를 반영한다. 촬영 대기 중에도 시험장에서 P03 이후 구현을 진행할 수 있다.
 
 ## 확인한 환경과 증빙
 
