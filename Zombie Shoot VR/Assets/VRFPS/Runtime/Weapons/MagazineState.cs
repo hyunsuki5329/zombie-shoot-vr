@@ -3,6 +3,7 @@ namespace VRFPS
     public sealed class MagazineState
     {
         readonly int capacity;
+        public int Capacity => capacity;
         public int Rounds { get; private set; }
         public bool Inserted { get; private set; }
         public MagazineState(int capacity)
