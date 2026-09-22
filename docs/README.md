@@ -3,6 +3,7 @@
 현재 기준: **2026-09-20, 문서 묶음 1.1**
 
 - [전체 개발 문서](vr-fps-project-docs/README.md)
+- [Goal 실행 현황과 검증 결과](progress.md)
 - [방 촬영 가이드: 앱 스캔·사진·영상 선택](vr-fps-project-docs/05-capture-map-workflow.md)
 - [개발 계획서](vr-fps-project-docs/01-development-plan.md)
 - [Goal 실행 프롬프트: 구현·검증·커밋·PR·병합](prompts/vr-zombie-fps-goal.md)

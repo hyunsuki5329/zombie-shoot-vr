@@ -1,0 +1,60 @@
+{
+  "date": "2026-09-22",
+  "baselineCommit": "a400ecb194c40fd082ef549ea798ca512c4cd411",
+  "scope": "P01-a foundation only; P01/T01 hardware acceptance pending",
+  "unity": "6000.3.23f1",
+  "red": {
+    "total": 3,
+    "failed": 3,
+    "cause": "Dedicated lab, Bootstrap and Combat scenes absent"
+  },
+  "finalEditMode": {
+    "total": 3,
+    "passed": 3,
+    "failed": 0,
+    "cases": [
+      {
+        "name": "VRFPS.Tests.EnvironmentTests.InteractionLabProvidesTrackedCameraAndSolidScaleReference",
+        "result": "Passed"
+      },
+      {
+        "name": "VRFPS.Tests.EnvironmentTests.SharedSceneCanBeLoaded(\"Assets/VRFPS/Scenes/Bootstrap.unity\")",
+        "result": "Passed"
+      },
+      {
+        "name": "VRFPS.Tests.EnvironmentTests.SharedSceneCanBeLoaded(\"Assets/VRFPS/Scenes/Combat.unity\")",
+        "result": "Passed"
+      }
+    ]
+  },
+  "windowsBuild": {
+    "result": "Succeeded",
+    "backend": "Mono",
+    "configuration": "Development",
+    "relativeExe": "Zombie Shoot VR/Builds/Windows/InteractionLab/InteractionLab.exe",
+    "exeSha256": "56c28afba054092826b7a8a80ba3767daa87967f182c0c562eb2f98799175b7a",
+    "unityPlayerSha256": "a56336022ab3c15ec474c09198f8389bd3448bb54d67c928eefe20b1c77686c2",
+    "logSha256": "41a172c74b198bbd08ce04209c03157ab88d2063885b66a8f44dd7e918d1852e"
+  },
+  "hardware": "Not run; awaiting user report",
+  "sourceSha256": {
+    "Zombie Shoot VR/Assets/VRFPS/Editor/ProjectSetup.cs": "f6a13aee56f8c361910df032cea28c511fc1b7ffb7f1a8a941ae84c0c4c0f2fb",
+    "Zombie Shoot VR/Assets/VRFPS/Editor/ProjectSetup.cs.meta": "519225b77f58131c2159d5077d9d8282202619be4b973f344735b1ae58ed7c95",
+    "Zombie Shoot VR/Assets/VRFPS/Editor.meta": "9b3cc0e5bb3ab0ff1cdd6cee4c66221f088e60e9cbbc2f82c4aac76b1fc9e6f3",
+    "Zombie Shoot VR/Assets/VRFPS/Scenes/Bootstrap.unity": "2dab5017419a2ee28505c5594da8f22a492895f3ae30dd8afc70a6a0c52ddc1a",
+    "Zombie Shoot VR/Assets/VRFPS/Scenes/Bootstrap.unity.meta": "d03590d57826b753fc4a0c5e71a450da4f6431b719c5617de3ab5adbafba546d",
+    "Zombie Shoot VR/Assets/VRFPS/Scenes/Combat.unity": "aed6a855d85ab5ca6abce95ada11e96fa2102adb799a23d3fedcf1d1c0342f75",
+    "Zombie Shoot VR/Assets/VRFPS/Scenes/Combat.unity.meta": "1b32156b9ef6cb067395ac6ea3f6dbe8f08c6389e1e2c451de07deb6fb5c083d",
+    "Zombie Shoot VR/Assets/VRFPS/Scenes/Tests/InteractionLab.unity": "49a732da9d50b94278a7331aa7621a64905cf66acfa14e59bcfb06e00019ae57",
+    "Zombie Shoot VR/Assets/VRFPS/Scenes/Tests/InteractionLab.unity.meta": "8ab8f22900b78ec1f55e6b23e4843ae8bbfe3b5cf552a0602c11d41e4219f700",
+    "Zombie Shoot VR/Assets/VRFPS/Scenes/Tests.meta": "16cb4e212557c80f06c2826ecb9b567f3a1423489d828888ea40e4dffc202e34",
+    "Zombie Shoot VR/Assets/VRFPS/Scenes.meta": "639c415339a30890d16a3c300d4b34e83eff3cf1058d045848dde1ac0521a900",
+    "Zombie Shoot VR/Assets/VRFPS/Tests/EditMode/EnvironmentTests.cs": "d6f1b49e31b1258dfa405ceb691706af306afe62fd1b2e66fdc95fe990c19f5d",
+    "Zombie Shoot VR/Assets/VRFPS/Tests/EditMode/EnvironmentTests.cs.meta": "4b1c7597e05f7e26bb9165652d4f881f59d5ae86add867788ba8a47e57918eb3",
+    "Zombie Shoot VR/Assets/VRFPS/Tests/EditMode/VRFPS.EditModeTests.asmdef": "e466e8eda329b9856fd4b3678f8031f5ce9335e05b147f15a81e1684bdf5eb49",
+    "Zombie Shoot VR/Assets/VRFPS/Tests/EditMode/VRFPS.EditModeTests.asmdef.meta": "adcd2b039ee18a085af75eda4328ba7d2852eadf2cfcc226bd4ae57100401889",
+    "Zombie Shoot VR/Assets/VRFPS/Tests/EditMode.meta": "659e5e9a6672dde3c3868801b8f096adc42e05921c218b247143de5a47ecd87a",
+    "Zombie Shoot VR/Assets/VRFPS/Tests.meta": "91568282707c7876f76250252b08ff541c884967866b63f65e396326651a1e72"
+  },
+  "testLogSha256": "caa326cb3121878ed37ee7b7a0186ad6a9094ddb9afedbad9b3f4ea3d2e3aa96"
+}

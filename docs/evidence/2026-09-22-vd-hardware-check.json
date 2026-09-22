@@ -1,0 +1,22 @@
+{
+  "date": "2026-09-22",
+  "evidenceType": "user-reported hardware check and supplied settings screenshots",
+  "sourceImages": [
+    {
+      "file": "VirtualDesktop.Android-20260922-120836.jpg",
+      "sha256": "98f56774e20efb7f3475885d3017c8b7143b1b17a7315a653674c38b55d0a7d6"
+    },
+    {
+      "file": "VirtualDesktop.Android-20260922-120905.jpg",
+      "sha256": "cfbd64dbfbf3ae4748f58a714d1d0ad7844e783d9e65c63fb10fbe9553166415"
+    }
+  ],
+  "originalImagesUploaded": false,
+  "tracking": {
+    "leftHand": "user-confirmed normal",
+    "head": "user-confirmed normal",
+    "rightHand": "user-confirmed normal"
+  },
+  "performanceAcceptance": "Not measured; current 90Hz/SSW-on settings differ from planned 72Hz/SSW-off baseline",
+  "codec": null
+}
