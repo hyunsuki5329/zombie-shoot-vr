@@ -1,6 +1,6 @@
 {
   "name": "VRFPS.EditModeTests",
-  "references": ["Unity.XR.CoreUtils", "Unity.InputSystem", "Unity.XR.Interaction.Toolkit"],
+  "references": ["Unity.XR.CoreUtils", "Unity.InputSystem", "Unity.XR.Interaction.Toolkit", "VRFPS.Runtime"],
   "includePlatforms": ["Editor"],
   "optionalUnityReferences": ["TestAssemblies"]
 }

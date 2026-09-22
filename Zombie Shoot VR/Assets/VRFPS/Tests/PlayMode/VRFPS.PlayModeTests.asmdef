@@ -1,0 +1,5 @@
+{
+  "name": "VRFPS.PlayModeTests",
+  "references": ["VRFPS.Runtime"],
+  "optionalUnityReferences": ["TestAssemblies"]
+}

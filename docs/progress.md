@@ -5,14 +5,15 @@
 ## 현재 작업
 
 - 기준 커밋: `a400ecb194c40fd082ef549ea798ca512c4cd411`.
-- 브랜치: `codex/p01-environment`.
+- 브랜치: `codex/p03-locomotion` (P01의 `47ceb4c`에서 분기, P01 PR에 의존).
 - P01-a 구현 커밋: `5a8dc1d844bf5aacd53a522a894bca3eee7c91d3`. [PR #1](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/1)은 OPEN / Draft이며 병합하지 않았다. 로컬·원격 커밋 일치를 확인했다. GitHub CI는 없으며 로컬 Unity 검증 결과를 사용한다.
 - P01-a 구현·자동 검증 완료: Unity 환경 확인, EditMode 시험 어셈블리와 InteractionLab 구성, Windows Mono 개발 빌드. 증빙: [시험·빌드·소스 해시](evidence/p01-foundation.json), [환경 및 실행 절차](../Zombie%20Shoot%20VR/Docs/environment.md).
 - P01 실기 확인: 사용자가 VR 실행과 머리·양손 추적 정상 동작을 확인했다(2026-09-22). [VD 설정·실기 보고](evidence/2026-09-22-vd-hardware-check.md). 전용 입력 구성과 양안 가림 등 후속 검증까지 완료한 것으로 확대하지 않는다.
 - P02 실제 촬영본과 기준 길이 2개: 대기. 촬영 경로를 확인하고 나면 작은 공간 검증을 진행한다.
-- P03~P12: 미착수. 상세 체크리스트는 기존 구현 계획을 따른다.
-- P01-b: 프로젝트 전용 VRFPS.inputactions와 PlayerRig를 생성하고 Combat·InteractionLab에 연결했다. 입력 시험 3개가 연결 전 실패했고 연결 후 기존 시험을 포함한 EditMode 6/6이 통과했다. 새 입력 구성의 Windows 빌드·실기 검증은 아직 수행하지 않았다.
-- 다음 실행: 실제 런타임 구현과 함께 런타임·PlayMode 어셈블리를 구성한다. 촬영 대기 중에도 시험장에서 P03 이후 구현을 진행할 수 있다.
+- P01-b: `47ceb4c`에서 프로젝트 전용 VRFPS.inputactions와 PlayerRig를 생성하고 Combat·InteractionLab에 연결했다. 입력 시험 3개가 연결 전 실패했고 연결 후 기존 시험을 포함한 EditMode 6/6이 통과했다. 아래 P03 빌드에도 포함되며 새 입력의 실기는 대기 중이다.
+- P03-a 구현·자동 검증: HMD 평면 방향 이동(1.6m/s), 머리 위치 중심 연속 회전(60도/s), CharacterController 높이·중심 갱신, 가상 이동 정지 인터페이스. 런타임·PlayMode 어셈블리 구성. EditMode 12/12, PlayMode 4/4 통과, Windows Mono 시험장 빌드 성공. [증빙](evidence/p03-locomotion.json).
+- P03 전체 미완료: 실제 머리의 벽 침투 대응과 시험장 열린 경계 보완, T03 기기 시험이 남았다. 독립 리뷰는 에이전트 사용량 제한으로 실패했으며 승인으로 취급하지 않는다. PR은 초안으로 유지한다.
+- P04~P12: 미착수. 다음 실행은 P03의 벽 침투·경계 보완 후 관련 시험과 리뷰, 실제 기기 결과 반영이다.
 
 ## 확인한 환경과 증빙
 
@@ -33,6 +34,8 @@
 - 리뷰: 중대한 지적 없음. 모든 열린 씬의 미저장 상태를 확인하도록 시험 보호를 보완했다. Minor deferred: `SharedSceneCanBeLoaded` 이름과 달리 해당 시험은 씬 자산의 존재를 확인한다. 실제 로드·XR 구성 검사는 별도 InteractionLab 시험이 담당한다.
 - 리뷰 범위 밖 판정: 실기·VD·편안함은 실제 기기 결과로 판정하고, 전용 입력·연속 회전·런타임·PlayMode 어셈블리·Bootstrap 동작은 후속 구현 대상으로 남긴다. 비용: P01 전체 완료나 최종 플레이 가능 상태로 해석해서는 안 된다. Mono 빌드와 엔진 생성 변경은 실행자가 최종 로그·diff로 확인한다.
 - P01→P03/P04: XR Origin·좌우 입력은 공통 PlayerRig의 기반이다. 오른손 총 고정과 왼손 소유권은 후속 단계에서 일반 잡기와 충돌하지 않게 적용한다.
+- Ruling: P03은 승인된 CharacterController 기반 제어기로 이동을 통합하고 기존 XRI 이동·회전·중력 공급자와 샘플의 이동 액션 전환기를 비활성화한다. 이유: 중복 이동과 액션 비활성화 경쟁을 피하고 RunController의 정지 계약을 제공한다. 비용: XR 실기에서 이동·상호작용 동시 동작을 다시 확인해야 한다.
+- Ruling: P01 기기 수락을 기다리는 동안 P01 브랜치 기반의 P03 의존 PR로 구현을 분리한다. 이유: 미완료 P01을 병합하거나 이동 변경을 같은 PR에 누적하지 않는다. 비용: P01 변경 시 P03 재검증과 기본 브랜치 갱신이 필요하다.
 - P01-b 증빙: [입력 시험 결과](evidence/p01-project-input.json). 설정 재실행 후 입력·리그·두 씬의 해시가 동일했다. 리뷰에서 현재 씬의 외부 리그 참조와 부모 관계가 없음을 확인했다. 도구는 임의의 편집된 씬 관계를 보존하는 일반 마이그레이터가 아니므로 초기 기반 씬으로 사용 범위를 제한했다.
 - P02→P09: 실제 외형·충돌·가림 검증을 MapRoot로 연결한다. 임시 시험장을 최종 맵으로 판정하지 않는다.
 - P04→P05: FireGate는 탄창 삽입과 왼손 앞부분 잡기를 별도로 요구한다. 재장전 완료만으로 발사하지 않는다.

@@ -1,0 +1,64 @@
+{
+  "date": "2026-09-22",
+  "scope": "P03-a / R03 / T03: joystick locomotion, continuous turn and capsule tracking",
+  "baseCommit": "47ceb4c89888cb1d3454344a913a63c542a089d7",
+  "red": {
+    "play": {
+      "failed": 4,
+      "total": 4
+    },
+    "configuration": {
+      "failed": 1,
+      "total": 1
+    },
+    "edit": {
+      "failed": 4,
+      "total": 5
+    }
+  },
+  "green": {
+    "edit": {
+      "sha256": "545B6ECD093EA227AE2DBE07C24B668A90437E64108845FA79BA49D627CB51BB",
+      "total": "12",
+      "passed": "12",
+      "failed": "0",
+      "xml": "tmp/p03/green-edit.xml",
+      "result": "Passed"
+    },
+    "play": {
+      "sha256": "7288E42893FCE6673312C9D1B61B9D24BC287C838484429422D72FA0D15DEF3E",
+      "total": "4",
+      "passed": "4",
+      "failed": "0",
+      "xml": "tmp/p03/green-play.xml",
+      "result": "Passed"
+    }
+  },
+  "build": {
+    "exitCode": 0,
+    "result": "Succeeded",
+    "log": "tmp/p03/build.log",
+    "backend": "Windows x64 Mono development"
+  },
+  "hardware": "T03 pending on this build",
+  "review": "Independent review failed due to agent usage limit; not approved",
+  "limitations": [
+    "Physical head lean through virtual walls not yet prevented or accepted",
+    "Lab has two walls; open floor edges are not final map boundaries",
+    "No headset acceptance or performance claims"
+  ],
+  "hashes": [
+    {
+      "sha256": "3A8E6E17F5D4FC5B52E5139031A01C485DA10D31A060C3E0C126869D8C3714DD",
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/Player/PlayerRigController.cs"
+    },
+    {
+      "sha256": "3D3F89DB3F147517A753A756C6BE98507293884E57B8FB2124AA718D26B065EE",
+      "path": "Zombie Shoot VR/Assets/VRFPS/Prefabs/PlayerRig.prefab"
+    },
+    {
+      "sha256": "2A85146BE1D485259D9F872077AA768B7320F566D547AEDFDF638B4EF9692C78",
+      "path": "Zombie Shoot VR/Builds/Windows/InteractionLab/InteractionLab_Data/Managed/VRFPS.Runtime.dll"
+    }
+  ]
+}

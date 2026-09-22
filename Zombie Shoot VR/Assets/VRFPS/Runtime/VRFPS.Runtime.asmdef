@@ -1,0 +1,4 @@
+{
+  "name": "VRFPS.Runtime",
+  "references": ["Unity.InputSystem"]
+}
