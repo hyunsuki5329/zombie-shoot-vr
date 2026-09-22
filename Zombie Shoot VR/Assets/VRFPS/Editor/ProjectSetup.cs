@@ -49,6 +49,8 @@ namespace VRFPS.Editor
                     Cube("One Metre Cube", new Vector3(0, 0.5f, 3), Vector3.one);
                     Cube("Back Wall", new Vector3(0, 1.5f, 6), new Vector3(12, 3, 0.2f));
                     Cube("Left Wall", new Vector3(-6, 1.5f, 0), new Vector3(0.2f, 3, 12));
+                    Cube("Front Wall", new Vector3(0, 1.5f, -6), new Vector3(12, 3, 0.2f));
+                    Cube("Right Wall", new Vector3(6, 1.5f, 0), new Vector3(0.2f, 3, 12));
                     var light = new GameObject("Directional Light").AddComponent<Light>();
                     light.type = LightType.Directional;
                     light.intensity = 1.2f;
@@ -59,6 +61,18 @@ namespace VRFPS.Editor
                     throw new IOException("Could not save " + path);
             }
             finally { AssetDatabase.SaveAssets(); }
+        }
+
+        public static void CompleteLabBoundaries()
+        {
+            if (!Application.isBatchMode) throw new InvalidOperationException("Run in a separate batchmode editor.");
+            var scene = EditorSceneManager.OpenScene(Lab, OpenSceneMode.Single);
+            var names = new System.Collections.Generic.HashSet<string>();
+            foreach (var root in scene.GetRootGameObjects()) names.Add(root.name);
+            if (!names.Contains("Front Wall")) Cube("Front Wall", new Vector3(0, 1.5f, -6), new Vector3(12, 3, 0.2f));
+            if (!names.Contains("Right Wall")) Cube("Right Wall", new Vector3(6, 1.5f, 0), new Vector3(0.2f, 3, 12));
+            if (!EditorSceneManager.SaveScene(scene, Lab)) throw new IOException("Could not save lab boundaries.");
+            Debug.Log("VRFPS_LAB_BOUNDARIES_COMPLETE");
         }
 
         static void Cube(string name, Vector3 position, Vector3 scale)
