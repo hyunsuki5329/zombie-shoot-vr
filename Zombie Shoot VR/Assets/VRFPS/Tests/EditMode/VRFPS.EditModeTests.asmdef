@@ -1,0 +1,6 @@
+{
+  "name": "VRFPS.EditModeTests",
+  "references": ["Unity.XR.CoreUtils"],
+  "includePlatforms": ["Editor"],
+  "optionalUnityReferences": ["TestAssemblies"]
+}
