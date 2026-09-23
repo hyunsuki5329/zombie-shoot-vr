@@ -24,13 +24,15 @@
 - P05-b 구현·자동 검증: 왼손 소유권, 새 그립 입력당 허리 탄창 1개, 전체 토큰 10개·바닥 8개 상한, 12초 회수와 손 소유 토큰 보호, 프리팹 연결. EditMode 31/31, PlayMode 25/25와 Windows Mono 빌드 성공. 실제 중력 낙하·바닥 정지 시험을 포함한다. [증빙](evidence/p05-manual-reload.json), [실기 절차](evidence/p05-reload-hardware-check.md). P05-a 커밋 `9dde1bb`, [초안 PR #5](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/5).
 - P05 미완료 범위: Quest Pro T06/T07 각 10회와 조작 편안함, 독립 리뷰. 리뷰 에이전트는 사용량 제한으로 종료되어 승인으로 취급하지 않는다. P07 전체 정지/재개 통합도 남아 있다. 현재 시험장은 재시작 없이 수동 탄창 교체가 가능하다.
 - P06-a 구현·자동 검증: `codex/p06-enemies`에서 근접 준비 후 거리/가림 재검사, 원거리 0.8초 예고와 발사 순간 조준, 고정 방향 투사체의 구간 충돌·최초 피해·4초 수명, 사망 1회 알림을 구현했다. 신규 9개 시험 실패 후 전체 PlayMode 34/34 통과 후 독립 리뷰의 검증 공백 6개를 보완하여 최종 40/40 통과. 리뷰에서 코어 범위의 중대한 결함은 발견되지 않았다. [증빙](evidence/p06-attacks.json). 아직 씬에서 구동하지 않는 공격 코어이며 P06 완료가 아니다.
-- P06 다음 실행: NavMesh 이동과 5초 정체 복구, 두 유형의 표시·예고, 12개 투사체 풀, 프리팹·시험장 연결과 빌드. 공식 Unity 패키지 레지스트리에서 AI Navigation 2.0.14의 최소 Unity 6000.0과 AI 모듈 의존성을 확인했다. P07~P12는 미착수다.
+- P06-a 커밋 `f067136`, [초안 PR #6](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/6). P05의 기기 검증 대기 브랜치를 기반으로 하며 병합하지 않았다.
+- P06-b 준비: 공식 Unity 패키지 레지스트리에서 최소 Unity 6000.0을 확인한 AI Navigation 2.0.14를 설치했다. manifest와 lock의 단일 패키지 추가만 확인했고, 로컬 패키지 버전 및 batchmode 임포트/컴파일 종료 코드 0을 확인했다(`tmp/p06-attacks/navigation-import.log`). 아직 NavMesh 베이크나 이동 시험 통과를 의미하지 않는다.
+- P06 다음 실행: NavMesh 이동과 5초 정체 복구, 두 유형의 표시·예고, 12개 투사체 풀, 프리팹·시험장 연결과 빌드. P07~P12는 미착수다.
 
 ## 확인한 환경과 증빙
 
 - Unity 실행 파일: `D:/Unity editor/6000.3.23f1/Editor/Unity.exe`.
 - 기존 프로젝트의 batchmode 임포트·컴파일은 2026-09-22 정상 종료했다. 로컬 로그: `tmp/p01/baseline.log`, 끝의 반환 코드 0 확인.
-- Test Framework 1.6.0은 잠금 파일에 존재한다. AI Navigation은 아직 설치되지 않았다.
+- Test Framework 1.6.0과 AI Navigation 2.0.14가 잠금 파일에 존재한다.
 - Windows OpenXR ActiveRuntime: Virtual Desktop의 `virtualdesktop-openxr.json`.
 - Virtual Desktop Streamer 1.34.22.0, 헤드셋 앱 1.34.22 - 207. 사용자 화면: High, 표시 해상도 2496×2688, 90Hz, 270Mbps, SSW Always enabled, SGSR 켜짐. 코덱 미확인. 현재 프로필과 계획의 72Hz·보간 끔 성능 시험을 구분한다.
 - 지정된 `.github/agents/*_agent.prompt.md`와 `main_instruction.prompt.md`는 현재 저장소에 없다. 해당 파일의 규칙을 추측하지 않는다.
