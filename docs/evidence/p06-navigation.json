@@ -1,0 +1,65 @@
+{
+  "pending": [
+    "Quest Pro T10/T11",
+    "Final visual and binocular acceptance",
+    "P07 full HP/wave/pause integration"
+  ],
+  "build": {
+    "exitCode": 0,
+    "copy": "All copied files hash-matched",
+    "result": "Succeeded",
+    "hashes": [
+      {
+        "path": "InteractionLab.exe",
+        "sha256": "56C28AFBA054092826B7A8A80BA3767DAA87967F182C0C562EB2F98799175B7A"
+      },
+      {
+        "path": "InteractionLab_Data/Managed/VRFPS.Runtime.dll",
+        "sha256": "EAC2BA56495615DF2CBAC1EE08860E8BCB74454D8899210D53F976BB9BBE3C9E"
+      },
+      {
+        "path": "InteractionLab_Data/level0",
+        "sha256": "7C50045989D47FAF2D71F430195A86C6F25676644E6F5D91959B330A6AB64FCB"
+      }
+    ],
+    "directory": "Zombie Shoot VR/Builds/Windows/EnemyLab",
+    "log": "tmp/p06-navigation/build.log",
+    "backend": "Windows x64 Mono development"
+  },
+  "redEvidence": [
+    "tmp/p06-navigation/red.xml: 3 failed",
+    "tmp/p06-navigation/actor-red.xml: 1 failed",
+    "tmp/p06-navigation/scene.xml: null prefab references",
+    "tmp/p06-navigation/isolated-tests.xml: 47 passed, tabletop path test failed"
+  ],
+  "review": "Independent read-only review: no remaining important defect in P06-b; reviewed source, scene references and result XML",
+  "baseCommit": "5daf1ed",
+  "preservedLocalChanges": [
+    "Assets/XR/Settings/OpenXRPackageSettings.asset",
+    "ProjectSettings/Packages/com.unity.learn.iet-framework/Settings.json"
+  ],
+  "scope": "P06-b / T10 T11: navigation, actor lifecycle, projectile pool and authored lab",
+  "tests": {
+    "edit": {
+      "sha256": "0293542E138770BF6F2A0BD331E223D2D30D581B3F0ED5CD1482580905BA107C",
+      "failed": "0",
+      "passed": "31",
+      "result": "Passed",
+      "path": "tmp/p06-navigation/final-edit.xml"
+    },
+    "play": {
+      "sha256": "CC830D01E4B745515E054E3456B3F810C6266E2B922886F6DA1284B4CD67054B",
+      "failed": "0",
+      "passed": "48",
+      "result": "Passed",
+      "path": "tmp/p06-navigation/final-play.xml"
+    }
+  },
+  "sourceVerification": {
+    "sha256": "FAFD220E888F68C847EE1EA4EFDB53C7E9B9E717B9E34C095301B603A8181523",
+    "matchedFiles": 146,
+    "description": "Every VRFPS source and asset file matches verified worktree",
+    "manifest": "tmp/p06-navigation/source-manifest.json"
+  },
+  "date": "2026-09-23"
+}
