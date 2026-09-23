@@ -14,6 +14,7 @@ namespace VRFPS
         public bool IsWindingUp { get; private set; }
         public bool IsDead => configured && health == 0;
         public int Health => health;
+        public bool HoldsPosition => IsWindingUp || cooldownRemaining > 0 || CanReachTarget();
         public event Action<Vector3, Vector3, int, int> ProjectileRequested;
         public event Action<int, int> Died;
         public void Configure(int id, EnemyKind kind, Transform target, Transform origin, LayerMask solidMask)

@@ -4,8 +4,8 @@
 
 ## 현재 작업
 
-- 기준 커밋: `a400ecb194c40fd082ef549ea798ca512c4cd411`.
-- 브랜치: `codex/p05-manual-reload`. 원격 P04 병합 커밋 `ec79139`로 fast-forward했으며 파일 내용은 `800b562`와 동일함을 확인했다.
+- 현재 기준 커밋: `5daf1ed` (P06-a 공격 코어와 AI Navigation 설치).
+- 브랜치: `codex/p06-enemies`. P05 기반 의존 PR이며 P06-b 변경은 검증 진행 중이다.
 - P01-a 구현 커밋: `5a8dc1d844bf5aacd53a522a894bca3eee7c91d3`. [PR #1](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/1)은 원격에서 main에 병합됨(`e0e3be2`). GitHub CI는 없으며 로컬 Unity 검증 결과를 사용한다.
 - P01-a 구현·자동 검증 완료: Unity 환경 확인, EditMode 시험 어셈블리와 InteractionLab 구성, Windows Mono 개발 빌드. 증빙: [시험·빌드·소스 해시](evidence/p01-foundation.json), [환경 및 실행 절차](../Zombie%20Shoot%20VR/Docs/environment.md).
 - P01 실기 확인: 사용자가 VR 실행과 머리·양손 추적 정상 동작을 확인했다(2026-09-22). [VD 설정·실기 보고](evidence/2026-09-22-vd-hardware-check.md). 전용 입력 구성과 양안 가림 등 후속 검증까지 완료한 것으로 확대하지 않는다.
@@ -25,8 +25,12 @@
 - P05 미완료 범위: Quest Pro T06/T07 각 10회와 조작 편안함, 독립 리뷰. 리뷰 에이전트는 사용량 제한으로 종료되어 승인으로 취급하지 않는다. P07 전체 정지/재개 통합도 남아 있다. 현재 시험장은 재시작 없이 수동 탄창 교체가 가능하다.
 - P06-a 구현·자동 검증: `codex/p06-enemies`에서 근접 준비 후 거리/가림 재검사, 원거리 0.8초 예고와 발사 순간 조준, 고정 방향 투사체의 구간 충돌·최초 피해·4초 수명, 사망 1회 알림을 구현했다. 신규 9개 시험 실패 후 전체 PlayMode 34/34 통과 후 독립 리뷰의 검증 공백 6개를 보완하여 최종 40/40 통과. 리뷰에서 코어 범위의 중대한 결함은 발견되지 않았다. [증빙](evidence/p06-attacks.json). 아직 씬에서 구동하지 않는 공격 코어이며 P06 완료가 아니다.
 - P06-a 커밋 `f067136`, [초안 PR #6](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/6). P05의 기기 검증 대기 브랜치를 기반으로 하며 병합하지 않았다.
-- P06-b 준비: 공식 Unity 패키지 레지스트리에서 최소 Unity 6000.0을 확인한 AI Navigation 2.0.14를 설치했다. manifest와 lock의 단일 패키지 추가만 확인했고, 로컬 패키지 버전 및 batchmode 임포트/컴파일 종료 코드 0을 확인했다(`tmp/p06-attacks/navigation-import.log`). 아직 NavMesh 베이크나 이동 시험 통과를 의미하지 않는다.
-- P06 다음 실행: NavMesh 이동과 5초 정체 복구, 두 유형의 표시·예고, 12개 투사체 풀, 프리팹·시험장 연결과 빌드. P07~P12는 미착수다.
+- P06-b 구현·검증 완료(실기 대기): NavMesh 우회·정지·5초 정체 복구, 12개 투사체 풀, 사망 즉시 피격 해제·5초 사체 회수와 객체 재사용, 두 적 프리팹·직접 만든 애니메이션·시험장 연결. 최종 PlayMode **48/48**, EditMode **31/31**, Windows Mono 빌드 성공. [증빙](evidence/p06-navigation.json), [실기 절차](evidence/p06-enemy-hardware-check.md), [자산 출처](evidence/p06-assets.md).
+- P06-b 결함 수정: 최초 씬 시험의 적 0개는 prefab 참조 3개 누락이었다. 씬을 연 뒤 자산을 다시 로드해 해결했다. 리뷰에서 제기한 HMD 근처 책상 상단 NavMesh 선택은 PathPartial 실패로 재현했고, 이동·복구는 플레이어 캡슐 발밑을 사용하도록 수정했다. 공격 조준은 HMD를 유지한다. 실제 가구 우회 이동, 공격 중 정지, 무효 복구점과 씬 시작·재시작·정리 시험이 포함된다.
+- P06-b 독립 재검토: 수정된 코드·씬 참조와 결과 XML을 읽기 전용으로 확인했고 범위 내 남은 중요 결함을 발견하지 못했다. Quest Pro T10/T11과 외형·양안 표시·회피 편안함은 아직 대기이므로 PR #6은 초안으로 유지한다.
+- P06-b 격리 검증: 사용자 에디터가 SampleScene을 열고 있어 `tmp/p06-verification` detached worktree에서 실행했다. 모든 검증/빌드 프로세스는 정상 종료했다. 원본 생성 자산이 snapshot과 같음을 확인한 뒤 수정된 씬 참조와 NavMesh를 반영했고, 원본·검증 복사본의 VRFPS 파일 해시 전체가 일치함을 확인했다. 사용자 OpenXR·튜토리얼 설정 변경은 보존하고 커밋 범위에서 제외한다. 비교 기록은 `tmp/p06-navigation/workspace-source-snapshot.json`이다.
+- 새 빌드: `Zombie Shoot VR/Builds/Windows/EnemyLab/InteractionLab.exe`. 기존 P05 시험장 빌드는 유지한다. X/F6으로 적 시작·정지, Y/F7로 적 초기화. 이 시험장의 피격 횟수는 최종 HP·웨이브·사망 시스템을 대신하지 않는다.
+- 다음 실행: T06/T07·T10/T11 실기 결과를 반영하며 P07 체력·웨이브·생성·정지·사망 우선 규칙을 구현한다. P07~P12는 미착수다.
 
 ## 확인한 환경과 증빙
 
