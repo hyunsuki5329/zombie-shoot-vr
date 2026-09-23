@@ -1,0 +1,59 @@
+{
+  "date": "2026-09-23",
+  "scope": "P05-a token and socket foundation / R06 R07 / T06 T07 preparation",
+  "baseCommit": "c69b4f8",
+  "red": {
+    "initial": "6 of 6 failed",
+    "review": "InitialFreshTokenRejectsPartiallyConsumedAmmoWithoutMutatingToken failed before full-capacity check"
+  },
+  "tests": {
+    "edit": {
+      "xml": "tmp/p05/final-edit.xml",
+      "failed": "0",
+      "passed": "30",
+      "result": "Passed",
+      "sha256": "2D96ECC2EBA391EA7688406EA215657BDC658B1E847D62574B1A74E263AFE435",
+      "total": "30"
+    },
+    "play": {
+      "xml": "tmp/p05/final-play.xml",
+      "failed": "0",
+      "passed": "20",
+      "result": "Passed",
+      "sha256": "3AA413372F68A55E04EF75453EA24E7F261722B878370E23FB8A1CB0C2462892",
+      "total": "20"
+    }
+  },
+  "review": {
+    "minor": 0,
+    "critical": 0,
+    "important": "Initial fresh token did not require full ammo; fixed with Capacity check",
+    "type": "independent read-only agent review"
+  },
+  "pending": [
+    "Left-hand global ownership",
+    "Pouch and bounded token lifetime",
+    "Scene and prefab connection",
+    "Time-stepped drop collision",
+    "Headset T06/T07"
+  ],
+  "build": "No new build: socket foundation not yet connected to hardware lab",
+  "hashes": [
+    {
+      "sha256": "7632FE8C29715E015E24AB9D5C47AC06B6BF20E64291609B2F892BA0F3325311",
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/Weapons/MagazineState.cs"
+    },
+    {
+      "sha256": "79B3698D8DA72BC603FD4D3A61721F6A9D379A3DEB2973779CEA9E24D6BC04CB",
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/Weapons/MagazineToken.cs"
+    },
+    {
+      "sha256": "744E7F980A81DC764AA10F2301622BE17C0F3B6BEAD1B39E21A6B0057F16DBD9",
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/Weapons/MagazineSocket.cs"
+    },
+    {
+      "sha256": "380BE7E3EEB4590A1DAFFB76E076B6713F356D579215D82E4089DEC660DB407A",
+      "path": "Zombie Shoot VR/Assets/VRFPS/Tests/PlayMode/MagazineSocketTests.cs"
+    }
+  ]
+}
