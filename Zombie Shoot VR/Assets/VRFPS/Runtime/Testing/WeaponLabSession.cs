@@ -14,7 +14,8 @@ namespace VRFPS
             if (status != null && gun != null && displayedRounds != gun.Magazine.Rounds)
             {
                 displayedRounds = gun.Magazine.Rounds;
-                status.text = "WEAPON LAB - PROTOTYPE\nLeft grip at yellow foregrip + right trigger\nROUNDS: " + gun.Magazine.Rounds + " / 30\nReload not connected yet; restart lab to refill";
+                status.text = "WEAPON LAB - PROTOTYPE\nLeft foregrip + right trigger\nROUNDS: " + gun.Magazine.Rounds +
+                    " / 30\nReload: release foregrip, grab magazine, drop\nGrab fresh at LEFT WAIST, align and insert\nRelease grip, then grab foregrip again";
             }
         }
     }

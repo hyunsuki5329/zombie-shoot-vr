@@ -11,6 +11,7 @@ namespace VRFPS
         [SerializeField] InputActionReference gripAction;
         [SerializeField] InputActionReference triggerAction;
         [SerializeField] LineRenderer tracer;
+        [SerializeField] LeftHandInteractor leftHandOwnership;
         double activeTime;
         float tracerUntil;
 
@@ -23,6 +24,7 @@ namespace VRFPS
         void OnDisable()
         {
             if (gun != null) { gun.Fired -= ShowTracer; gun.SetLeftGrip(false); }
+            if (leftHandOwnership != null) leftHandOwnership.ReleaseAll();
             if (tracer != null) tracer.enabled = false;
         }
 
@@ -39,7 +41,10 @@ namespace VRFPS
         {
             if (gun == null || left == null || foregrip == null) return false;
             gun.UpdatePose();
-            gun.SetLeftGrip(grip && Vector3.Distance(left.position, foregrip.position) <= 0.18f);
+            if (leftHandOwnership != null)
+                leftHandOwnership.Tick(grip, gun.Phase == RunPhase.Active || gun.Phase == RunPhase.Preparing);
+            else
+                gun.SetLeftGrip(grip && Vector3.Distance(left.position, foregrip.position) <= 0.18f);
             return gun.Tick(trigger, time);
         }
 

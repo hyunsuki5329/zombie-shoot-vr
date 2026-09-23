@@ -11,6 +11,14 @@ namespace VRFPS
         public Transform HeldBy { get; private set; }
         MagazineSocket mountedIn;
 
+        internal void ResetFresh()
+        {
+            if (HeldBy != null || State == MagazineTokenState.Inserted)
+                throw new System.InvalidOperationException("Cannot recycle an owned magazine.");
+            mountedIn = null;
+            State = MagazineTokenState.Fresh;
+        }
+
         public bool TryGrab(Transform hand)
         {
             if (hand == null || HeldBy != null || State == MagazineTokenState.Inserted) return false;
