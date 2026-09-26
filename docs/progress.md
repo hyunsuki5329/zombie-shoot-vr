@@ -1,11 +1,11 @@
 # Goal 실행 현황
 
-갱신: 2026-09-26. 전체 목표는 미완료이며 진행 중이다.
+갱신: 2026-09-27. 전체 목표는 미완료이며 진행 중이다.
 
 ## 현재 작업
 
-- 현재 기준 커밋: `12bcddc` (P07-d WaveLab 통합·빌드).
-- 브랜치: `codex/p08-records`. P07 기반 의존 작업이다. P07은 WaveLab 빌드까지 구현됐으나 독립 리뷰·실기 대기이며, P08-a 기록 저장 기반 자동 검증을 완료했다.
+- 현재 기준 커밋: `5416507` (P08-a 맵별 기록 저장).
+- 브랜치: `codex/p08-records`. P07 기반 의존 작업이다. P07은 WaveLab 빌드까지 구현됐으나 독립 리뷰·실기 대기이며, P08-a/b 기록 저장과 도전 종료 연결 자동 검증을 완료했다.
 - P01-a 구현 커밋: `5a8dc1d844bf5aacd53a522a894bca3eee7c91d3`. [PR #1](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/1)은 원격에서 main에 병합됨(`e0e3be2`). GitHub CI는 없으며 로컬 Unity 검증 결과를 사용한다.
 - P01-a 구현·자동 검증 완료: Unity 환경 확인, EditMode 시험 어셈블리와 InteractionLab 구성, Windows Mono 개발 빌드. 증빙: [시험·빌드·소스 해시](evidence/p01-foundation.json), [환경 및 실행 절차](../Zombie%20Shoot%20VR/Docs/environment.md).
 - P01 실기 확인: 사용자가 VR 실행과 머리·양손 추적 정상 동작을 확인했다(2026-09-22). [VD 설정·실기 보고](evidence/2026-09-22-vd-hardware-check.md). 전용 입력 구성과 양안 가림 등 후속 검증까지 완료한 것으로 확대하지 않는다.
@@ -116,3 +116,11 @@
 - 실제 사용자 기록은 사용하지 않았으며 시험별 새 GUID 임시 폴더에서 파일 잠금·쓰기 불가·본 파일/백업 손상을 확인했다. 자체 검토 완료, 독립 리뷰는 남아 있다.
 - 다음: RunEnded 저장 1회 연결과 오류 표시, 오른팔 HUD, 맵 선택·정지·결과·재도전 메뉴, Windows 빌드 검증. 현재 WaveLab 빌드에는 아직 P08 저장 기능이 연결되지 않았다.
 - Ruling: .NET DataContractJsonSerializer의 필수 필드 검증을 사용해 누락된 kills를 0으로 오인하지 않게 한다. 추가 패키지 없이 계획의 schema 1 JSON 형식을 유지한다. 비용은 향후 IL2CPP로 전환할 경우 직렬화와 코드 보존을 해당 빌드에서 다시 검증해야 한다는 것이다.
+
+### P08-b 종료 결과와 저장 연결
+
+- P08-a 커밋 `5416507`, [초안 PR #8](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/8), base `codex/p07-progression`. 미병합.
+- RunRecordBinding이 실제 RunEnded에서 맵 ID·ReachedWave·Kills를 고정해 저장한다. 중복 종료나 성공 후 저장 재시도는 파일을 다시 쓰지 않는다. 실패해도 사망과 결과 상태를 유지하며 저장만 다시 시도할 수 있다.
+- 새 도전 시 현재 결과 표시 상태를 초기화하고, 다른 RunController에 재연결하면 이전 구독을 해제한다. 같은 RecordStore의 맵별 최고 기록은 유지한다.
+- 2026-09-27 신규 PlayMode 5개 RED 후 구현. 최종 **PlayMode 75/75**, **EditMode 50/50** 통과. 5 클리어 후 준비에서 종료하면 5, 6 시작 후 사망하면 6, 같은 도전의 50처치가 저장되는 것을 실제 디스크 재로드로 확인했다. [증빙](evidence/p08-results.json).
+- 자체 검토 완료, 독립 리뷰 대기. 아직 UI 씬에 바인딩하지 않았으므로 기존 실행 빌드는 P07이다. 다음은 오른팔 HUD·결과/오류 패널·메뉴 입력 연결이다. 메뉴를 닫은 입력이 같은 프레임의 사격으로 이어지지 않도록 트리거 해제 조건을 함께 검증해야 한다.
