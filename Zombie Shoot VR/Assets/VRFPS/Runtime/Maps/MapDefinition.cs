@@ -11,7 +11,7 @@ namespace VRFPS
         public void Validate()
         {
             if (string.IsNullOrWhiteSpace(mapId) || string.IsNullOrWhiteSpace(sceneName) ||
-                maxAlive <= 0 || maxRangedAlive < 0 || maxRangedAlive > maxAlive ||
+                maxAlive <= 0 || maxRangedAlive <= 0 || maxRangedAlive > maxAlive ||
                 minSpawnDistance <= 0 || float.IsNaN(minSpawnDistance) || float.IsInfinity(minSpawnDistance))
                 throw new System.ArgumentException("Map identity, scene and spawn limits must be valid.");
         }

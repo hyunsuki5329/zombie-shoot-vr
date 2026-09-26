@@ -5,7 +5,7 @@ namespace VRFPS
     public enum EnemyKind { Melee, Ranged }
     public sealed class ZombieController : MonoBehaviour, IDamageable
     {
-        int enemyId, health;
+        int enemyId, health, attackDamage;
         EnemyKind kind;
         Transform target, origin;
         LayerMask solidMask;
@@ -17,13 +17,14 @@ namespace VRFPS
         public bool HoldsPosition => IsWindingUp || cooldownRemaining > 0 || CanReachTarget();
         public event Action<Vector3, Vector3, int, int> ProjectileRequested;
         public event Action<int, int> Died;
-        public void Configure(int id, EnemyKind kind, Transform target, Transform origin, LayerMask solidMask)
+        public void Configure(int id, EnemyKind kind, Transform target, Transform origin, LayerMask solidMask, int wave = 1)
         {
             if (target == null || origin == null || solidMask.value == 0)
                 throw new ArgumentException("Enemy requires a target, attack origin and solid mask.");
             if (kind != EnemyKind.Melee && kind != EnemyKind.Ranged) throw new ArgumentOutOfRangeException(nameof(kind));
             enemyId = id; this.kind = kind; this.target = target; this.origin = origin; this.solidMask = solidMask;
-            health = kind == EnemyKind.Melee ? 100 : 80;
+            health = GameBalance.EnemyHealth(kind, wave);
+            attackDamage = GameBalance.EnemyDamage(kind, wave);
             configured = combatEnabled = true;
             IsWindingUp = false; windupRemaining = cooldownRemaining = 0;
         }
@@ -57,9 +58,9 @@ namespace VRFPS
                 cooldownRemaining = kind == EnemyKind.Melee ? 0.85f : 2.7f;
                 if (!CanReachTarget()) return;
                 if (kind == EnemyKind.Melee)
-                    target.GetComponentInParent<IDamageable>()?.ApplyDamage(10, enemyId, activeTime);
+                    target.GetComponentInParent<IDamageable>()?.ApplyDamage(attackDamage, enemyId, activeTime);
                 else
-                    ProjectileRequested?.Invoke(origin.position, (target.position - origin.position).normalized, enemyId, 15);
+                    ProjectileRequested?.Invoke(origin.position, (target.position - origin.position).normalized, enemyId, attackDamage);
                 return;
             }
             cooldownRemaining = Mathf.Max(0, cooldownRemaining - deltaTime);
