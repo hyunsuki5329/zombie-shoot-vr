@@ -134,3 +134,5 @@
 - P08-f (2026-09-27): uGUI 메뉴 프리팹·XR raycaster/EventSystem·재개/재도전/결과 표시를 WaveLab에 연결했다. 저장 실패 재시도 버튼은 독립 기록 시험에서 검증했다. 2개 RED 후 전체 PlayMode 83/83 및 Windows 빌드 성공, MenuLab 복사 337개 파일 해시 일치. [증빙](evidence/p08-menu-view.json), [실기 절차](evidence/p08-menu-hardware-check.md). 연습장 점수는 저장하지 않으며 설정 조절/실제 맵 선택 버튼은 비활성이다. Bootstrap·실제 맵·영구 기록 씬 통합·실기·독립 리뷰는 남아 있다.
 
 - P08-g (2026-09-27): 이동 1.0~2.0m/s·회전 30~90deg/s 설정과 PlayerPrefs 저장, 메뉴 증감 버튼을 연결했다. 독립 키에서 실제 이동·회전·재로드·범위/비정상 값·버튼 동작을 검증했다. 2개 RED 후 전체 PlayMode 86/86, Windows 빌드 성공, MenuLab 337개 파일 해시 일치. [증빙](evidence/p08-settings.json). 실제 스캔 맵 선택과 실기·독립 리뷰는 대기다.
+
+- P08/P09 맵 로딩 선행 작업 (2026-09-27): MapRoot가 외형/충돌/시작점·WorldSolid·NavMesh를 검사하고 연결되지 않은 적 생성점을 제외한다. 유효 후보가 없으면 시작을 거부한다. 2개 RED 후 전체 PlayMode 88/88, 분리된 NavMesh 섬 사례 추가 후 맵 시험 3/3 통과. [증빙](evidence/p09-map-root.json). 실제 촬영 맵이나 Bootstrap에는 아직 연결하지 않았으며 합성 시험장을 실제 스캔 검증으로 취급하지 않는다.

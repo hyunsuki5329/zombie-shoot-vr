@@ -1,0 +1,49 @@
+{
+  "unit": "P08/P09 map loading prerequisite",
+  "date": "2026-09-27",
+  "baseCommit": "f81082cf363bd7d410f7e29256567a695c78d484",
+  "scope": [
+    "MapRoot validates local active visual/collision/player references and WorldSolid colliders",
+    "Player start must sample onto NavMesh",
+    "Enemy candidates require navigation and complete path to player, minimum distance and uniqueness",
+    "Reject missing valid candidates; report excluded count"
+  ],
+  "tests": [
+    {
+      "result": "Failed(Child)",
+      "failed": "2",
+      "path": "tmp/p09-map-root/red.xml",
+      "sha256": "8976441C0ED6ADAC2AEB58DC055F86134E21B9377A669EE5D12AC0EC167D62A2",
+      "passed": "0"
+    },
+    {
+      "result": "Passed",
+      "failed": "0",
+      "path": "tmp/p09-map-root/green-play.xml",
+      "sha256": "153581EE98A0783305F29586AD41522E64334A90AC116EFF474EBCF8C8B89410",
+      "passed": "88"
+    },
+    {
+      "result": "Passed",
+      "failed": "0",
+      "path": "tmp/p09-map-root/verified-map.xml",
+      "sha256": "58F99E0A8B541BEA843E973C10D3BF3E602D6EFD67835DCABAC5E7507D666482",
+      "passed": "3"
+    }
+  ],
+  "sources": [
+    {
+      "sha256": "14E648B6B60D2ACBF13C4DB2F48C9697DD0137CF80C66D1890944E8DAE9C84AC",
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/Maps/MapRoot.cs"
+    },
+    {
+      "sha256": "5DFEDB50A3CA1C5B3171E81310738D35CA75EE0DCA0736FAC9C1B011A36AA946",
+      "path": "Zombie Shoot VR/Assets/VRFPS/Tests/PlayMode/MapRootTests.cs"
+    }
+  ],
+  "limitations": [
+    "Not yet connected to Bootstrap or real map scenes",
+    "Synthetic NavMesh fixtures; actual room/classroom scans and collision/scale validation pending",
+    "No new executable build; independent review pending"
+  ]
+}
