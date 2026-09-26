@@ -63,6 +63,17 @@ namespace VRFPS.Tests
             Assert.That(receiver.Damage, Is.EqualTo(25));
         }
 
+        [Test] public void RestartResetsShotClockAndRequiresANewGrip()
+        {
+            Assert.That(controller.Tick(true, 100), Is.True);
+            controller.Restart(); controller.SetCombatEnabled(true);
+            Assert.That(controller.Magazine.Rounds, Is.EqualTo(30));
+            Assert.That(controller.Tick(true, 0), Is.False);
+            controller.SetLeftGrip(true);
+            Assert.That(controller.Tick(true, 0), Is.True, "Previous run cooldown must not block the new clock.");
+            Assert.That(receiver.Damage, Is.EqualTo(50));
+        }
+
         [TestCase(0f)]
         [TestCase(0.35f)]
         [TestCase(0.7f)]

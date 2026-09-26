@@ -13,6 +13,23 @@ namespace VRFPS
         bool simulationEnabled = true;
         public int TokenCount => tokens.Count;
 
+        internal MagazineToken ResetForRun()
+        {
+            for (var i = tokens.Count - 1; i >= 0; i--)
+                if (tokens[i] == null) { ages.Remove(tokens[i]); tokens.RemoveAt(i); }
+            if (tokens.Count == 0)
+            {
+                if (prefab == null) throw new System.InvalidOperationException("Magazine prefab is missing.");
+                Register(Instantiate(prefab));
+            }
+            foreach (var token in tokens)
+            {
+                token.ResetForRun(); token.gameObject.SetActive(false); ages[token] = 0;
+            }
+            tokens[0].gameObject.SetActive(true);
+            return tokens[0];
+        }
+
         public void SetSimulationEnabled(bool enabled)
         {
             simulationEnabled = enabled;

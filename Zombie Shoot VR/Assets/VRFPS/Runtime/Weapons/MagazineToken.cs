@@ -45,6 +45,14 @@ namespace VRFPS
             State = MagazineTokenState.Fresh;
         }
 
+        internal void ResetForRun()
+        {
+            HeldBy = null; mountedIn = null;
+            transform.SetParent(null, true);
+            State = MagazineTokenState.Fresh;
+            SetAttachedPhysics();
+        }
+
         public bool TryGrab(Transform hand)
         {
             if (hand == null || HeldBy != null || State == MagazineTokenState.Inserted) return false;

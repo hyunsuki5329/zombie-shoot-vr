@@ -1,0 +1,84 @@
+{
+  "tests": [
+    {
+      "path": "tmp/p07-wave-lab/red.xml",
+      "failed": 2,
+      "sha256": "8BB4A376E16D20093E230693F350FDAB9095323214BA81F8F5B0B574BE25A285",
+      "passed": 0,
+      "result": "Failed(Child)"
+    },
+    {
+      "path": "tmp/p07-wave-lab/green-play.xml",
+      "failed": 1,
+      "sha256": "78EFF25B1E59557094082FB6EC6801D0A66FA657118194D0A95E4E538D19272D",
+      "passed": 68,
+      "result": "Failed(Child)"
+    },
+    {
+      "path": "tmp/p07-wave-lab/final-play.xml",
+      "failed": 1,
+      "sha256": "0E7D24AE4D00DD6BCE326CB6856E803056D638597DA8AE2009E165BF6CD3BF7E",
+      "passed": 68,
+      "result": "Failed(Child)"
+    },
+    {
+      "path": "tmp/p07-wave-lab/verified-play.xml",
+      "failed": 0,
+      "sha256": "88DE685409206A0423C6C4965622E7BB4FB0CC517BDC1F316D32C146CBE08F3B",
+      "passed": 70,
+      "result": "Passed"
+    },
+    {
+      "path": "tmp/p07-wave-lab/verified-edit.xml",
+      "failed": 0,
+      "sha256": "65DA7E9D3DBE3BC379C3BCD98898BC30EB61967DACD00AFC5F8419636018A3AC",
+      "passed": 37,
+      "result": "Passed"
+    }
+  ],
+  "unity": "6000.3.23f1",
+  "testCorrections": [
+    "Scene load completion precedes Start; test waits one frame before initial state assertion",
+    "Headless XR controller hierarchy may be inactive; test inspects serialized gun and activeSelf magazine state including inactive parents"
+  ],
+  "hardware": "Not executed; user result requested after verified build copy",
+  "date": "2026-09-26",
+  "limitations": [
+    "Prototype test scene and actors, not scanned room/classroom",
+    "World-space status sign, not final forearm HUD/menu",
+    "No persistent map records yet",
+    "No final performance or long-session evidence"
+  ],
+  "build": {
+    "manifest": "tmp/p07-wave-lab/build-manifest.json",
+    "exitCode": 0,
+    "exeSha256": "56C28AFBA054092826B7A8A80BA3767DAA87967F182C0C562EB2F98799175B7A",
+    "exe": "Zombie Shoot VR/Builds/Windows/WaveLab/WaveLab.exe",
+    "result": "Succeeded",
+    "manifestSha256": "D4F360DA9665B3EA676ED0747C1E4556216E7AD3714830A22E2CC0F06D767998",
+    "log": "tmp/p07-wave-lab/build.log",
+    "backend": "Mono",
+    "runtimeSha256": "30EEA73B665216F17A0ED48066413E38D05A7DCFFF0B02000CEF4A8FFD353A5C",
+    "verifiedCopiedFiles": 337,
+    "logSha256": "E57F6B0DF07BE060F2D2EFD888B804B91D71F98D86507515B3E93A1BB0795B44"
+  },
+  "scope": [
+    "Restart resets ammo, shot cooldown, hand ownership and pooled magazines",
+    "Separate authored WaveLab scene integrates run, spawning and pause",
+    "Shared combat clock and 10-retry scene lifecycle verification",
+    "Windows Mono development build and hardware guide"
+  ],
+  "unit": "P07-d",
+  "baseCommit": "b4bac3d25f99b54cdabad457435112aebcdf3696",
+  "review": "Self-reviewed; independent review and hardware gates pending",
+  "reproduce": [
+    "Unity.exe -batchmode -nographics -quit -projectPath <isolated project> -executeMethod VRFPS.Editor.WaveLabSetup.Configure -logFile <setup.log>",
+    "Unity.exe -batchmode -nographics -projectPath <isolated project> -runTests -testPlatform <PlayMode|EditMode> -testResults <xml> -logFile <log>",
+    "Unity.exe -batchmode -nographics -quit -projectPath <isolated project> -executeMethod VRFPS.Editor.WaveLabSetup.Build -logFile <build.log>"
+  ],
+  "sourceManifest": {
+    "path": "tmp/p07-wave-lab/source-manifest.json",
+    "sha256": "9EBF6679F78170C6771CB1673E6C49D8E2EC9A24C87515435640D887E4B7A0E3",
+    "files": 181
+  }
+}

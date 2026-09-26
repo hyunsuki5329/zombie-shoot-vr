@@ -43,6 +43,31 @@ namespace VRFPS.Tests
         void GripAt(Vector3 position) { left.position = position; interactor.Tick(true, true); }
         void Release() => interactor.Tick(false, true);
 
+        [Test] public void RestartRestoresOneMountedMagazineAndClearsOwnership()
+        {
+            for (var attempt = 0; attempt < 10; attempt++)
+            {
+                for (var shot = 0; shot < 13; shot++) gun.Magazine.TryConsume();
+                Release(); GripAt(socket.transform.position); Release(); GripAt(pouch.transform.position);
+                Assert.That(interactor.HeldToken, Is.Not.Null);
+                gun.SetPhase(RunPhase.Paused); pouch.SetSimulationEnabled(false);
+                interactor.Restart();
+                Assert.That(interactor.Owner, Is.EqualTo(LeftHandOwner.None));
+                Assert.That(interactor.HeldToken, Is.Null);
+                Assert.That(gun.Magazine.Rounds, Is.EqualTo(30));
+                Assert.That(gun.Magazine.Inserted, Is.True);
+                Assert.That(socket.Installed.State, Is.EqualTo(MagazineTokenState.Inserted));
+                Assert.That(socket.Installed.HeldBy, Is.Null);
+                var active = Object.FindObjectsByType<MagazineToken>(FindObjectsSortMode.None);
+                Assert.That(active.Length, Is.EqualTo(1), "Only the mounted magazine survives each retry.");
+                Assert.That(pouch.TokenCount, Is.EqualTo(2), "The existing pool is reused across retries.");
+                pouch.SetSimulationEnabled(true);
+                left.position = socket.transform.position;
+                interactor.Tick(true, true);
+                Assert.That(gun.Magazine.Inserted, Is.True, "A held grip across retry must not immediately eject.");
+            }
+        }
+
         [Test]
         public void ReloadSequenceDiscardsAmmoAndRequiresASeparateForegripGrab()
         {
