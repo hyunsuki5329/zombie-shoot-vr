@@ -1,0 +1,43 @@
+{
+  "review": "Self-reviewed against P07 plan; independent review unavailable due reviewer usage limit; not approval",
+  "baseCommit": "174be3b8639bd2a2ff0b90020613c586d042bd17",
+  "evidenceRecheckedOn": "2026-09-26",
+  "unity": "6000.3.23f1",
+  "reproduce": "Unity.exe -batchmode -nographics -projectPath <isolated project> -runTests -testPlatform EditMode -testResults <xml> -logFile <log>",
+  "pending": [
+    "RunController damage/death ordering",
+    "SpawnDirector actual spawn validation",
+    "8-second preparation and pause integration",
+    "PlayMode lifecycle tests",
+    "Quest Pro T08/T09/T12/T13"
+  ],
+  "verifiedOn": "2026-09-23",
+  "unit": "P07-a",
+  "sources": [
+    {
+      "sha256": "F8D6865AA220B6C360C1996BA94B3B41AA7ABDF45DA6C5BC146B6CAB9CA45494",
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/Combat/VitalState.cs"
+    },
+    {
+      "sha256": "9439E7D658B4664C9284EB25FA40C32D62038D4B129EAEE21995110630754433",
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/Progression/WaveProgress.cs"
+    },
+    {
+      "sha256": "AE87D714F609618179A9B54E2F31FEDC513CA25ADA002EA2A206E953F08DBB21",
+      "path": "Zombie Shoot VR/Assets/VRFPS/Tests/EditMode/ProgressionRulesTests.cs"
+    }
+  ],
+  "red": {
+    "sha256": "FE8D84375015C98E1FB576DE36B279F2F4CC665B3FC55263AEAA4DB5BDA3DEB8",
+    "failed": 6,
+    "passed": 0,
+    "path": "tmp/p07-rules/red.xml"
+  },
+  "scope": "Pure health and wave accounting rules; not scene integration",
+  "green": {
+    "sha256": "8766C3CA33F184263BCF862A9874B7D1E03298DEE19FAB06A6B09BBE0A4BA42B",
+    "failed": 0,
+    "passed": 37,
+    "path": "tmp/p07-rules/green.xml"
+  }
+}
