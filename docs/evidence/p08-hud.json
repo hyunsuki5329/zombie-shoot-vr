@@ -1,0 +1,59 @@
+{
+  "unit": "P08-d forearm HUD",
+  "date": "2026-09-27",
+  "baseCommit": "1a712c286011ca7da6255a7970963ecd8f423705",
+  "scope": [
+    "HP, reached wave, kills, preparation/pause/death display",
+    "HP <=25 uses red text and exclamation icon",
+    "World panel 12x7cm, right controller local (0,.035,-.125), rotation (90,0,0)",
+    "WaveLab authored instance; cached text updates"
+  ],
+  "tests": [
+    {
+      "result": "Failed(Child)",
+      "failed": "2",
+      "path": "tmp/p08-hud/red.xml",
+      "passed": "0",
+      "sha256": "88DB810D69AB3AAE8DCF6FEB63603CCE5542B833FC5751EAF24BA38CCDDAF220"
+    },
+    {
+      "result": "Failed(Child)",
+      "failed": "1",
+      "path": "tmp/p08-hud/green-play.xml",
+      "passed": "77",
+      "sha256": "8CA24D277C4294A1E13956F462E9ACC8C97E2299B21722F1E7BDC91380B052E4"
+    },
+    {
+      "result": "Passed",
+      "failed": "0",
+      "path": "tmp/p08-hud/verified-play.xml",
+      "passed": "78",
+      "sha256": "D67CCA14299C32B8259BB485C0EB740A9457BB85067312C5F239EE0DE1EA74B3"
+    }
+  ],
+  "sources": [
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/UI/ForearmHUD.cs",
+      "sha256": "D9CF980F80AB7990C63E6C0262B741BF373A357730463A308CA47F55A5C616DE"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Tests/PlayMode/ForearmHUDTests.cs",
+      "sha256": "2F37A88E5EB4AB3AEF8E815D776397B6FFC70A8F1E023C6DC4C745621E800818"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Editor/ForearmHUDSetup.cs",
+      "sha256": "95DF417ECB2DA7E83ADA69D12E8A53337E0A710C25F3CE5C5262E5B40F633CA8"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Scenes/Tests/WaveLab.unity",
+      "sha256": "71EE75089C1ADB084D8540664BBB6A526A4402FE40BF8FB4289B6F52DAD8C88A"
+    }
+  ],
+  "limitations": [
+    "Headset legibility, occlusion, visual appearance unverified",
+    "Menu screens and Windows build pending",
+    "Independent review pending"
+  ],
+  "setup": "tmp/p08-hud/setup.log: VRFPS_FOREARM_HUD_CONFIGURED",
+  "testCorrection": "Initial green run 77/78: fixture assumed eight enemies in wave one; corrected to specified six."
+}
