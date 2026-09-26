@@ -4,8 +4,8 @@
 
 ## 현재 작업
 
-- 현재 기준 커밋: `174be3b` (P06-b 시험장 통합).
-- 브랜치: `codex/p07-progression`. P06 기반 의존 작업이며 P07-a 순수 규칙 자동 검증 완료, 전체 P07은 미완료다.
+- 현재 기준 커밋: `0bb1c6e` (P07-a 순수 체력·웨이브 규칙).
+- 브랜치: `codex/p07-progression`. P06 기반 의존 작업이며 P07-a/b 규칙·실행 흐름 자동 검증 완료, 씬 통합과 전체 P07은 미완료다.
 - P01-a 구현 커밋: `5a8dc1d844bf5aacd53a522a894bca3eee7c91d3`. [PR #1](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/1)은 원격에서 main에 병합됨(`e0e3be2`). GitHub CI는 없으며 로컬 Unity 검증 결과를 사용한다.
 - P01-a 구현·자동 검증 완료: Unity 환경 확인, EditMode 시험 어셈블리와 InteractionLab 구성, Windows Mono 개발 빌드. 증빙: [시험·빌드·소스 해시](evidence/p01-foundation.json), [환경 및 실행 절차](../Zombie%20Shoot%20VR/Docs/environment.md).
 - P01 실기 확인: 사용자가 VR 실행과 머리·양손 추적 정상 동작을 확인했다(2026-09-22). [VD 설정·실기 보고](evidence/2026-09-22-vd-hardware-check.md). 전용 입력 구성과 양안 가림 등 후속 검증까지 완료한 것으로 확대하지 않는다.
@@ -75,3 +75,13 @@
 - 2026-09-23 신규 EditMode 6개 실패 후 전체 37/37 통과. 2026-09-26 결과 XML과 검증 복사본/원본 소스 해시 일치를 재확인했다. [증빙](evidence/p07-rules.json). 새 시험 실행으로 표시하지 않는다.
 - 자체 검토 완료, 독립 리뷰는 사용량 제한으로 미실행이다. 승인이나 병합 조건 충족으로 취급하지 않는다.
 - 다음: RunController의 피해/사망 우선 처리와 준비 8초, SpawnDirector 실제 생성 성공 등록, 전체 정지/재개, PlayMode 수명 시험과 T08/T09/T12/T13 실기. 씬·빌드는 아직 P06 동작이다.
+
+### P07-b 실행 흐름 및 플레이어 정지 연결
+
+- P07-a 커밋 `0bb1c6e`, [초안 PR #7](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/7), base `codex/p06-enemies`. 미병합.
+- RunController: 준비 8초 종료 시 실제 웨이브 시작, 피해·사망 즉시 확정 후 프레임 후반 클리어/회복, 사망 이벤트 1회, 정지 시 전투·준비 시계 동결, 재도전 시 체력·집계 초기화. MapDefinition 유효성 및 GameBalance 할당 상한 추가.
+- RunCombatBindings: 총 발사와 가상 이동 정지, 추적 Transform 갱신 유지, 탄창 Rigidbody 속도 보존/복원과 수명 동결. 기존 수동 재장전 시험도 재실행했다.
+- 2026-09-26 신규 수명 시험 7개 RED, 정지 연결 시험 2개 RED 후 전체 PlayMode **57/57**, EditMode **37/37** GREEN. 실제 LateUpdate 순서의 동시 마지막 처치/치명타와 독립 물리 씬의 낙하 동결을 포함한다. [증빙](evidence/p07-lifecycle.json).
+- 자체 검토 완료. 독립 리뷰 미완료. Headless OpenXR 기기 부재 로그가 있으며 자동 시험을 실기 추적 증빙으로 사용하지 않는다. 새 빌드는 아직 만들지 않았다.
+- 다음 작업: SpawnDirector의 실제 NavMesh 생성·상한·실패 재시도와 적/투사체 정지, 탄약·객체 재도전 초기화, 시험장 씬 연결 및 Windows 빌드, Quest Pro T08/T09/T12/T13.
+- Ruling: P07의 클리어 판정은 실행 순서 10000의 LateUpdate에서 처리한다. 기존 무기 LateUpdate와 적/투사체 Update의 피해가 먼저 확정되도록 하기 위함이다. 새로운 피해 생산자를 이 순서 뒤에 추가하면 동시 사망 시험과 처리 순서를 함께 갱신해야 한다.

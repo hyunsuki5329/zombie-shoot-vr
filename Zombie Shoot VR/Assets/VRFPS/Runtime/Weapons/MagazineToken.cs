@@ -10,6 +10,32 @@ namespace VRFPS
         public MagazineTokenState State { get; private set; }
         public Transform HeldBy { get; private set; }
         MagazineSocket mountedIn;
+        bool simulationEnabled = true, suspendedDynamic;
+        Vector3 suspendedVelocity, suspendedAngularVelocity;
+
+        public void SetSimulationEnabled(bool enabled)
+        {
+            if (simulationEnabled == enabled) return;
+            simulationEnabled = enabled;
+            var body = GetComponent<Rigidbody>();
+            if (!enabled && !body.isKinematic)
+            {
+                suspendedDynamic = true;
+                suspendedVelocity = body.linearVelocity;
+                suspendedAngularVelocity = body.angularVelocity;
+                body.isKinematic = true;
+            }
+            else if (enabled && suspendedDynamic)
+            {
+                suspendedDynamic = false;
+                if (HeldBy == null && State != MagazineTokenState.Inserted)
+                {
+                    body.isKinematic = false;
+                    body.linearVelocity = suspendedVelocity;
+                    body.angularVelocity = suspendedAngularVelocity;
+                }
+            }
+        }
 
         internal void ResetFresh()
         {
@@ -32,7 +58,9 @@ namespace VRFPS
             HeldBy = null;
             transform.SetParent(null, true);
             var body = GetComponent<Rigidbody>();
-            body.isKinematic = false;
+            body.isKinematic = !simulationEnabled;
+            suspendedDynamic = !simulationEnabled;
+            suspendedVelocity = suspendedAngularVelocity = Vector3.zero;
             body.useGravity = true;
             body.detectCollisions = true;
             return true;
@@ -49,6 +77,7 @@ namespace VRFPS
 
         void SetAttachedPhysics()
         {
+            suspendedDynamic = false;
             var body = GetComponent<Rigidbody>();
             if (!body.isKinematic) { body.linearVelocity = Vector3.zero; body.angularVelocity = Vector3.zero; }
             body.isKinematic = true;
