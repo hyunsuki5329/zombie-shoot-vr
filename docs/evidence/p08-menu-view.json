@@ -1,0 +1,75 @@
+{
+  "unit": "P08-f menu view and lab build",
+  "date": "2026-09-27",
+  "baseCommit": "8cfcf9315579467cecac6dce279a7c67a76c942d",
+  "scope": [
+    "uGUI button listeners for pause/resume/retry/settings/back/map-selection/save retry",
+    "Result and save status from same run; failed save can retry without restart",
+    "World-space Canvas with TrackedDeviceGraphicRaycaster and XRUIInputModule in WaveLab",
+    "Menu placed in front of current head position when opened"
+  ],
+  "tests": [
+    {
+      "result": "Failed(Child)",
+      "failed": "2",
+      "passed": "0",
+      "sha256": "609DE7CE50B4DC160D23B20CF17B6A3B27579010F366AF1E5C4BC022D95D9617",
+      "path": "tmp/p08-menu-view/red.xml"
+    },
+    {
+      "result": "Failed(Child)",
+      "failed": "1",
+      "passed": "82",
+      "sha256": "0DB48CDF2B3005ED79F84E4F090F4C5A674EB164E716AD67D0F7AE7FF085F0D1",
+      "path": "tmp/p08-menu-view/green-play.xml"
+    },
+    {
+      "result": "Passed",
+      "failed": "0",
+      "passed": "83",
+      "sha256": "E5EC189B7C39907CF16ABD050E3934F4FC67722B92B5E484E319BCF2ECA3EEAD",
+      "path": "tmp/p08-menu-view/verified-play.xml"
+    }
+  ],
+  "sources": [
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/UI/MenuView.cs",
+      "sha256": "EDA8DCDD6A951DF444223E80F104D16E6D18E80CEE1EC9D4E447FAED5E45D1B0"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Editor/MenuSetup.cs",
+      "sha256": "5F34F5C605C41F167F6EB9B1BFF468E3D1529FF1C708E203149F97F3C776EED7"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Tests/PlayMode/MenuViewTests.cs",
+      "sha256": "3690B3A7DE39E27EF1CC83F52E58C39EE59FCE67CFE614D945F020C5EFA64072"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Tests/PlayMode/WaveLabSceneTests.cs",
+      "sha256": "6CF0355A6796DBCAB6B787E495904654113B977BAC84B3BFFBAC49EBDCB2D524"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Scenes/Tests/WaveLab.unity",
+      "sha256": "1AC97E70DC83ECF364A64EFD44B03D711F34ABAAA87046431DA1CA35E3B71F5D"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Prefabs/UI/Menus.prefab",
+      "sha256": "90D2F33E14B9B55FB45DA9FFBE74BB718208D33E03593357C4E528113C41936C"
+    }
+  ],
+  "build": {
+    "files": 337,
+    "result": "Succeeded, exit 0",
+    "manifest": "tmp/p08-menu-view/build-manifest.json",
+    "path": "Zombie Shoot VR/Builds/Windows/MenuLab/WaveLab.exe",
+    "log": "tmp/p08-menu-view/build.log",
+    "sha256": "21E146C7831E6899A432A244A1103689EE5D553F4038DBAD6E0F06644E4C1534"
+  },
+  "limitations": [
+    "Settings adjustment and map loading buttons disabled in lab",
+    "Actual scanned maps, record binding in real map scenes, Bootstrap integration pending",
+    "Lab scores intentionally not saved to room/classroom records",
+    "Visual/headset interaction, occlusion and independent review pending"
+  ],
+  "testCorrection": "First green: 82/83; pause title changed from PAUSE to expected PAUSED."
+}
