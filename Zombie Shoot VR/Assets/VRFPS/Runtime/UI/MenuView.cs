@@ -9,6 +9,7 @@ namespace VRFPS
         [SerializeField] RunRecordBinding result;
         [SerializeField] GameObject panel;
         [SerializeField] Transform viewer;
+        [SerializeField] GameObject settingsControls;
         [SerializeField] Text title, details;
         [SerializeField] Button resume, retry, settings, back, maps, retrySave;
         bool subscribed;
@@ -62,6 +63,7 @@ namespace VRFPS
                 transform.rotation=Quaternion.LookRotation(forward,Vector3.up);
             }
             panel.SetActive(screen!=MenuScreen.Hidden);
+            if(settingsControls!=null)settingsControls.SetActive(screen==MenuScreen.Settings);
             if(screen==MenuScreen.Hidden)return;
             title.text=screen==MenuScreen.MapSelection ? "MAP SELECTION" : screen==MenuScreen.Pause ? "PAUSED" : screen.ToString().ToUpperInvariant();
             resume.gameObject.SetActive(screen==MenuScreen.Pause);

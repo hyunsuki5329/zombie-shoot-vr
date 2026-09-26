@@ -26,11 +26,23 @@ namespace VRFPS.Editor
                 var details=Label("Details",panel.transform,new Vector2(0,140),new Vector2(860,130),28);
                 var resume=Button("Resume",panel.transform,new Vector2(-205,20));
                 var retry=Button("Retry",panel.transform,new Vector2(205,20));
-                var settings=Button("Settings",panel.transform,new Vector2(-205,-75));settings.interactable=false;
+                var settings=Button("Settings",panel.transform,new Vector2(-205,-75));
                 var maps=Button("Maps unavailable",panel.transform,new Vector2(205,-75));maps.interactable=false;
                 var back=Button("Back",panel.transform,new Vector2(-205,-170));
                 var save=Button("Retry save",panel.transform,new Vector2(205,-170));
                 root.AddComponent<MenuView>().Configure(root.AddComponent<MenuController>(),null,null,panel,title,details,resume,retry,settings,back,maps,save);
+                var controls=Rect("SettingsControls",panel.transform,Vector2.zero,new Vector2(900,220));
+                var moveText=Label("Move speed",controls.transform,new Vector2(0,20),new Vector2(300,70),28);
+                var turnText=Label("Turn speed",controls.transform,new Vector2(0,-75),new Vector2(300,70),28);
+                var moveDown=Button("Move -",controls.transform,new Vector2(-300,20));
+                var moveUp=Button("Move +",controls.transform,new Vector2(300,20));
+                var turnDown=Button("Turn -",controls.transform,new Vector2(-300,-75));
+                var turnUp=Button("Turn +",controls.transform,new Vector2(300,-75));
+                foreach(var b in new[]{moveDown,moveUp,turnDown,turnUp})b.GetComponent<RectTransform>().sizeDelta=new Vector2(180,75);
+                root.AddComponent<SettingsView>().Configure(null,moveText,turnText,moveDown,moveUp,turnDown,turnUp);
+                var viewData=new SerializedObject(root.GetComponent<MenuView>());
+                viewData.FindProperty("settingsControls").objectReferenceValue=controls;viewData.ApplyModifiedPropertiesWithoutUndo();
+                controls.SetActive(false);
                 PrefabUtility.SaveAsPrefabAsset(root,Path);
             }
             finally{UnityEngine.Object.DestroyImmediate(root);}
@@ -43,6 +55,9 @@ namespace VRFPS.Editor
             data.FindProperty("run").objectReferenceValue=run;
             data.FindProperty("viewer").objectReferenceValue=camera.transform;
             data.ApplyModifiedPropertiesWithoutUndo();
+            var settingsData=new SerializedObject(instance.GetComponent<SettingsView>());
+            settingsData.FindProperty("rig").objectReferenceValue=run.GetComponent<VRFPS.Player.PlayerRigController>();
+            settingsData.ApplyModifiedPropertiesWithoutUndo();
             instance.GetComponent<Canvas>().worldCamera=camera;
             instance.transform.position=camera.transform.position+camera.transform.forward*1.2f;
             instance.transform.rotation=camera.transform.rotation;

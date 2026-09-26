@@ -4,8 +4,8 @@
 
 ## 현재 작업
 
-- 현재 기준 커밋: `5416507` (P08-a 맵별 기록 저장).
-- 브랜치: `codex/p08-records`. P07 기반 의존 작업이다. P07은 WaveLab 빌드까지 구현됐으나 독립 리뷰·실기 대기이며, P08-a/b 기록 저장과 도전 종료 연결 자동 검증을 완료했다.
+- 현재 기준 커밋: `eb211d7` (P08-f XR 메뉴·HUD 시험 빌드).
+- 브랜치: `codex/p08-records`. P07 기반 의존 작업이다. P07은 WaveLab 빌드까지 구현됐으나 독립 리뷰·실기 대기이며, P08 기록·HUD·메뉴 연결을 구현했고 이동/회전 설정 통합을 진행 중이다. 실제 맵·Bootstrap 통합과 실기·독립 리뷰는 남아 있다.
 - P01-a 구현 커밋: `5a8dc1d844bf5aacd53a522a894bca3eee7c91d3`. [PR #1](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/1)은 원격에서 main에 병합됨(`e0e3be2`). GitHub CI는 없으며 로컬 Unity 검증 결과를 사용한다.
 - P01-a 구현·자동 검증 완료: Unity 환경 확인, EditMode 시험 어셈블리와 InteractionLab 구성, Windows Mono 개발 빌드. 증빙: [시험·빌드·소스 해시](evidence/p01-foundation.json), [환경 및 실행 절차](../Zombie%20Shoot%20VR/Docs/environment.md).
 - P01 실기 확인: 사용자가 VR 실행과 머리·양손 추적 정상 동작을 확인했다(2026-09-22). [VD 설정·실기 보고](evidence/2026-09-22-vd-hardware-check.md). 전용 입력 구성과 양안 가림 등 후속 검증까지 완료한 것으로 확대하지 않는다.
@@ -30,7 +30,7 @@
 - P06-b 독립 재검토: 수정된 코드·씬 참조와 결과 XML을 읽기 전용으로 확인했고 범위 내 남은 중요 결함을 발견하지 못했다. Quest Pro T10/T11과 외형·양안 표시·회피 편안함은 아직 대기이므로 PR #6은 초안으로 유지한다.
 - P06-b 격리 검증: 사용자 에디터가 SampleScene을 열고 있어 `tmp/p06-verification` detached worktree에서 실행했다. 모든 검증/빌드 프로세스는 정상 종료했다. 원본 생성 자산이 snapshot과 같음을 확인한 뒤 수정된 씬 참조와 NavMesh를 반영했고, 원본·검증 복사본의 VRFPS 파일 해시 전체가 일치함을 확인했다. 사용자 OpenXR·튜토리얼 설정 변경은 보존하고 커밋 범위에서 제외한다. 비교 기록은 `tmp/p06-navigation/workspace-source-snapshot.json`이다.
 - 새 빌드: `Zombie Shoot VR/Builds/Windows/EnemyLab/InteractionLab.exe`. 기존 P05 시험장 빌드는 유지한다. X/F6으로 적 시작·정지, Y/F7로 적 초기화. 이 시험장의 피격 횟수는 최종 HP·웨이브·사망 시스템을 대신하지 않는다.
-- 다음 실행: T06/T07·T10/T11 실기 결과를 반영하며 P07 체력·웨이브·생성·정지·사망 우선 규칙을 구현한다. P07~P12는 미착수다.
+- 다음 실행: P08 설정·Bootstrap·맵 선택/기록 통합을 진행하며 T06/T07·T10/T11 및 메뉴·HUD 실기 결과를 반영한다. P09 실제 맵과 P10~P12의 필수 결과물은 아직 완료되지 않았다.
 
 ## 확인한 환경과 증빙
 
@@ -132,3 +132,5 @@
 - P08-e (2026-09-27): 메뉴 상태 제어 구현. 설정 진입 시 정지, 설정 닫기 후 명시적 재개, 사망 결과·같은 맵 재도전·맵 선택 시 현재 도전 종료를 검증했다. 3개 RED 후 전체 PlayMode 81/81 통과. [증빙](evidence/p08-menu-state.json). 실제 버튼/씬·설정 값·맵 로딩·결과 화면 연결은 다음 작업이다.
 
 - P08-f (2026-09-27): uGUI 메뉴 프리팹·XR raycaster/EventSystem·재개/재도전/결과 표시를 WaveLab에 연결했다. 저장 실패 재시도 버튼은 독립 기록 시험에서 검증했다. 2개 RED 후 전체 PlayMode 83/83 및 Windows 빌드 성공, MenuLab 복사 337개 파일 해시 일치. [증빙](evidence/p08-menu-view.json), [실기 절차](evidence/p08-menu-hardware-check.md). 연습장 점수는 저장하지 않으며 설정 조절/실제 맵 선택 버튼은 비활성이다. Bootstrap·실제 맵·영구 기록 씬 통합·실기·독립 리뷰는 남아 있다.
+
+- P08-g (2026-09-27): 이동 1.0~2.0m/s·회전 30~90deg/s 설정과 PlayerPrefs 저장, 메뉴 증감 버튼을 연결했다. 독립 키에서 실제 이동·회전·재로드·범위/비정상 값·버튼 동작을 검증했다. 2개 RED 후 전체 PlayMode 86/86, Windows 빌드 성공, MenuLab 337개 파일 해시 일치. [증빙](evidence/p08-settings.json). 실제 스캔 맵 선택과 실기·독립 리뷰는 대기다.
