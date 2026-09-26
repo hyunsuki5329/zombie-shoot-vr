@@ -1,0 +1,41 @@
+{
+  "unit": "P08-c menu input boundary",
+  "date": "2026-09-27",
+  "baseCommit": "e3a26e6f01ccda1fb0b496c76baed4c4041fecee",
+  "scope": "Require trigger release after pause/death transitions; preserve grip and pose evaluation.",
+  "tests": [
+    {
+      "result": "Failed(Child)",
+      "failed": "1",
+      "path": "tmp/p08-menu-input/red.xml",
+      "sha256": "5F29BF6A8093FE5D599EF66C50EC142A6EAC95C0ECFABA576D9F794B8F1F88C7",
+      "passed": "0"
+    },
+    {
+      "result": "Passed",
+      "failed": "0",
+      "path": "tmp/p08-menu-input/green-play.xml",
+      "sha256": "2F5B5876BDF52873361EDD627DF8D747A4ABE1B9D2E7E10216B9DDBFB25274BE",
+      "passed": "76"
+    }
+  ],
+  "sources": [
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/Weapons/K2HandInput.cs",
+      "sha256": "C7462D615D2A2F34B4508AB75373239FF21DA804AFBDC3D30145448C81D45044"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/Progression/RunCombatBindings.cs",
+      "sha256": "9609508CAEF68522AC75BB7645DB79F5287A1B74352DB3A3BB30AB8AC0245197"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Tests/PlayMode/K2PhysicsTests.cs",
+      "sha256": "5EBD4DA9B647A9377CAFFAE24A79F4B35C6F62676FCE15AE8CBC1AEDDF592DDA"
+    }
+  ],
+  "limitations": [
+    "Forearm HUD and menu scene integration pending",
+    "No new Windows build or headset verification",
+    "Independent branch review pending"
+  ]
+}

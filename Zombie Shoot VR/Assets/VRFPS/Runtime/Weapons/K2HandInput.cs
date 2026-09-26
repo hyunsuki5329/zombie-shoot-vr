@@ -15,6 +15,8 @@ namespace VRFPS
         double activeTime;
         float tracerUntil;
         RunController clock;
+        bool triggerReleaseRequired;
+        public void RequireTriggerRelease() => triggerReleaseRequired = true;
         public void UseRunClock(RunController run) { clock = run; activeTime = 0; }
 
         public void Configure(K2Controller gun, Transform left, Transform foregrip)
@@ -42,13 +44,14 @@ namespace VRFPS
 
         public bool TickInput(bool grip, bool trigger, double time)
         {
+            if (!trigger) triggerReleaseRequired = false;
             if (gun == null || left == null || foregrip == null) return false;
             gun.UpdatePose();
             if (leftHandOwnership != null)
                 leftHandOwnership.Tick(grip, gun.Phase == RunPhase.Active || gun.Phase == RunPhase.Preparing);
             else
                 gun.SetLeftGrip(grip && Vector3.Distance(left.position, foregrip.position) <= 0.18f);
-            return gun.Tick(trigger, time);
+            return gun.Tick(trigger && !triggerReleaseRequired, time);
         }
 
         void ShowTracer(Vector3 start, Vector3 end)
