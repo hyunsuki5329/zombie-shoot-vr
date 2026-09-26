@@ -4,8 +4,8 @@
 
 ## 현재 작업
 
-- 현재 기준 커밋: `b4bac3d` (P07-c 적 생성·상한).
-- 브랜치: `codex/p07-progression`. P06 기반 의존 작업이며 P07-a~d 구현·자동 시험·Windows 시험장 빌드 완료. 독립 리뷰·Quest Pro 실기 전까지 전체 P07은 미완료다.
+- 현재 기준 커밋: `12bcddc` (P07-d WaveLab 통합·빌드).
+- 브랜치: `codex/p08-records`. P07 기반 의존 작업이다. P07은 WaveLab 빌드까지 구현됐으나 독립 리뷰·실기 대기이며, P08-a 기록 저장 기반 자동 검증을 완료했다.
 - P01-a 구현 커밋: `5a8dc1d844bf5aacd53a522a894bca3eee7c91d3`. [PR #1](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/1)은 원격에서 main에 병합됨(`e0e3be2`). GitHub CI는 없으며 로컬 Unity 검증 결과를 사용한다.
 - P01-a 구현·자동 검증 완료: Unity 환경 확인, EditMode 시험 어셈블리와 InteractionLab 구성, Windows Mono 개발 빌드. 증빙: [시험·빌드·소스 해시](evidence/p01-foundation.json), [환경 및 실행 절차](../Zombie%20Shoot%20VR/Docs/environment.md).
 - P01 실기 확인: 사용자가 VR 실행과 머리·양손 추적 정상 동작을 확인했다(2026-09-22). [VD 설정·실기 보고](evidence/2026-09-22-vd-hardware-check.md). 전용 입력 구성과 양안 가림 등 후속 검증까지 완료한 것으로 확대하지 않는다.
@@ -106,3 +106,13 @@
 - 실기 결과를 요청했다. T08/T09/T12/T13의 실제 Quest Pro 결과와 독립 리뷰는 아직 대기다. 미완료 항목 때문에 PR #7은 초안으로 유지한다.
 - 다음: P08 맵별 최고 기록 저장·오른팔 UI·메뉴. 실제 방/강의실 촬영본·거리 2개, 제출 공지, P05~P07 잔여 실기 결과는 별도 대기다.
 - Ruling: P07 시험장을 별도 WaveLab 씬/빌드로 제공하여 기존 실기 증빙의 P06 실행 경로를 보존한다. 두 시험장은 공통 프리팹과 전투 코드를 사용하므로 공통 변경은 두 씬 회귀 시험으로 확인한다. 비용은 시험장 씬 두 개를 유지해야 한다는 것이다.
+
+## P08 기록·UI·메뉴
+
+- P07-d 커밋 `12bcddc`는 PR #7에 push돼 있으며 초안·미병합 상태다. WaveLab 실기 결과는 아직 대기다.
+- P08-a: RecordStore와 BestRecord 구현. 맵별 최고 도전의 웨이브/처치를 함께 저장하며 같은 웨이브에서만 처치로 비교한다. schema 1의 필수 필드·맵 ID·음수·중복 맵을 검사한다.
+- 임시 파일을 닫고 읽어 검증한 후 본 파일로 교체한다. 기존 정상 파일만 `.bak`으로 남기며, 손상된 본 파일을 복구할 때 정상 백업을 덮어쓰지 않는다. 쓰기 실패는 false/LastError로 보고하고 메모리의 최고 기록을 유지하여 재시도할 수 있다.
+- 2026-09-26 신규 11개 RED 후 구현. 중간 48개 중 2개 실패로 InvalidDataException 처리 누락을 확인해 수정했다. 추가 백업/문서 형식 시험을 포함한 최종 **EditMode 50/50**, 기존 **PlayMode 70/70** 통과. [증빙](evidence/p08-records.json).
+- 실제 사용자 기록은 사용하지 않았으며 시험별 새 GUID 임시 폴더에서 파일 잠금·쓰기 불가·본 파일/백업 손상을 확인했다. 자체 검토 완료, 독립 리뷰는 남아 있다.
+- 다음: RunEnded 저장 1회 연결과 오류 표시, 오른팔 HUD, 맵 선택·정지·결과·재도전 메뉴, Windows 빌드 검증. 현재 WaveLab 빌드에는 아직 P08 저장 기능이 연결되지 않았다.
+- Ruling: .NET DataContractJsonSerializer의 필수 필드 검증을 사용해 누락된 kills를 0으로 오인하지 않게 한다. 추가 패키지 없이 계획의 schema 1 JSON 형식을 유지한다. 비용은 향후 IL2CPP로 전환할 경우 직렬화와 코드 보존을 해당 빌드에서 다시 검증해야 한다는 것이다.
