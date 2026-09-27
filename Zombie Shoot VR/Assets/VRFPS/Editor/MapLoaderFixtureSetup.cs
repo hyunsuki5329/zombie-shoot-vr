@@ -12,7 +12,7 @@ namespace VRFPS.Editor
         const string Folder="Assets/VRFPS/Tests/Fixtures/MapLoading";
         public static void EnableForTests()
         {
-            var paths=new[]{Folder+"/ValidMap.unity",Folder+"/InvalidMap.unity"};
+            var paths=new[]{Folder+"/ValidMap.unity",Folder+"/InvalidMap.unity","Assets/VRFPS/Scenes/Bootstrap.unity","Assets/VRFPS/Scenes/Combat.unity"};
             EditorBuildSettings.scenes=EditorBuildSettings.scenes.Where(x=>!paths.Contains(x.path))
                 .Concat(paths.Select(x=>new EditorBuildSettingsScene(x,true))).ToArray();
             Debug.Log("VRFPS_MAP_TEST_SCENES_ENABLED");

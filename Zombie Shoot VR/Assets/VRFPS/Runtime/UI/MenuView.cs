@@ -21,6 +21,10 @@ namespace VRFPS
             this.back=back;this.maps=maps;this.retrySave=retrySave;
             if(isActiveAndEnabled) Subscribe();
         }
+        public void BindResult(RunRecordBinding binding)
+        {
+            Unsubscribe();result=binding;if(isActiveAndEnabled)Subscribe();
+        }
         void OnEnable() => Subscribe();
         void OnDisable() => Unsubscribe();
         void Subscribe()

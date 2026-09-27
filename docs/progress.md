@@ -4,8 +4,8 @@
 
 ## 현재 작업
 
-- 현재 기준 커밋: `eb211d7` (P08-f XR 메뉴·HUD 시험 빌드).
-- 브랜치: `codex/p08-records`. P07 기반 의존 작업이다. P07은 WaveLab 빌드까지 구현됐으나 독립 리뷰·실기 대기이며, P08 기록·HUD·메뉴 연결을 구현했고 이동/회전 설정 통합을 진행 중이다. 실제 맵·Bootstrap 통합과 실기·독립 리뷰는 남아 있다.
+- 현재 기준 커밋: `1344f9a` (공통 전투 세션). 이후 Bootstrap 통합 단위의 최종 SHA는 PR #8 기록에 연결한다.
+- 브랜치: `codex/p08-records`. P07 기반 의존 작업이다. 기록·HUD·메뉴·이동/회전 설정과 Bootstrap/Combat 통합을 구현했다. 최신 자동 검증은 PlayMode 96/96, EditMode 50/50이며 실제 두 맵·실기·독립 리뷰는 남아 있다. PR #8은 초안·미병합 상태다.
 - P01-a 구현 커밋: `5a8dc1d844bf5aacd53a522a894bca3eee7c91d3`. [PR #1](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/1)은 원격에서 main에 병합됨(`e0e3be2`). GitHub CI는 없으며 로컬 Unity 검증 결과를 사용한다.
 - P01-a 구현·자동 검증 완료: Unity 환경 확인, EditMode 시험 어셈블리와 InteractionLab 구성, Windows Mono 개발 빌드. 증빙: [시험·빌드·소스 해시](evidence/p01-foundation.json), [환경 및 실행 절차](../Zombie%20Shoot%20VR/Docs/environment.md).
 - P01 실기 확인: 사용자가 VR 실행과 머리·양손 추적 정상 동작을 확인했다(2026-09-22). [VD 설정·실기 보고](evidence/2026-09-22-vd-hardware-check.md). 전용 입력 구성과 양안 가림 등 후속 검증까지 완료한 것으로 확대하지 않는다.
@@ -140,3 +140,12 @@
 - P08/P09 맵 로더 (2026-09-27): 저장된 합성 Unity 씬을 실제 추가 로드/해제하고 MapRoot 검증 후에만 공개한다. 잘못된 씬 정리 후 재시도와 없는 씬 선택 시 기존 맵 유지 검증. 3개 RED 후 최초 90/92에서 시험 씬 사전 등록 방식으로 수정하여 전체 92/92 통과. [증빙·재현 명령](evidence/p09-map-loader.json). 격리 프로젝트는 시험 전에 MapLoaderFixtureSetup.EnableForTests로 씬 목록을 등록해야 한다. 실제 사용자 프로젝트의 빌드 씬 목록은 바꾸지 않았다. Bootstrap/Combat 연결과 실제 맵은 다음 작업이다.
 
 - P08/P09 공통 전투 세션 (2026-09-27): 검증한 맵 로딩→이전 런타임 정리→머리 로컬 추적 자세를 보존한 시작점 배치→탄창/도전 초기화→생성/기록 연결을 구현했다. 2개 RED 후 전체 PlayMode 94/94, 추적 오프셋 사례 보강 후 세션 시험 2/2 통과. 합성 맵 10회 재로딩의 씬/런타임 수 유지 및 실제 적 생성·사망 기록 저장을 확인했다. [증빙](evidence/p09-combat-session.json). Bootstrap/Combat 씬에 아직 배치하지 않았으며 코디네이터는 Combat 해제 전 Shutdown을 기다려야 한다. 실제 두 맵 전환·실기는 별도 대기다.
+
+### P08/P09 Bootstrap·Combat 통합 (2026-09-27)
+
+- Bootstrap에서 공통 Combat 씬을 로드하고 맵별 최고 기록·선택·설정 화면을 연결했다. 검증한 맵 시작, 사망 결과 저장, 맵 메뉴 복귀, 로딩 도중 종료의 정리 순서를 합성 씬으로 시험했다. 관련 P08/P09, R02/R14/R15, T02/T14/T15의 기반 구현이며 실제 공간·기기 시험 완료를 의미하지 않는다.
+- 초기 93/95 실행의 프레임 수 기반 대기와 씬 누수, 91/96 실행의 시험 씬 미등록을 수정했다. 최종 **PlayMode 96/96, EditMode 50/50**. 시험 클래스의 사전/사후 훅이 합성 씬을 자동 등록하고 원래 빌드 목록을 복원한다. 위 과거 맵 로더 항목의 수동 EnableForTests 절차는 이제 필요하지 않다.
+- Windows x64 Mono 개발 빌드 성공, 원본 프로젝트로 복사한 340개 파일의 SHA-256 일치. [증빙](evidence/p09-bootstrap.json). 재현: Unity batchmode에서 `-runTests -testPlatform PlayMode` 또는 `EditMode`; 빌드는 `-executeMethod VRFPS.Editor.BootstrapSetup.Build -quit`이며 격리 프로젝트를 사용한다.
+- 실행: `Zombie Shoot VR/Builds/Windows/BootstrapPreview/BootstrapPreview.exe`. **실제 Room/Classroom 씬이 없어 선택 버튼이 비활성인 메뉴 미리보기**다. 전투 조작 시험은 기존 `Builds/Windows/MenuLab/WaveLab.exe`를 사용한다. 합성 시험 씬은 이 빌드에 포함하지 않는다.
+- 배포 씬 목록은 Bootstrap→Combat으로 변경했다. 기존 XR 설정 객체 참조는 유지했다. 독립 리뷰와 Quest Pro 메뉴 조작·팔 HUD 가독성·가림 검증은 대기이며 PR #8은 초안으로 유지한다.
+- 다음: P10 첫 조작 안내·소리/진동/피드백과 P11 측정 준비를 진행한다. 실제 촬영본·기준 길이 2개 확보 후 P02 평가 및 두 맵 통합, 실기와 성능 시험을 수행한다. 현재 자동 시험 결과를 실제 두 맵의 완료 증빙으로 확대하지 않는다.

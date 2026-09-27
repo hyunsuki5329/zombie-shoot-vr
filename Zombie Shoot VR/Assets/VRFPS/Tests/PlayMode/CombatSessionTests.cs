@@ -11,6 +11,7 @@ using UnityEngine.TestTools;
 using VRFPS.Player;
 namespace VRFPS.Tests
 {
+    [PrebuildSetup(typeof(MapSceneTestSetup)),PostBuildCleanup(typeof(MapSceneTestSetup))]
     public class CombatSessionTests
     {
         const string Lab="Assets/VRFPS/Scenes/Tests/WaveLab.unity";

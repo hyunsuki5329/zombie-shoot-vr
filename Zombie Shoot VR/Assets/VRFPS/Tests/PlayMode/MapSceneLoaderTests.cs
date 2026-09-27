@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 namespace VRFPS.Tests
 {
+    [PrebuildSetup(typeof(MapSceneTestSetup)),PostBuildCleanup(typeof(MapSceneTestSetup))]
     public class MapSceneLoaderTests
     {
         const string Valid="Assets/VRFPS/Tests/Fixtures/MapLoading/ValidMap.unity";
