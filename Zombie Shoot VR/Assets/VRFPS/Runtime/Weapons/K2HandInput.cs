@@ -14,6 +14,8 @@ namespace VRFPS
         [SerializeField] LeftHandInteractor leftHandOwnership;
         double activeTime;
         float tracerUntil;
+        RunController clock;
+        public void UseRunClock(RunController run) { clock = run; activeTime = 0; }
 
         public void Configure(K2Controller gun, Transform left, Transform foregrip)
         {
@@ -31,7 +33,8 @@ namespace VRFPS
         void LateUpdate()
         {
             if (gun == null) return;
-            if (gun.Phase == RunPhase.Active) activeTime += Time.deltaTime;
+            if (clock != null) activeTime = clock.ActiveTime;
+            else if (gun.Phase == RunPhase.Active) activeTime += Time.deltaTime;
             TickInput(gripAction != null && gripAction.action.IsPressed(),
                 triggerAction != null && triggerAction.action.IsPressed(), activeTime);
             if (tracer != null && Time.unscaledTime >= tracerUntil) tracer.enabled = false;

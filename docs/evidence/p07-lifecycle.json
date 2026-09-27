@@ -1,0 +1,93 @@
+{
+  "unity": "6000.3.23f1",
+  "sources": [
+    {
+      "sha256": "590E99174EC7E68A273D2006A2F3189005EB37075253083054D5D58C887ED167",
+      "path": "Zombie Shoot VR\\Assets\\VRFPS\\Runtime\\Configuration\\GameBalance.cs"
+    },
+    {
+      "sha256": "6430B36D83D6CE945ED1567881035243A47C1AE24C61A619EA805743F0AB0731",
+      "path": "Zombie Shoot VR\\Assets\\VRFPS\\Runtime\\Maps\\MapDefinition.cs"
+    },
+    {
+      "sha256": "6CD619B00B70CAAAFCA8C48A930D8C80ABCEC591598D468614BC211FC0001E36",
+      "path": "Zombie Shoot VR\\Assets\\VRFPS\\Runtime\\Progression\\RunController.cs"
+    },
+    {
+      "sha256": "F5967B633C5B3C62895892F0AC5044F2DA1DF76962937E969A4BF934DFA3512A",
+      "path": "Zombie Shoot VR\\Assets\\VRFPS\\Runtime\\Progression\\RunCombatBindings.cs"
+    },
+    {
+      "sha256": "CEDF4F6A55BE57E00A4CEB0902B08D46819E3F8A75E2F840E6EAF1E2B9380F7B",
+      "path": "Zombie Shoot VR\\Assets\\VRFPS\\Runtime\\Weapons\\AmmoPouch.cs"
+    },
+    {
+      "sha256": "6017B38908542CB2DB1907D88A23B6E1B87A7077F14AEA8CFBEB7568CBB84B02",
+      "path": "Zombie Shoot VR\\Assets\\VRFPS\\Runtime\\Weapons\\MagazineToken.cs"
+    },
+    {
+      "sha256": "C6D9FB63B74357350B5DCB9F91D7CE6400411589AAD0C92E5431B771E8E237BC",
+      "path": "Zombie Shoot VR\\Assets\\VRFPS\\Tests\\PlayMode\\RunLifecycleTests.cs"
+    },
+    {
+      "sha256": "29FD58C8BDCE0807D7D71E8F8B2A3FA5F8EB493CD721B6499FCE978FD143BD20",
+      "path": "Zombie Shoot VR\\Assets\\VRFPS\\Tests\\PlayMode\\RunPauseTests.cs"
+    }
+  ],
+  "requirements": [
+    "R08/T08",
+    "R09/T09",
+    "R12/T12 (partial)",
+    "R13/T13 (partial)"
+  ],
+  "reproduce": "Unity.exe -batchmode -nographics -projectPath <isolated project> -runTests -testPlatform <PlayMode|EditMode> -testResults <xml> -logFile <log>",
+  "review": "Self-review against requirements and current callers; independent review pending, not approval",
+  "date": "2026-09-26",
+  "limitations": [
+    "No SpawnDirector or combat scene connection yet",
+    "Enemy/projectile pause must be connected through SpawnDirector",
+    "Restart still needs weapon and actor reset",
+    "No new Windows build or Quest Pro result",
+    "Headless tests log unavailable OpenXR headset; physical tracking not verified"
+  ],
+  "tests": [
+    {
+      "result": "Failed(Child)",
+      "failed": 7,
+      "passed": 0,
+      "sha256": "49F3351EF7C2C9EA317C9F51748E85C35455431E5DD76ED0BF6DE88B2E418854",
+      "path": "tmp/p07-lifecycle/red.xml"
+    },
+    {
+      "result": "Failed(Child)",
+      "failed": 2,
+      "passed": 0,
+      "sha256": "08C5F2220C2D2014B90595A40186479722434A7FD2D8D198383439B59FF747C9",
+      "path": "tmp/p07-lifecycle/pause-red.xml"
+    },
+    {
+      "result": "Passed",
+      "failed": 0,
+      "passed": 57,
+      "sha256": "270CF9A367BEE124D141CC3FAA8BFB81B77AAAC4A97B32AF8C21BF13E67D6AB6",
+      "path": "tmp/p07-lifecycle/pause-green-play.xml"
+    },
+    {
+      "result": "Passed",
+      "failed": 0,
+      "passed": 37,
+      "sha256": "5CE40AB538AA9A03271CE5AB76FA77B5A4C0415C9F3F059C16F56A87E0B6A9F5",
+      "path": "tmp/p07-lifecycle/green-edit.xml"
+    }
+  ],
+  "unit": "P07-b",
+  "scope": [
+    "8-second preparation and actual-start wave accounting",
+    "Death before end-of-frame clear and single RunEnded event",
+    "Paused combat clock, health protection and preparation timer",
+    "Run state reset, capped quota, map validation",
+    "Gun and stick pause with tracking transforms preserved",
+    "Dropped magazine motion, velocity and lifetime pause/resume"
+  ],
+  "baseCommit": "0bb1c6e655a0cb882fb00679f3ec28b16f3d7624"
+}

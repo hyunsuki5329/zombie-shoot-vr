@@ -10,7 +10,31 @@ namespace VRFPS
         [SerializeField] Transform head;
         readonly List<MagazineToken> tokens = new List<MagazineToken>();
         readonly Dictionary<MagazineToken, float> ages = new Dictionary<MagazineToken, float>();
+        bool simulationEnabled = true;
         public int TokenCount => tokens.Count;
+
+        internal MagazineToken ResetForRun()
+        {
+            for (var i = tokens.Count - 1; i >= 0; i--)
+                if (tokens[i] == null) { ages.Remove(tokens[i]); tokens.RemoveAt(i); }
+            if (tokens.Count == 0)
+            {
+                if (prefab == null) throw new System.InvalidOperationException("Magazine prefab is missing.");
+                Register(Instantiate(prefab));
+            }
+            foreach (var token in tokens)
+            {
+                token.ResetForRun(); token.gameObject.SetActive(false); ages[token] = 0;
+            }
+            tokens[0].gameObject.SetActive(true);
+            return tokens[0];
+        }
+
+        public void SetSimulationEnabled(bool enabled)
+        {
+            simulationEnabled = enabled;
+            foreach (var token in tokens) if (token != null) token.SetSimulationEnabled(enabled);
+        }
 
         void Awake()
         {
@@ -27,11 +51,12 @@ namespace VRFPS
             if (token == null || tokens.Contains(token)) return;
             if (tokens.Count >= 10) throw new System.InvalidOperationException("Magazine pool is full.");
             tokens.Add(token); ages[token] = 0;
+            token.SetSimulationEnabled(simulationEnabled);
         }
 
         public MagazineToken TrySupply(Transform hand)
         {
-            if (hand == null || hand != leftHand || prefab == null || Vector3.Distance(hand.position, transform.position) > 0.18f) return null;
+            if (!simulationEnabled || hand == null || hand != leftHand || prefab == null || Vector3.Distance(hand.position, transform.position) > 0.18f) return null;
             foreach (var token in tokens) if (token != null && token.HeldBy == hand) return null;
             TickLifetime(0);
             MagazineToken available = null;
@@ -76,6 +101,7 @@ namespace VRFPS
 
         public void TickLifetime(float deltaTime)
         {
+            if (!simulationEnabled) return;
             for (var i = tokens.Count - 1; i >= 0; i--)
                 if (tokens[i] == null) { ages.Remove(tokens[i]); tokens.RemoveAt(i); }
             var looseCount = 0;

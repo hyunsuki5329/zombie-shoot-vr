@@ -14,6 +14,15 @@ namespace VRFPS
         bool configured, previousGrip;
         public LeftHandOwner Owner { get; private set; }
         public MagazineToken HeldToken { get; private set; }
+        public void Restart()
+        {
+            if (!configured) throw new System.InvalidOperationException("Left hand must be configured before restarting.");
+            ReleaseAll();
+            gun.Restart();
+            initial = pouch.ResetForRun();
+            socket.ResetForRun(initial);
+            previousGrip = true; // A grip held through retry must be released before a new grab.
+        }
 
         void Awake()
         {

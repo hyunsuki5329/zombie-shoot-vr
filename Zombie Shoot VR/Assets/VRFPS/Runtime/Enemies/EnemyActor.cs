@@ -18,10 +18,10 @@ namespace VRFPS
         bool configured, combatEnabled;
         public ZombieController Controller => enemy;
 
-        public void Initialize(int id, Transform target, AcidProjectilePool pool, Vector3[] recovery, LayerMask solidMask)
-            => Configure(id, kind, target, attackOrigin, pool, recovery, solidMask);
+        public void Initialize(int id, Transform target, AcidProjectilePool pool, Vector3[] recovery, LayerMask solidMask, int wave = 1)
+            => Configure(id, kind, target, attackOrigin, pool, recovery, solidMask, wave);
 
-        public void Configure(int id, EnemyKind kind, Transform target, Transform origin, AcidProjectilePool pool, Vector3[] recovery, LayerMask solidMask)
+        public void Configure(int id, EnemyKind kind, Transform target, Transform origin, AcidProjectilePool pool, Vector3[] recovery, LayerMask solidMask, int wave = 1)
         {
             if (enemy != null) { enemy.Died -= HandleDeath; enemy.ProjectileRequested -= Launch; }
             enemy = GetComponent<ZombieController>(); motor = GetComponent<ZombieMotor>(); agent = GetComponent<NavMeshAgent>();
@@ -35,7 +35,7 @@ namespace VRFPS
             foreach (var hitbox in hitboxes) hitbox.enabled = true;
             agent.enabled = true;
             if (animator != null) { animator.applyRootMotion = false; animator.Rebind(); animator.speed = 1; }
-            enemy.Configure(id, kind, target, origin, solidMask);
+            enemy.Configure(id, kind, target, origin, solidMask, wave);
             motor.Configure(target, kind, recovery);
             enemy.Died += HandleDeath; enemy.ProjectileRequested += Launch;
             corpseAge = 0; configured = combatEnabled = true;

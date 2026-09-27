@@ -8,6 +8,14 @@ namespace VRFPS
         MagazineState ammo;
         Transform leftHand;
 
+        internal void ResetForRun(MagazineToken token)
+        {
+            if (ammo == null || !ammo.Inserted || ammo.Rounds != ammo.Capacity || token == null ||
+                token.State != MagazineTokenState.Fresh || token.HeldBy != null)
+                throw new System.InvalidOperationException("Restart requires reset ammo and an unowned fresh token.");
+            token.Mount(this); Installed = token;
+        }
+
         public void Initialize(MagazineState ammo, Transform leftHand, MagazineToken initial)
         {
             if (this.ammo != null) throw new System.InvalidOperationException("Socket is already initialized.");

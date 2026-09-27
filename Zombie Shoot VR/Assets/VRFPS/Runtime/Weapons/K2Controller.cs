@@ -16,6 +16,13 @@ namespace VRFPS
         public RunPhase Phase => phase;
         public event System.Action<Vector3, Vector3> Fired;
 
+        public void Restart()
+        {
+            SetPhase(RunPhase.Preparing);
+            Magazine.Eject(); Magazine.InsertFresh();
+            fire = new K2FireControl(Magazine);
+        }
+
         public void Configure(Transform right, Transform left, Transform muzzle, LayerMask worldMask, LayerMask shotMask)
         {
             rightAnchor = right;
