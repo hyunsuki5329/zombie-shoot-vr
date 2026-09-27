@@ -136,3 +136,5 @@
 - P08-g (2026-09-27): 이동 1.0~2.0m/s·회전 30~90deg/s 설정과 PlayerPrefs 저장, 메뉴 증감 버튼을 연결했다. 독립 키에서 실제 이동·회전·재로드·범위/비정상 값·버튼 동작을 검증했다. 2개 RED 후 전체 PlayMode 86/86, Windows 빌드 성공, MenuLab 337개 파일 해시 일치. [증빙](evidence/p08-settings.json). 실제 스캔 맵 선택과 실기·독립 리뷰는 대기다.
 
 - P08/P09 맵 로딩 선행 작업 (2026-09-27): MapRoot가 외형/충돌/시작점·WorldSolid·NavMesh를 검사하고 연결되지 않은 적 생성점을 제외한다. 유효 후보가 없으면 시작을 거부한다. 2개 RED 후 전체 PlayMode 88/88, 분리된 NavMesh 섬 사례 추가 후 맵 시험 3/3 통과. [증빙](evidence/p09-map-root.json). 실제 촬영 맵이나 Bootstrap에는 아직 연결하지 않았으며 합성 시험장을 실제 스캔 검증으로 취급하지 않는다.
+
+- P08/P09 맵 로더 (2026-09-27): 저장된 합성 Unity 씬을 실제 추가 로드/해제하고 MapRoot 검증 후에만 공개한다. 잘못된 씬 정리 후 재시도와 없는 씬 선택 시 기존 맵 유지 검증. 3개 RED 후 최초 90/92에서 시험 씬 사전 등록 방식으로 수정하여 전체 92/92 통과. [증빙·재현 명령](evidence/p09-map-loader.json). 격리 프로젝트는 시험 전에 MapLoaderFixtureSetup.EnableForTests로 씬 목록을 등록해야 한다. 실제 사용자 프로젝트의 빌드 씬 목록은 바꾸지 않았다. Bootstrap/Combat 연결과 실제 맵은 다음 작업이다.
