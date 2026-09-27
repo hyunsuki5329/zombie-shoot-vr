@@ -1,11 +1,11 @@
 # Goal 실행 현황
 
-갱신: 2026-09-27. 전체 목표는 미완료이며 진행 중이다.
+갱신: 2026-09-28. 전체 목표는 미완료이며 진행 중이다.
 
 ## 현재 작업
 
-- 현재 기준 커밋: `813bc15` (Bootstrap 통합, PR #8에 push). 이후 P10 안내 단위의 최종 SHA는 해당 PR 기록에 연결한다.
-- 브랜치: `codex/p10-feedback`, base `codex/p08-records`. 첫 조작 안내를 연결했고 최신 PlayMode 97/97이 통과했다. EditMode는 앞 단위의 50/50 결과이며 이번 안내 변경에서는 재실행하지 않았다. 실제 두 맵·실기·독립 리뷰는 남아 있다. 선행 PR #8은 초안·미병합 상태다.
+- 현재 기준 커밋: `48cdce3` (첫 안내, [초안 PR #9](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/9)에 push). 이후 무기 피드백 단위의 최종 SHA는 같은 PR 기록에 연결한다.
+- 브랜치: `codex/p10-feedback`, base `codex/p08-records`. 첫 안내와 무기 소리·햅틱 연결을 구현했고 최신 PlayMode 99/99이 통과했다. EditMode는 앞 단위의 50/50 결과이며 이번 변경에서는 재실행하지 않았다. 실제 두 맵·실기·독립 리뷰는 남아 있다. 선행 PR #8과 현재 PR #9는 초안·미병합 상태다.
 - P01-a 구현 커밋: `5a8dc1d844bf5aacd53a522a894bca3eee7c91d3`. [PR #1](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/1)은 원격에서 main에 병합됨(`e0e3be2`). GitHub CI는 없으며 로컬 Unity 검증 결과를 사용한다.
 - P01-a 구현·자동 검증 완료: Unity 환경 확인, EditMode 시험 어셈블리와 InteractionLab 구성, Windows Mono 개발 빌드. 증빙: [시험·빌드·소스 해시](evidence/p01-foundation.json), [환경 및 실행 절차](../Zombie%20Shoot%20VR/Docs/environment.md).
 - P01 실기 확인: 사용자가 VR 실행과 머리·양손 추적 정상 동작을 확인했다(2026-09-22). [VD 설정·실기 보고](evidence/2026-09-22-vd-hardware-check.md). 전용 입력 구성과 양안 가림 등 후속 검증까지 완료한 것으로 확대하지 않는다.
@@ -158,3 +158,11 @@
 - 안내 메서드 부재로 신규 시험 1개가 실패한 뒤 전체 PlayMode 97/97 통과. Bootstrap 실제 씬의 최초 안내·Back 버튼 연결도 기존 통합 시험에서 확인했다. Windows 빌드와 증빙은 [p10-instructions.json](evidence/p10-instructions.json), 실제 관찰 절차는 [T19 안내 시험](evidence/p10-instructions-hardware-check.md)을 따른다.
 - Ruling: 첫 안내는 실행마다 표시하고 메뉴에서도 재열기 가능하게 한다. 처음 보는 사람이 설명을 놓치지 않게 하기 위한 선택이며, 비용은 숙련자도 실행 시 한 번 닫아야 한다는 것이다. 영어 기본 폰트를 사용한 현재 안내의 이해도·가독성은 실기로 확인해야 한다.
 - 자체 검토를 수행했고 독립 리뷰와 실제 초보 사용자 T19 관찰은 대기다. 소리·진동·공격 예고/저체력 소리와 실측 강도 조정은 아직 구현하지 않았으므로 P10 전체는 미완료다.
+
+### P10-b 무기 소리·햅틱 (2026-09-28)
+
+- K2 실제 발사 성공, 빈 탄창에서 새 트리거 입력, MagazineSocket의 검증된 삽입 성공 이벤트에 소리/진동을 연결했다. 초기 자동 장착은 삽입 이벤트를 발생시키지 않는다. 빈 총 소리는 트리거를 계속 누르면 반복하지 않는다.
+- CombatFeedback은 고정 AudioSource 3개를 재사용한다. 정지/사망 시 소리를 중단하고 비활성 시 이벤트 구독을 해제한다. 설치된 XRI 3.5.1 HapticImpulsePlayer로 발사는 오른손, 삽입은 왼손에 짧은 진동을 요청한다. 카메라 반동은 추가하지 않는다.
+- 신규 피드백 부재 1개 RED 후 전체 PlayMode **99/99** 통과. 추가 삽입 시험으로 중복 삽입 실패와 최초 장착 무음을 확인했다. [증빙](evidence/p10-weapon-feedback.json), [실기 확인](evidence/p10-weapon-feedback-hardware-check.md).
+- 음원 3개는 FeedbackSetup의 고정 시드 PCM 합성으로 생성한 원본이며 외부 녹음/샘플은 쓰지 않았다. 실제 K2 녹음이나 실기 확정 음량·진동으로 주장하지 않는다. 초기 후보는 음량0.35, 발사0.25×35ms, 삽입0.20×55ms다.
+- 자체 검토 완료, 독립 리뷰 및 실제 소리/진동·좌우 출력·체감 강도 확인 대기. 피격·웨이브 시작·좀비 접근/공격 준비·저체력 소리, AudioMixer와 최종 실기 조정은 후속 작업이다. 실제 두 맵 통합과 성능/장시간 시험도 남아 있으므로 P10 전체나 프로젝트 완료로 표시하지 않는다.

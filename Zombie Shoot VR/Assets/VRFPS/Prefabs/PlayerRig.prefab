@@ -718,6 +718,73 @@ MonoBehaviour:
   m_UseLocalSpace: 1
   m_AngleStabilization: 20
   m_PositionStabilization: 0.25
+--- !u!1 &2883698713542302915
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5061623512456795578}
+  - component: {fileID: 6480207889006844871}
+  m_Layer: 0
+  m_Name: Weapon Haptics
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5061623512456795578
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2883698713542302915}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4740186389534435897}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6480207889006844871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2883698713542302915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b734f2bd29eeddd4d85afb0c266228c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.XR.Interaction.Toolkit::UnityEngine.XR.Interaction.Toolkit.Inputs.Haptics.HapticImpulsePlayer
+  m_HapticOutput:
+    m_InputSourceMode: 1
+    m_InputAction:
+      m_Name: Weapon haptics
+      m_Type: 2
+      m_ExpectedControlType: Haptic
+      m_Id: 229a2b1b-352c-4613-b144-f825d1aeb514
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings:
+      - m_Name: 
+        m_Id: 078be2b6-c8d2-47b1-b47d-70c2cc3cb07c
+        m_Path: <XRController>{RightHand}/*
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Weapon haptics
+        m_Flags: 0
+      m_Flags: 0
+      m_Priority: 0
+    m_InputActionReference: {fileID: 0}
+    m_ObjectReferenceObject: {fileID: 0}
+  m_AmplitudeMultiplier: 1
 --- !u!1 &3079617275535175987
 GameObject:
   m_ObjectHideFlags: 0
@@ -1041,6 +1108,7 @@ Transform:
   - {fileID: 1662771110890500165}
   - {fileID: 5275090833994064294}
   - {fileID: 6867301010859405394}
+  - {fileID: 4363020790749461651}
   m_Father: {fileID: 7170361491364398966}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5055925674891444196
@@ -1537,6 +1605,73 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6723326444435704298}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6268437190273966047
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4363020790749461651}
+  - component: {fileID: 5022661255460659906}
+  m_Layer: 0
+  m_Name: Weapon Haptics
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4363020790749461651
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6268437190273966047}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7927357867305843460}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5022661255460659906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6268437190273966047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b734f2bd29eeddd4d85afb0c266228c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.XR.Interaction.Toolkit::UnityEngine.XR.Interaction.Toolkit.Inputs.Haptics.HapticImpulsePlayer
+  m_HapticOutput:
+    m_InputSourceMode: 1
+    m_InputAction:
+      m_Name: Weapon haptics
+      m_Type: 2
+      m_ExpectedControlType: Haptic
+      m_Id: 2d196691-74f0-4a63-aa41-432d0ec235e1
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings:
+      - m_Name: 
+        m_Id: 994a1466-cd21-4d0c-8e8d-915a41e7bcfe
+        m_Path: <XRController>{LeftHand}/*
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Weapon haptics
+        m_Flags: 0
+      m_Flags: 0
+      m_Priority: 0
+    m_InputActionReference: {fileID: 0}
+    m_ObjectReferenceObject: {fileID: 0}
+  m_AmplitudeMultiplier: 1
 --- !u!1 &6272682091473803783
 GameObject:
   m_ObjectHideFlags: 0
@@ -1575,6 +1710,7 @@ Transform:
   - {fileID: 5051805808818279042}
   - {fileID: 7153349657341872209}
   - {fileID: 6626584265884090325}
+  - {fileID: 5061623512456795578}
   m_Father: {fileID: 7170361491364398966}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2502935658589819082
@@ -2639,19 +2775,49 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1747161672017390579, guid: 7996042bcb9de7647995ebdab064a4a0, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4389200168709930985}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 642727952828707966, guid: 7996042bcb9de7647995ebdab064a4a0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3355026224405259445}
   m_SourcePrefab: {fileID: 100100000, guid: 7996042bcb9de7647995ebdab064a4a0, type: 3}
 --- !u!114 &4132884247384909842 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8832549924468948020, guid: 7996042bcb9de7647995ebdab064a4a0, type: 3}
   m_PrefabInstance: {fileID: 4884559582043608102}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 5413921199201787992}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b8092ce2ed5a561409ffa39590ea6102, type: 3}
   m_Name: 
   m_EditorClassIdentifier: VRFPS.Runtime::VRFPS.K2Controller
+--- !u!1 &5413921199201787992 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 642727952828707966, guid: 7996042bcb9de7647995ebdab064a4a0, type: 3}
+  m_PrefabInstance: {fileID: 4884559582043608102}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3355026224405259445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5413921199201787992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a2e6953f70ad4e49a0f2bdf61deb1cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: VRFPS.Runtime::VRFPS.CombatFeedback
+  gun: {fileID: 4132884247384909842}
+  socket: {fileID: 3489587295310875097}
+  shotClip: {fileID: 8300000, guid: 05f870b0fedadda48bf548c991d55be1, type: 3}
+  emptyClip: {fileID: 8300000, guid: 27d71e7a9b0a6f347845697a1a36bacc, type: 3}
+  insertClip: {fileID: 8300000, guid: c04ec98db306d374c8f2692b1a50b40a, type: 3}
+  rightHaptics: {fileID: 6480207889006844871}
+  leftHaptics: {fileID: 5022661255460659906}
+  volume: 0.35
+  shotHaptic: 0.25
+  insertHaptic: 0.2
 --- !u!4 &6626584265884090325 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1747161672017390579, guid: 7996042bcb9de7647995ebdab064a4a0, type: 3}

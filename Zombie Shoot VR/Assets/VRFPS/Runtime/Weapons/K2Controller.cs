@@ -10,11 +10,14 @@ namespace VRFPS
         [SerializeField] LayerMask worldSolidMask;
         [SerializeField] LayerMask shotMask;
         bool leftGrip;
+        bool previousTrigger;
         RunPhase phase = RunPhase.Preparing;
         K2FireControl fire;
         public MagazineState Magazine { get; } = new MagazineState(30);
         public RunPhase Phase => phase;
         public event System.Action<Vector3, Vector3> Fired;
+        public event System.Action EmptyTriggered;
+        public event System.Action<RunPhase> PhaseChanged;
 
         public void Restart()
         {
@@ -36,8 +39,10 @@ namespace VRFPS
         public void SetCombatEnabled(bool value) => SetPhase(value ? RunPhase.Active : RunPhase.Preparing);
         public void SetPhase(RunPhase value)
         {
+            var changed=phase!=value;
             phase = value;
             if (phase != RunPhase.Active) leftGrip = false;
+            if(changed)PhaseChanged?.Invoke(phase);
         }
 
         public void UpdatePose()
@@ -56,6 +61,7 @@ namespace VRFPS
 
         public bool Tick(bool trigger, double activeTime)
         {
+            var pressed=trigger && !previousTrigger;previousTrigger=trigger;
             UpdatePose();
             if (rightAnchor == null || leftAnchor == null || muzzle == null || worldSolidMask.value == 0 || shotMask.value == 0) return false;
             if (fire == null) fire = new K2FireControl(Magazine);
@@ -65,7 +71,13 @@ namespace VRFPS
                 Physics.CheckSphere(muzzle.position, clearance, worldSolidMask, QueryTriggerInteraction.Ignore) ||
                 (barrel.sqrMagnitude > 0.000001f && Physics.SphereCast(rightAnchor.position, clearance,
                     barrel.normalized, out _, barrel.magnitude, worldSolidMask, QueryTriggerInteraction.Ignore));
-            if (!fire.TryFire(trigger, leftGrip, phase, blocked, activeTime)) return false;
+            if (!fire.TryFire(trigger, leftGrip, phase, blocked, activeTime))
+            {
+                if(pressed && leftGrip && phase==RunPhase.Active && !blocked &&
+                    (!Magazine.Inserted || Magazine.Rounds==0) && !double.IsNaN(activeTime) && !double.IsInfinity(activeTime) && activeTime>=0)
+                    EmptyTriggered?.Invoke();
+                return false;
+            }
             var end = muzzle.position + muzzle.forward * 60f;
             if (Physics.Raycast(muzzle.position, muzzle.forward, out var hit, 60f, shotMask, QueryTriggerInteraction.Ignore))
             {
