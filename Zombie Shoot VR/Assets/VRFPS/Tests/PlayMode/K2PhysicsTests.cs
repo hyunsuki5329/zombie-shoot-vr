@@ -138,5 +138,31 @@ namespace VRFPS.Tests
             controller.SetLeftGrip(true);
             Assert.That(controller.Tick(true, 1), Is.True);
         }
+
+        [Test] public void MenuResumeRequiresTriggerReleaseEvenWithoutAPausedInputTick()
+        {
+            var anchor = new GameObject("Foregrip").transform;
+            anchor.SetParent(gun.transform); anchor.localPosition = Vector3.forward * 0.3f;
+            var input = gun.AddComponent<K2HandInput>(); input.enabled = false;
+            input.Configure(controller, left.transform, anchor);
+            var run = gun.AddComponent<RunController>(); run.enabled = false;
+            gun.AddComponent<RunCombatBindings>().Configure(run, controller, null, null);
+            var map = ScriptableObject.CreateInstance<MapDefinition>();
+            try
+            {
+                map.mapId = "room"; map.sceneName = "Room";
+                map.maxAlive = 4; map.maxRangedAlive = 1; map.minSpawnDistance = 2;
+                run.StartRun(map); run.Tick(8);
+                input.TickInput(true, false, 0);
+                Assert.That(input.TickInput(true, true, 0), Is.True);
+                run.SetPaused(true); run.SetPaused(false);
+                Assert.That(input.TickInput(true, true, 1), Is.False, "The menu click must not become a shot.");
+                Assert.That(input.TickInput(true, true, 2), Is.False);
+                input.TickInput(true, false, 2);
+                Assert.That(input.TickInput(true, true, 2), Is.True);
+                Assert.That(controller.Magazine.Rounds, Is.EqualTo(28));
+            }
+            finally { Object.DestroyImmediate(map); }
+        }
     }
 }

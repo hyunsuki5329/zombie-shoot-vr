@@ -1,0 +1,70 @@
+{
+  "date": "2026-09-26",
+  "unity": "6000.3.23f1",
+  "baseCommit": "12bcddc4687e98718337980e4d6a9363d276e002",
+  "review": "Self-reviewed; branch independent review pending",
+  "scope": [
+    "Per-map best record, wave priority and kills tie breaker, values from the same run",
+    "Schema 1 JSON with required fields and room/classroom IDs",
+    "Write/flush/close/verify temporary file before atomic replacement",
+    "Previous valid backup preserved during corrupt-main recovery",
+    "Missing/corrupt main or backup and failed writes report errors without losing memory state"
+  ],
+  "limitations": [
+    "Not connected to RunEnded or menus yet",
+    "LastError is exposed for future UI; no player-facing error panel yet",
+    "No new Windows build; existing WaveLab is P07",
+    "Quest Pro record and forearm HUD tests pending"
+  ],
+  "requirements": [
+    "R14/T14 storage foundation"
+  ],
+  "tests": [
+    {
+      "passed": 0,
+      "path": "tmp/p08-records/red.xml",
+      "sha256": "3FEC4B843A282C7592B01328070E5BF18931C6F28365BAAA3CBB292CD2E1B379",
+      "failed": 11,
+      "result": "Failed(Child)"
+    },
+    {
+      "passed": 46,
+      "path": "tmp/p08-records/green.xml",
+      "sha256": "1BD3D967A0E79E430274AA35067A791F92A15F104214CEE37CBE938256AF0C32",
+      "failed": 2,
+      "result": "Failed(Child)"
+    },
+    {
+      "passed": 50,
+      "path": "tmp/p08-records/verified.xml",
+      "sha256": "AF2BC7844D06FD20E686C4133432DF1D738AF7D16826134EA5FCD6B2A6FB70B0",
+      "failed": 0,
+      "result": "Passed"
+    },
+    {
+      "passed": 70,
+      "path": "tmp/p08-records/play.xml",
+      "sha256": "EDFF4CDB430F0D59C7F52D5D8750E8BD68A03B8B0FBF4C9730FD1C9FE9DDFD69",
+      "failed": 0,
+      "result": "Passed"
+    }
+  ],
+  "fix": "InvalidDataException was not covered by the IOException filter; two failing tests reproduced the gap before the explicit exception case was added",
+  "testData": "Only newly generated Temp/VRFPS-RecordTests/GUID directories; real user records untouched",
+  "reproduce": "Unity.exe -batchmode -nographics -projectPath <isolated project> -runTests -testPlatform <EditMode|PlayMode> -testResults <xml> -logFile <log>",
+  "unit": "P08-a",
+  "sources": [
+    {
+      "path": "Zombie Shoot VR\\Assets\\VRFPS\\Runtime\\Persistence\\BestRecord.cs",
+      "sha256": "93575FF0662E7AD7F8AA1CA0261E08C3EFBBBD519CDABE457E5E05EC2442C659"
+    },
+    {
+      "path": "Zombie Shoot VR\\Assets\\VRFPS\\Runtime\\Persistence\\RecordStore.cs",
+      "sha256": "651B0691CA8D4C9B534B4BB106FB570A94C30125668616C8D4E4F55ED09301C3"
+    },
+    {
+      "path": "Zombie Shoot VR\\Assets\\VRFPS\\Tests\\EditMode\\RecordStoreTests.cs",
+      "sha256": "05561D124AB8A65917BDC318F88749EB6D6BAF628D7AA678D699F378BFDE04EE"
+    }
+  ]
+}

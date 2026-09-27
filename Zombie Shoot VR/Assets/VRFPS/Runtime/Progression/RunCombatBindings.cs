@@ -8,6 +8,7 @@ namespace VRFPS
         [SerializeField] K2Controller gun;
         [SerializeField] PlayerRigController movement;
         [SerializeField] AmmoPouch pouch;
+        RunPhase previousPhase = RunPhase.Dead;
 
         public void Configure(RunController run, K2Controller gun, PlayerRigController movement, AmmoPouch pouch)
         {
@@ -32,7 +33,14 @@ namespace VRFPS
         void ApplyPhase(RunPhase phase)
         {
             var simulationEnabled = phase == RunPhase.Active || phase == RunPhase.Preparing;
-            if (gun != null) gun.SetPhase(phase);
+            if (gun != null)
+            {
+                if (phase == RunPhase.Paused || phase == RunPhase.Dead ||
+                    previousPhase == RunPhase.Paused || previousPhase == RunPhase.Dead)
+                    gun.GetComponent<K2HandInput>()?.RequireTriggerRelease();
+                gun.SetPhase(phase);
+            }
+            previousPhase = phase;
             if (movement != null) movement.SetLocomotionEnabled(simulationEnabled);
             if (pouch != null) pouch.SetSimulationEnabled(simulationEnabled);
         }

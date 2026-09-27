@@ -1,0 +1,51 @@
+{
+  "unit": "P08/P09 common combat session",
+  "date": "2026-09-27",
+  "baseCommit": "e71c5d8183066062f536c188fa93dba33be89f5b",
+  "scope": [
+    "Validated additive map load connects common player, weapon, run, spawn director and record binding",
+    "Old runtime is destroyed before replacement; fresh run resets weapon and positions player at spawn",
+    "Preserve head local pose while offsetting rig origin",
+    "Death saves same-run record; ten synthetic-map reloads preserve scene/runtime counts"
+  ],
+  "tests": [
+    {
+      "result": "Failed(Child)",
+      "passed": "0",
+      "path": "tmp/p09-combat-session/red.xml",
+      "sha256": "AC8B52A774C14DB197A3E33C8A1565C2F077F53FD03E99C31E252A3D9B0E62FA",
+      "failed": "2"
+    },
+    {
+      "result": "Passed",
+      "passed": "94",
+      "path": "tmp/p09-combat-session/green-play.xml",
+      "sha256": "330D069303B2EB3DF7B04EF324C9AE2B29EEB48629E610C0007F0498F8B63BAC",
+      "failed": "0"
+    },
+    {
+      "result": "Passed",
+      "passed": "2",
+      "path": "tmp/p09-combat-session/verified-session.xml",
+      "sha256": "450382E4C28AC45BEC6D94EF2FEA1F84D8D816B725597B239DC3A70BE0C4959F",
+      "failed": "0"
+    }
+  ],
+  "sources": [
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/Progression/CombatSession.cs",
+      "sha256": "3830DA391906504E9BD096DA642A2B344E29798C7C9DD571217BE74F9B21A563"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Tests/PlayMode/CombatSessionTests.cs",
+      "sha256": "00189BBD1B0769BD08E7981C1875E3B47879572012B8C74A22A437BEA0AA003C"
+    }
+  ],
+  "reproduce": "Enable map fixtures with MapLoaderFixtureSetup.EnableForTests before PlayMode; run CombatSessionTests or full PlayMode suite.",
+  "limitations": [
+    "Not yet authored into Bootstrap/Combat scenes",
+    "Synthetic map and headless XR fixture; actual headset/real-map transitions pending",
+    "Coordinator must await Shutdown before unloading the common Combat scene",
+    "No new executable build; independent review pending"
+  ]
+}

@@ -6,6 +6,7 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
+using UnityEngine.UI;
 
 namespace VRFPS.Tests
 {
@@ -41,6 +42,15 @@ namespace VRFPS.Tests
                 Assert.That(run.Kills, Is.EqualTo(1));
                 run.SetPaused(true);
                 Assert.That(gun.Phase, Is.EqualTo(RunPhase.Paused));
+                var menuView = Object.FindFirstObjectByType<MenuView>();
+                Assert.That(menuView, Is.Not.Null, "WaveLab must include the authored menu.");
+                var menuPanel = menuView.transform.Find("Panel");
+                Assert.That(menuPanel.gameObject.activeSelf, Is.True);
+                Assert.That(menuPanel.Find("Title").GetComponent<Text>().text, Is.EqualTo("PAUSED"));
+                menuPanel.Find("Resume").GetComponent<Button>().onClick.Invoke();
+                Assert.That(run.Phase, Is.EqualTo(RunPhase.Active));
+                Assert.That(menuPanel.gameObject.activeSelf, Is.False);
+                run.SetPaused(true);
                 for (var i = 0; i < 10; i++)
                 {
                     gun.Magazine.TryConsume(); session.Restart();

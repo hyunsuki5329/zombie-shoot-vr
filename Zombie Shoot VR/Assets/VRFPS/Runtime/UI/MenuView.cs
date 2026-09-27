@@ -1,0 +1,91 @@
+using UnityEngine;
+using UnityEngine.UI;
+namespace VRFPS
+{
+    public sealed class MenuView : MonoBehaviour
+    {
+        [SerializeField] MenuController menu;
+        [SerializeField] RunController run;
+        [SerializeField] RunRecordBinding result;
+        [SerializeField] GameObject panel;
+        [SerializeField] Transform viewer;
+        [SerializeField] GameObject settingsControls;
+        [SerializeField] Text title, details;
+        [SerializeField] Button resume, retry, settings, back, maps, retrySave;
+        bool subscribed;
+        public void Configure(MenuController menu, RunController run, RunRecordBinding result,
+            GameObject panel, Text title, Text details, Button resume, Button retry, Button settings, Button back, Button maps, Button retrySave)
+        {
+            Unsubscribe(); this.menu=menu;this.run=run;this.result=result;this.panel=panel;
+            this.title=title;this.details=details;this.resume=resume;this.retry=retry;this.settings=settings;
+            this.back=back;this.maps=maps;this.retrySave=retrySave;
+            if(isActiveAndEnabled) Subscribe();
+        }
+        public void BindResult(RunRecordBinding binding)
+        {
+            Unsubscribe();result=binding;if(isActiveAndEnabled)Subscribe();
+        }
+        void OnEnable() => Subscribe();
+        void OnDisable() => Unsubscribe();
+        void Subscribe()
+        {
+            if(subscribed || menu==null || run==null || panel==null) return;
+            subscribed=true;
+            menu.Configure(run);
+            menu.ScreenChanged+=OnScreenChanged;
+            if(result!=null) result.ResultChanged+=Refresh;
+            resume.onClick.AddListener(menu.Resume); retry.onClick.AddListener(menu.Retry);
+            settings.onClick.AddListener(menu.OpenSettings); back.onClick.AddListener(menu.CloseSettings);
+            maps.onClick.AddListener(menu.ShowMapSelection); retrySave.onClick.AddListener(RetrySave);
+            Refresh();
+        }
+        void Unsubscribe()
+        {
+            if(!subscribed) return; subscribed=false;
+            if(menu!=null)
+            {
+                menu.ScreenChanged-=OnScreenChanged;
+                resume.onClick.RemoveListener(menu.Resume);retry.onClick.RemoveListener(menu.Retry);
+                settings.onClick.RemoveListener(menu.OpenSettings);back.onClick.RemoveListener(menu.CloseSettings);
+                maps.onClick.RemoveListener(menu.ShowMapSelection);
+            }
+            if(result!=null)result.ResultChanged-=Refresh;
+            retrySave.onClick.RemoveListener(RetrySave);
+        }
+        void OnScreenChanged(MenuScreen screen) => Refresh();
+        void RetrySave() { if(result!=null) result.RetrySave();Refresh(); }
+        public void Refresh()
+        {
+            if(menu==null || panel==null) return;
+            var screen=menu.Screen;
+            if(screen!=MenuScreen.Hidden && !panel.activeSelf && viewer!=null)
+            {
+                var forward=Vector3.ProjectOnPlane(viewer.forward,Vector3.up);
+                if(forward.sqrMagnitude<.001f) forward=Vector3.forward;
+                forward.Normalize();
+                transform.position=viewer.position+forward*1.2f;
+                transform.rotation=Quaternion.LookRotation(forward,Vector3.up);
+            }
+            panel.SetActive(screen!=MenuScreen.Hidden);
+            if(settingsControls!=null)settingsControls.SetActive(screen==MenuScreen.Settings);
+            if(screen==MenuScreen.Hidden)return;
+            title.text=screen==MenuScreen.MapSelection ? "MAP SELECTION" : screen==MenuScreen.Pause ? "PAUSED" : screen.ToString().ToUpperInvariant();
+            resume.gameObject.SetActive(screen==MenuScreen.Pause);
+            retry.gameObject.SetActive(screen==MenuScreen.Pause || screen==MenuScreen.Result);
+            settings.gameObject.SetActive(screen!=MenuScreen.Settings);
+            back.gameObject.SetActive(screen==MenuScreen.Settings);
+            maps.gameObject.SetActive(screen==MenuScreen.Pause || screen==MenuScreen.Result);
+            retrySave.gameObject.SetActive(screen==MenuScreen.Result && result!=null && result.HasResult && !result.SaveSucceeded);
+            if(screen==MenuScreen.Result)
+            {
+                var wave=result!=null && result.HasResult ? result.Result.reachedWave : run.ReachedWave;
+                var kills=result!=null && result.HasResult ? result.Result.kills : run.Kills;
+                var saved=result==null ? "Practice scores are not saved." : result.SaveSucceeded ? "Saved" : "Save failed. Retry saving below.";
+                details.text=$"WAVE {wave}   KILLS {kills}\n{saved}";
+            }
+            else if(screen==MenuScreen.Pause) details.text="Combat paused. Move your hands to point at a button.";
+            else if(screen==MenuScreen.Settings) details.text="Continuous movement and continuous turning.";
+            else details.text="Choose a map to begin.";
+        }
+    }
+}

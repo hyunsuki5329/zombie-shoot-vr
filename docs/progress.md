@@ -1,11 +1,11 @@
 # Goal 실행 현황
 
-갱신: 2026-09-26. 전체 목표는 미완료이며 진행 중이다.
+갱신: 2026-09-27. 전체 목표는 미완료이며 진행 중이다.
 
 ## 현재 작업
 
-- 현재 기준 커밋: `b4bac3d` (P07-c 적 생성·상한).
-- 브랜치: `codex/p07-progression`. P06 기반 의존 작업이며 P07-a~d 구현·자동 시험·Windows 시험장 빌드 완료. 독립 리뷰·Quest Pro 실기 전까지 전체 P07은 미완료다.
+- 현재 기준 커밋: `1344f9a` (공통 전투 세션). 이후 Bootstrap 통합 단위의 최종 SHA는 PR #8 기록에 연결한다.
+- 브랜치: `codex/p08-records`. P07 기반 의존 작업이다. 기록·HUD·메뉴·이동/회전 설정과 Bootstrap/Combat 통합을 구현했다. 최신 자동 검증은 PlayMode 96/96, EditMode 50/50이며 실제 두 맵·실기·독립 리뷰는 남아 있다. PR #8은 초안·미병합 상태다.
 - P01-a 구현 커밋: `5a8dc1d844bf5aacd53a522a894bca3eee7c91d3`. [PR #1](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/1)은 원격에서 main에 병합됨(`e0e3be2`). GitHub CI는 없으며 로컬 Unity 검증 결과를 사용한다.
 - P01-a 구현·자동 검증 완료: Unity 환경 확인, EditMode 시험 어셈블리와 InteractionLab 구성, Windows Mono 개발 빌드. 증빙: [시험·빌드·소스 해시](evidence/p01-foundation.json), [환경 및 실행 절차](../Zombie%20Shoot%20VR/Docs/environment.md).
 - P01 실기 확인: 사용자가 VR 실행과 머리·양손 추적 정상 동작을 확인했다(2026-09-22). [VD 설정·실기 보고](evidence/2026-09-22-vd-hardware-check.md). 전용 입력 구성과 양안 가림 등 후속 검증까지 완료한 것으로 확대하지 않는다.
@@ -30,7 +30,7 @@
 - P06-b 독립 재검토: 수정된 코드·씬 참조와 결과 XML을 읽기 전용으로 확인했고 범위 내 남은 중요 결함을 발견하지 못했다. Quest Pro T10/T11과 외형·양안 표시·회피 편안함은 아직 대기이므로 PR #6은 초안으로 유지한다.
 - P06-b 격리 검증: 사용자 에디터가 SampleScene을 열고 있어 `tmp/p06-verification` detached worktree에서 실행했다. 모든 검증/빌드 프로세스는 정상 종료했다. 원본 생성 자산이 snapshot과 같음을 확인한 뒤 수정된 씬 참조와 NavMesh를 반영했고, 원본·검증 복사본의 VRFPS 파일 해시 전체가 일치함을 확인했다. 사용자 OpenXR·튜토리얼 설정 변경은 보존하고 커밋 범위에서 제외한다. 비교 기록은 `tmp/p06-navigation/workspace-source-snapshot.json`이다.
 - 새 빌드: `Zombie Shoot VR/Builds/Windows/EnemyLab/InteractionLab.exe`. 기존 P05 시험장 빌드는 유지한다. X/F6으로 적 시작·정지, Y/F7로 적 초기화. 이 시험장의 피격 횟수는 최종 HP·웨이브·사망 시스템을 대신하지 않는다.
-- 다음 실행: T06/T07·T10/T11 실기 결과를 반영하며 P07 체력·웨이브·생성·정지·사망 우선 규칙을 구현한다. P07~P12는 미착수다.
+- 다음 실행: P08 설정·Bootstrap·맵 선택/기록 통합을 진행하며 T06/T07·T10/T11 및 메뉴·HUD 실기 결과를 반영한다. P09 실제 맵과 P10~P12의 필수 결과물은 아직 완료되지 않았다.
 
 ## 확인한 환경과 증빙
 
@@ -106,3 +106,46 @@
 - 실기 결과를 요청했다. T08/T09/T12/T13의 실제 Quest Pro 결과와 독립 리뷰는 아직 대기다. 미완료 항목 때문에 PR #7은 초안으로 유지한다.
 - 다음: P08 맵별 최고 기록 저장·오른팔 UI·메뉴. 실제 방/강의실 촬영본·거리 2개, 제출 공지, P05~P07 잔여 실기 결과는 별도 대기다.
 - Ruling: P07 시험장을 별도 WaveLab 씬/빌드로 제공하여 기존 실기 증빙의 P06 실행 경로를 보존한다. 두 시험장은 공통 프리팹과 전투 코드를 사용하므로 공통 변경은 두 씬 회귀 시험으로 확인한다. 비용은 시험장 씬 두 개를 유지해야 한다는 것이다.
+
+## P08 기록·UI·메뉴
+
+- P07-d 커밋 `12bcddc`는 PR #7에 push돼 있으며 초안·미병합 상태다. WaveLab 실기 결과는 아직 대기다.
+- P08-a: RecordStore와 BestRecord 구현. 맵별 최고 도전의 웨이브/처치를 함께 저장하며 같은 웨이브에서만 처치로 비교한다. schema 1의 필수 필드·맵 ID·음수·중복 맵을 검사한다.
+- 임시 파일을 닫고 읽어 검증한 후 본 파일로 교체한다. 기존 정상 파일만 `.bak`으로 남기며, 손상된 본 파일을 복구할 때 정상 백업을 덮어쓰지 않는다. 쓰기 실패는 false/LastError로 보고하고 메모리의 최고 기록을 유지하여 재시도할 수 있다.
+- 2026-09-26 신규 11개 RED 후 구현. 중간 48개 중 2개 실패로 InvalidDataException 처리 누락을 확인해 수정했다. 추가 백업/문서 형식 시험을 포함한 최종 **EditMode 50/50**, 기존 **PlayMode 70/70** 통과. [증빙](evidence/p08-records.json).
+- 실제 사용자 기록은 사용하지 않았으며 시험별 새 GUID 임시 폴더에서 파일 잠금·쓰기 불가·본 파일/백업 손상을 확인했다. 자체 검토 완료, 독립 리뷰는 남아 있다.
+- 다음: RunEnded 저장 1회 연결과 오류 표시, 오른팔 HUD, 맵 선택·정지·결과·재도전 메뉴, Windows 빌드 검증. 현재 WaveLab 빌드에는 아직 P08 저장 기능이 연결되지 않았다.
+- Ruling: .NET DataContractJsonSerializer의 필수 필드 검증을 사용해 누락된 kills를 0으로 오인하지 않게 한다. 추가 패키지 없이 계획의 schema 1 JSON 형식을 유지한다. 비용은 향후 IL2CPP로 전환할 경우 직렬화와 코드 보존을 해당 빌드에서 다시 검증해야 한다는 것이다.
+
+### P08-b 종료 결과와 저장 연결
+
+- P08-a 커밋 `5416507`, [초안 PR #8](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/8), base `codex/p07-progression`. 미병합.
+- RunRecordBinding이 실제 RunEnded에서 맵 ID·ReachedWave·Kills를 고정해 저장한다. 중복 종료나 성공 후 저장 재시도는 파일을 다시 쓰지 않는다. 실패해도 사망과 결과 상태를 유지하며 저장만 다시 시도할 수 있다.
+- 새 도전 시 현재 결과 표시 상태를 초기화하고, 다른 RunController에 재연결하면 이전 구독을 해제한다. 같은 RecordStore의 맵별 최고 기록은 유지한다.
+- 2026-09-27 신규 PlayMode 5개 RED 후 구현. 최종 **PlayMode 75/75**, **EditMode 50/50** 통과. 5 클리어 후 준비에서 종료하면 5, 6 시작 후 사망하면 6, 같은 도전의 50처치가 저장되는 것을 실제 디스크 재로드로 확인했다. [증빙](evidence/p08-results.json).
+- 자체 검토 완료, 독립 리뷰 대기. 아직 UI 씬에 바인딩하지 않았으므로 기존 실행 빌드는 P07이다. 다음은 오른팔 HUD·결과/오류 패널·메뉴 입력 연결이다. 메뉴를 닫은 입력이 같은 프레임의 사격으로 이어지지 않도록 트리거 해제 조건을 함께 검증해야 한다.
+
+- P08-c (2026-09-27): 정지·사망 상태 전환 뒤 트리거 해제를 요구하여 메뉴 입력이 사격으로 이어지는 문제를 차단했다. 같은 프레임에 정지·재개해도 재현되던 실패 1개를 확인한 후 PlayMode 76/76 통과. [증빙](evidence/p08-menu-input.json). 팔 UI·메뉴 씬 연결·새 빌드·실기는 대기이며 PR #8은 초안 유지.
+
+- P08-d (2026-09-27): 오른팔 HP·실제 도달 웨이브·처치 수·상태 HUD와 저체력 색/느낌표를 구현하고 WaveLab에 프리팹을 연결했다. 표시 시험 2개 RED 후 전체 PlayMode 78/78 통과. 첫 실행의 1개 실패는 첫 웨이브 시험 데이터 8→6 수정. [증빙](evidence/p08-hud.json). 패널은 12×7cm, 컨트롤러 뒤 12.5cm 초기 후보이며 가독성·가림·실기와 새 빌드·메뉴는 미검증/미완료다.
+
+- P08-e (2026-09-27): 메뉴 상태 제어 구현. 설정 진입 시 정지, 설정 닫기 후 명시적 재개, 사망 결과·같은 맵 재도전·맵 선택 시 현재 도전 종료를 검증했다. 3개 RED 후 전체 PlayMode 81/81 통과. [증빙](evidence/p08-menu-state.json). 실제 버튼/씬·설정 값·맵 로딩·결과 화면 연결은 다음 작업이다.
+
+- P08-f (2026-09-27): uGUI 메뉴 프리팹·XR raycaster/EventSystem·재개/재도전/결과 표시를 WaveLab에 연결했다. 저장 실패 재시도 버튼은 독립 기록 시험에서 검증했다. 2개 RED 후 전체 PlayMode 83/83 및 Windows 빌드 성공, MenuLab 복사 337개 파일 해시 일치. [증빙](evidence/p08-menu-view.json), [실기 절차](evidence/p08-menu-hardware-check.md). 연습장 점수는 저장하지 않으며 설정 조절/실제 맵 선택 버튼은 비활성이다. Bootstrap·실제 맵·영구 기록 씬 통합·실기·독립 리뷰는 남아 있다.
+
+- P08-g (2026-09-27): 이동 1.0~2.0m/s·회전 30~90deg/s 설정과 PlayerPrefs 저장, 메뉴 증감 버튼을 연결했다. 독립 키에서 실제 이동·회전·재로드·범위/비정상 값·버튼 동작을 검증했다. 2개 RED 후 전체 PlayMode 86/86, Windows 빌드 성공, MenuLab 337개 파일 해시 일치. [증빙](evidence/p08-settings.json). 실제 스캔 맵 선택과 실기·독립 리뷰는 대기다.
+
+- P08/P09 맵 로딩 선행 작업 (2026-09-27): MapRoot가 외형/충돌/시작점·WorldSolid·NavMesh를 검사하고 연결되지 않은 적 생성점을 제외한다. 유효 후보가 없으면 시작을 거부한다. 2개 RED 후 전체 PlayMode 88/88, 분리된 NavMesh 섬 사례 추가 후 맵 시험 3/3 통과. [증빙](evidence/p09-map-root.json). 실제 촬영 맵이나 Bootstrap에는 아직 연결하지 않았으며 합성 시험장을 실제 스캔 검증으로 취급하지 않는다.
+
+- P08/P09 맵 로더 (2026-09-27): 저장된 합성 Unity 씬을 실제 추가 로드/해제하고 MapRoot 검증 후에만 공개한다. 잘못된 씬 정리 후 재시도와 없는 씬 선택 시 기존 맵 유지 검증. 3개 RED 후 최초 90/92에서 시험 씬 사전 등록 방식으로 수정하여 전체 92/92 통과. [증빙·재현 명령](evidence/p09-map-loader.json). 격리 프로젝트는 시험 전에 MapLoaderFixtureSetup.EnableForTests로 씬 목록을 등록해야 한다. 실제 사용자 프로젝트의 빌드 씬 목록은 바꾸지 않았다. Bootstrap/Combat 연결과 실제 맵은 다음 작업이다.
+
+- P08/P09 공통 전투 세션 (2026-09-27): 검증한 맵 로딩→이전 런타임 정리→머리 로컬 추적 자세를 보존한 시작점 배치→탄창/도전 초기화→생성/기록 연결을 구현했다. 2개 RED 후 전체 PlayMode 94/94, 추적 오프셋 사례 보강 후 세션 시험 2/2 통과. 합성 맵 10회 재로딩의 씬/런타임 수 유지 및 실제 적 생성·사망 기록 저장을 확인했다. [증빙](evidence/p09-combat-session.json). Bootstrap/Combat 씬에 아직 배치하지 않았으며 코디네이터는 Combat 해제 전 Shutdown을 기다려야 한다. 실제 두 맵 전환·실기는 별도 대기다.
+
+### P08/P09 Bootstrap·Combat 통합 (2026-09-27)
+
+- Bootstrap에서 공통 Combat 씬을 로드하고 맵별 최고 기록·선택·설정 화면을 연결했다. 검증한 맵 시작, 사망 결과 저장, 맵 메뉴 복귀, 로딩 도중 종료의 정리 순서를 합성 씬으로 시험했다. 관련 P08/P09, R02/R14/R15, T02/T14/T15의 기반 구현이며 실제 공간·기기 시험 완료를 의미하지 않는다.
+- 초기 93/95 실행의 프레임 수 기반 대기와 씬 누수, 91/96 실행의 시험 씬 미등록을 수정했다. 최종 **PlayMode 96/96, EditMode 50/50**. 시험 클래스의 사전/사후 훅이 합성 씬을 자동 등록하고 원래 빌드 목록을 복원한다. 위 과거 맵 로더 항목의 수동 EnableForTests 절차는 이제 필요하지 않다.
+- Windows x64 Mono 개발 빌드 성공, 원본 프로젝트로 복사한 340개 파일의 SHA-256 일치. [증빙](evidence/p09-bootstrap.json). 재현: Unity batchmode에서 `-runTests -testPlatform PlayMode` 또는 `EditMode`; 빌드는 `-executeMethod VRFPS.Editor.BootstrapSetup.Build -quit`이며 격리 프로젝트를 사용한다.
+- 실행: `Zombie Shoot VR/Builds/Windows/BootstrapPreview/BootstrapPreview.exe`. **실제 Room/Classroom 씬이 없어 선택 버튼이 비활성인 메뉴 미리보기**다. 전투 조작 시험은 기존 `Builds/Windows/MenuLab/WaveLab.exe`를 사용한다. 합성 시험 씬은 이 빌드에 포함하지 않는다.
+- 배포 씬 목록은 Bootstrap→Combat으로 변경했다. 기존 XR 설정 객체 참조는 유지했다. 독립 리뷰와 Quest Pro 메뉴 조작·팔 HUD 가독성·가림 검증은 대기이며 PR #8은 초안으로 유지한다.
+- 다음: P10 첫 조작 안내·소리/진동/피드백과 P11 측정 준비를 진행한다. 실제 촬영본·기준 길이 2개 확보 후 P02 평가 및 두 맵 통합, 실기와 성능 시험을 수행한다. 현재 자동 시험 결과를 실제 두 맵의 완료 증빙으로 확대하지 않는다.

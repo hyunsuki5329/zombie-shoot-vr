@@ -15,6 +15,14 @@ namespace VRFPS.Player
         bool locomotionEnabled = true;
         float verticalSpeed;
 
+        public float MoveSpeed => moveSpeed;
+        public float TurnSpeed => turnSpeed;
+        public void SetSpeeds(float move, float turn)
+        {
+            moveSpeed = float.IsNaN(move) || float.IsInfinity(move) ? 1.6f : Mathf.Clamp(move, 1f, 2f);
+            turnSpeed = float.IsNaN(turn) || float.IsInfinity(turn) ? 60f : Mathf.Clamp(turn, 30f, 90f);
+        }
+
         public Transform Head { get => head; set => head = value; }
 
         void Awake() => capsule = GetComponent<CharacterController>();
