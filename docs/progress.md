@@ -4,8 +4,8 @@
 
 ## 현재 작업
 
-- 현재 기준 커밋: `1344f9a` (공통 전투 세션). 이후 Bootstrap 통합 단위의 최종 SHA는 PR #8 기록에 연결한다.
-- 브랜치: `codex/p08-records`. P07 기반 의존 작업이다. 기록·HUD·메뉴·이동/회전 설정과 Bootstrap/Combat 통합을 구현했다. 최신 자동 검증은 PlayMode 96/96, EditMode 50/50이며 실제 두 맵·실기·독립 리뷰는 남아 있다. PR #8은 초안·미병합 상태다.
+- 현재 기준 커밋: `813bc15` (Bootstrap 통합, PR #8에 push). 이후 P10 안내 단위의 최종 SHA는 해당 PR 기록에 연결한다.
+- 브랜치: `codex/p10-feedback`, base `codex/p08-records`. 첫 조작 안내를 연결했고 최신 PlayMode 97/97이 통과했다. EditMode는 앞 단위의 50/50 결과이며 이번 안내 변경에서는 재실행하지 않았다. 실제 두 맵·실기·독립 리뷰는 남아 있다. 선행 PR #8은 초안·미병합 상태다.
 - P01-a 구현 커밋: `5a8dc1d844bf5aacd53a522a894bca3eee7c91d3`. [PR #1](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/1)은 원격에서 main에 병합됨(`e0e3be2`). GitHub CI는 없으며 로컬 Unity 검증 결과를 사용한다.
 - P01-a 구현·자동 검증 완료: Unity 환경 확인, EditMode 시험 어셈블리와 InteractionLab 구성, Windows Mono 개발 빌드. 증빙: [시험·빌드·소스 해시](evidence/p01-foundation.json), [환경 및 실행 절차](../Zombie%20Shoot%20VR/Docs/environment.md).
 - P01 실기 확인: 사용자가 VR 실행과 머리·양손 추적 정상 동작을 확인했다(2026-09-22). [VD 설정·실기 보고](evidence/2026-09-22-vd-hardware-check.md). 전용 입력 구성과 양안 가림 등 후속 검증까지 완료한 것으로 확대하지 않는다.
@@ -149,3 +149,12 @@
 - 실행: `Zombie Shoot VR/Builds/Windows/BootstrapPreview/BootstrapPreview.exe`. **실제 Room/Classroom 씬이 없어 선택 버튼이 비활성인 메뉴 미리보기**다. 전투 조작 시험은 기존 `Builds/Windows/MenuLab/WaveLab.exe`를 사용한다. 합성 시험 씬은 이 빌드에 포함하지 않는다.
 - 배포 씬 목록은 Bootstrap→Combat으로 변경했다. 기존 XR 설정 객체 참조는 유지했다. 독립 리뷰와 Quest Pro 메뉴 조작·팔 HUD 가독성·가림 검증은 대기이며 PR #8은 초안으로 유지한다.
 - 다음: P10 첫 조작 안내·소리/진동/피드백과 P11 측정 준비를 진행한다. 실제 촬영본·기준 길이 2개 확보 후 P02 평가 및 두 맵 통합, 실기와 성능 시험을 수행한다. 현재 자동 시험 결과를 실제 두 맵의 완료 증빙으로 확대하지 않는다.
+
+### P10-a 첫 조작 안내 (2026-09-27)
+
+- 기준: `813bc15`, 브랜치 `codex/p10-feedback`, 선행 base `codex/p08-records`. P08/P09 실기·실제 맵은 계속 대기이며 이번 변경은 R19/T19의 안내 부분이다.
+- Bootstrap 최초 화면에 조작 안내를 표시하고 Back으로 맵 선택에 돌아간다. Controls로 다시 열 수 있고 전투 중에는 정지 상태를 유지한다. 안내를 닫아도 자동 재개하지 않는다.
+- 왼쪽 이동·오른쪽 회전·양손 발사·왼손 탄창 탈거/폐기/허리 보급/삽입/앞부분 재잡기·오른팔 HUD·X 정지 방법을 InstructionPanel 프리팹에 담았다.
+- 안내 메서드 부재로 신규 시험 1개가 실패한 뒤 전체 PlayMode 97/97 통과. Bootstrap 실제 씬의 최초 안내·Back 버튼 연결도 기존 통합 시험에서 확인했다. Windows 빌드와 증빙은 [p10-instructions.json](evidence/p10-instructions.json), 실제 관찰 절차는 [T19 안내 시험](evidence/p10-instructions-hardware-check.md)을 따른다.
+- Ruling: 첫 안내는 실행마다 표시하고 메뉴에서도 재열기 가능하게 한다. 처음 보는 사람이 설명을 놓치지 않게 하기 위한 선택이며, 비용은 숙련자도 실행 시 한 번 닫아야 한다는 것이다. 영어 기본 폰트를 사용한 현재 안내의 이해도·가독성은 실기로 확인해야 한다.
+- 자체 검토를 수행했고 독립 리뷰와 실제 초보 사용자 T19 관찰은 대기다. 소리·진동·공격 예고/저체력 소리와 실측 강도 조정은 아직 구현하지 않았으므로 P10 전체는 미완료다.

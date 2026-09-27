@@ -33,14 +33,14 @@ namespace VRFPS
             Session.Configure(run,rig,gun,hand,melee,ranged,projectile,records);
             menu.Configure(run);view.BindResult(Session.Results);
             roomButton.onClick.AddListener(SelectRoom);classroomButton.onClick.AddListener(SelectClassroom);
-            menu.ScreenChanged+=OnScreenChanged;ready=true;Refresh();
+            menu.ScreenChanged+=OnScreenChanged;ready=true;menu.OpenInstructions();Refresh();
         }
         void Update()
         {
             if(!ready || busy || !pause.WasPressedThisFrame())return;
             if(menu.Screen==MenuScreen.Hidden)menu.Pause();
             else if(menu.Screen==MenuScreen.Pause)menu.Resume();
-            else if(menu.Screen==MenuScreen.Settings)menu.CloseSettings();
+            else if(menu.Screen==MenuScreen.Settings || menu.Screen==MenuScreen.Instructions)menu.CloseAuxiliary();
         }
         void SelectRoom()=>StartCoroutine(SelectMap(room));
         void SelectClassroom()=>StartCoroutine(SelectMap(classroom));

@@ -2,11 +2,12 @@ using System;
 using UnityEngine;
 namespace VRFPS
 {
-    public enum MenuScreen { Hidden, MapSelection, Pause, Settings, Result }
+    public enum MenuScreen { Hidden, MapSelection, Pause, Settings, Result, Instructions }
     public sealed class MenuController : MonoBehaviour
     {
         RunController run;
         MenuScreen settingsReturn;
+        MenuScreen instructionsReturn;
         public MenuScreen Screen { get; private set; } = MenuScreen.MapSelection;
         public event Action<MenuScreen> ScreenChanged;
         public void Configure(RunController run)
@@ -48,6 +49,17 @@ namespace VRFPS
             SetScreen(MenuScreen.Settings);
         }
         public void CloseSettings() { if(Screen==MenuScreen.Settings) SetScreen(settingsReturn); }
+        public void OpenInstructions()
+        {
+            if(run==null || Screen==MenuScreen.Instructions || Screen==MenuScreen.Settings)return;
+            if(Screen==MenuScreen.Hidden)Pause();
+            instructionsReturn=Screen;SetScreen(MenuScreen.Instructions);
+        }
+        public void CloseInstructions() { if(Screen==MenuScreen.Instructions)SetScreen(instructionsReturn); }
+        public void CloseAuxiliary()
+        {
+            if(Screen==MenuScreen.Instructions)CloseInstructions();else CloseSettings();
+        }
         public void Retry()
         {
             if(run==null || run.Map==null || (Screen!=MenuScreen.Result && Screen!=MenuScreen.Pause)) return;

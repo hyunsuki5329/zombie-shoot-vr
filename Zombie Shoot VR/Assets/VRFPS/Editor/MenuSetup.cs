@@ -30,7 +30,24 @@ namespace VRFPS.Editor
                 var maps=Button("Maps unavailable",panel.transform,new Vector2(205,-75));maps.interactable=false;
                 var back=Button("Back",panel.transform,new Vector2(-205,-170));
                 var save=Button("Retry save",panel.transform,new Vector2(205,-170));
+                var help=Button("Controls",panel.transform,new Vector2(205,-265));
                 root.AddComponent<MenuView>().Configure(root.AddComponent<MenuController>(),null,null,panel,title,details,resume,retry,settings,back,maps,save);
+                Directory.CreateDirectory("Assets/VRFPS/UI");AssetDatabase.Refresh();
+                var instruction=Label("InstructionPanel",panel.transform,new Vector2(0,40),new Vector2(860,300),24);
+                instruction.alignment=TextAnchor.MiddleLeft;
+                instruction.text="MOVE: left stick     TURN: right stick\n"+
+                    "FIRE: hold the foregrip with LEFT grip, then RIGHT trigger.\n"+
+                    "RELOAD (left hand):\n"+
+                    "1. Release the foregrip. Grip the magazine and pull it out.\n"+
+                    "2. Release grip to discard it. Old rounds are lost.\n"+
+                    "3. Grip near your LEFT waist for a fresh 30-round magazine.\n"+
+                    "4. Move it into the socket, then grip the foregrip again.\n"+
+                    "HEALTH / WAVE / KILLS: look at your right forearm.\n"+
+                    "PAUSE: X (left controller). Point at a button and select it.";
+                var instructionPrefab=PrefabUtility.SaveAsPrefabAsset(instruction.gameObject,"Assets/VRFPS/UI/InstructionPanel.prefab");
+                UnityEngine.Object.DestroyImmediate(instruction.gameObject);
+                var instructionInstance=(GameObject)PrefabUtility.InstantiatePrefab(instructionPrefab,panel.transform);
+                instructionInstance.name="InstructionPanel";instructionInstance.SetActive(false);
                 var controls=Rect("SettingsControls",panel.transform,Vector2.zero,new Vector2(900,220));
                 var moveText=Label("Move speed",controls.transform,new Vector2(0,20),new Vector2(300,70),28);
                 var turnText=Label("Turn speed",controls.transform,new Vector2(0,-75),new Vector2(300,70),28);
@@ -41,6 +58,8 @@ namespace VRFPS.Editor
                 foreach(var b in new[]{moveDown,moveUp,turnDown,turnUp})b.GetComponent<RectTransform>().sizeDelta=new Vector2(180,75);
                 root.AddComponent<SettingsView>().Configure(null,moveText,turnText,moveDown,moveUp,turnDown,turnUp);
                 var viewData=new SerializedObject(root.GetComponent<MenuView>());
+                viewData.FindProperty("instructions").objectReferenceValue=help;
+                viewData.FindProperty("instructionPanel").objectReferenceValue=instructionInstance;
                 viewData.FindProperty("settingsControls").objectReferenceValue=controls;viewData.ApplyModifiedPropertiesWithoutUndo();
                 controls.SetActive(false);
                 PrefabUtility.SaveAsPrefabAsset(root,Path);

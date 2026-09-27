@@ -43,6 +43,10 @@ namespace VRFPS.Tests
             while(!bootstrap.IsReady && bootstrap.LastError==null && Time.realtimeSinceStartup<deadline)yield return null;
             Assert.That(bootstrap.LastError,Is.Null);Assert.That(bootstrap.IsReady,Is.True);
             var entry=bootstrap.Entry;
+            Assert.That(entry.menu.Screen,Is.EqualTo(MenuScreen.Instructions));
+            var guide=entry.view.transform.Find("Panel/InstructionPanel");
+            Assert.That(guide,Is.Not.Null);Assert.That(guide.gameObject.activeInHierarchy,Is.True);
+            entry.view.transform.Find("Panel/Back").GetComponent<UnityEngine.UI.Button>().onClick.Invoke();
             Assert.That(entry.menu.Screen,Is.EqualTo(MenuScreen.MapSelection));Assert.That(entry.roomButton.interactable,Is.False);
             Assert.That(entry.classroomButton.interactable,Is.False);
             var fixture=ScriptableObject.CreateInstance<MapDefinition>();
