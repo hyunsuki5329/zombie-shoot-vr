@@ -43,6 +43,9 @@ namespace VRFPS.Tests
             while(!bootstrap.IsReady && bootstrap.LastError==null && Time.realtimeSinceStartup<deadline)yield return null;
             Assert.That(bootstrap.LastError,Is.Null);Assert.That(bootstrap.IsReady,Is.True);
             var entry=bootstrap.Entry;
+            var sounds=entry.run.GetComponent<RunFeedback>();
+            Assert.That(sounds,Is.Not.Null);Assert.That(sounds.output,Is.Not.Null);
+            Assert.That(sounds.damageClip,Is.Not.Null);Assert.That(sounds.waveClip,Is.Not.Null);Assert.That(sounds.lowHealthClip,Is.Not.Null);
             Assert.That(entry.menu.Screen,Is.EqualTo(MenuScreen.Instructions));
             var guide=entry.view.transform.Find("Panel/InstructionPanel");
             Assert.That(guide,Is.Not.Null);Assert.That(guide.gameObject.activeInHierarchy,Is.True);

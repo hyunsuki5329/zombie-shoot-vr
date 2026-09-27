@@ -17,6 +17,7 @@ namespace VRFPS
         public bool HoldsPosition => IsWindingUp || cooldownRemaining > 0 || CanReachTarget();
         public event Action<Vector3, Vector3, int, int> ProjectileRequested;
         public event Action<int, int> Died;
+        public event Action AttackStarted;
         public void Configure(int id, EnemyKind kind, Transform target, Transform origin, LayerMask solidMask, int wave = 1)
         {
             if (target == null || origin == null || solidMask.value == 0)
@@ -67,6 +68,7 @@ namespace VRFPS
             if (cooldownRemaining > 0 || !CanReachTarget()) return;
             IsWindingUp = true;
             windupRemaining = kind == EnemyKind.Melee ? 0.65f : 0.8f;
+            AttackStarted?.Invoke();
         }
 
         public void SetCombatEnabled(bool enabled) => combatEnabled = enabled;

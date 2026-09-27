@@ -4,8 +4,8 @@
 
 ## 현재 작업
 
-- 현재 기준 커밋: `48cdce3` (첫 안내, [초안 PR #9](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/9)에 push). 이후 무기 피드백 단위의 최종 SHA는 같은 PR 기록에 연결한다.
-- 브랜치: `codex/p10-feedback`, base `codex/p08-records`. 첫 안내와 무기 소리·햅틱 연결을 구현했고 최신 PlayMode 99/99이 통과했다. EditMode는 앞 단위의 50/50 결과이며 이번 변경에서는 재실행하지 않았다. 실제 두 맵·실기·독립 리뷰는 남아 있다. 선행 PR #8과 현재 PR #9는 초안·미병합 상태다.
+- 현재 기준 커밋: `76813b1` (무기 피드백, [초안 PR #9](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/9)에 push). 이후 전투 소리 단위의 최종 SHA는 같은 PR 기록에 연결한다.
+- 브랜치: `codex/p10-feedback`, base `codex/p08-records`. 첫 안내·무기/전투 소리·햅틱·AudioMixer의 초기 연결을 구현했고 최신 PlayMode 101/101이 통과했다. EditMode는 앞 단위의 50/50 결과이며 이번 변경에서는 재실행하지 않았다. 실제 두 맵·실기 청취/강도 조정·독립 리뷰는 남아 있다. 선행 PR #8과 현재 PR #9는 초안·미병합 상태다.
 - P01-a 구현 커밋: `5a8dc1d844bf5aacd53a522a894bca3eee7c91d3`. [PR #1](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/1)은 원격에서 main에 병합됨(`e0e3be2`). GitHub CI는 없으며 로컬 Unity 검증 결과를 사용한다.
 - P01-a 구현·자동 검증 완료: Unity 환경 확인, EditMode 시험 어셈블리와 InteractionLab 구성, Windows Mono 개발 빌드. 증빙: [시험·빌드·소스 해시](evidence/p01-foundation.json), [환경 및 실행 절차](../Zombie%20Shoot%20VR/Docs/environment.md).
 - P01 실기 확인: 사용자가 VR 실행과 머리·양손 추적 정상 동작을 확인했다(2026-09-22). [VD 설정·실기 보고](evidence/2026-09-22-vd-hardware-check.md). 전용 입력 구성과 양안 가림 등 후속 검증까지 완료한 것으로 확대하지 않는다.
@@ -166,3 +166,12 @@
 - 신규 피드백 부재 1개 RED 후 전체 PlayMode **99/99** 통과. 추가 삽입 시험으로 중복 삽입 실패와 최초 장착 무음을 확인했다. [증빙](evidence/p10-weapon-feedback.json), [실기 확인](evidence/p10-weapon-feedback-hardware-check.md).
 - 음원 3개는 FeedbackSetup의 고정 시드 PCM 합성으로 생성한 원본이며 외부 녹음/샘플은 쓰지 않았다. 실제 K2 녹음이나 실기 확정 음량·진동으로 주장하지 않는다. 초기 후보는 음량0.35, 발사0.25×35ms, 삽입0.20×55ms다.
 - 자체 검토 완료, 독립 리뷰 및 실제 소리/진동·좌우 출력·체감 강도 확인 대기. 피격·웨이브 시작·좀비 접근/공격 준비·저체력 소리, AudioMixer와 최종 실기 조정은 후속 작업이다. 실제 두 맵 통합과 성능/장시간 시험도 남아 있으므로 P10 전체나 프로젝트 완료로 표시하지 않는다.
+
+### P10-c 피격·웨이브·적 소리와 AudioMixer (2026-09-28)
+
+- RunController의 실제 웨이브 시작·수락된 피해 사건을 추가하고 피격/웨이브/저체력 소리를 연결했다. 재개는 웨이브 시작 사건이 아니며 보호 시간의 무효 피해는 소리를 추가하지 않는다. HP25 초과→25 이하 생존 시만 저체력 소리가 난다. 치명 피해의 소리는 사망 전환에서 즉시 중단된다.
+- 근접/원거리 공격 준비 시작 사건에 서로 다른 3D 준비음을 연결했다. 적 접근음은 6m 이내·3초 간격으로 제한하며 준비 중에는 추가하지 않는다. 정지/사망/비활성/풀 재설정 시 재생과 구독을 정리한다.
+- Unity 에디터로 `Audio/AudioMixer.mixer`를 생성하고 모든 무기·플레이어·적 소리를 Master로 라우팅했다. 개인 알림은 2D, 적/무기는 3D다. 무기3+플레이어3+적당2 AudioSource를 재사용하며 PlayOneShot으로 목소리를 쌓지 않는다.
+- 신규 2개 RED 후 전체 PlayMode **101/101** 통과. 원래 Bootstrap 통합 시험에 실제 씬의 RunFeedback/믹서/클립 참조 확인을 추가했다. [증빙](evidence/p10-world-feedback.json), [실기 청취 절차](evidence/p10-world-feedback-hardware-check.md).
+- 합성 음원 6개와 생성 코드를 포함한다. 실제 청감·접근 방향·공격 예고 인지·적절한 음량과 햅틱, T19 초보 사용자 관찰은 대기다. 자체 변경 검토와 독립 리뷰를 구분하며 PR #9는 초안 유지한다.
+- 다음은 P11 측정/객체 수 관찰과 장시간 시험 준비다. 실제 두 스캔 맵·기기 결과를 받으면 P02/P09와 P10 조정을 진행한다. 자동 시험을 실제 두 맵 성능·가독성·음향 인수 결과로 취급하지 않는다.

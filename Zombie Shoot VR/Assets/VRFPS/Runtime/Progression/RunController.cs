@@ -22,6 +22,8 @@ namespace VRFPS
         public event Action RunStarted;
         public event Action RunEnded;
         public event Action<RunPhase> PhaseChanged;
+        public event Action<int> WaveStarted;
+        public event Action<int,int> DamageTaken;
 
         public void StartRun(MapDefinition map)
         {
@@ -72,6 +74,7 @@ namespace VRFPS
                     var next = checked(ReachedWave + 1);
                     wave.Begin(next, GameBalance.QuotaForWave(next));
                     ChangePhase(RunPhase.Active);
+                    WaveStarted?.Invoke(next);
                 }
                 return;
             }
@@ -89,7 +92,9 @@ namespace VRFPS
         {
             // Callers can have local clocks; invulnerability belongs to this run's
             // paused combat clock, not to a projectile or weapon's timestamp.
+            var before=Health;
             if (Phase != RunPhase.Active || !vital.Damage(amount, ActiveTime)) return false;
+            DamageTaken?.Invoke(before,Health);
             if (Health == 0) EndRun();
             return true;
         }

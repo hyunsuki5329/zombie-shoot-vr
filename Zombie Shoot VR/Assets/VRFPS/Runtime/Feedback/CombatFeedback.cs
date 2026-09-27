@@ -8,6 +8,7 @@ namespace VRFPS
         [SerializeField] K2Controller gun;
         [SerializeField] MagazineSocket socket;
         public AudioClip shotClip,emptyClip,insertClip;
+        public UnityEngine.Audio.AudioMixerGroup output;
         public HapticImpulsePlayer rightHaptics,leftHaptics;
         [Range(0,1)] public float volume=.35f;
         [Range(0,1)] public float shotHaptic=.25f,insertHaptic=.2f;
@@ -48,7 +49,7 @@ namespace VRFPS
         void Play(AudioSource source,AudioClip clip,HapticImpulsePlayer haptics,float amplitude,float duration)
         {
             CueCount++;
-            if(source!=null && clip!=null){source.clip=clip;source.volume=Mathf.Clamp01(volume);source.Play();}
+            if(source!=null && clip!=null){source.clip=clip;source.outputAudioMixerGroup=output;source.volume=Mathf.Clamp01(volume);source.Play();}
             if(haptics!=null)haptics.SendHapticImpulse(Mathf.Clamp01(amplitude),duration);
         }
         void OnShot(Vector3 start,Vector3 end)=>Play(shot,shotClip,rightHaptics,shotHaptic,.035f);
