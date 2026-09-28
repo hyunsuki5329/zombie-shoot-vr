@@ -4,8 +4,8 @@
 
 ## 현재 작업
 
-- 현재 기준 커밋: `8f1b656` (탄창 풀·소유권 통계, [초안 PR #10](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/10)에 push). 이후 P11 단위의 최종 SHA는 해당 PR 기록에 연결한다.
-- 브랜치: `codex/p11-performance`, base `codex/p10-feedback`. 투사체 충돌 할당 최적화와 PoolRegistry/투사체·탄창·적/사체 수명 통계를 구현했고 최신 PlayMode 113/113이 통과했다. EditMode는 앞 단위의 50/50 결과이며 이번 변경에서는 재실행하지 않았다. 실제 두 맵·실기·CPU/GPU/장시간·독립 리뷰는 남아 있다. 선행 PR #8/#9는 초안·미병합 상태다.
+- 현재 기준 커밋: `3032a75` (적·사체 풀 통계, [초안 PR #10](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/10)에 push). 이후 P11 단위의 최종 SHA는 해당 PR 기록에 연결한다.
+- 브랜치: `codex/p11-performance`, base `codex/p10-feedback`. 투사체 충돌 할당 최적화와 객체 풀·효과 수량과 선택적 JSONL 기록을 연결했고 최신 PlayMode 114/114이 통과했다. EditMode는 앞 단위의 50/50 결과이며 이번 변경에서는 재실행하지 않았다. 실제 두 맵·실기·CPU/GPU/장시간·독립 리뷰는 남아 있다. 선행 PR #8/#9는 초안·미병합 상태다.
 - P01-a 구현 커밋: `5a8dc1d844bf5aacd53a522a894bca3eee7c91d3`. [PR #1](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/1)은 원격에서 main에 병합됨(`e0e3be2`). GitHub CI는 없으며 로컬 Unity 검증 결과를 사용한다.
 - P01-a 구현·자동 검증 완료: Unity 환경 확인, EditMode 시험 어셈블리와 InteractionLab 구성, Windows Mono 개발 빌드. 증빙: [시험·빌드·소스 해시](evidence/p01-foundation.json), [환경 및 실행 절차](../Zombie%20Shoot%20VR/Docs/environment.md).
 - P01 실기 확인: 사용자가 VR 실행과 머리·양손 추적 정상 동작을 확인했다(2026-09-22). [VD 설정·실기 보고](evidence/2026-09-22-vd-hardware-check.md). 전용 입력 구성과 양안 가림 등 후속 검증까지 완료한 것으로 확대하지 않는다.
@@ -207,3 +207,11 @@
 - 반환 시 공격 타이머·타겟·사건 구독·경로 갱신 상태를 지우고 에이전트/피격을 끄며 애니메이터를 초기화한다. 재사용 때 새ID/체력/타겟/피드백을 다시 설정한다.
 - 신규 시험1개 RED(기존10PASS), 첫 전체112/112, 사체5초 반환/통계 검증 추가 후 최종 **PlayMode113/113**. 20회 재도전에서 같은 몸체1개를 재사용하며 처치 사건이 중복되지 않는다. 사체 회수로 처치/할당량이 변하지 않고 사체4개 상한을 유지한다. [증빙](evidence/p11-enemy-pool.json).
 - 자체 변경 검토와 독립 리뷰를 구분한다. PR #10은 초안이며 실제 두 맵·72Hz·장시간 검증은 미실행이다. 다음 작업은 고정 재사용 효과의 수량 통계와 기록 수집이다.
+
+### P11-e 효과 수량과 장시간 객체 기록 (2026-09-28)
+
+- 기존 시각 효과는 트레이서1개·생성 예고1개를 재사용한다. 16개까지 불필요한 객체를 만들지 않고 실제 생성2개/현재 표시 수를 수집한다. 효과 수에는 AudioSource를 합산하지 않는다.
+- `-vrfps-diagnostics` 옵션으로만 활성화되는 CombatDiagnostics를 공통 맵 세션과 WaveLab에 연결했다. 1초마다 phase/map/attempt/실시간/전투시간/객체 현재·최대·상한/관리 힙을 JSONL에 flush한다. 표본을 메모리에 쌓지 않는다.
+- 기존 파일 덮어쓰기 금지, 정상 종료 footer, 쓰기 실패 시 수집 중단/오류 로그를 제공한다. map-session은 실제 스캔 증명이 아니며 헤더는 CPU/GPU 측정 없음(false)을 명시한다. 관리 힙은 RAM/VRAM이 아니다.
+- 신규 실제 WaveLab 씬 시험1개 RED 후 전체 **114/114**. 122개 수동 표본, 일시정지, 재도전 번호, 기존 파일 보존, 실제 1초 자동 표본과 비활성화 종료를 확인했다. [증빙](evidence/p11-diagnostics.json). 이는 짧은 합성 기능 시험이며 30분 시험을 대신하지 않는다.
+- [실행 스크립트](../scripts/Start-VrDiagnostics.ps1) `-CheckOnly` 경로 확인 완료. [실행·기록 해석](../Zombie%20Shoot%20VR/Docs/performance.md). 실제 기록 요약/CPU·GPU 측정 준비와 두 맵 실기 인수는 다음 단계다. 독립 리뷰가 남아 PR #10은 초안이다.

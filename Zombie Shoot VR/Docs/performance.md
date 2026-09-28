@@ -51,3 +51,15 @@ SpawnDirector의 생존 수 제한은 맵 maxAlive(4/6), 원거리 maxRangedAliv
 레지스트리의 `melee`와 `ranged` 풀은 각각 maxAlive+4, maxRangedAlive+4개의 몸체 슬롯을 허용하며 전체 생성 몸체는 기존16개 상한을 유지한다. 풀의 Current는 생존과 표시 중 사체를 모두 포함하고 Created는 비활성 보관분도 포함하므로 생존 수로 읽지 않는다. 타입별 여유 슬롯은 프리팹 종류가 다른 몸체를 재사용하기 위한 것이다.
 
 사체 만료·초과 사체·재도전에서 Return을 호출한다. 반환 시 공격/대상/사건 구독을 비우고 이동 갱신과 에이전트를 중단하며 애니메이터를 초기화한다. 재대여 시 기존 Initialize가 새 ID·체력·공격 대상·이동·피드백 구독을 설정한다. 반환은 추가 처치나 생성 성공으로 계산하지 않는다.
+
+## 장시간 객체 기록 실행
+
+워크스페이스에서 `pwsh -File scripts/Start-VrDiagnostics.ps1 -Build MenuLab`로 실행한다. `-CheckOnly`를 덧붙이면 실행 없이 경로만 확인한다. 실제 맵을 연결한 뒤에는 `-Build BootstrapPreview`를 사용한다. 직접 실행할 때는 실행 파일에 `-vrfps-diagnostics` 인수를 추가한다. 옵션이 없으면 수집기를 만들지 않는다.
+
+기본 출력은 `%USERPROFILE%/AppData/LocalLow/DefaultCompany/Zombie Shoot VR/Diagnostics/*.jsonl`이다. 정확한 경로는 Player.log의 `VRFPS_DIAGNOSTICS`에도 남긴다. UTC 시각과 GUID로 새 파일을 만들고 기존 파일을 덮어쓰지 않는다. 맵 세션마다 새 파일, 같은 맵 재도전은 같은 파일의 attempt 증가로 구분한다. MenuLab은 `wave-lab`, 공통 맵 세션은 `map-session`으로 기록하며 후자가 실제 스캔이라는 증빙은 아니다.
+
+1초마다 상태·맵·웨이브·처치·경과 실시간·전투 시간·시도 번호, 각 객체의 현재/최대/상한, 관리 힙 바이트를 기록한다. 매 표본을 flush하고 메모리에 표본 목록을 쌓지 않는다. 50ms 트레이서 같은 짧은 효과는 표본 사이에 발생해 관측되지 않을 수 있다. 현재 시각 효과는 고정 트레이서1개와 생성 예고1개를 재사용하므로 생성 객체는2개이며 임시 효과 상한16 이내다. 오디오 소스는 이 시각 효과 수에 포함하지 않는다.
+
+`boundsSatisfied`는 해당 표본의 수량 상한 판정일 뿐 전체 실행의 성능/안정성 합격이 아니다. 헤더의 `cpuGpuTimingCaptured:false`를 확인한다. 관리 힙은 전체 RAM/VRAM이 아니며 이 기록은 CPU/GPU p95·p99를 제공하지 않는다. Unity Profiler/VR 런타임 측정과 함께 같은 구간을 비교해야 한다. JSON 직렬화와 파일 쓰기는 관측 비용이 있으므로 켠/끈 조건도 구분한다.
+
+정상 종료/맵 언로드/수집기 비활성화 시 footer를 기록한다. 강제 종료 시 footer가 없을 수 있으므로 미완료 기록으로 분류한다. 쓰기 실패는 수집을 중단하고 Player.log에 `VRFPS_DIAGNOSTICS_FAILED`를 남긴다. 실제 30분 시험 전 새 파일이 증가하는지 확인하고, 종료 후 footer와 표본 간격·누락·attempt를 확인한다. 자동 시험의 짧은 기록을 30분 실기 결과로 취급하지 않는다.

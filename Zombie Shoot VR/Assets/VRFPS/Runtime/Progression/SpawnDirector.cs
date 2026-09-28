@@ -37,6 +37,7 @@ namespace VRFPS
         public int CorpseCount { get { var count=0;foreach(var entry in actors)if(!entry.Registered&&entry.Actor.gameObject.activeSelf&&entry.Actor.Controller.IsDead)count++;return count; } }
         public int PeakAliveCount { get; private set; }
         public int PeakCorpseCount { get; private set; }
+        public int RangedAliveCount=>RangedAlive();
         void ObserveCounts(){PeakAliveCount=Mathf.Max(PeakAliveCount,AliveCount);PeakCorpseCount=Mathf.Max(PeakCorpseCount,CorpseCount);}
         Vector3 PlayerFeet => playerBody != null
             ? playerBody.transform.TransformPoint(playerBody.center - Vector3.up * (playerBody.height * 0.5f))
