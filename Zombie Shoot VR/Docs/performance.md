@@ -63,3 +63,13 @@ SpawnDirector의 생존 수 제한은 맵 maxAlive(4/6), 원거리 maxRangedAliv
 `boundsSatisfied`는 해당 표본의 수량 상한 판정일 뿐 전체 실행의 성능/안정성 합격이 아니다. 헤더의 `cpuGpuTimingCaptured:false`를 확인한다. 관리 힙은 전체 RAM/VRAM이 아니며 이 기록은 CPU/GPU p95·p99를 제공하지 않는다. Unity Profiler/VR 런타임 측정과 함께 같은 구간을 비교해야 한다. JSON 직렬화와 파일 쓰기는 관측 비용이 있으므로 켠/끈 조건도 구분한다.
 
 정상 종료/맵 언로드/수집기 비활성화 시 footer를 기록한다. 강제 종료 시 footer가 없을 수 있으므로 미완료 기록으로 분류한다. 쓰기 실패는 수집을 중단하고 Player.log에 `VRFPS_DIAGNOSTICS_FAILED`를 남긴다. 실제 30분 시험 전 새 파일이 증가하는지 확인하고, 종료 후 footer와 표본 간격·누락·attempt를 확인한다. 자동 시험의 짧은 기록을 30분 실기 결과로 취급하지 않는다.
+
+## 기록 요약
+
+Python 3.11 표준 라이브러리로 검증한 분석기는 워크스페이스 `scripts/analyze_vr_diagnostics.py`다. `python -B scripts/analyze_vr_diagnostics.py "기록.jsonl" --output "새-요약.json"`로 실행한다. 출력 옵션을 생략하면 화면에 JSON을 출력한다. 원본과 기존 요약 파일을 덮어쓰지 않는다.
+
+한 줄씩 읽으며 원본 SHA256, 표본 개수·시간 범위·최대 간격, 관측된 전투 시간, 재도전 번호, 객체 최대 수, 관리 힙 증감을 요약한다. 헤더/스키마·표본 순서·시간 역행·맵 변경·종료 개수·숫자 형식·중복 JSON 키를 검사한다. 잘린 JSON이나 잘못된 스키마는 행 번호와 오류로 거절한다. 정상 형식에서 footer만 없으면 `recording_complete:false`로 표시한다.
+
+`boundsSatisfied`를 신뢰하지 않고 현재 기준(방4/1, 강의실6/2, 시험장4/1 및 나머지 고정 상한)으로 다시 계산한다. 비활성 투사체/탄창 보유 수와 생성 효과 수까지 비교한다. 기록된 상한이 기준과 다르면 `cap_mismatch_samples`에 나타난다. 모르는 맵은 `known_map_policy:false`이며 최대6/2와 비교한 참고값만 제공한다. 밸런스 기준 변경 시 분석기 정책도 함께 갱신해야 한다.
+
+`thirty_minute_sample_span`은 첫/마지막 표본 사이1800초 여부로, 일시정지·메뉴 시간을 포함한다. `observed_active_seconds`는 같은 attempt에서 관측한 전투 시계 차이의 합이며 재도전 경계의 미관측 시간은 포함하지 않는다. 간격2.5초 초과는 누락 검토용 표시이지 성능 합격 기준이 아니다. 종료 코드0은 분석 성공일 뿐 인수 합격이 아니며 `performance_acceptance`는 항상 `unverified`다. CPU/GPU·VRAM·실제 두 맵·기기 출처와30분 플레이를 별도 확인해야 한다.

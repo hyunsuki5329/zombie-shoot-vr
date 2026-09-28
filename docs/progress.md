@@ -4,7 +4,7 @@
 
 ## 현재 작업
 
-- 현재 기준 커밋: `3032a75` (적·사체 풀 통계, [초안 PR #10](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/10)에 push). 이후 P11 단위의 최종 SHA는 해당 PR 기록에 연결한다.
+- 현재 기준 커밋: `42b3416` (선택적 객체 진단 기록, [초안 PR #10](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/10)에 push). 이후 P11 단위의 최종 SHA는 해당 PR 기록에 연결한다.
 - 브랜치: `codex/p11-performance`, base `codex/p10-feedback`. 투사체 충돌 할당 최적화와 객체 풀·효과 수량과 선택적 JSONL 기록을 연결했고 최신 PlayMode 114/114이 통과했다. EditMode는 앞 단위의 50/50 결과이며 이번 변경에서는 재실행하지 않았다. 실제 두 맵·실기·CPU/GPU/장시간·독립 리뷰는 남아 있다. 선행 PR #8/#9는 초안·미병합 상태다.
 - P01-a 구현 커밋: `5a8dc1d844bf5aacd53a522a894bca3eee7c91d3`. [PR #1](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/1)은 원격에서 main에 병합됨(`e0e3be2`). GitHub CI는 없으며 로컬 Unity 검증 결과를 사용한다.
 - P01-a 구현·자동 검증 완료: Unity 환경 확인, EditMode 시험 어셈블리와 InteractionLab 구성, Windows Mono 개발 빌드. 증빙: [시험·빌드·소스 해시](evidence/p01-foundation.json), [환경 및 실행 절차](../Zombie%20Shoot%20VR/Docs/environment.md).
@@ -215,3 +215,11 @@
 - 기존 파일 덮어쓰기 금지, 정상 종료 footer, 쓰기 실패 시 수집 중단/오류 로그를 제공한다. map-session은 실제 스캔 증명이 아니며 헤더는 CPU/GPU 측정 없음(false)을 명시한다. 관리 힙은 RAM/VRAM이 아니다.
 - 신규 실제 WaveLab 씬 시험1개 RED 후 전체 **114/114**. 122개 수동 표본, 일시정지, 재도전 번호, 기존 파일 보존, 실제 1초 자동 표본과 비활성화 종료를 확인했다. [증빙](evidence/p11-diagnostics.json). 이는 짧은 합성 기능 시험이며 30분 시험을 대신하지 않는다.
 - [실행 스크립트](../scripts/Start-VrDiagnostics.ps1) `-CheckOnly` 경로 확인 완료. [실행·기록 해석](../Zombie%20Shoot%20VR/Docs/performance.md). 실제 기록 요약/CPU·GPU 측정 준비와 두 맵 실기 인수는 다음 단계다. 독립 리뷰가 남아 PR #10은 초안이다.
+
+### P11-f JSONL 기록 분석과 오판 방지 (2026-09-28)
+
+- Python 표준 라이브러리 분석기를 추가했다. 스트리밍으로 SHA256·표본 간격·상태·재도전·전투 시계 차이·객체 최대·관리 힙 증감을 요약하며 스키마/순서/숫자/종료 개수를 검사한다. 기존 원본/요약을 덮어쓰지 않는다.
+- 기록의 boundsSatisfied나 변경된 상한을 그대로 믿지 않고 현재 방/강의실/시험장 기준으로 재검사한다. 비활성 풀 보유 수까지 비교한다. 미등록 맵은 명시하며 실제 맵/기기 출처로 단정하지 않는다.
+- 최초 분석 미구현 RED(8개 시험), 첫 구현에서 시험 도우미 인수 중복 오류1개를 수정하고 경계/CLI 사례를 확장해 **Python11/11** 통과. [증빙](evidence/p11-diagnostics-analysis.json).
+- 기존 Unity 시험의 실제 출력에서 헤더+첫 표본만 발췌해 CLI 호환성을 확인했다. footer 없는1표본 발췌본을 incomplete/성능unverified로 정확히 분류했다. 완전한 실행 기록이나30분 결과로 주장하지 않는다.
+- Unity 런타임 소스 변경이 없어 PlayMode114/114와 Windows 빌드는 앞 단위의 결과를 유지하며 이번에 재실행하지 않았다. 다음은 CPU/GPU 측정 경로와 실제 실기 결과 확보다. 독립 리뷰와 실제 두 맵은 계속 대기다.
