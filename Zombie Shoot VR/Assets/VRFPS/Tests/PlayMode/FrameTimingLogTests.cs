@@ -12,7 +12,8 @@ namespace VRFPS.Tests
         [TearDown] public void Cleanup(){if(File.Exists(path))File.Delete(path);}
         [Test] public void UniqueFramesPreserveRawTimesAndMarkUnsupportedGpuWithoutCountingDuplicates()
         {
-            using(var log=new FrameTimingLog(path,"{}"))
+            const string metadata="{\"schemaVersion\":1,\"source\":\"Unity.FrameTimingManager\",\"units\":\"milliseconds\",\"mapId\":\"interaction-lab\",\"scenario\":\"wave-lab\",\"graphicsApi\":\"Synthetic\",\"phaseNames\":[\"Preparing\",\"Active\",\"Paused\",\"Dead\"]}";
+            using(var log=new FrameTimingLog(path,metadata))
             {
                 var frame=new FrameTiming{frameStartTimestamp=100,cpuFrameTime=14,cpuMainThreadFrameTime=3,
                     cpuRenderThreadFrameTime=2,cpuMainThreadPresentWaitTime=10,gpuFrameTime=0};
@@ -25,7 +26,7 @@ namespace VRFPS.Tests
             using(var reader=new BinaryReader(File.OpenRead(path)))
             {
                 Assert.That(Encoding.ASCII.GetString(reader.ReadBytes(8)),Is.EqualTo("VRFT0001"));
-                Assert.That(Encoding.UTF8.GetString(reader.ReadBytes(reader.ReadInt32())),Is.EqualTo("{}"));
+                Assert.That(Encoding.UTF8.GetString(reader.ReadBytes(reader.ReadInt32())),Is.EqualTo(metadata));
                 Assert.That(reader.ReadByte(),Is.EqualTo(1));Assert.That(reader.ReadUInt64(),Is.EqualTo(100));
                 Assert.That(reader.ReadDouble(),Is.EqualTo(1));Assert.That(reader.ReadInt32(),Is.EqualTo(10));
                 Assert.That(reader.ReadInt32(),Is.EqualTo(1));Assert.That(reader.ReadInt32(),Is.EqualTo((int)RunPhase.Active));
@@ -39,6 +40,7 @@ namespace VRFPS.Tests
                 Assert.That(reader.ReadByte(),Is.EqualTo(2));Assert.That(reader.ReadInt64(),Is.EqualTo(2));
                 Assert.That(reader.ReadInt64(),Is.EqualTo(1));Assert.That(reader.ReadInt64(),Is.EqualTo(1));
             }
+            TestContext.Out.WriteLine("VRFT_FIXTURE_BASE64:"+Convert.ToBase64String(File.ReadAllBytes(path)));
         }
         [Test] public void DisabledOrEmptyPollsDoNotCreateZeroMillisecondFramesOrOverwriteLogs()
         {

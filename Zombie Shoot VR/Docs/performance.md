@@ -95,6 +95,22 @@ Unity는 지연된 프레임 결과를 반환하므로 phase/attempt는 **측정
 | 프레임(type1) | byte1, uint64타임스탬프, double수신 경과초, int32수신 Unity프레임, int32시도, int32phase, uint32유효성, double CPU전체/메인/렌더/Present대기/GPU | 73바이트 |
 | 종료(type2) | byte2, int64 수신프레임/중복/타임스탬프0/기능비활성/표본없음/유효CPU전체/유효GPU | 57바이트 |
 
-유효성 비트는1=CPU전체,2=메인,4=렌더,8=Present대기,16=GPU다. 프레임 문자열을 만들지 않고64KiB 스트림 버퍼에 고정 크기로 기록하고1초마다 flush한다. 종료 레코드가 없거나 중간 레코드가 잘렸으면 미완료로 취급한다. 전용 백분위 분석/CSV 내보내기는 후속 작업이다.
+유효성 비트는1=CPU전체,2=메인,4=렌더,8=Present대기,16=GPU다. 프레임 문자열을 만들지 않고64KiB 스트림 버퍼에 고정 크기로 기록하고1초마다 flush한다. 종료 레코드가 없거나 중간 레코드가 잘렸으면 미완료로 취급한다.
 
 API 근거: [Unity FrameTiming](https://docs.unity3d.com/6000.0/Documentation/ScriptReference/FrameTiming.html), [FrameTimingManager 지원·지연 조건](https://docs.unity3d.com/6000.0/Documentation/Manual/frame-timing-manager.html). 설치본 `Editor/Data/Managed/UnityEngine/UnityEngine.CoreModule.xml`의 필드 설명과 실제 컴파일도 대조했다.
+
+### 원시 기록 분석과 CSV
+
+워크스페이스에서 다음을 실행한다. Python 3.11 표준 라이브러리만 사용한다.
+
+```powershell
+python -B scripts/analyze_vr_frame_timings.py "기록.vrft" --output "새-프레임요약.json" --csv "새-프레임.csv"
+```
+
+`--after 30 --before 1830 --attempt 1 --phase Active`를 추가하면 해당 수신 경과초(양 끝 포함), 시도, 수신 상태만 선택한다. 상태 전환 직후의 지연 측정값까지 실제 Active 프레임이라고 단정하지 않는다. 필터를 생략하면 전체 완전한 프레임을 사용한다. `frames`는 전체, `selected_frames`는 선택 개수다. 필터 밖 레코드도 파일 무결성 검사를 받는다.
+
+각 지표는 유효값만 정렬한 nearest-rank(`ceil(p×N)`, 1부터 시작) p50/p95/p99와 유효/무효 개수를 제공한다. 유효값이 없으면 JSON null이며 CSV 무효 셀은 비운다. GPU0을 빠른 프레임으로 세지 않는다. CPU전체/메인/렌더/Present대기/GPU를 각각 표시하며 `cpu_active_work_p95_ms`는 null, `performance_acceptance`는 항상 unverified다. CPU 작업 지표와 실제 인수 조건은 별도 확인한다.
+
+헤더·단위·상태 배열·시간/시도 역행·타임스탬프 중복·유효성 비트·footer 개수를 검증한다. 알 수 없는 레코드, 잘못된 footer, footer 뒤 데이터는 오류다. 종료 레코드 부재나 마지막 레코드의 일부 손실은 완전한 앞부분만 분석하고 `recording_complete:false`로 표시한다. 잘린 헤더는 분석하지 않는다. SHA256은 읽은 원본 바이트 전체에 대한 값이다.
+
+기본 최대2,000,000프레임을 초과하면 중단한다. 필요하면 `--max-frames`로 명시적으로 늘리며 백분위 계산 메모리도 함께 늘어난다. 기존 입력/JSON/CSV를 덮어쓰지 않고 파일 검증에 실패하면 CSV를 게시하지 않는다. 종료 코드0은 분석 성공이며 성능 통과가 아니다. 정상 분석된 미완료 기록도 코드0이므로 반드시 recording_complete와 유효 표본 수를 함께 확인한다.

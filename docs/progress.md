@@ -4,7 +4,7 @@
 
 ## 현재 작업
 
-- 현재 기준 커밋: `9ee3816` (객체 기록 분석기, [초안 PR #10](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/10)에 push). 이후 P11 단위의 최종 SHA는 해당 PR 기록에 연결한다.
+- 현재 기준 커밋: `03ced90` (원시 프레임 시간 수집, [초안 PR #10](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/10)에 push). 이후 P11-h 분석기 단위의 최종 SHA는 해당 PR 기록에 연결한다.
 - 브랜치: `codex/p11-performance`, base `codex/p10-feedback`. 투사체 충돌 할당 최적화와 객체 기록과 선택적 원시 프레임 시간 수집을 연결했고 최신 PlayMode 116/116이 통과했다. EditMode는 앞 단위의 50/50 결과이며 이번 변경에서는 재실행하지 않았다. 실제 두 맵·실기·CPU/GPU/장시간·독립 리뷰는 남아 있다. 선행 PR #8/#9는 초안·미병합 상태다.
 - P01-a 구현 커밋: `5a8dc1d844bf5aacd53a522a894bca3eee7c91d3`. [PR #1](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/1)은 원격에서 main에 병합됨(`e0e3be2`). GitHub CI는 없으며 로컬 Unity 검증 결과를 사용한다.
 - P01-a 구현·자동 검증 완료: Unity 환경 확인, EditMode 시험 어셈블리와 InteractionLab 구성, Windows Mono 개발 빌드. 증빙: [시험·빌드·소스 해시](evidence/p01-foundation.json), [환경 및 실행 절차](../Zombie%20Shoot%20VR/Docs/environment.md).
@@ -231,3 +231,12 @@
 - 문자열 생성 대신 고정73바이트 프레임·64KiB 버퍼·1초 flush를 사용한다. 수신 시점phase와 지연된 측정 프레임을 구분하고 최신1개 요청의 전체 프레임 포착을 보장하지 않는다. 전용 백분위 분석/CSV 출력은 후속 작업이다.
 - 신규 원시 기록 시험2개 RED 후 전체116/116. 실제 WaveLab에서 API 조회/연결 메타데이터/종료까지 확인한 최종 **PlayMode116/116**. 해당 시험은 그래픽API Null인 headless 환경으로 실제GPU 성능 증빙이 아니다. [증빙](evidence/p11-frame-timings.json).
 - Windows 빌드 함수는 enableFrameTimingStats를 빌드 중 켜고 finally에서 원래 설정을 복원한다. 실행 도우미의 -FrameTimings/-CheckOnly 경로를 검증했다. 실제72Hz·두맵30분·CPU지표대조·계측비용 비교·독립 리뷰는 남아 있다.
+
+### P11-h 프레임 백분위 분석과 CSV (2026-09-28)
+
+- Python 분석기로 VRFT0001 원시 파일의 CPU전체/메인/렌더/Present대기/GPU를 분리해 nearest-rank p50/p95/p99와 유효/무효 표본 수를 계산한다. 무효 GPU0·NaN은 제외하고 표본이 없으면 null, CSV 무효 셀은 비운다.
+- 수신 경과초·attempt·phase 필터를 제공하며 필터 밖 레코드도 검증한다. 헤더/단위/시간 순서/타임스탬프/유효성 비트/footer 개수와 종료 후 데이터를 검사한다. 잘린 마지막 레코드는 완전한 앞부분만 분석하고 미완료로 표시한다. 기존 파일은 보존하며 잘못된 입력에서 CSV를 게시하지 않는다.
+- 최초 7개 시험 RED(미구현 오류9개) 후 구현하고 CLI/옵션 경계를 추가하여 **Python20/20** 통과(프레임9+기존 객체11). Unity 기록기 대상 시험 **2/2** 통과 후 해당 C# 코드가 만든 바이너리를 실제 Python CLI로 분석했다. 합성 입력2개·중복1·타임스탬프0 제외1·유효CPU/GPU 각1개와 예상값14/8ms가 일치했다. 이 숫자는 실기 성능이 아니다. [증빙](evidence/p11-frame-analysis.json).
+- CPU전체의 대기를 실제 CPU 작업으로 치환하지 않으며 cpu_active_work_p95_ms=null, performance_acceptance=unverified를 유지한다. 수신 상태와 지연된 측정 상태가 다를 수 있고 전체 프레임 포착을 보장하지 않는다.
+- 런타임 변경 없이 분석기와 시험 출력만 추가했다. 전체 PlayMode116/116과 Windows 빌드는 03ced90 단위의 기존 결과를 유지하며 이번에 재실행하지 않았다. 자체 검토 완료, 독립 리뷰·실제 두 맵·72Hz·30분·RAM/VRAM·계측 비용 검증은 남아 PR #10은 초안이다.
+- 다음: 기기 검증 기록을 받을 실행 패킷을 정리하고 실제 촬영본/기준 길이2개를 받으면 P02·P09 맵 제작과 실기 인수를 진행한다. 촬영본은 아직 제공되지 않았다.
