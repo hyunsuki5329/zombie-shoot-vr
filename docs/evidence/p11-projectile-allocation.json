@@ -1,0 +1,101 @@
+{
+  "unit": "P11-a projectile collision allocation",
+  "date": "2026-09-28",
+  "baseCommit": "23597c4b96c8e3674aac2b575922150e9c40dd73",
+  "requirements": [
+    "P11",
+    "R17",
+    "T17"
+  ],
+  "tests": [
+    {
+      "path": "tmp/p11-projectile-allocation/red.xml",
+      "sha256": "DF41CB91C1FF121747F96957170F308A82C1233378BB18F14E515B0EC75605AA",
+      "result": "Passed",
+      "passed": 1,
+      "failed": 0,
+      "interpretation": "Excluded: uncalibrated .NET allocation counter"
+    },
+    {
+      "path": "tmp/p11-projectile-allocation/impact-red.xml",
+      "sha256": "73AFB26150A91183BAE1E68B0E61C3635F01F60A84B00FEA88EAEA1F8A7B6816",
+      "result": "Passed",
+      "passed": 2,
+      "failed": 0,
+      "interpretation": "Excluded: uncalibrated .NET allocation counter"
+    },
+    {
+      "path": "tmp/p11-projectile-allocation/calibration.xml",
+      "sha256": "193DCAC6D11010453BBBEF5DA7C2BA90709DBA77DB4206CDC77FC75381747121",
+      "result": "Failed(Child)",
+      "passed": 2,
+      "failed": 1,
+      "interpretation": "Proves .NET counter unusable: known 8192-byte allocation reported zero"
+    },
+    {
+      "path": "tmp/p11-projectile-allocation/profiler-red.xml",
+      "sha256": "0FF1D85B47AE682A10A69FBEE1B202F2F67A6125A577DCCC313BC11CDED8AA28",
+      "result": "Failed(Child)",
+      "passed": 1,
+      "failed": 2,
+      "interpretation": "Unity GC.Alloc recorder, known allocation calibration included"
+    },
+    {
+      "path": "tmp/p11-projectile-allocation/green-play.xml",
+      "sha256": "7A55BBD2AAB28EC2F8F2440F26378726807B572819A9D698F7529C491B5CFA92",
+      "result": "Passed",
+      "passed": 104,
+      "failed": 0,
+      "interpretation": "Unity GC.Alloc recorder, known allocation calibration included"
+    },
+    {
+      "path": "tmp/p11-projectile-allocation/verified-play.xml",
+      "sha256": "274B32CD4A86F5A8D12E342BB65AA71BC86424D4BB1242F1F78C6583202E5B7F",
+      "result": "Passed",
+      "passed": 105,
+      "failed": 0,
+      "interpretation": "Unity GC.Alloc recorder, known allocation calibration included"
+    }
+  ],
+  "measurement": {
+    "metric": "Current-thread GC.Alloc events, not bytes",
+    "iterations": 1000,
+    "beforeEmptyFlight": 1000,
+    "afterEmptyFlight": 0,
+    "beforeRepeatedImpact": 1000,
+    "afterRepeatedImpact": 0,
+    "known8192ByteArrayEvents": 1,
+    "wallRegression": "16 player colliders and one overlapping wall: no damage"
+  },
+  "build": {
+    "result": "Both Windows builds succeeded",
+    "log": "tmp/p11-projectile-allocation/build.log",
+    "logSha256": "C8DC4DB078C77C42DE89F6B6CA6359977C385AEC51465C2DE4D27B45C4B0AA69",
+    "manifest": "tmp/p11-projectile-allocation/build-manifest.json",
+    "manifestSha256": "41058E3F4FAE71D7E265F827E81E39012D49681EA9B35A2031B9151E587C2FFD",
+    "bootstrapMatchedFiles": 341,
+    "menuLabMatchedFiles": 338,
+    "hashMismatches": 0
+  },
+  "sources": [
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/Enemies/AcidProjectile.cs",
+      "sha256": "B434FD6754DE468094B99A3DF13C60F829E7F4298DD1288E9578DC5D08D03BBF"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Tests/PlayMode/ProjectileAllocationTests.cs",
+      "sha256": "0833F84D5094F9DBA4C5B13EA1034BF39CE30343FDF4B7C023BA7DA5A2869DB9"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Tests/PlayMode/ProjectileAllocationTests.cs.meta",
+      "sha256": "E4B43CF6A903BD4F24FC1DEEE7642C008EF38031F5789BB5AD3A061C9369FD0F"
+    }
+  ],
+  "limitations": [
+    "Actual VR CPU/GPU p95 and p99 not measured",
+    "Actual room/classroom scans not available",
+    "Each-map 30 minute stability and transition/retry acceptance pending",
+    "Independent review pending; draft PR only",
+    "BootstrapPreview has no actual maps; MenuLab is a synthetic practice build"
+  ]
+}

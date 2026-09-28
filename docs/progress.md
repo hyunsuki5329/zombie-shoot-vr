@@ -4,8 +4,8 @@
 
 ## 현재 작업
 
-- 현재 기준 커밋: `76813b1` (무기 피드백, [초안 PR #9](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/9)에 push). 이후 전투 소리 단위의 최종 SHA는 같은 PR 기록에 연결한다.
-- 브랜치: `codex/p10-feedback`, base `codex/p08-records`. 첫 안내·무기/전투 소리·햅틱·AudioMixer의 초기 연결을 구현했고 최신 PlayMode 101/101이 통과했다. EditMode는 앞 단위의 50/50 결과이며 이번 변경에서는 재실행하지 않았다. 실제 두 맵·실기 청취/강도 조정·독립 리뷰는 남아 있다. 선행 PR #8과 현재 PR #9는 초안·미병합 상태다.
+- 현재 기준 커밋: `23597c4` (전투 소리·믹서, [초안 PR #9](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/9)에 push). 이후 P11 단위의 최종 SHA는 해당 PR 기록에 연결한다.
+- 브랜치: `codex/p11-performance`, base `codex/p10-feedback`. 투사체 충돌 할당 회귀를 재현·최적화했고 최신 PlayMode 105/105이 통과했다. EditMode는 앞 단위의 50/50 결과이며 이번 변경에서는 재실행하지 않았다. 실제 두 맵·실기·CPU/GPU/장시간·독립 리뷰는 남아 있다. 선행 PR #8/#9는 초안·미병합 상태다.
 - P01-a 구현 커밋: `5a8dc1d844bf5aacd53a522a894bca3eee7c91d3`. [PR #1](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/1)은 원격에서 main에 병합됨(`e0e3be2`). GitHub CI는 없으며 로컬 Unity 검증 결과를 사용한다.
 - P01-a 구현·자동 검증 완료: Unity 환경 확인, EditMode 시험 어셈블리와 InteractionLab 구성, Windows Mono 개발 빌드. 증빙: [시험·빌드·소스 해시](evidence/p01-foundation.json), [환경 및 실행 절차](../Zombie%20Shoot%20VR/Docs/environment.md).
 - P01 실기 확인: 사용자가 VR 실행과 머리·양손 추적 정상 동작을 확인했다(2026-09-22). [VD 설정·실기 보고](evidence/2026-09-22-vd-hardware-check.md). 전용 입력 구성과 양안 가림 등 후속 검증까지 완료한 것으로 확대하지 않는다.
@@ -175,3 +175,11 @@
 - 신규 2개 RED 후 전체 PlayMode **101/101** 통과. 원래 Bootstrap 통합 시험에 실제 씬의 RunFeedback/믹서/클립 참조 확인을 추가했다. [증빙](evidence/p10-world-feedback.json), [실기 청취 절차](evidence/p10-world-feedback-hardware-check.md).
 - 합성 음원 6개와 생성 코드를 포함한다. 실제 청감·접근 방향·공격 예고 인지·적절한 음량과 햅틱, T19 초보 사용자 관찰은 대기다. 자체 변경 검토와 독립 리뷰를 구분하며 PR #9는 초안 유지한다.
 - 다음은 P11 측정/객체 수 관찰과 장시간 시험 준비다. 실제 두 스캔 맵·기기 결과를 받으면 P02/P09와 P10 조정을 진행한다. 자동 시험을 실제 두 맵 성능·가독성·음향 인수 결과로 취급하지 않는다.
+
+### P11-a 투사체 충돌의 반복 GC 할당 제거 (2026-09-28)
+
+- 처음 사용한 .NET GetAllocatedBytesForCurrentThread는 알려진 8KB 배열도 0으로 반환했다. 빈 비행/충돌 시험의 초기 통과 두 건은 성능 증빙에서 제외했다. 교정된 Unity ProfilerRecorder GC.Alloc을 사용해 기존 투사체의 빈 비행/충돌 반복 각각 1,000회에 1,000개 할당 사건을 재현했다(신규 기능 시험 2개 RED, 교정 시험 1개 PASS).
+- 투사체마다 Collider[1]을 재사용한다. 겹침이 없으면 추가 질의를 하지 않고, 겹침이 있으면 피해 적용 전 별도 WorldSolid 검사로 버퍼에 가려진 벽도 우선한다. 단일 플레이어 규칙을 사용하며 배열 참조는 사용 직후 지운다.
+- 첫 수정 104/104 후 빈 비행 질의 수를 유지하고 포화 겹침 사례를 추가했다. 최종 **PlayMode 105/105**, 두 1,000회 측정 구간의 GC 사건 **0/0**, 알려진 배열 교정 **1회**. 플레이어 충돌체16개+벽 겹침에서도 피해가 없음을 확인했다. [증빙](evidence/p11-projectile-allocation.json).
+- [성능 절차](../Zombie%20Shoot%20VR/Docs/performance.md), [최신 시험 결과](../Zombie%20Shoot%20VR/Docs/test-results.md)를 추가했다. 사건 수 감소를 실제 CPU/GPU p95 개선이나 각 맵30분 통과로 확대하지 않는다.
+- 자체 검토 완료, 독립 리뷰·실제 성능 대기. 다음은 PoolRegistry 등록/회수와 현재·최대 통계, 장시간 기록, 실제 두 맵 72Hz 측정이다. 기존 풀 상한 코드를 확인한 것만으로 P11을 완료 처리하지 않는다.
