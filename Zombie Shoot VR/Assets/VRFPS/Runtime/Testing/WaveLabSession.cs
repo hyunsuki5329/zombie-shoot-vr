@@ -38,6 +38,7 @@ namespace VRFPS
             run.RunStarted += ResetWeapon;
             ready = true; Restart();
             CombatDiagnostics.AttachIfRequested(run,director,GetComponentInChildren<AmmoPouch>(true),gun.GetComponent<K2HandInput>(),"wave-lab");
+            FrameTimingCapture.AttachIfRequested(run,director,"wave-lab");
         }
         void ResetWeapon() => hand.Restart();
         public void Restart() { if (ready) run.StartRun(map); }

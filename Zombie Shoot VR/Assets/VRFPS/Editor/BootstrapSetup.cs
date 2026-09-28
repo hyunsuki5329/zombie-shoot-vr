@@ -62,14 +62,17 @@ namespace VRFPS.Editor
             Directory.CreateDirectory(System.IO.Path.GetDirectoryName(output));
             var scenes=new[]{"Assets/VRFPS/Scenes/Bootstrap.unity","Assets/VRFPS/Scenes/Combat.unity","Assets/VRFPS/Scenes/Maps/Room.unity","Assets/VRFPS/Scenes/Maps/Classroom.unity"}.Where(File.Exists).ToArray();
             var previous=PlayerSettings.GetScriptingBackend(NamedBuildTarget.Standalone);
+            var previousTiming=PlayerSettings.enableFrameTimingStats;
             try
             {
                 PlayerSettings.SetScriptingBackend(NamedBuildTarget.Standalone,ScriptingImplementation.Mono2x);
+                PlayerSettings.enableFrameTimingStats=true;
+                Debug.Log("VRFPS_FRAME_TIMING_STATS_ENABLED "+PlayerSettings.enableFrameTimingStats);
                 var report=BuildPipeline.BuildPlayer(new BuildPlayerOptions{scenes=scenes,locationPathName=output,target=BuildTarget.StandaloneWindows64,options=BuildOptions.Development});
                 if(report.summary.result!=BuildResult.Succeeded)throw new InvalidOperationException("Bootstrap build failed: "+report.summary.result);
                 Debug.Log("VRFPS_BOOTSTRAP_BUILD_SUCCEEDED "+output);
             }
-            finally{PlayerSettings.SetScriptingBackend(NamedBuildTarget.Standalone,previous);}
+            finally{PlayerSettings.SetScriptingBackend(NamedBuildTarget.Standalone,previous);PlayerSettings.enableFrameTimingStats=previousTiming;}
         }        static MapDefinition Map(string name,string id,int alive,int ranged,float distance)
         {
             var path="Assets/VRFPS/Configuration/Maps/"+name+".asset";var map=AssetDatabase.LoadAssetAtPath<MapDefinition>(path);

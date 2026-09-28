@@ -50,8 +50,22 @@ namespace VRFPS.Tests
                 Assert.That(automatic.Length,Is.GreaterThanOrEqualTo(4),"Header,at least two timed samples,footer.");
                 Assert.That(automatic[automatic.Length-1],Does.Contain("footer"));
                 TestContext.Out.WriteLine(lines[0]);TestContext.Out.WriteLine(lines[1]);TestContext.Out.WriteLine(lines[122]);
+                var frames=director.gameObject.AddComponent<FrameTimingCapture>();frames.enabled=false;
+                Assert.That(frames.Begin(path+".vrft",run,"wave-lab",path),Is.True);
+                frames.PollNow();run.StartRun(run.Map);frames.PollNow();frames.Close();
+                Assert.That(frames.LastError,Is.Null);Assert.That(frames.IsRecording,Is.False);
+                using(var reader=new BinaryReader(File.OpenRead(path+".vrft")))
+                {
+                    Assert.That(System.Text.Encoding.ASCII.GetString(reader.ReadBytes(8)),Is.EqualTo("VRFT0001"));
+                    var metadata=System.Text.Encoding.UTF8.GetString(reader.ReadBytes(reader.ReadInt32()));
+                    Assert.That(metadata,Does.Contain("Unity.FrameTimingManager"));TestContext.Out.WriteLine(metadata);
+                }
             }
-            finally{if(File.Exists(path))File.Delete(path);if(File.Exists(path+".auto"))File.Delete(path+".auto");}
+            finally
+            {
+                if(File.Exists(path))File.Delete(path);if(File.Exists(path+".auto"))File.Delete(path+".auto");
+                if(File.Exists(path+".vrft"))File.Delete(path+".vrft");
+            }
             yield return SceneManager.UnloadSceneAsync(scene);
         }
     }

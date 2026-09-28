@@ -73,3 +73,28 @@ Python 3.11 표준 라이브러리로 검증한 분석기는 워크스페이스 
 `boundsSatisfied`를 신뢰하지 않고 현재 기준(방4/1, 강의실6/2, 시험장4/1 및 나머지 고정 상한)으로 다시 계산한다. 비활성 투사체/탄창 보유 수와 생성 효과 수까지 비교한다. 기록된 상한이 기준과 다르면 `cap_mismatch_samples`에 나타난다. 모르는 맵은 `known_map_policy:false`이며 최대6/2와 비교한 참고값만 제공한다. 밸런스 기준 변경 시 분석기 정책도 함께 갱신해야 한다.
 
 `thirty_minute_sample_span`은 첫/마지막 표본 사이1800초 여부로, 일시정지·메뉴 시간을 포함한다. `observed_active_seconds`는 같은 attempt에서 관측한 전투 시계 차이의 합이며 재도전 경계의 미관측 시간은 포함하지 않는다. 간격2.5초 초과는 누락 검토용 표시이지 성능 합격 기준이 아니다. 종료 코드0은 분석 성공일 뿐 인수 합격이 아니며 `performance_acceptance`는 항상 `unverified`다. CPU/GPU·VRAM·실제 두 맵·기기 출처와30분 플레이를 별도 확인해야 한다.
+
+## 원시 프레임 시간 수집
+
+`pwsh -File scripts/Start-VrDiagnostics.ps1 -Build MenuLab -FrameTimings`는 객체 JSONL과 원시 프레임 `.vrft`를 함께 켠다. 직접 실행 시 `-vrfps-frame-timings` 옵션이다. JSONL과 함께 켜면 같은 파일 이름의 확장자만 다르고, 바이너리 헤더에 연결된 객체 로그 경로가 남는다. JSONL 헤더의 `cpuGpuTimingCaptured:false`는 그 파일 자체에 시간 표본이 없다는 뜻이며 별도의 `.vrft`를 확인해야 한다.
+
+Windows 빌드 함수는 빌드 동안 `PlayerSettings.enableFrameTimingStats`를 켜고 종료/실패 후 원래 설정을 복원한다. 파일 기록 옵션이 꺼져도 이 빌드의 엔진 통계 지원 설정은 켜져 있으므로 계측 비용을 비교할 때 이 조건도 남긴다. 실제 지원 여부는 실행 시 `IsFeatureEnabled`와 수신값으로 확인하며 빌드 설정만으로 GPU 측정 성공을 선언하지 않는다.
+
+설치된 Unity6000.3.23f1 API 문서에서 시간 단위는 ms다. CPU 전체(cpuFrameTime), 메인 스레드, 렌더 스레드, 메인 Present 대기, GPU를 각각 원시값으로 보존한다. CPU 전체에는 대기와 오버헤드가 포함되므로 이를 CPU 작업12.5ms 기준으로 곧바로 판정하지 않는다. CPU 작업 지표 선택과 Unity Profiler/VR 런타임 대조는 별도 검증 사항이며 기준을 임의로 낮추지 않는다.
+
+매 LateUpdate에서 최신1개를 요청하며 frameStartTimestamp가0이면 제외하고 중복/이전 타임스탬프는 다시 세지 않는다. 원시0·NaN·Infinity는 유효성 비트와 함께 보존하며 정상0ms로 평균/백분위에 넣으면 안 된다. CPU/GPU 양수 유한값, Present 대기는0 이상 유한값만 해당 비트를 켠다. 기능 비활성/표본 없음/타임스탬프 없음/중복 수를 footer에 남긴다.
+
+Unity는 지연된 프레임 결과를 반환하므로 phase/attempt는 **측정 프레임의 상태가 아닌 수신 시점의 상태**다. 최신1개 요청이 모든 프레임을 빠짐없이 수집한다고 보장하지 않는다. 시작/종료·상태 전환 경계와 실제 GPU 지원·계측 비용을 검토해야 한다. 현재는 수집 경로와 바이너리 형식 검증이며 실제 기기 시간이나 p95/p99 통과 결과가 아니다.
+
+### VRFT0001 형식
+
+모든 수치는 little-endian이다. 파일은 ASCII8바이트 `VRFT0001`, int32 UTF-8 메타데이터 길이, 해당 JSON 바이트로 시작한다. 메타데이터에는 단위·Unity/빌드/그래픽API·맵/시나리오·시각·기능 상태·phase 이름 배열을 포함한다.
+
+| 레코드 | 순서 | 크기 |
+|---|---|---:|
+| 프레임(type1) | byte1, uint64타임스탬프, double수신 경과초, int32수신 Unity프레임, int32시도, int32phase, uint32유효성, double CPU전체/메인/렌더/Present대기/GPU | 73바이트 |
+| 종료(type2) | byte2, int64 수신프레임/중복/타임스탬프0/기능비활성/표본없음/유효CPU전체/유효GPU | 57바이트 |
+
+유효성 비트는1=CPU전체,2=메인,4=렌더,8=Present대기,16=GPU다. 프레임 문자열을 만들지 않고64KiB 스트림 버퍼에 고정 크기로 기록하고1초마다 flush한다. 종료 레코드가 없거나 중간 레코드가 잘렸으면 미완료로 취급한다. 전용 백분위 분석/CSV 내보내기는 후속 작업이다.
+
+API 근거: [Unity FrameTiming](https://docs.unity3d.com/6000.0/Documentation/ScriptReference/FrameTiming.html), [FrameTimingManager 지원·지연 조건](https://docs.unity3d.com/6000.0/Documentation/Manual/frame-timing-manager.html). 설치본 `Editor/Data/Managed/UnityEngine/UnityEngine.CoreModule.xml`의 필드 설명과 실제 컴파일도 대조했다.

@@ -4,8 +4,8 @@
 
 ## 현재 작업
 
-- 현재 기준 커밋: `42b3416` (선택적 객체 진단 기록, [초안 PR #10](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/10)에 push). 이후 P11 단위의 최종 SHA는 해당 PR 기록에 연결한다.
-- 브랜치: `codex/p11-performance`, base `codex/p10-feedback`. 투사체 충돌 할당 최적화와 객체 풀·효과 수량과 선택적 JSONL 기록을 연결했고 최신 PlayMode 114/114이 통과했다. EditMode는 앞 단위의 50/50 결과이며 이번 변경에서는 재실행하지 않았다. 실제 두 맵·실기·CPU/GPU/장시간·독립 리뷰는 남아 있다. 선행 PR #8/#9는 초안·미병합 상태다.
+- 현재 기준 커밋: `9ee3816` (객체 기록 분석기, [초안 PR #10](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/10)에 push). 이후 P11 단위의 최종 SHA는 해당 PR 기록에 연결한다.
+- 브랜치: `codex/p11-performance`, base `codex/p10-feedback`. 투사체 충돌 할당 최적화와 객체 기록과 선택적 원시 프레임 시간 수집을 연결했고 최신 PlayMode 116/116이 통과했다. EditMode는 앞 단위의 50/50 결과이며 이번 변경에서는 재실행하지 않았다. 실제 두 맵·실기·CPU/GPU/장시간·독립 리뷰는 남아 있다. 선행 PR #8/#9는 초안·미병합 상태다.
 - P01-a 구현 커밋: `5a8dc1d844bf5aacd53a522a894bca3eee7c91d3`. [PR #1](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/1)은 원격에서 main에 병합됨(`e0e3be2`). GitHub CI는 없으며 로컬 Unity 검증 결과를 사용한다.
 - P01-a 구현·자동 검증 완료: Unity 환경 확인, EditMode 시험 어셈블리와 InteractionLab 구성, Windows Mono 개발 빌드. 증빙: [시험·빌드·소스 해시](evidence/p01-foundation.json), [환경 및 실행 절차](../Zombie%20Shoot%20VR/Docs/environment.md).
 - P01 실기 확인: 사용자가 VR 실행과 머리·양손 추적 정상 동작을 확인했다(2026-09-22). [VD 설정·실기 보고](evidence/2026-09-22-vd-hardware-check.md). 전용 입력 구성과 양안 가림 등 후속 검증까지 완료한 것으로 확대하지 않는다.
@@ -223,3 +223,11 @@
 - 최초 분석 미구현 RED(8개 시험), 첫 구현에서 시험 도우미 인수 중복 오류1개를 수정하고 경계/CLI 사례를 확장해 **Python11/11** 통과. [증빙](evidence/p11-diagnostics-analysis.json).
 - 기존 Unity 시험의 실제 출력에서 헤더+첫 표본만 발췌해 CLI 호환성을 확인했다. footer 없는1표본 발췌본을 incomplete/성능unverified로 정확히 분류했다. 완전한 실행 기록이나30분 결과로 주장하지 않는다.
 - Unity 런타임 소스 변경이 없어 PlayMode114/114와 Windows 빌드는 앞 단위의 결과를 유지하며 이번에 재실행하지 않았다. 다음은 CPU/GPU 측정 경로와 실제 실기 결과 확보다. 독립 리뷰와 실제 두 맵은 계속 대기다.
+
+### P11-g 원시 CPU/GPU 프레임 시간 수집 (2026-09-28)
+
+- 설치 Unity6000.3.23f1 API XML/실제 타입과 Unity 공식 문서를 확인했다. cpuFrameTime은 대기 포함 전체 시간이고 필드는ms다. CPU전체/메인/렌더/Present대기/GPU 원시값을 따로 보존하며 CPU 작업12.5ms 판정으로 바로 사용하지 않는다.
+- `-vrfps-frame-timings`로 FrameTimingManager를 매 프레임 조회하고 VRFT0001 바이너리에 기록한다. 타임스탬프0/중복을 제외하고 기능비활성/미수신을 따로 센다. GPU0·NaN·Infinity는 유효 측정 비트를 끄며 0ms 성공으로 치환하지 않는다.
+- 문자열 생성 대신 고정73바이트 프레임·64KiB 버퍼·1초 flush를 사용한다. 수신 시점phase와 지연된 측정 프레임을 구분하고 최신1개 요청의 전체 프레임 포착을 보장하지 않는다. 전용 백분위 분석/CSV 출력은 후속 작업이다.
+- 신규 원시 기록 시험2개 RED 후 전체116/116. 실제 WaveLab에서 API 조회/연결 메타데이터/종료까지 확인한 최종 **PlayMode116/116**. 해당 시험은 그래픽API Null인 headless 환경으로 실제GPU 성능 증빙이 아니다. [증빙](evidence/p11-frame-timings.json).
+- Windows 빌드 함수는 enableFrameTimingStats를 빌드 중 켜고 finally에서 원래 설정을 복원한다. 실행 도우미의 -FrameTimings/-CheckOnly 경로를 검증했다. 실제72Hz·두맵30분·CPU지표대조·계측비용 비교·독립 리뷰는 남아 있다.

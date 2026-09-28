@@ -4,7 +4,7 @@
 
 ## 최신 자동 검증
 
-2026-09-28 P11 객체 풀·효과 수량·JSONL 기록 연결: 전체 PlayMode **114/114** 통과. 기록 기능 증빙은 `docs/evidence/p11-diagnostics.json`이다. 적/사체 증빙은 `docs/evidence/p11-enemy-pool.json`이다. 풀 수명 증빙은 `docs/evidence/p11-pool-registry.json`, 탄창 소유권 증빙은 `docs/evidence/p11-magazine-pool.json`이다. 앞선 투사체 충돌 할당 최적화의 전체 PlayMode는 105/105이었다. 증빙 원본 및 소스/빌드 해시는 워크스페이스의 `docs/evidence/p11-projectile-allocation.json`을 참조한다. 앞 단위의 EditMode 50/50은 이번 변경에서 재실행한 결과가 아니다.
+2026-09-28 P11 객체 기록·원시 프레임 시간 수집 연결: 전체 PlayMode **116/116** 통과. 원시 시간 수집 증빙은 `docs/evidence/p11-frame-timings.json`이다. 기록 기능 증빙은 `docs/evidence/p11-diagnostics.json`이다. 적/사체 증빙은 `docs/evidence/p11-enemy-pool.json`이다. 풀 수명 증빙은 `docs/evidence/p11-pool-registry.json`, 탄창 소유권 증빙은 `docs/evidence/p11-magazine-pool.json`이다. 앞선 투사체 충돌 할당 최적화의 전체 PlayMode는 105/105이었다. 증빙 원본 및 소스/빌드 해시는 워크스페이스의 `docs/evidence/p11-projectile-allocation.json`을 참조한다. 앞 단위의 EditMode 50/50은 이번 변경에서 재실행한 결과가 아니다.
 
 | 측정 | 변경 전 | 최종 변경 후 |
 |---|---:|---:|
@@ -18,7 +18,7 @@
 
 ## 진단 분석 도구
 
-2026-09-28 Python 3.11.9 표준 라이브러리 시험11/11 통과. 기록 종료/누락/상한/스키마/시간/재도전/파일 보호를 검증했다. Unity 런타임은 변경하지 않아 위 PlayMode와 빌드는 앞 단위 결과다. 증빙: `docs/evidence/p11-diagnostics-analysis.json`.
+2026-09-28 Python 3.11.9 표준 라이브러리 시험11/11 통과. 기록 종료/누락/상한/스키마/시간/재도전/파일 보호를 검증했다. 분석기 단위에서는 Unity 런타임을 변경하지 않았으며 이후 원시 프레임 수집 단위의 최신 Unity 결과는 위 항목을 따른다. 증빙: `docs/evidence/p11-diagnostics-analysis.json`.
 
 ## 전체 진행과 실기
 
