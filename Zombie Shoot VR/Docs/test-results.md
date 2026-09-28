@@ -4,7 +4,7 @@
 
 ## 최신 자동 검증
 
-2026-09-28 P11 투사체 충돌 할당 최적화: 전체 PlayMode **105/105** 통과. 증빙 원본 및 소스/빌드 해시는 워크스페이스의 `docs/evidence/p11-projectile-allocation.json`을 참조한다. 앞 단위의 EditMode 50/50은 이번 변경에서 재실행한 결과가 아니다.
+2026-09-28 P11 PoolRegistry/투사체 연결: 전체 PlayMode **109/109** 통과. 풀 수명 증빙은 `docs/evidence/p11-pool-registry.json`이다. 앞선 투사체 충돌 할당 최적화의 전체 PlayMode는 105/105이었다. 증빙 원본 및 소스/빌드 해시는 워크스페이스의 `docs/evidence/p11-projectile-allocation.json`을 참조한다. 앞 단위의 EditMode 50/50은 이번 변경에서 재실행한 결과가 아니다.
 
 | 측정 | 변경 전 | 최종 변경 후 |
 |---|---:|---:|

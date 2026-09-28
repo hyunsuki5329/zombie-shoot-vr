@@ -4,8 +4,8 @@
 
 ## 현재 작업
 
-- 현재 기준 커밋: `23597c4` (전투 소리·믹서, [초안 PR #9](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/9)에 push). 이후 P11 단위의 최종 SHA는 해당 PR 기록에 연결한다.
-- 브랜치: `codex/p11-performance`, base `codex/p10-feedback`. 투사체 충돌 할당 회귀를 재현·최적화했고 최신 PlayMode 105/105이 통과했다. EditMode는 앞 단위의 50/50 결과이며 이번 변경에서는 재실행하지 않았다. 실제 두 맵·실기·CPU/GPU/장시간·독립 리뷰는 남아 있다. 선행 PR #8/#9는 초안·미병합 상태다.
+- 현재 기준 커밋: `dceffc0` (투사체 충돌 GC 최적화, [초안 PR #10](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/10)에 push). 이후 P11 단위의 최종 SHA는 해당 PR 기록에 연결한다.
+- 브랜치: `codex/p11-performance`, base `codex/p10-feedback`. 투사체 충돌 할당 최적화와 PoolRegistry/투사체 수명 통계를 구현했고 최신 PlayMode 109/109이 통과했다. EditMode는 앞 단위의 50/50 결과이며 이번 변경에서는 재실행하지 않았다. 실제 두 맵·실기·CPU/GPU/장시간·독립 리뷰는 남아 있다. 선행 PR #8/#9는 초안·미병합 상태다.
 - P01-a 구현 커밋: `5a8dc1d844bf5aacd53a522a894bca3eee7c91d3`. [PR #1](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/1)은 원격에서 main에 병합됨(`e0e3be2`). GitHub CI는 없으며 로컬 Unity 검증 결과를 사용한다.
 - P01-a 구현·자동 검증 완료: Unity 환경 확인, EditMode 시험 어셈블리와 InteractionLab 구성, Windows Mono 개발 빌드. 증빙: [시험·빌드·소스 해시](evidence/p01-foundation.json), [환경 및 실행 절차](../Zombie%20Shoot%20VR/Docs/environment.md).
 - P01 실기 확인: 사용자가 VR 실행과 머리·양손 추적 정상 동작을 확인했다(2026-09-22). [VD 설정·실기 보고](evidence/2026-09-22-vd-hardware-check.md). 전용 입력 구성과 양안 가림 등 후속 검증까지 완료한 것으로 확대하지 않는다.
@@ -183,3 +183,11 @@
 - 첫 수정 104/104 후 빈 비행 질의 수를 유지하고 포화 겹침 사례를 추가했다. 최종 **PlayMode 105/105**, 두 1,000회 측정 구간의 GC 사건 **0/0**, 알려진 배열 교정 **1회**. 플레이어 충돌체16개+벽 겹침에서도 피해가 없음을 확인했다. [증빙](evidence/p11-projectile-allocation.json).
 - [성능 절차](../Zombie%20Shoot%20VR/Docs/performance.md), [최신 시험 결과](../Zombie%20Shoot%20VR/Docs/test-results.md)를 추가했다. 사건 수 감소를 실제 CPU/GPU p95 개선이나 각 맵30분 통과로 확대하지 않는다.
 - 자체 검토 완료, 독립 리뷰·실제 성능 대기. 다음은 PoolRegistry 등록/회수와 현재·최대 통계, 장시간 기록, 실제 두 맵 72Hz 측정이다. 기존 풀 상한 코드를 확인한 것만으로 P11을 완료 처리하지 않는다.
+
+### P11-b PoolRegistry와 투사체 수명/통계 (2026-09-28)
+
+- 상한·현재 대여·최대 동시 대여·현재 보유 객체 수를 제공하는 PoolRegistry를 추가했다. 비활성 객체를 대여하며 소유자가 초기화 후 활성화한다. 중복/외부 반환은 무시하고 반환 중 재대여를 막는다. 초기화 실패 객체는 재사용하지 않는다.
+- 투사체12개 풀을 연결해 충돌/만료/재도전에서 반환하고 방향·수명·피해·공격자·마스크를 초기화한다. 잘못된 발사 인수의 예외에서도 슬롯을 반납한다.
+- 기본 수명 시험2개 RED 후 PlayMode107/107. 파괴된 투사체를 반복 대체하면 기존 목록이21개로 누적되는 추가 회귀를 재현(3PASS/1FAIL)하고 참조 정리를 추가했다. 최종 PlayMode **109/109**. 1,000회 슬롯 재사용, 20회×12발 만료/재시작, 반환 중 재진입·초기화 실패 격리·외부 파괴 후 대체를 검증했다.
+- [증빙](evidence/p11-pool-registry.json). 자체 변경 검토와 독립 리뷰를 구분하며 PR #10은 초안 유지한다. 실제 두 맵/72Hz/30분 검증은 여전히 대기다.
+- Ruling: 기존 적/사체·탄창의 소유권 규칙을 보존하면서 타입별로 레지스트리와 통계를 연결한다. 이번 단위의 실제 연결은 투사체이며 다른 타입과 효과 통계/장시간 기록은 후속 구현이다. 공통 풀 존재만으로 전체 P11 완료를 선언하지 않는다.

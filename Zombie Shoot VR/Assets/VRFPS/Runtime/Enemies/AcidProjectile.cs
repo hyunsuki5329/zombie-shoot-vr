@@ -57,5 +57,10 @@ namespace VRFPS
         }
 
         public void Retire() { Flying = false; gameObject.SetActive(false); }
+        internal void ResetForPool()
+        {
+            Retire();direction=Vector3.zero;remaining=0;
+            sourceId=damage=solidMask=collisionMask=0;overlap[0]=null;
+        }
     }
 }
