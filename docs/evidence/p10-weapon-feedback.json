@@ -1,0 +1,95 @@
+{
+  "unit": "P10-b weapon audio and haptic feedback",
+  "date": "2026-09-28",
+  "baseCommit": "48cdce3b4e4c2d7f2ee3eb8c52dba89c2a365c8e",
+  "requirements": [
+    "P10",
+    "R19",
+    "T19"
+  ],
+  "tests": [
+    {
+      "path": "tmp/p10-weapon-feedback/red.xml",
+      "sha256": "B6C6DD830F9D7E74CE55BB92125930DC2838CEBDBDE04CD2340AACFF045E24D9",
+      "result": "Failed(Child)",
+      "passed": "0",
+      "failed": "1"
+    },
+    {
+      "path": "tmp/p10-weapon-feedback/green-play.xml",
+      "sha256": "AB016B8591C1CC0A8C900B63FF9B214DF682509E0A214FF5FEC986CB72D8F072",
+      "result": "Passed",
+      "passed": "99",
+      "failed": "0"
+    }
+  ],
+  "build": {
+    "result": "Both builds succeeded",
+    "log": "tmp/p10-weapon-feedback/build.log",
+    "logSha256": "B052CA4285F8499CF75D1800671917407EBBC99EBEEC8A01576CF8CFB8C84331",
+    "manifest": "tmp/p10-weapon-feedback/build-manifest.json",
+    "manifestSha256": "553CB590CCB1F74CDCFC65E65C56D82652D39B58FFC2A1A1113D760EDD4556E7",
+    "bootstrapMatchedFiles": 341,
+    "menuLabMatchedFiles": 338,
+    "hashMismatches": 0
+  },
+  "sources": [
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/Feedback/CombatFeedback.cs",
+      "sha256": "0CC663A27594BA2669516494C4024156060E11B63A67CB90561745425FA1E159"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/Weapons/K2Controller.cs",
+      "sha256": "8452E7E22C95ECB083A65E491066E98CB962D0E875A0D0745FE3EC3A006DCA1C"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/Weapons/MagazineSocket.cs",
+      "sha256": "7ABBB395B8D3AD39A87DC90F3E66D02BC3F958CD5D06A402E59F3C845B855693"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/VRFPS.Runtime.asmdef",
+      "sha256": "A472C195FB5C677030F545D286CEEEDA66306A832CBD80D46F678E16870DE2B1"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Editor/FeedbackSetup.cs",
+      "sha256": "DBA05D174A11FAF748F645666BD307AB09104BD6605EAEF3EA9713CDE76BF7C9"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Prefabs/PlayerRig.prefab",
+      "sha256": "D821B1765B6BF2DD9D3C81CED7741A29CBBBE619AA5BDCD6C6248299843E8654"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Tests/PlayMode/WeaponFeedbackTests.cs",
+      "sha256": "C4E9CA283C96C6967012D5A01B33DE945DBDC80A0AFE800975C67DA47BEF48EB"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Audio/K2_Shot.wav",
+      "sha256": "31B9D9CEE70AA4FAD96D04F25643CF5A4595B4B1747BD7BB08A14F67959A65A4"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Audio/K2_Empty.wav",
+      "sha256": "A74638DC4D7F465D44658F3557D1319A017806D9F47C031868DCEA000BF13353"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Audio/Magazine_Insert.wav",
+      "sha256": "32AB598B8CD81810DB76E8B18327239AD3959A34CA91A231BB2EE265506092CF"
+    }
+  ],
+  "scope": [
+    "Fixed three reusable audio voices for successful fire, empty trigger edge and validated manual insertion",
+    "XRI 3.5.1 HapticImpulsePlayer requests right shot / left insertion impulses",
+    "Paused/dead transitions stop audio; disabled feedback unsubscribes; rebind does not duplicate cues"
+  ],
+  "review": "Self-reviewed event lifetimes, gate conditions, serialized prefab links and original PCM generation. Independent review pending.",
+  "limitations": [
+    "CueCount measures software requests, not physical audio/haptic delivery",
+    "Actual Quest Pro output, amplitude, latency and novice observation remain unverified",
+    "No camera recoil; actual scans, performance and long-duration tests still pending",
+    "Damage, wave, enemy approach/windup, low-health audio and AudioMixer are not yet implemented"
+  ],
+  "reproduce": [
+    "Unity -batchmode -nographics -projectPath <isolated project> -runTests -testPlatform PlayMode -testResults <xml> -logFile <log>",
+    "Unity -batchmode -nographics -projectPath <isolated project> -executeMethod VRFPS.Editor.FeedbackSetup.Configure -quit -logFile <log>",
+    "Unity -batchmode -nographics -projectPath <isolated project> -executeMethod VRFPS.Editor.InstructionSetup.Build -quit -logFile <log>"
+  ]
+}

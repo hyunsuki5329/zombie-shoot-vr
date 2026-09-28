@@ -555,6 +555,7 @@ GameObject:
   - component: {fileID: 2797094244169887570}
   - component: {fileID: 3858175277165714809}
   - component: {fileID: 3487636483394197510}
+  - component: {fileID: 1560949775969269011}
   m_Layer: 9
   m_Name: RangedZombie
   m_TagString: Untagged
@@ -662,6 +663,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: VRFPS.Runtime::VRFPS.EnemyActor
   kind: 1
   attackOrigin: {fileID: 8649944719034750603}
+--- !u!114 &1560949775969269011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6150912797830561195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d14cdf91277da28418aaabd68da63625, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: VRFPS.Runtime::VRFPS.EnemyFeedback
+  approachClip: {fileID: 8300000, guid: 5f4cb40ce95b47c4392ede806357bbe1, type: 3}
+  warningClip: {fileID: 8300000, guid: fd94ed218738c1c4696e909814aa97ab, type: 3}
+  output: {fileID: 24300002, guid: 067bb6ced04537845a51fd2b7754000b, type: 2}
 --- !u!1 &7077435651664019959
 GameObject:
   m_ObjectHideFlags: 0

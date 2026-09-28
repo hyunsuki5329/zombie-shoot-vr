@@ -7,6 +7,7 @@ namespace VRFPS
         public MagazineToken Installed { get; private set; }
         MagazineState ammo;
         Transform leftHand;
+        public event System.Action Inserted;
 
         internal void ResetForRun(MagazineToken token)
         {
@@ -50,6 +51,7 @@ namespace VRFPS
             if (!ammo.InsertFresh()) return false;
             token.Mount(this);
             Installed = token;
+            Inserted?.Invoke();
             return true;
         }
     }

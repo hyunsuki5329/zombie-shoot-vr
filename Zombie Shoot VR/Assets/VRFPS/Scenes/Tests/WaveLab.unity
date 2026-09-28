@@ -1018,6 +1018,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2137255817605095621, guid: c71db2bda0d8de84f87cee86d741641b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1046186234}
+    - targetCorrespondingSourceObject: {fileID: 2137255817605095621, guid: c71db2bda0d8de84f87cee86d741641b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1046186237}
   m_SourcePrefab: {fileID: 100100000, guid: c71db2bda0d8de84f87cee86d741641b, type: 3}
 --- !u!114 &1046186230 stripped
 MonoBehaviour:
@@ -1102,6 +1105,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1657dd757744d6346b7cc14d6ee47a91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: VRFPS.Runtime::VRFPS.RunController
+--- !u!114 &1046186237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1046186232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff0ab9929d927ae49a6629376fef2f63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: VRFPS.Runtime::VRFPS.RunFeedback
+  run: {fileID: 1046186236}
+  damageClip: {fileID: 8300000, guid: 1e53b602094a89242bea78c440893d74, type: 3}
+  waveClip: {fileID: 8300000, guid: e7faabab6413ccf46938f030b36a1673, type: 3}
+  lowHealthClip: {fileID: 8300000, guid: c4d42e172dbbe904d90ff5aae1b69f80, type: 3}
+  output: {fileID: 24300002, guid: 067bb6ced04537845a51fd2b7754000b, type: 2}
 --- !u!1 &1087488702
 GameObject:
   m_ObjectHideFlags: 0
@@ -1453,7 +1473,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1699673750
+--- !u!1001 &1571015805
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -1886,4 +1906,4 @@ SceneRoots:
   - {fileID: 2018808431}
   - {fileID: 1872345292}
   - {fileID: 1701790901}
-  - {fileID: 1699673750}
+  - {fileID: 1571015805}

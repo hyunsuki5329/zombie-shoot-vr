@@ -16,6 +16,7 @@ namespace VRFPS
         MaterialPropertyBlock tint;
         float corpseAge;
         bool configured, combatEnabled;
+        EnemyFeedback feedback;
         public ZombieController Controller => enemy;
 
         public void Initialize(int id, Transform target, AcidProjectilePool pool, Vector3[] recovery, LayerMask solidMask, int wave = 1)
@@ -36,6 +37,7 @@ namespace VRFPS
             agent.enabled = true;
             if (animator != null) { animator.applyRootMotion = false; animator.Rebind(); animator.speed = 1; }
             enemy.Configure(id, kind, target, origin, solidMask, wave);
+            feedback=GetComponent<EnemyFeedback>();feedback?.Configure(enemy,target);
             motor.Configure(target, kind, recovery);
             enemy.Died += HandleDeath; enemy.ProjectileRequested += Launch;
             corpseAge = 0; configured = combatEnabled = true;
@@ -52,6 +54,7 @@ namespace VRFPS
         public void SetCombatEnabled(bool enabled)
         {
             combatEnabled = enabled;
+            feedback?.SetCombatEnabled(enabled);
             if (motor != null) motor.SetCombatEnabled(enabled);
             if (animator != null) animator.speed = enabled ? 1 : 0;
         }
@@ -59,6 +62,7 @@ namespace VRFPS
         {
             if (!configured || !combatEnabled || !gameObject.activeSelf) return;
             enemy.Tick(deltaTime, activeTime); motor.Tick(deltaTime);
+            feedback?.Tick(deltaTime);
             UpdatePresentation();
             if (enemy.IsDead)
             {

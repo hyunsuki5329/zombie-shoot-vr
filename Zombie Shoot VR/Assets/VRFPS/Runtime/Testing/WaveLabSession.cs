@@ -44,7 +44,12 @@ namespace VRFPS
         {
             if (!ready) return;
             if (retry.WasPressedThisFrame()) Restart();
-            else if (pause.WasPressedThisFrame()) run.SetPaused(run.Phase != RunPhase.Paused);
+            else if (pause.WasPressedThisFrame())
+            {
+                var menu=FindFirstObjectByType<MenuController>();
+                if(menu!=null && (menu.Screen==MenuScreen.Settings || menu.Screen==MenuScreen.Instructions))menu.CloseAuxiliary();
+                else run.SetPaused(run.Phase != RunPhase.Paused);
+            }
             if (status != null) status.text = "WAVE LAB - " + run.Phase +
                 "\nHP " + run.Health + " / 100   WAVE " + run.ReachedWave +
                 "\nKILLS " + run.Kills + "   ROUNDS " + gun.Magazine.Rounds + " / 30" +

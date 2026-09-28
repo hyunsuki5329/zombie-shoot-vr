@@ -225,6 +225,7 @@ GameObject:
   - component: {fileID: 8873545889635912471}
   - component: {fileID: 6992050988588774117}
   - component: {fileID: 8133552325100010311}
+  - component: {fileID: 8382753657045724914}
   m_Layer: 9
   m_Name: MeleeZombie
   m_TagString: Untagged
@@ -332,6 +333,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: VRFPS.Runtime::VRFPS.EnemyActor
   kind: 0
   attackOrigin: {fileID: 8796114939065087656}
+--- !u!114 &8382753657045724914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5848221423218738612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d14cdf91277da28418aaabd68da63625, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: VRFPS.Runtime::VRFPS.EnemyFeedback
+  approachClip: {fileID: 8300000, guid: 5f4cb40ce95b47c4392ede806357bbe1, type: 3}
+  warningClip: {fileID: 8300000, guid: c1163098cd09e29419d6fece52ed9a2f, type: 3}
+  output: {fileID: 24300002, guid: 067bb6ced04537845a51fd2b7754000b, type: 2}
 --- !u!1 &7171783067488812458
 GameObject:
   m_ObjectHideFlags: 0

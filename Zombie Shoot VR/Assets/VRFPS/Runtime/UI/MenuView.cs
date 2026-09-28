@@ -12,6 +12,8 @@ namespace VRFPS
         [SerializeField] GameObject settingsControls;
         [SerializeField] Text title, details;
         [SerializeField] Button resume, retry, settings, back, maps, retrySave;
+        [SerializeField] Button instructions;
+        [SerializeField] GameObject instructionPanel;
         bool subscribed;
         public void Configure(MenuController menu, RunController run, RunRecordBinding result,
             GameObject panel, Text title, Text details, Button resume, Button retry, Button settings, Button back, Button maps, Button retrySave)
@@ -35,7 +37,8 @@ namespace VRFPS
             menu.ScreenChanged+=OnScreenChanged;
             if(result!=null) result.ResultChanged+=Refresh;
             resume.onClick.AddListener(menu.Resume); retry.onClick.AddListener(menu.Retry);
-            settings.onClick.AddListener(menu.OpenSettings); back.onClick.AddListener(menu.CloseSettings);
+            settings.onClick.AddListener(menu.OpenSettings); back.onClick.AddListener(menu.CloseAuxiliary);
+            if(instructions!=null)instructions.onClick.AddListener(menu.OpenInstructions);
             maps.onClick.AddListener(menu.ShowMapSelection); retrySave.onClick.AddListener(RetrySave);
             Refresh();
         }
@@ -46,7 +49,8 @@ namespace VRFPS
             {
                 menu.ScreenChanged-=OnScreenChanged;
                 resume.onClick.RemoveListener(menu.Resume);retry.onClick.RemoveListener(menu.Retry);
-                settings.onClick.RemoveListener(menu.OpenSettings);back.onClick.RemoveListener(menu.CloseSettings);
+                settings.onClick.RemoveListener(menu.OpenSettings);back.onClick.RemoveListener(menu.CloseAuxiliary);
+                if(instructions!=null)instructions.onClick.RemoveListener(menu.OpenInstructions);
                 maps.onClick.RemoveListener(menu.ShowMapSelection);
             }
             if(result!=null)result.ResultChanged-=Refresh;
@@ -68,12 +72,16 @@ namespace VRFPS
             }
             panel.SetActive(screen!=MenuScreen.Hidden);
             if(settingsControls!=null)settingsControls.SetActive(screen==MenuScreen.Settings);
+            var showingInstructions=screen==MenuScreen.Instructions;
+            if(instructionPanel!=null)instructionPanel.SetActive(showingInstructions);
+            details.gameObject.SetActive(!showingInstructions);
+            if(instructions!=null)instructions.gameObject.SetActive(!showingInstructions && screen!=MenuScreen.Settings);
             if(screen==MenuScreen.Hidden)return;
             title.text=screen==MenuScreen.MapSelection ? "MAP SELECTION" : screen==MenuScreen.Pause ? "PAUSED" : screen.ToString().ToUpperInvariant();
             resume.gameObject.SetActive(screen==MenuScreen.Pause);
             retry.gameObject.SetActive(screen==MenuScreen.Pause || screen==MenuScreen.Result);
-            settings.gameObject.SetActive(screen!=MenuScreen.Settings);
-            back.gameObject.SetActive(screen==MenuScreen.Settings);
+            settings.gameObject.SetActive(screen!=MenuScreen.Settings && !showingInstructions);
+            back.gameObject.SetActive(screen==MenuScreen.Settings || showingInstructions);
             maps.gameObject.SetActive(screen==MenuScreen.Pause || screen==MenuScreen.Result);
             retrySave.gameObject.SetActive(screen==MenuScreen.Result && result!=null && result.HasResult && !result.SaveSucceeded);
             if(screen==MenuScreen.Result)
