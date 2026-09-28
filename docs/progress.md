@@ -4,8 +4,8 @@
 
 ## 현재 작업
 
-- 현재 기준 커밋: `fa6322f` (PoolRegistry·투사체 수명 통계, [초안 PR #10](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/10)에 push). 이후 P11 단위의 최종 SHA는 해당 PR 기록에 연결한다.
-- 브랜치: `codex/p11-performance`, base `codex/p10-feedback`. 투사체 충돌 할당 최적화와 PoolRegistry/투사체·탄창 수명 통계를 구현했고 최신 PlayMode 111/111이 통과했다. EditMode는 앞 단위의 50/50 결과이며 이번 변경에서는 재실행하지 않았다. 실제 두 맵·실기·CPU/GPU/장시간·독립 리뷰는 남아 있다. 선행 PR #8/#9는 초안·미병합 상태다.
+- 현재 기준 커밋: `8f1b656` (탄창 풀·소유권 통계, [초안 PR #10](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/10)에 push). 이후 P11 단위의 최종 SHA는 해당 PR 기록에 연결한다.
+- 브랜치: `codex/p11-performance`, base `codex/p10-feedback`. 투사체 충돌 할당 최적화와 PoolRegistry/투사체·탄창·적/사체 수명 통계를 구현했고 최신 PlayMode 113/113이 통과했다. EditMode는 앞 단위의 50/50 결과이며 이번 변경에서는 재실행하지 않았다. 실제 두 맵·실기·CPU/GPU/장시간·독립 리뷰는 남아 있다. 선행 PR #8/#9는 초안·미병합 상태다.
 - P01-a 구현 커밋: `5a8dc1d844bf5aacd53a522a894bca3eee7c91d3`. [PR #1](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/1)은 원격에서 main에 병합됨(`e0e3be2`). GitHub CI는 없으며 로컬 Unity 검증 결과를 사용한다.
 - P01-a 구현·자동 검증 완료: Unity 환경 확인, EditMode 시험 어셈블리와 InteractionLab 구성, Windows Mono 개발 빌드. 증빙: [시험·빌드·소스 해시](evidence/p01-foundation.json), [환경 및 실행 절차](../Zombie%20Shoot%20VR/Docs/environment.md).
 - P01 실기 확인: 사용자가 VR 실행과 머리·양손 추적 정상 동작을 확인했다(2026-09-22). [VD 설정·실기 보고](evidence/2026-09-22-vd-hardware-check.md). 전용 입력 구성과 양안 가림 등 후속 검증까지 완료한 것으로 확대하지 않는다.
@@ -199,3 +199,11 @@
 - Counts와 LooseCount/PeakLooseCount를 제공한다. 바닥 최대값은 Tick의 상한 정리 후 표본이며 모든 순간을 측정한 값으로 확대하지 않는다.
 - 새 시험2개 RED(기존 시험10PASS) 후 전체 PlayMode **111/111**. 100회 공급/해제, 소유 탄창 보호, 바닥 만료·재사용·재도전, 중복 편입을 검증했다. 기존 실제 물리 낙하·일시정지 복원 시험도 포함한다. [증빙](evidence/p11-magazine-pool.json).
 - 실제 Quest Pro 수동 재장전·두 맵30분 성능, 독립 리뷰는 대기다. PR #10은 초안 유지하며 적/사체·효과 통계와 기록 수집이 다음 작업이다.
+
+### P11-d 적/사체 풀 연결과 상태 초기화 (2026-09-28)
+
+- SpawnDirector의 근접/원거리 몸체를 PoolRegistry에 연결했다. 생존 상한(맵4/6·원거리1/2)과 표시 사체 상한4개·5초를 유지한다. 몸체 풀 Current에는 표시 중 사체도 포함하고 Created에는 비활성 여유 몸체도 포함한다. 전체 몸체 생성 상한16과 기존 타입별 여유를 유지했다.
+- AliveCount/CorpseCount와 각각의 최대 관측값을 추가했다. 최대값은 생성/사망 상한 처리 후 갱신하며 재도전 간 유지한다. 실제 연속 성능 표본이나 30분 통과로 확대하지 않는다.
+- 반환 시 공격 타이머·타겟·사건 구독·경로 갱신 상태를 지우고 에이전트/피격을 끄며 애니메이터를 초기화한다. 재사용 때 새ID/체력/타겟/피드백을 다시 설정한다.
+- 신규 시험1개 RED(기존10PASS), 첫 전체112/112, 사체5초 반환/통계 검증 추가 후 최종 **PlayMode113/113**. 20회 재도전에서 같은 몸체1개를 재사용하며 처치 사건이 중복되지 않는다. 사체 회수로 처치/할당량이 변하지 않고 사체4개 상한을 유지한다. [증빙](evidence/p11-enemy-pool.json).
+- 자체 변경 검토와 독립 리뷰를 구분한다. PR #10은 초안이며 실제 두 맵·72Hz·장시간 검증은 미실행이다. 다음 작업은 고정 재사용 효과의 수량 통계와 기록 수집이다.

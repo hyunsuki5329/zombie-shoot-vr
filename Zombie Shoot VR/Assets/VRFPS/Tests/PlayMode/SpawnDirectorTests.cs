@@ -260,9 +260,45 @@ namespace VRFPS.Tests
             var corpses = 0;
             foreach (var actor in Actors()) if (actor.gameObject.activeSelf && actor.Controller.IsDead) corpses++;
             Assert.That(corpses, Is.EqualTo(4));
+            Assert.That(director.CorpseCount,Is.EqualTo(4));
+            Assert.That(director.PeakCorpseCount,Is.EqualTo(4));
+            Assert.That(director.PeakAliveCount,Is.EqualTo(map.maxAlive));
             Assert.That(first.gameObject.activeSelf, Is.False);
             Assert.That(run.Kills, Is.EqualTo(5));
             Assert.That(run.Pending, Is.EqualTo(1));
+        }
+        [Test] public void EnemyRegistryRetainsCorpsesThenReturnsAndReusesActorsAcrossRetries()
+        {
+            SpawnOne();
+            var registry=director.GetComponent<PoolRegistry>();Assert.That(registry,Is.Not.Null);
+            var first=Actors()[0];first.Controller.ApplyDamage(1000,PlayerSource,0);
+            Assert.That(registry.GetCounts("melee").Current,Is.EqualTo(1),"Corpse retains its body lease.");
+            run.StartRun(map);
+            Assert.That(registry.GetCounts("melee").Current,Is.Zero);
+            Assert.That(first.Controller.IsWindingUp,Is.False);
+            Assert.That(first.Controller.ApplyDamage(10,PlayerSource,0),Is.False);
+            for(var attempt=0;attempt<20;attempt++)
+            {
+                run.Tick(8);SpawnOne();Assert.That(Actors().Length,Is.EqualTo(1));
+                first.Controller.ApplyDamage(1000,PlayerSource,0);
+                Assert.That(run.Kills,Is.EqualTo(1),"Reusing body must not duplicate death subscriptions.");
+                run.StartRun(map);
+                Assert.That(registry.GetCounts("melee").Current,Is.Zero);
+            }
+            Assert.That(registry.GetCounts("melee").Created,Is.EqualTo(1));
+            Assert.That(registry.GetCounts("melee").Peak,Is.EqualTo(1));
+            Assert.That(director.AliveCount,Is.Zero);Assert.That(director.CorpseCount,Is.Zero);
+            Assert.That(director.PeakAliveCount,Is.EqualTo(1));Assert.That(director.PeakCorpseCount,Is.EqualTo(1));
+        }
+        [Test] public void CorpseExpiryReturnsLeaseWithoutChangingKillsOrPendingQuota()
+        {
+            SpawnOne();var actor=Actors()[0];actor.Controller.ApplyDamage(1000,PlayerSource,0);
+            var pending=run.Pending;director.Tick(5.1f);
+            Assert.That(actor.gameObject.activeSelf,Is.False);
+            Assert.That(director.GetComponent<PoolRegistry>().GetCounts("melee").Current,Is.Zero);
+            Assert.That(director.CorpseCount,Is.Zero);Assert.That(run.Kills,Is.EqualTo(1));
+            Assert.That(run.Pending,Is.EqualTo(pending));
+            Assert.That(actor.GetComponent<NavMeshAgent>().enabled,Is.False);
         }
     }
 }

@@ -72,6 +72,13 @@ namespace VRFPS
         }
 
         public void SetCombatEnabled(bool enabled) => combatEnabled = enabled;
+        internal void ResetForPool()
+        {
+            configured=combatEnabled=IsWindingUp=false;
+            windupRemaining=cooldownRemaining=0;enemyId=health=attackDamage=0;
+            target=origin=null;solidMask=0;
+            ProjectileRequested=null;Died=null;AttackStarted=null;
+        }
         public bool ApplyDamage(int amount, int sourceId, double activeTime)
         {
             if (!configured || !combatEnabled || IsDead || amount <= 0) return false;

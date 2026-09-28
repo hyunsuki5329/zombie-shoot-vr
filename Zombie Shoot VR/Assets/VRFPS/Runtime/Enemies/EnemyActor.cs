@@ -84,5 +84,17 @@ namespace VRFPS
         }
         void OnDestroy()
         { if (enemy != null) { enemy.Died -= HandleDeath; enemy.ProjectileRequested -= Launch; } }
+        internal void ResetForPool()
+        {
+            configured=combatEnabled=false;corpseAge=0;pool=null;
+            feedback?.Configure(null,null);
+            motor?.ResetForPool();enemy?.ResetForPool();
+            if(hitboxes!=null)foreach(var hitbox in hitboxes)if(hitbox!=null)hitbox.enabled=false;
+            if(animator!=null)
+            {
+                if(animator.runtimeAnimatorController!=null)animator.Rebind();
+                animator.speed=0;
+            }
+        }
     }
 }

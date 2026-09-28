@@ -28,9 +28,16 @@ namespace VRFPS
         GameObject warning;
         NavMeshPath path;
         bool configured;
+        PoolRegistry registry;
+        bool poolsRegistered;
         public bool WarningActive { get; private set; }
         public Vector3 WarningPosition { get; private set; }
         public int CreatedCount => actors.Count;
+        public int AliveCount { get { var count=0;foreach(var entry in actors)if(entry.Registered)count++;return count; } }
+        public int CorpseCount { get { var count=0;foreach(var entry in actors)if(!entry.Registered&&entry.Actor.gameObject.activeSelf&&entry.Actor.Controller.IsDead)count++;return count; } }
+        public int PeakAliveCount { get; private set; }
+        public int PeakCorpseCount { get; private set; }
+        void ObserveCounts(){PeakAliveCount=Mathf.Max(PeakAliveCount,AliveCount);PeakCorpseCount=Mathf.Max(PeakCorpseCount,CorpseCount);}
         Vector3 PlayerFeet => playerBody != null
             ? playerBody.transform.TransformPoint(playerBody.center - Vector3.up * (playerBody.height * 0.5f))
             : target.position;
@@ -45,6 +52,7 @@ namespace VRFPS
                 throw new ArgumentException("Spawn director requires run, target, prefabs and spawn positions.");
             this.run = run; this.target = target; this.melee = melee; this.ranged = ranged;
             this.positions = (Vector3[])positions.Clone(); this.playerSourceId = playerSourceId;
+            registry=gameObject.AddComponent<PoolRegistry>();
             playerBody = target.GetComponentInParent<CharacterController>();
             solidMask = LayerMask.GetMask("WorldSolid");
             path = new NavMeshPath();
@@ -70,7 +78,11 @@ namespace VRFPS
             if (deltaTime < 0 || float.IsNaN(deltaTime) || float.IsInfinity(deltaTime))
                 throw new ArgumentOutOfRangeException(nameof(deltaTime));
             if (!configured || run.Phase == RunPhase.Paused || run.Phase == RunPhase.Dead) return;
-            foreach (var entry in actors) entry.Actor.Tick(deltaTime, run.ActiveTime);
+            foreach (var entry in actors)
+            {
+                entry.Actor.Tick(deltaTime, run.ActiveTime);
+                if(!entry.Registered&&!entry.Actor.gameObject.activeSelf)ReturnEntry(entry);
+            }
             if (run.Phase != RunPhase.Active) return;
             projectiles.Tick(deltaTime, run.ActiveTime);
             if (run.Phase != RunPhase.Active) return;
@@ -111,9 +123,10 @@ namespace VRFPS
                 var id = checked(++lastId); // Never reused across pooled lives or retries.
                 entry.Actor.Initialize(id, target, projectiles, positions, solidMask, wave);
                 if (!agent.isOnNavMesh || !agent.Warp(position) || !run.RegisterSpawn(id))
-                { entry.Actor.gameObject.SetActive(false); CancelWarning(); retryRemaining = 2; return false; }
+                { ReturnEntry(entry); CancelWarning(); retryRemaining = 2; return false; }
                 entry.Id = id; entry.Registered = true;
                 entry.Actor.Controller.Died += OnDeath;
+                ObserveCounts();
                 if (kind == EnemyKind.Melee) meleeSpawned++; else rangedSpawned++;
                 enemyId = id; spawnRemaining = 2; CancelWarning();
                 return true;
@@ -157,24 +170,38 @@ namespace VRFPS
 
         Entry Acquire(EnemyKind kind, Vector3 position)
         {
+            if(!poolsRegistered)
+            {
+                registry.Register("melee",melee.gameObject,run.Map.maxAlive+4,ResetActor);
+                registry.Register("ranged",ranged.gameObject,run.Map.maxRangedAlive+4,ResetActor);
+                poolsRegistered=true;
+            }
             Entry oldest = null;
-            var count = 0;
             foreach (var entry in actors)
             {
                 if (entry.Kind != kind) continue;
-                count++;
-                if (!entry.Actor.gameObject.activeSelf) return entry;
+                if(!entry.Registered&&!entry.Actor.gameObject.activeSelf)ReturnEntry(entry);
                 if (!entry.Registered && (oldest == null || entry.DeathOrder < oldest.DeathOrder)) oldest = entry;
             }
-            var limit = (kind == EnemyKind.Melee ? run.Map.maxAlive : run.Map.maxRangedAlive) + 4;
-            if (count >= limit || actors.Count >= 16)
+            var id=PoolId(kind);var counts=registry.GetCounts(id);
+            if(counts.Current>=counts.Capacity || counts.Current==counts.Created&&actors.Count>=16)
             {
-                if (oldest != null) oldest.Actor.gameObject.SetActive(false);
-                return oldest;
+                if(oldest==null)return null;
+                ReturnEntry(oldest);
             }
-            var actor = Instantiate(kind == EnemyKind.Melee ? melee : ranged, position, Quaternion.identity, transform);
+            if(!registry.TryRent(id,out var instance))return null;
+            var actor=instance.GetComponent<EnemyActor>();
+            foreach(var entry in actors)if(entry.Actor==actor)return entry;
             var created = new Entry { Actor = actor, Kind = kind };
             actors.Add(created); return created;
+        }
+        static string PoolId(EnemyKind kind)=>kind==EnemyKind.Melee?"melee":"ranged";
+        static void ResetActor(GameObject instance)=>instance.GetComponent<EnemyActor>().ResetForPool();
+        void ReturnEntry(Entry entry)
+        {
+            if(entry.Actor.Controller!=null)entry.Actor.Controller.Died-=OnDeath;
+            entry.Registered=false;
+            registry.Return(PoolId(entry.Kind),entry.Actor.gameObject);
         }
 
         void OnDeath(int id, int source)
@@ -193,8 +220,9 @@ namespace VRFPS
                     if (!entry.Registered && entry.Actor.gameObject.activeSelf && entry.Actor.Controller.IsDead)
                     { count++; if (oldest == null || entry.DeathOrder < oldest.DeathOrder) oldest = entry; }
                 if (count <= 4) break;
-                oldest.Actor.gameObject.SetActive(false);
+                ReturnEntry(oldest);
             }
+            ObserveCounts();
         }
         void CancelWarning() { WarningActive = false; if (warning != null) warning.SetActive(false); }
         void ResetRun()
@@ -202,8 +230,7 @@ namespace VRFPS
             CancelWarning(); projectiles.RetireAll();
             foreach (var entry in actors)
             {
-                entry.Registered = false;
-                entry.Actor.SetCombatEnabled(false); entry.Actor.gameObject.SetActive(false);
+                ReturnEntry(entry);
             }
             wave = meleeSpawned = rangedSpawned = pointCursor = 0;
             spawnRemaining = retryRemaining = 0;
