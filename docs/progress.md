@@ -4,7 +4,7 @@
 
 ## 현재 작업
 
-- 현재 기준 커밋: `03ced90` (원시 프레임 시간 수집, [초안 PR #10](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/10)에 push). 이후 P11-h 분석기 단위의 최종 SHA는 해당 PR 기록에 연결한다.
+- 현재 기준 커밋: `22eca09` (원시 프레임 분석기, [초안 PR #10](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/10)에 push). 이후 검증 안내 단위의 최종 SHA는 해당 PR 기록에 연결한다. [최신 실기 실행 안내](hardware-validation.md)를 사용한다.
 - 브랜치: `codex/p11-performance`, base `codex/p10-feedback`. 투사체 충돌 할당 최적화와 객체 기록과 선택적 원시 프레임 시간 수집을 연결했고 최신 PlayMode 116/116이 통과했다. EditMode는 앞 단위의 50/50 결과이며 이번 변경에서는 재실행하지 않았다. 실제 두 맵·실기·CPU/GPU/장시간·독립 리뷰는 남아 있다. 선행 PR #8/#9는 초안·미병합 상태다.
 - P01-a 구현 커밋: `5a8dc1d844bf5aacd53a522a894bca3eee7c91d3`. [PR #1](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/1)은 원격에서 main에 병합됨(`e0e3be2`). GitHub CI는 없으며 로컬 Unity 검증 결과를 사용한다.
 - P01-a 구현·자동 검증 완료: Unity 환경 확인, EditMode 시험 어셈블리와 InteractionLab 구성, Windows Mono 개발 빌드. 증빙: [시험·빌드·소스 해시](evidence/p01-foundation.json), [환경 및 실행 절차](../Zombie%20Shoot%20VR/Docs/environment.md).
@@ -240,3 +240,10 @@
 - CPU전체의 대기를 실제 CPU 작업으로 치환하지 않으며 cpu_active_work_p95_ms=null, performance_acceptance=unverified를 유지한다. 수신 상태와 지연된 측정 상태가 다를 수 있고 전체 프레임 포착을 보장하지 않는다.
 - 런타임 변경 없이 분석기와 시험 출력만 추가했다. 전체 PlayMode116/116과 Windows 빌드는 03ced90 단위의 기존 결과를 유지하며 이번에 재실행하지 않았다. 자체 검토 완료, 독립 리뷰·실제 두 맵·72Hz·30분·RAM/VRAM·계측 비용 검증은 남아 PR #10은 초안이다.
 - 다음: 기기 검증 기록을 받을 실행 패킷을 정리하고 실제 촬영본/기준 길이2개를 받으면 P02·P09 맵 제작과 실기 인수를 진행한다. 촬영본은 아직 제공되지 않았다.
+
+### P11 실기 검증 안내 정리 (2026-09-28)
+
+- [최신 실행 안내](hardware-validation.md)와 [결과 양식](templates/hardware-session-result.md)을 마련했다. 현재 MenuLab의 재장전·정지·메뉴·HUD·소리/진동과 미구현 실제 맵/기록 시험을 구분한다. 예전 단계별 문서의 빌드 경로와 당시 미구현 설명 대신 최신 안내를 진입점으로 사용한다.
+- 기존 03ced90 빌드 manifest와 현재 MenuLab338개·BootstrapPreview341개 파일의 SHA256이 모두 일치했다. 진단 실행 스크립트는 -CheckOnly로 실제 경로/인수를 확인했고 게임은 실행하지 않았다. [증빙](evidence/p11-hardware-packet.json).
+- 사용자 기존90Hz/보간켬 조작 확인과 별도72Hz/SSW끔 성능 인수를 분리했다. 로그 쌍·Player.log 보존과 분석 절차, 실제 관찰을 반환할 양식을 연결했다. 현재 시험장 기록만으로 실제 두 맵·영구 기록·30분 성능 통과를 선언하지 않는다.
+- 문서만 변경했으므로 Unity/Python 시험을 재실행하지 않았다. 링크·현재 소스 조작·빌드 해시를 검토했다. 실기 결과는 대기하며 별도 권한 재요청 없이 이후 확인된 결과를 반영한다.

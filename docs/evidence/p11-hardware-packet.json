@@ -1,0 +1,35 @@
+{
+  "unit": "P11 hardware validation packet",
+  "date": "2026-09-28",
+  "documentationBaseCommit": "22eca09f62c22fd53f7a3d0cd824517bfbc3f557",
+  "runtimeBuildCommit": "03ced903ef0a49f63ad6d8f7950e826ab3c5cd56",
+  "checks": [
+    {
+      "build": "BootstrapPreview",
+      "files": 341,
+      "mismatches": []
+    },
+    {
+      "build": "MenuLab",
+      "files": 338,
+      "mismatches": []
+    }
+  ],
+  "manifest": {
+    "sha256": "E438540680D4926BAB1A34138A98EE1A70C9437C3C55531211440CF1D4545A05",
+    "path": "tmp/p11-frame-timings/build-manifest.json"
+  },
+  "launcher": {
+    "mode": "CheckOnly; game not launched",
+    "path": "tmp/p11-hardware-packet/launcher.json",
+    "sha256": "A841F3CB762B8C01691A370A23BF3322B2F3738DA0DFA3D27952231A854D09AA"
+  },
+  "hardwareResult": "Not executed. This is a procedure/template and existing-build integrity check only.",
+  "runtimeChanged": false,
+  "remaining": [
+    "User reload/pause/HUD/audio observations",
+    "Real room/classroom scans and two reference lengths",
+    "72Hz real-map timing and long-run results",
+    "Independent review"
+  ]
+}
