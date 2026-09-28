@@ -21,6 +21,18 @@ namespace VRFPS
         }
         readonly Dictionary<string,Pool> pools=new Dictionary<string,Pool>(StringComparer.Ordinal);
         Transform storage;
+        public bool Adopt(string poolId,GameObject instance)
+        {
+            if(poolId==null||instance==null||!pools.TryGetValue(poolId,out var pool))return false;
+            RemoveDestroyed(pool);
+            foreach(var registered in pools.Values)foreach(var entry in registered.Entries)
+                if(entry.Instance==instance)return false;
+            if(pool.Entries.Count>=pool.Capacity)return false;
+            pool.Entries.Add(new Entry{Instance=instance,Leased=true});
+            pool.Current++;pool.Peak=Math.Max(pool.Peak,pool.Current);
+            // Existing scene objects may already be held or mounted; preserve their hierarchy/state.
+            return true;
+        }
         public void Register(string poolId,GameObject prefab,int capacity,Action<GameObject> reset)
         {
             if(string.IsNullOrEmpty(poolId)||prefab==null||capacity<=0||reset==null)

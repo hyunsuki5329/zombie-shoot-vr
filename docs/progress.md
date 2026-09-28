@@ -4,8 +4,8 @@
 
 ## 현재 작업
 
-- 현재 기준 커밋: `dceffc0` (투사체 충돌 GC 최적화, [초안 PR #10](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/10)에 push). 이후 P11 단위의 최종 SHA는 해당 PR 기록에 연결한다.
-- 브랜치: `codex/p11-performance`, base `codex/p10-feedback`. 투사체 충돌 할당 최적화와 PoolRegistry/투사체 수명 통계를 구현했고 최신 PlayMode 109/109이 통과했다. EditMode는 앞 단위의 50/50 결과이며 이번 변경에서는 재실행하지 않았다. 실제 두 맵·실기·CPU/GPU/장시간·독립 리뷰는 남아 있다. 선행 PR #8/#9는 초안·미병합 상태다.
+- 현재 기준 커밋: `fa6322f` (PoolRegistry·투사체 수명 통계, [초안 PR #10](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/10)에 push). 이후 P11 단위의 최종 SHA는 해당 PR 기록에 연결한다.
+- 브랜치: `codex/p11-performance`, base `codex/p10-feedback`. 투사체 충돌 할당 최적화와 PoolRegistry/투사체·탄창 수명 통계를 구현했고 최신 PlayMode 111/111이 통과했다. EditMode는 앞 단위의 50/50 결과이며 이번 변경에서는 재실행하지 않았다. 실제 두 맵·실기·CPU/GPU/장시간·독립 리뷰는 남아 있다. 선행 PR #8/#9는 초안·미병합 상태다.
 - P01-a 구현 커밋: `5a8dc1d844bf5aacd53a522a894bca3eee7c91d3`. [PR #1](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/1)은 원격에서 main에 병합됨(`e0e3be2`). GitHub CI는 없으며 로컬 Unity 검증 결과를 사용한다.
 - P01-a 구현·자동 검증 완료: Unity 환경 확인, EditMode 시험 어셈블리와 InteractionLab 구성, Windows Mono 개발 빌드. 증빙: [시험·빌드·소스 해시](evidence/p01-foundation.json), [환경 및 실행 절차](../Zombie%20Shoot%20VR/Docs/environment.md).
 - P01 실기 확인: 사용자가 VR 실행과 머리·양손 추적 정상 동작을 확인했다(2026-09-22). [VD 설정·실기 보고](evidence/2026-09-22-vd-hardware-check.md). 전용 입력 구성과 양안 가림 등 후속 검증까지 완료한 것으로 확대하지 않는다.
@@ -191,3 +191,11 @@
 - 기본 수명 시험2개 RED 후 PlayMode107/107. 파괴된 투사체를 반복 대체하면 기존 목록이21개로 누적되는 추가 회귀를 재현(3PASS/1FAIL)하고 참조 정리를 추가했다. 최종 PlayMode **109/109**. 1,000회 슬롯 재사용, 20회×12발 만료/재시작, 반환 중 재진입·초기화 실패 격리·외부 파괴 후 대체를 검증했다.
 - [증빙](evidence/p11-pool-registry.json). 자체 변경 검토와 독립 리뷰를 구분하며 PR #10은 초안 유지한다. 실제 두 맵/72Hz/30분 검증은 여전히 대기다.
 - Ruling: 기존 적/사체·탄창의 소유권 규칙을 보존하면서 타입별로 레지스트리와 통계를 연결한다. 이번 단위의 실제 연결은 투사체이며 다른 타입과 효과 통계/장시간 기록은 후속 구현이다. 공통 풀 존재만으로 전체 P11 완료를 선언하지 않는다.
+
+### P11-c 탄창 풀 연결과 소유권 보존 (2026-09-28)
+
+- PoolRegistry.Adopt로 기존 장착 탄창을 위치/부모/소유권 변경 없이 편입한다. 같은 레지스트리 내 두 풀의 이중 소유와 중복 편입을 차단한다.
+- AmmoPouch는 magazines 상한10을 사용한다. 바닥8개·12초 회수에서 손/삽입 탄창을 제외하며, 재도전은 전체 반환 후 하나를 다시 장착한다. 반환 콜백은 기존 MagazineToken.ResetForRun의 물리/소유권 초기화를 사용한다.
+- Counts와 LooseCount/PeakLooseCount를 제공한다. 바닥 최대값은 Tick의 상한 정리 후 표본이며 모든 순간을 측정한 값으로 확대하지 않는다.
+- 새 시험2개 RED(기존 시험10PASS) 후 전체 PlayMode **111/111**. 100회 공급/해제, 소유 탄창 보호, 바닥 만료·재사용·재도전, 중복 편입을 검증했다. 기존 실제 물리 낙하·일시정지 복원 시험도 포함한다. [증빙](evidence/p11-magazine-pool.json).
+- 실제 Quest Pro 수동 재장전·두 맵30분 성능, 독립 리뷰는 대기다. PR #10은 초안 유지하며 적/사체·효과 통계와 기록 수집이 다음 작업이다.

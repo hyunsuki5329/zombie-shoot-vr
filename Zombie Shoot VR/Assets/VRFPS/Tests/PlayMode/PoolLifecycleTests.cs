@@ -83,5 +83,17 @@ namespace VRFPS.Tests
             Assert.That(replacement,Is.Not.SameAs(first));registry.Return("test",replacement);
             Assert.That(registry.GetCounts("test").Current,Is.Zero);
         }
+        [Test] public void AdoptedSceneObjectKeepsItsOwnerAndConsumesExactlyOneSlot()
+        {
+            registry.Register("a",template,1,item=>{});registry.Register("b",template,1,item=>{});
+            var initial=new GameObject("Scene initial");initial.transform.SetParent(root.transform,false);
+            Assert.That(registry.Adopt("a",initial),Is.True);
+            Assert.That(initial.activeSelf,Is.True);Assert.That(initial.transform.parent,Is.EqualTo(root.transform));
+            Assert.That(registry.Adopt("a",initial),Is.False);Assert.That(registry.Adopt("b",initial),Is.False);
+            Assert.That(registry.TryRent("a",out _),Is.False);
+            registry.Return("a",initial);
+            Assert.That(registry.TryRent("a",out var reused),Is.True);Assert.That(reused,Is.SameAs(initial));
+            Assert.That(registry.GetCounts("a").Created,Is.EqualTo(1));
+        }
     }
 }

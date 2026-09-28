@@ -43,6 +43,26 @@ namespace VRFPS.Tests
         void GripAt(Vector3 position) { left.position = position; interactor.Tick(true, true); }
         void Release() => interactor.Tick(false, true);
 
+        [Test] public void MagazineRegistryTracksOwnedTokensAndRecyclesOnlyLooseTokens()
+        {
+            var registry=pouch.GetComponent<PoolRegistry>();Assert.That(registry,Is.Not.Null);
+            Assert.That(registry.GetCounts("magazines").Current,Is.EqualTo(1));
+            for(var i=0;i<100;i++){Release();GripAt(pouch.transform.position);}
+            var held=interactor.HeldToken;var mounted=socket.Installed;
+            Assert.That(registry.GetCounts("magazines").Created,Is.LessThanOrEqualTo(10));
+            pouch.TickLifetime(20);
+            Assert.That(held.HeldBy,Is.SameAs(left));Assert.That(mounted.State,Is.EqualTo(MagazineTokenState.Inserted));
+            Assert.That(registry.GetCounts("magazines").Current,Is.EqualTo(2));
+            Release();var body=held.GetComponent<Rigidbody>();body.linearVelocity=Vector3.one*5;
+            pouch.TickLifetime(20);
+            Assert.That(registry.GetCounts("magazines").Current,Is.EqualTo(1));
+            Assert.That(held.gameObject.activeSelf,Is.False);Assert.That(body.isKinematic,Is.True);
+            GripAt(pouch.transform.position);Assert.That(interactor.HeldToken.State,Is.EqualTo(MagazineTokenState.Fresh));
+            interactor.Restart();
+            Assert.That(registry.GetCounts("magazines").Current,Is.EqualTo(1));
+            Assert.That(registry.GetCounts("magazines").Peak,Is.LessThanOrEqualTo(10));
+        }
+
         [Test] public void RestartRestoresOneMountedMagazineAndClearsOwnership()
         {
             for (var attempt = 0; attempt < 10; attempt++)
