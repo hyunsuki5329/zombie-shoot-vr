@@ -61,3 +61,7 @@ __pycache__/
 *.unitypackage
 
 # Keep Unity source assets, their .meta files, Packages, and ProjectSettings.
+
+# Restricted original models and generated materials: restore with Restore-GamgoAssets.py.
+**/Assets/VRFPS/External/GAMGO/
+**/Assets/VRFPS/External/GAMGO.meta
