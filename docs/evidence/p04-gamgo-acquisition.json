@@ -84,8 +84,9 @@
       "acquired": "2026-09-29",
       "acquisition": "User downloaded original FBX ZIP through signed-in Chrome; copied locally and checked ZIP CRC",
       "local_directory": "tmp/external-assets/gamgo/daewoo-k2",
-      "unity_imported": false,
-      "hardware_verified": false
+      "unity_imported": true,
+      "hardware_verified": false,
+      "import_scope": "isolated inspection only"
     },
     {
       "archive": "30-rounds-556mm-stanag-mag.zip",
@@ -145,8 +146,40 @@
       "acquired": "2026-09-29",
       "acquisition": "User downloaded original FBX ZIP through signed-in Chrome; copied locally and checked ZIP CRC",
       "local_directory": "tmp/external-assets/gamgo/30-rounds-556mm-stanag-mag",
-      "unity_imported": false,
-      "hardware_verified": false
+      "unity_imported": true,
+      "hardware_verified": false,
+      "import_scope": "isolated inspection only"
     }
-  ]
+  ],
+  "isolated_inspection": {
+    "date": "2026-09-29",
+    "unity": "6000.3.23f1",
+    "project": "tmp/p06-verification/Zombie Shoot VR",
+    "import_exit": 0,
+    "preview_exit": 0,
+    "k2": {
+      "mesh_count": 3,
+      "triangles": 9646,
+      "material_slots": [
+        "02-up",
+        "07 - Default",
+        "09 - Default"
+      ],
+      "texture_resolution": 2048,
+      "forward_axis": "+X",
+      "magazine_present": false
+    },
+    "magazine": {
+      "mesh_count": 1,
+      "triangles": 2798,
+      "material_slots": [
+        "02 - Default",
+        "03 - Default"
+      ],
+      "texture_resolution": 4096,
+      "all_textures_rgb_no_alpha": true
+    },
+    "preview": "Unlit base-color inspection only; not final URP lighting or headset acceptance",
+    "production_prefabs_modified": false
+  }
 }
