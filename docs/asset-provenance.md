@@ -50,3 +50,10 @@ GAMGO K2와 STANAG 탄창은 아래와 같이 다운로드를 확보하고 로�
 탄창 표기: “30 rounds 5.56mm STANAG MAG” by GAMGO, CC BY 4.0, 위 원본 링크. 원본 파일 바이트는 보존했다. Unity에서 크기·방향·위치를 조정하고 URP 재질을 구성했다. K2의 거칠기를 매끄러움 알파로 패킹하고 탄창은 알파 없는 JPEG에 매끄러움0.35를 초기값으로 적용했다. K2는 CC BY로 간주하지 않으며 원본 자산을 Git에 올리지 않았다. 소스 전달 범위에 맞는 확보·복원 절차가 필요하다. 로컬 tmp는 최종 제출 보관소가 아니며 최종 패키징 때 별도 보존해야 한다.
 
 Unity에서 실제 메시/재질 슬롯을 검사하고 기존 Foregrip/Muzzle/MagazineSocket을 보존하여 시각 모델을 정렬했다. 탄창 JPG는 알파 채널이 없으므로 파일명의 Smoothnes만으로 매끄러움 채널이 보존되었다고 가정하지 않는다. [복원·적용 절차와 검증 한계](gamgo-visual-restore.md)를 따른다. 기기 인수는 아직 완료하지 않았다.
+
+
+## 패키지 내부 고지 보완 (2026-09-30)
+
+잠금 버전과 일치하는 설치 PackageCache70개 내부에서 LICENSE/COPYING/NOTICE/OFL 및 Third Party Notices 이름을 검색했다. 기존 루트49개와 별도로 Mathematics1.3.3의 Noise 하위 LICENSE1개를 발견해 [원문](licenses/packages/com.unity.mathematics-1.3.3/Unity.Mathematics/Noise/LICENSE)을 바이트 그대로 보존했다. Ashima Arts와 Stefan Gustavson의 저작권·허용 조건·면책을 포함하며 루트 Unity 라이선스로 대체하지 않는다. [경로·해시와 조사 범위](evidence/p12-nested-notices.json).
+
+파일명 검색으로 발견한 범위이며 소스 내부 인라인 고지나 다른 이름의 고지까지 모두 확인했다는 뜻은 아니다. 최종 빌드 의존성 및 엔진 배포 고지 확인은 남아 있다. 원본 PackageCache 전체를 Git이나 제출 Source에 넣지 않는다.
