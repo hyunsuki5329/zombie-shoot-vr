@@ -1,0 +1,833 @@
+{
+  "unit": "P12-b asset provenance and notices",
+  "date": "2026-09-29",
+  "baseCommit": "7fb378c10f3bba3c460fedaad4c3d30c493859ed",
+  "trackedAssetFilesIncludingMeta": {
+    "CompositionLayers.meta": 1,
+    "CompositionLayers": 1,
+    "DefaultVolumeProfile.asset": 1,
+    "DefaultVolumeProfile.asset.meta": 1,
+    "Samples.meta": 1,
+    "Samples": 765,
+    "Scenes.meta": 1,
+    "Scenes": 22,
+    "Settings.meta": 1,
+    "Settings": 15,
+    "TextMesh Pro.meta": 1,
+    "TextMesh Pro": 71,
+    "VRFPS.meta": 1,
+    "VRFPS": 320,
+    "VRTemplateAssets.meta": 1,
+    "VRTemplateAssets": 450,
+    "XR.meta": 1,
+    "XR": 23,
+    "XRI.meta": 1,
+    "XRI": 10
+  },
+  "fonts": [
+    {
+      "path": "Zombie Shoot VR/Assets/TextMesh Pro/Fonts/LiberationSans.ttf",
+      "sha256": "e5b0af421ea2bfbc1ac8d251d647268087ae82786234c57f757d1f0b90fa8b49",
+      "embeddedNameRecords": {
+        "0": [
+          "Digitized data copyright (c) 2010 Google Corporation. \nCopyright (c) 2012 Red Hat, Inc."
+        ],
+        "1": [
+          "Liberation Sans"
+        ],
+        "5": [
+          "Version 2.00.1"
+        ],
+        "8": [
+          "Ascender Corporation"
+        ],
+        "9": [
+          "Steve Matteson"
+        ],
+        "13": [
+          "Licensed under the SIL Open Font License, Version 1.1"
+        ],
+        "14": [
+          "http://scripts.sil.org/OFL"
+        ]
+      },
+      "templateArchiveMatches": [
+        {
+          "member": "package/ProjectData~/Assets/TextMesh Pro/Fonts/LiberationSans.ttf",
+          "sha256": "e5b0af421ea2bfbc1ac8d251d647268087ae82786234c57f757d1f0b90fa8b49"
+        }
+      ],
+      "matchesTemplateBytes": true
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRTemplateAssets/Fonts/Inter/Inter-Regular.ttf",
+      "sha256": "b02e565207c8d42459ad8e3795babf8a9f3fe337508da7f0c74b60ab6f8f81e7",
+      "embeddedNameRecords": {
+        "0": [
+          "Copyright 2019 The Inter project authors"
+        ],
+        "1": [
+          "Inter"
+        ],
+        "5": [
+          "Version 3.010;git-aca7606f2"
+        ],
+        "8": [
+          "rsms"
+        ],
+        "9": [
+          "Rasmus Andersson"
+        ],
+        "13": [
+          "OFL 1.1 (SIL Open Font License, Version 1.1)"
+        ],
+        "14": [
+          "http://scripts.sil.org/OFL"
+        ]
+      },
+      "templateArchiveMatches": [
+        {
+          "member": "package/ProjectData~/Assets/VRTemplateAssets/Fonts/Inter/Inter-Regular.ttf",
+          "sha256": "b02e565207c8d42459ad8e3795babf8a9f3fe337508da7f0c74b60ab6f8f81e7"
+        }
+      ],
+      "matchesTemplateBytes": true
+    }
+  ],
+  "template": {
+    "package": "com.unity.template.vr",
+    "version": "10.0.0",
+    "licensePath": "docs/licenses/Unity-VR-Template-10.0.0-LICENSE.md",
+    "licenseSha256": "652b15bff4d9c9a9eb5366fb7fb8a98c42a00fbcf5288605c1518f8007e31ed7",
+    "sourceArchive": "C:\\Users\\User\\AppData\\Roaming\\UnityHub\\Templates\\com.unity.template.vr-10.0.0.tgz"
+  },
+  "packages": [
+    {
+      "package": "com.unity.ai.navigation",
+      "version": "2.0.14",
+      "source": "registry",
+      "notices": [
+        {
+          "path": "docs/licenses/packages/com.unity.ai.navigation-2.0.14/LICENSE.md",
+          "source": "Zombie Shoot VR/Library/PackageCache/com.unity.ai.navigation@134dd6a3b97b/LICENSE.md",
+          "sha256": "2b2113e0522b3eaa9e701d70956f9affaccac7e79d99b6029903bcec7139590e"
+        }
+      ]
+    },
+    {
+      "package": "com.unity.burst",
+      "version": "1.8.30",
+      "source": "registry",
+      "notices": [
+        {
+          "path": "docs/licenses/packages/com.unity.burst-1.8.30/LICENSE.md",
+          "source": "Zombie Shoot VR/Library/PackageCache/com.unity.burst@2f3d916873ea/LICENSE.md",
+          "sha256": "9bd567d6de754ab7396a8e3022758c617b78d7115bf1585bdb29ae0de464d059"
+        },
+        {
+          "path": "docs/licenses/packages/com.unity.burst-1.8.30/Third Party Notices.md",
+          "source": "Zombie Shoot VR/Library/PackageCache/com.unity.burst@2f3d916873ea/Third Party Notices.md",
+          "sha256": "01b366462da89d104fc7db01309b69de07cee05400ec429e2ea9e4c23fa5f085"
+        }
+      ]
+    },
+    {
+      "package": "com.unity.collections",
+      "version": "2.6.8",
+      "source": "registry",
+      "notices": [
+        {
+          "path": "docs/licenses/packages/com.unity.collections-2.6.8/LICENSE.md",
+          "source": "Zombie Shoot VR/Library/PackageCache/com.unity.collections@84e8eb3fc12e/LICENSE.md",
+          "sha256": "4947f647c031b0fec440237f8136386a606dd998089bb1df67316ee693f568f5"
+        }
+      ]
+    },
+    {
+      "package": "com.unity.editorcoroutines",
+      "version": "1.1.0",
+      "source": "registry",
+      "notices": [
+        {
+          "path": "docs/licenses/packages/com.unity.editorcoroutines-1.1.0/LICENSE.md",
+          "source": "Zombie Shoot VR/Library/PackageCache/com.unity.editorcoroutines@87a15ed012c2/LICENSE.md",
+          "sha256": "6f21548115fe72f1e8c4b31f9d12c306650c8ebe85930f367f7d49b7a73352f0"
+        }
+      ]
+    },
+    {
+      "package": "com.unity.ext.nunit",
+      "version": "2.0.5",
+      "source": "builtin",
+      "notices": [
+        {
+          "path": "docs/licenses/packages/com.unity.ext.nunit-2.0.5/LICENSE.md",
+          "source": "Zombie Shoot VR/Library/PackageCache/com.unity.ext.nunit@d8c07649098d/LICENSE.md",
+          "sha256": "ea14f98ba99afcc079ec2a8a6c38461b5bc4ca3d184aa87ad7c60de9134c4d43"
+        },
+        {
+          "path": "docs/licenses/packages/com.unity.ext.nunit-2.0.5/Third Party Notices.md",
+          "source": "Zombie Shoot VR/Library/PackageCache/com.unity.ext.nunit@d8c07649098d/Third Party Notices.md",
+          "sha256": "ef37b1ccbae5e9b641482cbd77a74ee96193a39d232cc8d856b9044f37db9244"
+        }
+      ]
+    },
+    {
+      "package": "com.unity.feature.development",
+      "version": "1.0.2",
+      "source": "builtin",
+      "notices": []
+    },
+    {
+      "package": "com.unity.ide.rider",
+      "version": "3.0.40",
+      "source": "registry",
+      "notices": [
+        {
+          "path": "docs/licenses/packages/com.unity.ide.rider-3.0.40/LICENSE.md",
+          "source": "Zombie Shoot VR/Library/PackageCache/com.unity.ide.rider@e4950c6d131b/LICENSE.md",
+          "sha256": "49d8e39c5ba9fa2e7b8403d994162ffc49dc7a366b0691fdfa4c06bbaadc4d81"
+        }
+      ]
+    },
+    {
+      "package": "com.unity.ide.visualstudio",
+      "version": "2.0.26",
+      "source": "registry",
+      "notices": [
+        {
+          "path": "docs/licenses/packages/com.unity.ide.visualstudio-2.0.26/LICENSE.md",
+          "source": "Zombie Shoot VR/Library/PackageCache/com.unity.ide.visualstudio@a99d56dec63f/LICENSE.md",
+          "sha256": "af294e2812515c3569252d3ca7e2cb2519d82572df764529ac45ca72359e4995"
+        },
+        {
+          "path": "docs/licenses/packages/com.unity.ide.visualstudio-2.0.26/ThirdPartyNotices.md",
+          "source": "Zombie Shoot VR/Library/PackageCache/com.unity.ide.visualstudio@a99d56dec63f/ThirdPartyNotices.md",
+          "sha256": "08f3213e8b9842a65a58bcc6893a9eedcfb47bb74c89c5764627b7cc3e1a2763"
+        }
+      ]
+    },
+    {
+      "package": "com.unity.inputsystem",
+      "version": "1.20.0",
+      "source": "registry",
+      "notices": [
+        {
+          "path": "docs/licenses/packages/com.unity.inputsystem-1.20.0/LICENSE.md",
+          "source": "Zombie Shoot VR/Library/PackageCache/com.unity.inputsystem@7a4e1a2a8194/LICENSE.md",
+          "sha256": "419718e59cd6c1f9c3ed80bd004394504bed368c23ad8665cce1792a33c8a02c"
+        }
+      ]
+    },
+    {
+      "package": "com.unity.learn.iet-framework",
+      "version": "6.0.6",
+      "source": "registry",
+      "notices": [
+        {
+          "path": "docs/licenses/packages/com.unity.learn.iet-framework-6.0.6/LICENSE.md",
+          "source": "Zombie Shoot VR/Library/PackageCache/com.unity.learn.iet-framework@20adddfea631/LICENSE.md",
+          "sha256": "6f96e049a8c2aaf9dded6e5a288ae627f97bc70cf9a04f31730ab75cfd8fdb4a"
+        },
+        {
+          "path": "docs/licenses/packages/com.unity.learn.iet-framework-6.0.6/Third Party Notices.md",
+          "source": "Zombie Shoot VR/Library/PackageCache/com.unity.learn.iet-framework@20adddfea631/Third Party Notices.md",
+          "sha256": "ab769b5ae1eec7fb1c4c6a32d5f4f684b42d198429af2c6a7a3a1db47418f60c"
+        }
+      ]
+    },
+    {
+      "package": "com.unity.mathematics",
+      "version": "1.3.3",
+      "source": "registry",
+      "notices": [
+        {
+          "path": "docs/licenses/packages/com.unity.mathematics-1.3.3/LICENSE.md",
+          "source": "Zombie Shoot VR/Library/PackageCache/com.unity.mathematics@19a9377c4ffa/LICENSE.md",
+          "sha256": "5b1a26ff2ca6e6e7d9fd2b6df151e1a43c671fdf49c05dcee1227f20dcf25fde"
+        }
+      ]
+    },
+    {
+      "package": "com.unity.modules.accessibility",
+      "version": "1.0.0",
+      "source": "builtin",
+      "notices": []
+    },
+    {
+      "package": "com.unity.modules.adaptiveperformance",
+      "version": "1.0.0",
+      "source": "builtin",
+      "notices": []
+    },
+    {
+      "package": "com.unity.modules.ai",
+      "version": "1.0.0",
+      "source": "builtin",
+      "notices": []
+    },
+    {
+      "package": "com.unity.modules.androidjni",
+      "version": "1.0.0",
+      "source": "builtin",
+      "notices": []
+    },
+    {
+      "package": "com.unity.modules.animation",
+      "version": "1.0.0",
+      "source": "builtin",
+      "notices": []
+    },
+    {
+      "package": "com.unity.modules.assetbundle",
+      "version": "1.0.0",
+      "source": "builtin",
+      "notices": []
+    },
+    {
+      "package": "com.unity.modules.audio",
+      "version": "1.0.0",
+      "source": "builtin",
+      "notices": []
+    },
+    {
+      "package": "com.unity.modules.cloth",
+      "version": "1.0.0",
+      "source": "builtin",
+      "notices": []
+    },
+    {
+      "package": "com.unity.modules.director",
+      "version": "1.0.0",
+      "source": "builtin",
+      "notices": []
+    },
+    {
+      "package": "com.unity.modules.hierarchycore",
+      "version": "1.0.0",
+      "source": "builtin",
+      "notices": []
+    },
+    {
+      "package": "com.unity.modules.imageconversion",
+      "version": "1.0.0",
+      "source": "builtin",
+      "notices": []
+    },
+    {
+      "package": "com.unity.modules.imgui",
+      "version": "1.0.0",
+      "source": "builtin",
+      "notices": []
+    },
+    {
+      "package": "com.unity.modules.jsonserialize",
+      "version": "1.0.0",
+      "source": "builtin",
+      "notices": []
+    },
+    {
+      "package": "com.unity.modules.particlesystem",
+      "version": "1.0.0",
+      "source": "builtin",
+      "notices": []
+    },
+    {
+      "package": "com.unity.modules.physics",
+      "version": "1.0.0",
+      "source": "builtin",
+      "notices": []
+    },
+    {
+      "package": "com.unity.modules.physics2d",
+      "version": "1.0.0",
+      "source": "builtin",
+      "notices": []
+    },
+    {
+      "package": "com.unity.modules.screencapture",
+      "version": "1.0.0",
+      "source": "builtin",
+      "notices": []
+    },
+    {
+      "package": "com.unity.modules.subsystems",
+      "version": "1.0.0",
+      "source": "builtin",
+      "notices": []
+    },
+    {
+      "package": "com.unity.modules.terrain",
+      "version": "1.0.0",
+      "source": "builtin",
+      "notices": []
+    },
+    {
+      "package": "com.unity.modules.terrainphysics",
+      "version": "1.0.0",
+      "source": "builtin",
+      "notices": []
+    },
+    {
+      "package": "com.unity.modules.tilemap",
+      "version": "1.0.0",
+      "source": "builtin",
+      "notices": []
+    },
+    {
+      "package": "com.unity.modules.ui",
+      "version": "1.0.0",
+      "source": "builtin",
+      "notices": []
+    },
+    {
+      "package": "com.unity.modules.uielements",
+      "version": "1.0.0",
+      "source": "builtin",
+      "notices": []
+    },
+    {
+      "package": "com.unity.modules.umbra",
+      "version": "1.0.0",
+      "source": "builtin",
+      "notices": []
+    },
+    {
+      "package": "com.unity.modules.unityanalytics",
+      "version": "1.0.0",
+      "source": "builtin",
+      "notices": []
+    },
+    {
+      "package": "com.unity.modules.unitywebrequest",
+      "version": "1.0.0",
+      "source": "builtin",
+      "notices": []
+    },
+    {
+      "package": "com.unity.modules.unitywebrequestassetbundle",
+      "version": "1.0.0",
+      "source": "builtin",
+      "notices": []
+    },
+    {
+      "package": "com.unity.modules.unitywebrequestaudio",
+      "version": "1.0.0",
+      "source": "builtin",
+      "notices": []
+    },
+    {
+      "package": "com.unity.modules.unitywebrequesttexture",
+      "version": "1.0.0",
+      "source": "builtin",
+      "notices": []
+    },
+    {
+      "package": "com.unity.modules.unitywebrequestwww",
+      "version": "1.0.0",
+      "source": "builtin",
+      "notices": []
+    },
+    {
+      "package": "com.unity.modules.vectorgraphics",
+      "version": "1.0.0",
+      "source": "builtin",
+      "notices": []
+    },
+    {
+      "package": "com.unity.modules.vehicles",
+      "version": "1.0.0",
+      "source": "builtin",
+      "notices": []
+    },
+    {
+      "package": "com.unity.modules.video",
+      "version": "1.0.0",
+      "source": "builtin",
+      "notices": []
+    },
+    {
+      "package": "com.unity.modules.vr",
+      "version": "1.0.0",
+      "source": "builtin",
+      "notices": []
+    },
+    {
+      "package": "com.unity.modules.wind",
+      "version": "1.0.0",
+      "source": "builtin",
+      "notices": []
+    },
+    {
+      "package": "com.unity.modules.xr",
+      "version": "1.0.0",
+      "source": "builtin",
+      "notices": []
+    },
+    {
+      "package": "com.unity.multiplayer.center",
+      "version": "1.0.1",
+      "source": "builtin",
+      "notices": [
+        {
+          "path": "docs/licenses/packages/com.unity.multiplayer.center-1.0.1/LICENSE.md",
+          "source": "Zombie Shoot VR/Library/PackageCache/com.unity.multiplayer.center@f01f4ba8d00a/LICENSE.md",
+          "sha256": "e6522fc3e87017b4950060c58fac8478ecc96ba84ce48f4678b73dc1289d6c03"
+        },
+        {
+          "path": "docs/licenses/packages/com.unity.multiplayer.center-1.0.1/Third Party Notices.md",
+          "source": "Zombie Shoot VR/Library/PackageCache/com.unity.multiplayer.center@f01f4ba8d00a/Third Party Notices.md",
+          "sha256": "85105d078ca8cdcd75fbb5e7ddb75d5b569f0e20270d3b9f387f37c30130b720"
+        }
+      ]
+    },
+    {
+      "package": "com.unity.nuget.mono-cecil",
+      "version": "1.11.6",
+      "source": "registry",
+      "notices": [
+        {
+          "path": "docs/licenses/packages/com.unity.nuget.mono-cecil-1.11.6/LICENSE.md",
+          "source": "Zombie Shoot VR/Library/PackageCache/com.unity.nuget.mono-cecil@ecb9724e46ff/LICENSE.md",
+          "sha256": "76101254034fbea9afc4169e98ce15382b0f130e3bf15e7da1ca599d940e1cda"
+        },
+        {
+          "path": "docs/licenses/packages/com.unity.nuget.mono-cecil-1.11.6/Third Party Notices.md",
+          "source": "Zombie Shoot VR/Library/PackageCache/com.unity.nuget.mono-cecil@ecb9724e46ff/Third Party Notices.md",
+          "sha256": "99966d24b32096a2a1963d9ccec993cf1c729fafd359179ee727762b2dd2b4ba"
+        }
+      ]
+    },
+    {
+      "package": "com.unity.performance.profile-analyzer",
+      "version": "1.4.0",
+      "source": "registry",
+      "notices": [
+        {
+          "path": "docs/licenses/packages/com.unity.performance.profile-analyzer-1.4.0/LICENSE.md",
+          "source": "Zombie Shoot VR/Library/PackageCache/com.unity.performance.profile-analyzer@2bb26871883c/LICENSE.md",
+          "sha256": "05467652502bf5e06578e6fc65880aa4f5110005bc93f7cd47b4c500014f25a9"
+        }
+      ]
+    },
+    {
+      "package": "com.unity.render-pipelines.core",
+      "version": "17.3.0",
+      "source": "builtin",
+      "notices": [
+        {
+          "path": "docs/licenses/packages/com.unity.render-pipelines.core-17.3.0/LICENSE.md",
+          "source": "Zombie Shoot VR/Library/PackageCache/com.unity.render-pipelines.core@0bb36005e9ba/LICENSE.md",
+          "sha256": "39691adc5fdaf614d951f53637e22501baf46fcc535a69ab8a21ebaa8b9e9cb4"
+        },
+        {
+          "path": "docs/licenses/packages/com.unity.render-pipelines.core-17.3.0/THIRD PARTY NOTICES.md",
+          "source": "Zombie Shoot VR/Library/PackageCache/com.unity.render-pipelines.core@0bb36005e9ba/THIRD PARTY NOTICES.md",
+          "sha256": "fdfacc9a242bda05b26eace324033b467b7d70e83a2761cd03337b612affc339"
+        }
+      ]
+    },
+    {
+      "package": "com.unity.render-pipelines.universal-config",
+      "version": "17.0.3",
+      "source": "builtin",
+      "notices": [
+        {
+          "path": "docs/licenses/packages/com.unity.render-pipelines.universal-config-17.0.3/LICENSE.md",
+          "source": "Zombie Shoot VR/Library/PackageCache/com.unity.render-pipelines.universal-config@8dc1aab4af1d/LICENSE.md",
+          "sha256": "fa2dcbc8ff967f49342c6c61854909ba4bbcc70b27f07d25538b8eaf7be5be3c"
+        }
+      ]
+    },
+    {
+      "package": "com.unity.render-pipelines.universal",
+      "version": "17.3.0",
+      "source": "builtin",
+      "notices": [
+        {
+          "path": "docs/licenses/packages/com.unity.render-pipelines.universal-17.3.0/LICENSE.md",
+          "source": "Zombie Shoot VR/Library/PackageCache/com.unity.render-pipelines.universal@7865b6b91f8a/LICENSE.md",
+          "sha256": "4be520a425e06c8de56fa8aee1ce957cfe610406456278172a2d18b7c388c2cf"
+        },
+        {
+          "path": "docs/licenses/packages/com.unity.render-pipelines.universal-17.3.0/Third Party Notices.md",
+          "source": "Zombie Shoot VR/Library/PackageCache/com.unity.render-pipelines.universal@7865b6b91f8a/Third Party Notices.md",
+          "sha256": "0652509dfc81a1a3d9e037e59bd047b305155fc5c4abeef69e2fc078488035fd"
+        }
+      ]
+    },
+    {
+      "package": "com.unity.searcher",
+      "version": "4.9.5",
+      "source": "registry",
+      "notices": [
+        {
+          "path": "docs/licenses/packages/com.unity.searcher-4.9.5/LICENSE.md",
+          "source": "Zombie Shoot VR/Library/PackageCache/com.unity.searcher@a463122f2c00/LICENSE.md",
+          "sha256": "73e67aa49be44b2b1e37d4244224bf111a82b79235324457bcc82ac4fb339f61"
+        }
+      ]
+    },
+    {
+      "package": "com.unity.settings-manager",
+      "version": "2.1.1",
+      "source": "registry",
+      "notices": [
+        {
+          "path": "docs/licenses/packages/com.unity.settings-manager-2.1.1/LICENSE.md",
+          "source": "Zombie Shoot VR/Library/PackageCache/com.unity.settings-manager@0b8638c5ce86/LICENSE.md",
+          "sha256": "a3e5f04ac956baf993de51da35968ce8721ad3684952ce0160e1af1e7bda5739"
+        }
+      ]
+    },
+    {
+      "package": "com.unity.shadergraph",
+      "version": "17.3.0",
+      "source": "builtin",
+      "notices": [
+        {
+          "path": "docs/licenses/packages/com.unity.shadergraph-17.3.0/LICENSE.md",
+          "source": "Zombie Shoot VR/Library/PackageCache/com.unity.shadergraph@b4b75cc00891/LICENSE.md",
+          "sha256": "364b0c08b7fe15b70c4777dccb26fc21d02ae831c2f707dbe29879ac15ece353"
+        }
+      ]
+    },
+    {
+      "package": "com.unity.test-framework.performance",
+      "version": "3.5.0",
+      "source": "registry",
+      "notices": [
+        {
+          "path": "docs/licenses/packages/com.unity.test-framework.performance-3.5.0/LICENSE.md",
+          "source": "Zombie Shoot VR/Library/PackageCache/com.unity.test-framework.performance@8b56083ec0f0/LICENSE.md",
+          "sha256": "202adffac8b9d21d3b148a294d241894f3bcef85724c01b6a0bd52269a3798c8"
+        },
+        {
+          "path": "docs/licenses/packages/com.unity.test-framework.performance-3.5.0/Third Party Notices.md",
+          "source": "Zombie Shoot VR/Library/PackageCache/com.unity.test-framework.performance@8b56083ec0f0/Third Party Notices.md",
+          "sha256": "361cdb83b8f7c4868ad5c61d8014ab423d9229919219f77bae1eb36084e0227a"
+        }
+      ]
+    },
+    {
+      "package": "com.unity.test-framework",
+      "version": "1.6.0",
+      "source": "builtin",
+      "notices": [
+        {
+          "path": "docs/licenses/packages/com.unity.test-framework-1.6.0/LICENSE.md",
+          "source": "Zombie Shoot VR/Library/PackageCache/com.unity.test-framework@bd7f943e9647/LICENSE.md",
+          "sha256": "d3b09e9683afbc8d468a83000308f18e7133eaf7879af870747000a66e3c0693"
+        }
+      ]
+    },
+    {
+      "package": "com.unity.testtools.codecoverage",
+      "version": "1.3.0",
+      "source": "registry",
+      "notices": [
+        {
+          "path": "docs/licenses/packages/com.unity.testtools.codecoverage-1.3.0/LICENSE.md",
+          "source": "Zombie Shoot VR/Library/PackageCache/com.unity.testtools.codecoverage@19a841221620/LICENSE.md",
+          "sha256": "b1574c7d4980a6f4b83f4c69f9a0e520e2b2ad29d13e16d9cb1e43c91b6d1b8b"
+        },
+        {
+          "path": "docs/licenses/packages/com.unity.testtools.codecoverage-1.3.0/Third Party Notices.md",
+          "source": "Zombie Shoot VR/Library/PackageCache/com.unity.testtools.codecoverage@19a841221620/Third Party Notices.md",
+          "sha256": "09b652997ac501d1fd482993acd5cf1336742030405a779c83014e3ead6f55dd"
+        }
+      ]
+    },
+    {
+      "package": "com.unity.ugui",
+      "version": "2.0.0",
+      "source": "builtin",
+      "notices": [
+        {
+          "path": "docs/licenses/packages/com.unity.ugui-2.0.0/LICENSE.md",
+          "source": "Zombie Shoot VR/Library/PackageCache/com.unity.ugui@27635d171b1a/LICENSE.md",
+          "sha256": "a8e0cae87b2edb8c205ae6c308f20b89a09f32d62bd4a3ff0343bb4724a4201e"
+        }
+      ]
+    },
+    {
+      "package": "com.unity.xr.androidxr-openxr",
+      "version": "1.3.1",
+      "source": "registry",
+      "notices": [
+        {
+          "path": "docs/licenses/packages/com.unity.xr.androidxr-openxr-1.3.1/LICENSE.md",
+          "source": "Zombie Shoot VR/Library/PackageCache/com.unity.xr.androidxr-openxr@85a4ea3b26b6/LICENSE.md",
+          "sha256": "3dc8b1a784f0bbd7c0ee204b11233c69851f7fb6715720c9c339720207e623b2"
+        },
+        {
+          "path": "docs/licenses/packages/com.unity.xr.androidxr-openxr-1.3.1/Third Party Notices.md",
+          "source": "Zombie Shoot VR/Library/PackageCache/com.unity.xr.androidxr-openxr@85a4ea3b26b6/Third Party Notices.md",
+          "sha256": "c6f70d893e5d8047dda89d3110ca3aeb8fe1e2695606f77c00677af7b7ddf158"
+        }
+      ]
+    },
+    {
+      "package": "com.unity.xr.arfoundation",
+      "version": "6.5.0",
+      "source": "registry",
+      "notices": [
+        {
+          "path": "docs/licenses/packages/com.unity.xr.arfoundation-6.5.0/LICENSE.md",
+          "source": "Zombie Shoot VR/Library/PackageCache/com.unity.xr.arfoundation@13d2457b468b/LICENSE.md",
+          "sha256": "6b6b4166164a5c547ee4e04a005c3f7d2880745a6e553a43aeaf1e7eddf7f093"
+        }
+      ]
+    },
+    {
+      "package": "com.unity.xr.compositionlayers",
+      "version": "2.5.0",
+      "source": "registry",
+      "notices": [
+        {
+          "path": "docs/licenses/packages/com.unity.xr.compositionlayers-2.5.0/LICENSE.md",
+          "source": "Zombie Shoot VR/Library/PackageCache/com.unity.xr.compositionlayers@2843cb312e13/LICENSE.md",
+          "sha256": "bf9b749e40266c2c0bddfbda49cf5bb25b368747765dcbb5704f6fd73efdc3e8"
+        }
+      ]
+    },
+    {
+      "package": "com.unity.xr.core-utils",
+      "version": "2.6.0",
+      "source": "registry",
+      "notices": [
+        {
+          "path": "docs/licenses/packages/com.unity.xr.core-utils-2.6.0/LICENSE.md",
+          "source": "Zombie Shoot VR/Library/PackageCache/com.unity.xr.core-utils@a8b900321199/LICENSE.md",
+          "sha256": "729d2121f79da7d543602c8dbafe84779dcfdaa203156f3dac9bd0605c973818"
+        }
+      ]
+    },
+    {
+      "package": "com.unity.xr.hands",
+      "version": "1.8.1",
+      "source": "registry",
+      "notices": [
+        {
+          "path": "docs/licenses/packages/com.unity.xr.hands-1.8.1/LICENSE.md",
+          "source": "Zombie Shoot VR/Library/PackageCache/com.unity.xr.hands@0908de89928b/LICENSE.md",
+          "sha256": "4f9d3a47475c63a35f245ec2ab74ab274fd8af8ea179b44a879566ee0ac0949d"
+        },
+        {
+          "path": "docs/licenses/packages/com.unity.xr.hands-1.8.1/Third Party Notices.md",
+          "source": "Zombie Shoot VR/Library/PackageCache/com.unity.xr.hands@0908de89928b/Third Party Notices.md",
+          "sha256": "9eb9e8d5c757ce3e6c4748090444ea9854f6b9419727f559939fda2d4023da6b"
+        }
+      ]
+    },
+    {
+      "package": "com.unity.xr.interaction.toolkit",
+      "version": "3.5.1",
+      "source": "registry",
+      "notices": [
+        {
+          "path": "docs/licenses/packages/com.unity.xr.interaction.toolkit-3.5.1/LICENSE.md",
+          "source": "Zombie Shoot VR/Library/PackageCache/com.unity.xr.interaction.toolkit@63ca3b7ce776/LICENSE.md",
+          "sha256": "00fad8864c2208d6bfb6827af9bf0715530ec69cf3c408443e16a43efa695e1e"
+        },
+        {
+          "path": "docs/licenses/packages/com.unity.xr.interaction.toolkit-3.5.1/Third Party Notices.md",
+          "source": "Zombie Shoot VR/Library/PackageCache/com.unity.xr.interaction.toolkit@63ca3b7ce776/Third Party Notices.md",
+          "sha256": "100eff46d4f29569d1eb85738dd86ac2ce4c4ea2e08f9bf6c784354e09f9f7b8"
+        }
+      ]
+    },
+    {
+      "package": "com.unity.xr.legacyinputhelpers",
+      "version": "2.1.13",
+      "source": "registry",
+      "notices": [
+        {
+          "path": "docs/licenses/packages/com.unity.xr.legacyinputhelpers-2.1.13/LICENSE.md",
+          "source": "Zombie Shoot VR/Library/PackageCache/com.unity.xr.legacyinputhelpers@9535ff2c27ac/LICENSE.md",
+          "sha256": "5c5aa0b40b2699e2f3c1709f782f96ed5e37886c8722eb4a6ded1f9c766f8a83"
+        },
+        {
+          "path": "docs/licenses/packages/com.unity.xr.legacyinputhelpers-2.1.13/Third Party Notices.md",
+          "source": "Zombie Shoot VR/Library/PackageCache/com.unity.xr.legacyinputhelpers@9535ff2c27ac/Third Party Notices.md",
+          "sha256": "f21b4d545deb1225278bba935e7d9ee07cee5dcb447d3287ea0bd9c21b215e95"
+        }
+      ]
+    },
+    {
+      "package": "com.unity.xr.management",
+      "version": "4.6.1",
+      "source": "registry",
+      "notices": [
+        {
+          "path": "docs/licenses/packages/com.unity.xr.management-4.6.1/LICENSE.md",
+          "source": "Zombie Shoot VR/Library/PackageCache/com.unity.xr.management@df145a5bc89e/LICENSE.md",
+          "sha256": "7a6f61c0a6481885ab097422dae29b53feabd8b490ece147c7b0620cb7943a04"
+        }
+      ]
+    },
+    {
+      "package": "com.unity.xr.meta-openxr",
+      "version": "2.5.1",
+      "source": "registry",
+      "notices": [
+        {
+          "path": "docs/licenses/packages/com.unity.xr.meta-openxr-2.5.1/LICENSE.md",
+          "source": "Zombie Shoot VR/Library/PackageCache/com.unity.xr.meta-openxr@6d169a09f2c7/LICENSE.md",
+          "sha256": "4e1a29e56ca28f223659e4a1146967a8998c1a54b7efc248dc66ca4b1d2c8dcd"
+        },
+        {
+          "path": "docs/licenses/packages/com.unity.xr.meta-openxr-2.5.1/Third Party Notices.md",
+          "source": "Zombie Shoot VR/Library/PackageCache/com.unity.xr.meta-openxr@6d169a09f2c7/Third Party Notices.md",
+          "sha256": "a82c4545e58a0fc5b80e778bdaac4ef1cd1b8fa49e0a0ba04e9685e9450f97df"
+        }
+      ]
+    },
+    {
+      "package": "com.unity.xr.openxr",
+      "version": "1.17.1",
+      "source": "registry",
+      "notices": [
+        {
+          "path": "docs/licenses/packages/com.unity.xr.openxr-1.17.1/LICENSE.md",
+          "source": "Zombie Shoot VR/Library/PackageCache/com.unity.xr.openxr@58837b2992e0/LICENSE.md",
+          "sha256": "579ae5e666c4d955c1a0f6904d2fe9319d2bd94d38120fd1a50feb78ce87ce0f"
+        },
+        {
+          "path": "docs/licenses/packages/com.unity.xr.openxr-1.17.1/Third Party Notices.md",
+          "source": "Zombie Shoot VR/Library/PackageCache/com.unity.xr.openxr@58837b2992e0/Third Party Notices.md",
+          "sha256": "9eb9e8d5c757ce3e6c4748090444ea9854f6b9419727f559939fda2d4023da6b"
+        }
+      ]
+    }
+  ],
+  "fontLicenseSources": [
+    {
+      "file": "docs/licenses/Inter-3.010-OFL.txt",
+      "url": "https://raw.githubusercontent.com/rsms/inter/aca7606f250a74d4b42ee4c4038dcef28395d000/LICENSE.txt",
+      "sha256": "e68284465dffb78145848f2c2e466add3a8f1025788497e95e090f06e5bc19a4"
+    },
+    {
+      "file": "docs/licenses/Liberation-OFL.txt",
+      "url": "https://raw.githubusercontent.com/liberationfonts/liberation-fonts/380277b57ffb0b49ca655962c850ff0224a61cae/LICENSE",
+      "sha256": "93fed46019c38bbe566b479d22148e2e8a1e85ada614accb0211c37b2c61c19b"
+    }
+  ],
+  "limitations": [
+    "Registry/package inventory is not a per-build dependency inventory.",
+    "Source-only reproduction archive predates added notices; include docs/licenses in the final submission.",
+    "Final K2/zombie visuals, scans and their provenance are not complete.",
+    "Font metadata confirms versions and OFL declaration; exact Liberation 2.00.1 distribution archive was not obtained.",
+    "Installed root notices are preserved; nested third-party material and final engine/build redistribution inventory require final audit."
+  ],
+  "validation": {
+    "lockedPackages": 70,
+    "inspectedPackages": 70,
+    "missingPackages": [],
+    "matchingPackageNoticeCopies": 49,
+    "matchingTemplateFonts": 2,
+    "localLinksChecked": 40,
+    "runtimeChanged": false
+  },
+  "review": "Self-review of embedded font version/license records, exact template font hashes, locked package versions, copied notice hashes and document paths. Independent review pending."
+}

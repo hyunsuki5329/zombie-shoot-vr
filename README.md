@@ -40,4 +40,6 @@
 
 현재 포함된 Unity 템플릿·패키지 샘플·폰트 등 외부 에셋에는 각각의 사용 조건이 적용된다. 저장소 전체에 임의의 오픈 소스 라이선스를 부여하지 않는다. 실제 게임용 에셋을 채택할 때 [출처 관리 문서](docs/vr-fps-project-docs/07-assets-licenses.md)를 갱신한다.
 
+[현재 자산 출처표](docs/asset-provenance.md)와 [보존한 라이선스/제3자 고지](docs/licenses/README.md)를 제출 준비에 사용한다. 미채택 모델 후보와 실제 포함 자산을 구분하며 최종 외형·스캔 출처는 추가 검증이 필요하다.
+
 단위별 자동 시험·빌드와 사용자 관찰은 [진행 기록](docs/progress.md) 및 `docs/evidence/`에 구분해 남긴다. 전체 완료나 성능 합격은 실제 두 맵과 최종 빌드의 인수 결과로 판정한다. 캐시 없는 소스 내보내기 검증은 [복원 안내](docs/source-reproduction.md)에 기록한다.

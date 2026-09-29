@@ -12,6 +12,8 @@
 
 Git clone 또는 아래 소스 내보내기에서 같은 커밋을 고정한다. `Library`, `Temp`, `Logs`, 빌드, 개인 촬영 원본, `.git`, 자격 증명은 복원에 넣지 않는다. 개인 OpenXR/튜토리얼 미커밋 설정을 내보내기에 섞지 않는다. 새 PC에는 그 PC에 맞는 검증된 VR 런타임/연결 환경이 별도로 필요하다.
 
+최종 소스/문서 묶음에는 [자산 출처표](asset-provenance.md)와 `docs/licenses/`도 동봉한다. 아래8a28aee 리허설 ZIP은 후속 추가된 고지를 포함하지 않으며 최종 제출 ZIP이 아니다.
+
 ```powershell
 # 저장소 루트에서, 새 파일/폴더 이름을 사용한다.
 git archive --format=zip --output=source-8a28aee.zip 8a28aee -- 'Zombie Shoot VR/Assets' 'Zombie Shoot VR/Packages' 'Zombie Shoot VR/ProjectSettings'
