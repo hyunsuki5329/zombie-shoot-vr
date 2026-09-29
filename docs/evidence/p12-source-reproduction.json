@@ -1,0 +1,130 @@
+{
+  "unit": "P12-a source-only export and reproduction",
+  "date": "2026-09-29",
+  "sourceCommit": "8a28aee702f886dc26bb3e669c063d37121eead0",
+  "requirements": [
+    "P12",
+    "T20 (source restore/build subset only)"
+  ],
+  "archive": {
+    "path": "tmp\\p12-reproduction\\source-8a28aee.zip",
+    "bytes": 92927261,
+    "sha256": "717c32af61a0b57a0fd6c8c02e250a17b0be40af2df2949dc07b637c31ef10e5",
+    "files": 1723,
+    "exportedRoots": [
+      "Assets",
+      "Packages",
+      "ProjectSettings"
+    ],
+    "libraryPresentBeforeImport": false,
+    "userUncommittedSettingsIncluded": false
+  },
+  "tests": [
+    {
+      "platform": "editmode",
+      "result": "Passed",
+      "total": 50,
+      "passed": 50,
+      "failed": 0,
+      "path": "tmp\\p12-reproduction\\editmode.xml",
+      "sha256": "c205df9a7c6a4f33c3fc002cff9e2afe16a6cce550de6c5c402d4bd7467e0130",
+      "startTime": "2026-09-28 14:22:22Z",
+      "endTime": "2026-09-28 14:22:23Z"
+    },
+    {
+      "platform": "playmode",
+      "result": "Passed",
+      "total": 116,
+      "passed": 116,
+      "failed": 0,
+      "path": "tmp\\p12-reproduction\\playmode.xml",
+      "sha256": "b4e227d116634ce2853ae6b0ed976ee1e70fded9f164fe4818df55f694fd5d15",
+      "startTime": "2026-09-28 14:23:22Z",
+      "endTime": "2026-09-28 14:23:29Z"
+    }
+  ],
+  "build": {
+    "result": "Both Windows x64 Mono Development builds succeeded",
+    "exitCodeFromLog": 0,
+    "files": {
+      "BootstrapPreview": 341,
+      "WaveLab": 337
+    },
+    "frameTimingSettingRestored": true,
+    "log": "tmp\\p12-reproduction\\build.log",
+    "logSha256": "c9a53f7ec3556c2c7a20a575a4b38c238e352778257aa83748e7382cd39eacd2",
+    "manifest": "tmp\\p12-reproduction\\build-manifest.json",
+    "manifestSha256": "fc7d5d9032cc48c0b1ce46b6d0046eb1a7194dc57b9ec1a4dd63e9fc6f3de931"
+  },
+  "postBuildSource": {
+    "changedFiles": [
+      "Zombie Shoot VR/Assets/DefaultVolumeProfile.asset",
+      "Zombie Shoot VR/Assets/Samples/XR Interaction Toolkit/3.5.1/Hands Interaction Demo/DemoAssets/Textures/AnchorGlowGradient.png.meta",
+      "Zombie Shoot VR/Assets/Samples/XR Interaction Toolkit/3.5.1/Hands Interaction Demo/DemoAssets/Textures/Circle60x60Horizontal.png.meta",
+      "Zombie Shoot VR/Assets/Samples/XR Interaction Toolkit/3.5.1/Hands Interaction Demo/DemoAssets/Textures/Pause.png.meta",
+      "Zombie Shoot VR/Assets/Samples/XR Interaction Toolkit/3.5.1/Hands Interaction Demo/DemoAssets/Textures/Play.png.meta",
+      "Zombie Shoot VR/Assets/Samples/XR Interaction Toolkit/3.5.1/Hands Interaction Demo/DemoAssets/Textures/Round Radius 10.png.meta",
+      "Zombie Shoot VR/Assets/Samples/XR Interaction Toolkit/3.5.1/Hands Interaction Demo/DemoAssets/Textures/UIIconTeleport.png.meta",
+      "Zombie Shoot VR/Assets/Samples/XR Interaction Toolkit/3.5.1/Starter Assets/DemoAssets/Sprites/Asset.png.meta",
+      "Zombie Shoot VR/Assets/Samples/XR Interaction Toolkit/3.5.1/Starter Assets/DemoAssets/Sprites/Checkmark.png.meta",
+      "Zombie Shoot VR/Assets/Samples/XR Interaction Toolkit/3.5.1/Starter Assets/DemoAssets/Sprites/Circle_60x60 Outline 4.png.meta",
+      "Zombie Shoot VR/Assets/Samples/XR Interaction Toolkit/3.5.1/Starter Assets/DemoAssets/Sprites/Circle_60x60_Horizontal.png.meta",
+      "Zombie Shoot VR/Assets/Samples/XR Interaction Toolkit/3.5.1/Starter Assets/DemoAssets/Sprites/Forward.png.meta",
+      "Zombie Shoot VR/Assets/Samples/XR Interaction Toolkit/3.5.1/Starter Assets/DemoAssets/Sprites/LegibilityMask.png.meta",
+      "Zombie Shoot VR/Assets/Samples/XR Interaction Toolkit/3.5.1/Starter Assets/DemoAssets/Sprites/Round Radius 4 Outline.png.meta",
+      "Zombie Shoot VR/Assets/Samples/XR Interaction Toolkit/3.5.1/Starter Assets/DemoAssets/Sprites/Round Radius 4.png.meta",
+      "Zombie Shoot VR/Assets/Settings/Project Configuration/Performance URP Config.asset",
+      "Zombie Shoot VR/Assets/Settings/Project Configuration/Quality URP Config.asset",
+      "Zombie Shoot VR/Assets/Settings/Project Configuration/UniversalRenderPipelineGlobalSettings.asset",
+      "Zombie Shoot VR/Assets/VRTemplateAssets/Materials/Anchor Materials/Anchor Glow Gradient.png.meta",
+      "Zombie Shoot VR/Assets/VRTemplateAssets/Materials/Anchor Materials/White_Mixed_AO.png.meta",
+      "Zombie Shoot VR/Assets/VRTemplateAssets/Sprites/CoachingCards/Coaching Step 1.png.meta",
+      "Zombie Shoot VR/Assets/VRTemplateAssets/Sprites/CoachingCards/Coaching Step 2.png.meta",
+      "Zombie Shoot VR/Assets/VRTemplateAssets/Sprites/CoachingCards/Coaching Step 3.png.meta",
+      "Zombie Shoot VR/Assets/VRTemplateAssets/Sprites/CoachingCards/Coaching Step 4.png.meta",
+      "Zombie Shoot VR/Assets/VRTemplateAssets/Sprites/CoachingCards/Coaching Step 5.png.meta",
+      "Zombie Shoot VR/Assets/VRTemplateAssets/Sprites/CoachingCards/Coaching Step 6.png.meta",
+      "Zombie Shoot VR/Assets/VRTemplateAssets/Sprites/Icons/Checkmark.png.meta",
+      "Zombie Shoot VR/Assets/VRTemplateAssets/Sprites/Icons/Chevron.png.meta",
+      "Zombie Shoot VR/Assets/VRTemplateAssets/Sprites/Icons/Forward.png.meta",
+      "Zombie Shoot VR/Assets/VRTemplateAssets/Sprites/Icons/Pause.png.meta",
+      "Zombie Shoot VR/Assets/VRTemplateAssets/Sprites/Icons/Play.png.meta",
+      "Zombie Shoot VR/Assets/VRTemplateAssets/Sprites/Icons/Rotate Left.png.meta",
+      "Zombie Shoot VR/Assets/VRTemplateAssets/Sprites/Icons/Rotate Right.png.meta",
+      "Zombie Shoot VR/Assets/VRTemplateAssets/Sprites/Icons/Scroll Down.png.meta",
+      "Zombie Shoot VR/Assets/VRTemplateAssets/Sprites/Icons/Scroll Left.png.meta",
+      "Zombie Shoot VR/Assets/VRTemplateAssets/Sprites/Icons/Scroll Right.png.meta",
+      "Zombie Shoot VR/Assets/VRTemplateAssets/Sprites/Icons/Scroll Up.png.meta",
+      "Zombie Shoot VR/Assets/VRTemplateAssets/Sprites/Icons/Teleport.png.meta",
+      "Zombie Shoot VR/Assets/VRTemplateAssets/Sprites/UI/CircleMask.png.meta",
+      "Zombie Shoot VR/Assets/VRTemplateAssets/Sprites/UI/Circle_60x60 Outline 4.png.meta",
+      "Zombie Shoot VR/Assets/VRTemplateAssets/Sprites/UI/Circle_60x60 Outline.png.meta",
+      "Zombie Shoot VR/Assets/VRTemplateAssets/Sprites/UI/Circle_60x60_Horizontal.png.meta",
+      "Zombie Shoot VR/Assets/VRTemplateAssets/Sprites/UI/Circle_60x60_Vertical.png.meta",
+      "Zombie Shoot VR/Assets/VRTemplateAssets/Sprites/UI/Joystick BG.png.meta",
+      "Zombie Shoot VR/Assets/VRTemplateAssets/Sprites/UI/Joystick Segment.png.meta",
+      "Zombie Shoot VR/Assets/VRTemplateAssets/Sprites/UI/Round Radius 10 Bottom.png.meta",
+      "Zombie Shoot VR/Assets/VRTemplateAssets/Sprites/UI/Round Radius 10 Outline.png.meta",
+      "Zombie Shoot VR/Assets/VRTemplateAssets/Sprites/UI/Round Radius 10 Top.png.meta",
+      "Zombie Shoot VR/Assets/VRTemplateAssets/Sprites/UI/Round Radius 10.png.meta",
+      "Zombie Shoot VR/Assets/VRTemplateAssets/Tutorial/Images/Unity Logo.png.meta",
+      "Zombie Shoot VR/Assets/XR/Settings/OpenXRPackageSettings.asset",
+      "Zombie Shoot VR/ProjectSettings/EditorBuildSettings.asset",
+      "Zombie Shoot VR/ProjectSettings/GraphicsSettings.asset",
+      "Zombie Shoot VR/ProjectSettings/ProjectSettings.asset",
+      "Zombie Shoot VR/ProjectSettings/ShaderGraphSettings.asset",
+      "Zombie Shoot VR/ProjectSettings/UnityConnectSettings.asset"
+    ],
+    "changedMetaGuids": [],
+    "changedVRFPSOrPackageFiles": [],
+    "missingAssetFileMetas": []
+  },
+  "review": "Self-review of paths, commands, logs, source archive boundaries, imported GUIDs and final artifacts. Independent review pending.",
+  "limitations": [
+    "Same Windows machine: global UPM cache and licensed Unity reused; not an offline/new-PC test.",
+    "Headless tests do not prove Quest Pro stereo/input/performance.",
+    "Real Room/Classroom and final asset appearance absent.",
+    "Source-only archive is local rehearsal, not final submission or redistribution approval.",
+    "Original hardware-test builds were not replaced."
+  ]
+}
