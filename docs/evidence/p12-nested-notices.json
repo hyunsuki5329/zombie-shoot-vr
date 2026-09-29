@@ -1,0 +1,19 @@
+{
+  "date": "2026-09-30",
+  "scope": "Installed locked PackageCache nested filenames LICENSE/COPYING/NOTICE/OFL and Third Party Notices, excluding .meta and package root",
+  "package_count": 70,
+  "notices": [
+    {
+      "package": "com.unity.mathematics",
+      "version": "1.3.3",
+      "source": "Zombie Shoot VR/Library/PackageCache/com.unity.mathematics@19a9377c4ffa/Unity.Mathematics/Noise/LICENSE",
+      "copy": "docs/licenses/packages/com.unity.mathematics-1.3.3/Unity.Mathematics/Noise/LICENSE",
+      "sha256": "bdafce1bb01517c9ae6c4f3620c01340790b5e9d039ae9e356347d1174250916"
+    }
+  ],
+  "limitations": [
+    "Filename-based discovery does not find every inline copyright or unusually named notice",
+    "Not a final build dependency or engine redistribution audit",
+    "PackageCache is restored via lock; not copied into submission source"
+  ]
+}
