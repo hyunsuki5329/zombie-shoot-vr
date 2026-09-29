@@ -30,6 +30,12 @@ namespace VRFPS.Editor
 
         static GameObject RequireModel(string path)
         {
+            var importer = AssetImporter.GetAtPath(Root + path) as ModelImporter;
+            if (importer != null)
+            {
+                importer.importTangents = ModelImporterTangents.CalculateMikk;
+                importer.SaveAndReimport();
+            }
             var model = AssetDatabase.LoadAssetAtPath<GameObject>(Root + path);
             if (model == null) throw new FileNotFoundException("Run scripts/Restore-GamgoAssets.py first: " + path);
             return model;
@@ -42,6 +48,7 @@ namespace VRFPS.Editor
             if (importer == null) throw new FileNotFoundException(path);
             importer.textureType = normal ? TextureImporterType.NormalMap : TextureImporterType.Default;
             importer.sRGBTexture = !normal && !linear;
+            importer.flipGreenChannel = false;
             importer.isReadable = readable;
             importer.maxTextureSize = 2048;
             importer.mipmapEnabled = true;
@@ -64,6 +71,8 @@ namespace VRFPS.Editor
             material.SetColor("_BaseColor", Color.white);
             material.SetFloat("_WorkflowMode", 1);
             material.SetFloat("_Metallic", 1);
+            // Keep the authored normal strength; preview only after render resources are initialized.
+            material.SetFloat("_BumpScale", 1);
             material.EnableKeyword("_NORMALMAP");
             material.EnableKeyword("_METALLICSPECGLOSSMAP");
             return material;
