@@ -1,0 +1,41 @@
+{
+  "date": "2026-09-30",
+  "source_base": "3133162a161630032dc264fbc3f20d38bf81a080",
+  "archive_sha256": "1f21803666f8b7df182010a69f47499aa69e5d1d92eddab66da0fca8476d2a69",
+  "initial_state": "Git Assets/Packages/ProjectSettings only, no Library or GAMGO metadata; raw ZIP restore then fresh Unity import",
+  "defect": "Missing nested model renamed by Unity survived exact-name lookup and left unresolved serialized source GUID. Configure exited0 and original tests passed.",
+  "red": {
+    "test": "WeaponVisualAssetTests serialized model GUID resolution",
+    "failed": 1
+  },
+  "repair": "Remove only direct generated GAMGO Visual or its observed Unity missing-prefab name before recreating",
+  "green": {
+    "editmode_passed": 51,
+    "failed": 0,
+    "old_model_guids_absent": true,
+    "new_model_guids_differ": true,
+    "model_source_reference_count_per_prefab": 1
+  },
+  "independent_static_review": "review_gamgo_visual: no actionable findings in two-file fix; no Unity execution by reviewer",
+  "build": {
+    "status": "success",
+    "exit_code": 0,
+    "bootstrap_and_wavelab_succeeded": true,
+    "model_paths_in_build_log": true,
+    "log_sha256": "826f03751dd1a4e27d70b44268314f5ab6f1eac73addc8a45df675184ce94077"
+  },
+  "limits": [
+    "same PC global package cache/license may be reused",
+    "no headset result",
+    "fresh PlayMode not rerun"
+  ],
+  "serialized-red.xml": {
+    "sha256": "9741a742ea90ab86a3513aed8915f85f11882d26ddf8ebaa2aeb0a8efb9e4ea2"
+  },
+  "restore-green.xml": {
+    "sha256": "70bc7747b365b270afe2bc767b300c84fc02d61547f35248c6a93714dd46139a"
+  },
+  "repair-restore.log": {
+    "sha256": "02c95b72ac6e1761acf3db5acb5b90ca75297d799d4874815636f917a67495ea"
+  }
+}

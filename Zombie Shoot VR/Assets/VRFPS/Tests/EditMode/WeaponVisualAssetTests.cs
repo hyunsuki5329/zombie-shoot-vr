@@ -8,6 +8,13 @@ namespace VRFPS.Tests {
    var gun=rig.GetComponentInChildren<K2Controller>(true);
    var visual=gun.transform.Find("GAMGO Visual");
    Assert.That(visual,Is.Not.Null,"K2 final model missing");
+   foreach(var path in new[]{"Assets/VRFPS/Prefabs/Weapons/K2.prefab","Assets/VRFPS/Prefabs/Weapons/Magazine.prefab"}) {
+    foreach(System.Text.RegularExpressions.Match match in System.Text.RegularExpressions.Regex.Matches(System.IO.File.ReadAllText(path), @"m_SourcePrefab: \{fileID: [^,]+, guid: ([0-9a-f]+)"))
+     Assert.That(AssetDatabase.GUIDToAssetPath(match.Groups[1].Value),Is.Not.Empty,"Unresolved serialized nested model in "+path);
+    var prefab=AssetDatabase.LoadAssetAtPath<GameObject>(path);
+    foreach(var t in prefab.GetComponentsInChildren<Transform>(true))
+     Assert.That(PrefabUtility.IsPrefabAssetMissing(t.gameObject),Is.False,"Missing nested prefab: "+t.name);
+   }
    Assert.That(gun.transform.Find("Muzzle").localPosition,Is.EqualTo(new Vector3(0,0,.72f)));
    Assert.That(gun.transform.Find("Foregrip").localPosition,Is.EqualTo(new Vector3(0,0,.3f)));
    Assert.That(gun.transform.Find("Foregrip").GetComponent<Renderer>().enabled,Is.False);

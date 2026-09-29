@@ -32,3 +32,10 @@ python -B scripts/Restore-GamgoAssets.py --archives 'C:/Users/User/Downloads' --
 격리 적용기를 반복 실행한 뒤 EditMode51/51, 외형 적용 상태 PlayMode116/116을 확인했다. 생산 프로젝트에는 같은 로컬 자원과 두 프리팹만 복사했으며 사용자 XR/프로젝트 설정은 보존했다. Git 프리팹은 로컬 자원 GUID를 참조하므로 새 체크아웃에서 복원/적용 명령을 실행하기 전에는 외부 참조가 누락된다. 적용기가 새로 생성된 로컬 GUID로 두 프리팹의 외형 참조를 다시 연결한다. 이 절차 없이 소스 복원 완료를 주장하지 않는다.
 
 진단 이미지와 로그: `tmp/external-assets/gamgo/`, `tmp/p06-verification/Zombie Shoot VR/gamgo-rig-*.png`. 이는 로컬 조사 산출물이며 최종 제출 증빙은 확정 빌드에서 다시 만든다.
+
+
+## 새 GUID 복원에서 확인한 결함과 수정 (2026-09-30)
+
+3133162의 Git 소스만 새 폴더에 내보내고 원본 ZIP을 복원해 모델 meta/GUID를 새로 생성했다. 기존 도구는 Unity가 `GAMGO Visual (Missing Prefab...)`로 바꾼 자식을 제거하지 못해 옛 모델 참조를 남겼다. 종료0이나 기존51개 시험만으로 이를 발견하지 못했다.
+
+수정 도구는 바로 아래 자식 중 자체 생성 이름 또는 관측된 누락 프리팹 이름만 제거한다. 검사에는 저장된 `m_SourcePrefab` GUID가 실제 자산 경로로 해석되는지 확인을 추가했다. 수정 전1개 실패 후 복원본 전체 EditMode51개 통과, 두 프리팹 모두 옛 GUID 없음·새 GUID 참조1개를 확인했다. [복원 증빙](evidence/p04-gamgo-restoration.json). 새 PC·오프라인·실기 증명은 아니다.

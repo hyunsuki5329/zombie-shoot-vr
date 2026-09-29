@@ -126,8 +126,11 @@ namespace VRFPS.Editor
             var root = PrefabUtility.LoadPrefabContents(prefabPath);
             try
             {
-                var old = root.transform.Find("GAMGO Visual");
-                if (old != null) UnityEngine.Object.DestroyImmediate(old.gameObject);
+                // Unity renames an unavailable nested model after a clean source restore.
+                // Remove only our generated visual children, including that missing-prefab form.
+                foreach (var child in root.transform.Cast<Transform>().ToArray())
+                    if (child.name == "GAMGO Visual" || child.name.StartsWith("GAMGO Visual (Missing Prefab", StringComparison.Ordinal))
+                        UnityEngine.Object.DestroyImmediate(child.gameObject);
                 var visual = (GameObject)PrefabUtility.InstantiatePrefab(model, root.transform);
                 visual.name = "GAMGO Visual";
                 if (gun)

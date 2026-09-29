@@ -295,3 +295,11 @@
 - 적용 반복 후 최종 EditMode51/51, 외형 적용 상태 PlayMode116/116 통과. Windows BootstrapPreview와 WaveLab 빌드 성공/종료0, 빌드 로그에 GAMGO 모델·재질·텍스처 포함을 확인했다. [증빙](evidence/p04-gamgo-visual.json).
 - 생산 프로젝트의 로컬 원본/생성재질과 K2/Magazine 프리팹 두 개를 반영했다. 외부 원본은 Git 제외이며 복원 명령이 필요하다. 새 기기 빌드는 `Zombie Shoot VR/Builds/Windows/GamgoMenuLab/WaveLab.exe`, 복사파일 SHA256 일치를 확인했다. 기존 MenuLab은 유지했다.
 - PR #12 https://github.com/hyunsuki5329/zombie-shoot-vr/pull/12 는 초안으로 유지한다. 실제 손 정렬·수동 재장전·첫 프레임/양안·성능, 새 체크아웃 외형 복원 리허설과 독립 리뷰는 남아 있으며 전체 P04/P05 완료로 확대하지 않는다.
+
+
+### P04/P12 새 소스의 외부 모델 참조 복원 수정 (2026-09-30)
+
+- 3133162 Git Assets/Packages/ProjectSettings를 Library와 외부meta 없이 새 폴더에 내보내 원본 ZIP 두 개만 복원했다. 새 모델 GUID가 생성됐지만 기존 적용기는 이름이 바뀐 누락 프리팹을 남기는 결함이 있었다. 기존 시험51개가 통과해도 저장 파일에 옛 참조가 남아 있었으므로 검증 범위를 보강했다.
+- 저장된 m_SourcePrefab GUID 해석 검사에서 수정 전1개 실패를 확인했다. 자체 생성 이름/Unity 누락 이름인 직접 자식만 제거하도록 수정한 뒤 두 프리팹 모두 새 모델 참조1개·옛 GUID없음을 확인하고 **EditMode51/51** 통과했다. 복원본으로 **BootstrapPreview/WaveLab Windows 빌드2개 성공·종료0**, 빌드 로그의 K2/탄창 자원 포함을 확인했다. [증빙](evidence/p04-gamgo-restoration.json).
+- 독립 정적 리뷰는 수정 범위/정확성의 추가 지적 없음이었다. Unity 실검증은 본 작업에서 수행했다. 첫 객체API 검사만으로 못 잡았던 과정도 증빙에 구분한다. 기존 기기용 GamgoMenuLab은 유지한다. 런타임 로직은 바꾸지 않았으며 새 복원본 PlayMode 전체를 재실행했다고 주장하지 않는다.
+- 같은 PC의 전역 패키지 캐시/라이선스는 재사용 가능하므로 새 PC/오프라인 재현 증명은 아니다. 초기화 이후 반대면 렌더도 확인했으나 실제 손/재장전·양안·실행 첫 프레임·72Hz 성능은 대기다. PR #12는 초안 유지, 다음은 사용자 기기 결과 반영과 실제 공간/최종 적 자산 통합이다.
