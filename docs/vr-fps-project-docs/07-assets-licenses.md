@@ -1,5 +1,7 @@
 # 무료 에셋과 출처 관리
 
+현재 실제 포함 자산은 [2026-09-29 출처 조사와 원문 고지](../asset-provenance.md)를 따른다. 아래 외부 모델 후보를 실제 채택한 것으로 해석하지 않는다.
+
 ## 실제 임시 자산 기록 — 2026-09-22
 
 P04-b의 `Assets/VRFPS/Prefabs/Weapons/K2.prefab` 외형과 `Assets/VRFPS/Materials/`의 단색 재질은 프로젝트에서 Unity 기본 도형으로 자체 작성했다. 외부 K2 모델을 다운로드하거나 채택한 것이 아니며 최종 K2 실루엣·분리 탄창 요건의 완료 증빙으로 사용하지 않는다. 작성 경로는 `Assets/VRFPS/Editor/WeaponLabSetup.cs`이고, 조작 검증 후 아래 후보의 사용 조건을 확인하여 교체할 예정이다.

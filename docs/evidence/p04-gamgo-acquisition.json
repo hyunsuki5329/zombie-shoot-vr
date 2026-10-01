@@ -1,0 +1,185 @@
+{
+  "status": "acquired_not_integrated",
+  "assets": [
+    {
+      "archive": "daewoo-k2.zip",
+      "bytes": 9710704,
+      "sha256": "ddb70a33b9049d2f512dc35be7209362c4d5ade0f6b5d02bacdab01f80aaa243",
+      "entries": [
+        {
+          "path": "source/k2_orgin.fbx",
+          "bytes": 373680,
+          "sha256": "b01ff50b718531470897ac4af656028ed8d1d1c1123a1507e8268cddb34e31f9"
+        },
+        {
+          "path": "textures/Body_down_metallic.png",
+          "bytes": 146894,
+          "sha256": "726ef4e99e926942314dd5dd0a8da83a6f926a3225131b4d866fff88dafde254"
+        },
+        {
+          "path": "textures/Plastic_Parts_roughness.png",
+          "bytes": 494291,
+          "sha256": "3ae98d5f072d8cdc4ef57c4250908c0ec8585c1a034e92224771ca1d9f97eaa7"
+        },
+        {
+          "path": "textures/Body_down_roughness.png",
+          "bytes": 951375,
+          "sha256": "87cb667290fea70af4a4aec2ab9046f59e84062def2a819c3a1b702a9ac83496"
+        },
+        {
+          "path": "textures/Plastic_Parts_metallic.png",
+          "bytes": 46486,
+          "sha256": "fe077a5e48a0734ab725526d168d75afc2bc388e088ab4151bee0831ed0a4635"
+        },
+        {
+          "path": "textures/Body_up_normal.png",
+          "bytes": 708281,
+          "sha256": "715d131b6483626e81e56e153dfb1cee812389c0022de18a7b2ec961ed219bcb"
+        },
+        {
+          "path": "textures/Body_up_metallic.png",
+          "bytes": 9574,
+          "sha256": "12f68f6a8c77b89692c9b3a31771da7d039d3ace74197a0f6a5429fb040ba425"
+        },
+        {
+          "path": "textures/Plastic_Parts_baseColor.png",
+          "bytes": 313989,
+          "sha256": "01ace38e56d8237a85c1b1e56e41d6efc8f8c1c3e65160e55b5269174982538f"
+        },
+        {
+          "path": "textures/Body_up_baseColor.png",
+          "bytes": 1814647,
+          "sha256": "2c13f018a7873d174b08460a59d59d1253f21a648976f06df9c9eb547cf8578f"
+        },
+        {
+          "path": "textures/Plastic_Parts_normal.png",
+          "bytes": 2167853,
+          "sha256": "b8502cf8610196589a4ac125ccb8928610dd8d652d7ce35c9ef6d733a0e3d1cf"
+        },
+        {
+          "path": "textures/Body_up_glow.png",
+          "bytes": 3439,
+          "sha256": "45b97350e5e1f9cdc4ebb74113fb34a90b9debddd3ec67f23a41caab2b24caf3"
+        },
+        {
+          "path": "textures/Body_down_baseColor.png",
+          "bytes": 1310054,
+          "sha256": "84607fba0f2c0e4a4a58182866b410064895e71135b188198ef6491fa6a87856"
+        },
+        {
+          "path": "textures/Body_down_normal.png",
+          "bytes": 699051,
+          "sha256": "ecd56121ced411e0dfc9524254c38983887c2611b634fd2ce0104492893ce039"
+        },
+        {
+          "path": "textures/Body_up_roughness.png",
+          "bytes": 669156,
+          "sha256": "c87bdf50e0dbbe52ca7cf2e5ccd59d28ee7dd50b2e0bc9f6fd2d7656ec1e090d"
+        }
+      ],
+      "model_id": "258d30e1f3e04c13a60abd916425b0c2",
+      "author": "GAMGO",
+      "license_displayed": "Free Standard",
+      "license_url": "https://sketchfab.com/licenses",
+      "acquired": "2026-09-29",
+      "acquisition": "User downloaded original FBX ZIP through signed-in Chrome; copied locally and checked ZIP CRC",
+      "local_directory": "tmp/external-assets/gamgo/daewoo-k2",
+      "unity_imported": true,
+      "hardware_verified": false,
+      "import_scope": "isolated inspection only"
+    },
+    {
+      "archive": "30-rounds-556mm-stanag-mag.zip",
+      "bytes": 14829988,
+      "sha256": "10d802588b8f500bd15b40687e4dea6e30467523b96818d8f1e5758388145b16",
+      "entries": [
+        {
+          "path": "source/magazine556.fbx",
+          "bytes": 121616,
+          "sha256": "8f581dcbd6e47822503783438a89c2eaf1a4f47ac2e3bd4a3484b10c71b95649"
+        },
+        {
+          "path": "textures/magazine556_03_-_Default_Normal.jpg",
+          "bytes": 1159919,
+          "sha256": "db28c43b2d1e91fa55da3a86d04c9dbdb0c24e98113389cc1e101d71f4dcf809"
+        },
+        {
+          "path": "textures/magazine556_02_-_Default_AlbedoTransparenc.jpg",
+          "bytes": 3716313,
+          "sha256": "dd9b631a768d07306dd505ff0ec05f497c343686c622d427de30c3fbcb4405b6"
+        },
+        {
+          "path": "textures/magazine556_03_-_Default_AlbedoTransparenc.jpg",
+          "bytes": 390988,
+          "sha256": "a741ff6500d04a8153f9e756ac43bed8b5d3bf326f0cb53dddc0da700e9d8a13"
+        },
+        {
+          "path": "textures/magazine556_02_-_Default_SpecularSmoothnes.jpg",
+          "bytes": 2793153,
+          "sha256": "05999f5bee1d69699b3eb3e9faee63d6de5053429eb635672cf388bf282cbd8e"
+        },
+        {
+          "path": "textures/magazine556_02_-_Default_MetallicSmoothnes.jpg",
+          "bytes": 5156973,
+          "sha256": "8da357ac28373bc98c9a596850263013b82bf1faa77ce06d9c4a0e6e418ce054"
+        },
+        {
+          "path": "textures/magazine556_02_-_Default_Normal.jpg",
+          "bytes": 963898,
+          "sha256": "6cab1d5b13f25ba67428812cbd4cff86c9e1bfb9311b7bbcfe09afa581fad0df"
+        },
+        {
+          "path": "textures/magazine556_03_-_Default_MetallicSmoothnes.jpg",
+          "bytes": 262771,
+          "sha256": "6197d984d7d1bdd917ca8afe3d4eb023a6139af6c973776464d4e48444f8b27d"
+        },
+        {
+          "path": "textures/magazine556_03_-_Default_SpecularSmoothnes.jpg",
+          "bytes": 262771,
+          "sha256": "a6e09707801cf5fc002412e742f534ec2c56c3a3f9809c4e8b5d7431813297d0"
+        }
+      ],
+      "model_id": "1eadc947c0894aa0bbac0c6226a21bda",
+      "author": "GAMGO",
+      "license_displayed": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "acquired": "2026-09-29",
+      "acquisition": "User downloaded original FBX ZIP through signed-in Chrome; copied locally and checked ZIP CRC",
+      "local_directory": "tmp/external-assets/gamgo/30-rounds-556mm-stanag-mag",
+      "unity_imported": true,
+      "hardware_verified": false,
+      "import_scope": "isolated inspection only"
+    }
+  ],
+  "isolated_inspection": {
+    "date": "2026-09-29",
+    "unity": "6000.3.23f1",
+    "project": "tmp/p06-verification/Zombie Shoot VR",
+    "import_exit": 0,
+    "preview_exit": 0,
+    "k2": {
+      "mesh_count": 3,
+      "triangles": 9646,
+      "material_slots": [
+        "02-up",
+        "07 - Default",
+        "09 - Default"
+      ],
+      "texture_resolution": 2048,
+      "forward_axis": "+X",
+      "magazine_present": false
+    },
+    "magazine": {
+      "mesh_count": 1,
+      "triangles": 2798,
+      "material_slots": [
+        "02 - Default",
+        "03 - Default"
+      ],
+      "texture_resolution": 4096,
+      "all_textures_rgb_no_alpha": true
+    },
+    "preview": "Unlit base-color inspection only; not final URP lighting or headset acceptance",
+    "production_prefabs_modified": false
+  }
+}
