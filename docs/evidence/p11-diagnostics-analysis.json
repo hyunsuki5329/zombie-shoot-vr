@@ -1,0 +1,61 @@
+{
+  "unit": "P11-f diagnostics analysis",
+  "date": "2026-09-28",
+  "baseCommit": "42b34161bc1c8670860100e507e582dbb984fa68",
+  "requirements": [
+    "P11",
+    "R17",
+    "T17"
+  ],
+  "environment": "Python 3.11.9 standard library",
+  "tests": {
+    "command": "python -B -m unittest discover -s scripts/tests -v",
+    "initial": "8 test methods failed because analyzer was unimplemented",
+    "intermediate": "One test helper raised duplicate index argument TypeError; corrected helper",
+    "finalPassed": 11,
+    "finalFailed": 0
+  },
+  "artifacts": [
+    {
+      "path": "tmp/p11-diagnostics-analysis/red.log",
+      "sha256": "A3C711208BB267AF7BDAD11C752FF81DCAFCE8174F71964C3831D1D54655039D"
+    },
+    {
+      "path": "tmp/p11-diagnostics-analysis/green.log",
+      "sha256": "8E0070CEA2BA7BD7DE6742AB52ABE50554B2D507995E378ED04C7C5573C5D630"
+    },
+    {
+      "path": "tmp/p11-diagnostics-analysis/verified.log",
+      "sha256": "BAE405D324846BE24F1D5689C6339CDEDAEC68CA02543555DE858CDC1FE667FF"
+    },
+    {
+      "path": "tmp/p11-diagnostics-analysis/unity-excerpt.jsonl",
+      "sha256": "DD43A652B7B52CA0C74C36EA8C50CB4632485C600F887D18A7FA146C55D61FFE"
+    },
+    {
+      "path": "tmp/p11-diagnostics-analysis/unity-excerpt-summary.json",
+      "sha256": "57A5FC83C55B5B84713ACBD639DDE7DB82BAEBF3E1673F9DF43548FE031EB143"
+    }
+  ],
+  "sources": [
+    {
+      "path": "scripts/analyze_vr_diagnostics.py",
+      "sha256": "2EB74657137ECB6814CD99F1EF814EED5A5A08C502544F5413DFE3F19962094D"
+    },
+    {
+      "path": "scripts/tests/test_analyze_vr_diagnostics.py",
+      "sha256": "C22BE0ED9E863DB35F258E5662E9085BB76BC9D708F4EFEB584E59B8265FADB6"
+    }
+  ],
+  "compatibility": {
+    "origin": "tmp/p11-diagnostics/verified-play.xml CombatDiagnosticsTests output",
+    "input": "Actual header and first sample only; no invented footer",
+    "result": "CLI success, samples1, recording_complete false, performance_acceptance unverified"
+  },
+  "limitations": [
+    "No new Unity runtime changes; previous PlayMode114 and Windows builds not rerun",
+    "Synthetic 1801-second paused fixture is a parser test, not elapsed hardware testing",
+    "No CPU/GPU timings, actual maps or headset provenance established",
+    "Independent review and actual30-minute acceptance remain pending"
+  ]
+}

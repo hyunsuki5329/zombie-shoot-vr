@@ -70,9 +70,12 @@ namespace VRFPS.Editor
             var output = Path.GetFullPath("Builds/Windows/WaveLab/WaveLab.exe");
             Directory.CreateDirectory(Path.GetDirectoryName(output));
             var previous = PlayerSettings.GetScriptingBackend(NamedBuildTarget.Standalone);
+            var previousTiming=PlayerSettings.enableFrameTimingStats;
             try
             {
                 PlayerSettings.SetScriptingBackend(NamedBuildTarget.Standalone, ScriptingImplementation.Mono2x);
+                PlayerSettings.enableFrameTimingStats=true;
+                Debug.Log("VRFPS_FRAME_TIMING_STATS_ENABLED "+PlayerSettings.enableFrameTimingStats);
                 var report = BuildPipeline.BuildPlayer(new BuildPlayerOptions {
                     scenes = new[] { ScenePath }, locationPathName = output,
                     target = BuildTarget.StandaloneWindows64, options = BuildOptions.Development
@@ -80,7 +83,7 @@ namespace VRFPS.Editor
                 if (report.summary.result != BuildResult.Succeeded) throw new InvalidOperationException("WaveLab build failed: " + report.summary.result);
                 Debug.Log("VRFPS_WAVE_LAB_BUILD_SUCCEEDED " + output);
             }
-            finally { PlayerSettings.SetScriptingBackend(NamedBuildTarget.Standalone, previous); }
+            finally { PlayerSettings.SetScriptingBackend(NamedBuildTarget.Standalone, previous);PlayerSettings.enableFrameTimingStats=previousTiming; }
         }
     }
 }

@@ -1,0 +1,89 @@
+{
+  "unit": "P11-b PoolRegistry and projectile lifecycle",
+  "date": "2026-09-28",
+  "baseCommit": "dceffc09f71d304ce4edfb24ee6841376caf3517",
+  "requirements": [
+    "P11",
+    "R17",
+    "T17"
+  ],
+  "tests": [
+    {
+      "path": "tmp/p11-pool-registry/red.xml",
+      "sha256": "13E9A52CF8D6CC71AB98C535303C1237D7E20163D08B67A226984C50CBB2D0F2",
+      "result": "Failed(Child)",
+      "passed": 0,
+      "failed": 2
+    },
+    {
+      "path": "tmp/p11-pool-registry/green-play.xml",
+      "sha256": "F57165C537A2F3F2A648252CC012625935648E01DCD1D199CC83A8ACCA4472FC",
+      "result": "Passed",
+      "passed": 107,
+      "failed": 0
+    },
+    {
+      "path": "tmp/p11-pool-registry/lifecycle-red.xml",
+      "sha256": "26F37CBD385A4BA53DFE280491D27C99267BE0909D2EC1A068B403D157221B34",
+      "result": "Failed(Child)",
+      "passed": 3,
+      "failed": 1
+    },
+    {
+      "path": "tmp/p11-pool-registry/verified-play.xml",
+      "sha256": "3F3A40512CCBA2BE7F33095B2E24C159C6B13C38DD87F00EF05C7D73722AA94F",
+      "result": "Passed",
+      "passed": 109,
+      "failed": 0
+    }
+  ],
+  "coverage": [
+    "1000 bounded slot reuse cycles; foreign and duplicate return ignored",
+    "20 cycles of 12 shots: alternating lifetime expiry and reset; capacity/current/peak verified",
+    "Invalid launch returns lease",
+    "Destroyed projectile replacement reproduced stale list count 21 versus expected 1; fixed and verified",
+    "Returning object cannot be rented during reset; failed reset never reused"
+  ],
+  "build": {
+    "result": "Both Windows builds succeeded",
+    "log": "tmp/p11-pool-registry/build.log",
+    "logSha256": "60D28D32D4E288C5F39574FB97AE7346A15B0E82D083510376E80B6C4F6E4719",
+    "manifest": "tmp/p11-pool-registry/build-manifest.json",
+    "manifestSha256": "D1CE1FD5690268A27E568DA42380E70B07E84555554DAC855F737066152A68FC",
+    "bootstrapMatchedFiles": 341,
+    "menuLabMatchedFiles": 338,
+    "hashMismatches": 0
+  },
+  "sources": [
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/Pooling/PoolRegistry.cs",
+      "sha256": "A9433520C2784C32522F2B59A92CBC3289DE8A86848FC9DE6D8D265B3B0264C9"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/Pooling/PoolRegistry.cs.meta",
+      "sha256": "BB2F5DF24AC6F1BA942BFB8E15B6DCCD4B77A73D2ADD2CD4D850717C6B3A3ABD"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/Enemies/AcidProjectile.cs",
+      "sha256": "43F628C39A05AFF9E9CC0149A932C3D48BE179B4945DDC79A58EC38283971E9E"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/Enemies/AcidProjectilePool.cs",
+      "sha256": "D2DD2ADC32EA5771F8E6A237AC3B6D547F400853B400A2E7775E2DC747118DE0"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Tests/PlayMode/PoolLifecycleTests.cs",
+      "sha256": "7EF86ECDE198455F3222231D5E140924A15F31F2A994F1360B09E8D71E8C9BF4"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Tests/PlayMode/PoolLifecycleTests.cs.meta",
+      "sha256": "F0269C027A2DA30CE9ECAD20B4FF3C32FAB2F09EA181BDA9A696FF9520EE2A69"
+    }
+  ],
+  "limitations": [
+    "Registry currently integrated with projectiles only; other typed pools and telemetry remain",
+    "Actual room/classroom scans, 72Hz CPU/GPU and 30 minute stability pending",
+    "Independent review pending; PR10 remains draft",
+    "Synthetic tests do not prove hardware performance"
+  ]
+}

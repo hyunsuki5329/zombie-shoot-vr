@@ -1,0 +1,111 @@
+{
+  "unit": "P11-g raw FrameTimingManager capture",
+  "date": "2026-09-28",
+  "baseCommit": "9ee381695eb1685f86859abd3d0b7b1d94a8780f",
+  "requirements": [
+    "P11",
+    "R17",
+    "T17"
+  ],
+  "tests": [
+    {
+      "path": "tmp/p11-frame-timings/red.xml",
+      "sha256": "49C8439D9C300E56F8FCDF8F68A23893B948C3A72F4A571A1CBC05C244D4C06D",
+      "result": "Failed(Child)",
+      "passed": 0,
+      "failed": 2
+    },
+    {
+      "path": "tmp/p11-frame-timings/green-play.xml",
+      "sha256": "0A4288A2B9A854C230C1FF0C5C0587AF8B77D983ED05F79A773AFF99B3CB1483",
+      "result": "Passed",
+      "passed": 116,
+      "failed": 0
+    },
+    {
+      "path": "tmp/p11-frame-timings/verified-play.xml",
+      "sha256": "59EB47641108962E56B6E21BB464BE3D9F93313DFF1DAB250DEA272C7F11E92F",
+      "result": "Passed",
+      "passed": 116,
+      "failed": 0
+    }
+  ],
+  "coverage": [
+    "Fixed binary record round trip with raw CPU and GPU values",
+    "Duplicate and zero timestamps excluded",
+    "GPU zero and CPU NaN have invalid bits, never treated as valid zero ms",
+    "Disabled/empty polls counted without fabricated samples",
+    "Existing output never overwritten",
+    "Authored WaveLab calls actual API and records metadata in headless Null graphics environment"
+  ],
+  "build": {
+    "result": "Both Windows builds succeeded",
+    "log": "tmp/p11-frame-timings/build.log",
+    "logSha256": "FBD9163CF37EB6E0390F3B2DA41449225D20CD87CB4FA60A8A685EF06752A32F",
+    "manifest": "tmp/p11-frame-timings/build-manifest.json",
+    "manifestSha256": "E438540680D4926BAB1A34138A98EE1A70C9437C3C55531211440CF1D4545A05",
+    "bootstrapMatchedFiles": 341,
+    "menuLabMatchedFiles": 338,
+    "hashMismatches": 0,
+    "frameTimingEnabledDuringBothBuilds": true,
+    "verificationProjectSettingRestoredTo": 0
+  },
+  "sources": [
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/Testing/FrameTimingLog.cs",
+      "sha256": "E86382C81B63E03123E8B41C1D6341E40C8071E56704AAFD172AEC7F8664F05F"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/Testing/FrameTimingLog.cs.meta",
+      "sha256": "63074E9F0A8F62B2A07C232C9BE0370E8AEAE13E5D1644DF3F132DA4A5810539"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/Testing/FrameTimingCapture.cs",
+      "sha256": "3A4E9A282CD442351631B69D74DCA930E677122ADC0F2BCCFB1EB06D094D7A4A"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/Testing/FrameTimingCapture.cs.meta",
+      "sha256": "D1AEB93D2AE2D7795BB4BF9792920DCC91C12108A7D009BC691D9CF8E3D3AA76"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/Testing/WaveLabSession.cs",
+      "sha256": "DFA64FB82E26AFB1E8ED31E950F1F78A02E60E409EA455300BEE6BB828B8D773"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/Progression/CombatSession.cs",
+      "sha256": "0D3F9BF501CBF50056500604BB53B7AD6AE50DFC1772B76523CBD7B13DF39A92"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Editor/BootstrapSetup.cs",
+      "sha256": "0498A6AF047481FFFD23C40DD534E04E9A956807B19EF9D5F0DB707AD748B40B"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Editor/WaveLabSetup.cs",
+      "sha256": "0257E3ED21E100692237B0DF98BA8BE40933494C00BEB10953C9292DC8618347"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Tests/PlayMode/FrameTimingLogTests.cs",
+      "sha256": "0F3CFF29BB7C9B16271A155FCE54ECB6C577080443188D5E41990A6EE19D3522"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Tests/PlayMode/FrameTimingLogTests.cs.meta",
+      "sha256": "F094EB6BFF29610617954071B5D79F581DF5EEB62D366462FD2EDEC1D2214756"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Tests/PlayMode/CombatDiagnosticsTests.cs",
+      "sha256": "48988F0D15C3A2CB9EF573F887F2EB344D0DBBA16E4DC050A25306A01F7B783A"
+    }
+  ],
+  "references": [
+    "https://docs.unity3d.com/6000.0/Documentation/ScriptReference/FrameTiming.html",
+    "https://docs.unity3d.com/6000.0/Documentation/Manual/frame-timing-manager.html",
+    "Installed6000.3.23f1 UnityEngine.CoreModule.xml and reflected FrameTiming field types"
+  ],
+  "limitations": [
+    "Headless Null graphics is not GPU hardware timing evidence",
+    "CPU total includes waits and is not directly the12.5ms CPU work gate",
+    "Latest-one polling cannot guarantee full coverage; phase is retrieval-time state",
+    "Raw binary percentile analysis and CSV export pending",
+    "Actual two maps,72Hz,30-minute stability and independent review pending"
+  ]
+}

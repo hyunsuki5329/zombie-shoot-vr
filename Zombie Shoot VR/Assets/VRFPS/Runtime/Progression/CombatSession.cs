@@ -48,6 +48,8 @@ namespace VRFPS
                     Director=runtime.AddComponent<SpawnDirector>();
                     Director.Configure(run,rig.Head,melee,ranged,projectile,loader.SpawnPositions,gun.GetInstanceID());
                     run.StartRun(map);IsReady=true;
+                    CombatDiagnostics.AttachIfRequested(run,Director,rig.GetComponentInChildren<AmmoPouch>(true),gun.GetComponent<K2HandInput>(),"map-session");
+                    FrameTimingCapture.AttachIfRequested(run,Director,"map-session");
                 }
                 catch(Exception error){LastError=error.Message;run.EndRun();}
                 if(LastError!=null){yield return RemoveRuntime();yield return loader.Unload();}

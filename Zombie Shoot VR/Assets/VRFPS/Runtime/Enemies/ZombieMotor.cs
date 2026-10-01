@@ -37,6 +37,17 @@ namespace VRFPS
         void Stop() { if (agent != null && agent.enabled && agent.isOnNavMesh) agent.isStopped = true; }
         public void SetCombatEnabled(bool enabled)
         { combatEnabled = enabled; if (enemy != null) enemy.SetCombatEnabled(enabled); if (!enabled) Stop(); }
+        internal void ResetForPool()
+        {
+            Stop();
+            if(agent!=null)
+            {
+                if(agent.enabled&&agent.isOnNavMesh){agent.ResetPath();agent.velocity=Vector3.zero;}
+                agent.enabled=false;
+            }
+            configured=combatEnabled=false;target=null;targetBody=null;
+            recoveryPoints=System.Array.Empty<Vector3>();stalledTime=pathTimer=0;RecoveryCount=0;
+        }
 
         public void Tick(float deltaTime)
         {

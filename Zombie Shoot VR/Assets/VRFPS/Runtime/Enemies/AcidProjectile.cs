@@ -6,6 +6,7 @@ namespace VRFPS
         const float Speed = 3, Lifetime = 4, Radius = 0.05f;
         Vector3 direction;
         int sourceId, damage, solidMask, collisionMask;
+        readonly Collider[] overlap = new Collider[1];
         float remaining;
         public bool Flying { get; private set; }
 
@@ -26,10 +27,15 @@ namespace VRFPS
         {
             if (!Flying || deltaTime <= 0) return;
             // SphereCast does not report colliders that already contain the origin.
-            var overlaps = Physics.OverlapSphere(transform.position, Radius, collisionMask, QueryTriggerInteraction.Ignore);
-            foreach (var collider in overlaps)
-                if ((solidMask & (1 << collider.gameObject.layer)) != 0) { Retire(); return; }
-            if (overlaps.Length > 0) { Impact(overlaps[0], activeTime); return; }
+            // This single-player game needs one hit; never allocate an overlap array per tick.
+            if(Physics.OverlapSphereNonAlloc(transform.position,Radius,overlap,collisionMask,QueryTriggerInteraction.Ignore)>0)
+            {
+                var collider=overlap[0];overlap[0]=null;
+                // A full buffer may hide a wall behind a player collider. Solids always win.
+                if((solidMask & (1<<collider.gameObject.layer))!=0 ||
+                    Physics.CheckSphere(transform.position,Radius,solidMask,QueryTriggerInteraction.Ignore)) { Retire(); return; }
+                Impact(collider,activeTime);return;
+            }
             var elapsed = Mathf.Min(deltaTime, remaining);
             var distance = Speed * elapsed;
             if (Physics.SphereCast(transform.position, Radius, direction, out var hit, distance, collisionMask, QueryTriggerInteraction.Ignore))
@@ -51,5 +57,10 @@ namespace VRFPS
         }
 
         public void Retire() { Flying = false; gameObject.SetActive(false); }
+        internal void ResetForPool()
+        {
+            Retire();direction=Vector3.zero;remaining=0;
+            sourceId=damage=solidMask=collisionMask=0;overlap[0]=null;
+        }
     }
 }

@@ -11,23 +11,47 @@ namespace VRFPS
         readonly List<MagazineToken> tokens = new List<MagazineToken>();
         readonly Dictionary<MagazineToken, float> ages = new Dictionary<MagazineToken, float>();
         bool simulationEnabled = true;
+        PoolRegistry registry;
         public int TokenCount => tokens.Count;
+        public PoolCounts Counts => registry!=null ? registry.GetCounts("magazines") : default;
+        public int LooseCount { get { var count=0;foreach(var token in tokens)if(IsLoose(token))count++;return count; } }
+        public int PeakLooseCount { get; private set; }
+
+        void EnsurePool(MagazineToken fallback=null)
+        {
+            if(registry!=null)return;
+            var source=prefab!=null?prefab:fallback;
+            if(source==null)throw new System.InvalidOperationException("Magazine prefab is missing.");
+            registry=GetComponent<PoolRegistry>();if(registry==null)registry=gameObject.AddComponent<PoolRegistry>();
+            registry.Register("magazines",source.gameObject,10,instance=>instance.GetComponent<MagazineToken>().ResetForRun());
+        }
+
+        void RemoveDestroyed()
+        {
+            for(var i=tokens.Count-1;i>=0;i--)
+                if(tokens[i]==null){ages.Remove(tokens[i]);tokens.RemoveAt(i);}
+        }
+
+        MagazineToken Rent()
+        {
+            EnsurePool();RemoveDestroyed();
+            if(!registry.TryRent("magazines",out var instance))return null;
+            var token=instance.GetComponent<MagazineToken>();
+            if(!tokens.Contains(token))tokens.Add(token);
+            ages[token]=0;token.SetSimulationEnabled(simulationEnabled);
+            return token;
+        }
 
         internal MagazineToken ResetForRun()
         {
-            for (var i = tokens.Count - 1; i >= 0; i--)
-                if (tokens[i] == null) { ages.Remove(tokens[i]); tokens.RemoveAt(i); }
-            if (tokens.Count == 0)
-            {
-                if (prefab == null) throw new System.InvalidOperationException("Magazine prefab is missing.");
-                Register(Instantiate(prefab));
-            }
+            EnsurePool();RemoveDestroyed();
             foreach (var token in tokens)
             {
-                token.ResetForRun(); token.gameObject.SetActive(false); ages[token] = 0;
+                registry.Return("magazines",token.gameObject);ages[token]=0;
             }
-            tokens[0].gameObject.SetActive(true);
-            return tokens[0];
+            var mounted=Rent();
+            if(mounted==null)throw new System.InvalidOperationException("No magazine slot after reset.");
+            mounted.ResetForRun();mounted.gameObject.SetActive(true);return mounted;
         }
 
         public void SetSimulationEnabled(bool enabled)
@@ -49,7 +73,8 @@ namespace VRFPS
         public void Register(MagazineToken token)
         {
             if (token == null || tokens.Contains(token)) return;
-            if (tokens.Count >= 10) throw new System.InvalidOperationException("Magazine pool is full.");
+            EnsurePool(token);RemoveDestroyed();
+            if(!registry.Adopt("magazines",token.gameObject))throw new System.InvalidOperationException("Magazine pool is full or token is already owned.");
             tokens.Add(token); ages[token] = 0;
             token.SetSimulationEnabled(simulationEnabled);
         }
@@ -59,19 +84,18 @@ namespace VRFPS
             if (!simulationEnabled || hand == null || hand != leftHand || prefab == null || Vector3.Distance(hand.position, transform.position) > 0.18f) return null;
             foreach (var token in tokens) if (token != null && token.HeldBy == hand) return null;
             TickLifetime(0);
-            MagazineToken available = null;
-            foreach (var token in tokens) if (token != null && !token.gameObject.activeSelf) { available = token; break; }
-            if (available == null && tokens.Count < 10)
+            var available=Rent();
+            if(available==null)
             {
-                available = Instantiate(prefab);
-                Register(available);
+                var oldest=OldestLoose();
+                if(oldest!=null){registry.Return("magazines",oldest.gameObject);available=Rent();}
             }
-            if (available == null) available = OldestLoose();
             if (available == null) return null;
             available.ResetFresh();
             available.gameObject.SetActive(true);
             ages[available] = 0;
-            return available.TryGrab(hand) ? available : null;
+            if(available.TryGrab(hand))return available;
+            registry.Return("magazines",available.gameObject);return null;
         }
 
         public MagazineToken FindNearbyLoose(Transform hand)
@@ -102,23 +126,23 @@ namespace VRFPS
         public void TickLifetime(float deltaTime)
         {
             if (!simulationEnabled) return;
-            for (var i = tokens.Count - 1; i >= 0; i--)
-                if (tokens[i] == null) { ages.Remove(tokens[i]); tokens.RemoveAt(i); }
+            RemoveDestroyed();
             var looseCount = 0;
             foreach (var token in tokens)
             {
                 if (token == null) continue;
                 if (!IsLoose(token)) { ages[token] = 0; continue; }
                 ages[token] += Mathf.Max(0, deltaTime);
-                if (ages[token] >= 12) token.gameObject.SetActive(false);
+                if (ages[token] >= 12) registry.Return("magazines",token.gameObject);
                 else looseCount++;
             }
             while (looseCount > 8)
             {
                 var oldest = OldestLoose();
                 if (oldest == null) break;
-                oldest.gameObject.SetActive(false); looseCount--;
+                registry.Return("magazines",oldest.gameObject);looseCount--;
             }
+            PeakLooseCount=Mathf.Max(PeakLooseCount,looseCount);
         }
 
         void Update()
@@ -133,15 +157,5 @@ namespace VRFPS
             TickLifetime(Time.deltaTime);
         }
 
-        void OnDestroy()
-        {
-            foreach (var token in tokens)
-                if (token != null)
-                {
-                    token.gameObject.SetActive(false);
-                    if (Application.isPlaying) Destroy(token.gameObject);
-                    else DestroyImmediate(token.gameObject);
-                }
-        }
     }
 }

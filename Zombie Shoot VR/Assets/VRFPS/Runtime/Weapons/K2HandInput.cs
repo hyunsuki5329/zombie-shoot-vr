@@ -16,6 +16,8 @@ namespace VRFPS
         float tracerUntil;
         RunController clock;
         bool triggerReleaseRequired;
+        public int TracerObjectCount=>tracer!=null?1:0;
+        public int ActiveTracerCount=>tracer!=null&&tracer.enabled&&tracer.gameObject.activeInHierarchy?1:0;
         public void RequireTriggerRelease() => triggerReleaseRequired = true;
         public void UseRunClock(RunController run) { clock = run; activeTime = 0; }
 

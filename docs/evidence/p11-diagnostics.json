@@ -1,0 +1,97 @@
+{
+  "unit": "P11-e opt-in combat object diagnostics",
+  "date": "2026-09-28",
+  "baseCommit": "3032a75e32537ad5ea1a907414f74c00a72911e3",
+  "requirements": [
+    "P11",
+    "R17",
+    "T17"
+  ],
+  "tests": [
+    {
+      "path": "tmp/p11-diagnostics/red.xml",
+      "sha256": "681EC315C433CD8C4C697272729E986551E7D0CE59DEDBB3C023E3374A32FFF1",
+      "result": "Failed(Child)",
+      "passed": 0,
+      "failed": 1
+    },
+    {
+      "path": "tmp/p11-diagnostics/green-play.xml",
+      "sha256": "881B0DE5850BA6B996AC459E16AD3970AE7CBC1A1D9385012F24A212370ADC4A",
+      "result": "Passed",
+      "passed": 114,
+      "failed": 0
+    },
+    {
+      "path": "tmp/p11-diagnostics/verified-play.xml",
+      "sha256": "1256ACE1E4F6F47C40FF8921388892139963EE6519FC2527B1A837D2F701AA46",
+      "result": "Passed",
+      "passed": 114,
+      "failed": 0
+    }
+  ],
+  "coverage": [
+    "Authored WaveLab scene references and actual object counts",
+    "122 manual samples with pause and retry attempt transition",
+    "CreateNew preserves existing log on failure",
+    "Automatic one-second sampling and disable footer",
+    "Fixed tracer and spawn warning total two visual effect objects",
+    "Launcher CheckOnly verifies executable path without starting game"
+  ],
+  "build": {
+    "result": "Both Windows builds succeeded",
+    "log": "tmp/p11-diagnostics/build.log",
+    "logSha256": "4762114865EDD3CF0DA63EC22548EAF7411E165412285E74C9951329E3BED2A9",
+    "manifest": "tmp/p11-diagnostics/build-manifest.json",
+    "manifestSha256": "D5FEA2387A11E55AAE021B778D1FEE9B9535039A01CF1CBFFE0735A74C95C2AA",
+    "bootstrapMatchedFiles": 341,
+    "menuLabMatchedFiles": 338,
+    "hashMismatches": 0
+  },
+  "launcherCheck": {
+    "path": "tmp/p11-diagnostics/launcher-check.json",
+    "sha256": "47480EF9677AAE3DA29F7DEB4357A62874F0B7C67FF033C3EBE9B9C1B5DB8B3F"
+  },
+  "sources": [
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/Testing/CombatDiagnostics.cs",
+      "sha256": "81FB3544E38D1A23DCC3618DEF086D79FB3AECC8106EC45A3D8547925D6DE913"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/Testing/CombatDiagnostics.cs.meta",
+      "sha256": "B30DEB9F6FCC408D6A6A00DDCE987B525BDDCFB1EADE02E67C2F9FC7E04E5187"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/Testing/WaveLabSession.cs",
+      "sha256": "5BA5C21B1EE79C2C7423E7219821DAE7232E60284AB7D2B5AC85DFB186AB8985"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/Progression/CombatSession.cs",
+      "sha256": "11F92F6B9A62F6FB72207F6E755C44F562B75802E3079FAE0B5BC082B1E2B19F"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/Progression/SpawnDirector.cs",
+      "sha256": "952F581DA7B249E3C82294DAF36DDBEC6F615CA4772BB34ED7A59F9475FEEFD5"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/Weapons/K2HandInput.cs",
+      "sha256": "322D5FCF2BEB7935B7994B9DFD176CDA70B8239FA2614EC51D1F235564904F57"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Tests/PlayMode/CombatDiagnosticsTests.cs",
+      "sha256": "C35FABB6A83C2540B4F52530D57E62D2377C5C51B214D31882E3C313E7003231"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Tests/PlayMode/CombatDiagnosticsTests.cs.meta",
+      "sha256": "73BEE79756E0C9D809E12C4DB811E9218F0F0134A630C902606D6527569C08C7"
+    }
+  ],
+  "limitations": [
+    "No CPU/GPU timing, p95, p99 or VRAM measurement",
+    "Managed heap is not total RAM; recording has allocation and I/O overhead",
+    "One-second samples can miss short transient effects",
+    "Editor fixture log is not a 30-minute hardware run",
+    "Command-line player activation is wired but no actual headset recording was performed",
+    "Actual two maps and independent review pending; draft PR10"
+  ]
+}

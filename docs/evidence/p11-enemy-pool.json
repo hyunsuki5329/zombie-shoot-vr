@@ -1,0 +1,81 @@
+{
+  "unit": "P11-d enemy and corpse pooling",
+  "date": "2026-09-28",
+  "baseCommit": "8f1b656970976562e1b26eaf57f44641cf9d7b6d",
+  "requirements": [
+    "P11",
+    "R17",
+    "T17",
+    "P06",
+    "P07"
+  ],
+  "tests": [
+    {
+      "path": "tmp/p11-enemy-pool/red.xml",
+      "sha256": "4648C6A5F5E302F62C227EEE08BAE38EF6C0F844630B793FB02798F45A6ABA75",
+      "result": "Failed(Child)",
+      "passed": 10,
+      "failed": 1
+    },
+    {
+      "path": "tmp/p11-enemy-pool/green-play.xml",
+      "sha256": "26761E64DB36A3D2D6D7B5A7636A54CB4B8765738276C1BE76216EB8F213A13D",
+      "result": "Passed",
+      "passed": 112,
+      "failed": 0
+    },
+    {
+      "path": "tmp/p11-enemy-pool/verified-play.xml",
+      "sha256": "F91271D7E76235C2D5F1746928CB30C2861F2DD97D78C263909D34D11D0AE135",
+      "result": "Passed",
+      "passed": 113,
+      "failed": 0
+    }
+  ],
+  "coverage": [
+    "Corpse keeps body lease until expiration/cap cleanup/retry",
+    "20 retries reuse one body and resolve exactly one kill per life",
+    "Corpse expiry returns lease without changing kills or pending quota",
+    "Fifth corpse retires oldest; corpse peak4 and alive peak map max verified",
+    "Inactive pooled enemy cannot receive damage; NavMeshAgent disabled on return",
+    "Existing ranged cap, scaling, pause, paths and projectile regressions included"
+  ],
+  "build": {
+    "result": "Both Windows builds succeeded",
+    "log": "tmp/p11-enemy-pool/build.log",
+    "logSha256": "806EB77EB00DC862F25B048589EAD63059D1E09A305AA26799514BD94FC15FF2",
+    "manifest": "tmp/p11-enemy-pool/build-manifest.json",
+    "manifestSha256": "C6E9530B99A0A406299BE3A76ACE366846B99365EDFFB6C1E8E4BC6E166B5630",
+    "bootstrapMatchedFiles": 341,
+    "menuLabMatchedFiles": 338,
+    "hashMismatches": 0
+  },
+  "sources": [
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/Enemies/EnemyActor.cs",
+      "sha256": "D5EE3514116940D692284AF4E0AA85F1602D8A24AC72499C51A867965C86B746"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/Enemies/ZombieController.cs",
+      "sha256": "2562B83536D8EA3D47C33BBC04681ED9CA5D05206B51BEDC8EA2725BD8ADC9AF"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/Enemies/ZombieMotor.cs",
+      "sha256": "9C04B5DCD2479070510D612CB8562A3766B82742574EAEB94E3E660D7F35071E"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/Progression/SpawnDirector.cs",
+      "sha256": "D076AA3D52448E6DEA40FB2D4208349256956EB0DD2A1F117AAD26C249EA705E"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Tests/PlayMode/SpawnDirectorTests.cs",
+      "sha256": "4E8FDCA926DAF957A2309029D7DCCE4D315E5FA7231EB0120C14273F28253A2C"
+    }
+  ],
+  "limitations": [
+    "Effect statistics and long-run telemetry pending",
+    "Actual two scans and each-map 30 minute performance pending",
+    "Population peak is sampled after spawn/death cap processing",
+    "Independent review pending; PR10 remains draft"
+  ]
+}
