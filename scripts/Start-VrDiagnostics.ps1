@@ -1,12 +1,12 @@
 param(
-    [ValidateSet('MenuLab', 'BootstrapPreview')]
+    [ValidateSet('MenuLab', 'GamgoMenuLab', 'BootstrapPreview')]
     [string]$Build = 'MenuLab',
     [switch]$CheckOnly,
     [switch]$FrameTimings
 )
 $ErrorActionPreference = 'Stop'
 $workspace = Split-Path $PSScriptRoot -Parent
-$executableName = if ($Build -eq 'MenuLab') { 'WaveLab.exe' } else { 'BootstrapPreview.exe' }
+$executableName = if ($Build -eq 'BootstrapPreview') { 'BootstrapPreview.exe' } else { 'WaveLab.exe' }
 $executable = Join-Path $workspace "Zombie Shoot VR/Builds/Windows/$Build/$executableName"
 if (!(Test-Path -LiteralPath $executable -PathType Leaf)) { throw "빌드가 없습니다: $executable" }
 $localAppDataParent = Split-Path ([Environment]::GetFolderPath('LocalApplicationData')) -Parent

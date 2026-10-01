@@ -86,3 +86,8 @@ $unityProcess.ExitCode
 2026-09-29 확인: 8a28aee의 추적 소스만 ZIP으로 내보내고 기존 Library가 없는 새 폴더에서 **EditMode50/50, PlayMode116/116**, BootstrapPreview/WaveLab Windows 개발 빌드를 검증했다. [P12 소스 복원 증빙](evidence/p12-source-reproduction.json)에 소스 ZIP·시험 XML·빌드 manifest 해시와 임포트 변경 범위를 기록했다.
 
 Unity의 PC 전역 패키지 캐시/라이선스는 공유할 수 있으므로 완전히 새 PC나 오프라인 복원을 검증한 것으로 확대하지 않는다. 기존 샘플 텍스처 메타데이터 등 에디터 생성 변경은 복원본에서 관찰하고 원래 사용자 프로젝트에 복사하지 않았다. 실제 두 맵·최종 외형·독립 리뷰·제출 형식·최종 기기 인수가 남아 T20 전체 완료가 아니다.
+
+
+## GAMGO 외형 추가 이후의 필수 복원 단계
+
+P04 외형 브랜치부터 K2/탄창 프리팹은 Git 제외 자원을 참조한다. 기존8a28aee 복원 리허설 결과를 이 변경 이후의 완전 복원 증빙으로 확대하지 않는다. Unity 시험/빌드 전에 [GAMGO 원본 확보 및 복원·적용](gamgo-visual-restore.md)을 수행해야 한다. 원본 ZIP의 라이선스별 전달 조건을 지키고 해당 계정으로 다시 확보할 수 있는 링크·해시를 제공한다. 파일이 없으면 임시 도형으로 최종 빌드를 성공 처리하지 않는다. 외형 추가 후 Git 소스만 새 폴더로 복원하는 리허설에서 누락된 이전 모델 참조가 남는 결함을 발견해 수정했다. 수정 후 EditMode51/51과 Windows 빌드2개를 확인했다. [상세 증빙](evidence/p04-gamgo-restoration.json). 새 복원본 PlayMode·새 PC·오프라인 시험까지 통과한 것으로 확대하지 않는다.

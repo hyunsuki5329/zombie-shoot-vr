@@ -6,7 +6,7 @@
 
 | 자산·경로(Assets/VRFPS 아래) | 제작 방법·수정 | 현재 검증과 제출 상태 |
 |---|---|---|
-| `Prefabs/Weapons/K2.prefab`, 탄창·재질 | WeaponLabSetup/ReloadSetup의 기본 도형, 손·총구·삽입 앵커와 물리 구성 | 자체 임시 외형. 외부 K2 모델 없음. 최종 K2 실루엣은 아직 완료하지 않음 |
+| `Prefabs/Weapons/K2.prefab`, 탄창·재질 | WeaponLabSetup/ReloadSetup의 기본 도형, 손·총구·삽입 앵커와 물리 구성 | GAMGO K2·STANAG 외형을 로컬 복원/적용. 실제 기기 인수 대기 |
 | `Prefabs/Enemies/`, `Animators/` | EnemyLabSetup의 기본 도형과 직접 작성한 Transform 애니메이션 곡선 | 자체 임시 적. 최종 외형/리깅/양안 시각 품질 미완료. [P06 상세](evidence/p06-assets.md) |
 | `Audio/` WAV·AudioMixer | FeedbackSetup/WorldFeedbackSetup에서 결정적 합성 신호 생성, 믹서 구성 | 외부 녹음·모션캡처 없음. 실제 총기/좀비 녹음으로 주장하지 않음. 음량·햅틱 실기 대기 |
 | 시험장·NavMesh·충돌·UI 프리팹 | 저장된 Unity 씬, 기본 도형·uGUI, 시험장 콜라이더에서 NavMesh 생성 | 실제 촬영 공간이 아님. UI의 Unity 기본 폰트/템플릿 의존성은 아래 외부 자산과 구분 |
@@ -35,10 +35,10 @@
 
 현재 목록은 저장소·패키지 전체 조사로, 모든 샘플이 실행 빌드에 들어간다는 뜻이 아니다. 불필요한 데모·샘플 제거는 GUID/참조와 실제 빌드 의존성을 확인한 뒤 별도 수행한다. 패키지는 잠금으로 복원하고 PackageCache 전체를 소스에 복사하지 않는다.
 
-GAMGO K2와 STANAG 탄창은 아래와 같이 다운로드를 확보했으나 아직 게임에 적용하지 않았다. Mixamo, Quaternius, War FX는 아직 채택하지 않아 실제 사용 출처표에서 제외한다. 실제 방/강의실 스캔도 아직 없다. 앞으로 채택하는 모델·동작·스캔은 제작자·원본 URL·취득일·버전·수정·사용/소스 전달 조건과 실제 기기 결과를 추가한다. **현재 T18은 부분 준비 상태이며 최종 출처 검증 완료가 아니다.**
+GAMGO K2와 STANAG 탄창은 아래와 같이 다운로드를 확보하고 로컬 프리팹에 적용했다. Mixamo, Quaternius, War FX는 아직 채택하지 않아 실제 사용 출처표에서 제외한다. 실제 방/강의실 스캔도 아직 없다. 앞으로 채택하는 모델·동작·스캔은 제작자·원본 URL·취득일·버전·수정·사용/소스 전달 조건과 실제 기기 결과를 추가한다. **현재 T18은 부분 준비 상태이며 최종 출처 검증 완료가 아니다.**
 
 
-## K2·탄창 확보, Unity 적용 대기 (2026-09-29)
+## K2·탄창 확보와 로컬 Unity 적용 (2026-09-29)
 
 사용자가 로그인된 Chrome에서 원본 FBX ZIP 두 개를 직접 다운로드했다. Downloads 원본은 보존하고 Git 제외 경로 `tmp/external-assets/gamgo/`에 복사·압축 해제했다. ZIP CRC, 경로 이탈 없음, 파일 크기와 SHA256을 확인했다. [취득·파일별 증빙](evidence/p04-gamgo-acquisition.json)에 기록하며 다운로드 성공을 Unity 적용/실기 통과로 표시하지 않는다.
 
@@ -47,9 +47,9 @@ GAMGO K2와 STANAG 탄창은 아래와 같이 다운로드를 확보했으나 �
 | DAEWOO - K2 | [GAMGO](https://sketchfab.com/3d-models/daewoo-k2-258d30e1f3e04c13a60abd916425b0c2) | Free Standard, [조건](https://sketchfab.com/licenses) | daewoo-k2.zip 9,710,704바이트, FBX1·PNG13 |
 | 30 rounds 5.56mm STANAG MAG | [GAMGO](https://sketchfab.com/3d-models/30-rounds-556mm-stanag-mag-1eadc947c0894aa0bbac0c6226a21bda), 사용자 링크 https://skfb.ly/oxAOu | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | 30-rounds-556mm-stanag-mag.zip 14,829,988바이트, FBX1·JPG8 |
 
-탄창 표기: “30 rounds 5.56mm STANAG MAG” by GAMGO, CC BY 4.0, 위 원본 링크. 현재 파일 수정 없음. 적용 과정에서 크기·방향·재질 변환을 하면 변경 내용을 추가한다. K2는 CC BY로 간주하지 않으며 원본 자산을 Git에 올리지 않았다. 소스 전달 범위에 맞는 확보·복원 절차가 필요하다. 로컬 tmp는 최종 제출 보관소가 아니며 최종 패키징 때 별도 보존해야 한다.
+탄창 표기: “30 rounds 5.56mm STANAG MAG” by GAMGO, CC BY 4.0, 위 원본 링크. 원본 파일 바이트는 보존했다. Unity에서 크기·방향·위치를 조정하고 URP 재질을 구성했다. K2의 거칠기를 매끄러움 알파로 패킹하고 탄창은 알파 없는 JPEG에 매끄러움0.35를 초기값으로 적용했다. K2는 CC BY로 간주하지 않으며 원본 자산을 Git에 올리지 않았다. 소스 전달 범위에 맞는 확보·복원 절차가 필요하다. 로컬 tmp는 최종 제출 보관소가 아니며 최종 패키징 때 별도 보존해야 한다.
 
-다음 단계는 Unity 임포트 후 실제 메시/재질 슬롯·모델 단위·방향을 검사하고, 기존 Foregrip/Muzzle/MagazineSocket 기준으로 시각 모델을 정렬하는 것이다. 탄창 JPG는 알파 채널이 없으므로 파일명의 Smoothnes만으로 매끄러움 채널이 보존되었다고 가정하지 않는다. 현재 실행 빌드는 여전히 기본 도형 외형이다.
+Unity에서 실제 메시/재질 슬롯을 검사하고 기존 Foregrip/Muzzle/MagazineSocket을 보존하여 시각 모델을 정렬했다. 탄창 JPG는 알파 채널이 없으므로 파일명의 Smoothnes만으로 매끄러움 채널이 보존되었다고 가정하지 않는다. [복원·적용 절차와 검증 한계](gamgo-visual-restore.md)를 따른다. 기기 인수는 아직 완료하지 않았다.
 
 
 ## 패키지 내부 고지 보완 (2026-09-30)
