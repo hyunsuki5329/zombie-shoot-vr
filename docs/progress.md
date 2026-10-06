@@ -337,3 +337,9 @@
 - Windows WaveLab 빌드 성공/Unity종료0, 모델2개와 공격 클립 포함을 확인했다. `Zombie Shoot VR/Builds/Windows/MixamoMenuLab/WaveLab.exe`로338개 파일을 복사·해시 대조하고 자산 고지1개를 추가했다. Start-VrDiagnostics의 MixamoMenuLab 경로를 CheckOnly로 확인했다. 기존 빌드들은 유지한다.
 - 생산 프로젝트에 검증된 외부 자원과 적 프리팹2개를 반영했다. 외부 원본·추출물·생성물은 Git 제외, 새 체크아웃은 로컬 취득 파일 복원과 적용기 실행이 필요하다. 독립 새GUID 복원 리허설, 실제 VR 크기/바닥/피격·공격/양안·성능, 전용 피격 동작과 실제 두 맵은 아직 남아 있다. 전체 P06 또는 프로젝트 완료가 아니다.
 - AGENTS가 참조한 `.github/agents/main_instruction.prompt.md`, `part_agent.prompt.md`, `work_agent.prompt.md`는 현재 저장소에 없어 내용을 추정하지 않았다. 기존 승인 범위에서 코드·시험·Git 작업을 진행했다.
+
+### P06/P12 Mixamo 새 소스 복원 검증 (2026-10-06)
+
+- 통합 커밋 `53daa00`, [초안 PR #14](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/14)의 소스를 Library/외부meta 없이 새 폴더로 내보내 사용자 취득 GAMGO·Mixamo 원본만 복원했다. 두 좀비 모델의 새GUID와 프리팹의 이전GUID 제거를 확인했다.
+- 새 복원본 **EditMode57/57·PlayMode116/116**, **BootstrapPreview/WaveLab Windows 빌드2개 성공·종료0**. 모델·공격 동작이 빌드 로그에 포함됐다. [증빙](evidence/p06-mixamo-restoration.json). 코드 수정 없이 기존 적용기가 새 참조를 정상 연결했다.
+- 동일 PC 전역 패키지/라이선스 재사용 가능성은 남아 새 PC·오프라인 보장으로 확대하지 않는다. 원래 기기용 MixamoMenuLab과 사용자 설정을 유지했다. 사용자는 새 VR 빌드를 아직 실행 전이라고 답했다. 실기·실제 두 맵·최종 성능 및 제출물은 미완료여서 PR은 초안으로 유지한다.

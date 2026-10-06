@@ -29,3 +29,9 @@ New-Item -ItemType Directory -Force tmp | Out-Null
 - 이 변경은 외형·동작 통합이며 최종 P06 인수 완료가 아니다. 실제 VR 크기/바닥/공격 방향/양안/프레임 성능, 전용 피격 동작과 최종 맵 검증은 남아 있다.
 
 검증 결과와 빌드 경로는 [진행 기록](progress.md) 및 [증빙](evidence/p06-mixamo-visuals.json)을 따른다.
+
+## 새 소스 복원 리허설 (2026-10-06)
+
+`53daa00`의 Assets/Packages/ProjectSettings를 Git에서 별도 폴더로 내보내고, 기존 Library 및 외부 자원 meta 없이 위 복원을 실행했다. Yaku/Parasite의 모델 GUID가 새로 생성됐으며 각 적 프리팹에 새 원본 참조가 정확히1개 있고 이전 GUID가 남지 않았음을 확인했다. 복원본 EditMode57/57, PlayMode116/116 통과, BootstrapPreview/WaveLab Windows 빌드 모두 성공·종료0이었다. [복원 증빙](evidence/p06-mixamo-restoration.json).
+
+같은 PC의 전역 패키지 캐시와 Unity 라이선스는 재사용할 수 있으므로 새 PC 또는 오프라인 복원 증명은 아니다. 기존 기기용 MixamoMenuLab은 교체하지 않았다. 사용자 답변 기준 새 빌드 VR 검증은 아직 실행 전이다.
