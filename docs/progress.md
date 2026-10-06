@@ -328,3 +328,12 @@
 - 설치 잠금 패키지70개를 대조하고 중첩 고지 파일명 검색으로 Mathematics1.3.3 Noise LICENSE1개를 추가 보존했다. 원본/사본 바이트와 SHA256 일치를 확인했다. [증빙](evidence/p12-nested-notices.json).
 - 라이선스 원문만 추가했으며 실행 코드·패키지 버전은 변경하지 않았다. 파일명 조사 범위의 한계와 최종 빌드·엔진 고지 감사 미완료를 명시한다.
 - 독립 정적 리뷰에서 원문/사본 해시, 잠금 버전70개, 검색 범위1개와 한계 표기가 일치함을 재확인했고 추가 지적 없음이었다.
+
+### P06 Mixamo 근거리·원거리 외형과 동작 통합 (2026-10-06)
+
+- 사용자 지정 Yaku J Ignite(근거리), Parasite L Starkie(원거리)와 Scary Zombie Pack12개 모션을 확보했다. 두 모델은 유효한 Humanoid avatar이며 원본에는 바인드 포즈만 있어 별도 모션을 연결했다. [복원·연결](mixamo-visual-restore.md), [출처](asset-provenance.md), [증빙](evidence/p06-mixamo-visuals.json).
+- 기존 도형 상태에서 외형 검사2개가 실패하는 것을 확인했다. 적용 후 EditMode57/57, PlayMode116/116, Python23/23 통과. 연속 공격 시험이 근거리 회복 지연을 잡아 exitTime0.9→0.8로 수정했다. 걷기 자세 로그에서 외형이 전진하는 문제를 확인하고 planar root motion을 추출했다. 피해/투사체/이동 런타임은 변경하지 않았다.
+- 독립 정적 리뷰의 중대 지적은 없었다. 추가 제안한 사망 후 재사용 애니메이션 검사를 반영했다. 처음 추가한 헤드리스 검사는 컬링/전이 대기를 고려하지 않아1개 실패했고, AlwaysAnimate와 전이 대기를 명시한 최종 전체 PlayMode가 통과했다. GitHub 승인이나 실기 결과로 해석하지 않는다.
+- Windows WaveLab 빌드 성공/Unity종료0, 모델2개와 공격 클립 포함을 확인했다. `Zombie Shoot VR/Builds/Windows/MixamoMenuLab/WaveLab.exe`로338개 파일을 복사·해시 대조하고 자산 고지1개를 추가했다. Start-VrDiagnostics의 MixamoMenuLab 경로를 CheckOnly로 확인했다. 기존 빌드들은 유지한다.
+- 생산 프로젝트에 검증된 외부 자원과 적 프리팹2개를 반영했다. 외부 원본·추출물·생성물은 Git 제외, 새 체크아웃은 로컬 취득 파일 복원과 적용기 실행이 필요하다. 독립 새GUID 복원 리허설, 실제 VR 크기/바닥/피격·공격/양안·성능, 전용 피격 동작과 실제 두 맵은 아직 남아 있다. 전체 P06 또는 프로젝트 완료가 아니다.
+- AGENTS가 참조한 `.github/agents/main_instruction.prompt.md`, `part_agent.prompt.md`, `work_agent.prompt.md`는 현재 저장소에 없어 내용을 추정하지 않았다. 기존 승인 범위에서 코드·시험·Git 작업을 진행했다.

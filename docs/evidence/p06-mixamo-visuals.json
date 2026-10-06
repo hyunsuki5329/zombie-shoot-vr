@@ -1,0 +1,94 @@
+{
+  "date": "2026-10-06",
+  "base_commit": "5d0a3de",
+  "status": "hardware_acceptance_pending",
+  "roles": {
+    "melee": "Yaku J Ignite",
+    "ranged": "Parasite L Starkie"
+  },
+  "originals": [
+    {
+      "file": "Yaku J Ignite.fbx",
+      "bytes": 20107744,
+      "sha256": "7c7986bca670897a9d8dda69696613907898035051104886b8afac3ddc1ac0ef"
+    },
+    {
+      "file": "Parasite L Starkie.fbx",
+      "bytes": 15772080,
+      "sha256": "0421651482d7c38dabd116e7980be4b055f67da0bf837a4074a68513d8afb356"
+    },
+    {
+      "file": "Scary Zombie Pack.zip",
+      "bytes": 1689499,
+      "sha256": "39b00f79e526ed2ce71887b1323cedb0b2ac1c1d686b331fd275683c4b4bfba4"
+    }
+  ],
+  "checks": {
+    "red.xml": {
+      "total": 2,
+      "passed": 0,
+      "failed": 2,
+      "sha256": "6b0cf23e867e38c8f19e0f306034a2f982cfb0ab50bc8f06581796f96a2812d6"
+    },
+    "timing-red.xml": {
+      "total": 2,
+      "passed": 1,
+      "failed": 1,
+      "sha256": "1a62a89659b176cbaed5203ad388f1a1ae7a2adeeb0a9ea6f65f2d912544c671"
+    },
+    "edit-final.xml": {
+      "total": 57,
+      "passed": 57,
+      "failed": 0,
+      "sha256": "4cefd241e6e7ae0b7f112cacb88123f4f87c1204d33029c7fdf6f2721a0a5af6"
+    },
+    "play-reuse.xml": {
+      "total": 116,
+      "passed": 115,
+      "failed": 1,
+      "sha256": "7097e9684c7d3514ca26ee7fc3da6d80432a4fb34b0ea622f0e498f93344d35b"
+    },
+    "play-verified.xml": {
+      "total": 116,
+      "passed": 116,
+      "failed": 0,
+      "sha256": "9e9f5bc0801fc2c2e2a7adbbfa6b036d4836b0af7ccb6898a288ad6f831c7072"
+    }
+  },
+  "red_explanations": {
+    "red.xml": "Old primitive prefabs lack user-selected visual: two expected failures.",
+    "timing-red.xml": "Melee recovery too late for next windup at exitTime .9; fixed .8.",
+    "play-reuse.xml": "Additional headless death-state test sampled a culled/unfinished transition; fixed test evaluation with AlwaysAnimate and transition settling. Gameplay was unchanged."
+  },
+  "python_tests": {
+    "passed": 23,
+    "failed": 0,
+    "restore_specific": 3
+  },
+  "build": {
+    "result": "Succeeded",
+    "unity_exit": 0,
+    "path": "Zombie Shoot VR/Builds/Windows/MixamoMenuLab/WaveLab.exe",
+    "files_copied_and_hash_verified": 338,
+    "additional_notice": "ASSET-NOTICES.txt",
+    "manifest_sha256": "41f4adb6857d33d8dba2f4a13bcdb9a9b667bffd4e64c35ca2fa9fbcf9afbbe0",
+    "log_sha256": "a473ab77798b3bbcff775ff213f3f08b735e46795438cca92fb431c8235b74c5",
+    "models_and_attack_clips_in_build_log": true
+  },
+  "source_copy": {
+    "Prefabs/Enemies/MeleeZombie.prefab": "93723a768c7d542e1ed8153deea4eef8ced5038adece29818dc8ea43c4cd8053",
+    "Prefabs/Enemies/RangedZombie.prefab": "a7a096288306406da928127a444bdfb9e8045653eb0c73152dd478f790bb96f9",
+    "Editor/MixamoVisualSetup.cs": "bb260916bb39a30444880820526b4e77e57677c24649533f95816ff248c71477",
+    "Editor/MixamoModelPreparation.cs": "4d82954e4ee487c32ab4939fda7bb1d8a7744d788ac65974592612e33639c9f0",
+    "Tests/EditMode/EnemyVisualAssetTests.cs": "caf1eeb527389edf0fbd8950e3f085cbdc813cc11ac7aedfc16472713fe21aa8",
+    "Tests/PlayMode/EnemyLabSceneTests.cs": "309d911cac9abeeb614fd65c09f7f3b6f95cc39eed7d06b97e677a324202a2a8"
+  },
+  "visual_review": "Offscreen baked-mesh front pose renders for both attacks and Yaku death viewed, plus earlier front/back material renders. Planar skeleton travel fixed after pose logs showed 2m walk displacement. Not stereo/hardware validation; corpse floor contact and clothing edges still require in-scene review.",
+  "independent_review": "Static review: no confirmed critical/important findings. Suggested death/reuse animation test added; final PlayMode116 passed. Not a GitHub approval.",
+  "remaining": [
+    "Actual Quest Pro scale, floor contact, attack contact/telegraph, first-frame and stereo checks",
+    "Fresh-checkout external GUID restore rehearsal",
+    "Dedicated hit reaction animation",
+    "Actual room/classroom maps and final performance/submit gates"
+  ]
+}

@@ -35,7 +35,7 @@
 
 현재 목록은 저장소·패키지 전체 조사로, 모든 샘플이 실행 빌드에 들어간다는 뜻이 아니다. 불필요한 데모·샘플 제거는 GUID/참조와 실제 빌드 의존성을 확인한 뒤 별도 수행한다. 패키지는 잠금으로 복원하고 PackageCache 전체를 소스에 복사하지 않는다.
 
-GAMGO K2와 STANAG 탄창은 아래와 같이 다운로드를 확보하고 로컬 프리팹에 적용했다. Mixamo, Quaternius, War FX는 아직 채택하지 않아 실제 사용 출처표에서 제외한다. 실제 방/강의실 스캔도 아직 없다. 앞으로 채택하는 모델·동작·스캔은 제작자·원본 URL·취득일·버전·수정·사용/소스 전달 조건과 실제 기기 결과를 추가한다. **현재 T18은 부분 준비 상태이며 최종 출처 검증 완료가 아니다.**
+GAMGO K2와 STANAG 탄창 및 아래 Mixamo 모델·동작을 채택했다. Quaternius, War FX는 아직 채택하지 않아 실제 사용 출처표에서 제외한다. 실제 방/강의실 스캔도 아직 없다. 앞으로 채택하는 모델·동작·스캔은 제작자·원본 URL·취득일·버전·수정·사용/소스 전달 조건과 실제 기기 결과를 추가한다. **현재 T18은 부분 준비 상태이며 최종 출처 검증 완료가 아니다.**
 
 
 ## K2·탄창 확보와 로컬 Unity 적용 (2026-09-29)
@@ -57,3 +57,11 @@ Unity에서 실제 메시/재질 슬롯을 검사하고 기존 Foregrip/Muzzle/M
 잠금 버전과 일치하는 설치 PackageCache70개 내부에서 LICENSE/COPYING/NOTICE/OFL 및 Third Party Notices 이름을 검색했다. 기존 루트49개와 별도로 Mathematics1.3.3의 Noise 하위 LICENSE1개를 발견해 [원문](licenses/packages/com.unity.mathematics-1.3.3/Unity.Mathematics/Noise/LICENSE)을 바이트 그대로 보존했다. Ashima Arts와 Stefan Gustavson의 저작권·허용 조건·면책을 포함하며 루트 Unity 라이선스로 대체하지 않는다. [경로·해시와 조사 범위](evidence/p12-nested-notices.json).
 
 파일명 검색으로 발견한 범위이며 소스 내부 인라인 고지나 다른 이름의 고지까지 모두 확인했다는 뜻은 아니다. 최종 빌드 의존성 및 엔진 배포 고지 확인은 남아 있다. 원본 PackageCache 전체를 Git이나 제출 Source에 넣지 않는다.
+
+## Mixamo 좀비 모델·동작 (2026-10-06)
+
+사용자 Adobe 계정으로 [Mixamo](https://www.mixamo.com/)에서 다운로드한 Yaku J Ignite(근거리), Parasite L Starkie(원거리), Scary Zombie Pack(12개 FBX)을 로컬에 보존했다. 공급자는 Adobe/Mixamo이며 개별 원저작자 크레딧은 다운로드 파일명만으로 추정하지 않는다. 원본 파일의 해시는 [복원 스크립트](../scripts/Restore-MixamoAssets.py)에 기록한다.
+
+실제 사용 동작은 zombie idle/walk/attack/death/scream이다. 사용하지 않는 나머지7개 동작은 로컬 다운로드 보존용이며 프리팹 Animator에 연결하지 않았다. 모델에는 유효한 Humanoid avatar가 있지만 원본 동작은 한 프레임 바인드 포즈여서 동작 팩을 리타게팅했다. 수정 내용은 [복원·적용 문서](mixamo-visual-restore.md)를 따른다.
+
+[Adobe 공식 FAQ](https://helpx.adobe.com/creative-cloud/faq/mixamo-faq.html)를 2026-10-06 확인했다. 캐릭터·애니메이션을 개인/상업/비영리 프로젝트와 게임에 royalty-free로 사용할 수 있다고 안내한다. 이 안내를 원본 자원의 독립 재배포 허가로 확대하지 않는다. FBX·추출 텍스처·생성 자원은 Git 제외하고 사용자 취득 파일로 복원한다. 최종 Source 전달 범위는 제출 방식과 원본 제공 조건을 확인한 후 확정한다.

@@ -29,12 +29,25 @@ namespace VRFPS.Tests
                     Assert.That(actor.GetComponent<NavMeshAgent>().isOnNavMesh, Is.True);
                     Assert.That(actor.GetComponentInChildren<Animator>().applyRootMotion, Is.False);
                     Assert.That(actor.Controller.ApplyDamage(100, 8, 1), Is.True);
+                    var animator = actor.GetComponentInChildren<Animator>();
+                    Assert.That(animator.GetBool("Dead"), Is.True);
+                    animator.cullingMode = AnimatorCullingMode.AlwaysAnimate;
+                    animator.Update(.01f); animator.Update(.3f);
+                    Assert.That(animator.GetCurrentAnimatorStateInfo(0).IsName("Dead"), Is.True);
                 }
                 session.Restart(); yield return null;
                 var resetActors = Object.FindObjectsByType<EnemyActor>(FindObjectsSortMode.None);
                 Assert.That(resetActors.Length, Is.EqualTo(2));
                 CollectionAssert.AreEquivalent(actors, resetActors);
-                foreach (var actor in resetActors) Assert.That(actor.Controller.IsDead, Is.False);
+                foreach (var actor in resetActors)
+                {
+                    Assert.That(actor.Controller.IsDead, Is.False);
+                    var animator = actor.GetComponentInChildren<Animator>();
+                    Assert.That(animator.GetBool("Dead"), Is.False);
+                    Assert.That(animator.speed, Is.EqualTo(1));
+                    animator.Update(.01f);
+                    Assert.That(animator.GetCurrentAnimatorStateInfo(0).IsName("Dead"), Is.False, "Reused enemy must leave the corpse animation");
+                }
             }
             finally
             {
