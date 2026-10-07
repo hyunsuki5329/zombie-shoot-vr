@@ -11,6 +11,27 @@ namespace VRFPS.Tests
 {
     public class EnemyVisualAssetTests
     {
+        [TestCase("MeleeZombie", 1, 880, 576)]
+        [TestCase("RangedZombie", 0, 208, 944)]
+        public void TornClothingUsesTransparentPixelsInsteadOfWhiteOpaqueBorders(string name, int slot, int x, int y)
+        {
+            var prefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/VRFPS/Prefabs/Enemies/" + name + ".prefab");
+            var material = prefab.GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterials[slot];
+            var path = AssetDatabase.GetAssetPath(material.GetTexture("_BaseMap"));
+            var source = new Texture2D(2, 2);
+            try
+            {
+                Assert.That(source.LoadImage(File.ReadAllBytes(path)), Is.True);
+                // Hand-checked source pixels within the reported white clothing cutouts.
+                Assert.That(source.GetPixel(x, source.height - 1 - y).a, Is.LessThan(.1f), "Clothing border must have authored transparency");
+                Assert.That(material.IsKeywordEnabled("_ALPHATEST_ON"), Is.True);
+                Assert.That(material.GetFloat("_AlphaClip"), Is.EqualTo(1));
+                var importer = (TextureImporter)AssetImporter.GetAtPath(path);
+                Assert.That(importer.alphaSource, Is.EqualTo(TextureImporterAlphaSource.FromInput));
+            }
+            finally { Object.DestroyImmediate(source); }
+        }
+
         [TestCase("MeleeZombie", .65f, .85f)]
         [TestCase("RangedZombie", .8f, 2.7f)]
         public void AttackRecoversBeforeNextWindup(string name, float windup, float cooldown)

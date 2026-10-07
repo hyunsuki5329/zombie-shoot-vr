@@ -1,0 +1,55 @@
+{
+  "date": "2026-10-07",
+  "base_commit": "1de6b80",
+  "status": "build_ready_hardware_acceptance_pending",
+  "cause": "Opaque RGB embedded texture copies assigned to YakuClothes and ParasiteBody. Authored RGBA counterparts preserve torn-clothing cutouts.",
+  "fix": "Assign original RGBA diffuse atlases to all slots; explicitly retain input alpha and alpha edge processing. Existing alpha clipping follows source alpha. Original FBX/PNG bytes unchanged.",
+  "tests": {
+    "red.xml": {
+      "passed": 0,
+      "failed": 2,
+      "sha256": "7cd6627c3dbbc48f9a101cea08f9a2286cef72933bac27d9e872fc4a4289deeb"
+    },
+    "edit.xml": {
+      "passed": 59,
+      "failed": 0,
+      "sha256": "ee49ffdb97f86b8fd2ee8a4829e58d687e688affdbb69f6b2b030d0cdb2e36b8"
+    },
+    "play.xml": {
+      "passed": 117,
+      "failed": 0,
+      "sha256": "1bbe50ff934b6b2b937d98e5aa8c6cb7fa1f57cdecc2ae25f67a13527f21be30"
+    }
+  },
+  "visual_checks": {
+    "melee": "Front/back GPU comparison reproduces white shoulder/back/clothing borders and shows removal.",
+    "ranged": "Same RGB attachment corrected; front/back comparison showed no conspicuous original white band and no new visible edge issue.",
+    "comparison_orientation": "Left fixed, right original RGB attachment, due camera projection.",
+    "screenshots": [
+      {
+        "path": "tmp\\p06-verification\\Zombie Shoot VR\\clothing-MeleeZombie-0.png",
+        "sha256": "daa9fd752cb5229738ccc574d03d2bf9a44046e6a5e7e625ab7b2469ad1a1762"
+      },
+      {
+        "path": "tmp\\p06-verification\\Zombie Shoot VR\\clothing-MeleeZombie-180.png",
+        "sha256": "c62ab62c85273e69ac5b716896b6f4eb2243559e396f813ab053478f3e4d2541"
+      },
+      {
+        "path": "tmp\\p06-verification\\Zombie Shoot VR\\clothing-RangedZombie-0.png",
+        "sha256": "b9fe0441fef84e5190ceca8a275196b04a0f19ef2cba1198ae33cac9b0a88aba"
+      },
+      {
+        "path": "tmp\\p06-verification\\Zombie Shoot VR\\clothing-RangedZombie-180.png",
+        "sha256": "dce78c5c5029498ea2cf58b5abe9021b1a152ae07fb6ef51b1f8a2a2a0f6b4ac"
+      }
+    ]
+  },
+  "review": "Independent static review: no important actionable issues.",
+  "hardware_acceptance": "Corrected build not yet tested in headset.",
+  "build": {
+    "path": "Zombie Shoot VR\\Builds\\Windows\\ClothingFixMenuLab\\WaveLab.exe",
+    "copied_files_sha256_verified": 338,
+    "asset_notice_included": true,
+    "build_log_sha256": "d399ff3bb22cea2cb265de21a966e48a4316ac88121f63b29e6184a1b2b94e70"
+  }
+}

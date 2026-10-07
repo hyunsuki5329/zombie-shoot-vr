@@ -367,3 +367,12 @@
 - 수정 전 4개 회귀 실패 확인 후 전체 PlayMode117/117, EditMode57/57, Python23/23 통과. 독립 코드 리뷰에서 중요한 결함 없음. [증빙](evidence/vr-feedback-tuning.json).
 - 수정 빌드 양안 정렬·삽입·속도 체감은 실기 재확인 대상이다. 실제 스캔과 최종 성능/제출물 인수도 계속 남아 있다.
 - Windows BootstrapPreview/WaveLab 빌드 성공. WaveLab을 `FeedbackMenuLab/WaveLab.exe`로 복사한 338개 파일의 SHA256 일치와 출처 안내 포함을 확인했다. 진단 실행기의 FeedbackMenuLab 경로 검사도 통과했다. 실제 실행은 사용자 실기 확인을 기다린다.
+
+## 2026-10-07 — 좀비 의상 흰 테두리 수정
+
+- 사용자 화면의 Yaku 옷 흰 테두리를 원본 텍스처/재질까지 추적했다. YakuClothes 슬롯은 알파 없는 RGB 복사본을 사용해 찢어진 부분이 불투명 흰색으로 남았다. 원본 RGBA diffuse로 연결하고 입력 알파를 유지한다.
+- ParasiteBody도 같은 종류의 RGB 연결이어서 RGBA로 교정했다. 원거리 모델의 앞뒤 비교 렌더에서는 초기 큰 흰 띠는 두드러지지 않았으며, 수정 후 새 테두리 결함은 보이지 않았다. 실제 기기에서 동일 결함이 발생했다고 확대하지 않는다.
+- Yaku 앞뒤 비교 렌더에서 어깨·등·옷자락 흰 부분의 제거를 확인했다. 원본 FBX/PNG는 변경하지 않고 로컬 생성 재질·설정만 갱신했다. 복원 적용기도 같은 연결을 생성한다.
+- 새 회귀 시험은 수정 전 두 모델 모두 실패(불투명 알파1). 수정 후 전체 EditMode59/59·PlayMode117/117 통과. 독립 리뷰 중요 결함 없음. [증빙](evidence/zombie-clothing-alpha.json).
+- 이전 탄창/적 색조/투사체/탄창 회수 수정도 유지된다. 수정 후 헤드셋 양안 표시는 아직 인수 전이다.
+- Windows 두 빌드 성공. 전투 빌드를 `ClothingFixMenuLab/WaveLab.exe`로 복사하고 338개 파일 SHA256 일치와 출처 안내 포함을 확인했다.
