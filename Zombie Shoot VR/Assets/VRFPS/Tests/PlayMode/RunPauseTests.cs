@@ -106,7 +106,7 @@ namespace VRFPS.Tests
                 Assert.That(body.angularVelocity, Is.EqualTo(angular));
                 physics.Simulate(0.1f);
                 Assert.That(token.transform.position.y, Is.LessThan(position.y - 0.1f));
-                pouch.TickLifetime(11.9f);
+                pouch.TickLifetime(9.9f);
                 Assert.That(token.gameObject.activeSelf, Is.True);
                 pouch.TickLifetime(0.2f);
                 Assert.That(token.gameObject.activeSelf, Is.False);

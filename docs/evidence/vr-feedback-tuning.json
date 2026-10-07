@@ -1,0 +1,49 @@
+{
+  "date": "2026-10-07",
+  "base_commit": "dc30d9b",
+  "status": "build_ready_hardware_acceptance_pending",
+  "user_feedback": "Latest build executed; magazine seating mismatch, unwanted enemy tint, projectile too slow, request ~10s dropped magazine cleanup. No full hardware acceptance inferred.",
+  "changes": {
+    "socket_local_position": [
+      0,
+      -0.105,
+      0.17
+    ],
+    "socket_delta_m": [
+      0,
+      0.005,
+      0.02
+    ],
+    "enemy_tint": "removed; authored materials unchanged",
+    "projectile_speed_mps": 6,
+    "projectile_lifetime_seconds": 4,
+    "loose_magazine_lifetime_seconds": 10,
+    "held_mounted_and_pause_protected": true
+  },
+  "tests": {
+    "red.xml": {
+      "passed": 113,
+      "failed": 4,
+      "sha256": "c3c031dbe28bbf2799ff518ebec81661674351346ddcbb97b4001eaaed16beff"
+    },
+    "play.xml": {
+      "passed": 117,
+      "failed": 0,
+      "sha256": "e24abeb46f4f9744367c322125c8f6c633446bea8545662b5d3550ec9e3780ac"
+    },
+    "edit.xml": {
+      "passed": 57,
+      "failed": 0,
+      "sha256": "531d50c1e6a534141b9679336d1b829064a558669c6408064f6ae713d7a172cc"
+    }
+  },
+  "python_tests_passed": 23,
+  "review": "Independent static review found no actionable regressions.",
+  "hardware_acceptance": "pending for the corrected build",
+  "build": {
+    "path": "Zombie Shoot VR\\Builds\\Windows\\FeedbackMenuLab\\WaveLab.exe",
+    "copied_files_sha256_verified": 338,
+    "asset_notice_included": true,
+    "build_log_sha256": "0b74f63143f9690c834609694acc7711db581daab056af81bd1475b711846a58"
+  }
+}

@@ -24,8 +24,26 @@ namespace VRFPS.Editor
             var magazineMaterials = new[] { MagazineMaterial("02"), MagazineMaterial("03") };
             Apply(GunPath, gunModel, true, gunMaterials);
             Apply(MagazinePath, magazineModel, false, magazineMaterials);
+            AlignMagazineSocket();
             AssetDatabase.SaveAssets();
             Debug.Log("VRFPS_GAMGO_VISUALS_CONFIGURED");
+        }
+
+        public static void AlignMagazineSocket()
+        {
+            if (!Application.isBatchMode) throw new InvalidOperationException("Use a separate batchmode editor.");
+            const string rigPath = "Assets/VRFPS/Prefabs/PlayerRig.prefab";
+            var rig = PrefabUtility.LoadPrefabContents(rigPath);
+            try
+            {
+                var socket = rig.GetComponentInChildren<MagazineSocket>(true);
+                if (socket == null) throw new InvalidOperationException("Missing magazine socket");
+                // Seat the separately authored magazine in the K2 well, not the placeholder centre.
+                socket.transform.localPosition = new Vector3(0, -.105f, .17f);
+                if (PrefabUtility.SaveAsPrefabAsset(rig, rigPath) == null)
+                    throw new IOException("Could not save magazine socket alignment");
+            }
+            finally { PrefabUtility.UnloadPrefabContents(rig); }
         }
 
         static GameObject RequireModel(string path)

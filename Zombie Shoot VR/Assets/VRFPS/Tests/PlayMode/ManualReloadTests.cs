@@ -63,6 +63,23 @@ namespace VRFPS.Tests
             Assert.That(registry.GetCounts("magazines").Peak,Is.LessThanOrEqualTo(10));
         }
 
+        [Test] public void EjectedMagazineRetiresAfterTenLooseSecondsAndCanBeReused()
+        {
+            var discarded = socket.Installed;
+            GripAt(socket.transform.position);
+            pouch.TickLifetime(20);
+            Assert.That(discarded.gameObject.activeSelf, Is.True, "Held magazine must survive");
+            Release();
+            pouch.TickLifetime(9.9f);
+            Assert.That(discarded.gameObject.activeSelf, Is.True);
+            pouch.TickLifetime(.1f);
+            Assert.That(discarded.gameObject.activeSelf, Is.False);
+            Assert.That(pouch.Counts.Current, Is.Zero);
+            GripAt(pouch.transform.position);
+            Assert.That(interactor.HeldToken, Is.SameAs(discarded));
+            Assert.That(discarded.State, Is.EqualTo(MagazineTokenState.Fresh));
+        }
+
         [Test] public void RestartRestoresOneMountedMagazineAndClearsOwnership()
         {
             for (var attempt = 0; attempt < 10; attempt++)

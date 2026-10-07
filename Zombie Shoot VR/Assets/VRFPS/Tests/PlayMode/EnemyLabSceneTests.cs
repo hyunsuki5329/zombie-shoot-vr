@@ -28,6 +28,12 @@ namespace VRFPS.Tests
                 {
                     Assert.That(actor.GetComponent<NavMeshAgent>().isOnNavMesh, Is.True);
                     Assert.That(actor.GetComponentInChildren<Animator>().applyRootMotion, Is.False);
+                    var block = new MaterialPropertyBlock();
+                    foreach (var renderer in actor.GetComponentsInChildren<Renderer>())
+                    {
+                        renderer.GetPropertyBlock(block);
+                        Assert.That(block.HasColor("_BaseColor"), Is.False, "Keep authored enemy texture colors");
+                    }
                     var animator = actor.GetComponentInChildren<Animator>();
                     animator.cullingMode = AnimatorCullingMode.AlwaysAnimate;
                     var hitLayer = animator.GetLayerIndex("Hit Reaction");

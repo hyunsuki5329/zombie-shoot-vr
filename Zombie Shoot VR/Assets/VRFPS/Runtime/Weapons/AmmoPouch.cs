@@ -133,7 +133,7 @@ namespace VRFPS
                 if (token == null) continue;
                 if (!IsLoose(token)) { ages[token] = 0; continue; }
                 ages[token] += Mathf.Max(0, deltaTime);
-                if (ages[token] >= 12) registry.Return("magazines",token.gameObject);
+                if (ages[token] >= 10) registry.Return("magazines",token.gameObject);
                 else looseCount++;
             }
             while (looseCount > 8)
