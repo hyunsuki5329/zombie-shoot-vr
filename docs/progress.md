@@ -1,11 +1,14 @@
 # Goal 실행 현황
 
-갱신: 2026-09-29. 전체 목표는 미완료이며 진행 중이다.
+현재 상태: 사용자 음원 적용 빌드까지 준비됐으며 전체 목표는 미완료다. 아래 최신 요약을 우선하고 이전 날짜별 기록은 당시 증빙으로 읽는다.
 
 ## 현재 작업
 
-- 현재 기준 커밋: `8a28aee` (실기 안내, [초안 PR #10](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/10)에 push). 이후 P12 단위의 최종 SHA와 PR은 원격 기록에 연결한다. [최신 실기 실행 안내](hardware-validation.md)와 [소스 복원 안내](source-reproduction.md)를 사용한다.
-- 브랜치: `codex/p12-reproduction`, base `codex/p11-performance`. 8a28aee 소스를 캐시 없는 별도 폴더로 내보내 EditMode50/50·PlayMode116/116과 Windows 두 빌드를 재현했다. 투사체·탄창·적/사체 풀, 객체/원시 프레임 수집과 Python20/20 분석 검증은 P11에서 수행했다. 실제 두 맵·실기·CPU/GPU/장시간·독립 리뷰는 남아 있다. 선행 PR #8/#9/#10은 초안·미병합 상태다.
+- 최신 구현 커밋: `f64ca8f6d9d780f3fd3bc9acb10160f3b570c6ca`, 브랜치 `codex/user-weapon-audio`. [초안 PR #18](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/18)의 base는 `codex/vr-feedback-tuning`이다. 실제 청감 인수 전이며 자동 병합하지 않는다.
+- 최신 검증: EditMode60/60·PlayMode118/118·Python23/23, Windows 빌드 성공. [음원 증빙](evidence/user-weapon-audio.json), [복원 안내](user-weapon-audio.md). 실행 파일은 `Zombie Shoot VR/Builds/Windows/UserAudioMenuLab/WaveLab.exe`이며 복사한338개 빌드 파일의 SHA256이 원본과 일치한다.
+- 사용자 실기 확인 범위: 옷 흰 테두리·탄창 정렬·투사체 속도·놓은 탄창10초 제거. [확인 기록](evidence/2026-10-07-vr-fixes-confirmed.md). 의상 수정 PR #17은 통합 브랜치에 병합됐으며 전체 P단계 인수를 뜻하지 않는다.
+- 다음 입력: 새 빌드의 단발/연사/장전/빈 총 청감, 작은 실제 스캔 파일과 기준 길이2개, 최신 과제 제출 형식. 실제 Room/Classroom 맵 및 두 맵의 전체 실기·성능·30분 시험은 미완료다. 제출 형식과 실제 결과에 맞춘 최종 보고서·발표·시연 자료도 남아 있다.
+- [최신 실기 실행 안내](hardware-validation.md)와 [소스 복원 안내](source-reproduction.md)를 사용한다. 아래 과거 커밋·시험·PR 상태는 당시 이력이며 현재 원격 상태를 대신하지 않는다.
 - P01-a 구현 커밋: `5a8dc1d844bf5aacd53a522a894bca3eee7c91d3`. [PR #1](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/1)은 원격에서 main에 병합됨(`e0e3be2`). GitHub CI는 없으며 로컬 Unity 검증 결과를 사용한다.
 - P01-a 구현·자동 검증 완료: Unity 환경 확인, EditMode 시험 어셈블리와 InteractionLab 구성, Windows Mono 개발 빌드. 증빙: [시험·빌드·소스 해시](evidence/p01-foundation.json), [환경 및 실행 절차](../Zombie%20Shoot%20VR/Docs/environment.md).
 - P01 실기 확인: 사용자가 VR 실행과 머리·양손 추적 정상 동작을 확인했다(2026-09-22). [VD 설정·실기 보고](evidence/2026-09-22-vd-hardware-check.md). 전용 입력 구성과 양안 가림 등 후속 검증까지 완료한 것으로 확대하지 않는다.
