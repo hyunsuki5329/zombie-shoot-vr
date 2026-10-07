@@ -4,7 +4,7 @@
 
 ## 로컬 복원
 
-사용자가 Mixamo에서 취득한 `Yaku J Ignite.fbx`, `Parasite L Starkie.fbx`, `Scary Zombie Pack.zip`을 준비한다. ZIP 다운로드 설정은 FBX for Unity / No Character / 30fps / none이었다. 파일의 SHA256은 복원 스크립트에 고정되어 있다. 다른 다운로드를 받았다면 해시를 임의 변경하지 말고 내용부터 검토한다.
+사용자가 Mixamo에서 취득한 `Yaku J Ignite.fbx`, `Parasite L Starkie.fbx`, `Scary Zombie Pack.zip`, `Yaku J Ignite@Zombie Reaction Hit.fbx`를 준비한다. ZIP 다운로드 설정은 FBX for Unity / No Character / 30fps / none, 피격 클립은 FBX for Unity / Without Skin / 30fps / none이었다. 파일의 SHA256은 복원 스크립트에 고정되어 있다. 다른 다운로드를 받았다면 해시를 임의 변경하지 말고 내용부터 검토한다.
 
 Unity가 해당 프로젝트를 열고 있지 않은 상태에서 저장소 루트에서 실행한다. 기존 작업을 보존하려면 별도 검증 프로젝트에서 먼저 실행한다.
 
@@ -14,7 +14,7 @@ New-Item -ItemType Directory -Force tmp | Out-Null
 & 'D:/Unity editor/6000.3.23f1/Editor/Unity.exe' -batchmode -nographics -quit -projectPath "$PWD/Zombie Shoot VR" -executeMethod VRFPS.Editor.MixamoVisualSetup.Configure -logFile "$PWD/tmp/mixamo-apply.log"
 ```
 
-복원기는 세 원본의 해시, ZIP CRC/항목과 기존 파일을 검사한 후 14개 FBX를 복원한다. 변경된 로컬 원본은 덮어쓰지 않는다. Unity 적용기는 Humanoid avatar, 추출 텍스처, URP 재질과 Animator를 만들고 두 적 프리팹의 외형 참조를 다시 연결한다. 생성된 재질/Animator는 재실행하면 설정이 다시 적용된다.
+복원기는 네 원본의 해시, ZIP CRC/항목과 기존 파일을 검사한 후 15개 FBX를 복원한다. 변경된 로컬 원본은 덮어쓰지 않는다. Unity 적용기는 Humanoid avatar, 추출 텍스처, URP 재질과 Animator를 만들고 두 적 프리팹의 외형 참조를 다시 연결한다. 생성된 재질/Animator는 재실행하면 설정이 다시 적용된다.
 
 `Assets/VRFPS/External/Mixamo/` 원본·추출물·생성물은 Git 제외다. 새 체크아웃은 복원과 Unity 적용 **둘 다** 필요하다. 총/탄창은 별도의 [GAMGO 복원](gamgo-visual-restore.md)도 필요하다. 이 과정을 하지 않은 소스는 외부 모델 참조가 누락되며 외형 테스트가 실패한다.
 
@@ -26,7 +26,7 @@ New-Item -ItemType Directory -Force tmp | Out-Null
 - 공격 클립 약40% 지점을 기존 준비시간(근거리0.65초/원거리0.8초)에 맞추고 후속 동작을 이어간다. 실제 피해·투사체 생성은 기존 ZombieController 타이머가 담당하며 애니메이션 이벤트를 추가하지 않는다. 실제 VR에서 접촉감은 추가 확인이 필요하다.
 - 원본 diffuse 알파가 있는 재질은 cutout으로 처리한다. 별도 diffuse atlas에 대응하지 않는 normal atlas는 재사용하지 않는다.
 - 기존 기본 도형 외형을 끄고 그 안의 이전 Animator를 제거해 새 Animator 하나만 사용한다. 기존 콜라이더·공격 원점·색상 경고·풀링 규칙을 유지한다.
-- 이 변경은 외형·동작 통합이며 최종 P06 인수 완료가 아니다. 실제 VR 크기/바닥/공격 방향/양안/프레임 성능, 전용 피격 동작과 최종 맵 검증은 남아 있다.
+- 이 변경은 외형·동작 통합이며 최종 P06 인수 완료가 아니다. 실제 VR 크기/바닥/공격 방향/양안/프레임 성능, 피격 동작의 실제 VR 인수와 최종 맵 검증은 남아 있다.
 
 검증 결과와 빌드 경로는 [진행 기록](progress.md) 및 [증빙](evidence/p06-mixamo-visuals.json)을 따른다.
 
@@ -35,3 +35,9 @@ New-Item -ItemType Directory -Force tmp | Out-Null
 `53daa00`의 Assets/Packages/ProjectSettings를 Git에서 별도 폴더로 내보내고, 기존 Library 및 외부 자원 meta 없이 위 복원을 실행했다. Yaku/Parasite의 모델 GUID가 새로 생성됐으며 각 적 프리팹에 새 원본 참조가 정확히1개 있고 이전 GUID가 남지 않았음을 확인했다. 복원본 EditMode57/57, PlayMode116/116 통과, BootstrapPreview/WaveLab Windows 빌드 모두 성공·종료0이었다. [복원 증빙](evidence/p06-mixamo-restoration.json).
 
 같은 PC의 전역 패키지 캐시와 Unity 라이선스는 재사용할 수 있으므로 새 PC 또는 오프라인 복원 증명은 아니다. 기존 기기용 MixamoMenuLab은 교체하지 않았다. 사용자 답변 기준 새 빌드 VR 검증은 아직 실행 전이다.
+
+## 피격 반응 연결 (2026-10-07)
+
+별도로 확보한 Zombie Reaction Hit(Flinches)를 양쪽 Humanoid에 리타게팅한다. 상체 마스크 레이어로0.4초간 최대0.45 가중치에서 점차 원래 자세로 복귀한다. 하체와 루트는 마스크에서 제외한다. 피격 동작 자체가 공격 타이머나 NavMesh 이동을 중단하지 않는다. 진행 중인 반응은 연사로 매번 처음 프레임으로 돌아가지 않으며, 정지 때 함께 멈추고 사망·재사용 때 가중치를0으로 초기화한다.
+
+기존 캐릭터/팩 파일에 더해 별도 피격 FBX가 필요하다. 복원 스크립트는 이를 `Motions/zombie reaction hit.fbx`로 복사한다. 앞 절53daa00 복원 증빙은 피격 연결 전 버전의 기록이다. 최신 검증 결과는 진행 기록을 따른다.

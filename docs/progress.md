@@ -343,3 +343,11 @@
 - 통합 커밋 `53daa00`, [초안 PR #14](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/14)의 소스를 Library/외부meta 없이 새 폴더로 내보내 사용자 취득 GAMGO·Mixamo 원본만 복원했다. 두 좀비 모델의 새GUID와 프리팹의 이전GUID 제거를 확인했다.
 - 새 복원본 **EditMode57/57·PlayMode116/116**, **BootstrapPreview/WaveLab Windows 빌드2개 성공·종료0**. 모델·공격 동작이 빌드 로그에 포함됐다. [증빙](evidence/p06-mixamo-restoration.json). 코드 수정 없이 기존 적용기가 새 참조를 정상 연결했다.
 - 동일 PC 전역 패키지/라이선스 재사용 가능성은 남아 새 PC·오프라인 보장으로 확대하지 않는다. 원래 기기용 MixamoMenuLab과 사용자 설정을 유지했다. 사용자는 새 VR 빌드를 아직 실행 전이라고 답했다. 실기·실제 두 맵·최종 성능 및 제출물은 미완료여서 PR은 초안으로 유지한다.
+
+### P06 상체 피격 반응 연결 (2026-10-07)
+
+- 계획07의 Hit Reaction 요구를 위해 사용자 로그인 Mixamo에서 Zombie Reaction Hit(Flinches)를 확보했다. 486,960바이트, Humanoid2초/30fps를 격리 임포트로 확인했다. 원본 해시는 복원 스크립트와 [증빙](evidence/p06-hit-reaction.json)에 기록한다. 기존 팩과 별도 원본이며 Git 제외다.
+- EnemyActor가 실제 체력 감소를 관찰해0.4초 상체 반응을 재생하고 최대0.45에서 가중치를 줄인다. 하체·루트를 제외하고 이동/공격 타이머를 변경하지 않는다. 연사가 진행 중인 동작을 되감지 않으며, 정지 때 함께 멈추고 사망·재사용 시 가중치를0으로 초기화한다.
+- 기존 구현에서 피격 레이어 없음1개 RED 확인 후, **PlayMode116/116·EditMode57/57·Python23/23** 통과. 연사 재시작 방지·반응 종료·정지·사망·재사용을 실제 적 시험에 추가했다. 두 모델의 피격 자세 렌더를 확인했고 독립 정적 리뷰에 중대한 지적은 없었다. 실제 VR의 반응 가독성·시간감은 미검증이다.
+- **BootstrapPreview/WaveLab Windows 빌드2개 성공·종료0**, 피격 클립 포함 확인. `Zombie Shoot VR/Builds/Windows/HitReactionMenuLab/WaveLab.exe`로338개 파일 복사·해시 대조 및 고지1개 추가. 진단 실행기 CheckOnly 경로 확인. 기존 빌드를 유지하고 최신 실기 안내를 갱신했다.
+- 적용된 로컬 모션/마스크/Animator를 생산 프로젝트에 반영했다. 복원은 네 다운로드 원본으로15개 FBX를 확보한 후 외형 적용기를 실행한다. 현재 사용자는 이전 새 빌드도 아직 실행 전이며 실제 두 맵·최종 성능·제출 형식 확인은 대기다. 전체 프로젝트 완료가 아니다.

@@ -35,8 +35,8 @@ class RestoreMixamoTests(unittest.TestCase):
         restore.EXPECTED = {name: hashlib.sha256((self.source / name).read_bytes()).hexdigest() for name in self.original}
 
     def test_repeat_is_idempotent_and_changed_destination_is_preserved(self):
-        self.assertEqual(restore.restore(self.source, self.project), 3)
-        self.assertEqual(restore.restore(self.source, self.project), 3)
+        self.assertEqual(restore.restore(self.source, self.project), 4)
+        self.assertEqual(restore.restore(self.source, self.project), 4)
         changed = self.target / "Yaku J Ignite.fbx"
         changed.write_bytes(b"local edit")
         with self.assertRaisesRegex(ValueError, "Preserving modified"):

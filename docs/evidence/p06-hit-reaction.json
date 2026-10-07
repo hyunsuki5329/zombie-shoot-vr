@@ -1,0 +1,55 @@
+{
+  "date": "2026-10-07",
+  "base_commit": "8707e85",
+  "status": "hardware_acceptance_pending",
+  "motion": {
+    "file": "Yaku J Ignite@Zombie Reaction Hit.fbx",
+    "bytes": 486960,
+    "sha256": "cdb0ccb2edc0327527829aaa5faa1121e95e05177bf5a66053b2804850ec02a1",
+    "human": true,
+    "seconds": 2,
+    "fps": 30
+  },
+  "tests": {
+    "hit-red.xml": {
+      "passed": 0,
+      "failed": 1,
+      "sha256": "1364f36de16e97ce096c132dd7d0ba37a8e9101a427f35f001270b1818942b00"
+    },
+    "hit-play.xml": {
+      "passed": 116,
+      "failed": 0,
+      "sha256": "a34f805751ac4709b317b6ff7ae2b47d0a7024ed8a892483f9c79353bda0da1d"
+    },
+    "hit-edit.xml": {
+      "passed": 57,
+      "failed": 0,
+      "sha256": "6f72feeeb40fd4f019300e66910640eab7175c333a08d9b57292ab4aa620ac49"
+    }
+  },
+  "presentation": {
+    "duration_seconds": 0.4,
+    "maximum_upper_body_weight": 0.45,
+    "root_legs_excluded": true,
+    "attack_timers_changed": false,
+    "death_and_reuse_clear_blend": true
+  },
+  "builds": [
+    "BootstrapPreview",
+    "WaveLab"
+  ],
+  "python_tests_passed": 23,
+  "hardware_build": {
+    "path": "Zombie Shoot VR/Builds/Windows/HitReactionMenuLab/WaveLab.exe",
+    "copied_hash_verified": 338,
+    "additional_asset_notice": 1,
+    "log_sha256": "2aaed05774be55e69c656a5d9aa204ff8fdbb71199c82b71e47e0188edd069a2"
+  },
+  "review": "Independent static review: no important bugs. Not GitHub approval or headset signoff.",
+  "render": "Viewed offscreen baked-mesh upper-body hit pose on both models. No headset/temporal contact evaluation.",
+  "remaining": [
+    "Actual VR hit readability, scale, floor contact, stereo and performance",
+    "Actual Room/Classroom scans and map integration",
+    "Final course format and deliverables"
+  ]
+}
