@@ -4,9 +4,9 @@
 
 ## 1. 지금 실행할 빌드
 
-전투 시험: `D:/Unity Project/Zombie Shoot VR/Zombie Shoot VR/Builds/Windows/FeedbackMenuLab/WaveLab.exe`
+전투 시험: `D:/Unity Project/Zombie Shoot VR/Zombie Shoot VR/Builds/Windows/ClothingFixMenuLab/WaveLab.exe`
 
-현재 권장 빌드는 GAMGO K2·탄창과 Mixamo 좀비 외형·동작이 적용된 FeedbackMenuLab이다. 2026-10-07 실기 피드백 수정 빌드다. 탄창 소켓을 총구 쪽 2cm·위 5mm 보정하고, 적 색조를 제거하고, 투사체 속도를 6m/s로 높였다. 놓은 탄창은 활성 플레이 시간 10초 뒤 회수된다. 수정 후 실기 인수는 아직 미확인이다. 임시 도형 공간에서 Yaku 근거리/Parasite 원거리 적, 오른팔 HUD·메뉴·수동 재장전·웨이브·소리·진동을 시험한다. 점수는 저장하지 않는다. `WaveLab.exe`만 옮기지 말고 같은 폴더의 Data·DLL을 함께 유지한다. 기존 GamgoMenuLab·MixamoMenuLab·HitReactionMenuLab은 비교용으로 보존했다.
+현재 권장 빌드는 GAMGO K2·탄창과 Mixamo 좀비 외형·동작이 적용된 ClothingFixMenuLab이다. 2026-10-07 실기 피드백 및 의상 투명도 수정 빌드다. Yaku 옷의 흰 테두리를 제거하고 Parasite도 RGBA 원본 연결을 적용했다. 탄창 소켓을 총구 쪽 2cm·위 5mm 보정하고, 적 색조를 제거하고, 투사체 속도를 6m/s로 높였다. 놓은 탄창은 활성 플레이 시간 10초 뒤 회수된다. 수정 후 실기 인수는 아직 미확인이다. 임시 도형 공간에서 Yaku 근거리/Parasite 원거리 적, 오른팔 HUD·메뉴·수동 재장전·웨이브·소리·진동을 시험한다. 점수는 저장하지 않는다. `WaveLab.exe`만 옮기지 말고 같은 폴더의 Data·DLL을 함께 유지한다. 기존 GamgoMenuLab·MixamoMenuLab·HitReactionMenuLab·FeedbackMenuLab은 비교용으로 보존했다.
 
 메뉴 미리보기: `D:/Unity Project/Zombie Shoot VR/Zombie Shoot VR/Builds/Windows/BootstrapPreview/BootstrapPreview.exe`. 첫 조작 안내와 설정을 확인할 수 있지만 실제 Room/Classroom 씬이 없어 맵 선택 버튼은 비활성이다. 두 프로그램을 동시에 실행하지 않는다.
 
@@ -18,7 +18,7 @@
 
 현재 정상 연결되는 Quest Pro + Virtual Desktop 환경으로 진행한다. 제공된 기존 설정은 High/90Hz/270Mbps/SSW Always enabled였다. 이는 조작 시험의 환경 기록이며 72Hz 성능 인수 결과로 사용하지 않는다. 시작 날짜·시각과 실제 적용된 설정, 변경 여부를 [결과 양식](templates/hardware-session-result.md)에 기록한다.
 
-1. FeedbackMenuLab을 실행한다. 시작 준비8초 뒤 전투가 시작된다. 왼손 X(PC F6)로 정지, 왼손 Y(PC F7)로 새 도전을 시작한다. 재도전 후 왼손 그립은 놓았다 다시 잡는다.
+1. ClothingFixMenuLab을 실행한다. 시작 준비8초 뒤 전투가 시작된다. 왼손 X(PC F6)로 정지, 왼손 Y(PC F7)로 새 도전을 시작한다. 재도전 후 왼손 그립은 놓았다 다시 잡는다.
 2. **T04/T05 외형·양손 제한**: 시작 직후와 재도전 후 양쪽 눈에서 총·탄창의 재질/크기/위치가 자연스러운지, 손이 총에서 과도하게 벗어나거나 탄창 삽입을 가리지 않는지 확인한다.  오른손 그립을 놓아도 총이 오른손에 유지되는지 확인한다. 오른손만으로 발사되지 않고, 왼손 앞부분을 잡으면 발사되며, 트리거를 누른 채 왼손을 놓으면 즉시 멈춰야 한다.
 3. **T06/T07 재장전**: 앞부분 그립 해제 → 총 아래 탄창에서 새 그립 입력으로 탈거 → 놓아 버리기 → 왼쪽 허리에서 새 그립 입력으로 공급 → 그립을 유지하며 삽입 → 놓았다 앞부분 다시 잡기 → 발사. 잔탄 교체10회, 빈 탄창 교체10회를 따로 센다. 삽입 직후 앞부분을 잡기 전에는 발사되지 않아야 한다. ROUNDS 표시는 앞쪽 상태판에서 확인한다.
 4. **T12 정지/재개**: X로 정지하면 전투·스틱 이동·낙하 탄창은 멈추고 머리·손 추적은 유지되어야 한다. 정지 중 왼손을 앞부분에서 멀리 옮긴 후 Resume을 선택한다. 예전 잡기 상태로 발사되면 실패다. 메뉴를 누른 트리거도 놓았다 다시 눌러야 발사된다.
@@ -32,8 +32,8 @@
 | 범위 | 확인할 결과 | 세부 절차 |
 |---|---|---|
 | T07 | 버린 잔탄 재삽입 거절, 새 탄창 분실 후 복구, 허리 그립 유지 시 중복 공급 없음, 손 탄창 수명 보호 | [재장전 예외 항목](evidence/p05-reload-hardware-check.md) |
-| T08/T09/T13 | 클리어 회복, 남은 생성 대기 중 조기 클리어 없음, 준비 중 직전 웨이브 유지, 실제 시작 번호로 결과 표시 | [웨이브 절차](evidence/p07-wave-hardware-check.md), 실행은 위 FeedbackMenuLab 사용 |
-| T10/T11 | Yaku의 근거리 공격과 3웨이브부터 Parasite의 원거리 공격 예고·회피, 가구 우회, 벽 뒤 피해 차단. 걷기 중 외형/판정 분리, 바닥 침하, 연사 피격 반응·정지 중 멈춤·사망·재도전 자세 및 양안 표시 확인 | [적 시험](evidence/p06-enemy-hardware-check.md), 실행은 위 FeedbackMenuLab 사용 |
+| T08/T09/T13 | 클리어 회복, 남은 생성 대기 중 조기 클리어 없음, 준비 중 직전 웨이브 유지, 실제 시작 번호로 결과 표시 | [웨이브 절차](evidence/p07-wave-hardware-check.md), 실행은 위 ClothingFixMenuLab 사용 |
+| T10/T11 | Yaku의 근거리 공격과 3웨이브부터 Parasite의 원거리 공격 예고·회피, 가구 우회, 벽 뒤 피해 차단. 걷기 중 외형/판정 분리, 바닥 침하, 연사 피격 반응·정지 중 멈춤·사망·재도전 자세 및 양안 표시 확인 | [적 시험](evidence/p06-enemy-hardware-check.md), 실행은 위 ClothingFixMenuLab 사용 |
 | T12 | 사용한/손에 든/버린 탄창, 정지·사망 상태를 포함해 재도전 총10회. 매번 HP100·ROUNDS30·KILLS0·WAVE0·준비8초 | [웨이브 절차](evidence/p07-wave-hardware-check.md) |
 | T15 | 저체력 표시, 포인터·버튼, 실제 팔 자세에서 가독성·가림 | [메뉴/HUD](evidence/p08-menu-hardware-check.md) |
 | P10 | 빈 탄창 소리, 좌우 햅틱, 웨이브/피격/저체력/적 접근·준비음과 방향 | [무기](evidence/p10-weapon-feedback-hardware-check.md), [전투 소리](evidence/p10-world-feedback-hardware-check.md) |
@@ -49,7 +49,7 @@ PC PowerShell에서 다음을 실행한다. 게임이 이미 실행 중이면 �
 
 ```powershell
 Set-Location -LiteralPath 'D:/Unity Project/Zombie Shoot VR'
-& './scripts/Start-VrDiagnostics.ps1' -Build FeedbackMenuLab -FrameTimings
+& './scripts/Start-VrDiagnostics.ps1' -Build ClothingFixMenuLab -FrameTimings
 ```
 
 실행 전 경로 확인만 하려면 `-CheckOnly`를 추가한다. `-Build`를 생략하면 이전 MenuLab이 선택되므로 새 외형 시험에서는 위 인수를 유지한다. 로그는 아래 폴더에 생성된다.
@@ -73,7 +73,7 @@ python -B scripts/analyze_vr_frame_timings.py '실제-기록.vrft' --output '새
 
 위 조작이 안정된 뒤 VD를72Hz·SSW Disabled로 설정하고 해상도·코덱·비트레이트와 네트워크 조건을 고정해 별도 기록한다. 기존90Hz·보간 켬 자료와 합치지 않는다. 설정 적용 후 다시 실행하고 실제 적용 상태를 확인한다.
 
-지금 FeedbackMenuLab에서는 로그 생성·GPU 유효 표본 존재·종료 기록 여부를 짧게 점검할 수 있다. 이것은 실제 방/강의실 성능 시험이 아니다. CPU전체 시간은 대기를 포함하므로 CPU 작업12.5ms 판정으로 사용하지 않으며, GPU0·빈 표본은 측정 불가다. CPU 작업 지표·VR 런타임 대조가 완료되기 전 성능 통과를 선언하지 않는다.
+지금 ClothingFixMenuLab에서는 로그 생성·GPU 유효 표본 존재·종료 기록 여부를 짧게 점검할 수 있다. 이것은 실제 방/강의실 성능 시험이 아니다. CPU전체 시간은 대기를 포함하므로 CPU 작업12.5ms 판정으로 사용하지 않으며, GPU0·빈 표본은 측정 불가다. CPU 작업 지표·VR 런타임 대조가 완료되기 전 성능 통과를 선언하지 않는다.
 
 최종 두 맵 각각 워밍업2분 뒤 빈 맵3분, 일반 전투3분, 최대 동시 수3분, 지속 플레이30분을 수행한다. 재도전·맵 전환도 각각10회다. CPU/GPU 각각 p95≤12.5ms, p99·끊김·객체 상한·RAM/VRAM 추세·계측 켬/끔 조건을 [T17 계획](vr-fps-project-docs/08-test-plan.md)에 따라 기록한다. 정지 시간이 포함된 로그 길이만으로30분 플레이를 인정하지 않는다.
 
@@ -82,7 +82,7 @@ python -B scripts/analyze_vr_frame_timings.py '실제-기록.vrft' --output '새
 첫 회차 결과는 다음처럼 짧게 회신해도 된다. 빈칸은 미확인으로 취급한다.
 
 ```text
-FeedbackMenuLab / 실행 날짜·시각:
+ClothingFixMenuLab / 실행 날짜·시각:
 VD 설정 변경 여부:
 T06 잔탄 __/10, 빈 탄창 __/10:
 T07 버린 탄창 거절·새 탄창 분실 복구:
@@ -94,3 +94,7 @@ T15 팔 UI·포인터·가림:
 ```
 
 정식 시험 기록은 [복사해서 쓰는 양식](templates/hardware-session-result.md)을 사용한다. 원본 촬영·개인 화면·로그는 자동으로 Git에 올리지 않는다.
+
+## 2026-10-07 사용자 실기 확인 갱신
+
+최신 ClothingFixMenuLab에서 옷 흰 테두리·탄창 정렬·투사체 속도·놓은 탄창 10초 회수의 정상 동작을 사용자가 확인했다. [직접 보고와 확인 범위](evidence/2026-10-07-vr-fixes-confirmed.md). 이전 문단의 해당 네 항목 실기 대기는 이 기록으로 갱신한다. 전체 P단계, 성능, 실제 두 맵 및 최종 제출물의 완료 판정은 아니다.

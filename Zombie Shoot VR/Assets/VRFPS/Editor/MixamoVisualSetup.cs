@@ -43,7 +43,8 @@ namespace VRFPS.Editor
     ti.textureType=TextureImporterType.NormalMap;ti.maxTextureSize=2048;ti.SaveAndReimport();
    }
    var colorPath=folder+diffuse;var ci=(TextureImporter)AssetImporter.GetAtPath(colorPath);
-   ci.sRGBTexture=true;ci.maxTextureSize=2048;ci.SaveAndReimport();
+   ci.sRGBTexture=true;ci.maxTextureSize=2048;
+   ci.alphaSource=TextureImporterAlphaSource.FromInput;ci.alphaIsTransparency=true;ci.SaveAndReimport();
    var path=Root+"Generated/"+name+".mat";
    var m=AssetDatabase.LoadAssetAtPath<Material>(path);
    if(m==null){m=new Material(Shader.Find("Universal Render Pipeline/Lit"));AssetDatabase.CreateAsset(m,path);}
@@ -105,8 +106,8 @@ namespace VRFPS.Editor
     foreach(var t in visual.GetComponentsInChildren<Transform>(true))t.gameObject.layer=root.layer;
     var animator=visual.GetComponent<Animator>();animator.applyRootMotion=false;animator.runtimeAnimatorController=Controller(prefab,ranged,clips);
     var renderer=visual.GetComponentInChildren<SkinnedMeshRenderer>();
-    // The alternate diffuse atlas has no matching normal atlas in either FBX.
-    renderer.sharedMaterials=ranged?new[]{Mat(model,"ParasiteBody","parasiteZombie_body_diffuse.png",null),Mat(model,"Parasite","parasiteZombie_diffuse.png","parasiteZombie_normal.png")}:new[]{Mat(model,"Yaku","Yakuzombie_diffuse.png","Yakuzombie_normal.png"),Mat(model,"YakuClothes","Yakuzombie_.png",null)};
+    // Use authored RGBA atlases for every slot; embedded RGB copies flatten torn clothing to white.
+    renderer.sharedMaterials=ranged?new[]{Mat(model,"ParasiteBody","parasiteZombie_diffuse.png",null),Mat(model,"Parasite","parasiteZombie_diffuse.png","parasiteZombie_normal.png")}:new[]{Mat(model,"Yaku","Yakuzombie_diffuse.png","Yakuzombie_normal.png"),Mat(model,"YakuClothes","Yakuzombie_diffuse.png",null)};
     PrefabUtility.SaveAsPrefabAsset(root,path);
    }finally{PrefabUtility.UnloadPrefabContents(root);}
   }
