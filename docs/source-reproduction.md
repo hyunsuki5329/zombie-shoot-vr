@@ -11,6 +11,8 @@
 - Python 분석기를 실행할 경우 Python3.11과 `scripts/` 전체. `analyze_vr_frame_timings.py`는 같은 폴더의 `analyze_vr_diagnostics.py`를 가져온다.
 - 현재 외형 브랜치는 Git 제외 외부 모델을 사용한다. 사용자 취득 파일로 [GAMGO K2·탄창](gamgo-visual-restore.md) 및 [Mixamo 좀비·동작](mixamo-visual-restore.md)의 복원과 해당 외형 적용기를 실행해야 한다. 아래 과거8a28aee 리허설은 이 외부 자산 도입 전 기록이다.
 
+사용자 제공 무기 음원3개도 [음원 복원 절차](user-weapon-audio.md)에 따라 복원·적용한 후 최종 자산 시험을 실행한다.
+
 Git clone 또는 아래 소스 내보내기에서 같은 커밋을 고정한다. `Library`, `Temp`, `Logs`, 빌드, 개인 촬영 원본, `.git`, 자격 증명은 복원에 넣지 않는다. 개인 OpenXR/튜토리얼 미커밋 설정을 내보내기에 섞지 않는다. 새 PC에는 그 PC에 맞는 검증된 VR 런타임/연결 환경이 별도로 필요하다.
 
 최종 소스/문서 묶음에는 [자산 출처표](asset-provenance.md)와 `docs/licenses/`도 동봉한다. 아래8a28aee 리허설 ZIP은 후속 추가된 고지를 포함하지 않으며 최종 제출 ZIP이 아니다.

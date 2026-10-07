@@ -1,0 +1,85 @@
+{
+  "base_commit": "a45317ee1c3044f166f51703dcc098c428c69731",
+  "status": "build_ready_hardware_audio_acceptance_pending",
+  "source_url": "https://pgtd.tistory.com/227",
+  "license_link_on_page": "https://creativecommons.org/licenses/by/4.0/deed.ko",
+  "originals": {
+    "shoot sound.mp3": {
+      "bytes": 91542,
+      "sha256": "b12aee9041391b0214bfdd67fc50d783ec66fad3d4cc89eae77ac900ea601e88"
+    },
+    "empty shoot.mp3": {
+      "bytes": 16117,
+      "sha256": "a15f0ce8251274aa4d33733fe94f408f681ee232c47598df257eba3e6b328ccc"
+    },
+    "reload.mp3": {
+      "bytes": 22859,
+      "sha256": "78067b1634a13133a218c1826769bfc90ff14c5efeb777d391013cad9b9ce950"
+    }
+  },
+  "prepared": {
+    "Shot": {
+      "source_segment_seconds": [
+        0.322,
+        0.702
+      ],
+      "seconds": 0.38,
+      "rate": 44100,
+      "channels": 1,
+      "sha256": "beb01426524cb79ee9d572478d78941502539739a532c0f0e960b3cb4f88f2b1"
+    },
+    "Empty": {
+      "source_segment_seconds": [
+        0.207,
+        0.57
+      ],
+      "seconds": 0.36299319727891155,
+      "rate": 44100,
+      "channels": 1,
+      "sha256": "d05cd776e6edd8e6e1683a93cff420233be6e96ee2ccb2b929b4ccf81b3278fa"
+    },
+    "Reload": {
+      "source_segment_seconds": [
+        0.063,
+        0.84
+      ],
+      "seconds": 0.7770068027210885,
+      "rate": 44100,
+      "channels": 1,
+      "sha256": "0b3bb6214fd216d56d4563a9b6546b2ac8821af91f52f15535ea6ff93d7d4e77"
+    }
+  },
+  "tests": {
+    "red.xml": {
+      "passed": 0,
+      "failed": 3,
+      "end_time_utc": "2026-10-07 12:53:01Z",
+      "sha256": "db3d2afd4aa4b53ffeefaa7683f10874d424f56739d8b6074fd5920bb3737dde"
+    },
+    "play.xml": {
+      "passed": 118,
+      "failed": 0,
+      "end_time_utc": "2026-10-07 12:57:42Z",
+      "sha256": "20a0d224a70edfca344a0876a82074a6e9f9236c1a63404ce7782bdf0461ce96"
+    },
+    "edit-final.xml": {
+      "passed": 60,
+      "failed": 0,
+      "end_time_utc": "2026-10-07 18:45:45Z",
+      "sha256": "71f6c70197a79d30338b28757fed66956bd255feea2405efef4ab87c935b5a3e"
+    }
+  },
+  "python_tests_passed": 23,
+  "shot_voice_count": 4,
+  "total_weapon_voices": 6,
+  "review": "Prevalidation issue fixed and verified by corrupt/missing-source probe; no remaining important reviewer findings. Final assets require documented restoration.",
+  "restore_checks": "valid originals, idempotence, edited destination preservation, bad source no writes; Unity corrupt/partial originals leave rig and audio unchanged",
+  "hardware_audio_acceptance": "pending; waveform/event tests are not headset listening evidence",
+  "build": {
+    "executable": "D:\\Unity Project\\Zombie Shoot VR\\Zombie Shoot VR\\Builds\\Windows\\UserAudioMenuLab\\WaveLab.exe",
+    "verified_source_files": 338,
+    "verification": "Every copied build file SHA256 matched source; attribution notice added separately",
+    "log_sha256": "2ac72f3091a291d12b8e8e74f774385ff683a6873156b08c98c37024479c6669",
+    "unity_exit_code": 0
+  }
+}

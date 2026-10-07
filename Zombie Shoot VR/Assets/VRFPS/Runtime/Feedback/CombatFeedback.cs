@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit.Inputs.Haptics;
 namespace VRFPS
 {
-    // Three reusable voices; no per-shot objects or unbounded PlayOneShot voices.
+    // Four bounded shot voices preserve the 0.38-second tail at the 0.1-second fire interval.
     public sealed class CombatFeedback : MonoBehaviour
     {
         [SerializeField] K2Controller gun;
@@ -12,12 +12,15 @@ namespace VRFPS
         public HapticImpulsePlayer rightHaptics,leftHaptics;
         [Range(0,1)] public float volume=.35f;
         [Range(0,1)] public float shotHaptic=.25f,insertHaptic=.2f;
-        AudioSource shot,empty,insert;
+        readonly AudioSource[] shots=new AudioSource[4];
+        int nextShot;
+        AudioSource empty,insert;
         bool subscribed;
         public int CueCount { get; private set; }
         void Awake()
         {
-            shot=Voice("Shot audio");empty=Voice("Empty audio");insert=Voice("Insert audio");
+            for(var i=0;i<shots.Length;i++)shots[i]=Voice("Shot audio "+i);
+            empty=Voice("Empty audio");insert=Voice("Insert audio");
         }
         AudioSource Voice(string name)
         {
@@ -45,14 +48,18 @@ namespace VRFPS
         }
         void OnDisable(){Unsubscribe();StopVoices();}
         void OnPhase(RunPhase phase){if(phase==RunPhase.Paused || phase==RunPhase.Dead)StopVoices();}
-        void StopVoices(){if(shot!=null)shot.Stop();if(empty!=null)empty.Stop();if(insert!=null)insert.Stop();}
+        void StopVoices(){foreach(var voice in shots)if(voice!=null)voice.Stop();nextShot=0;if(empty!=null)empty.Stop();if(insert!=null)insert.Stop();}
         void Play(AudioSource source,AudioClip clip,HapticImpulsePlayer haptics,float amplitude,float duration)
         {
             CueCount++;
             if(source!=null && clip!=null){source.clip=clip;source.outputAudioMixerGroup=output;source.volume=Mathf.Clamp01(volume);source.Play();}
             if(haptics!=null)haptics.SendHapticImpulse(Mathf.Clamp01(amplitude),duration);
         }
-        void OnShot(Vector3 start,Vector3 end)=>Play(shot,shotClip,rightHaptics,shotHaptic,.035f);
+        void OnShot(Vector3 start,Vector3 end)
+        {
+            Play(shots[nextShot],shotClip,rightHaptics,shotHaptic,.035f);
+            nextShot=(nextShot+1)%shots.Length;
+        }
         void OnEmpty()=>Play(empty,emptyClip,null,0,0);
         void OnInsert()
         {
