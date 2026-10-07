@@ -1,7 +1,7 @@
 {
   "date": "2026-10-07",
   "base_commit": "1de6b80",
-  "status": "build_ready_hardware_acceptance_pending",
+  "status": "user_confirmed_clothing_fix",
   "cause": "Opaque RGB embedded texture copies assigned to YakuClothes and ParasiteBody. Authored RGBA counterparts preserve torn-clothing cutouts.",
   "fix": "Assign original RGBA diffuse atlases to all slots; explicitly retain input alpha and alpha edge processing. Existing alpha clipping follows source alpha. Original FBX/PNG bytes unchanged.",
   "tests": {
@@ -45,7 +45,13 @@
     ]
   },
   "review": "Independent static review: no important actionable issues.",
-  "hardware_acceptance": "Corrected build not yet tested in headset.",
+  "hardware_acceptance": {
+    "date": "2026-10-07",
+    "source": "user report",
+    "record": "2026-10-07-vr-fixes-confirmed.md",
+    "build": "ClothingFixMenuLab/WaveLab.exe",
+    "scope": "clothing white edges"
+  },
   "build": {
     "path": "Zombie Shoot VR\\Builds\\Windows\\ClothingFixMenuLab\\WaveLab.exe",
     "copied_files_sha256_verified": 338,

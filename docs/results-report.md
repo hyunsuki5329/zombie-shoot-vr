@@ -84,3 +84,7 @@ K2와 탄창의 제작자는 GAMGO이며 K2는 Free Standard, 탄창은 CC BY 4.
 ## 2026-10-07 의상 투명도 후속 수정
 
 Yaku 옷 끝 흰 영역의 원인은 알파가 없는 RGB 텍스처 연결이었다. 원본 RGBA로 교체하고 Parasite의 같은 유형 연결도 정정했다. 앞뒤 비교 렌더와 수정 전 2개 실패 → EditMode59/59·PlayMode117/117로 검증했다. [증빙](evidence/zombie-clothing-alpha.json). 새 헤드셋 인수 결과는 아직 없다.
+
+## 2026-10-07 사용자 실기 확인 갱신
+
+최신 ClothingFixMenuLab에서 옷 흰 테두리·탄창 정렬·투사체 속도·놓은 탄창 10초 회수의 정상 동작을 사용자가 확인했다. [직접 보고와 확인 범위](evidence/2026-10-07-vr-fixes-confirmed.md). 이전 문단의 해당 네 항목 실기 대기는 이 기록으로 갱신한다. 전체 P단계, 성능, 실제 두 맵 및 최종 제출물의 완료 판정은 아니다.

@@ -1,7 +1,7 @@
 {
   "date": "2026-10-07",
   "base_commit": "dc30d9b",
-  "status": "build_ready_hardware_acceptance_pending",
+  "status": "user_confirmed_alignment_speed_cleanup",
   "user_feedback": "Latest build executed; magazine seating mismatch, unwanted enemy tint, projectile too slow, request ~10s dropped magazine cleanup. No full hardware acceptance inferred.",
   "changes": {
     "socket_local_position": [
@@ -39,7 +39,13 @@
   },
   "python_tests_passed": 23,
   "review": "Independent static review found no actionable regressions.",
-  "hardware_acceptance": "pending for the corrected build",
+  "hardware_acceptance": {
+    "date": "2026-10-07",
+    "source": "user report",
+    "record": "2026-10-07-vr-fixes-confirmed.md",
+    "build": "ClothingFixMenuLab/WaveLab.exe",
+    "scope": "magazine alignment, projectile speed, dropped magazine 10-second cleanup; enemy tint not separately confirmed"
+  },
   "build": {
     "path": "Zombie Shoot VR\\Builds\\Windows\\FeedbackMenuLab\\WaveLab.exe",
     "copied_files_sha256_verified": 338,
