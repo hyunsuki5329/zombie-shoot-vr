@@ -376,3 +376,8 @@
 - 새 회귀 시험은 수정 전 두 모델 모두 실패(불투명 알파1). 수정 후 전체 EditMode59/59·PlayMode117/117 통과. 독립 리뷰 중요 결함 없음. [증빙](evidence/zombie-clothing-alpha.json).
 - 이전 탄창/적 색조/투사체/탄창 회수 수정도 유지된다. 수정 후 헤드셋 양안 표시는 아직 인수 전이다.
 - Windows 두 빌드 성공. 전투 빌드를 `ClothingFixMenuLab/WaveLab.exe`로 복사하고 338개 파일 SHA256 일치와 출처 안내 포함을 확인했다.
+
+### 밸런스 참고 데이터 동기화
+
+- 전체 종료 조건 재점검 중 참고 JSON의 투사체3m/s·탄창12초가 코드/06 표와 다른 것을 발견해6m/s·10초로 갱신하고 결정 기록에 근거를 연결했다. 런타임 변경 없이 JSON 파싱과 값 대조로 확인했다.
+- 실기 수정 커밋 `1de6b80`은 [PR #16](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/16), 의상 수정 `874523f`는 [PR #17](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/17)에 있다. 수정 빌드 인수 전이므로 초안 유지.
