@@ -403,3 +403,11 @@ Windows 빌드 성공. `Builds/Windows/UserAudioMenuLab/WaveLab.exe`에 복사�
 단발·연사·장전·빈 총 소리를 사용자가 모두 확인했다. [직접 보고](evidence/2026-10-08-weapon-audio-confirmed.md). 기존 음원 청감 대기는 이 기록으로 갱신한다. 다음 실제 공간 스캔은 사용자가 촬영 전이라고 다시 확인했다.
 
 병합 전 검증 캐시의 기존 모델 참조 검사 누락을 복원하고 EditMode60/60을 재확인했다. 런타임 변경은 없어 기존 PlayMode118/118 및 사용자 확인 빌드가 동일 구현을 검증한다.
+
+## 2026-10-08 P12 최신 소스 복원 검증
+
+사용자가 공간 스캔 이외의 작업을 먼저 요청하여 최신 통합 소스 `1412b0a`의 재현 경로를 검증했다. 기존 검증 폴더에서 시험 코드가 달랐던 일을 계기로 Git 내보내기에서 다시 시작했다. Library·외부 meta 없이 사용자 취득 원본9개를 복원했고 C#106개는 기준 커밋과 바이트 일치를 확인했다. 새 모델·음원 GUID를 생성한 복원본에서 EditMode60/60·PlayMode118/118, Python23/23 통과. Windows 빌드 결과는 [복원 증빙](evidence/current-source-restoration.json)에 기록한다.
+
+`Zombie Shoot VR/Builds/Reproduction/1412b0a/`에 소스 ZIP·원본 ZIP·해시 manifest·복원 README를 로컬 보관했다. 배포용 소스 ZIP의 기존 검증 내보내기2027개 항목을 바이트 대조하고 원본9개도 ZIP 내부 SHA256을 대조했다. 외부 원본을 Git에 올리지 않았으며 사용자 확인 UserAudioMenuLab을 교체하지 않았다. 이 작업은 실제 두 맵이나 최종 제출 인수가 아니라 최신 개발 버전의 복원 검증이다.
+
+BootstrapPreview/WaveLab 빌드 모두 성공·종료0. 복원 WaveLab337개 파일을 보관본의 RestoredWaveLab에 복사하고 SHA256 일치 및 고지를 확인했다. 독립 증빙 리뷰에서 중요 지적 없음. C#106개 대조 범위는 VRFPS로 명확히 표기했다.
