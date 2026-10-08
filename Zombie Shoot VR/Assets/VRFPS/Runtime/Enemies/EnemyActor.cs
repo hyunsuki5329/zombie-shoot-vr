@@ -11,9 +11,7 @@ namespace VRFPS
         NavMeshAgent agent;
         AcidProjectilePool pool;
         Collider[] hitboxes;
-        Renderer[] renderers;
         Animator animator;
-        MaterialPropertyBlock tint;
         float corpseAge;
         const float HitDuration = .4f;
         int hitLayer = -1, presentedHealth;
@@ -33,9 +31,7 @@ namespace VRFPS
             this.kind = kind; this.pool = pool;
             gameObject.SetActive(true);
             hitboxes = GetComponentsInChildren<Collider>(true);
-            renderers = GetComponentsInChildren<Renderer>(true);
             animator = GetComponentInChildren<Animator>(true);
-            if (tint == null) tint = new MaterialPropertyBlock();
             foreach (var hitbox in hitboxes) hitbox.enabled = true;
             agent.enabled = true;
             if (animator != null) { animator.applyRootMotion = false; animator.Rebind(); animator.speed = 1; }
@@ -79,10 +75,6 @@ namespace VRFPS
         }
         void UpdatePresentation()
         {
-            var color = enemy.IsDead ? Color.gray : enemy.IsWindingUp ? Color.yellow :
-                kind == EnemyKind.Melee ? new Color(0.35f, 0.65f, 0.3f) : new Color(0.7f, 0.25f, 0.65f);
-            tint.SetColor("_BaseColor", color);
-            foreach (var renderer in renderers) renderer.SetPropertyBlock(tint);
             if (animator != null && animator.runtimeAnimatorController != null)
             {
                 if (hitLayer > 0)

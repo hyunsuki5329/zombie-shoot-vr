@@ -109,7 +109,7 @@ namespace VRFPS.Tests
         }
         [Test] public void ProjectileExpiresBeforeDistantTargetAndDoesNotHome()
         {
-            var target = Target(Vector3.forward * 14); Physics.SyncTransforms();
+            var target = Target(Vector3.forward * 26); Physics.SyncTransforms();
             var shot = Projectile(); shot.Tick(10, 10);
             Assert.That(shot.Flying, Is.False); Assert.That(target.Hits, Is.Zero);
             shot.Launch(Vector3.zero, Vector3.forward, 42, 15, Solid, Player);
@@ -148,13 +148,13 @@ namespace VRFPS.Tests
             Assert.That(kind == EnemyKind.Melee ? target.Hits : shots, Is.EqualTo(2));
         }
 
-        [Test] public void ProjectileTravelsAtThreeMetresPerSecondUntilFourSecondLifetime()
+        [Test] public void ProjectileTravelsAtSixMetresPerSecondUntilFourSecondLifetime()
         {
             var shot = Projectile(); shot.Tick(1, 1);
-            Assert.That(shot.transform.position.z, Is.EqualTo(3).Within(0.001));
+            Assert.That(shot.transform.position.z, Is.EqualTo(6).Within(0.001));
             shot.Tick(2.9f, 3.9); Assert.That(shot.Flying, Is.True);
             shot.Tick(1, 4.9); Assert.That(shot.Flying, Is.False);
-            Assert.That(shot.transform.position.z, Is.EqualTo(12).Within(0.001));
+            Assert.That(shot.transform.position.z, Is.EqualTo(24).Within(0.001));
         }
 
         [Test] public void ProjectileBornInsideWallCannotDamageOverlappingPlayer()

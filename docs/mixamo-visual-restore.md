@@ -24,7 +24,7 @@ New-Item -ItemType Directory -Force tmp | Out-Null
 - Idle/Walk/Dead는 공통 모션, 근거리 Attack은 zombie attack, 원거리는 zombie scream을 발사 준비 동작으로 사용한다. 전용 침 뱉기 모션은 아니다.
 - 이동은 기존 NavMeshAgent가 담당한다. 평면 루트 이동은 추출하고 `applyRootMotion=false`로 두어 외형이 콜라이더에서 멀어지지 않게 한다.
 - 공격 클립 약40% 지점을 기존 준비시간(근거리0.65초/원거리0.8초)에 맞추고 후속 동작을 이어간다. 실제 피해·투사체 생성은 기존 ZombieController 타이머가 담당하며 애니메이션 이벤트를 추가하지 않는다. 실제 VR에서 접촉감은 추가 확인이 필요하다.
-- 원본 diffuse 알파가 있는 재질은 cutout으로 처리한다. 별도 diffuse atlas에 대응하지 않는 normal atlas는 재사용하지 않는다.
+- 모든 재질 슬롯에 원본 RGBA diffuse atlas를 사용하고 입력 알파와 cutout을 활성화한다. RGB 복사본(`Yakuzombie_.png`, `parasiteZombie_body_diffuse.png`)은 찢어진 옷 부분을 흰색으로 평탄화하므로 사용하지 않는다. 기존 슬롯별 normal 연결은 유지한다.
 - 기존 기본 도형 외형을 끄고 그 안의 이전 Animator를 제거해 새 Animator 하나만 사용한다. 기존 콜라이더·공격 원점·색상 경고·풀링 규칙을 유지한다.
 - 이 변경은 외형·동작 통합이며 최종 P06 인수 완료가 아니다. 실제 VR 크기/바닥/공격 방향/양안/프레임 성능, 피격 동작의 실제 VR 인수와 최종 맵 검증은 남아 있다.
 
@@ -41,3 +41,9 @@ New-Item -ItemType Directory -Force tmp | Out-Null
 별도로 확보한 Zombie Reaction Hit(Flinches)를 양쪽 Humanoid에 리타게팅한다. 상체 마스크 레이어로0.4초간 최대0.45 가중치에서 점차 원래 자세로 복귀한다. 하체와 루트는 마스크에서 제외한다. 피격 동작 자체가 공격 타이머나 NavMesh 이동을 중단하지 않는다. 진행 중인 반응은 연사로 매번 처음 프레임으로 돌아가지 않으며, 정지 때 함께 멈추고 사망·재사용 때 가중치를0으로 초기화한다.
 
 기존 캐릭터/팩 파일에 더해 별도 피격 FBX가 필요하다. 복원 스크립트는 이를 `Motions/zombie reaction hit.fbx`로 복사한다. 앞 절53daa00 복원 증빙은 피격 연결 전 버전의 기록이다. 최신 검증 결과는 진행 기록을 따른다.
+
+## 2026-10-07 의상 흰 테두리 수정
+
+사용자 실기 화면에서 Yaku 옷 끝의 흰 영역을 확인했다. YakuClothes에 연결된 RGB 텍스처에는 찢어진 부분이 흰색으로 들어 있었으며, 원본 RGBA diffuse에는 같은 부분이 투명하다. ParasiteBody도 같은 유형의 RGB 소스를 사용하고 있어 함께 원본 RGBA로 연결했다. Parasite 전후 렌더에서는 처음부터 큰 흰 띠가 두드러지지는 않았으므로 Yaku와 동일한 실기 결함이 관측됐다고 주장하지 않는다.
+
+입력 알파를 명시적으로 읽고 알파 경계 처리를 설정한다. 원본 FBX/PNG 바이트는 변경하지 않았다. 두 재질의 투명 픽셀 회귀 시험과 실제 프리팹 앞뒤 비교 렌더로 검증한다. 새 체크아웃은 기존 Configure 절차를 다시 실행하면 같은 연결이 생성된다.

@@ -45,7 +45,7 @@ namespace VRFPS.Editor
                 {
                     socket = new GameObject("Magazine Socket").AddComponent<MagazineSocket>();
                     socket.transform.SetParent(gun.transform, false);
-                    socket.transform.localPosition = new Vector3(0, -0.11f, 0.15f);
+                    socket.transform.localPosition = new Vector3(0, -0.105f, 0.17f);
                 }
                 var initial = socket.GetComponentInChildren<MagazineToken>(true);
                 if (initial == null)

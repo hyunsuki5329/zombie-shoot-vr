@@ -3,7 +3,7 @@ namespace VRFPS
 {
     public sealed class AcidProjectile : MonoBehaviour
     {
-        const float Speed = 3, Lifetime = 4, Radius = 0.05f;
+        const float Speed = 6, Lifetime = 4, Radius = 0.05f;
         Vector3 direction;
         int sourceId, damage, solidMask, collisionMask;
         readonly Collider[] overlap = new Collider[1];

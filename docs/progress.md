@@ -1,11 +1,14 @@
 # Goal 실행 현황
 
-갱신: 2026-09-29. 전체 목표는 미완료이며 진행 중이다.
+현재 상태: 사용자 음원 적용 빌드까지 준비됐으며 전체 목표는 미완료다. 아래 최신 요약을 우선하고 이전 날짜별 기록은 당시 증빙으로 읽는다.
 
 ## 현재 작업
 
-- 현재 기준 커밋: `8a28aee` (실기 안내, [초안 PR #10](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/10)에 push). 이후 P12 단위의 최종 SHA와 PR은 원격 기록에 연결한다. [최신 실기 실행 안내](hardware-validation.md)와 [소스 복원 안내](source-reproduction.md)를 사용한다.
-- 브랜치: `codex/p12-reproduction`, base `codex/p11-performance`. 8a28aee 소스를 캐시 없는 별도 폴더로 내보내 EditMode50/50·PlayMode116/116과 Windows 두 빌드를 재현했다. 투사체·탄창·적/사체 풀, 객체/원시 프레임 수집과 Python20/20 분석 검증은 P11에서 수행했다. 실제 두 맵·실기·CPU/GPU/장시간·독립 리뷰는 남아 있다. 선행 PR #8/#9/#10은 초안·미병합 상태다.
+- 최신 구현 커밋: `f64ca8f6d9d780f3fd3bc9acb10160f3b570c6ca`, 브랜치 `codex/user-weapon-audio`. [초안 PR #18](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/18)의 base는 `codex/vr-feedback-tuning`이다. 2026-10-08 사용자가 네 가지 소리의 실기를 확인했다. 병합 결과는 PR 원격 기록을 따른다.
+- 최신 검증: EditMode60/60·PlayMode118/118·Python23/23, Windows 빌드 성공. [음원 증빙](evidence/user-weapon-audio.json), [복원 안내](user-weapon-audio.md). 실행 파일은 `Zombie Shoot VR/Builds/Windows/UserAudioMenuLab/WaveLab.exe`이며 복사한338개 빌드 파일의 SHA256이 원본과 일치한다.
+- 사용자 실기 확인 범위: 옷 흰 테두리·탄창 정렬·투사체 속도·놓은 탄창10초 제거. [확인 기록](evidence/2026-10-07-vr-fixes-confirmed.md). 의상 수정 PR #17은 통합 브랜치에 병합됐으며 전체 P단계 인수를 뜻하지 않는다.
+- 다음 입력: 작은 실제 스캔 파일과 기준 길이2개, 최신 과제 제출 형식. 실제 Room/Classroom 맵 및 두 맵의 전체 실기·성능·30분 시험은 미완료다. 제출 형식과 실제 결과에 맞춘 최종 보고서·발표·시연 자료도 남아 있다.
+- [최신 실기 실행 안내](hardware-validation.md)와 [소스 복원 안내](source-reproduction.md)를 사용한다. 아래 과거 커밋·시험·PR 상태는 당시 이력이며 현재 원격 상태를 대신하지 않는다.
 - P01-a 구현 커밋: `5a8dc1d844bf5aacd53a522a894bca3eee7c91d3`. [PR #1](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/1)은 원격에서 main에 병합됨(`e0e3be2`). GitHub CI는 없으며 로컬 Unity 검증 결과를 사용한다.
 - P01-a 구현·자동 검증 완료: Unity 환경 확인, EditMode 시험 어셈블리와 InteractionLab 구성, Windows Mono 개발 빌드. 증빙: [시험·빌드·소스 해시](evidence/p01-foundation.json), [환경 및 실행 절차](../Zombie%20Shoot%20VR/Docs/environment.md).
 - P01 실기 확인: 사용자가 VR 실행과 머리·양손 추적 정상 동작을 확인했다(2026-09-22). [VD 설정·실기 보고](evidence/2026-09-22-vd-hardware-check.md). 전용 입력 구성과 양안 가림 등 후속 검증까지 완료한 것으로 확대하지 않는다.
@@ -357,3 +360,54 @@
 - [결과보고서](results-report.md)의 구현 기준을 `524fa7b`로 갱신했다. 임시 도형 적이라는 오래된 설명을 사용자 지정 Mixamo 모델·별도 피격 반응으로 교체하고, 53daa00 새 소스 복원과524fa7b 피격 포함 검증을 날짜·범위별로 추가했다.
 - 보고서 링크28개와 최신 시험XML4개의 해시·통과 수를 대조했다. 문서 수정만 수행했으며 Unity 시험을 다시 실행한 것으로 표시하지 않았다. [피격 초안 PR #15](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/15)에 연결한다.
 - 최종 종료 조건 대조: 실제 Room/Classroom 씬 파일은 둘 다 없고 사용자는 새 VR 빌드를 실행 전이라고 답했다. 촬영본/기준 길이, 실제 두 맵 인수·성능·30분 시험, 최신 과제 형식에 따른 최종 보고서/발표/시연 영상이 필요하다. 수업 공지 링크 질문은 답변 대기다. 이 보고서는 중간 결과이며 최종 제출물로 표시하지 않는다.
+
+## 2026-10-07 — 최신 빌드 실기 피드백 수정
+
+- 사용자가 최신 빌드 실행 후 탄창 위치 차이, 적 초록/보라 색조, 느린 투사체를 보고하고 분리 탄창의 약 10초 정리를 요청했다. 실행 사실만 기록하며 전체 실기 항목 통과로 확대하지 않는다.
+- 탄창 소켓을 총구 방향 2cm·위 5mm 보정했다. 실제 PlayerRig의 양측 비교 렌더로 삽입구와 위치를 확인했다. 초기/교체 탄창은 같은 소켓을 사용하고, 새 소스 GAMGO 복원에서도 보정이 적용된다.
+- EnemyActor의 종류·공격·사망 색조 덧씌우기를 제거해 원본 재질을 유지한다. 피격/공격/사망 애니메이션과 판정은 유지한다.
+- 산성 투사체 속도를 3→6m/s로 조정했다(수명 4초). 놓은 탄창은 활성 플레이 10초 후 풀에 반환하며 손·장착·일시정지 보호는 유지한다.
+- 수정 전 4개 회귀 실패 확인 후 전체 PlayMode117/117, EditMode57/57, Python23/23 통과. 독립 코드 리뷰에서 중요한 결함 없음. [증빙](evidence/vr-feedback-tuning.json).
+- 수정 빌드 양안 정렬·삽입·속도 체감은 실기 재확인 대상이다. 실제 스캔과 최종 성능/제출물 인수도 계속 남아 있다.
+- Windows BootstrapPreview/WaveLab 빌드 성공. WaveLab을 `FeedbackMenuLab/WaveLab.exe`로 복사한 338개 파일의 SHA256 일치와 출처 안내 포함을 확인했다. 진단 실행기의 FeedbackMenuLab 경로 검사도 통과했다. 실제 실행은 사용자 실기 확인을 기다린다.
+
+## 2026-10-07 — 좀비 의상 흰 테두리 수정
+
+- 사용자 화면의 Yaku 옷 흰 테두리를 원본 텍스처/재질까지 추적했다. YakuClothes 슬롯은 알파 없는 RGB 복사본을 사용해 찢어진 부분이 불투명 흰색으로 남았다. 원본 RGBA diffuse로 연결하고 입력 알파를 유지한다.
+- ParasiteBody도 같은 종류의 RGB 연결이어서 RGBA로 교정했다. 원거리 모델의 앞뒤 비교 렌더에서는 초기 큰 흰 띠는 두드러지지 않았으며, 수정 후 새 테두리 결함은 보이지 않았다. 실제 기기에서 동일 결함이 발생했다고 확대하지 않는다.
+- Yaku 앞뒤 비교 렌더에서 어깨·등·옷자락 흰 부분의 제거를 확인했다. 원본 FBX/PNG는 변경하지 않고 로컬 생성 재질·설정만 갱신했다. 복원 적용기도 같은 연결을 생성한다.
+- 새 회귀 시험은 수정 전 두 모델 모두 실패(불투명 알파1). 수정 후 전체 EditMode59/59·PlayMode117/117 통과. 독립 리뷰 중요 결함 없음. [증빙](evidence/zombie-clothing-alpha.json).
+- 이전 탄창/적 색조/투사체/탄창 회수 수정도 유지된다. 수정 후 헤드셋 양안 표시는 아직 인수 전이다.
+- Windows 두 빌드 성공. 전투 빌드를 `ClothingFixMenuLab/WaveLab.exe`로 복사하고 338개 파일 SHA256 일치와 출처 안내 포함을 확인했다.
+
+### 밸런스 참고 데이터 동기화
+
+- 전체 종료 조건 재점검 중 참고 JSON의 투사체3m/s·탄창12초가 코드/06 표와 다른 것을 발견해6m/s·10초로 갱신하고 결정 기록에 근거를 연결했다. 런타임 변경 없이 JSON 파싱과 값 대조로 확인했다.
+- 실기 수정 커밋 `1de6b80`은 [PR #16](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/16), 의상 수정 `874523f`는 [PR #17](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/17)에 있다. 수정 빌드 인수 전이므로 초안 유지.
+
+## 2026-10-07 사용자 실기 확인 갱신
+
+최신 ClothingFixMenuLab에서 옷 흰 테두리·탄창 정렬·투사체 속도·놓은 탄창 10초 회수의 정상 동작을 사용자가 확인했다. [직접 보고와 확인 범위](evidence/2026-10-07-vr-fixes-confirmed.md). 이전 문단의 해당 네 항목 실기 대기는 이 기록으로 갱신한다. 전체 P단계, 성능, 실제 두 맵 및 최종 제출물의 완료 판정은 아니다.
+
+## P10 사용자 제공 무기 음원 적용
+
+- `reload.mp3`→성공한 삽입, `empty shoot.mp3`→빈 총 새 트리거, `shoot sound.mp3`→실제 Fired 이벤트에 연결했다. 발사 원본3개 연사 구간을 분석해 가장 짧은 구간의 마지막 발사와 잔향0.38초를 추출했다. 이벤트 없이 전체 연사 녹음을 재생하지 않는다.
+- mono PCM, 앞 무음 제거·페이드·피크 정규화. 10Hz에서0.4초마다 재사용되는 고정4채널로 잔향을 보존한다. 빈 총/삽입 포함 총6개 AudioSource이며 발사마다 객체를 생성하지 않는다.
+- 기존단일채널 RED3개 후 PlayMode118/118·최종 EditMode60/60·Python23/23. 원본손상/부분누락이 기존 프리팹을 덮는 리뷰 지적을 사전검증으로 수정하고 격리 실제실행으로 바이트불변을 확인했다. 독립재리뷰 중요결함없음.
+- 출처 [무료 소리 창고](https://pgtd.tistory.com/227)의 CC BY4.0 링크와 변경내역을 기록했다. [복원/재생 안내](user-weapon-audio.md), [증빙](evidence/user-weapon-audio.json). 원본/가공물은 로컬보존, Git에는 복원·적용기와 출처를 포함한다.
+- 실제 헤드셋의 음량·동기감·잔향 청감은 미확인이다. 파형검증이나 무음 환경 테스트를 청취 통과로 해석하지 않는다.
+Windows 빌드 성공. `Builds/Windows/UserAudioMenuLab/WaveLab.exe`에 복사하고 전체 빌드 파일 SHA256 일치 확인, ASSET-NOTICES.txt에 음원 출처와 가공 고지 추가. 헤드셋 청감 인수는 대기.
+
+## 2026-10-08 무기 음원 실기 인수
+
+단발·연사·장전·빈 총 소리를 사용자가 모두 확인했다. [직접 보고](evidence/2026-10-08-weapon-audio-confirmed.md). 기존 음원 청감 대기는 이 기록으로 갱신한다. 다음 실제 공간 스캔은 사용자가 촬영 전이라고 다시 확인했다.
+
+병합 전 검증 캐시의 기존 모델 참조 검사 누락을 복원하고 EditMode60/60을 재확인했다. 런타임 변경은 없어 기존 PlayMode118/118 및 사용자 확인 빌드가 동일 구현을 검증한다.
+
+## 2026-10-08 P12 최신 소스 복원 검증
+
+사용자가 공간 스캔 이외의 작업을 먼저 요청하여 최신 통합 소스 `1412b0a`의 재현 경로를 검증했다. 기존 검증 폴더에서 시험 코드가 달랐던 일을 계기로 Git 내보내기에서 다시 시작했다. Library·외부 meta 없이 사용자 취득 원본9개를 복원했고 C#106개는 기준 커밋과 바이트 일치를 확인했다. 새 모델·음원 GUID를 생성한 복원본에서 EditMode60/60·PlayMode118/118, Python23/23 통과. Windows 빌드 결과는 [복원 증빙](evidence/current-source-restoration.json)에 기록한다.
+
+`Zombie Shoot VR/Builds/Reproduction/1412b0a/`에 소스 ZIP·원본 ZIP·해시 manifest·복원 README를 로컬 보관했다. 배포용 소스 ZIP의 기존 검증 내보내기2027개 항목을 바이트 대조하고 원본9개도 ZIP 내부 SHA256을 대조했다. 외부 원본을 Git에 올리지 않았으며 사용자 확인 UserAudioMenuLab을 교체하지 않았다. 이 작업은 실제 두 맵이나 최종 제출 인수가 아니라 최신 개발 버전의 복원 검증이다.
+
+BootstrapPreview/WaveLab 빌드 모두 성공·종료0. 복원 WaveLab337개 파일을 보관본의 RestoredWaveLab에 복사하고 SHA256 일치 및 고지를 확인했다. 독립 증빙 리뷰에서 중요 지적 없음. C#106개 대조 범위는 VRFPS로 명확히 표기했다.
