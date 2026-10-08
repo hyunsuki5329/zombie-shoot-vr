@@ -1,5 +1,5 @@
 param(
-    [ValidateSet('MenuLab', 'GamgoMenuLab', 'BootstrapPreview')]
+    [ValidateSet('MenuLab', 'GamgoMenuLab', 'MixamoMenuLab', 'BootstrapPreview')]
     [string]$Build = 'MenuLab',
     [switch]$CheckOnly,
     [switch]$FrameTimings

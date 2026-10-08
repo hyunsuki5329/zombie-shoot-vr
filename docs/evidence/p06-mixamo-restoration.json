@@ -1,0 +1,49 @@
+{
+  "date": "2026-10-06",
+  "source_commit": "53daa00539b94a571f53b21fe11d743ee50ec836",
+  "source_archive_sha256": "91f7b5271abe800dea5116c470e106369491da0f5404d727dd91ff09c088e416",
+  "scope": "Git-exported Assets/Packages/ProjectSettings; no prior Library or ignored external metadata. Restored user-acquired GAMGO and Mixamo originals. Same PC global packages/license may be reused; not a fresh-PC/offline proof.",
+  "model_guids": [
+    {
+      "model": "Yaku J Ignite",
+      "old_guid": "82d805f0bc2909242ab074f87be2eaf8",
+      "new_guid": "c6c326d9be394154a8e8847da61fe968",
+      "nested_source_count": 1,
+      "old_guid_absent": true
+    },
+    {
+      "model": "Parasite L Starkie",
+      "old_guid": "32a716aaad1e9ea4fb0b516e19ee6426",
+      "new_guid": "32b7a76ee0ce11b4d94973fbe1153223",
+      "nested_source_count": 1,
+      "old_guid_absent": true
+    }
+  ],
+  "tests": {
+    "fresh-edit.xml": {
+      "passed": 57,
+      "failed": 0,
+      "sha256": "6870969b55d2061d6c93795b043cc348eaa8c8833a17bf73ee615b6e19d81bff"
+    },
+    "fresh-play.xml": {
+      "passed": 116,
+      "failed": 0,
+      "sha256": "4d4d967824a2f6f47f7944b1959154eff7775865652ca220a5de58a549a153e0"
+    }
+  },
+  "builds": [
+    "BootstrapPreview",
+    "WaveLab"
+  ],
+  "unity_build_exit": 0,
+  "logs": {
+    "fresh-restore.log": "c6c5261bbbf85b39b1af434dd6034dd857da920e2a02b3892a944c7419f657e7",
+    "fresh-build.log": "be587726278183ad7211ac5e754e5c1fbfb6b79881dc62a511b394b5f0e5c955"
+  },
+  "hardware": "User reported not yet run on 2026-10-06; existing MixamoMenuLab build preserved.",
+  "remaining": [
+    "Quest Pro scale, floor contact, attack feedback, stereo and performance",
+    "Actual Room/Classroom maps",
+    "Final deliverables and course requirements"
+  ]
+}
