@@ -1,0 +1,56 @@
+{
+  "date": "2026-09-30",
+  "method": "Local PDF page text extraction with pypdf; conceptual mapping, not layout review or technical/medical efficacy validation",
+  "originals": "Local course-materials excluded from Git",
+  "sources": [
+    {
+      "file": "L04_게임엔진.pdf",
+      "sha256": "61374472c2d84beffe83d5e93fdedd09314d79f18f6ee12187239f57069eaaf6",
+      "pdf_pages_one_based": [
+        3,
+        4
+      ]
+    },
+    {
+      "file": "L08_가상현실 사용자 경험.pdf",
+      "sha256": "a5d17b3c2e589497283c847e30f19028f0a663264df2c54fb5e85620bfa5cb26",
+      "pdf_pages_one_based": [
+        3,
+        6
+      ]
+    },
+    {
+      "file": "L09_가상현실 부작용.pdf",
+      "sha256": "55271ea1cdb8b822a24f970a59c46efd046d0fb638c3ce7ccf6dcf9392e26472",
+      "pdf_pages_one_based": [
+        2,
+        3,
+        4
+      ]
+    },
+    {
+      "file": "L11_Novel View Synthesis_NeRF.pdf",
+      "sha256": "e4fa7807cdecc09a0cd402d5ff38edddba66d114b635da4b59725611583eedde",
+      "pdf_pages_one_based": [
+        11,
+        12,
+        13,
+        14
+      ]
+    },
+    {
+      "file": "L12_Gaussian Splatting.pdf",
+      "sha256": "35efba74edb7dbdba237207708cd73b112639198cd26ccd2d44763fff72b9009",
+      "pdf_pages_one_based": [
+        2,
+        9,
+        11
+      ]
+    }
+  ],
+  "limits": [
+    "No completed NeRF or GS implementation",
+    "No measured sickness reduction or motion-to-photon latency",
+    "Final course requirements and submission notice unconfirmed"
+  ]
+}

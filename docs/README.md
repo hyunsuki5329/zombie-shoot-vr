@@ -7,6 +7,7 @@
 - [최신 빌드로 진행하는 Quest Pro 실기 검증](hardware-validation.md)
 - [소스 복원·자동 시험·Windows 빌드](source-reproduction.md)
 - [현재 자산 출처와 라이선스 원문](asset-provenance.md)
+- [구현·시험 결과보고서 초안](results-report.md)
 - [방 촬영 가이드: 앱 스캔·사진·영상 선택](vr-fps-project-docs/05-capture-map-workflow.md)
 - [개발 계획서](vr-fps-project-docs/01-development-plan.md)
 - [Goal 실행 프롬프트: 구현·검증·커밋·PR·병합](prompts/vr-zombie-fps-goal.md)
