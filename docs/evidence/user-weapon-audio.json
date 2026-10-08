@@ -1,6 +1,6 @@
 {
   "base_commit": "a45317ee1c3044f166f51703dcc098c428c69731",
-  "status": "build_ready_hardware_audio_acceptance_pending",
+  "status": "weapon_audio_hardware_accepted",
   "source_url": "https://pgtd.tistory.com/227",
   "license_link_on_page": "https://creativecommons.org/licenses/by/4.0/deed.ko",
   "originals": {
@@ -67,6 +67,12 @@
       "failed": 0,
       "end_time_utc": "2026-10-07 18:45:45Z",
       "sha256": "71f6c70197a79d30338b28757fed66956bd255feea2405efef4ab87c935b5a3e"
+    },
+    "edit-acceptance.xml": {
+      "passed": 60,
+      "failed": 0,
+      "end_time_utc": "2026-10-08 00:27:12Z",
+      "sha256": "1c484175fc4f931e80326b792c1da48f3e5ee4f2077d92b2114bfc2feadb8f2a"
     }
   },
   "python_tests_passed": 23,
@@ -74,12 +80,14 @@
   "total_weapon_voices": 6,
   "review": "Prevalidation issue fixed and verified by corrupt/missing-source probe; no remaining important reviewer findings. Final assets require documented restoration.",
   "restore_checks": "valid originals, idempotence, edited destination preservation, bad source no writes; Unity corrupt/partial originals leave rig and audio unchanged",
-  "hardware_audio_acceptance": "pending; waveform/event tests are not headset listening evidence",
+  "hardware_audio_acceptance": "2026-10-08 user confirmed single fire, automatic fire, reload and empty trigger sound are satisfactory; no quantitative latency or performance claim",
   "build": {
     "executable": "D:\\Unity Project\\Zombie Shoot VR\\Zombie Shoot VR\\Builds\\Windows\\UserAudioMenuLab\\WaveLab.exe",
     "verified_source_files": 338,
     "verification": "Every copied build file SHA256 matched source; attribution notice added separately",
     "log_sha256": "2ac72f3091a291d12b8e8e74f774385ff683a6873156b08c98c37024479c6669",
     "unity_exit_code": 0
-  }
+  },
+  "hardware_audio_evidence": "2026-10-08-weapon-audio-confirmed.md",
+  "acceptance_recheck": "Restored missing existing nested-model assertions in verification cache; EditMode 60/60. Runtime code unchanged since PlayMode 118/118 and accepted build."
 }

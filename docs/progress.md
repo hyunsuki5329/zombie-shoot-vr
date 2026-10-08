@@ -4,10 +4,10 @@
 
 ## 현재 작업
 
-- 최신 구현 커밋: `f64ca8f6d9d780f3fd3bc9acb10160f3b570c6ca`, 브랜치 `codex/user-weapon-audio`. [초안 PR #18](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/18)의 base는 `codex/vr-feedback-tuning`이다. 실제 청감 인수 전이며 자동 병합하지 않는다.
+- 최신 구현 커밋: `f64ca8f6d9d780f3fd3bc9acb10160f3b570c6ca`, 브랜치 `codex/user-weapon-audio`. [초안 PR #18](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/18)의 base는 `codex/vr-feedback-tuning`이다. 2026-10-08 사용자가 네 가지 소리의 실기를 확인했다. 병합 결과는 PR 원격 기록을 따른다.
 - 최신 검증: EditMode60/60·PlayMode118/118·Python23/23, Windows 빌드 성공. [음원 증빙](evidence/user-weapon-audio.json), [복원 안내](user-weapon-audio.md). 실행 파일은 `Zombie Shoot VR/Builds/Windows/UserAudioMenuLab/WaveLab.exe`이며 복사한338개 빌드 파일의 SHA256이 원본과 일치한다.
 - 사용자 실기 확인 범위: 옷 흰 테두리·탄창 정렬·투사체 속도·놓은 탄창10초 제거. [확인 기록](evidence/2026-10-07-vr-fixes-confirmed.md). 의상 수정 PR #17은 통합 브랜치에 병합됐으며 전체 P단계 인수를 뜻하지 않는다.
-- 다음 입력: 새 빌드의 단발/연사/장전/빈 총 청감, 작은 실제 스캔 파일과 기준 길이2개, 최신 과제 제출 형식. 실제 Room/Classroom 맵 및 두 맵의 전체 실기·성능·30분 시험은 미완료다. 제출 형식과 실제 결과에 맞춘 최종 보고서·발표·시연 자료도 남아 있다.
+- 다음 입력: 작은 실제 스캔 파일과 기준 길이2개, 최신 과제 제출 형식. 실제 Room/Classroom 맵 및 두 맵의 전체 실기·성능·30분 시험은 미완료다. 제출 형식과 실제 결과에 맞춘 최종 보고서·발표·시연 자료도 남아 있다.
 - [최신 실기 실행 안내](hardware-validation.md)와 [소스 복원 안내](source-reproduction.md)를 사용한다. 아래 과거 커밋·시험·PR 상태는 당시 이력이며 현재 원격 상태를 대신하지 않는다.
 - P01-a 구현 커밋: `5a8dc1d844bf5aacd53a522a894bca3eee7c91d3`. [PR #1](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/1)은 원격에서 main에 병합됨(`e0e3be2`). GitHub CI는 없으며 로컬 Unity 검증 결과를 사용한다.
 - P01-a 구현·자동 검증 완료: Unity 환경 확인, EditMode 시험 어셈블리와 InteractionLab 구성, Windows Mono 개발 빌드. 증빙: [시험·빌드·소스 해시](evidence/p01-foundation.json), [환경 및 실행 절차](../Zombie%20Shoot%20VR/Docs/environment.md).
@@ -397,3 +397,9 @@
 - 출처 [무료 소리 창고](https://pgtd.tistory.com/227)의 CC BY4.0 링크와 변경내역을 기록했다. [복원/재생 안내](user-weapon-audio.md), [증빙](evidence/user-weapon-audio.json). 원본/가공물은 로컬보존, Git에는 복원·적용기와 출처를 포함한다.
 - 실제 헤드셋의 음량·동기감·잔향 청감은 미확인이다. 파형검증이나 무음 환경 테스트를 청취 통과로 해석하지 않는다.
 Windows 빌드 성공. `Builds/Windows/UserAudioMenuLab/WaveLab.exe`에 복사하고 전체 빌드 파일 SHA256 일치 확인, ASSET-NOTICES.txt에 음원 출처와 가공 고지 추가. 헤드셋 청감 인수는 대기.
+
+## 2026-10-08 무기 음원 실기 인수
+
+단발·연사·장전·빈 총 소리를 사용자가 모두 확인했다. [직접 보고](evidence/2026-10-08-weapon-audio-confirmed.md). 기존 음원 청감 대기는 이 기록으로 갱신한다. 다음 실제 공간 스캔은 사용자가 촬영 전이라고 다시 확인했다.
+
+병합 전 검증 캐시의 기존 모델 참조 검사 누락을 복원하고 EditMode60/60을 재확인했다. 런타임 변경은 없어 기존 PlayMode118/118 및 사용자 확인 빌드가 동일 구현을 검증한다.
