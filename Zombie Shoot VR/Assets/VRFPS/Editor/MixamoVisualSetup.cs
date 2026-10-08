@@ -14,7 +14,7 @@ namespace VRFPS.Editor
    MixamoModelPreparation.Prepare();
    Directory.CreateDirectory(Root+"Generated"); AssetDatabase.Refresh();
    var clips=new System.Collections.Generic.Dictionary<string,AnimationClip>();
-   foreach(var n in new[]{"zombie idle","zombie walk","zombie attack","zombie death","zombie scream"})
+   foreach(var n in new[]{"zombie idle","zombie walk","zombie attack","zombie death","zombie scream","zombie reaction hit"})
    {
     var path=Root+"Motions/"+n+".fbx";
     var imp=AssetImporter.GetAtPath(path) as ModelImporter;
@@ -81,6 +81,16 @@ namespace VRFPS.Editor
    var finish=attack.AddTransition(idle);finish.hasExitTime=true;finish.exitTime=.8f;finish.hasFixedDuration=true;finish.duration=.05f;finish.AddCondition(AnimatorConditionMode.IfNot,0,"Attack");finish.AddCondition(AnimatorConditionMode.IfNot,0,"Dead");
    var move=idle.AddTransition(walk);move.hasExitTime=false;move.duration=.15f;move.AddCondition(AnimatorConditionMode.Greater,.05f,"Speed");
    var stop=walk.AddTransition(idle);stop.hasExitTime=false;stop.duration=.15f;stop.AddCondition(AnimatorConditionMode.Less,.05f,"Speed");
+   while(controller.layers.Length>1)controller.RemoveLayer(controller.layers.Length-1);
+   var maskPath=Root+"Generated/HitUpperBody.mask";
+   var mask=AssetDatabase.LoadAssetAtPath<AvatarMask>(maskPath);
+   if(mask==null){mask=new AvatarMask();AssetDatabase.CreateAsset(mask,maskPath);}
+   for(var i=0;i<(int)AvatarMaskBodyPart.LastBodyPart;i++)mask.SetHumanoidBodyPartActive((AvatarMaskBodyPart)i,false);
+   foreach(var part in new[]{AvatarMaskBodyPart.Body,AvatarMaskBodyPart.Head,AvatarMaskBodyPart.LeftArm,AvatarMaskBodyPart.RightArm,AvatarMaskBodyPart.LeftFingers,AvatarMaskBodyPart.RightFingers})mask.SetHumanoidBodyPartActive(part,true);
+   EditorUtility.SetDirty(mask);
+   var reaction=new AnimatorStateMachine{name="Hit Reaction"};AssetDatabase.AddObjectToAsset(reaction,controller);
+   var flinch=reaction.AddState("Hit");flinch.motion=clips["zombie reaction hit"];flinch.speed=clips["zombie reaction hit"].length/.4f;reaction.defaultState=flinch;
+   controller.AddLayer(new AnimatorControllerLayer{name="Hit Reaction",stateMachine=reaction,avatarMask=mask,defaultWeight=0,blendingMode=AnimatorLayerBlendingMode.Override});
    EditorUtility.SetDirty(controller);return controller;
   }
   static void Apply(string prefab,string model,bool ranged,System.Collections.Generic.Dictionary<string,AnimationClip> clips)

@@ -65,3 +65,7 @@ Unity에서 실제 메시/재질 슬롯을 검사하고 기존 Foregrip/Muzzle/M
 실제 사용 동작은 zombie idle/walk/attack/death/scream이다. 사용하지 않는 나머지7개 동작은 로컬 다운로드 보존용이며 프리팹 Animator에 연결하지 않았다. 모델에는 유효한 Humanoid avatar가 있지만 원본 동작은 한 프레임 바인드 포즈여서 동작 팩을 리타게팅했다. 수정 내용은 [복원·적용 문서](mixamo-visual-restore.md)를 따른다.
 
 [Adobe 공식 FAQ](https://helpx.adobe.com/creative-cloud/faq/mixamo-faq.html)를 2026-10-06 확인했다. 캐릭터·애니메이션을 개인/상업/비영리 프로젝트와 게임에 royalty-free로 사용할 수 있다고 안내한다. 이 안내를 원본 자원의 독립 재배포 허가로 확대하지 않는다. FBX·추출 텍스처·생성 자원은 Git 제외하고 사용자 취득 파일로 복원한다. 최종 Source 전달 범위는 제출 방식과 원본 제공 조건을 확인한 후 확정한다.
+
+## 별도 피격 모션 (2026-10-07)
+
+Mixamo의 `Zombie Reaction Hit` 중 Flinches 동작을 사용자 로그인 세션에서 FBX for Unity / Without Skin / 30fps / none으로 취득했다. 원본명 `Yaku J Ignite@Zombie Reaction Hit.fbx`, 486,960바이트, SHA256 `cdb0ccb2edc0327527829aaa5faa1121e95e05177bf5a66053b2804850ec02a1`이다. 임포트 결과2초/30fps의 Humanoid 동작이며 두 적에 상체 마스크와0.4초 재생·블렌딩을 적용했다. 위 동작 팩에 포함된 파일로 혼동하지 않는다. 사용 조건과 원본 Git 제외 정책은 위 Adobe/Mixamo 항목과 동일하다.

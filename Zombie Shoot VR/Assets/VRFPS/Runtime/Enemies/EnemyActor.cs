@@ -15,6 +15,9 @@ namespace VRFPS
         Animator animator;
         MaterialPropertyBlock tint;
         float corpseAge;
+        const float HitDuration = .4f;
+        int hitLayer = -1, presentedHealth;
+        float hitRemaining;
         bool configured, combatEnabled;
         EnemyFeedback feedback;
         public ZombieController Controller => enemy;
@@ -37,6 +40,9 @@ namespace VRFPS
             agent.enabled = true;
             if (animator != null) { animator.applyRootMotion = false; animator.Rebind(); animator.speed = 1; }
             enemy.Configure(id, kind, target, origin, solidMask, wave);
+            hitLayer = animator != null && animator.runtimeAnimatorController != null ? animator.GetLayerIndex("Hit Reaction") : -1;
+            presentedHealth = enemy.Health; hitRemaining = 0;
+            if (hitLayer > 0) animator.SetLayerWeight(hitLayer, 0);
             feedback=GetComponent<EnemyFeedback>();feedback?.Configure(enemy,target);
             motor.Configure(target, kind, recovery);
             enemy.Died += HandleDeath; enemy.ProjectileRequested += Launch;
@@ -61,6 +67,7 @@ namespace VRFPS
         public void Tick(float deltaTime, double activeTime)
         {
             if (!configured || !combatEnabled || !gameObject.activeSelf) return;
+            hitRemaining = Mathf.Max(0, hitRemaining - Mathf.Max(0, deltaTime));
             enemy.Tick(deltaTime, activeTime); motor.Tick(deltaTime);
             feedback?.Tick(deltaTime);
             UpdatePresentation();
@@ -78,15 +85,29 @@ namespace VRFPS
             foreach (var renderer in renderers) renderer.SetPropertyBlock(tint);
             if (animator != null && animator.runtimeAnimatorController != null)
             {
+                if (hitLayer > 0)
+                {
+                    // Only presentation reacts: attack timers and navigation remain authoritative.
+                    // Do not restart an active flinch on every automatic-rifle bullet.
+                    if (enemy.IsDead) hitRemaining = 0;
+                    else if (enemy.Health < presentedHealth && hitRemaining <= 0)
+                    {
+                        hitRemaining = HitDuration;
+                        animator.Play("Hit", hitLayer, 0);
+                    }
+                    animator.SetLayerWeight(hitLayer, .45f * hitRemaining / HitDuration);
+                }
                 animator.SetBool("Attack", enemy.IsWindingUp); animator.SetBool("Dead", enemy.IsDead);
                 animator.SetFloat("Speed", agent.enabled && agent.isOnNavMesh ? agent.velocity.magnitude : 0);
             }
+            presentedHealth = enemy.Health;
         }
         void OnDestroy()
         { if (enemy != null) { enemy.Died -= HandleDeath; enemy.ProjectileRequested -= Launch; } }
         internal void ResetForPool()
         {
             configured=combatEnabled=false;corpseAge=0;pool=null;
+            hitRemaining=0;presentedHealth=0;
             feedback?.Configure(null,null);
             motor?.ResetForPool();enemy?.ResetForPool();
             if(hitboxes!=null)foreach(var hitbox in hitboxes)if(hitbox!=null)hitbox.enabled=false;
@@ -94,6 +115,7 @@ namespace VRFPS
             {
                 if(animator.runtimeAnimatorController!=null)animator.Rebind();
                 animator.speed=0;
+                if(hitLayer>0)animator.SetLayerWeight(hitLayer,0);
             }
         }
     }

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using NUnit.Framework;
 using UnityEditor;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -80,8 +81,14 @@ namespace VRFPS.Tests
             Assert.That(animator.avatar.isValid && animator.avatar.isHuman, Is.True);
             Assert.That(animator.applyRootMotion, Is.False);
             Assert.That(animator.runtimeAnimatorController, Is.Not.Null);
+            var layers = ((AnimatorController)animator.runtimeAnimatorController).layers;
+            Assert.That(layers.Length, Is.EqualTo(2));
+            Assert.That(layers[1].name, Is.EqualTo("Hit Reaction"));
+            Assert.That(layers[1].defaultWeight, Is.Zero);
+            foreach (var part in new[] { AvatarMaskBodyPart.Root, AvatarMaskBodyPart.LeftLeg, AvatarMaskBodyPart.RightLeg, AvatarMaskBodyPart.LeftFootIK, AvatarMaskBodyPart.RightFootIK })
+                Assert.That(layers[1].avatarMask.GetHumanoidBodyPartActive(part), Is.False, "Flinch must preserve navigation/feet");
             var clips = animator.runtimeAnimatorController.animationClips.Distinct().ToArray();
-            Assert.That(clips.Length, Is.EqualTo(4));
+            Assert.That(clips.Length, Is.EqualTo(5));
             foreach (var clip in clips)
             {
                 Assert.That(clip.humanMotion, Is.True);
