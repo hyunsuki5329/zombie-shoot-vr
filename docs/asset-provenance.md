@@ -73,3 +73,6 @@ Mixamo의 `Zombie Reaction Hit` 중 Flinches 동작을 사용자 로그인 세�
 ## 사용자 제공 발사·장전·빈 총 음원
 
 기존 합성 무기음 대신 사용자 제공 MP3 세 개를 사용한다. 출처는 [무료 소리 창고](https://pgtd.tistory.com/227), 게시자 〖 -라일락- 〗이며 페이지에서 CC BY 4.0을 연결한다. 사용 구간·페이드·mono 변환·정규화·로컬 복원은 [음원 문서](user-weapon-audio.md)를 따른다. 기존 합성 전투 신호의 출처는 그대로 유지하며 세 무기음을 합성 원본이라고 표시하지 않는다.
+# 보스·돌연변이 자원 추가 (2026-10-08)
+
+사용자가 제공한 Mixamo 모델 Skeletonzombie T Avelange와 Zombiegirl W Kurniawan을 각각 5웨이브 주기 보스와 6웨이브 이후 크롤러에 사용한다. 사용자 로그인 세션에서 Zombie Crawl(In Place), Zombie Biting(Victim On The Ground)을 FBX for Unity / Without Skin / 30fps / 키프레임 축소 없음으로 내려받았다. 이전 Adobe/Mixamo 사용 조건 및 원본 Git 제외 원칙을 유지한다. 원본 4개의 SHA256은 [복원 스크립트](../scripts/Restore-EnemyVariants.py)에 기록했다. Humanoid 리타게팅, URP 재질 연결, 보스 크기 조정, 크롤러 접지 보정과 머리 판정을 적용했다. [상세 복원 절차](boss-crawler.md).

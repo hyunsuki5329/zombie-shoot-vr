@@ -10,5 +10,25 @@
   "maps": [{"mapId":"room","maxAlive":4,"maxRangedAlive":1,"minSpawnDistanceMeters":2},{"mapId":"classroom","maxAlive":6,"maxRangedAlive":2,"minSpawnDistanceMeters":3}],
   "pools": {"droppedMagazines":8,"droppedMagazineLifetimeSeconds":10,"projectiles":12,"corpses":4,"corpseLifetimeSeconds":5,"effects":16},
   "record": {"primary":"reachedWave","tieBreaker":"kills","perMap":true},
-  "performanceGoal": {"headsetHz":72,"cpuP95Milliseconds":12.5,"gpuP95Milliseconds":12.5,"measured":false}
+  "performanceGoal": {"headsetHz":72,"cpuP95Milliseconds":12.5,"gpuP95Milliseconds":12.5,"measured":false},
+  "enemyVariants": {
+    "boss": {
+      "everyWaves": 5,
+      "count": 1,
+      "replacesMeleeSlot": 0,
+      "baseHealth": 500,
+      "baseDamage": 25,
+      "moveSpeed": 0.9,
+      "windupSeconds": 1.0
+    },
+    "crawler": {
+      "firstWave": 6,
+      "everyMeleeSlots": 3,
+      "baseHealth": 70,
+      "baseDamage": 8,
+      "moveSpeed": 2.2,
+      "windupSeconds": 0.45
+    },
+    "statsScaling": "existing wave health/damage percentage caps apply"
+  }
 }

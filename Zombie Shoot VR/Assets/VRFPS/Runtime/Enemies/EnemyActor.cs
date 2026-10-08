@@ -5,6 +5,11 @@ namespace VRFPS
     public sealed class EnemyActor : MonoBehaviour
     {
         [SerializeField] EnemyKind kind;
+        [SerializeField] EnemyVariant variant;
+        [SerializeField] EnemyActor crawlerPrefab,bossPrefab;
+        public EnemyVariant Variant=>variant;
+        public EnemyActor CrawlerPrefab=>crawlerPrefab;
+        public EnemyActor BossPrefab=>bossPrefab;
         [SerializeField] Transform attackOrigin;
         ZombieController enemy;
         ZombieMotor motor;
@@ -35,12 +40,12 @@ namespace VRFPS
             foreach (var hitbox in hitboxes) hitbox.enabled = true;
             agent.enabled = true;
             if (animator != null) { animator.applyRootMotion = false; animator.Rebind(); animator.speed = 1; }
-            enemy.Configure(id, kind, target, origin, solidMask, wave);
+            enemy.Configure(id, kind, target, origin, solidMask, wave,variant);
             hitLayer = animator != null && animator.runtimeAnimatorController != null ? animator.GetLayerIndex("Hit Reaction") : -1;
             presentedHealth = enemy.Health; hitRemaining = 0;
             if (hitLayer > 0) animator.SetLayerWeight(hitLayer, 0);
             feedback=GetComponent<EnemyFeedback>();feedback?.Configure(enemy,target);
-            motor.Configure(target, kind, recovery);
+            motor.Configure(target, kind, recovery,variant);
             enemy.Died += HandleDeath; enemy.ProjectileRequested += Launch;
             corpseAge = 0; configured = combatEnabled = true;
             UpdatePresentation();

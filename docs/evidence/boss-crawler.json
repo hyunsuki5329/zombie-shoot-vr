@@ -1,0 +1,62 @@
+{
+  "date": "2026-10-08",
+  "base_commit": "2c1e47a52ec72791004236af7e01644720c1c73c",
+  "status": "implemented_automated_checks_passed_hardware_pending",
+  "crawler_model": "Zombiegirl W Kurniawan",
+  "boss_model": "Skeletonzombie T Avelange",
+  "tests": {
+    "edit-complete.xml": {
+      "passed": 68,
+      "failed": 0,
+      "start_time": "2026-10-08 10:49:32Z",
+      "sha256": "87277c8dc4468484be5d54fdc9578f0871ae26bc40b3a561c79b186f5d019c11"
+    },
+    "play-complete.xml": {
+      "passed": 121,
+      "failed": 0,
+      "start_time": "2026-10-08 10:50:20Z",
+      "sha256": "5645fe61d44b365991dfa4dd4fa3326209b048119f69a8261e14cfce06686d53"
+    },
+    "python": {
+      "passed": 23,
+      "failed": 0
+    }
+  },
+  "build": {
+    "path": "D:\\Unity Project\\Zombie Shoot VR\\Zombie Shoot VR\\Builds\\Windows\\BossCrawlerMenuLab\\WaveLab.exe",
+    "verified_copied_files": 337,
+    "manifest_sha256": "5c8eae997d08519daf8b3daf2d2e1b5aeac28a97672200cf49b1f561c275b0ee",
+    "log_sha256": "ef2681bb80e7b388782fda7955ce7cbf6564ea1b5c63797eccaee77ecb57d761",
+    "unity_exit_code": 0,
+    "bootstrap_and_wave_lab_succeeded": true
+  },
+  "limitations": [
+    "New variants have not been tested on the headset.",
+    "Automated contact and prone-height checks plus rendered pose inspection do not replace headset mesh/hitbox alignment validation.",
+    "Prone corpse holds low static pose; no dedicated crawling death animation."
+  ],
+  "sources": {
+    "Skeletonzombie T Avelange.fbx": {
+      "bytes": 17508416,
+      "sha256": "b8a314a0b7babbf000a43f2f81aa58f1de90dc661c4da9faf085c6a630aa0f1a"
+    },
+    "Zombiegirl W Kurniawan.fbx": {
+      "bytes": 15897248,
+      "sha256": "30089459520752768335f87ba3cd8db48fa69eb98cbbb8f36c24d624f0d317b1"
+    },
+    "Skeletonzombie T Avelange@Zombie Crawl.fbx": {
+      "bytes": 784304,
+      "sha256": "be6211fec144f733e82c75082310761b262d4dbf4aa54ca10d83474b02d4dfa0"
+    },
+    "Skeletonzombie T Avelange@Zombie Biting.fbx": {
+      "bytes": 565408,
+      "sha256": "aeee9ed66ea2adf133aaab2bbc2ffb3bc2a1ac1194a5d7a514873c7272e2cde1"
+    }
+  },
+  "review": "Independent runtime, grounding/material and final source-avatar importer review: no important defects found.",
+  "preview": {
+    "CrawlerZombie-Walk.png": "10156fa2f923a969a772ff14742b6930192dcb323db274ceaf01e45fadd7a2b0",
+    "CrawlerZombie-Attack.png": "fab218917a4b901d2c6774873341aeeed6b8ad65458288960f34d95b0d233bc6"
+  },
+  "tested_source_files_match_live": 109
+}

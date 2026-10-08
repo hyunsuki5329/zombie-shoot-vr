@@ -88,6 +88,8 @@ $unityProcess.ExitCode
 
 ## 저장·로그와 문제 해결
 
+보스·돌연변이 변경부터는 기본 Mixamo 복원·적용 이후 [추가 모델과 모션 4개 복원 및 EnemyVariantSetup 적용](boss-crawler.md)을 수행한다. 크롤러 모델은 Zombiegirl W Kurniawan이다. 이 단계를 생략하면 변형 프리팹의 외부 참조가 누락되므로 시험·빌드를 진행하지 않는다. 기존 1412b0a 복원 패키지는 변경 전 이력으로 보존한다.
+
 기본 Windows 데이터 위치는 `%USERPROFILE%/AppData/LocalLow/DefaultCompany/Zombie Shoot VR/`이다. 실제 맵 기록은 `records-v1.json`과 `.bak`, 진단은 `Diagnostics/`, 실행 로그는 `Player.log`다. MenuLab은 연습 점수를 저장하지 않는다. 설정은 Unity PlayerPrefs에 저장된다. 오류 재현을 위해 실제 사용자 기록을 지우지 말고 백업과 별도 시험 환경을 사용한다.
 
 - 컴파일 오류: 에디터 버전과 package lock이 유지됐는지, 로그의 첫 컴파일 오류부터 확인한다.

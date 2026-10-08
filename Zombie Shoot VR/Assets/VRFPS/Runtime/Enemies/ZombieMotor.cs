@@ -19,7 +19,7 @@ namespace VRFPS
             ? targetBody.transform.TransformPoint(targetBody.center - Vector3.up * (targetBody.height * 0.5f))
             : target.position;
 
-        public void Configure(Transform target, EnemyKind kind, Vector3[] recoveryPoints)
+        public void Configure(Transform target, EnemyKind kind, Vector3[] recoveryPoints, EnemyVariant variant=EnemyVariant.Normal)
         {
             agent = GetComponent<NavMeshAgent>(); enemy = GetComponent<ZombieController>();
             if (recoveryPath == null) recoveryPath = new NavMeshPath();
@@ -28,7 +28,7 @@ namespace VRFPS
             this.target = target; this.kind = kind;
             targetBody = target.GetComponentInParent<CharacterController>();
             this.recoveryPoints = recoveryPoints ?? new Vector3[0];
-            agent.speed = kind == EnemyKind.Melee ? 1.1f : 0.85f;
+            agent.speed = GameBalance.EnemySpeed(kind,variant);
             agent.angularSpeed = 240; agent.acceleration = 6; agent.stoppingDistance = 0.65f;
             configured = combatEnabled = true; stalledTime = pathTimer = 0;
             RecoveryCount = 0; progressPosition = transform.position;

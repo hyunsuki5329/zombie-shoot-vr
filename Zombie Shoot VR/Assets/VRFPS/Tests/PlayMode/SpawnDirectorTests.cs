@@ -200,6 +200,29 @@ namespace VRFPS.Tests
             }
         }
 
+        [Test] public void BossAndCrawlerQuotasSurviveTenWavesAndRetry()
+        {
+            for(int w=1;w<=10;w++) {
+                int bosses=0,crawlers=0,spawned=0;
+                while(run.Phase==RunPhase.Active && spawned<100) {
+                    SpawnOne();Assert.That(run.Alive,Is.EqualTo(1));
+                    foreach(var actor in Actors())if(actor.gameObject.activeSelf && !actor.Controller.IsDead) {
+                        spawned++;if(actor.Variant==EnemyVariant.Boss)bosses++;
+                        if(actor.Variant==EnemyVariant.Crawler){crawlers++;Assert.That(actor.GetComponent<NavMeshAgent>().speed,Is.EqualTo(2.2f));}
+                        actor.Controller.ApplyDamage(10000,PlayerSource,run.ActiveTime);
+                    }
+                    run.Tick(0);
+                }
+                Assert.That(spawned,Is.EqualTo(GameBalance.QuotaForWave(w)));
+                Assert.That(bosses,Is.EqualTo(w%5==0?1:0));Assert.That(crawlers>0,Is.EqualTo(w>5));
+                Assert.That(director.CorpseCount,Is.LessThanOrEqualTo(4));
+                Assert.That(director.CreatedCount,Is.LessThanOrEqualTo(director.EnemyBodyCapacity));
+                run.Tick(8);
+            }
+            run.StartRun(map);run.Tick(8);SpawnOne();
+            foreach(var actor in Actors())if(actor.gameObject.activeSelf&&!actor.Controller.IsDead)Assert.That(actor.Variant,Is.EqualTo(EnemyVariant.Normal));
+        }
+
         [Test] public void RangedCapDefersItsQuotaWhileMeleeUsesFreeSlots()
         {
             for (var w = 1; w <= 5; w++)

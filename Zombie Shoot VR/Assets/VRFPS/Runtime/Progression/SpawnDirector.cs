@@ -10,6 +10,7 @@ namespace VRFPS
         {
             public EnemyActor Actor;
             public EnemyKind Kind;
+            public string Pool;
             public int Id;
             public bool Registered;
             public long DeathOrder;
@@ -33,6 +34,7 @@ namespace VRFPS
         public bool WarningActive { get; private set; }
         public Vector3 WarningPosition { get; private set; }
         public int CreatedCount => actors.Count;
+        public int EnemyBodyCapacity => melee!=null && melee.CrawlerPrefab!=null ? 2*(run.Map.maxAlive+4)+run.Map.maxRangedAlive+6 : 16;
         public int AliveCount { get { var count=0;foreach(var entry in actors)if(entry.Registered)count++;return count; } }
         public int CorpseCount { get { var count=0;foreach(var entry in actors)if(!entry.Registered&&entry.Actor.gameObject.activeSelf&&entry.Actor.Controller.IsDead)count++;return count; } }
         public int PeakAliveCount { get; private set; }
@@ -151,7 +153,7 @@ namespace VRFPS
         {
             position = candidate;
             if (target == null) return false;
-            var prefab = kind == EnemyKind.Melee ? melee : ranged;
+            var prefab = PrefabFor(kind);
             var agent = prefab.GetComponent<NavMeshAgent>();
             var filter = new NavMeshQueryFilter { agentTypeID = agent.agentTypeID, areaMask = agent.areaMask };
             if (!NavMesh.SamplePosition(candidate, out var point, 0.25f, filter) ||
@@ -175,17 +177,20 @@ namespace VRFPS
             {
                 registry.Register("melee",melee.gameObject,run.Map.maxAlive+4,ResetActor);
                 registry.Register("ranged",ranged.gameObject,run.Map.maxRangedAlive+4,ResetActor);
+                if(melee.CrawlerPrefab!=null)registry.Register("crawler",melee.CrawlerPrefab.gameObject,run.Map.maxAlive+4,ResetActor);
+                if(melee.BossPrefab!=null)registry.Register("boss",melee.BossPrefab.gameObject,2,ResetActor);
                 poolsRegistered=true;
             }
+            var poolId=PoolFor(kind);
             Entry oldest = null;
             foreach (var entry in actors)
             {
-                if (entry.Kind != kind) continue;
+                if (entry.Pool != poolId) continue;
                 if(!entry.Registered&&!entry.Actor.gameObject.activeSelf)ReturnEntry(entry);
                 if (!entry.Registered && (oldest == null || entry.DeathOrder < oldest.DeathOrder)) oldest = entry;
             }
-            var id=PoolId(kind);var counts=registry.GetCounts(id);
-            if(counts.Current>=counts.Capacity || counts.Current==counts.Created&&actors.Count>=16)
+            var id=poolId;var counts=registry.GetCounts(id);
+            if(counts.Current>=counts.Capacity || counts.Current==counts.Created&&actors.Count>=EnemyBodyCapacity)
             {
                 if(oldest==null)return null;
                 ReturnEntry(oldest);
@@ -193,16 +198,27 @@ namespace VRFPS
             if(!registry.TryRent(id,out var instance))return null;
             var actor=instance.GetComponent<EnemyActor>();
             foreach(var entry in actors)if(entry.Actor==actor)return entry;
-            var created = new Entry { Actor = actor, Kind = kind };
+            var created = new Entry { Actor = actor, Kind = kind, Pool=id };
             actors.Add(created); return created;
         }
-        static string PoolId(EnemyKind kind)=>kind==EnemyKind.Melee?"melee":"ranged";
+        EnemyActor PrefabFor(EnemyKind kind)
+        {
+            if(kind==EnemyKind.Ranged)return ranged;
+            var v=GameBalance.MeleeVariantForWave(wave,meleeSpawned);
+            return v==EnemyVariant.Boss && melee.BossPrefab!=null ? melee.BossPrefab :
+                v==EnemyVariant.Crawler && melee.CrawlerPrefab!=null ? melee.CrawlerPrefab : melee;
+        }
+        string PoolFor(EnemyKind kind)
+        {
+            var prefab=PrefabFor(kind);
+            return prefab==ranged?"ranged":prefab==melee?"melee":prefab==melee.BossPrefab?"boss":"crawler";
+        }
         static void ResetActor(GameObject instance)=>instance.GetComponent<EnemyActor>().ResetForPool();
         void ReturnEntry(Entry entry)
         {
             if(entry.Actor.Controller!=null)entry.Actor.Controller.Died-=OnDeath;
             entry.Registered=false;
-            registry.Return(PoolId(entry.Kind),entry.Actor.gameObject);
+            registry.Return(entry.Pool,entry.Actor.gameObject);
         }
 
         void OnDeath(int id, int source)
