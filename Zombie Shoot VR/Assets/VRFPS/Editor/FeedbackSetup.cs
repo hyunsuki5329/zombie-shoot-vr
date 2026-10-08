@@ -13,6 +13,8 @@ namespace VRFPS.Editor
         public static void Configure()
         {
             if(!Application.isBatchMode)throw new InvalidOperationException("Use an isolated batchmode project.");
+            var userAudio=UserWeaponAudioSetup.HasAnyOriginal;
+            if(userAudio)UserWeaponAudioSetup.ValidateOriginals();
             Directory.CreateDirectory(Folder);
             Wave("K2_Shot",.09,0);Wave("K2_Empty",.045,1);Wave("Magazine_Insert",.09,2);
             AssetDatabase.Refresh();
@@ -34,6 +36,7 @@ namespace VRFPS.Editor
                 PrefabUtility.SaveAsPrefabAsset(rig,path);
             }
             finally{PrefabUtility.UnloadPrefabContents(rig);}
+            if(userAudio)UserWeaponAudioSetup.Configure();
             AssetDatabase.SaveAssets();Debug.Log("VRFPS_WEAPON_FEEDBACK_CONFIGURED");
         }
         static HapticImpulsePlayer Haptic(GameObject rig,string name,string usage)

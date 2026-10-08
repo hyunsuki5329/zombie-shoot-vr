@@ -5,6 +5,30 @@ namespace VRFPS.Tests
 {
     public class WeaponFeedbackTests
     {
+        [Test] public void ConsecutiveShotsUseBoundedSeparateVoicesAndPauseStopsEveryTail()
+        {
+            var root=new GameObject("Shot tails");
+            var clip=AudioClip.Create("Long shot tail",16758,1,44100,false);
+            try
+            {
+                var right=new GameObject("Right").transform;right.SetParent(root.transform);
+                var left=new GameObject("Left").transform;left.SetParent(root.transform);left.localPosition=Vector3.forward*.3f;
+                var muzzle=new GameObject("Muzzle").transform;muzzle.SetParent(root.transform);muzzle.localPosition=Vector3.forward*.7f;
+                var gun=root.AddComponent<K2Controller>();gun.Configure(right,left,muzzle,1<<8,(1<<8)|(1<<9));
+                var feedback=root.AddComponent<CombatFeedback>();feedback.shotClip=clip;feedback.Configure(gun,null);
+                gun.SetPhase(RunPhase.Active);gun.SetLeftGrip(true);
+                Assert.That(gun.Tick(true,0),Is.True);Assert.That(gun.Tick(true,.1),Is.True);
+                var voices=root.GetComponentsInChildren<AudioSource>();
+                Assert.That(System.Array.FindAll(voices,v=>v.clip==clip).Length,Is.EqualTo(2),"Second bullet must not cut off first tail");
+                for(var i=2;i<30;i++)Assert.That(gun.Tick(true,i*.1),Is.True);
+                Assert.That(feedback.CueCount,Is.EqualTo(30));
+                Assert.That(root.GetComponentsInChildren<AudioSource>().Length,Is.EqualTo(6),"Four shot voices plus empty/insert, no unbounded one-shots");
+                gun.SetPhase(RunPhase.Paused);
+                foreach(var voice in voices)Assert.That(voice.isPlaying,Is.False);
+            }
+            finally{UnityEngine.Object.DestroyImmediate(root);UnityEngine.Object.DestroyImmediate(clip);}
+        }
+
         [Test] public void OnlySuccessfulManualInsertionEmitsCueAndRestartMountIsSilent()
         {
             var root=new GameObject("Insertion feedback");
@@ -20,7 +44,7 @@ namespace VRFPS.Tests
                 socket.TryEject(hand);Assert.That(fresh.TryGrab(hand),Is.True);
                 Assert.That(socket.TryInsert(fresh),Is.True);Assert.That(feedback.CueCount,Is.EqualTo(1));
                 Assert.That(socket.TryInsert(fresh),Is.False);Assert.That(feedback.CueCount,Is.EqualTo(1));
-                Assert.That(root.GetComponentsInChildren<AudioSource>(true).Length,Is.EqualTo(3));
+                Assert.That(root.GetComponentsInChildren<AudioSource>(true).Length,Is.EqualTo(6));
             }
             finally{UnityEngine.Object.DestroyImmediate(root);}
         }
@@ -52,7 +76,7 @@ namespace VRFPS.Tests
                 gun.Tick(false,7);gun.Tick(true,8);Assert.That(count(),Is.EqualTo(2));
                 feedback.enabled=true;type.GetMethod("Configure").Invoke(feedback,new object[]{gun,null});
                 gun.Tick(false,9);gun.Tick(true,10);Assert.That(count(),Is.EqualTo(3),"Rebinding must not duplicate listeners.");
-                Assert.That(root.GetComponentsInChildren<AudioSource>(true).Length,Is.EqualTo(3));
+                Assert.That(root.GetComponentsInChildren<AudioSource>(true).Length,Is.EqualTo(6));
             }
             finally{UnityEngine.Object.DestroyImmediate(root);UnityEngine.Object.DestroyImmediate(clip);}
         }

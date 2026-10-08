@@ -69,3 +69,7 @@ __pycache__/
 # Mixamo originals and generated assets are restored locally.
 **/Assets/VRFPS/External/Mixamo/
 **/Assets/VRFPS/External/Mixamo.meta
+
+# User-provided originals and prepared audio are restored locally; see docs/user-weapon-audio.md.
+**/Assets/VRFPS/External/UserAudio/
+**/Assets/VRFPS/External/UserAudio.meta

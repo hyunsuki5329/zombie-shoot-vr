@@ -69,3 +69,7 @@ Unity에서 실제 메시/재질 슬롯을 검사하고 기존 Foregrip/Muzzle/M
 ## 별도 피격 모션 (2026-10-07)
 
 Mixamo의 `Zombie Reaction Hit` 중 Flinches 동작을 사용자 로그인 세션에서 FBX for Unity / Without Skin / 30fps / none으로 취득했다. 원본명 `Yaku J Ignite@Zombie Reaction Hit.fbx`, 486,960바이트, SHA256 `cdb0ccb2edc0327527829aaa5faa1121e95e05177bf5a66053b2804850ec02a1`이다. 임포트 결과2초/30fps의 Humanoid 동작이며 두 적에 상체 마스크와0.4초 재생·블렌딩을 적용했다. 위 동작 팩에 포함된 파일로 혼동하지 않는다. 사용 조건과 원본 Git 제외 정책은 위 Adobe/Mixamo 항목과 동일하다.
+
+## 사용자 제공 발사·장전·빈 총 음원
+
+기존 합성 무기음 대신 사용자 제공 MP3 세 개를 사용한다. 출처는 [무료 소리 창고](https://pgtd.tistory.com/227), 게시자 〖 -라일락- 〗이며 페이지에서 CC BY 4.0을 연결한다. 사용 구간·페이드·mono 변환·정규화·로컬 복원은 [음원 문서](user-weapon-audio.md)를 따른다. 기존 합성 전투 신호의 출처는 그대로 유지하며 세 무기음을 합성 원본이라고 표시하지 않는다.
