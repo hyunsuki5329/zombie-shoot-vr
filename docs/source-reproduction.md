@@ -2,6 +2,18 @@
 
 이 안내는 현재 개발 브랜치의 재현 절차다. 실제 두 맵과 최종 제출 인수는 아직 완료하지 않았다. 실행·조작 확인은 [실기 안내](hardware-validation.md), 단계별 상태는 [진행 기록](progress.md)을 따른다.
 
+## 최신 복원 보관본 (2026-10-08)
+
+소스 기준은 `1412b0ad9a6f22b665f3b98f23191110185302bf`이며 사용자 인수가 끝난 무기 음원을 포함한다. 로컬 `Zombie Shoot VR/Builds/Reproduction/1412b0a/`에 다음 파일을 보관한다. 최종 제출 ZIP이 아니라 실제 맵 제작 전 개발 버전의 복원 묶음이다.
+
+- `source-1412b0a.zip`: 해당 커밋의 Unity Assets/meta·Packages·ProjectSettings·프로젝트 Docs·scripts·docs·README. 개인 미커밋 설정과 Library는 제외한다.
+- `external-originals-local-only.zip`: 해시를 확인한 GAMGO 원본2개·Mixamo 원본4개·음원3개 및 출처·라이선스 문서. 기존 다운로드 위치가 바뀌어도 로컬 복원할 수 있도록 보관하며 공개 재배포 허가를 뜻하지 않는다.
+- `manifest.json`과 `README.md`: 원본/압축 파일 SHA256과 실행 순서. 원본 압축과 소스 압축은 서로 다른 새 폴더에 푼다.
+
+복원 순서는 원본3종 복사 → `GamgoVisualSetup.Configure` → `MixamoVisualSetup.Configure` → `UserWeaponAudioSetup.Configure` → EditMode/PlayMode → `InstructionSetup.Build`다. 각각 Unity 프로세스가 종료하고 성공했는지 확인한 다음 진행한다. 모든 Setup을 무차별 실행하는 절차는 아니다.
+
+이번 검증은 Git에서 내보낸 새 프로젝트에서 시작하고 기존 Library나 외부 자산 meta를 복사하지 않았다. 같은 PC의 전역 패키지 캐시·Unity 라이선스 사용은 허용하므로 새 PC·완전 오프라인 검증과 구분한다. 자세한 실제 결과와 해시는 [최신 복원 증빙](evidence/current-source-restoration.json)에 기록한다. 아래 `8a28aee` 예시는 이전 시점의 이력이다.
+
 ## 필요한 환경과 파일
 
 - Unity6000.3.23f1 및 Windows x64 빌드 지원. 현재 빌드 함수는 Mono 개발 빌드를 사용한다. 최종 IL2CPP 또는 Release 빌드는 아직 검증하지 않았다.
