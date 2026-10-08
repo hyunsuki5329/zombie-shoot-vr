@@ -5,7 +5,7 @@
 - 5·10·15…웨이브: 첫 근접 슬롯1개를 Skeletonzombie T Avelange 보스로 대체한다. 기본 체력500, 피해25, 속도0.9m/s, 공격 예고1초. 기존 웨이브 체력/피해 배율을 적용하므로 첫 등장인5웨이브는 체력600·피해27이다.
 - 6웨이브부터: 근접 슬롯의 약1/3을 Zombiegirl W Kurniawan 돌연변이로 대체한다. 기본 체력70, 피해8, 속도2.2m/s, 예고0.45초. 같은 슬롯에 보스가 예정되면 보스가 우선한다.
 - 일반 적 할당량에 더하는 방식이 아니며 총 할당량·동시 생존·원거리 상한은 유지한다. 생성 실패는 슬롯을 소비하지 않는다.
-- 돌연변이는 Mixamo Zombie Crawl(In Place)로 이동하고 Zombie Biting(Victim On The Ground)으로 공격한다. 서 있는 피격 동작을 섞지 않고 사망 시 낮은 자세에서 정지한 뒤 기존 시체 회수 규칙을 따른다. 보스는 기존 대기·걷기·공격·사망·피격 동작을 리타게팅한다.
+- 돌연변이는 Mixamo Zombie Crawl(In Place)로 이동하고 Zombie Biting(Victim On The Ground)으로 공격한다. 서 있는 피격 동작을 섞지 않고 사망 시 현재 자세에서 약1.05초 동안 팔과 상체가 풀리며 옆으로 쓰러지는 자체 제작 동작을 재생한 뒤 기존 시체 회수 규칙을 따른다. 보스는 기존 대기·걷기·공격·사망·피격 동작을 리타게팅한다.
 - 돌연변이의 접지 보정은 애니메이션 후 발·발끝·손 높이를 기준으로 시각 모델만 보정한다. NavMesh 루트는 이동하지 않는다. 낮은 수평 몸통 판정과 움직이는 머리 판정을 사용한다.
 - 전투·정지·사망·재도전은 기존 상태 규칙을 공유한다. 풀은 일반 근접/원거리/돌연변이/보스로 분리하고 보관 객체 용량 합계를 진단에 기록한다. 동시 전투 객체 상한은 기존 맵 설정을 유지한다.
 
@@ -30,4 +30,8 @@ python -B scripts/Restore-EnemyVariants.py --source 'C:/Users/User/Downloads' --
 
 ## 검증과 실행
 
-EditMode68개(크롤러 발 접지·상체 높이 포함), PlayMode121개, Python23개를 검증한다. 최신 결과와 빌드 해시는 [증빙](evidence/boss-crawler.json)을 따른다. Windows 실행 파일은 `Zombie Shoot VR/Builds/Windows/BossCrawlerMenuLab/WaveLab.exe`다. 독립 코드 리뷰에서 중요한 결함은 발견되지 않았으나 실제 VR에서 바닥 접촉·외형과 피격 위치의 일치·접근 속도 확인이 남아 있다.
+EditMode68개(크롤러 발 접지·상체 높이 포함), PlayMode121개, Python23개를 검증한다. 최신 결과와 빌드 해시는 [증빙](evidence/boss-crawler.json)을 따른다. Windows 실행 파일은 `Zombie Shoot VR/Builds/Windows/CrawlerDeathMenuLab/WaveLab.exe`다. 독립 코드 리뷰에서 중요한 결함은 발견되지 않았으나 실제 VR에서 바닥 접촉·외형과 피격 위치의 일치·접근 속도 확인이 남아 있다.
+
+## 크롤러 사망 동작 수정 (2026-10-09)
+
+사용자 피드백에 따라 정지 포즈를 사망 동작으로 교체했다. CrawlerDeathSetup은 기존 크롤링 자세를 바탕으로 몸통 회전·머리 숙임·팔 이완을 작성하여 프리팹에 저장한다. CrawlerDeathMotion은 치명타 순간의 실제 뼈 자세를 캡처해 작성된 자세까지 전환한다. 공격 중 사망도 동일하게 현재 자세에서 시작하며 Animator의 기본 사망 상태가 동작을 덮어쓰지 않는다. 동작 시간은 전투 시간에 따라 진행하므로 정지 시 멈춘다. 판정은 사망 즉시 비활성화하고 시체는 기존5초 회수 규칙을 유지한다. 재사용 시 모션을 초기화하고 Animator를 다시 활성화한다. 새 외부 파일 취득은 없다. [수정 증빙](evidence/crawler-death.json).

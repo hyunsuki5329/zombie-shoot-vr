@@ -60,12 +60,13 @@ namespace VRFPS.Editor {
        if(state.state.name=="Walk"){state.state.motion=crawl;state.state.speed=2.2f;}
        if(state.state.name=="Idle"){state.state.motion=crawl;state.state.speed=0;}
        if(state.state.name=="Attack")state.state.motion=bite;
-       // Keep a prone pose on death, never blend into an upright death/flinch.
+       // Fallback only: CrawlerDeathMotion owns the actual current-pose collapse.
        if(state.state.name=="Dead"){state.state.motion=crawl;state.state.speed=0;}
       }
      }
      var attack=sm.states.First(x=>x.state.name=="Attack").state;
      attack.speed=((AnimationClip)attack.motion).length*.4f/GameBalance.AttackWindup(EnemyKind.Melee,boss?EnemyVariant.Boss:EnemyVariant.Crawler);
+     if(!boss)CrawlerDeathSetup.Apply(root);
      EditorUtility.SetDirty(controller);PrefabUtility.SaveAsPrefabAsset(root,Prefabs+name+".prefab");
     } finally {PrefabUtility.UnloadPrefabContents(root);}
    }

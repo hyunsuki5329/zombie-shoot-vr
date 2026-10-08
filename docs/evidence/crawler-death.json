@@ -1,0 +1,52 @@
+{
+  "date": "2026-10-09",
+  "base_commit": "35ce347",
+  "status": "automatic_checks_passed_headset_acceptance_pending",
+  "behavior": "1.05 second current-pose to authored side-collapse transition; combat pause freezes playback; immediate hitbox disable; existing 5 second corpse lifetime; reset on reuse",
+  "tests": {
+    "red.xml": {
+      "passed": 0,
+      "failed": 1,
+      "sha256": "065b63ca655508883f371f51c68b406b8fb9c993433d936e05c5df7330deda29"
+    },
+    "edit.xml": {
+      "passed": 69,
+      "failed": 0,
+      "sha256": "47e5029775785094897b7960022226ba478c72689a520ee3c9fa5b5875bb5093"
+    },
+    "play.xml": {
+      "passed": 123,
+      "failed": 0,
+      "sha256": "fa21ac8133fb224abbd9db2ce4d3d284889c0b9ccac49ca6e5b051bee5323f7b"
+    }
+  },
+  "build": {
+    "path": "D:\\Unity Project\\Zombie Shoot VR\\Zombie Shoot VR\\Builds\\Windows\\CrawlerDeathMenuLab\\WaveLab.exe",
+    "copied_files_verified": 337,
+    "manifest_sha256": "4a780e789a2628e6ab17cc8b8dd6a7d6557b4079e5d1237a6258da826bfa7c92",
+    "log_sha256": "e4deb81bfcba8565af95fff3156aaea676217295be6b6e270277e9ba35670f18",
+    "unity_exit_code": 0,
+    "bootstrap_and_wave_lab_succeeded": true
+  },
+  "source_sha256": {
+    "Runtime/Enemies/CrawlerDeathMotion.cs": "b98b96a1855dd2213b382028e978e7cc55a33db01eb954edbdbc5f688464e86e",
+    "Runtime/Enemies/EnemyActor.cs": "b7c8874f820d74dbf4eb83d1ebf1aee8ae7f728592b347dc1436a8e1d349a90a",
+    "Editor/CrawlerDeathSetup.cs": "98531350dc8dc484f5c1012a0a787a166745a3531ad2f677ea3fb288ed1352e2",
+    "Editor/EnemyVariantSetup.cs": "2cc23750d0acfd124c9e3e8440ee8fc59c2d554e44dc133973fac6eab21f332d",
+    "Prefabs/Enemies/CrawlerZombie.prefab": "94bdc9398000f7d0f717e00c84068170c9a6032fa7795aa7bd2607783ed97b8c",
+    "Tests/EditMode/CrawlerDeathTests.cs": "52f4bf510e633f57629c586641bb7e47da6076a420b7f19ac518ab22bca19e12",
+    "Tests/PlayMode/SpawnDirectorTests.cs": "6c0493781767e9be0198c04e2899f496b15cb96069ac349d3daac10b841b68ea"
+  },
+  "review": "Independent code review found no important lifecycle/timing defects.",
+  "visual_review": "Rendered Walk and Attack at 0, .25, .55 and 1.05 seconds; final sideways corpse pose inspected. Headset validation remains pending.",
+  "preview_sha256": {
+    "Attack-0.00.png": "bd4a12e36b232a0af53f6543515faa0eefedfcaed67613dde00f963419bb15e3",
+    "Attack-0.25.png": "512332989416523421b6bb95e20718916ba49b3fafe85681d4c4a9b536153c4e",
+    "Attack-0.55.png": "2bef4ddb55d72c21f3c9ab7f417cb367c7935dbc4bba0dd67743399e345d7c49",
+    "Attack-1.05.png": "119972ec1ed724812d66dde71089278a0524509b9eaf881a245c8518b43db9e4",
+    "Walk-0.00.png": "f60adcf0c12654a94acbe7fbe1f220d6d92226595f1bd331ecc8d290642fac20",
+    "Walk-0.25.png": "b98bd8efea0092aea03b8d683ac214c2451d8c8ea40be9c9597803c139321e4a",
+    "Walk-0.55.png": "f7bd34d74adbfcf1ea9edf18bcf4908d2400b1e75f248ed94bf5fe02da97c219",
+    "Walk-1.05.png": "91c00f233a8d49e9710aa856032e5a6d0429900d21744ab2f661e96d45cf929e"
+  }
+}
