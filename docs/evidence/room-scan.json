@@ -115,5 +115,45 @@
     "Rough scan edges and missing upper walls",
     "Plain game-authored corridor",
     "Classroom unavailable"
-  ]
+  ],
+  "clean_restoration": {
+    "source_commit": "c7eadf1",
+    "folder": "tmp/room-clean-restoration",
+    "package_folder": "Zombie Shoot VR/Builds/Reproduction/c7eadf1-room",
+    "external_files": 206,
+    "tests": [
+      {
+        "path": "tmp/room-map/clean-edit.xml",
+        "result": "Passed",
+        "passed": 74,
+        "total": 74,
+        "sha256": "59d7f52d41b531093a38d4d6c38f8c6ab46b6c9594ebb94d240cc101fe463ab4"
+      },
+      {
+        "path": "tmp/room-map/clean-play.xml",
+        "result": "Passed",
+        "passed": 127,
+        "total": 127,
+        "sha256": "c1622ffe0d21e4432d5135203be989f7c50c03818454f326741f509bc5509135"
+      }
+    ],
+    "manifest_sha256": "c06ba4e953ea6036ce2834654a22a5c1232948f3a5c1ee271e527f280278dae2",
+    "archives": [
+      {
+        "name": "external-assets-private-local-only.zip",
+        "bytes": 187352036,
+        "sha256": "da64b65a0b4c323259ccf73866f75228debe896c5a3e5a491c360305d9450ca1"
+      },
+      {
+        "name": "source-c7eadf1.zip",
+        "bytes": 93669795,
+        "sha256": "6103861b773189ec5bcf96b1666e3c9b1ad51e646c72d139eba16f155d987cbb"
+      }
+    ],
+    "limitations": [
+      "Same PC global package cache and license",
+      "No separate build of the restored folder",
+      "Hardware not run"
+    ]
+  }
 }

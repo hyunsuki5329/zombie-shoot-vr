@@ -14,9 +14,17 @@
 
 이번 검증은 Git에서 내보낸 새 프로젝트에서 시작하고 기존 Library나 외부 자산 meta를 복사하지 않았다. 같은 PC의 전역 패키지 캐시·Unity 라이선스 사용은 허용하므로 새 PC·완전 오프라인 검증과 구분한다. 자세한 실제 결과와 해시는 [최신 복원 증빙](evidence/current-source-restoration.json)에 기록한다. 아래 `8a28aee` 예시는 이전 시점의 이력이다.
 
-## 2026-10-12 실제 방 추가
+## 2026-10-12 실제 방 소스 백업
 
-현재 Room 빌드는 [방 스캔 복원](room-scan.md)의 원본 복사 → `ScannedRoomSetup.Configure` → 시험 → `ScannedRoomSetup.Build`를 추가한다. 이전 소스 묶음에는 방 스캔이 없다. 사적인 원본/가공 메시/텍스처/NavMesh는 Git에서 제외하며 생성 코드는 포함한다. 보스/크롤러는 [추가 복원 절차](boss-crawler.md)를 따른다.
+현재 로컬 묶음은 `Zombie Shoot VR/Builds/Reproduction/c7eadf1-room/`이다. 소스 기준 `c7eadf1`, 런타임 구현 `6aaee2f`이며 최종 제출본이 아니다.
+
+- `source-c7eadf1.zip`: Git의 Unity 소스·잠금 패키지·설정·문서·스크립트. 개인 미커밋 설정은 제외한다.
+- `external-assets-private-local-only.zip`: 현재 GAMGO·Mixamo·음원·RoomScan의 원본과 생성 자산206개 및 meta. 사용자 방을 포함하므로 로컬 전용이며 Git/공개 업로드하지 않는다.
+- `manifest.json`: 각 외부 자산과 ZIP의 SHA256. ZIP CRC와 외부 자산206개 전체 바이트를 대조했다.
+
+새 폴더 하나에 소스 ZIP과 외부 자산 ZIP을 차례로 풀어 `Zombie Shoot VR` 경로가 합쳐지도록 한다. meta를 유지하고 Unity6000.3.23f1로 연다. 생성 자산 GUID를 보존하는 복원이므로 모든 Setup을 일괄 실행하지 않는다. 새 Library에서의 실제 시험 결과는 [방 증빙](evidence/room-scan.json)을 따른다. 같은 PC의 패키지 캐시/라이선스를 사용한 검증이며 완전 오프라인·다른 PC 보장은 아니다.
+
+원본 FBX에서 방을 다시 생성하려면 [방 스캔 복원](room-scan.md)의 원본 복사 → `ScannedRoomSetup.Configure` → 시험 → `ScannedRoomSetup.Build`를 적용한다. 원본/가공 메시/텍스처/NavMesh는 Git에서 제외하고 생성 코드는 포함한다. 보스/크롤러 원본 복원은 [추가 절차](boss-crawler.md)를 따른다.
 
 ## 필요한 환경과 파일
 
