@@ -4,7 +4,7 @@
 
 ## 현재 작업
 
-- 2026-10-12 P02/P09: 실측 약4.3×3.5m Room, 단순 충돌/보수면/NavMesh, 실내5개·복도2개 생성점을 연결했다. 최신 브랜치 `codex/p09-scanned-room`, 기준 `aa09561`, PR base `codex/p06-boss-crawler`다. [작업·복원 안내](room-scan.md).
+- 2026-10-12 P02/P09: 실측 약4.3×3.5m Room, 단순 충돌/보수면/NavMesh, 실내5개·복도2개 생성점을 연결했다. 최신 브랜치 `codex/p09-scanned-room`, 기준 `aa09561`, PR base `codex/p06-boss-crawler`다. 구현 커밋 `6aaee2f`, [초안 PR #21](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/21)을 push·생성했다. [작업·복원 안내](room-scan.md).
 - 최신 자동 검증: EditMode74/74·PlayMode127/127. 중앙 생성 중단을 실패 재현한 뒤 사용자 승인1.5m 거리와 복도 확장으로 수정했다. 실제 Room의 기록·정지·재시작·10회 재로딩을 포함한다. [증빙](evidence/room-scan.json).
 - 새 빌드 대상은 `RoomScan/RoomScan.exe`다. 실제 Quest Pro의 스케일·양안 가림·복도/가구 경로·전투 난이도 및 성능은 대기다. PR은 실기 결과 전까지 초안으로 유지한다.
 - 보스·Zombiegirl 크롤러와1.05초 사망 동작은 새 Room 빌드에 포함된다. 이전 `CrawlerDeathMenuLab`은 비교용으로 보존한다. 새 변형의 실제 VR 인수는 아직 미확인이다.
@@ -413,3 +413,10 @@ Windows 빌드 성공. `Builds/Windows/UserAudioMenuLab/WaveLab.exe`에 복사�
 `Zombie Shoot VR/Builds/Reproduction/1412b0a/`에 소스 ZIP·원본 ZIP·해시 manifest·복원 README를 로컬 보관했다. 배포용 소스 ZIP의 기존 검증 내보내기2027개 항목을 바이트 대조하고 원본9개도 ZIP 내부 SHA256을 대조했다. 외부 원본을 Git에 올리지 않았으며 사용자 확인 UserAudioMenuLab을 교체하지 않았다. 이 작업은 실제 두 맵이나 최종 제출 인수가 아니라 최신 개발 버전의 복원 검증이다.
 
 BootstrapPreview/WaveLab 빌드 모두 성공·종료0. 복원 WaveLab337개 파일을 보관본의 RestoredWaveLab에 복사하고 SHA256 일치 및 고지를 확인했다. 독립 증빙 리뷰에서 중요 지적 없음. C#106개 대조 범위는 VRFPS로 명확히 표기했다.
+
+
+## 2026-10-12 P12 중간 결과와 과제 형식 동기화
+
+방 맵 `6aaee2f`의 구현/시험·한계와 보스/크롤러를 결과보고서 초안에 반영했다. 이전5분 시연 계획을 최신 공지의3분 이내(초안2분50초), 발표10분 이내(초안9분20초)로 수정했다. 영상 도입부 팀명·실명·프로젝트 이름, 팀 업무분장 요구를 명시했다. 실제 최종 영상·발표자료가 제작된 것은 아니며 개인 정보·강의실·실기 측정은 미확인 상태를 유지한다.
+
+사용자 회신(2026-10-12): RoomScan 빌드는 아직 실행 전, 강의실은 아직 촬영 전이다. 해당 실기/두 번째 실제 맵을 통과 처리하지 않는다.
