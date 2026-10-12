@@ -1,19 +1,20 @@
 # Goal 실행 현황
 
-현재 상태: 보스·Zombiegirl 크롤러 구현과 자동 검증을 진행했으며 전체 목표는 미완료다. 아래 최신 요약을 우선하고 이전 날짜별 기록은 당시 증빙으로 읽는다.
+현재 상태: 사용자 방 스캔을 공통 전투에 연결했고, 승인된1.5m 생성 거리와 방 밖 복도를 추가했다. Goal은 active이며 전체 목표는 미완료다. 아래 최신 요약을 우선하고 이전 날짜별 기록은 당시 증빙으로 읽는다.
 
 ## 현재 작업
 
-- 2026-10-09: 크롤러 정지 사망을 현재 자세에서 옆으로 쓰러지는1.05초 동작으로 교체했다. 이동/공격 중 사망·정지·시체 회수·재사용을 자동 검증했다. 새 실행 폴더는 `CrawlerDeathMenuLab`이며 실제 VR 인수는 대기 중이다. [증빙](evidence/crawler-death.json).
-- 현재 작업 브랜치: `codex/p06-boss-crawler`, 기준 통합 커밋 `2c1e47a52ec72791004236af7e01644720c1c73c`. 5웨이브마다 Skeleton 보스, 6웨이브부터 Zombiegirl 크롤러를 추가한다. [동작·복원 안내](boss-crawler.md).
-- 최신 자동 검증: EditMode69/69·PlayMode123/123 (2026-10-09 사망 모션 수정). 새 변형의 실제 VR 인수는 미확인이다. 빌드와 검증 해시는 [증빙](evidence/boss-crawler.json)을 따른다.
-- 사용자 확인: 옷 흰 테두리·탄창 정렬·투사체 속도·놓은 탄창10초 제거, 단발·연사·장전·빈 총 소리. 음원 PR #18과 소스 복원 PR #19는 통합 브랜치에 병합됐다. 전체 P단계 인수를 뜻하지 않는다.
-- 실제 공간은 아직 촬영 전이며 사용자 요청에 따라 다른 개발을 먼저 진행한다. 실제 Room/Classroom 맵, 두 맵의 전체 실기·성능·30분 시험과 최종 제출물이 남았다. 과제 지침은 제안서 PPT→PDF, 발표10분 이내, 동작 영상3분 이내(도입부 팀명·실명·프로젝트명)로 확인됐다.
-- [최신 실기 실행 안내](hardware-validation.md)와 [소스 복원 안내](source-reproduction.md)를 사용한다. 아래 과거 커밋·시험·PR 상태는 당시 이력이며 현재 원격 상태를 대신하지 않는다.
+- 2026-10-12 P02/P09: 실측 약4.3×3.5m Room, 단순 충돌/보수면/NavMesh, 실내5개·복도2개 생성점을 연결했다. 최신 브랜치 `codex/p09-scanned-room`, 기준 `aa09561`, PR base `codex/p06-boss-crawler`다. [작업·복원 안내](room-scan.md).
+- 최신 자동 검증: EditMode74/74·PlayMode127/127. 중앙 생성 중단을 실패 재현한 뒤 사용자 승인1.5m 거리와 복도 확장으로 수정했다. 실제 Room의 기록·정지·재시작·10회 재로딩을 포함한다. [증빙](evidence/room-scan.json).
+- 새 빌드 대상은 `RoomScan/RoomScan.exe`다. 실제 Quest Pro의 스케일·양안 가림·복도/가구 경로·전투 난이도 및 성능은 대기다. PR은 실기 결과 전까지 초안으로 유지한다.
+- 보스·Zombiegirl 크롤러와1.05초 사망 동작은 새 Room 빌드에 포함된다. 이전 `CrawlerDeathMenuLab`은 비교용으로 보존한다. 새 변형의 실제 VR 인수는 아직 미확인이다.
+- 사용자 확인 완료: 옷 흰 테두리·탄창 정렬·투사체 속도·놓은 탄창10초 제거, 단발·연사·장전·빈 총 소리. 음원 PR #18과 소스 복원 PR #19는 통합 브랜치에 병합됐다. 전체 P단계 인수를 뜻하지 않는다.
+- 방 촬영본은 확보했다. 강의실 촬영본, 두 맵 전체 실기·성능·30분 시험 및 최종 제출물이 남았다. 과제 지침은 제안서 PPT→PDF, 발표10분 이내, 동작 영상3분 이내(도입부 팀명·실명·프로젝트명)다.
+- [최신 실기 안내](hardware-validation.md), [소스 복원](source-reproduction.md)을 사용한다. 아래 과거 커밋·시험·PR 상태는 당시 이력이며 현재 원격 상태를 대신하지 않는다.
 - P01-a 구현 커밋: `5a8dc1d844bf5aacd53a522a894bca3eee7c91d3`. [PR #1](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/1)은 원격에서 main에 병합됨(`e0e3be2`). GitHub CI는 없으며 로컬 Unity 검증 결과를 사용한다.
 - P01-a 구현·자동 검증 완료: Unity 환경 확인, EditMode 시험 어셈블리와 InteractionLab 구성, Windows Mono 개발 빌드. 증빙: [시험·빌드·소스 해시](evidence/p01-foundation.json), [환경 및 실행 절차](../Zombie%20Shoot%20VR/Docs/environment.md).
 - P01 실기 확인: 사용자가 VR 실행과 머리·양손 추적 정상 동작을 확인했다(2026-09-22). [VD 설정·실기 보고](evidence/2026-09-22-vd-hardware-check.md). 전용 입력 구성과 양안 가림 등 후속 검증까지 완료한 것으로 확대하지 않는다.
-- P02 실제 촬영본과 기준 길이 2개: 대기. 촬영 경로를 확인하고 나면 작은 공간 검증을 진행한다.
+- P02 실제 방 촬영본과 약4.3×3.5m 기준 길이 확보(2026-10-12). 텍스처 메시 경로의 자동 검증을 진행했으며 양안 가림·체감 크기·성능 실기 인수는 남았다.
 - P01-b: `47ceb4c`에서 프로젝트 전용 VRFPS.inputactions와 PlayerRig를 생성하고 Combat·InteractionLab에 연결했다. 입력 시험 3개가 연결 전 실패했고 연결 후 기존 시험을 포함한 EditMode 6/6이 통과했다. 아래 P03 빌드에도 포함되며 새 입력의 실기는 대기 중이다.
 - P03-a 구현·자동 검증: HMD 평면 방향 이동(1.6m/s), 머리 위치 중심 연속 회전(60도/s), CharacterController 높이·중심 갱신, 가상 이동 정지 인터페이스. 런타임·PlayMode 어셈블리 구성. EditMode 12/12, PlayMode 4/4 통과, Windows Mono 시험장 빌드 성공. [증빙](evidence/p03-locomotion.json).
 - P03-a 커밋: `e959ef4`, [PR #2](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/2)는 원격에서 codex/p01-environment에 병합됨(`9106a2d`). 해당 이동 변경을 main에 올리는 [PR #4](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/4)는 OPEN이다.

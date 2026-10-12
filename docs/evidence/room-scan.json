@@ -1,0 +1,119 @@
+{
+  "date": "2026-10-12",
+  "branch": "codex/p09-scanned-room",
+  "base": "aa09561",
+  "phase": "P02/P09 Room implementation; hardware acceptance pending",
+  "unity": "6000.3.23f1",
+  "source_sha256": "245bbdb7284d6b755125b131be681891173ba791be3cf27b429726a048e1b2e8",
+  "room_dimensions_m": [
+    4.3,
+    3.5
+  ],
+  "dimensions_approximate": true,
+  "height_estimate_m": 2.45,
+  "texture_display_size": [
+    4096,
+    4096
+  ],
+  "triangles": 134410,
+  "spawn_anchors": 7,
+  "minimum_spawn_distance_m": 1.5,
+  "warning_seconds": 1.5,
+  "corridor_dimensions_m": [
+    2.2,
+    2.8
+  ],
+  "corridor_origin": "Project-authored game extension, not scanned",
+  "tests": [
+    {
+      "path": "tmp/room-map/edit-final.xml",
+      "result": "Passed",
+      "total": "74",
+      "passed": "74",
+      "failed": "0",
+      "sha256": "34315ebb4928508c56564963d606e6c92e5a79d886def06de43bc677ffa63a76"
+    },
+    {
+      "path": "tmp/room-map/play-corridor-final.xml",
+      "result": "Passed",
+      "total": "127",
+      "passed": "127",
+      "failed": "0",
+      "sha256": "1a1561f8ae5b2a5869184bb4399e4f0084c6d2580188cb353bbca6b8426de026"
+    },
+    {
+      "path": "tmp/room-map/red.xml",
+      "result": "Failed(Child)",
+      "total": "1",
+      "passed": "0",
+      "failed": "1",
+      "sha256": "d1549b940667cb3cd7ae6086628232f0c9acba0478b5b52a8802f760a2ba1951"
+    },
+    {
+      "path": "tmp/room-map/spawn-red.xml",
+      "result": "Failed(Child)",
+      "total": "1",
+      "passed": "0",
+      "failed": "1",
+      "sha256": "f328c5478cd19d88e7860dfd0a30977d8b79289169a9f3b4b4ce9dcf649fd5e9"
+    },
+    {
+      "path": "tmp/room-map/center-red.xml",
+      "result": "Failed(Child)",
+      "total": "1",
+      "passed": "0",
+      "failed": "1",
+      "sha256": "c791a5f862f7c2f970765654bea96718a70548fffc39f78606e83deea8470ab3"
+    },
+    {
+      "path": "tmp/room-map/coverage-red.xml",
+      "result": "Failed(Child)",
+      "total": "1",
+      "passed": "0",
+      "failed": "1",
+      "sha256": "6f1021b8976ad52147bcff50e24a406637c7abb89ff37f8b83696e9917f31dbb"
+    },
+    {
+      "path": "tmp/room-map/corridor-red.xml",
+      "result": "Failed(Child)",
+      "total": "1",
+      "passed": "0",
+      "failed": "1",
+      "sha256": "5c6734572f34ae577e41a368aaad37e3fcf816e1392287a63cc235b6763692b5"
+    }
+  ],
+  "build": {
+    "result": "Succeeded",
+    "log": "tmp/room-map/build-final.log",
+    "log_sha256": "892b43e0b2354423b4c6072022ab000fec0eb514b3db86a4e0dc27ac093556de",
+    "executable": "Zombie Shoot VR/Builds/Windows/RoomScan/RoomScan.exe",
+    "sha256": "56c28afba054092826b7a8a80ba3767daa87967f182c0c562eb2f98799175b7a",
+    "files_verified": 344,
+    "manifest_sha256": "44927e1c4bdcd687234a07e88dcaed6d429ac05daa5eea391016e4fc285e3953"
+  },
+  "assets_copied_and_verified": 20,
+  "restore_smoke": [
+    "valid source",
+    "idempotent",
+    "modified destination preserved",
+    "wrong source rejected"
+  ],
+  "review": {
+    "agent": "review_room_scan",
+    "important_findings": 1,
+    "fix": "Central stationary player spawn deadlock reproduced in PlayMode; user-approved 1.5m Room distance and connected outside corridor. Full suites pass after fix.",
+    "deferred_minors": [],
+    "not_reviewed": [
+      "Actual HMD comfort/stereo/performance",
+      "Unrelated user settings"
+    ]
+  },
+  "hardware": "NOT RUN: T02/T11/T16/T17, boss/crawler, performance and 30-minute tests",
+  "private_assets": "Original FBX, texture, mesh, nav and previews excluded from Git",
+  "limitations": [
+    "Approximate height/furniture collision",
+    "Rough scan edges and missing upper walls",
+    "Plain game-authored corridor",
+    "Classroom unavailable"
+  ]
+}

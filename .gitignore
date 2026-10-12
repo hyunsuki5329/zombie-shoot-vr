@@ -73,3 +73,7 @@ __pycache__/
 # User-provided originals and prepared audio are restored locally; see docs/user-weapon-audio.md.
 **/Assets/VRFPS/External/UserAudio/
 **/Assets/VRFPS/External/UserAudio.meta
+
+# Private room scan, textures, processed mesh and navigation: restore locally.
+**/Assets/VRFPS/External/RoomScan/
+**/Assets/VRFPS/External/RoomScan.meta

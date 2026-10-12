@@ -14,6 +14,10 @@
 
 이번 검증은 Git에서 내보낸 새 프로젝트에서 시작하고 기존 Library나 외부 자산 meta를 복사하지 않았다. 같은 PC의 전역 패키지 캐시·Unity 라이선스 사용은 허용하므로 새 PC·완전 오프라인 검증과 구분한다. 자세한 실제 결과와 해시는 [최신 복원 증빙](evidence/current-source-restoration.json)에 기록한다. 아래 `8a28aee` 예시는 이전 시점의 이력이다.
 
+## 2026-10-12 실제 방 추가
+
+현재 Room 빌드는 [방 스캔 복원](room-scan.md)의 원본 복사 → `ScannedRoomSetup.Configure` → 시험 → `ScannedRoomSetup.Build`를 추가한다. 이전 소스 묶음에는 방 스캔이 없다. 사적인 원본/가공 메시/텍스처/NavMesh는 Git에서 제외하며 생성 코드는 포함한다. 보스/크롤러는 [추가 복원 절차](boss-crawler.md)를 따른다.
+
 ## 필요한 환경과 파일
 
 - Unity6000.3.23f1 및 Windows x64 빌드 지원. 현재 빌드 함수는 Mono 개발 빌드를 사용한다. 최종 IL2CPP 또는 Release 빌드는 아직 검증하지 않았다.
