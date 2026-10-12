@@ -1,0 +1,39 @@
+{
+  "date": "2026-10-13",
+  "scope": "A01 structure data and exact collider/anchor capture-generation; theme work pending",
+  "tests": [
+    {
+      "path": "tmp\\method-a\\contracts-red.xml",
+      "result": "Failed(Child)",
+      "total": "7",
+      "passed": "0",
+      "failed": "7",
+      "sha256": "79bd1a6acff974500c614c59072bbd1f7ff6e2b3b872f91688511c67ec3e50af"
+    },
+    {
+      "path": "tmp\\method-a\\structure-green.xml",
+      "result": "Passed",
+      "total": "81",
+      "passed": "81",
+      "failed": "0",
+      "sha256": "88d9f92208c44b54e1842f20bafcdaf24ec27a949a3303f002a70d0f5fa5355a"
+    },
+    {
+      "path": "tmp\\method-a\\capture-red.xml",
+      "result": "Failed(Child)",
+      "total": "1",
+      "passed": "0",
+      "failed": "1",
+      "sha256": "cf6f1ee2ea6040feea8b62069799e3fc25545285c73ea3a15cb3f469432591ea"
+    },
+    {
+      "path": "tmp\\method-a\\capture-green.xml",
+      "result": "Passed",
+      "total": "82",
+      "passed": "82",
+      "failed": "0",
+      "sha256": "e61a3f2c817db989f67a8295d39ed33bf09293b01973dc093253cff07891c765"
+    }
+  ],
+  "hardware": "not run"
+}
