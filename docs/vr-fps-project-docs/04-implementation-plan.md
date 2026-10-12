@@ -1,10 +1,12 @@
 # 현실 공간 기반 VR 좀비 FPS Implementation Plan
 
+2026-10-12 범위 갱신: **내 방(`room`) → 폐가(`AbandonedHouse`), 실제 강의실(`classroom`) → 폐교(`AbandonedSchool`)**로 고정한다. 두 공간의 스캔·실측을 수동 구조 데이터로 정리하고, 그 위치·크기에 맞는 테마 프리팹으로 재구성한다. 다른 사용자의 공간 지원과 같은 맵의 테마 선택 기능은 범위에 포함하지 않는다. 세부 계약은 [Method A 가이드](../VRShoot_Method_A_Codex_Guide.reviewed.md)를 따른다. 이 갱신은 문서 변경이며 테마 구현 완료나 Goal 재개를 뜻하지 않는다.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task. superpowers:subagent-driven-development is an alternative only when parallel agent work is explicitly authorized. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** 방과 강의실에서 K2 양손 사격과 왼손 재장전으로 두 종류 좀비의 무한 웨이브를 플레이하고 맵별 기록을 남기는 PC VR 게임을 완성한다.
 
-**Architecture:** 촬영 공간의 외형과 충돌·NavMesh를 분리하고 공통 Combat 씬을 두 맵에서 사용한다. 순수 규칙인 발사·탄약·체력·웨이브·기록을 XR 입력과 분리해 시험한다. GS 채택은 작은 실제 기기 시험으로 결정하며 텍스처 메시를 대안으로 둔다.
+**Architecture:** 촬영 공간의 외형과 충돌·NavMesh를 분리하고 공통 Combat 씬을 두 맵에서 사용한다. 순수 규칙인 발사·탄약·체력·웨이브·기록을 XR 입력과 분리해 시험한다. 스캔은 수동 구조 참조로 사용하고 내 방 폐가·강의실 폐교 외형을 고정한다.
 
 **Tech Stack:** 기존 VR 템플릿 10.0.0, Unity 6000.3.23f1, URP 17.3.0, OpenXR 1.17.1, XRI 3.5.1, Input System 1.20.0, AI Navigation, C#, Unity Test Framework, Quest Pro, Virtual Desktop. 2026-09-20 갱신. AI Navigation·Test Framework의 추가 설정과 기기 실행은 P01에서 확인한다.
 
@@ -31,7 +33,7 @@
 | 작업 | 기본 시간 | 완료 결과 |
 |---|---:|---|
 | P01 | 5시간 | 실제 기기에서 실행되는 빈 프로젝트 |
-| P02 | 12시간 | 작은 스캔 공간과 기술 선택 기록 |
+| P02 | 12시간 | 스캔 구조와 폐가 외형 대응 검증 |
 | P03 | 5시간 | 연속 이동·회전과 충돌 |
 | P04 | 12시간 | 양손 K2 사격 |
 | P05 | 14시간 | 왼손 수동 재장전 |
@@ -77,22 +79,18 @@ if (!(Test-Path -LiteralPath (Join-Path $gameProjectPath 'Assets'))) { throw '�
 
 **Done:** 실행 파일에서 바닥과 컨트롤러가 안정적으로 보이며 입력이 연결된다. 연결 문제가 있으면 스캔 임포트 전에 해결한다.
 
-## P02 작은 공간의 표현 방식 결정
+## P02 스캔 기반 구조와 폐가 시제품
 
-**Files:** Create `Assets/VRFPS/Art/Scans/RoomSample/`, `Scenes/Tests/ScanLab.unity`, `Docs/scan-proof.md`. Modify `ProjectSettings/GraphicsSettings.asset`, 사용 중인 URP Renderer 설정.
+**Interfaces:** 기존 Room 스캔·실측·충돌·앵커를 입력으로 수동 구조 자산과 폐가 VisualRoot를 만든다. 세부 단계 A00~A03은 Method A 가이드를 따른다. 기존 완료 기록은 이전 사진형 빌드 증빙으로 보존한다.
 
-**Interfaces:** Consumes P01 XR 씬, 작은 촬영 결과와 기준 거리. Produces 실제 스케일의 `VisualRoot`, `CollisionRoot`, GS/메시 결정과 측정 기록. 공통 맵 필드는 P09에서 정식화한다.
+- [ ] 기존 씬·충돌·생성점·NavMesh 기준선을 기록하고 로컬 원본을 보존한다.
+- [ ] 실측/추정/게임 확장을 구분한 맵 로컬 미터 좌표 구조 데이터를 만든다.
+- [ ] 안전한 외형 생성과 반복 실행·실패 복구를 placeholder로 검증한다.
+- [ ] 내 방의 위치·크기에 맞는 폐가 프리팹·재질을 적용하고 충돌·가림을 검증한다.
+- [ ] 최종 씬의 원본 스캔 참조를 제거하고 구조+허용 에셋만으로 복원·빌드한다.
+- [ ] T11·T16·T17 실기와 성능 결과를 남긴다. 시제품과 최종 미술 인수를 구분한다.
 
-- [ ] 05의 촬영 전 점검 후 책상·벽·바닥이 함께 있는 작은 구역을 Scaniverse Classic에서 연속 스캔한다. 앱 내 처리와 파일 내보내기를 먼저 검증한다.
-- [ ] 별도 복원에 사용할 원본은 겹치는 일반 사진으로 확보한다. 일반 동영상만 준비한 경우에는 프레임 추출·선별 경로를 따르며 앱 스캔의 입력으로 바로 가져올 수 있다고 가정하지 않는다.
-- [ ] 원본·앱 버전·출력 형식·기준 거리 2개·사용 렌즈·촬영 해상도를 저장한다. 05의 체크리스트로 흐림과 누락 면을 확인한다.
-- [ ] GS 후보를 고정된 커밋 또는 버전으로 임포트하고 D3D12·URP 조건을 적용한다. 필요한 변경을 기록한다.
-- [ ] 큐브 적을 벽 앞뒤에 배치하고 양쪽 눈의 깊이·총구·투사체 가림을 확인한다.
-- [ ] 충돌 구조와 실제 길이를 비교하고 72Hz에서 빈 맵·적 포함 프레임과 VRAM을 측정한다.
-- [ ] GS가 G1을 통과하지 못하면 텍스처 메시 결과에 같은 시험을 적용한다.
-- [ ] `Docs/scan-proof.md`에 비교 결과·선택 이유·남은 보수 구역을 기록하고 P02를 커밋한다.
-
-**Done:** 외형·충돌·가림·기기 성능을 확인한 한 가지 경로가 선택된다. 기준은 T11·T16·T17이다.
+**Done:** 실제 내 방 구조에 대응하는 폐가 외형·충돌·양안 가림·성능 검증 완료.
 
 ## P03 플레이어 이동과 연속 회전
 
@@ -355,12 +353,14 @@ public static bool IsBetter(BestRecord old, int reachedWave, int kills) =>
 
 ## P09 방과 강의실 완성
 
-**Files:** Create `Runtime/Maps/MapDefinition.cs`, `MapRoot.cs`, `Configuration/Maps/Room.asset`, `Classroom.asset`, `Scenes/Maps/Room.unity`, `Classroom.unity`, `Art/Scans/Room/`, `Classroom/`. Modify `MenuController.cs`, `Combat.unity`.
+**Files:** Create `Runtime/Maps/MapDefinition.cs`, `MapRoot.cs`, `Configuration/Maps/Room.asset`, `Classroom.asset`, `Scenes/Maps/Room.unity`, `Classroom.unity`, 맵별 구조 자산과 고정 테마 프로필. Modify `MenuController.cs`, `Combat.unity`.
 
-**Interfaces:** Consumes G1의 외형 경로와 공통 전투. Produces 03의 MapDefinition·MapRoot 필드, `room`·`classroom` 맵 ID. 두 맵은 같은 진행·저장 코드를 사용한다.
+**Interfaces:** Consumes G1의 구조/테마 생성 경로와 공통 전투. Produces 03의 MapDefinition·MapRoot 필드, `room`·`classroom` 맵 ID. 두 맵은 같은 진행·저장 코드를 사용한다.
 
 - [ ] 05 절차로 두 공간을 촬영하고 실제 거리·원본·가공본을 기록한다.
-- [ ] 외형·충돌 구조·NavMesh·PlayerSpawn·EnemySpawns를 각각 배치한다.
+- [ ] 내 방→폐가, 별도 강의실→폐교를 각자의 실측 구조로 제작한다. 같은 방의 테마 교체로 대체하지 않는다.
+- [ ] 외형·충돌 구조·NavMesh·PlayerSpawn·EnemySpawns를 각각 배치한다. Room의 1.5m 생성 거리·1.5초 예고·실내5/복도2 앵커와 게임용 복도를 보존한다.
+- [ ] 원본 스캔 없는 생성·빌드와 맵별 고정 프로필 연결을 검증한다.
 - [ ] 각 생성점에 대해 NavMesh 위 여부와 시작점까지 `NavMeshPathStatus.PathComplete`를 검사한다. 실패 지점은 생성 후보에서 제외하고 씬에서 수정한다.
 - [ ] 맵별 최대 생존·원거리 수와 최소 생성 거리를 06대로 시작한다. 좁은 방의 실제 회피 가능성을 시험한다.
 - [ ] 메뉴에서 Combat과 선택 맵을 로드하고 이전 맵 언로드 시 풀·이벤트·참조를 해제한다.
@@ -422,5 +422,5 @@ public static bool IsBetter(BestRecord old, int reachedWave, int kills) =>
 - [ ] R01~R20 각각에 실행 작업과 시험 결과가 존재한다.
 - [ ] 재장전 손, UI 팔, 회전 방식, 도달 웨이브의 정의가 사용자 결정과 같다.
 - [ ] 무료 후보를 취득·임포트·검증 완료로 잘못 표시하지 않았다.
-- [ ] GS 기술 선택과 실제 기기 성능 결과가 기록되어 있다.
+- [ ] Method A 구조·외형 대응과 실제 기기 성능 결과가 기록되어 있다.
 - [ ] 필수 기능 변경은 사용자 결정으로 남겼고 일정 단축만을 위해 조용히 삭제하지 않았다.

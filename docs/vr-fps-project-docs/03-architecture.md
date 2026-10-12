@@ -1,12 +1,15 @@
 # 기술 설계
 
-2026-09-20 갱신 · 구현 전 설계 · 기존 VR 템플릿 프로젝트를 사용하며 아래 자체 게임 시스템은 구현 전이다.
+2026-10-12 범위 갱신: **내 방(`room`) → 폐가(`AbandonedHouse`), 실제 강의실(`classroom`) → 폐교(`AbandonedSchool`)**로 고정한다. 두 공간의 스캔·실측을 수동 구조 데이터로 정리하고, 그 위치·크기에 맞는 테마 프리팹으로 재구성한다. 다른 사용자의 공간 지원과 같은 맵의 테마 선택 기능은 범위에 포함하지 않는다. 세부 계약은 [Method A 가이드](../VRShoot_Method_A_Codex_Guide.reviewed.md)를 따른다. 이 갱신은 문서 변경이며 테마 구현 완료나 Goal 재개를 뜻하지 않는다.
+
+초안 2026-09-20 · 맵 설계 갱신 2026-10-12. 실제 구현·검증 상태는 progress.md를 따른다.
 
 ## 1 기본 구성
 
 기존 `D:/Unity Project/Zombie Shoot VR/Zombie Shoot VR/` 프로젝트를 사용한다. 2026-09-20 기준 Unity 6000.3.23f1, VR 템플릿 10.0.0, XR Interaction Toolkit 3.5.1, URP 17.3.0, OpenXR 1.17.1, Input System 1.20.0을 개발 기준으로 한다. XRI 3.5.1은 `Packages/manifest.json`과 `Packages/packages-lock.json`에서 확인했다. 같은 버전의 Starter Assets와 API를 사용하고, 추가로 필요한 AI Navigation·Unity Test Framework는 설치 여부와 호환 버전을 확인해 잠금 파일에 기록한다. 프리뷰 패키지는 기본 경로에서 제외한다. G0에서 Windows OpenXR 런타임·양쪽 입력·기기 빌드를 검증한다. 설치 버전 확인만으로 기기 호환성 통과로 표시하지 않는다. [XRI 3.5 문서](https://docs.unity3d.com/Packages/com.unity.xr.interaction.toolkit@3.5/manual/index.html)
 
-Windows x86_64 PC 빌드를 기준으로 하며 Quest 단독 Android 빌드는 만들지 않는다. GS 후보에서는 D3D12를 먼저 시험하고 해당 렌더러의 URP RenderGraph 조건을 맞춘다. GS에 필요한 설정을 확정하기 전에 후처리와 안티앨리어싱을 늘리지 않는다. [UnityGaussianSplatting](https://github.com/aras-p/UnityGaussianSplatting)
+Windows x86_64 PC 빌드를 기준으로 하며 Quest 단독 Android 빌드는 만들지 않는다. 기존 URP/OpenXR 환경을 유지한다. 최종 환경은 스캔 기반 수동 구조 데이터와 테마 프리팹으로 구성한다. Room→AbandonedHouse, Classroom→AbandonedSchool 매핑을 고정하고 맵별 구조를 분리한다. 구조 생성기는 CollisionRoot·스폰·NavMesh를, 외형 생성기는 VisualRoot/ThemeGenerated만 관리한다. 외형 갱신은 구조를 수정하지 않으며 임시 생성·검증 후 소유한 결과만 교체한다. 원본 스캔은 빌드 밖 로컬 참조 씬에 보존한다.
+
 
 ```mermaid
 flowchart LR
@@ -121,9 +124,9 @@ K2의 주 잡기 위치는 오른손 앵커에 고정한다. 양손 방향은 �
 | Weapon | 총 모델, 플레이어 몸에 물리 충격 전달하지 않음 |
 | Magazine | 손 상호작용·바닥 충돌, 이동 장애물로 사용하지 않음 |
 | Projectile | 플레이어·월드 충돌, 발사 주체와 충돌 제외 |
-| VisualOnly | 스캔 외형, 충돌은 WorldSolid 대리 구조가 담당 |
+| VisualOnly | 테마 외형, 충돌은 WorldSolid 대리 구조가 담당 |
 
-GS 외형과 물리 콜라이더는 서로 자동으로 맞지 않는다. 보이지 않는 콜라이더는 화면 깊이를 만들지 않으므로, 벽 뒤 적을 가려야 한다면 적절한 깊이 전용 렌더 구조가 별도로 필요하다. 그 구조가 스캔을 잘라 먹는지, 두 눈에서 같은 위치인지 시험한다. 실패하면 텍스처 메시로 전환한다.
+테마 프리팹과 물리 콜라이더의 위치·크기·통로를 비교한다. 작게 맞춘 가구 주위에 보이지 않는 큰 충돌이 남거나 열린 책상 하부가 탄환을 막으면 실패다. 적합한 외형을 사용하고 구조 수정은 별도 검증한다. 두 눈에서 벽 뒤 적이 일관되게 가려지는지 실제 VR에서 확인한다.
 
 적은 NavMeshAgent가 이동을 담당하고 애니메이션 루트 모션은 기본 비활성화한다. 공격 시 이동을 멈추고 준비→판정→회복 순서로 처리한다. 죽은 적은 즉시 공격·피격을 끄고 사망 표시 뒤 풀로 회수한다. 경로 고착은 5초마다 진행량을 검사하고 유효 지점으로 재배치한다. 재배치는 처치를 늘리거나 남은 적 수를 줄이지 않는다.
 
