@@ -1,5 +1,19 @@
 # 소스 복원·시험·Windows 빌드
 
+## 2026-10-13 Method A 폐가 경로
+
+현재 Room은 내 방 구조 기반 폐가 시제품으로 전환 중이다. 구조 자산·직접 만든 테마 프리팹/재질·독립 NavMesh는 Git으로 관리한다. 최종 상태·검증은 [Method A 실행 기록](method-a-execution.md)을 따른다. 아래 사진형 RoomScan 복원은 이전 비교용 경로다.
+
+기존 GAMGO·Mixamo·음원 복원은 필요하지만 폐가 생성에는 원본 방 FBX가 필요하지 않다. `RoomStructure.asset`이 있으면 이를 사용한다. 다음 명령은 각 프로세스 종료·성공 로그를 확인하며 격리 프로젝트에서 순서대로 실행한다.
+
+```powershell
+& 'D:/Unity editor/6000.3.23f1/Editor/Unity.exe' -batchmode -quit -projectPath '<복원 프로젝트>' -executeMethod VRFPS.Editor.RoomHouseSetup.ConfigurePreview -logFile house-configure.log
+& 'D:/Unity editor/6000.3.23f1/Editor/Unity.exe' -batchmode -quit -projectPath '<복원 프로젝트>' -executeMethod VRFPS.Editor.RoomHouseSetup.PromoteAndBuild -logFile house-build.log
+```
+
+성공 표식은 `VRFPS_HOUSE_PREVIEW_CREATED`, `VRFPS_HOUSE_BUILD_SUCCEEDED`다. `Builds/Windows/AbandonedHouse/scan-dependency-check.txt`의 packed RoomScan 자산 0도 확인한다. 사진형 Room을 다시 생성하는 `ScannedRoomSetup.Configure`는 새 폐가를 덮어쓰므로 이 경로에서 실행하지 않는다.
+
+
 이 안내는 현재 개발 브랜치의 재현 절차다. 실제 두 맵과 최종 제출 인수는 아직 완료하지 않았다. 실행·조작 확인은 [실기 안내](hardware-validation.md), 단계별 상태는 [진행 기록](progress.md)을 따른다.
 
 ## 최신 복원 보관본 (2026-10-08)
