@@ -1,0 +1,54 @@
+{
+  "source": "C:/Users/User/Desktop/Scaniverse 2026-10-13 165303.fbx",
+  "sha256": "9d257fcaead1b02f79b6bfa451f7062df3cfb2678de5cb21389dee1e986cc755",
+  "bytes": 23806560,
+  "version": 7500,
+  "meshes": [
+    {
+      "vertices": 153581,
+      "minimum": [
+        -8.77676773071289,
+        -0.16430675983428955,
+        -6.524698257446289
+      ],
+      "maximum": [
+        8.997074127197266,
+        3.4581756591796875,
+        6.836973190307617
+      ],
+      "finite": true
+    }
+  ],
+  "polygons": 261036,
+  "settings": [
+    [
+      "UpAxis",
+      "int",
+      "Integer",
+      "",
+      1
+    ],
+    [
+      "UpAxisSign",
+      "int",
+      "Integer",
+      "",
+      1
+    ],
+    [
+      "UnitScaleFactor",
+      "double",
+      "Number",
+      "",
+      100.0
+    ]
+  ],
+  "embedded_texture": true,
+  "calibration": "Awaiting measured classroom dimensions",
+  "userConfirmedClassroom": true,
+  "status": "Source inspected; measured dimensions and visual layout calibration pending",
+  "limitations": [
+    "Mesh bounds are scan extents, not measured wall-to-wall dimensions.",
+    "No classroom gameplay or VR acceptance is established by this inspection."
+  ]
+}
