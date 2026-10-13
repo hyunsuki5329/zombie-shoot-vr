@@ -76,8 +76,35 @@ namespace VRFPS.Editor {
    if(importer!=null&&importer.textureType!=TextureImporterType.NormalMap){importer.textureType=TextureImporterType.NormalMap;importer.SaveAndReimport();}
    var path=Output+"Tile"+tile+".mat";var mat=AssetDatabase.LoadAssetAtPath<Material>(path);
    if(mat==null){mat=new Material(Shader.Find("Universal Render Pipeline/Lit"));AssetDatabase.CreateAsset(mat,path);}
-   mat.SetTexture("_BaseMap",tex);mat.SetColor("_BaseColor",Color.white);mat.SetFloat("_Smoothness",.12f);mat.SetFloat("_Metallic",0);
+   mat.SetTexture("_BaseMap",tex);mat.SetColor("_BaseColor",Color.white);mat.SetFloat("_Smoothness",1);mat.SetFloat("_Metallic",1);
+   mat.SetTexture("_MetallicGlossMap",PackMetalSmoothness(tile));mat.EnableKeyword("_METALLICSPECGLOSSMAP");
+   mat.SetFloat("_WorkflowMode",1);mat.SetFloat("_SmoothnessTextureChannel",0);
+   mat.DisableKeyword("_SPECULAR_SETUP");mat.DisableKeyword("_SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A");
    mat.SetTexture("_BumpMap",AssetDatabase.LoadAssetAtPath<Texture2D>(normalPath));mat.EnableKeyword("_NORMALMAP");EditorUtility.SetDirty(mat);return mat;
   }
+  static Texture2D PackMetalSmoothness(int tile){
+   Texture2D metal=null,rough=null,packed=null;
+   try{
+    metal=new Texture2D(2,2,TextureFormat.RGBA32,false,true);
+    rough=new Texture2D(2,2,TextureFormat.RGBA32,false,true);
+    if(!metal.LoadImage(File.ReadAllBytes(Source+"textures/model_"+tile+"_Metalness.png"))||
+       !rough.LoadImage(File.ReadAllBytes(Source+"textures/model_"+tile+"_Roughness.png")))throw new InvalidDataException("Unreadable PBR maps "+tile);
+    if(metal.width!=rough.width||metal.height!=rough.height)throw new InvalidDataException("PBR map size mismatch "+tile);
+    var pixels=metal.GetPixels32();var roughPixels=rough.GetPixels32();
+    for(int i=0;i<pixels.Length;i++)pixels[i]=new Color32(pixels[i].r,0,0,(byte)(255-roughPixels[i].r));
+    packed=new Texture2D(metal.width,metal.height,TextureFormat.RGBA32,false,true);
+    packed.SetPixels32(pixels);packed.Apply();
+    var path=Output+"Tile"+tile+"-MetalSmooth.png";
+    File.WriteAllBytes(path,packed.EncodeToPNG());AssetDatabase.ImportAsset(path,ImportAssetOptions.ForceSynchronousImport);
+    var importer=(TextureImporter)AssetImporter.GetAtPath(path);
+    importer.sRGBTexture=false;importer.alphaSource=TextureImporterAlphaSource.FromInput;importer.alphaIsTransparency=false;
+    importer.SaveAndReimport();return AssetDatabase.LoadAssetAtPath<Texture2D>(path);
+   }finally{
+    if(metal!=null)UnityEngine.Object.DestroyImmediate(metal);
+    if(rough!=null)UnityEngine.Object.DestroyImmediate(rough);
+    if(packed!=null)UnityEngine.Object.DestroyImmediate(packed);
+   }
+  }
+
  }
 }

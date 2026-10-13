@@ -28,7 +28,39 @@
     "No Classroom scene integration or new game build in this unit.",
     "Measured classroom dimensions pending.",
     "Canonical library sizes are provisional.",
-    "BaseColor/Normal mapped; roughness/metalness/height precision conversion pending.",
-    "VR and performance acceptance pending."
-  ]
+    "VR and performance acceptance pending.",
+    "Height map unused; final VR appearance remains pending."
+  ],
+  "materialFollowup": {
+    "red": "material-red.xml: missing map failed",
+    "green": "material-green.xml: affected test1/1",
+    "pixelCheck": [
+      {
+        "tile": "1001",
+        "pixels": 4194304,
+        "metallicExact": true,
+        "smoothnessExact": true
+      },
+      {
+        "tile": "1002",
+        "pixels": 4194304,
+        "metallicExact": true,
+        "smoothnessExact": true
+      },
+      {
+        "tile": "1003",
+        "pixels": 4194304,
+        "metallicExact": true,
+        "smoothnessExact": true
+      },
+      {
+        "tile": "1007",
+        "pixels": 4194304,
+        "metallicExact": true,
+        "smoothnessExact": true
+      }
+    ],
+    "render": "material-render.log; Desk render inspected",
+    "copy": "Generated files SHA256 matched"
+  }
 }

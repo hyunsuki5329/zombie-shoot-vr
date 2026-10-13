@@ -7,7 +7,7 @@
 3. 격리 Unity에서 생성·시험·렌더 검토. 원본/추출 자산 로컬 보관, 출처와 복원 경로 기록. 코드/검증/문서만 커밋·push하고 기존 초안 PR에 연결한다.
 4. 실측 치수 확정 후 별도 작업으로 Classroom 구조·충돌·NavMesh·스폰·프리팹 배치, 공통 전투·빌드 연결, Quest Pro 검증. 이 라이브러리 작업을 맵 완성으로 판정하지 않는다.
 
-부드러움은 초기 상수0.12, 금속도0이다. BaseColor/Normal을 연결한다. Roughness/Metalness/Height 정밀 변환과 최종 시각 판정은 미완료로 공개하며 성능 측정 후 조정한다.
+BaseColor/Normal과 원본 Metalness/Roughness를 연결한다. URP용 텍스처 R=Metalness.R, A=255−Roughness.R로 변환하고 선형 데이터로 가져온다. Smoothness 승수1과 metallic workflow를 명시한다. Height는 현재 사용하지 않으며 실제 VR 미술/성능 인수는 별도다.
 
 ## 로컬 재생성
 
