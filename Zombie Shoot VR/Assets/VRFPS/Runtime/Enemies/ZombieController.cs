@@ -7,6 +7,8 @@ namespace VRFPS
     {
         int enemyId, health, attackDamage;
         EnemyKind kind;
+        EnemyVariant variant;
+        CharacterController targetBody;
         Transform target, origin;
         LayerMask solidMask;
         bool configured, combatEnabled;
@@ -18,14 +20,15 @@ namespace VRFPS
         public event Action<Vector3, Vector3, int, int> ProjectileRequested;
         public event Action<int, int> Died;
         public event Action AttackStarted;
-        public void Configure(int id, EnemyKind kind, Transform target, Transform origin, LayerMask solidMask, int wave = 1)
+        public void Configure(int id, EnemyKind kind, Transform target, Transform origin, LayerMask solidMask, int wave = 1, EnemyVariant variant = EnemyVariant.Normal)
         {
             if (target == null || origin == null || solidMask.value == 0)
                 throw new ArgumentException("Enemy requires a target, attack origin and solid mask.");
             if (kind != EnemyKind.Melee && kind != EnemyKind.Ranged) throw new ArgumentOutOfRangeException(nameof(kind));
+            this.variant=variant;targetBody=target.GetComponentInParent<CharacterController>();
             enemyId = id; this.kind = kind; this.target = target; this.origin = origin; this.solidMask = solidMask;
-            health = GameBalance.EnemyHealth(kind, wave);
-            attackDamage = GameBalance.EnemyDamage(kind, wave);
+            health = GameBalance.EnemyHealth(kind, wave,variant);
+            attackDamage = GameBalance.EnemyDamage(kind, wave,variant);
             configured = combatEnabled = true;
             IsWindingUp = false; windupRemaining = cooldownRemaining = 0;
         }
@@ -43,7 +46,8 @@ namespace VRFPS
             if (target == null || origin == null) return false;
             var range = kind == EnemyKind.Melee ? 1.2f : 7f;
             if (kind == EnemyKind.Ranged && Vector3.Distance(origin.position, target.position) < 2.5f) return false;
-            return IsMeleeHitValid(origin.position, target.position, range, solidMask);
+            var point=variant==EnemyVariant.Crawler && targetBody!=null ? targetBody.transform.TransformPoint(targetBody.center) : target.position;
+            return IsMeleeHitValid(origin.position, point, range, solidMask);
         }
 
         // A scene driver supplies combat-only time; pause never advances attack timers.
@@ -56,7 +60,7 @@ namespace VRFPS
                 windupRemaining -= deltaTime;
                 if (windupRemaining > 0) return;
                 IsWindingUp = false;
-                cooldownRemaining = kind == EnemyKind.Melee ? 0.85f : 2.7f;
+                cooldownRemaining = variant==EnemyVariant.Boss?1.3f:kind == EnemyKind.Melee ? 0.85f : 2.7f;
                 if (!CanReachTarget()) return;
                 if (kind == EnemyKind.Melee)
                     target.GetComponentInParent<IDamageable>()?.ApplyDamage(attackDamage, enemyId, activeTime);
@@ -67,7 +71,7 @@ namespace VRFPS
             cooldownRemaining = Mathf.Max(0, cooldownRemaining - deltaTime);
             if (cooldownRemaining > 0 || !CanReachTarget()) return;
             IsWindingUp = true;
-            windupRemaining = kind == EnemyKind.Melee ? 0.65f : 0.8f;
+            windupRemaining = GameBalance.AttackWindup(kind,variant);
             AttackStarted?.Invoke();
         }
 

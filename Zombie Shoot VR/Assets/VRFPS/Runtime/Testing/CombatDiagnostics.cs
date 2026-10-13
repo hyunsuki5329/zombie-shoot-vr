@@ -75,7 +75,7 @@ namespace VRFPS
                 var sample=new CombatDiagnosticsSample{kind="sample",index=samples,attempt=attempt,mapId=run.Map.mapId,phase=run.Phase.ToString(),
                     elapsedSeconds=Time.realtimeSinceStartupAsDouble-started,activeSeconds=run.ActiveTime,wave=run.ReachedWave,kills=run.Kills,
                     alive=director.AliveCount,rangedAlive=director.RangedAliveCount,corpses=director.CorpseCount,aliveCap=run.Map.maxAlive,rangedCap=run.Map.maxRangedAlive,
-                    enemyBodies=director.CreatedCount,peakAlive=director.PeakAliveCount,peakCorpses=director.PeakCorpseCount,
+                    enemyBodyCap=director.EnemyBodyCapacity,enemyBodies=director.CreatedCount,peakAlive=director.PeakAliveCount,peakCorpses=director.PeakCorpseCount,
                     projectiles=projectiles.ActiveCount,projectileBodies=shots.Created,peakProjectiles=shots.Peak,
                     magazines=tokens.Current,magazineBodies=tokens.Created,peakMagazines=tokens.Peak,
                     looseMagazines=pouch.LooseCount,peakLoose=pouch.PeakLooseCount,

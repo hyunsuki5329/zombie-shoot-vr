@@ -21,6 +21,36 @@ namespace VRFPS.Tests
         {
             var go = new GameObject(name); go.transform.SetParent(root.transform); return go;
         }
+        [TestCase("Walk")][TestCase("Attack")]
+        public void CrawlerDeathMovesFromCurrentPosePausesAndResets(string state)
+        {
+            var prefab=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/VRFPS/Prefabs/Enemies/CrawlerZombie.prefab");
+            var actor=Object.Instantiate(prefab,offset+Vector3.forward*3,Quaternion.identity,root.transform).GetComponent<EnemyActor>();
+            actor.Initialize(999,head,null,new Vector3[0],LayerMask.GetMask("WorldSolid"),6);
+            var animator=actor.GetComponentInChildren<Animator>();animator.cullingMode=AnimatorCullingMode.AlwaysAnimate;
+            animator.Update(0);animator.SetFloat("Speed",state=="Walk"?1:0);animator.SetBool("Attack",state=="Attack");
+            animator.Play("Base Layer."+state,0,.3f);animator.Update(0);
+            var ground=actor.GetComponent<GroundedEnemyVisual>();ground.AlignPose();
+            var motion=actor.GetComponent<CrawlerDeathMotion>();
+            var skull=animator.GetBoneTransform(HumanBodyBones.Head);var before=skull.position;
+            var actorPosition=actor.transform.position;
+            actor.Controller.ApplyDamage(10000,PlayerSource,0);motion.ApplyPose();ground.AlignPose();
+            Assert.That(motion.Playing,Is.True);Assert.That(Vector3.Distance(skull.position,before),Is.LessThan(.001f),"Lethal hit must not snap the pose");
+            foreach(var hit in actor.GetComponentsInChildren<Collider>())Assert.That(hit.enabled,Is.False);
+            actor.SetCombatEnabled(false);actor.Tick(3,3);motion.ApplyPose();ground.AlignPose();
+            Assert.That(motion.Elapsed,Is.Zero);Assert.That(Vector3.Distance(skull.position,before),Is.LessThan(.001f));
+            actor.SetCombatEnabled(true);actor.Tick(.5f,3.5);motion.ApplyPose();ground.AlignPose();
+            Assert.That(Vector3.Distance(skull.position,before),Is.GreaterThan(.03f),"Death must visibly move");
+            actor.Tick(.6f,4.1);motion.ApplyPose();ground.AlignPose();
+            Assert.That(motion.Elapsed,Is.EqualTo(CrawlerDeathMotion.Duration));
+            Assert.That(skull.position.y,Is.GreaterThan(.06f).And.LessThan(.65f));
+            var settled=skull.position;actor.Tick(.5f,4.6);motion.ApplyPose();ground.AlignPose();
+            Assert.That(Vector3.Distance(skull.position,settled),Is.LessThan(.001f));
+            Assert.That(actor.transform.position,Is.EqualTo(actorPosition));
+            actor.Tick(3.5f,8.1);Assert.That(actor.gameObject.activeSelf,Is.False);
+            actor.Initialize(1000,head,null,new Vector3[0],LayerMask.GetMask("WorldSolid"),6);
+            Assert.That(motion.Playing,Is.False);Assert.That(animator.enabled,Is.True);Assert.That(actor.Controller.IsDead,Is.False);
+        }
         [SetUp] public void Setup()
         {
             root = new GameObject("Spawn integration fixture");
@@ -198,6 +228,29 @@ namespace VRFPS.Tests
                 Assert.That(run.Kills, Is.EqualTo(wave == 1 ? 0 : wave == 2 ? 8 : 18));
                 run.Tick(8);
             }
+        }
+
+        [Test] public void BossAndCrawlerQuotasSurviveTenWavesAndRetry()
+        {
+            for(int w=1;w<=10;w++) {
+                int bosses=0,crawlers=0,spawned=0;
+                while(run.Phase==RunPhase.Active && spawned<100) {
+                    SpawnOne();Assert.That(run.Alive,Is.EqualTo(1));
+                    foreach(var actor in Actors())if(actor.gameObject.activeSelf && !actor.Controller.IsDead) {
+                        spawned++;if(actor.Variant==EnemyVariant.Boss)bosses++;
+                        if(actor.Variant==EnemyVariant.Crawler){crawlers++;Assert.That(actor.GetComponent<NavMeshAgent>().speed,Is.EqualTo(2.2f));}
+                        actor.Controller.ApplyDamage(10000,PlayerSource,run.ActiveTime);
+                    }
+                    run.Tick(0);
+                }
+                Assert.That(spawned,Is.EqualTo(GameBalance.QuotaForWave(w)));
+                Assert.That(bosses,Is.EqualTo(w%5==0?1:0));Assert.That(crawlers>0,Is.EqualTo(w>5));
+                Assert.That(director.CorpseCount,Is.LessThanOrEqualTo(4));
+                Assert.That(director.CreatedCount,Is.LessThanOrEqualTo(director.EnemyBodyCapacity));
+                run.Tick(8);
+            }
+            run.StartRun(map);run.Tick(8);SpawnOne();
+            foreach(var actor in Actors())if(actor.gameObject.activeSelf&&!actor.Controller.IsDead)Assert.That(actor.Variant,Is.EqualTo(EnemyVariant.Normal));
         }
 
         [Test] public void RangedCapDefersItsQuotaWhileMeleeUsesFreeSlots()

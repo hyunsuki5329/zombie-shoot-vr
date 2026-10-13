@@ -57,7 +57,7 @@ namespace VRFPS.Editor
    m.SetOverrideTag("RenderType",cutout?"TransparentCutout":"Opaque");m.renderQueue=cutout?2450:2000;
    m.SetFloat("_Metallic",0);m.SetFloat("_Smoothness",.25f);EditorUtility.SetDirty(m);return m;
   }
-  static AnimatorController Controller(string name,bool ranged,System.Collections.Generic.Dictionary<string,AnimationClip> clips)
+  internal static AnimatorController Controller(string name,bool ranged,System.Collections.Generic.Dictionary<string,AnimationClip> clips)
   {
    var path=Root+"Generated/"+name+".controller";
    var controller=AssetDatabase.LoadAssetAtPath<AnimatorController>(path);
@@ -94,7 +94,7 @@ namespace VRFPS.Editor
    controller.AddLayer(new AnimatorControllerLayer{name="Hit Reaction",stateMachine=reaction,avatarMask=mask,defaultWeight=0,blendingMode=AnimatorLayerBlendingMode.Override});
    EditorUtility.SetDirty(controller);return controller;
   }
-  static void Apply(string prefab,string model,bool ranged,System.Collections.Generic.Dictionary<string,AnimationClip> clips)
+  internal static void Apply(string prefab,string model,bool ranged,System.Collections.Generic.Dictionary<string,AnimationClip> clips)
   {
    var path="Assets/VRFPS/Prefabs/Enemies/"+prefab+".prefab";var root=PrefabUtility.LoadPrefabContents(path);
    try{
@@ -107,7 +107,13 @@ namespace VRFPS.Editor
     var animator=visual.GetComponent<Animator>();animator.applyRootMotion=false;animator.runtimeAnimatorController=Controller(prefab,ranged,clips);
     var renderer=visual.GetComponentInChildren<SkinnedMeshRenderer>();
     // Use authored RGBA atlases for every slot; embedded RGB copies flatten torn clothing to white.
-    renderer.sharedMaterials=ranged?new[]{Mat(model,"ParasiteBody","parasiteZombie_diffuse.png",null),Mat(model,"Parasite","parasiteZombie_diffuse.png","parasiteZombie_normal.png")}:new[]{Mat(model,"Yaku","Yakuzombie_diffuse.png","Yakuzombie_normal.png"),Mat(model,"YakuClothes","Yakuzombie_diffuse.png",null)};
+    if(model=="Skeletonzombie T Avelange")
+     renderer.sharedMaterials=renderer.sharedMaterials.Select(m=>Mat(model,"Skeleton-"+m.name,m.name.ToLowerInvariant().Contains("body")?"skeletonZombie_body_diffuse.png":"skeletonZombie_diffuse.png",null)).ToArray();
+    else if(model=="Zombiegirl W Kurniawan") {
+     foreach(var skin in visual.GetComponentsInChildren<SkinnedMeshRenderer>())
+      skin.sharedMaterials=skin.sharedMaterials.Select(m=>Mat(model,"Zombiegirl-"+m.name,"zombie_diffuse.png",null)).ToArray();
+    }
+    else renderer.sharedMaterials=ranged?new[]{Mat(model,"ParasiteBody","parasiteZombie_diffuse.png",null),Mat(model,"Parasite","parasiteZombie_diffuse.png","parasiteZombie_normal.png")}:new[]{Mat(model,"Yaku","Yakuzombie_diffuse.png","Yakuzombie_normal.png"),Mat(model,"YakuClothes","Yakuzombie_diffuse.png",null)};
     PrefabUtility.SaveAsPrefabAsset(root,path);
    }finally{PrefabUtility.UnloadPrefabContents(root);}
   }

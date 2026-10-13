@@ -47,3 +47,6 @@ New-Item -ItemType Directory -Force tmp | Out-Null
 사용자 실기 화면에서 Yaku 옷 끝의 흰 영역을 확인했다. YakuClothes에 연결된 RGB 텍스처에는 찢어진 부분이 흰색으로 들어 있었으며, 원본 RGBA diffuse에는 같은 부분이 투명하다. ParasiteBody도 같은 유형의 RGB 소스를 사용하고 있어 함께 원본 RGBA로 연결했다. Parasite 전후 렌더에서는 처음부터 큰 흰 띠가 두드러지지는 않았으므로 Yaku와 동일한 실기 결함이 관측됐다고 주장하지 않는다.
 
 입력 알파를 명시적으로 읽고 알파 경계 처리를 설정한다. 원본 FBX/PNG 바이트는 변경하지 않았다. 두 재질의 투명 픽셀 회귀 시험과 실제 프리팹 앞뒤 비교 렌더로 검증한다. 새 체크아웃은 기존 Configure 절차를 다시 실행하면 같은 연결이 생성된다.
+# 보스·돌연변이 추가 안내
+
+2026-10-08 이후 현재 소스를 복원할 때는 이 문서의 기본 모델 적용 후 [보스·Zombiegirl 돌연변이 복원](boss-crawler.md)을 추가로 실행한다. 기본 적용기만 재실행하면 변형 프리팹 연결을 최종 상태로 보장할 수 없으므로 EnemyVariantSetup.Configure를 마지막에 실행한다.

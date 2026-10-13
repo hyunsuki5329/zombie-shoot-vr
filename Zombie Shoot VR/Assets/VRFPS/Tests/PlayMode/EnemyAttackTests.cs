@@ -47,6 +47,24 @@ namespace VRFPS.Tests
         [TearDown] public void Cleanup()
         { foreach (var go in objects) if (go != null) Object.DestroyImmediate(go); objects.Clear(); }
 
+        [Test] public void CrawlerHitsStandingPlayerTorsoAndWallStillBlocks()
+        {
+            var player=Make("Player",Vector3.forward*.8f);var body=player.AddComponent<CharacterController>();body.height=1.8f;body.center=Vector3.up*.9f;
+            var damage=player.AddComponent<EnemyDamageProbe>();var head=Make("Head",player.transform.position+Vector3.up*1.8f).transform;head.SetParent(player.transform);
+            var origin=Make("Crawl",Vector3.up*.4f).transform;var enemy=origin.gameObject.AddComponent<ZombieController>();
+            enemy.Configure(42,EnemyKind.Melee,head,origin,Solid,6,EnemyVariant.Crawler);
+            enemy.Tick(0,0);Assert.That(enemy.IsWindingUp,Is.True);enemy.Tick(.46f,.46);Assert.That(damage.Hits,Is.EqualTo(1));
+            enemy.Tick(1,2);Wall(.4f);enemy.Tick(.46f,2.5);Assert.That(damage.Hits,Is.EqualTo(1));
+        }
+        [Test] public void BossHasLongerWarningAndPauseStopsImpact()
+        {
+            var target=Target(Vector3.forward);var enemy=Make("Boss",Vector3.zero).AddComponent<ZombieController>();
+            enemy.Configure(42,EnemyKind.Melee,target.transform,enemy.transform,Solid,5,EnemyVariant.Boss);
+            Assert.That(enemy.Health,Is.EqualTo(600));enemy.Tick(0,0);enemy.Tick(.7f,.7);Assert.That(target.Hits,Is.Zero);
+            enemy.SetCombatEnabled(false);enemy.Tick(10,10);Assert.That(target.Hits,Is.Zero);
+            enemy.SetCombatEnabled(true);enemy.Tick(.31f,1.01);Assert.That(target.Damage,Is.EqualTo(27));
+        }
+
         [Test] public void MeleeTelegraphsThenHitsOnceAndWaitsForCooldown()
         {
             var target = Target(Vector3.forward);

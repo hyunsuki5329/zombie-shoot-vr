@@ -34,6 +34,8 @@ namespace VRFPS.Tests
 
         [TestCase("MeleeZombie", .65f, .85f)]
         [TestCase("RangedZombie", .8f, 2.7f)]
+        [TestCase("BossZombie", 1f, 1.3f)]
+        [TestCase("CrawlerZombie", .45f, .85f)]
         public void AttackRecoversBeforeNextWindup(string name, float windup, float cooldown)
         {
             var instance = Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/VRFPS/Prefabs/Enemies/" + name + ".prefab"));
@@ -57,6 +59,8 @@ namespace VRFPS.Tests
 
         [TestCase("MeleeZombie")]
         [TestCase("RangedZombie")]
+        [TestCase("BossZombie")]
+        [TestCase("CrawlerZombie")]
         public void WalkStaysNearCollisionBodyAndPauseFreezesPose(string name)
         {
             var instance = Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/VRFPS/Prefabs/Enemies/" + name + ".prefab"));

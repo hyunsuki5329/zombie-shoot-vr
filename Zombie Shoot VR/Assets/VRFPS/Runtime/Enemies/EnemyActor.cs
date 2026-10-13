@@ -5,6 +5,11 @@ namespace VRFPS
     public sealed class EnemyActor : MonoBehaviour
     {
         [SerializeField] EnemyKind kind;
+        [SerializeField] EnemyVariant variant;
+        [SerializeField] EnemyActor crawlerPrefab,bossPrefab;
+        public EnemyVariant Variant=>variant;
+        public EnemyActor CrawlerPrefab=>crawlerPrefab;
+        public EnemyActor BossPrefab=>bossPrefab;
         [SerializeField] Transform attackOrigin;
         ZombieController enemy;
         ZombieMotor motor;
@@ -18,6 +23,7 @@ namespace VRFPS
         float hitRemaining;
         bool configured, combatEnabled;
         EnemyFeedback feedback;
+        CrawlerDeathMotion crawlerDeath;
         public ZombieController Controller => enemy;
 
         public void Initialize(int id, Transform target, AcidProjectilePool pool, Vector3[] recovery, LayerMask solidMask, int wave = 1)
@@ -32,15 +38,16 @@ namespace VRFPS
             gameObject.SetActive(true);
             hitboxes = GetComponentsInChildren<Collider>(true);
             animator = GetComponentInChildren<Animator>(true);
+            crawlerDeath = GetComponent<CrawlerDeathMotion>(); crawlerDeath?.ResetMotion();
             foreach (var hitbox in hitboxes) hitbox.enabled = true;
             agent.enabled = true;
             if (animator != null) { animator.applyRootMotion = false; animator.Rebind(); animator.speed = 1; }
-            enemy.Configure(id, kind, target, origin, solidMask, wave);
+            enemy.Configure(id, kind, target, origin, solidMask, wave,variant);
             hitLayer = animator != null && animator.runtimeAnimatorController != null ? animator.GetLayerIndex("Hit Reaction") : -1;
             presentedHealth = enemy.Health; hitRemaining = 0;
             if (hitLayer > 0) animator.SetLayerWeight(hitLayer, 0);
             feedback=GetComponent<EnemyFeedback>();feedback?.Configure(enemy,target);
-            motor.Configure(target, kind, recovery);
+            motor.Configure(target, kind, recovery,variant);
             enemy.Died += HandleDeath; enemy.ProjectileRequested += Launch;
             corpseAge = 0; configured = combatEnabled = true;
             UpdatePresentation();
@@ -49,6 +56,7 @@ namespace VRFPS
         { if (pool != null) pool.TryLaunch(position, direction, source, damage); }
         void HandleDeath(int id, int source)
         {
+            crawlerDeath?.Begin();
             foreach (var hitbox in hitboxes) hitbox.enabled = false;
             motor.Tick(0);
             UpdatePresentation();
@@ -69,6 +77,7 @@ namespace VRFPS
             UpdatePresentation();
             if (enemy.IsDead)
             {
+                crawlerDeath?.Tick(deltaTime);
                 corpseAge += Mathf.Max(0, deltaTime);
                 if (corpseAge >= 5) gameObject.SetActive(false);
             }
@@ -100,6 +109,7 @@ namespace VRFPS
         {
             configured=combatEnabled=false;corpseAge=0;pool=null;
             hitRemaining=0;presentedHealth=0;
+            crawlerDeath?.ResetMotion();
             feedback?.Configure(null,null);
             motor?.ResetForPool();enemy?.ResetForPool();
             if(hitboxes!=null)foreach(var hitbox in hitboxes)if(hitbox!=null)hitbox.enabled=false;
