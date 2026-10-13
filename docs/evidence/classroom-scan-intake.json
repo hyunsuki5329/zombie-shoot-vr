@@ -50,5 +50,97 @@
   "limitations": [
     "Mesh bounds are scan extents, not measured wall-to-wall dimensions.",
     "No classroom gameplay or VR acceptance is established by this inspection."
-  ]
+  ],
+  "crop": {
+    "regions": [
+      {
+        "id": "upper_left",
+        "polygon": [
+          [
+            -9,
+            2.1
+          ],
+          [
+            -7.2,
+            2.1
+          ],
+          [
+            -4.8,
+            2.8
+          ],
+          [
+            -4.8,
+            8
+          ],
+          [
+            -9,
+            8
+          ]
+        ]
+      },
+      {
+        "id": "upper_right",
+        "polygon": [
+          [
+            3.3,
+            4.25
+          ],
+          [
+            9.5,
+            5.35
+          ],
+          [
+            10,
+            9
+          ],
+          [
+            3.3,
+            9
+          ]
+        ]
+      },
+      {
+        "id": "lower_right",
+        "polygon": [
+          [
+            4.5,
+            -3.75
+          ],
+          [
+            6.2,
+            -3.45
+          ],
+          [
+            7.8,
+            -4.0
+          ],
+          [
+            7.8,
+            -8
+          ],
+          [
+            4.5,
+            -8
+          ]
+        ]
+      }
+    ],
+    "originalTriangles": 261036,
+    "retainedTriangles": 247477,
+    "removedTriangles": 13559,
+    "retainedVertices": 145719,
+    "boundsMin": [
+      -8.997074127197266,
+      -0.16430675983428955,
+      -5.202434539794922
+    ],
+    "boundsMax": [
+      8.77676773071289,
+      3.4581756591796875,
+      5.052807807922363
+    ],
+    "method": "Exclude triangles touching a marked region, projected in Unity X/Z. Original FBX unchanged.",
+    "status": "Reference crop only; no measured dimensions or gameplay acceptance.",
+    "userInstruction": "Exclude the three red-marked nonexistent regions in the supplied annotated top view."
+  }
 }
