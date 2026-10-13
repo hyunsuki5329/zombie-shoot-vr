@@ -81,3 +81,7 @@ __pycache__/
 # User-supplied Granny house originals and extracted derivatives are restored locally.
 **/Assets/VRFPS/External/GrannyHouse/
 **/Assets/VRFPS/External/GrannyHouse.meta
+
+# User-supplied school source and extracted library are restored locally.
+**/Assets/VRFPS/External/AbandonedSchool/
+**/Assets/VRFPS/External/AbandonedSchool.meta

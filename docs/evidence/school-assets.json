@@ -1,0 +1,34 @@
+{
+  "scope": "P09 extracted school visual library; not classroom runtime integration",
+  "prefabs": [
+    "Desk",
+    "Chair",
+    "TeacherDesk",
+    "Board",
+    "Wall",
+    "Floor"
+  ],
+  "sourceGroups": [
+    "table",
+    "chair",
+    "teacher_table",
+    "whitebord/frount_whitebord1",
+    "classrom_frount_wall",
+    "ground"
+  ],
+  "validation": {
+    "red": "tmp/school-source/red.xml: 1 failure (Missing Desk)",
+    "editMode": "tmp/school-source/editmode.xml: 98/98 before final Board selection",
+    "finalAffectedTest": "tmp/school-source/panel-final.xml: 1/1 after final Board selection",
+    "render": "tmp/school-source/panel-render.log; all six images visually inspected",
+    "copiedFilesHashMatched": 129,
+    "review": "review_school_assets: no code findings; visual review separately corrected source Board selection"
+  },
+  "limitations": [
+    "No Classroom scene integration or new game build in this unit.",
+    "Measured classroom dimensions pending.",
+    "Canonical library sizes are provisional.",
+    "BaseColor/Normal mapped; roughness/metalness/height precision conversion pending.",
+    "VR and performance acceptance pending."
+  ]
+}

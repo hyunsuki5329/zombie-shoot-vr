@@ -8,6 +8,6 @@
 - User-supplied archive: abandoned-school.zip
 - Archive SHA256: b11955cd8db34dc543afa1858912d3e9cc76cc10caec4cd1292178f89aec6319
 
-Current processing: extracted locally and imported into an isolated Unity inspection project. Runtime replacement is not yet complete. Planned changes are selective furniture/surface extraction, URP material conversion, and placement in the user's independently scanned classroom. The original author's classroom layout will not replace the scanned layout. No endorsement by the creator is implied.
+Changes: selected furniture/surface mesh extraction, UDIM UV normalization, URP base-color/normal material conversion, bottom-centered pivots, and uniform scaling to provisional library sizes. Placement in the user's independently scanned classroom and runtime replacement are not yet complete. The original author's classroom layout will not replace the scanned layout. No endorsement by the creator is implied.
 
 Include this attribution with derived assets and the execution build when integration is complete. Keep the original archive locally for reproducibility; original binary assets are not uploaded in this work unit.
