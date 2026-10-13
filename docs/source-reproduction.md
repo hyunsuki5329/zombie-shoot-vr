@@ -1,5 +1,9 @@
 # 소스 복원·시험·Windows 빌드
 
+## 2026-10-13 폐가 로컬 백업
+
+`Zombie Shoot VR/Builds/Reproduction/7af6176-house/`에 소스7af6176 ZIP(약90MiB), 외부 자산 ZIP(약156MiB), manifest와 README를 보관했다. GAMGO·Mixamo·음원188파일과 meta를 포함하고 RoomScan은 필요하지 않아 제외했다. 두 ZIP CRC 및 전체 외부 파일 SHA256 대조를 통과했다. 이 묶음을 새 Unity Library에서 여는 시험은 미실행이며 최종 제출본으로 표시하지 않는다.
+
 ## 2026-10-13 Method A 폐가 경로
 
 현재 Room은 내 방 구조 기반 폐가 시제품으로 전환 중이다. 구조 자산·직접 만든 테마 프리팹/재질·독립 NavMesh는 Git으로 관리한다. 최종 상태·검증은 [Method A 실행 기록](method-a-execution.md)을 따른다. 아래 사진형 RoomScan 복원은 이전 비교용 경로다.

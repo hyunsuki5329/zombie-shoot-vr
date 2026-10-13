@@ -121,5 +121,15 @@
     "exe_sha256": "56c28afba054092826b7a8a80ba3767daa87967f182c0c562eb2f98799175b7a",
     "note": "Existing Library/cache retained; original scan files absent from Assets during generation/build. Executable hash alone does not identify Unity data files."
   },
-  "no_scan_build": "Succeeded; packed private RoomScan assets 0; private folder restored after verification"
+  "no_scan_build": "Succeeded; packed private RoomScan assets 0; private folder restored after verification",
+  "source_commit": "7af6176883f55459308b731ea9c1ae8d572b0f8b",
+  "pull_request": "https://github.com/hyunsuki5329/zombie-shoot-vr/pull/21",
+  "backup": {
+    "path": "Zombie Shoot VR\\Builds\\Reproduction\\7af6176-house",
+    "source_sha256": "db09098164d4f8c24df6a5a6b106d1d9211f97053e677107b4d3317d83a94061",
+    "external_sha256": "602cb08814ef002e9eb1245c270abcea0148a852447e8596761b397d241627d8",
+    "external_file_count": 188,
+    "zip_crc_and_external_hashes": "Passed",
+    "fresh_unity_import": "Not run for this archive"
+  }
 }

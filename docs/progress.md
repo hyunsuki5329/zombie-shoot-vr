@@ -5,7 +5,7 @@
 Goal `active` 확인. 내 방 구조 기반 **폐가 시제품**을 Room에 연결했다. 직접 제작한 프리팹18개/렌더러46개와 별도 NavMesh를 사용하며, 사진형 스캔 씬은 로컬 참조로 보존한다. 고정 테마 가이드와 요구사항·Goal 문서도 갱신했다.
 
 - 검증: 리뷰 결함2건 수정, EditMode91/91·PlayMode127/127. [새 증빙](evidence/method-a-house.json).
-- 원본 RoomScan 없는 재생성 성공. 최종 빌드/복원 결과는 실행 기록에서 이어 갱신한다.
+- 원본 RoomScan 없는 재생성·Windows 빌드 성공, packed RoomScan 자산0. 런타임 기준7af6176을 push했고 PR #21을 초안으로 갱신했다. 로컬 복원 ZIP CRC/외부188파일 SHA256 검증 완료. 새 Library 복원은 아직 미실행.
 - 최신 실행 경로: `Zombie Shoot VR/Builds/Windows/AbandonedHouse/AbandonedHouse.exe`. [기기 확인 절차](hardware-validation.md).
 - 미완료: 폐가 최종 시각·VR/성능 인수, 실제 강의실 촬영 및 폐교 제작, 최종 발표·시연·제출 패키지. 시제품을 두 맵 완성이나 프로젝트 완료로 계산하지 않는다.
 
