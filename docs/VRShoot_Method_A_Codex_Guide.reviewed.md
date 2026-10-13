@@ -2,6 +2,8 @@
 
 확정 매핑: **Room → 폐가 / Classroom → 폐교**. 강의실은 아직 촬영 전이며 Room 구조로 대신하지 않는다.
 
+2026-10-13 크기 결정: 사용자가 기존 맵이 작다고 확인하여 Room 게임 공간에 **2.5배 균일 확대**를 적용한다. 아래의4.3×3.5m 및2.45m 높이는 원본 구조 기준이며, 게임은10.75×8.75m 및6.125m다. 구조 중심·치수·가구·복도·출입구·플레이어/적 생성 위치를 같은 비율로 변환하고 각도·배치를 보존한다. 플레이어·무기·적 모델과 이동 속도, 최소 생성 거리1.5m와 예고1.5초는 유지한다. 원본 실측 `measuredRoomSize`와 게임 배율 `gameplayScale`을 분리하고 재생성 시 절대 목표 배율을 적용하여 누적 확대를 막는다. 이 결정은 아래 Room 원본 크기 보존 조건보다 우선하며 Classroom에는 자동 적용하지 않는다.
+
 검토일: 2026-10-12  
 원본: `C:/Users/User/Downloads/VRShoot_Method_A_Codex_Guide.md`  
 대조: `ScannedRoomSetup.cs`, `MapRoot.cs`, `ScannedRoomTests.cs`, `docs/room-scan.md`  

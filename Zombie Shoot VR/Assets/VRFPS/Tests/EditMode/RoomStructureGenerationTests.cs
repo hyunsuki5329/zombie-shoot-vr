@@ -26,6 +26,7 @@ namespace VRFPS.Tests
                 data=(RoomStructureDefinition)setup.GetMethod("Capture").Invoke(null,new object[]{source});
                 data.Validate();
                 Assert.That(data.measuredRoomSize,Is.EqualTo(new Vector3(4.3f,2.45f,3.5f)));
+                Assert.That(data.gameplayScale,Is.EqualTo(2.5f));
                 Assert.That(data.enemySpawns.Length,Is.EqualTo(7));
                 generated=(MapRoot)setup.GetMethod("GenerateStructure").Invoke(null,new object[]{data});
                 var before=source.collisionRoot.GetComponentsInChildren<BoxCollider>();

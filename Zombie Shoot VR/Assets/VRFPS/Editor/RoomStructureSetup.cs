@@ -21,6 +21,11 @@ namespace VRFPS.Editor
             try
             {
                 data.measuredRoomSize=new Vector3(4.3f,2.45f,3.5f);
+                var sourceFloor=map.collisionRoot.Find("Floor")?.GetComponent<BoxCollider>();
+                if(sourceFloor==null)throw new InvalidOperationException("Missing measured floor");
+                data.gameplayScale=sourceFloor.size.x/4.3f;
+                if(Mathf.Abs(sourceFloor.size.z-3.5f*data.gameplayScale)>.001f || Mathf.Abs(sourceFloor.size.y-.2f*data.gameplayScale)>.001f)
+                    throw new InvalidOperationException("Room capture requires a uniformly scaled measured floor");
                 data.playerSpawn=map.transform.InverseTransformPoint(map.playerSpawn.position);
                 data.playerEuler=(Quaternion.Inverse(map.transform.rotation)*map.playerSpawn.rotation).eulerAngles;
                 data.enemySpawns=map.enemySpawns.Select(t=>map.transform.InverseTransformPoint(t.position)).ToArray();

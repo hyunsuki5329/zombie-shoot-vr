@@ -15,6 +15,7 @@ namespace VRFPS.Editor
         public const string Art="Assets/VRFPS/Art/Environment/AbandonedHouse/";
         public const string Preview="Assets/VRFPS/Scenes/Maps/RoomHousePreview.unity";
         public const string Navigation="Assets/VRFPS/Configuration/Maps/RoomHouseNavigation.asset";
+        public const float GameplayScale=2.5f;
         static Mesh cube;
         struct Part { public Vector3 center,size;public Material material; }
 
@@ -22,7 +23,7 @@ namespace VRFPS.Editor
         {
             if(!Application.isBatchMode)throw new InvalidOperationException("Use isolated batch editor");
             if(AssetDatabase.LoadAssetAtPath<RoomStructureDefinition>(RoomStructureSetup.AssetPath)==null)RoomStructureSetup.CaptureRoom();
-            var data=AssetDatabase.LoadAssetAtPath<RoomStructureDefinition>(RoomStructureSetup.AssetPath);data.Validate();
+            var data=AssetDatabase.LoadAssetAtPath<RoomStructureDefinition>(RoomStructureSetup.AssetPath).CreateGameplayCopy(GameplayScale);data.Validate();
             if(data.mapId!="room")throw new InvalidOperationException("Room house setup only accepts the measured room");
             Directory.CreateDirectory(Art+"Meshes");Directory.CreateDirectory(Art+"Prefabs");AssetDatabase.Refresh();
             var profile=AssetDatabase.LoadAssetAtPath<EnvironmentThemeProfile>(Art+"AbandonedHouse.asset");
@@ -35,11 +36,11 @@ namespace VRFPS.Editor
             profile.metal=MakeMaterial("Oxidized iron",new Color(.12f,.14f,.13f),false,.22f);
             profile.metal.SetFloat("_Metallic",.5f);
             var temporary=GameObject.CreatePrimitive(PrimitiveType.Cube);cube=temporary.GetComponent<MeshFilter>().sharedMesh;UnityEngine.Object.DestroyImmediate(temporary);
-            profile.visuals=data.elements.Where(e=>e.kind!=StructureKind.DoorOpening).Select(e=>new ThemeVisualBinding{elementId=e.id,size=e.size,prefab=MakePrefab(e,profile)}).ToArray();
+            profile.visuals=data.elements.Where(e=>e.kind!=StructureKind.DoorOpening).Select(e=>new ThemeVisualBinding{elementId=e.id,size=e.size,prefab=MakePrefab(e,profile,data.gameplayScale)}).ToArray();
             EditorUtility.SetDirty(profile);AssetDatabase.SaveAssets();
             var scene=EditorSceneManager.NewScene(NewSceneSetup.EmptyScene,NewSceneMode.Single);
             // NewScene unloads unused assets; reacquire saved assets after the scene transition.
-            data=AssetDatabase.LoadAssetAtPath<RoomStructureDefinition>(RoomStructureSetup.AssetPath);
+            data=AssetDatabase.LoadAssetAtPath<RoomStructureDefinition>(RoomStructureSetup.AssetPath).CreateGameplayCopy(GameplayScale);
             profile=AssetDatabase.LoadAssetAtPath<EnvironmentThemeProfile>(Art+"AbandonedHouse.asset");
             var map=RoomStructureSetup.GenerateStructure(data);
             RoomThemeGenerator.Generate(map,data,profile);
@@ -50,8 +51,8 @@ namespace VRFPS.Editor
             RenderSettings.ambientMode=AmbientMode.Flat;RenderSettings.ambientLight=new Color(.38f,.41f,.45f);RenderSettings.ambientIntensity=1;
             var light=new GameObject("Soft room light").AddComponent<Light>();light.type=LightType.Directional;light.transform.rotation=Quaternion.Euler(55,-25,0);
             light.color=new Color(1,.80f,.56f);light.intensity=1.1f;light.range=7;light.shadows=LightShadows.None;
-            var corridor=new GameObject("Corridor cold light").AddComponent<Light>();corridor.type=LightType.Point;corridor.transform.position=new Vector3(1.1f,2.15f,3.7f);
-            corridor.color=new Color(.60f,.72f,.84f);corridor.intensity=1.5f;corridor.range=5;corridor.shadows=LightShadows.None;
+            var corridor=new GameObject("Corridor cold light").AddComponent<Light>();corridor.type=LightType.Point;corridor.transform.position=new Vector3(1.1f,2.15f,3.7f)*GameplayScale;
+            corridor.color=new Color(.60f,.72f,.84f);corridor.intensity=1.5f;corridor.range=5*GameplayScale;corridor.shadows=LightShadows.None;
             if(!EditorSceneManager.SaveScene(scene,Preview))throw new IOException("Failed to save house preview");AssetDatabase.SaveAssets();
             var dependencies=AssetDatabase.GetDependencies(Preview,true);
             if(dependencies.Any(x=>x.Contains("External/RoomScan")))throw new InvalidOperationException("Private scan dependency in house preview");
@@ -71,8 +72,8 @@ namespace VRFPS.Editor
             try
             {
                 Directory.CreateDirectory("Builds/Previews");
-                var positions=new[]{new Vector3(.55f,1.65f,1.4f),new Vector3(.15f,1.6f,-1.25f)};
-                var looks=new[]{new Vector3(-.45f,1.0f,-.5f),new Vector3(.8f,1.1f,2.5f)};
+                var positions=new[]{new Vector3(.55f*GameplayScale,1.65f,1.4f*GameplayScale),new Vector3(.15f*GameplayScale,1.6f,-1.25f*GameplayScale)};
+                var looks=new[]{new Vector3(-.45f,1.0f,-.5f)*GameplayScale,new Vector3(.8f,1.1f,2.5f)*GameplayScale};
                 for(int i=0;i<positions.Length;i++)
                 {
                     camera.transform.position=positions[i];camera.transform.LookAt(looks[i]);
@@ -130,9 +131,9 @@ namespace VRFPS.Editor
             if(!File.ReadAllBytes(source).SequenceEqual(File.ReadAllBytes(destination)))throw new IOException("Reference backup bytes differ; promotion stopped");
         }
 
-        static GameObject MakePrefab(StructureElement e,EnvironmentThemeProfile p)
+        static GameObject MakePrefab(StructureElement e,EnvironmentThemeProfile p,float gameplayScale)
         {
-            var parts=new List<Part>();var s=e.size;
+            var parts=new List<Part>();var s=e.size/gameplayScale;
             void Box(Vector3 center,Vector3 size,Material material){if(size.x>0 && size.y>0 && size.z>0)parts.Add(new Part{center=center,size=size,material=material});}
             void FrameFront(float y,float height)
             {
@@ -216,7 +217,7 @@ namespace VRFPS.Editor
                             mesh.vertices=vertices;mesh.uv=uv;mesh.RecalculateBounds();meshes.Add(mesh);
                         }
                         var combined=new Mesh{name=e.id+" surface "+index};combined.CombineMeshes(meshes.Select(m=>new CombineInstance{mesh=m,transform=Matrix4x4.identity}).ToArray(),true,true);
-                        combined.RecalculateBounds();var saved=Save(combined,Art+"Meshes/"+e.id+"-"+index+".asset");
+                        combined.vertices=combined.vertices.Select(v=>v*gameplayScale).ToArray();combined.RecalculateBounds();var saved=Save(combined,Art+"Meshes/"+e.id+"-"+index+".asset");
                         var child=new GameObject(group.Key.name,typeof(MeshFilter),typeof(MeshRenderer));child.transform.SetParent(root.transform,false);
                         child.GetComponent<MeshFilter>().sharedMesh=saved;child.GetComponent<MeshRenderer>().sharedMaterial=group.Key;index++;
                     }

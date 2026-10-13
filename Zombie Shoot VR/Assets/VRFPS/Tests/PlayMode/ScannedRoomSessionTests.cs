@@ -27,12 +27,12 @@ namespace VRFPS.Tests {
    entry.run.ApplyDamage(100,1,entry.run.ActiveTime);Assert.That(entry.Session.Results.SaveSucceeded,Is.True);
    Assert.That(new RecordStore(recordsPath).Read("room").reachedWave,Is.EqualTo(1));
    entry.menu.Retry();Assert.That(entry.run.Phase,Is.EqualTo(RunPhase.Preparing));Assert.That(entry.gun.Magazine.Rounds,Is.EqualTo(30));Assert.That(entry.run.Alive,Is.Zero);
-   Assert.That(Vector2.Distance(new Vector2(entry.rig.Head.position.x,entry.rig.Head.position.z),new Vector2(.9f,1.1f)),Is.LessThan(.03f));
+   Assert.That(Vector2.Distance(new Vector2(entry.rig.Head.position.x,entry.rig.Head.position.z),new Vector2(2.25f,2.75f)),Is.LessThan(.03f));
   }
   [UnityTest] public IEnumerator CenterStripStillAllowsEnemySpawning(){
    yield return entry.SelectMap(entry.room);var director=entry.Session.Director;director.enabled=false;
    var body=entry.rig.GetComponent<CharacterController>();body.enabled=false;
-   entry.rig.transform.position+=new Vector3(.38f,0,0)-entry.rig.transform.TransformPoint(body.center-Vector3.up*(body.height*.5f));
+   entry.rig.transform.position+=new Vector3(.95f,0,0)-entry.rig.transform.TransformPoint(body.center-Vector3.up*(body.height*.5f));
    Physics.SyncTransforms();entry.run.Tick(8);director.Tick(0);director.Tick(1.6f);
    Assert.That(entry.run.Alive,Is.EqualTo(1),"A stationary player in the central aisle must not block every spawn");
   }

@@ -22,56 +22,56 @@ MonoBehaviour:
   metal: {fileID: 2100000, guid: e718024b1510d0844bebbb6c5e5d851a, type: 2}
   visuals:
   - elementId: Floor
-    size: {x: 4.3, y: 0.2, z: 3.5}
+    size: {x: 10.75, y: 0.5, z: 8.75}
     prefab: {fileID: 9013232502427987118, guid: 3fadfe0f855c41145849d1e8152d6f5d, type: 3}
   - elementId: Ceiling
-    size: {x: 4.6, y: 0.2, z: 3.8}
+    size: {x: 11.5, y: 0.5, z: 9.5}
     prefab: {fileID: 8766720750282178540, guid: e1a625c208c6a6748a09bb9f4da7e44f, type: 3}
   - elementId: Side wall -1
-    size: {x: 0.15, y: 2.45, z: 3.8}
+    size: {x: 0.375, y: 6.125, z: 9.5}
     prefab: {fileID: 1906748193707672971, guid: 330912fd6f17f014b84c579331fec178, type: 3}
   - elementId: End wall -1
-    size: {x: 4.6, y: 2.45, z: 0.15}
+    size: {x: 11.5, y: 6.125, z: 0.375}
     prefab: {fileID: 1530799309955023749, guid: e71e6d587bf9b8a4484e11e8ca48bbc7, type: 3}
   - elementId: Side wall 1
-    size: {x: 0.15, y: 2.45, z: 3.8}
+    size: {x: 0.375, y: 6.125, z: 9.5}
     prefab: {fileID: 2653168888554008424, guid: f9766dd2dc2e4884ab917474f60c69a2, type: 3}
   - elementId: Door wall left
-    size: {x: 2.75, y: 2.45, z: 0.15}
+    size: {x: 6.875, y: 6.125, z: 0.375}
     prefab: {fileID: 8661133663428111193, guid: e8718c2a2050ac94aa86c590ee2a9e18, type: 3}
   - elementId: Door wall right
-    size: {x: 0.15, y: 2.45, z: 0.15}
+    size: {x: 0.375, y: 6.125, z: 0.375}
     prefab: {fileID: 4033271635285902045, guid: b9708e4b365fb024c9067e40db90a7fe, type: 3}
   - elementId: Door lintel
-    size: {x: 1.4, y: 0.1, z: 0.15}
+    size: {x: 3.5, y: 0.25, z: 0.375}
     prefab: {fileID: 7069839797477196653, guid: 5996d30f2b87996418cb1569aa304073, type: 3}
   - elementId: Corridor floor
-    size: {x: 2.2, y: 0.2, z: 2.8}
+    size: {x: 5.5, y: 0.5, z: 7}
     prefab: {fileID: 3120220671008704302, guid: 01c9534a9372b8845907c3a6168faeac, type: 3}
   - elementId: Corridor ceiling
-    size: {x: 2.4, y: 0.2, z: 3}
+    size: {x: 6, y: 0.5, z: 7.5}
     prefab: {fileID: 1811232504579947901, guid: aebfc328ba268384dbfce75b56fd0b4d, type: 3}
   - elementId: Corridor left
-    size: {x: 0.15, y: 2.45, z: 2.8}
+    size: {x: 0.375, y: 6.125, z: 7}
     prefab: {fileID: 3781974242205236930, guid: ef132561d3be64b469201abf65bea1b4, type: 3}
   - elementId: Corridor right
-    size: {x: 0.15, y: 2.45, z: 2.8}
+    size: {x: 0.375, y: 6.125, z: 7}
     prefab: {fileID: 5545885521052698415, guid: 7c5f65890d7b6c54a87765f13b6bd8c1, type: 3}
   - elementId: Corridor end
-    size: {x: 2.5, y: 2.45, z: 0.15}
+    size: {x: 6.25, y: 6.125, z: 0.375}
     prefab: {fileID: 8366824140359683735, guid: 0f468ccdb7a1b02459c13ec25ceb62c2, type: 3}
   - elementId: Bed
-    size: {x: 1.22, y: 0.64, z: 1.98}
+    size: {x: 3.0500002, y: 1.5999999, z: 4.95}
     prefab: {fileID: 3200503676169415217, guid: 3e9495f22ac6c55459f8da1480d73af8, type: 3}
   - elementId: Desk
-    size: {x: 1.48, y: 0.84, z: 1.22}
+    size: {x: 3.7, y: 2.1, z: 3.0500002}
     prefab: {fileID: 6104876682831580406, guid: fd96bd2199755c04cb1a623cfd2f366a, type: 3}
   - elementId: Chair
-    size: {x: 0.6, y: 0.96, z: 0.65}
+    size: {x: 1.5, y: 2.3999999, z: 1.625}
     prefab: {fileID: 2108885656267528783, guid: da13f9bf3189a3b41a6ea7c54ebe434b, type: 3}
   - elementId: Wardrobe
-    size: {x: 1.46, y: 2.3, z: 1.06}
+    size: {x: 3.65, y: 5.75, z: 2.6499999}
     prefab: {fileID: 5743864492740069198, guid: ac77a9347662cea4cb21aa7f5c142d24, type: 3}
   - elementId: Keyboard
-    size: {x: 0.38, y: 0.9, z: 1}
+    size: {x: 0.95, y: 2.25, z: 2.5}
     prefab: {fileID: 1823473031914452569, guid: 0c22e654881a84f40bae324c066cbc30, type: 3}

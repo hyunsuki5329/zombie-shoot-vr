@@ -27,6 +27,7 @@ namespace VRFPS
         public int schemaVersion = 1;
         public string mapId = "room", themeId = "AbandonedHouse";
         public Vector3 measuredRoomSize;
+        public float gameplayScale = 1f;
         public bool ceilingHeightEstimated = true;
         public StructureElement[] elements = Array.Empty<StructureElement>();
         public Vector3 playerSpawn, playerEuler;
@@ -36,6 +37,7 @@ namespace VRFPS
 
         public void Validate()
         {
+            if (!Finite(gameplayScale) || gameplayScale <= 0) Fail("Invalid gameplay scale");
             if (schemaVersion != 1) Fail("Unsupported structure schema");
             if (!((mapId == "room" && themeId == "AbandonedHouse") ||
                   (mapId == "classroom" && themeId == "AbandonedSchool")))
@@ -58,6 +60,32 @@ namespace VRFPS
             foreach (var spawn in enemySpawns) if (!Finite(spawn) || !spawns.Add(spawn)) Fail("Invalid or duplicate enemy spawn");
             if (!Finite(navigationVoxelSize) || navigationVoxelSize <= 0 || navigationAgentType < 0) Fail("Invalid navigation settings");
         }
+        // Absolute scale, not an incremental multiplier: repeated regeneration is idempotent.
+        public RoomStructureDefinition CreateGameplayCopy(float targetScale)
+        {
+            if (!Finite(targetScale) || targetScale <= 0) throw new ArgumentOutOfRangeException(nameof(targetScale));
+            Validate();
+            var copy = CreateInstance<RoomStructureDefinition>();
+            try
+            {
+                float ratio = targetScale / gameplayScale;
+                copy.schemaVersion=schemaVersion;copy.mapId=mapId;copy.themeId=themeId;
+                copy.measuredRoomSize=measuredRoomSize;copy.ceilingHeightEstimated=ceilingHeightEstimated;copy.gameplayScale=targetScale;
+                copy.elements=new StructureElement[elements.Length];
+                for(int i=0;i<elements.Length;i++)
+                {
+                    var e=elements[i];copy.elements[i]=new StructureElement{id=e.id,kind=e.kind,origin=e.origin,
+                        localCenter=e.localCenter*ratio,localEuler=e.localEuler,size=e.size*ratio,collision=e.collision,navigation=e.navigation};
+                }
+                copy.playerSpawn=playerSpawn*ratio;copy.playerEuler=playerEuler;
+                copy.enemySpawns=new Vector3[enemySpawns.Length];
+                for(int i=0;i<enemySpawns.Length;i++)copy.enemySpawns[i]=enemySpawns[i]*ratio;
+                copy.navigationAgentType=navigationAgentType;copy.navigationVoxelSize=navigationVoxelSize;
+                copy.Validate();return copy;
+            }
+            catch {DestroyImmediate(copy);throw;}
+        }
+
         public static bool Finite(float value) => !float.IsNaN(value) && !float.IsInfinity(value);
         public static bool Finite(Vector3 value) => Finite(value.x) && Finite(value.y) && Finite(value.z);
         static bool Positive(Vector3 value) => Finite(value) && value.x > 0 && value.y > 0 && value.z > 0;
