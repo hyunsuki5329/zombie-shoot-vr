@@ -1,5 +1,17 @@
 # 소스 복원·시험·Windows 빌드
 
+## Granny 가구·표면 적용 버전
+
+2026-10-13 추가: 사용자 제공 Granny ZIP의 가구와 재질로 Room 외형을 교체한다. 원본과 추출 결과는 Git 제외이며 이전62c7427 ZIP에는 포함되지 않는다. 현재 브랜치를 복원할 때 [가구 자산 복원 안내](granny-house-assets.md)를 먼저 따른다.
+
+```powershell
+python scripts/Restore-GrannyHouse.py --archive 'C:/Users/User/Downloads/dvloper-grannys-house-official-model.zip' --project '<복원 Unity 프로젝트>'
+# 기본 RoomHousePreview가 존재하는 상태에서 실행
+& 'D:/Unity editor/6000.3.23f1/Editor/Unity.exe' -batchmode -quit -projectPath '<복원 Unity 프로젝트>' -executeMethod VRFPS.Editor.GrannyHouseSetup.Configure -logFile granny-configure.log
+```
+
+성공 표식은 `GRANNY_THEME_CREATED`다. 이후 아래 `RoomHouseSetup.PromoteAndBuild`를 실행한다. 기본 `RoomHouseSetup.ConfigurePreview`만 실행하면 이전 자체 제작 외형으로 돌아가므로 GrannyHouseSetup.Configure를 이어 실행한다. 현재 빌드가 외부 모델 권리 관계를 검증했다는 의미는 아니며 공개 배포 전 출처 문서의 미확인 항목을 해결한다.
+
 ## 최신 확대 버전 새 캐시 검증
 
 `Zombie Shoot VR/Builds/Reproduction/62c7427-house-scaled/`에 최신 확대 소스 ZIP·외부 자산 ZIP·manifest·README를 보관한다. 같은 새 폴더에 두 ZIP을 풀고 Unity6000.3.23f1로 연다. 2026-10-13 Library가 없는 새 복원 폴더에서 외부188파일 SHA256을 확인하고 EditMode95통과/실패0/개인 스캔 검사1제외, PlayMode127통과 및 Windows 빌드 성공을 확인했다. packed RoomScan 자산은0이다. [증빙](evidence/clean-room-restoration.json).

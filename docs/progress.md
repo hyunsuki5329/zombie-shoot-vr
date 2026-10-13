@@ -1,5 +1,13 @@
 # Goal 실행 현황
 
+## 2026-10-14 Granny 가구·벽·마루 적용
+
+사용자 지정 ZIP에서 가구를 분리하고 벽·바닥 재질을 적용했다. 방 배치와2.5배 공간, 기존 충돌/경로/생성점은 유지한다. [자산·복원 안내](granny-house-assets.md), [검증](evidence/granny-house.json). 기존 AbandonedHouse 실행 경로에 새 빌드를 반영했다.
+
+- EditMode97/97, PlayMode127/127, Windows 빌드 성공. 리뷰의 걸레받이 겹침과 새 환경 프리팹 GUID 복원 문제를 재현·수정했다. 별도 복원에서 프리팹18개 GUID와 실제 Room 메시·재질 참조 시험1/1 통과.
+- 외부 자산341파일, 씬/빌드347파일 복사 해시 일치. 원본·추출 결과는 로컬 보관하고 Git에는 코드·씬·복원 metadata·문서만 포함한다.
+- 기존 게임 자산에 대한 업로더 권한은 확인되지 않아 공개 배포 전 출처 확인이 필요하다. 단순 가구 BoxCollider 및 실제 VR/성능 인수는 남아 있다. 최종 프로젝트 완료가 아니며 PR#21 초안 유지.
+
 ## 2026-10-13 확대 소스 새 캐시 복원 검증
 
 62c7427 소스와 로컬 외부188파일을 새 폴더에 복원하고 Library 없이 Unity를 실행했다. EditMode95통과/실패0/원본 개인 스캔 검사1제외, PlayMode127통과, Windows 빌드 성공 및 packed RoomScan0을 확인했다. [증빙](evidence/clean-room-restoration.json), [복원 안내](source-reproduction.md). 제출 초안의 GS·다른 사용자 공간 확장 설명을 현재 고정 두 맵/Method A 범위로 수정했다. 동일 PC 새 캐시 검증이며 기기 인수와 최종 제출 완료를 뜻하지 않는다.

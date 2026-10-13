@@ -1,0 +1,22 @@
+{
+  "date": "2026-10-14",
+  "baseCommit": "f2de7db",
+  "source": "https://sketchfab.com/3d-models/dvloper-grannys-house-official-model-1bb0b0e98a474910b8de30bf80c5a096",
+  "licenseObservation": "Page displays CC BY4.0, uploader danielthesecond; title names DVloper game. Uploader rights not independently confirmed; assets kept local.",
+  "change": "Extracted bed, desk/drawers, chair, shelving, cabinet; source wall atlas and wooden floor. Existing room layout and2.5 scale preserved.",
+  "editMode": {"passed": 97, "failed": 0, "xml": "tmp/granny-source/editmode.xml"},
+  "playMode": {"passed": 127, "failed": 0, "xml": "tmp/granny-source/playmode.xml"},
+  "redTests": ["tmp/granny-source/red.xml", "tmp/granny-source/trim-red.xml"],
+  "reviewFixes": ["Coplanar skirting/wallpaper split into disjoint height sections", "Cold restoration orphan metadata replaced by prefab metadata seeding at generation time"],
+  "restoration": {"stablePrefabGuids": 18, "productionRoomReferencesTestPassed": 1, "xml": "tmp/granny-source/cold-test.xml", "log": "tmp/granny-source/cold-prefab-restore.log", "internalNativeAssetGuids": "Regenerated locally and rebound in prefabs"},
+  "restoreScriptChecks": ["Valid pinned ZIP", "Repeated restore", "Modified destination rejection without overwrite"],
+  "buildGuid": "83a6d2564cee4a5e8621ec1a9f7b832d",
+  "buildLog": "tmp/granny-source/build-final.log",
+  "build": "Zombie Shoot VR/Builds/Windows/AbandonedHouse/AbandonedHouse.exe",
+  "copiedAssetFilesHashVerified": 341,
+  "copiedBuildSceneFilesHashVerified": 347,
+  "packedRoomScanAssets": 0,
+  "wholeSourceFbxSceneDependency": false,
+  "hardwareAcceptance": "Pending",
+  "limitations": ["Conservative furniture box collision includes gaps under desks and chairs", "Original game asset rights need confirmation before public distribution"]
+}

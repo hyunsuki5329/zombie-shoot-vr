@@ -77,3 +77,7 @@ __pycache__/
 # Private room scan, textures, processed mesh and navigation: restore locally.
 **/Assets/VRFPS/External/RoomScan/
 **/Assets/VRFPS/External/RoomScan.meta
+
+# User-supplied Granny house originals and extracted derivatives are restored locally.
+**/Assets/VRFPS/External/GrannyHouse/
+**/Assets/VRFPS/External/GrannyHouse.meta

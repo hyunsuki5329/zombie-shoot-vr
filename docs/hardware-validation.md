@@ -4,6 +4,8 @@
 
 ## 최신 내 방 폐가 시제품 우선 확인
 
+2026-10-13 가구 교체: 제공된 Granny 모델에서 침대·책상·의자·선반·서랍장과 벽·마루 재질을 가져왔다. 방 크기와 배치는 유지한다. 아래 시험에 텍스처 뒤집힘/흰 면, 가구가 잘린 부분, 벽 걸레받이 깜빡임을 추가한다. 기존 보수적 가구 BoxCollider를 유지하므로 다리 사이 공간까지 정밀 충돌한다고 해석하지 않는다.
+
 실행: `D:/Unity Project/Zombie Shoot VR/Zombie Shoot VR/Builds/Windows/AbandonedHouse/AbandonedHouse.exe`.
 
 1. 첫 안내에서 Back으로 맵 선택에 돌아와 Room을 선택한다. Classroom은 아직 비활성이다. 준비8초 후 전투가 시작된다.
