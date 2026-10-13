@@ -142,5 +142,96 @@
     "method": "Exclude triangles touching a marked region, projected in Unity X/Z. Original FBX unchanged.",
     "status": "Reference crop only; no measured dimensions or gameplay acceptance.",
     "userInstruction": "Exclude the three red-marked nonexistent regions in the supplied annotated top view."
+  },
+  "layoutDraft": {
+    "coordinateSystem": "Unity X/Z reflected from FBX, then rotated -8 degrees for inspection only",
+    "calibrated": false,
+    "groups": [
+      {
+        "id": "A",
+        "minimumXZ": [
+          -7.65,
+          -2.35
+        ],
+        "sizeXZ": [
+          1.45,
+          3.6
+        ],
+        "origin": "ScanEstimated",
+        "role": "Furniture cluster; object identity/count not confirmed"
+      },
+      {
+        "id": "B",
+        "minimumXZ": [
+          -5.4,
+          -3.95
+        ],
+        "sizeXZ": [
+          1.95,
+          4.75
+        ],
+        "origin": "ScanEstimated",
+        "role": "Furniture cluster; object identity/count not confirmed"
+      },
+      {
+        "id": "C",
+        "minimumXZ": [
+          -2.85,
+          -3.95
+        ],
+        "sizeXZ": [
+          1.95,
+          4.7
+        ],
+        "origin": "ScanEstimated",
+        "role": "Furniture cluster; object identity/count not confirmed"
+      },
+      {
+        "id": "D",
+        "minimumXZ": [
+          0.3,
+          -4.05
+        ],
+        "sizeXZ": [
+          1.85,
+          4.85
+        ],
+        "origin": "ScanEstimated",
+        "role": "Furniture cluster; object identity/count not confirmed"
+      },
+      {
+        "id": "E",
+        "minimumXZ": [
+          3.15,
+          -4.1
+        ],
+        "sizeXZ": [
+          2.1,
+          4.9
+        ],
+        "origin": "ScanEstimated",
+        "role": "Furniture cluster; object identity/count not confirmed"
+      },
+      {
+        "id": "F",
+        "minimumXZ": [
+          5.85,
+          -3.95
+        ],
+        "sizeXZ": [
+          1.9,
+          5.35
+        ],
+        "origin": "ScanEstimated",
+        "role": "Furniture cluster; object identity/count not confirmed"
+      }
+    ],
+    "notes": [
+      "Do not feed these clusters directly into collision as solid blocks.",
+      "Six longitudinal furniture clusters visible in .45 to1.1 height slice.",
+      "Upper wall incomplete; do not convert scan extents to measured dimensions.",
+      "Individual desks/chairs require placement review before runtime promotion."
+    ],
+    "localPreview": "tmp/classroom-inspection/furniture-clusters.png"
   }
 }
