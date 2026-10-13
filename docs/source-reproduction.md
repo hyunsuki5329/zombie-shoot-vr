@@ -1,12 +1,18 @@
 # 소스 복원·시험·Windows 빌드
 
+## 최신 확대 버전 새 캐시 검증
+
+`Zombie Shoot VR/Builds/Reproduction/62c7427-house-scaled/`에 최신 확대 소스 ZIP·외부 자산 ZIP·manifest·README를 보관한다. 같은 새 폴더에 두 ZIP을 풀고 Unity6000.3.23f1로 연다. 2026-10-13 Library가 없는 새 복원 폴더에서 외부188파일 SHA256을 확인하고 EditMode95통과/실패0/개인 스캔 검사1제외, PlayMode127통과 및 Windows 빌드 성공을 확인했다. packed RoomScan 자산은0이다. [증빙](evidence/clean-room-restoration.json).
+
+동일 PC의 새 캐시 복원 시험이며 다른 PC·오프라인·라이선스 신규 설정 검증은 아니다. 외부 ZIP은 개인 로컬 복원용이다. 아래7af6176 묶음의 미실행 설명은 이전 백업에 대한 이력이며 최신 확대 소스의 결과와 구분한다.
+
 ## 2026-10-13 폐가 로컬 백업
 
 `Zombie Shoot VR/Builds/Reproduction/7af6176-house/`에 소스7af6176 ZIP(약90MiB), 외부 자산 ZIP(약156MiB), manifest와 README를 보관했다. GAMGO·Mixamo·음원188파일과 meta를 포함하고 RoomScan은 필요하지 않아 제외했다. 두 ZIP CRC 및 전체 외부 파일 SHA256 대조를 통과했다. 이 묶음을 새 Unity Library에서 여는 시험은 미실행이며 최종 제출본으로 표시하지 않는다.
 
 ## 2026-10-13 Method A 폐가 경로
 
-현재 Room은 내 방 구조 기반 폐가 시제품으로 전환 중이다. 구조 자산·직접 만든 테마 프리팹/재질·독립 NavMesh는 Git으로 관리한다. 최종 상태·검증은 [Method A 실행 기록](method-a-execution.md)을 따른다. 아래 사진형 RoomScan 복원은 이전 비교용 경로다.
+현재 Room은 내 방 구조 기반 폐가 시제품이며 게임 공간은2.5배 확대했다(커밋62c7427). 구조 자산·직접 만든 테마 프리팹/재질·독립 NavMesh는 Git으로 관리한다. 최신 크기 검증은 [확대 증빙](evidence/room-gameplay-scale.json), 이전 생성 과정은 [Method A 실행 기록](method-a-execution.md)을 따른다. 아래 사진형 RoomScan 복원은 이전 비교용 경로다.
 
 기존 GAMGO·Mixamo·음원 복원은 필요하지만 폐가 생성에는 원본 방 FBX가 필요하지 않다. `RoomStructure.asset`이 있으면 이를 사용한다. 다음 명령은 각 프로세스 종료·성공 로그를 확인하며 격리 프로젝트에서 순서대로 실행한다.
 
@@ -125,7 +131,7 @@ $unityProcess.ExitCode
 - 컴파일 오류: 에디터 버전과 package lock이 유지됐는지, 로그의 첫 컴파일 오류부터 확인한다.
 - 패키지 복원 오류: 라이선스·네트워크·UPM 오류를 확인한다. 임의의 최신 버전 설치로 잠금을 바꾸지 않는다.
 - 화면/입력 오류: 성공한 Quest Pro/VD 연결과 활성 OpenXR 런타임, Player.log를 대조한다. headless 자동 시험은 실제 두 눈/추적 시험이 아니다.
-- 맵 버튼 비활성: 현재 실제 Room/Classroom 자산이 없기 때문에 정상인 미완료 상태다.
+- 맵 버튼 비활성: Classroom은 실제 스캔과 폐교 맵이 준비되지 않아 비활성이다. 최신 폐가 빌드의 Room도 비활성이면 정상으로 간주하지 말고 씬 등록·Room 정의·Player.log를 확인한다.
 - 진단 GPU 표본0: 측정 지원/환경을 확인하고0ms 합격으로 처리하지 않는다. [분석 지침](../Zombie%20Shoot%20VR/Docs/performance.md)을 따른다.
 
 ## 현재 복원 검증 상태

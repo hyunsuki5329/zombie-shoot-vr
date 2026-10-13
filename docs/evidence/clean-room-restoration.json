@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-13",
+  "sourceCommit": "62c7427c84d6dbcf6fb394b1a8cbe85785b8baf8",
+  "sourceArchiveSha256": "e39f948ad04ee723cff62d8c95d56344e3a5311f23fa431aac40951dbcf86c93",
+  "initialLibraryPresent": false,
+  "externalFilesHashVerified": 188,
+  "roomScanPresent": false,
+  "tests": {
+    "editmode": {
+      "result": "Skipped:Ignored",
+      "passed": 95,
+      "failed": 0,
+      "skipped": 1,
+      "sha256": "c3d1328a9702230f5d37ab7cd451213c648ac9b2217c98d53178646800c9b148"
+    },
+    "playmode": {
+      "result": "Passed",
+      "passed": 127,
+      "failed": 0,
+      "skipped": 0,
+      "sha256": "cba55f6548f3b33b02a7d49e16d354fd63f556bf6b1b4ce53f4c24e26a0e338e"
+    }
+  },
+  "ignoredTest": "LocalScanReferenceRetainsOriginalTextureWhenAvailable: optional private scan excluded from final themed build",
+  "buildStatus": "succeeded",
+  "buildLog": "tmp/clean-room-62c7427/build.log",
+  "hardwareAcceptance": "pending",
+  "buildGuid": "f90e1bc35a044c978e3160ea10b62789",
+  "packedRoomScanAssets": 0
+}
