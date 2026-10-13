@@ -1,5 +1,7 @@
 # Goal 실행 현황
 
+2026-10-14 P12 후속: Granny 출처 안내를 빌드 과정에 연결했다. 복원 프로젝트에서 Windows 재빌드 성공 및 자동 동봉 파일 SHA256 일치 확인(`tmp/granny-source/build-attribution.log`). 이 작업은 제출물 누락 방지이며 게임 내용/VR 인수 상태는 바꾸지 않는다.
+
 ## 2026-10-14 Granny 가구·벽·마루 적용
 
 사용자 지정 ZIP에서 가구를 분리하고 벽·바닥 재질을 적용했다. 방 배치와2.5배 공간, 기존 충돌/경로/생성점은 유지한다. [자산·복원 안내](granny-house-assets.md), [검증](evidence/granny-house.json). 기존 AbandonedHouse 실행 경로에 새 빌드를 반영했다.

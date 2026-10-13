@@ -91,6 +91,9 @@ namespace VRFPS.Editor
             if(!Application.isBatchMode)throw new InvalidOperationException("Use isolated batch editor");
             var dependencies=AssetDatabase.GetDependencies(Preview,true);
             if(dependencies.Any(x=>x.Contains("External/RoomScan")))throw new InvalidOperationException("Private scan dependency in house");
+            const string attribution="Assets/VRFPS/Documentation/GrannyHouse-Attribution.txt";
+            bool usesGranny=dependencies.Any(x=>x.StartsWith(GrannyHouseSetup.Source,StringComparison.Ordinal));
+            if(usesGranny && !File.Exists(attribution))throw new FileNotFoundException("Missing Granny asset attribution",attribution);
             // Preserve the original photo reference locally. It is never part of the build list.
             var reference=ScannedRoomSetup.Source+"ReferenceRoom.unity";
             if(File.Exists(ScannedRoomSetup.ScenePath) && AssetDatabase.GetDependencies(ScannedRoomSetup.ScenePath,true).Any(p=>p.StartsWith(ScannedRoomSetup.Source,StringComparison.Ordinal)))
@@ -111,6 +114,7 @@ namespace VRFPS.Editor
                 var scanAssets=report.packedAssets.SelectMany(p=>p.contents).Where(p=>p.sourceAssetPath.Contains("External/RoomScan")).Select(p=>p.sourceAssetPath).ToArray();
                 if(scanAssets.Length!=0)throw new InvalidOperationException("Private scan assets leaked into build: "+string.Join(",",scanAssets));
                 File.WriteAllText("Builds/Windows/AbandonedHouse/scan-dependency-check.txt","RoomScan packed assets: 0\n"+report.summary.guid+"\n");
+                if(usesGranny)File.Copy(attribution,Path.Combine(Path.GetDirectoryName(path),"GrannyHouse-Attribution.txt"),true);
                 Debug.Log("VRFPS_HOUSE_BUILD_SUCCEEDED "+path);
             }
             finally {PlayerSettings.SetScriptingBackend(UnityEditor.Build.NamedBuildTarget.Standalone,previous);PlayerSettings.enableFrameTimingStats=timing;}

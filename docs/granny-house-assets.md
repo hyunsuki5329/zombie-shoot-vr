@@ -11,3 +11,5 @@
 복원: 제공 ZIP과 `scripts/Restore-GrannyHouse.py`로 외부 자산 및 meta를 복원한 뒤, 격리 Unity에서 `VRFPS.Editor.GrannyHouseSetup.Configure`를 실행한다. 기존 RoomHousePreview와 RoomStructure가 필요하다. 기본 폐가를 재생성했다면 이 명령을 다시 실행해야 외부 자산 테마가 적용된다. 다음 `RoomHouseSetup.PromoteAndBuild`로 Room에 반영하고 Windows 빌드를 생성한다. 원본 ZIP 해시와 meta 목록은 `docs/granny-house-manifest.json`을 따른다.
 
 2026-10-14 검증: EditMode97/97, PlayMode127/127 및 Windows 빌드 성공. 벽/걸레받이 겹침을 실패 재현 후 면 분리로 수정했다. 빈 GrannyHouse 폴더에 복원했을 때 Unity가 고아 meta를 삭제하는 문제도 재현했다. 이제 생성 시점에 씬이 참조하는 프리팹18개의 meta를 지정하고, 내부 메시·재질은 생성된 프리팹이 새 참조를 기록한다. 프리팹18개 GUID 일치 및 기존 Room 씬의 메시·재질·텍스처 참조 검사를 통과했다. 원본 FBX 전체는 씬 의존성에 포함되지 않는다. 실기 공간감·충돌과 성능은 확인 대기다.
+
+출처 동봉: `RoomHouseSetup.PromoteAndBuild`는 Granny 의존성이 있으면 `Assets/VRFPS/Documentation/GrannyHouse-Attribution.txt`를 실행 파일 옆에 자동 복사한다. 원본 안내가 없으면 빌드 전에 실패한다. 복원 프로젝트에서 실제 재빌드와 출력 파일 SHA256 일치를 확인했다(`tmp/granny-source/build-attribution.log`). 기존 로컬 실행 빌드에는 같은 안내를 추가했으며 게임 실행 파일은 교체하지 않았다.
