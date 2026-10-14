@@ -6,6 +6,14 @@
 현재 캐시 프로젝트에서 EditMode99/99·PlayMode128/128·빌드는 통과했다. 최신 커밋의 빈 환경 전체 복원과 제출용 소스 ZIP 재생성은 아직 별도 검증이 필요하다. 외부 원본과 생성 라이브러리는 Git 제외이며 소스만 복제해서 즉시 실행 가능하다고 주장하지 않는다.
 
 
+### 새 캐시 복원에서 확인된 필수 재연결
+
+2026-10-14 소스 `eaf2567`을 Library 없는 별도 폴더로 풀어 검사했다. 기존 외부 자산/meta를 복사해도 Git 소스의 K2 모델과 무기 음원 참조가 다를 수 있다. 실제 첫 EditMode 결과는96통과/2실패/1제외였으며, 아래 두 단계를 실행한 뒤98통과/실패0/개인 스캔 검사1제외를 확인했다.
+
+- `VRFPS.Editor.GamgoVisualSetup.Configure`
+- `VRFPS.Editor.UserWeaponAudioSetup.Configure`
+
+학교는 원본 ZIP에서 새 메타로 SchoolAssetsSetup.Configure → ClassroomSetup.Configure를 성공시켰다. 기존 외부 자산 복사만으로 재현 완료를 판단하지 않고 전체 검사와 빌드를 이어서 확인한다. 증빙 로그는 `tmp/school-restore-validation/`에 있다.
 ## Granny 가구·표면 적용 버전
 
 2026-10-13 추가: 사용자 제공 Granny ZIP의 가구와 재질로 Room 외형을 교체한다. 원본과 추출 결과는 Git 제외이며 이전62c7427 ZIP에는 포함되지 않는다. 현재 브랜치를 복원할 때 [가구 자산 복원 안내](granny-house-assets.md)를 먼저 따른다.
