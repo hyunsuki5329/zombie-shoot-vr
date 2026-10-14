@@ -1,4 +1,10 @@
 # Goal 실행 현황
+## 2026-10-14 폐교 맵 통합 시제품
+
+사용자 추정 크기14×6.3m로 Classroom을 구성했다. 잘못된 세 돌출부 제외, 학교 가구·벽·바닥 적용, 메시 충돌과8개 유효 생성점, 두 맵 공통 전투 연결. 학생 가구20조와 천장3m는 추정이며 출입구·창문 상세는 미확정이다. EditMode99/99, PlayMode128/128(두 맵10회 전환 포함), Windows 빌드 성공 GUID `4a9f39b9fb7d411bb936441659b3c5df`. 원본 스캔/학교 FBX 빌드 포함0. 로그는 로컬 `tmp/school-source/map-editmode-clean.xml`, `map-playmode-final.xml`, `map-build-final.log`.
+
+최신 실행 파일은 `Zombie Shoot VR/Builds/Windows/AbandonedSchool/AbandonedSchool.exe`. Room/ Classroom 모두 선택 가능하다. 아래 이전 기록의 강의실 비활성·실측 대기 상태를 대체한다. 두 맵 VR 인수, 성능, 최신 소스의 전체 복원 검증과 제출물은 남아 있어 Goal과 PR21은 진행 중이다.
+
 
 2026-10-14 재질 후속: 임시 금속도/부드러움을 원본 Metalness/Roughness로 교체했다. 4타일 총16,777,216픽셀의 금속도·역거칠기 채널 일치, 실패 재현 후 영향 시험1/1 및 렌더 확인. 생성 자산 복사 해시 일치. 게임 맵 연결·VR 인수는 여전히 대기다.
 

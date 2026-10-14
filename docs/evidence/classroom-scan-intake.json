@@ -44,9 +44,9 @@
     ]
   ],
   "embedded_texture": true,
-  "calibration": "Awaiting measured classroom dimensions",
+  "calibration": "User approximate dimensions 14m X by 6.3m Z; ceiling 3m estimated",
   "userConfirmedClassroom": true,
-  "status": "Source inspected; measured dimensions and visual layout calibration pending",
+  "status": "Classroom prototype generated; exact furniture count and VR acceptance pending",
   "limitations": [
     "Mesh bounds are scan extents, not measured wall-to-wall dimensions.",
     "No classroom gameplay or VR acceptance is established by this inspection."

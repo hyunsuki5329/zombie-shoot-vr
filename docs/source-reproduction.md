@@ -1,4 +1,10 @@
 # 소스 복원·시험·Windows 빌드
+## 2026-10-14 Classroom 추가
+
+[학교 자산 복원](school-assets-plan.md)에 따라 로컬 학교 라이브러리를 먼저 생성한 뒤 격리 Unity에서 `VRFPS.Editor.ClassroomSetup.Configure`를 실행한다. 이 단계는 생성 프리팹 GUID로 Classroom 씬·구조·NavMesh 참조를 다시 연결한다. 기존 Granny Room도 복원한 상태에서 `VRFPS.Editor.ClassroomSetup.Build`를 실행하면 두 맵 Windows 빌드와 두 출처 안내문을 생성한다. `Assets/VRFPS/Documentation` 폴더에 두 Attribution.txt 파일이 필요하다.
+
+현재 캐시 프로젝트에서 EditMode99/99·PlayMode128/128·빌드는 통과했다. 최신 커밋의 빈 환경 전체 복원과 제출용 소스 ZIP 재생성은 아직 별도 검증이 필요하다. 외부 원본과 생성 라이브러리는 Git 제외이며 소스만 복제해서 즉시 실행 가능하다고 주장하지 않는다.
+
 
 ## Granny 가구·표면 적용 버전
 

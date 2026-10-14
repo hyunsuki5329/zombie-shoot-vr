@@ -18,7 +18,7 @@ namespace VRFPS.Tests {
    if(Directory.Exists(recordsPath))Directory.Delete(recordsPath,true);
   }
   [UnityTest] public IEnumerator RoomSelectionCombatPauseDeathRecordAndRetry(){
-   Assert.That(entry.roomButton.interactable,Is.True);Assert.That(entry.classroomButton.interactable,Is.False);
+   Assert.That(entry.roomButton.interactable,Is.True);Assert.That(entry.classroomButton.interactable,Is.True);
    yield return entry.SelectMap(entry.room);Assert.That(entry.Session.LastError,Is.Null);Assert.That(entry.Session.IsReady,Is.True);
    var director=entry.Session.Director;director.enabled=false;
    Assert.That(entry.run.Phase,Is.EqualTo(RunPhase.Preparing));entry.run.Tick(8);director.Tick(0);director.Tick(1.6f);
@@ -28,6 +28,19 @@ namespace VRFPS.Tests {
    Assert.That(new RecordStore(recordsPath).Read("room").reachedWave,Is.EqualTo(1));
    entry.menu.Retry();Assert.That(entry.run.Phase,Is.EqualTo(RunPhase.Preparing));Assert.That(entry.gun.Magazine.Rounds,Is.EqualTo(30));Assert.That(entry.run.Alive,Is.Zero);
    Assert.That(Vector2.Distance(new Vector2(entry.rig.Head.position.x,entry.rig.Head.position.z),new Vector2(2.25f,2.75f)),Is.LessThan(.03f));
+  }
+  [UnityTest] public IEnumerator ClassroomCombatAndTenTwoMapTransitions(){
+   for(int i=0;i<10;i++){
+    yield return entry.SelectMap(i%2==0?entry.room:entry.classroom);
+    Assert.That(entry.Session.LastError,Is.Null);Assert.That(entry.Session.IsReady,Is.True);
+    Assert.That(UnityEngine.Object.FindObjectsByType<MapRoot>(FindObjectsSortMode.None).Length,Is.EqualTo(1));
+   }
+   var director=entry.Session.Director;director.enabled=false;
+   entry.run.Tick(8);director.Tick(0);director.Tick(1.6f);Assert.That(entry.run.Alive,Is.EqualTo(1));
+   entry.run.ApplyDamage(100,1,entry.run.ActiveTime);
+   Assert.That(new RecordStore(recordsPath).Read("classroom").reachedWave,Is.EqualTo(1));
+   Assert.That(new RecordStore(recordsPath).Read("room").reachedWave,Is.Zero);
+   entry.menu.Retry();Assert.That(entry.run.Phase,Is.EqualTo(RunPhase.Preparing));Assert.That(entry.gun.Magazine.Rounds,Is.EqualTo(30));
   }
   [UnityTest] public IEnumerator CenterStripStillAllowsEnemySpawning(){
    yield return entry.SelectMap(entry.room);var director=entry.Session.Director;director.enabled=false;

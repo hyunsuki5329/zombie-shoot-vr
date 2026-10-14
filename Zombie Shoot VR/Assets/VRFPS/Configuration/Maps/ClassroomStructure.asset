@@ -1,0 +1,426 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8c7dc159cf74ba181ec6eb3f60936db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: VRFPS.Runtime::VRFPS.RoomStructureDefinition
+  schemaVersion: 1
+  mapId: classroom
+  themeId: AbandonedSchool
+  measuredRoomSize: {x: 14, y: 3, z: 6.3}
+  gameplayScale: 1
+  ceilingHeightEstimated: 1
+  elements:
+  - id: Floor
+    kind: 0
+    origin: 0
+    localCenter: {x: 0, y: -0.1, z: 0}
+    localEuler: {x: 0, y: 0, z: 0}
+    size: {x: 14, y: 0.2, z: 6.3}
+    collision: 1
+    navigation: 1
+  - id: Ceiling
+    kind: 1
+    origin: 1
+    localCenter: {x: 0, y: 3.1, z: 0}
+    localEuler: {x: 0, y: 0, z: 0}
+    size: {x: 14, y: 0.2, z: 6.3}
+    collision: 1
+    navigation: 2
+  - id: North wall
+    kind: 2
+    origin: 1
+    localCenter: {x: 0, y: 1.5, z: 3.25}
+    localEuler: {x: 0, y: 90, z: 0}
+    size: {x: 0.2, y: 3, z: 14.4}
+    collision: 1
+    navigation: 2
+  - id: South wall
+    kind: 2
+    origin: 1
+    localCenter: {x: 0, y: 1.5, z: -3.25}
+    localEuler: {x: 0, y: 90, z: 0}
+    size: {x: 0.2, y: 3, z: 14.4}
+    collision: 1
+    navigation: 2
+  - id: West wall
+    kind: 2
+    origin: 1
+    localCenter: {x: -7.1, y: 1.5, z: 0}
+    localEuler: {x: 0, y: 0, z: 0}
+    size: {x: 0.2, y: 3, z: 6.3}
+    collision: 1
+    navigation: 2
+  - id: East wall
+    kind: 2
+    origin: 1
+    localCenter: {x: 7.1, y: 1.5, z: 0}
+    localEuler: {x: 0, y: 0, z: 0}
+    size: {x: 0.2, y: 3, z: 6.3}
+    collision: 1
+    navigation: 2
+  - id: Desk 0-0
+    kind: 5
+    origin: 1
+    localCenter: {x: -3.8, y: 0.375, z: -2.25}
+    localEuler: {x: 0, y: 90, z: 0}
+    size: {x: 0.75792533, y: 0.75, z: 0.7478597}
+    collision: 1
+    navigation: 2
+  - id: Chair 0-0
+    kind: 6
+    origin: 1
+    localCenter: {x: -3.25, y: 0.45, z: -2.25}
+    localEuler: {x: 0, y: 90, z: 0}
+    size: {x: 0.5464677, y: 0.9, z: 0.41388893}
+    collision: 1
+    navigation: 2
+  - id: Desk 0-1
+    kind: 5
+    origin: 1
+    localCenter: {x: -3.8, y: 0.375, z: -1.35}
+    localEuler: {x: 0, y: 90, z: 0}
+    size: {x: 0.75792533, y: 0.75, z: 0.7478597}
+    collision: 1
+    navigation: 2
+  - id: Chair 0-1
+    kind: 6
+    origin: 1
+    localCenter: {x: -3.25, y: 0.45, z: -1.35}
+    localEuler: {x: 0, y: 90, z: 0}
+    size: {x: 0.5464677, y: 0.9, z: 0.41388893}
+    collision: 1
+    navigation: 2
+  - id: Desk 0-2
+    kind: 5
+    origin: 1
+    localCenter: {x: -3.8, y: 0.375, z: -0.45}
+    localEuler: {x: 0, y: 90, z: 0}
+    size: {x: 0.75792533, y: 0.75, z: 0.7478597}
+    collision: 1
+    navigation: 2
+  - id: Chair 0-2
+    kind: 6
+    origin: 1
+    localCenter: {x: -3.25, y: 0.45, z: -0.45}
+    localEuler: {x: 0, y: 90, z: 0}
+    size: {x: 0.5464677, y: 0.9, z: 0.41388893}
+    collision: 1
+    navigation: 2
+  - id: Desk 0-3
+    kind: 5
+    origin: 1
+    localCenter: {x: -3.8, y: 0.375, z: 0.45}
+    localEuler: {x: 0, y: 90, z: 0}
+    size: {x: 0.75792533, y: 0.75, z: 0.7478597}
+    collision: 1
+    navigation: 2
+  - id: Chair 0-3
+    kind: 6
+    origin: 1
+    localCenter: {x: -3.25, y: 0.45, z: 0.45}
+    localEuler: {x: 0, y: 90, z: 0}
+    size: {x: 0.5464677, y: 0.9, z: 0.41388893}
+    collision: 1
+    navigation: 2
+  - id: Desk 1-0
+    kind: 5
+    origin: 1
+    localCenter: {x: -1.4, y: 0.375, z: -2.25}
+    localEuler: {x: 0, y: 90, z: 0}
+    size: {x: 0.75792533, y: 0.75, z: 0.7478597}
+    collision: 1
+    navigation: 2
+  - id: Chair 1-0
+    kind: 6
+    origin: 1
+    localCenter: {x: -0.84999996, y: 0.45, z: -2.25}
+    localEuler: {x: 0, y: 90, z: 0}
+    size: {x: 0.5464677, y: 0.9, z: 0.41388893}
+    collision: 1
+    navigation: 2
+  - id: Desk 1-1
+    kind: 5
+    origin: 1
+    localCenter: {x: -1.4, y: 0.375, z: -1.35}
+    localEuler: {x: 0, y: 90, z: 0}
+    size: {x: 0.75792533, y: 0.75, z: 0.7478597}
+    collision: 1
+    navigation: 2
+  - id: Chair 1-1
+    kind: 6
+    origin: 1
+    localCenter: {x: -0.84999996, y: 0.45, z: -1.35}
+    localEuler: {x: 0, y: 90, z: 0}
+    size: {x: 0.5464677, y: 0.9, z: 0.41388893}
+    collision: 1
+    navigation: 2
+  - id: Desk 1-2
+    kind: 5
+    origin: 1
+    localCenter: {x: -1.4, y: 0.375, z: -0.45}
+    localEuler: {x: 0, y: 90, z: 0}
+    size: {x: 0.75792533, y: 0.75, z: 0.7478597}
+    collision: 1
+    navigation: 2
+  - id: Chair 1-2
+    kind: 6
+    origin: 1
+    localCenter: {x: -0.84999996, y: 0.45, z: -0.45}
+    localEuler: {x: 0, y: 90, z: 0}
+    size: {x: 0.5464677, y: 0.9, z: 0.41388893}
+    collision: 1
+    navigation: 2
+  - id: Desk 1-3
+    kind: 5
+    origin: 1
+    localCenter: {x: -1.4, y: 0.375, z: 0.45}
+    localEuler: {x: 0, y: 90, z: 0}
+    size: {x: 0.75792533, y: 0.75, z: 0.7478597}
+    collision: 1
+    navigation: 2
+  - id: Chair 1-3
+    kind: 6
+    origin: 1
+    localCenter: {x: -0.84999996, y: 0.45, z: 0.45}
+    localEuler: {x: 0, y: 90, z: 0}
+    size: {x: 0.5464677, y: 0.9, z: 0.41388893}
+    collision: 1
+    navigation: 2
+  - id: Desk 2-0
+    kind: 5
+    origin: 1
+    localCenter: {x: 1, y: 0.375, z: -2.25}
+    localEuler: {x: 0, y: 90, z: 0}
+    size: {x: 0.75792533, y: 0.75, z: 0.7478597}
+    collision: 1
+    navigation: 2
+  - id: Chair 2-0
+    kind: 6
+    origin: 1
+    localCenter: {x: 1.55, y: 0.45, z: -2.25}
+    localEuler: {x: 0, y: 90, z: 0}
+    size: {x: 0.5464677, y: 0.9, z: 0.41388893}
+    collision: 1
+    navigation: 2
+  - id: Desk 2-1
+    kind: 5
+    origin: 1
+    localCenter: {x: 1, y: 0.375, z: -1.35}
+    localEuler: {x: 0, y: 90, z: 0}
+    size: {x: 0.75792533, y: 0.75, z: 0.7478597}
+    collision: 1
+    navigation: 2
+  - id: Chair 2-1
+    kind: 6
+    origin: 1
+    localCenter: {x: 1.55, y: 0.45, z: -1.35}
+    localEuler: {x: 0, y: 90, z: 0}
+    size: {x: 0.5464677, y: 0.9, z: 0.41388893}
+    collision: 1
+    navigation: 2
+  - id: Desk 2-2
+    kind: 5
+    origin: 1
+    localCenter: {x: 1, y: 0.375, z: -0.45}
+    localEuler: {x: 0, y: 90, z: 0}
+    size: {x: 0.75792533, y: 0.75, z: 0.7478597}
+    collision: 1
+    navigation: 2
+  - id: Chair 2-2
+    kind: 6
+    origin: 1
+    localCenter: {x: 1.55, y: 0.45, z: -0.45}
+    localEuler: {x: 0, y: 90, z: 0}
+    size: {x: 0.5464677, y: 0.9, z: 0.41388893}
+    collision: 1
+    navigation: 2
+  - id: Desk 2-3
+    kind: 5
+    origin: 1
+    localCenter: {x: 1, y: 0.375, z: 0.45}
+    localEuler: {x: 0, y: 90, z: 0}
+    size: {x: 0.75792533, y: 0.75, z: 0.7478597}
+    collision: 1
+    navigation: 2
+  - id: Chair 2-3
+    kind: 6
+    origin: 1
+    localCenter: {x: 1.55, y: 0.45, z: 0.45}
+    localEuler: {x: 0, y: 90, z: 0}
+    size: {x: 0.5464677, y: 0.9, z: 0.41388893}
+    collision: 1
+    navigation: 2
+  - id: Desk 3-0
+    kind: 5
+    origin: 1
+    localCenter: {x: 3.3, y: 0.375, z: -2.25}
+    localEuler: {x: 0, y: 90, z: 0}
+    size: {x: 0.75792533, y: 0.75, z: 0.7478597}
+    collision: 1
+    navigation: 2
+  - id: Chair 3-0
+    kind: 6
+    origin: 1
+    localCenter: {x: 3.85, y: 0.45, z: -2.25}
+    localEuler: {x: 0, y: 90, z: 0}
+    size: {x: 0.5464677, y: 0.9, z: 0.41388893}
+    collision: 1
+    navigation: 2
+  - id: Desk 3-1
+    kind: 5
+    origin: 1
+    localCenter: {x: 3.3, y: 0.375, z: -1.35}
+    localEuler: {x: 0, y: 90, z: 0}
+    size: {x: 0.75792533, y: 0.75, z: 0.7478597}
+    collision: 1
+    navigation: 2
+  - id: Chair 3-1
+    kind: 6
+    origin: 1
+    localCenter: {x: 3.85, y: 0.45, z: -1.35}
+    localEuler: {x: 0, y: 90, z: 0}
+    size: {x: 0.5464677, y: 0.9, z: 0.41388893}
+    collision: 1
+    navigation: 2
+  - id: Desk 3-2
+    kind: 5
+    origin: 1
+    localCenter: {x: 3.3, y: 0.375, z: -0.45}
+    localEuler: {x: 0, y: 90, z: 0}
+    size: {x: 0.75792533, y: 0.75, z: 0.7478597}
+    collision: 1
+    navigation: 2
+  - id: Chair 3-2
+    kind: 6
+    origin: 1
+    localCenter: {x: 3.85, y: 0.45, z: -0.45}
+    localEuler: {x: 0, y: 90, z: 0}
+    size: {x: 0.5464677, y: 0.9, z: 0.41388893}
+    collision: 1
+    navigation: 2
+  - id: Desk 3-3
+    kind: 5
+    origin: 1
+    localCenter: {x: 3.3, y: 0.375, z: 0.45}
+    localEuler: {x: 0, y: 90, z: 0}
+    size: {x: 0.75792533, y: 0.75, z: 0.7478597}
+    collision: 1
+    navigation: 2
+  - id: Chair 3-3
+    kind: 6
+    origin: 1
+    localCenter: {x: 3.85, y: 0.45, z: 0.45}
+    localEuler: {x: 0, y: 90, z: 0}
+    size: {x: 0.5464677, y: 0.9, z: 0.41388893}
+    collision: 1
+    navigation: 2
+  - id: Desk 4-0
+    kind: 5
+    origin: 1
+    localCenter: {x: 5.6, y: 0.375, z: -2.25}
+    localEuler: {x: 0, y: 90, z: 0}
+    size: {x: 0.75792533, y: 0.75, z: 0.7478597}
+    collision: 1
+    navigation: 2
+  - id: Chair 4-0
+    kind: 6
+    origin: 1
+    localCenter: {x: 6.15, y: 0.45, z: -2.25}
+    localEuler: {x: 0, y: 90, z: 0}
+    size: {x: 0.5464677, y: 0.9, z: 0.41388893}
+    collision: 1
+    navigation: 2
+  - id: Desk 4-1
+    kind: 5
+    origin: 1
+    localCenter: {x: 5.6, y: 0.375, z: -1.35}
+    localEuler: {x: 0, y: 90, z: 0}
+    size: {x: 0.75792533, y: 0.75, z: 0.7478597}
+    collision: 1
+    navigation: 2
+  - id: Chair 4-1
+    kind: 6
+    origin: 1
+    localCenter: {x: 6.15, y: 0.45, z: -1.35}
+    localEuler: {x: 0, y: 90, z: 0}
+    size: {x: 0.5464677, y: 0.9, z: 0.41388893}
+    collision: 1
+    navigation: 2
+  - id: Desk 4-2
+    kind: 5
+    origin: 1
+    localCenter: {x: 5.6, y: 0.375, z: -0.45}
+    localEuler: {x: 0, y: 90, z: 0}
+    size: {x: 0.75792533, y: 0.75, z: 0.7478597}
+    collision: 1
+    navigation: 2
+  - id: Chair 4-2
+    kind: 6
+    origin: 1
+    localCenter: {x: 6.15, y: 0.45, z: -0.45}
+    localEuler: {x: 0, y: 90, z: 0}
+    size: {x: 0.5464677, y: 0.9, z: 0.41388893}
+    collision: 1
+    navigation: 2
+  - id: Desk 4-3
+    kind: 5
+    origin: 1
+    localCenter: {x: 5.6, y: 0.375, z: 0.45}
+    localEuler: {x: 0, y: 90, z: 0}
+    size: {x: 0.75792533, y: 0.75, z: 0.7478597}
+    collision: 1
+    navigation: 2
+  - id: Chair 4-3
+    kind: 6
+    origin: 1
+    localCenter: {x: 6.15, y: 0.45, z: 0.45}
+    localEuler: {x: 0, y: 90, z: 0}
+    size: {x: 0.5464677, y: 0.9, z: 0.41388893}
+    collision: 1
+    navigation: 2
+  - id: Teacher desk
+    kind: 5
+    origin: 1
+    localCenter: {x: -5.7, y: 0.4, z: -0.9}
+    localEuler: {x: 0, y: 0, z: 0}
+    size: {x: 0.9325179, y: 0.8, z: 1.5357468}
+    collision: 1
+    navigation: 2
+  - id: Teacher chair
+    kind: 6
+    origin: 1
+    localCenter: {x: -6.45, y: 0.45, z: -0.9}
+    localEuler: {x: 0, y: -90, z: 0}
+    size: {x: 0.5464677, y: 0.9, z: 0.41388893}
+    collision: 1
+    navigation: 2
+  - id: Board
+    kind: 8
+    origin: 1
+    localCenter: {x: -6.9, y: 1.65, z: 0}
+    localEuler: {x: 0, y: 0, z: 0}
+    size: {x: 0.057300407, y: 1.2, z: 1.6920967}
+    collision: 1
+    navigation: 2
+  playerSpawn: {x: -5.8, y: 0, z: 2}
+  playerEuler: {x: 0, y: 90, z: 0}
+  enemySpawns:
+  - {x: -6, y: 0, z: 2.4}
+  - {x: -2, y: 0, z: 2.4}
+  - {x: 2, y: 0, z: 2.4}
+  - {x: 6, y: 0, z: 2.4}
+  - {x: -2.32, y: 0, z: -1}
+  - {x: 0.05, y: 0, z: -1}
+  - {x: 2.42, y: 0, z: -1}
+  - {x: 4.72, y: 0, z: -1}
+  navigationAgentType: 0
+  navigationVoxelSize: 0.04
