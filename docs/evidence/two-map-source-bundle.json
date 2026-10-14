@@ -1,0 +1,13 @@
+{
+  "baseSourceCommit": "eaf2567",
+  "scope": "Configured local restoration snapshot; generated school scene and weapon/audio references reapplied. Not a pristine Git archive or final submission.",
+  "archiveSha256": "dc2d4bb181ebbb26adde7c033a4515ffe56cfd2424582230bf64b6f42f1fdeb8",
+  "archiveBytes": 584271736,
+  "filesVerified": 2823,
+  "buildGuid": "a360be84dec64497b948aac082c5e450",
+  "hardwareAcceptance": "pending",
+  "redistribution": "Local backup only; external asset rights unchanged",
+  "path": "Zombie Shoot VR/Builds/Reproduction/eaf2567-two-maps",
+  "zipCrcVerified": true,
+  "exactZipReopenTest": "not run; packaged files match validated source snapshot"
+}

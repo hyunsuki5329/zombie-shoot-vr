@@ -3,7 +3,7 @@
 
 [학교 자산 복원](school-assets-plan.md)에 따라 로컬 학교 라이브러리를 먼저 생성한 뒤 격리 Unity에서 `VRFPS.Editor.ClassroomSetup.Configure`를 실행한다. 이 단계는 생성 프리팹 GUID로 Classroom 씬·구조·NavMesh 참조를 다시 연결한다. 기존 Granny Room도 복원한 상태에서 `VRFPS.Editor.ClassroomSetup.Build`를 실행하면 두 맵 Windows 빌드와 두 출처 안내문을 생성한다. `Assets/VRFPS/Documentation` 폴더에 두 Attribution.txt 파일이 필요하다.
 
-현재 캐시 프로젝트에서 EditMode99/99·PlayMode128/128·빌드는 통과했다. 후속으로 소스eaf2567의 새 Library에서 학교 재생성, EditMode98통과/개인 스캔1제외, PlayMode128통과 및 Windows 빌드까지 확인했다([증빙](evidence/school-clean-restoration.json)). 같은 PC에서 학교 외 자산532개는 기존 메타와 함께 복사했으므로 모든 원본의 신규 재생성이나 다른 PC 검증은 아니다. 제출용 소스 ZIP 재생성은 남아 있다. 외부 원본과 생성 라이브러리는 Git 제외이며 소스만 복제해서 즉시 실행 가능하다고 주장하지 않는다.
+현재 캐시 프로젝트에서 EditMode99/99·PlayMode128/128·빌드는 통과했다. 후속으로 소스eaf2567의 새 Library에서 학교 재생성, EditMode98통과/개인 스캔1제외, PlayMode128통과 및 Windows 빌드까지 확인했다([증빙](evidence/school-clean-restoration.json)). 같은 PC에서 학교 외 자산532개는 기존 메타와 함께 복사했으므로 모든 원본의 신규 재생성이나 다른 PC 검증은 아니다. 검증한 복원본의 로컬 보관 ZIP도 생성했다. 아래 보관본 설명을 따른다. 외부 원본과 생성 라이브러리는 Git 제외이며 소스만 복제해서 즉시 실행 가능하다고 주장하지 않는다.
 
 
 ### 새 캐시 복원에서 확인된 필수 재연결
@@ -170,3 +170,9 @@ Unity의 PC 전역 패키지 캐시/라이선스는 공유할 수 있으므로 �
 ## GAMGO 외형 추가 이후의 필수 복원 단계
 
 P04 외형 브랜치부터 K2/탄창 프리팹은 Git 제외 자원을 참조한다. 기존8a28aee 복원 리허설 결과를 이 변경 이후의 완전 복원 증빙으로 확대하지 않는다. Unity 시험/빌드 전에 [GAMGO 원본 확보 및 복원·적용](gamgo-visual-restore.md)을 수행해야 한다. 원본 ZIP의 라이선스별 전달 조건을 지키고 해당 계정으로 다시 확보할 수 있는 링크·해시를 제공한다. 파일이 없으면 임시 도형으로 최종 빌드를 성공 처리하지 않는다. 외형 추가 후 Git 소스만 새 폴더로 복원하는 리허설에서 누락된 이전 모델 참조가 남는 결함을 발견해 수정했다. 수정 후 EditMode51/51과 Windows 빌드2개를 확인했다. [상세 증빙](evidence/p04-gamgo-restoration.json). 새 복원본 PlayMode·새 PC·오프라인 시험까지 통과한 것으로 확대하지 않는다.
+
+## 두 맵 로컬 소스 보관본 (2026-10-14)
+
+`Zombie Shoot VR/Builds/Reproduction/eaf2567-two-maps/`의 `restored-source-local-only.zip`, `manifest.json`, `README.md`를 함께 보관한다. 584,271,736바이트, 2,823개 파일의 CRC와 SHA256을 검증했다([증빙](evidence/two-map-source-bundle.json)). 소스 기준eaf2567에 학교 생성 및 K2/음원 참조 재연결을 적용한 스냅샷이다. 순수 Git archive나 최종 제출본과 구분한다. Unity Library·빌드·개인 스캔은 포함하지 않았다.
+
+빈 폴더에 압축을 풀고 `Zombie Shoot VR`을 Unity6000.3.23f1로 연다. 원본 복원본은 자동 검사와 빌드를 통과했고 압축 구성원은 바이트 단위로 검증했지만 이 ZIP을 다시 풀어 Unity를 여는 시험은 별도로 수행하지 않았다. 외부 자산이 포함되어 로컬 보관하며 공개 재배포 허가로 해석하지 않는다.
