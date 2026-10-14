@@ -3,7 +3,7 @@
 
 [학교 자산 복원](school-assets-plan.md)에 따라 로컬 학교 라이브러리를 먼저 생성한 뒤 격리 Unity에서 `VRFPS.Editor.ClassroomSetup.Configure`를 실행한다. 이 단계는 생성 프리팹 GUID로 Classroom 씬·구조·NavMesh 참조를 다시 연결한다. 기존 Granny Room도 복원한 상태에서 `VRFPS.Editor.ClassroomSetup.Build`를 실행하면 두 맵 Windows 빌드와 두 출처 안내문을 생성한다. `Assets/VRFPS/Documentation` 폴더에 두 Attribution.txt 파일이 필요하다.
 
-현재 캐시 프로젝트에서 EditMode99/99·PlayMode128/128·빌드는 통과했다. 최신 커밋의 빈 환경 전체 복원과 제출용 소스 ZIP 재생성은 아직 별도 검증이 필요하다. 외부 원본과 생성 라이브러리는 Git 제외이며 소스만 복제해서 즉시 실행 가능하다고 주장하지 않는다.
+현재 캐시 프로젝트에서 EditMode99/99·PlayMode128/128·빌드는 통과했다. 후속으로 소스eaf2567의 새 Library에서 학교 재생성, EditMode98통과/개인 스캔1제외, PlayMode128통과 및 Windows 빌드까지 확인했다([증빙](evidence/school-clean-restoration.json)). 같은 PC에서 학교 외 자산532개는 기존 메타와 함께 복사했으므로 모든 원본의 신규 재생성이나 다른 PC 검증은 아니다. 제출용 소스 ZIP 재생성은 남아 있다. 외부 원본과 생성 라이브러리는 Git 제외이며 소스만 복제해서 즉시 실행 가능하다고 주장하지 않는다.
 
 
 ### 새 캐시 복원에서 확인된 필수 재연결
