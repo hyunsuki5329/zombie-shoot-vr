@@ -1,5 +1,13 @@
 # Goal 실행 현황
 
+## 2026-10-15 저장된 가구 배치·A 점프 반영
+
+구현 커밋 `83dc690`, 소스 보관 안내 `aedee9e`. 사용자 저장 Room/Classroom 씬을 기준으로 메시 충돌과 NavMesh를 동기화했다. 폐가 옛 의자 자리와 폐교 교탁 옆·학생 가구 사이 통로를 자동 검사했으며, 학생 가구 묶음은 연결 확보를 위해 Z음수 방향으로40cm 이동했다. 오른손 A 접지 점프와 새 탄창 공급 진동을 포함한다. [변경·재동기화 안내](user-layout-jump.md).
+
+최종 자동 시험 XML을 확인했다: EditMode100/100, PlayMode130/130 (`tmp/user-layout-20261015/edit-clean.xml`, `play-final.xml`). 빌드는 `Zombie Shoot VR/Builds/Windows/AbandonedSchool/AbandonedSchool.exe`, GUID `2a41ebb5739b4386b8b2b55ca4c66eca`. [소스 보관 증빙](evidence/user-layout-source-backup.json)은2834파일 해시 검증 및 저장 씬 일치를 기록한다. 해당 ZIP 자체를 새 캐시로 다시 여는 시험은 아직 실행하지 않았다.
+
+사용자의 최신 답변은 **실행 전**이다. A입력·침대/책상 착지·통로·새 탄창 진동의 실기 인수, 두 맵 성능·장시간 시험은 미완료다. [PR21](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/21)은 초안 유지, 최신 변경 독립 소스 검토에서 조치할 결함은 확인되지 않았다. 정지/사망을 거친 재도전 시 수직 속도 초기화와 재동기화 간격 마커를 확인했으며, 이 검토는 Unity 재실행이나 기기 검증을 대신하지 않는다. 다음 작업은 기기 결과 검증과 남은 성능·장시간 시험이다. 발표자료는 사용자 담당이며 에이전트가 제작하지 않는다. 이 기록은 아래 이전 빌드 식별자를 대체한다.
+
 ## 2026-10-15 새 탄창 공급 진동
 
 사용자 요청으로 왼손 새 탄창 공급 성공 시 강도0.3/0.07초 햅틱을 추가했다. 삽입음 없이 기존 왼손 HapticImpulsePlayer를 사용한다. 수정 전 신호0으로 실패 확인, 수정 후 PlayMode129/129 통과. 공급 실패·입력 차단·그립 유지·재도전의 중복 신호 방지 검사 포함. 두 맵 빌드 GUID `a3a2b52c2c6e4e2f879222bb330524bb`, 실제 진동 체감은 사용자 확인 대기. 로그 `tmp/supply-red.xml`, `tmp/supply-green.xml`, `tmp/supply-build.log`.
