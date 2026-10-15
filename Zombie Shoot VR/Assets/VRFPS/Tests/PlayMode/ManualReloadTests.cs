@@ -43,6 +43,21 @@ namespace VRFPS.Tests
         void GripAt(Vector3 position) { left.position = position; interactor.Tick(true, true); }
         void Release() => interactor.Tick(false, true);
 
+        [Test] public void FreshSupplyCuesOnceButHeldGripBlockedInputAndRestartStaySilent()
+        {
+            var feedback=gun.gameObject.AddComponent<CombatFeedback>();feedback.Configure(gun,socket);
+            GripAt(pouch.transform.position);
+            Assert.That(interactor.HeldToken,Is.Not.Null);
+            Assert.That(feedback.CueCount,Is.EqualTo(1));
+            GripAt(pouch.transform.position);Assert.That(feedback.CueCount,Is.EqualTo(1));
+            Release();left.position=Vector3.one*10;interactor.Tick(true,true);
+            Assert.That(feedback.CueCount,Is.EqualTo(1));
+            Release();left.position=pouch.transform.position;interactor.Tick(true,false);
+            Assert.That(feedback.CueCount,Is.EqualTo(1));
+            Release();GripAt(pouch.transform.position);Assert.That(feedback.CueCount,Is.EqualTo(2));
+            interactor.Restart();Assert.That(feedback.CueCount,Is.EqualTo(2));
+        }
+
         [Test] public void MagazineRegistryTracksOwnedTokensAndRecyclesOnlyLooseTokens()
         {
             var registry=pouch.GetComponent<PoolRegistry>();Assert.That(registry,Is.Not.Null);

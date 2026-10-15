@@ -1,7 +1,9 @@
 # Quest Pro 실기 검증 안내
-## 2026-10-14 두 맵 최신 빌드
+## 2026-10-15 두 맵 최신 빌드
 
-실행: `D:/Unity Project/Zombie Shoot VR/Zombie Shoot VR/Builds/Windows/AbandonedSchool/AbandonedSchool.exe` (GUID `4a9f39b9fb7d411bb936441659b3c5df`). Back → Classroom으로 폐교, Room으로 폐가를 선택한다. 아래 이전 빌드의 Classroom 비활성 설명은 최신 빌드에 적용하지 않는다.
+실행: `D:/Unity Project/Zombie Shoot VR/Zombie Shoot VR/Builds/Windows/AbandonedSchool/AbandonedSchool.exe` (GUID `a3a2b52c2c6e4e2f879222bb330524bb`). Back → Classroom으로 폐교, Room으로 폐가를 선택한다. 아래 이전 빌드의 Classroom 비활성 설명은 최신 빌드에 적용하지 않는다.
+
+새 탄창을 허리에서 집으면 왼손에0.07초 진동이 한 번 발생한다. 그립 유지·공급 실패·일시정지에서는 반복되지 않아야 한다. 실제 진동 체감은 확인 대기다.
 
 강의실 약14×6.3m 공간감, 추정20조 가구 배치, 발 높이·가구 충돌·밝기·적 경로, 일시정지/사망/재도전, 두 맵 전환을 확인한다. 천장3m·학생 가구 수·출입구/창문 상세는 미확정이다. 자동 시험 통과는 VR 실기 통과가 아니다. 현재 사용자 인수 대기.
 

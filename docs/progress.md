@@ -1,4 +1,9 @@
 # Goal 실행 현황
+
+## 2026-10-15 새 탄창 공급 진동
+
+사용자 요청으로 왼손 새 탄창 공급 성공 시 강도0.3/0.07초 햅틱을 추가했다. 삽입음 없이 기존 왼손 HapticImpulsePlayer를 사용한다. 수정 전 신호0으로 실패 확인, 수정 후 PlayMode129/129 통과. 공급 실패·입력 차단·그립 유지·재도전의 중복 신호 방지 검사 포함. 두 맵 빌드 GUID `a3a2b52c2c6e4e2f879222bb330524bb`, 실제 진동 체감은 사용자 확인 대기. 로그 `tmp/supply-red.xml`, `tmp/supply-green.xml`, `tmp/supply-build.log`.
+
 ## 2026-10-14 폐교 맵 통합 시제품
 
 사용자 추정 크기14×6.3m로 Classroom을 구성했다. 잘못된 세 돌출부 제외, 학교 가구·벽·바닥 적용, 메시 충돌과8개 유효 생성점, 두 맵 공통 전투 연결. 학생 가구20조와 천장3m는 추정이며 출입구·창문 상세는 미확정이다. EditMode99/99, PlayMode128/128(두 맵10회 전환 포함), Windows 빌드 성공 GUID `4a9f39b9fb7d411bb936441659b3c5df`. 원본 스캔/학교 FBX 빌드 포함0. 로그는 로컬 `tmp/school-source/map-editmode-clean.xml`, `map-playmode-final.xml`, `map-build-final.log`.
