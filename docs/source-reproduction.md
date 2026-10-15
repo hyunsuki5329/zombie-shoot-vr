@@ -1,4 +1,11 @@
 # 소스 복원·시험·Windows 빌드
+
+## 2026-10-15 수동 편집 씬 보존 우선
+
+현재 기준은 사용자 편집을 반영한83dc690의 Room/Classroom 씬이다. 아래10월14일 이전 재생성 절차는 당시 상태의 이력이며 최신 씬에 그대로 적용하지 않는다. ClassroomSetup.Configure, RoomHouseSetup.ConfigurePreview, GrannyHouseSetup.Configure는 초기 배치를 만들기 때문에 현재 씬을 덮어쓸 수 있다.
+
+최신 복원에서는 씬과 동일한 외부 자산/meta를 함께 확보해야 한다. 가구 배치·방향은 저장된 씬에서 읽고 `UserLayoutSetup.Configure`로 충돌/NavMesh만 동기화한다. 게임 빌드는 `ClassroomSetup.Build`를 사용한다. [배치·점프 변경](user-layout-jump.md).
+
 ## 2026-10-14 Classroom 추가
 
 [학교 자산 복원](school-assets-plan.md)에 따라 로컬 학교 라이브러리를 먼저 생성한 뒤 격리 Unity에서 `VRFPS.Editor.ClassroomSetup.Configure`를 실행한다. 이 단계는 생성 프리팹 GUID로 Classroom 씬·구조·NavMesh 참조를 다시 연결한다. 기존 Granny Room도 복원한 상태에서 `VRFPS.Editor.ClassroomSetup.Build`를 실행하면 두 맵 Windows 빌드와 두 출처 안내문을 생성한다. `Assets/VRFPS/Documentation` 폴더에 두 Attribution.txt 파일이 필요하다.
@@ -176,3 +183,7 @@ P04 외형 브랜치부터 K2/탄창 프리팹은 Git 제외 자원을 참조한
 `Zombie Shoot VR/Builds/Reproduction/eaf2567-two-maps/`의 `restored-source-local-only.zip`, `manifest.json`, `README.md`를 함께 보관한다. 584,271,736바이트, 2,823개 파일의 CRC와 SHA256을 검증했다([증빙](evidence/two-map-source-bundle.json)). 소스 기준eaf2567에 학교 생성 및 K2/음원 참조 재연결을 적용한 스냅샷이다. 순수 Git archive나 최종 제출본과 구분한다. Unity Library·빌드·개인 스캔은 포함하지 않았다.
 
 빈 폴더에 압축을 풀고 `Zombie Shoot VR`을 Unity6000.3.23f1로 연다. 원본 복원본은 자동 검사와 빌드를 통과했고 압축 구성원은 바이트 단위로 검증했지만 이 ZIP을 다시 풀어 Unity를 여는 시험은 별도로 수행하지 않았다. 외부 자산이 포함되어 로컬 보관하며 공개 재배포 허가로 해석하지 않는다.
+
+### 수동 편집 배치 로컬 보관본
+
+`Zombie Shoot VR/Builds/Reproduction/83dc690-user-layout/`에 소스·로컬 자산 ZIP, manifest, README를 보관했다. 2,834개 파일 CRC/SHA256과 현재 두 씬의 바이트 일치를 확인했다. Library·개인 스캔·사용자의 무관한 미커밋 설정은 포함하지 않았다. 이 ZIP을 다시 연 Unity 시험은 미실행이며 최종 제출본으로 표시하지 않는다. [증빙](evidence/user-layout-source-backup.json).
