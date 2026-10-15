@@ -18,11 +18,15 @@ namespace VRFPS.Tests
         [Test] public void CapturedStructureRecreatesEveryColliderAndAuthoredAnchor()
         {
             var scene=EditorSceneManager.OpenScene("Assets/VRFPS/Scenes/Maps/Room.unity",OpenSceneMode.Additive);
-            RoomStructureDefinition data=null; MapRoot generated=null;
+            RoomStructureDefinition data=null; MapRoot generated=null,source=null;
             try
             {
-                var source=scene.GetRootGameObjects().SelectMany(g=>g.GetComponentsInChildren<MapRoot>()).Single();
                 var setup=Setup();
+                // Capture is the box-structure tool. Authored mesh-collider scenes are synchronized separately.
+                var fixture=UnityEditor.AssetDatabase.LoadAssetAtPath<RoomStructureDefinition>("Assets/VRFPS/Configuration/Maps/RoomStructure.asset");
+                var scaled=fixture.CreateGameplayCopy(2.5f);
+                try{source=(MapRoot)setup.GetMethod("GenerateStructure").Invoke(null,new object[]{scaled});}
+                finally{UnityEngine.Object.DestroyImmediate(scaled);}
                 data=(RoomStructureDefinition)setup.GetMethod("Capture").Invoke(null,new object[]{source});
                 data.Validate();
                 Assert.That(data.measuredRoomSize,Is.EqualTo(new Vector3(4.3f,2.45f,3.5f)));
@@ -52,6 +56,7 @@ namespace VRFPS.Tests
             }
             finally
             {
+                if(source!=null)UnityEngine.Object.DestroyImmediate(source.gameObject);
                 if(generated!=null)UnityEngine.Object.DestroyImmediate(generated.gameObject);
                 if(data!=null)UnityEngine.Object.DestroyImmediate(data);
                 EditorSceneManager.CloseScene(scene,true);
