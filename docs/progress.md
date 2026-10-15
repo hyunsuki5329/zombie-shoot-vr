@@ -1,5 +1,11 @@
 # Goal 실행 현황
 
+## 2026-10-15 최신 ZIP 새 캐시 복원 검증
+
+소스83dc690과 외부 자산/meta를 담은 ZIP을 빈 폴더에 풀고 Library 없이 검증했다. 자산 재연결이나 씬 재생성 없이 EditMode99통과/실패0/개인 원본 스캔 검사1제외, PlayMode130/130, Windows 빌드 성공을 확인했다. Room/Classroom 씬은 ZIP 원본과 해시가 같으며 두 출처 안내문도 빌드에 동일하게 동봉됐다. 원본 스캔과 학교 원본 FBX의 빌드 포함은0이다. [복원 증빙](evidence/user-layout-clean-restoration.json).
+
+복원 검증 빌드 GUID는 `a7080199e5c04e3b9d2165f9064b5bc0`, 로그는 `tmp/user-layout-archive-validation/`에 있다. 동일 PC의 패키지 캐시·라이선스를 사용한 검증이며 다른 PC 검증이나 VR 인수가 아니다. 기존 사용자 테스트용 AbandonedSchool.exe(GUID `2a41ebb5739b4386b8b2b55ca4c66eca`)는 교체하지 않았다. 실제 두 맵 인수·성능·장시간 시험과 사용자 담당 발표/시연 자료, 최종 병합은 남아 있다.
+
 ## 2026-10-15 저장된 가구 배치·A 점프 반영
 
 구현 커밋 `83dc690`, 소스 보관 안내 `aedee9e`. 사용자 저장 Room/Classroom 씬을 기준으로 메시 충돌과 NavMesh를 동기화했다. 폐가 옛 의자 자리와 폐교 교탁 옆·학생 가구 사이 통로를 자동 검사했으며, 학생 가구 묶음은 연결 확보를 위해 Z음수 방향으로40cm 이동했다. 오른손 A 접지 점프와 새 탄창 공급 진동을 포함한다. [변경·재동기화 안내](user-layout-jump.md).

@@ -1,5 +1,11 @@
 # 소스 복원·시험·Windows 빌드
 
+## 2026-10-15 최신 ZIP 새 캐시 복원 검증
+
+소스83dc690과 외부 자산/meta를 담은 ZIP을 빈 폴더에 풀고 Library 없이 검증했다. 자산 재연결이나 씬 재생성 없이 EditMode99통과/실패0/개인 원본 스캔 검사1제외, PlayMode130/130, Windows 빌드 성공을 확인했다. Room/Classroom 씬은 ZIP 원본과 해시가 같으며 두 출처 안내문도 빌드에 동일하게 동봉됐다. 원본 스캔과 학교 원본 FBX의 빌드 포함은0이다. [복원 증빙](evidence/user-layout-clean-restoration.json).
+
+복원 검증 빌드 GUID는 `a7080199e5c04e3b9d2165f9064b5bc0`, 로그는 `tmp/user-layout-archive-validation/`에 있다. 동일 PC의 패키지 캐시·라이선스를 사용한 검증이며 다른 PC 검증이나 VR 인수가 아니다. 기존 사용자 테스트용 AbandonedSchool.exe(GUID `2a41ebb5739b4386b8b2b55ca4c66eca`)는 교체하지 않았다. 실제 두 맵 인수·성능·장시간 시험과 사용자 담당 발표/시연 자료, 최종 병합은 남아 있다.
+
 ## 2026-10-15 수동 편집 씬 보존 우선
 
 현재 기준은 사용자 편집을 반영한83dc690의 Room/Classroom 씬이다. 아래10월14일 이전 재생성 절차는 당시 상태의 이력이며 최신 씬에 그대로 적용하지 않는다. ClassroomSetup.Configure, RoomHouseSetup.ConfigurePreview, GrannyHouseSetup.Configure는 초기 배치를 만들기 때문에 현재 씬을 덮어쓸 수 있다.
