@@ -1,5 +1,7 @@
 # Goal 실행 현황
 
+2026-10-16 사용자 실기 확인: 최신 AbandonedSchool.exe 안내에 이어 사용자가 시점·점프가 적당하다고 답했고, 두 맵의 가구 사이 이동과 좀비 접근도 문제없다고 확인했다. Room/Classroom의 해당 항목을 사용자 관찰 기준 통과로 기록한다. 현재 배포 파일 GUID는 `4f8a62b0b3644f6595155f830491a59f`이며 사용자가 별도로 GUID를 대조한 결과는 아니다. 시점1.15배·점프1.35m를 유지한다. 약1.7m 폐가 책상 착지, 전체 전투/기록/재도전 흐름, 72Hz CPU/GPU 측정과 각 맵30분·재도전/전환 반복 시험까지 통과한 것으로 확대하지 않는다.
+
 2026-10-16 최신 ZIP 복원 검증 완료: `2d3f3e6-low-jump`를 빈 폴더에 풀어 Library 없이 EditMode106통과/실패0/개인 스캔 검사1제외, PlayMode131/131, Windows 빌드 성공을 확인했다. 세 맵 씬은 ZIP과 동일하며 원본 스캔 빌드 포함0, 출처 안내문2개 동봉을 확인했다. 복원 빌드 GUID `eb43eaca52b4478fab7aaa28b29750c2`. 같은 PC의 패키지 캐시·라이선스를 사용했으며 새 PC 또는 실제 VR 검증은 아니다. 기존 실기용 빌드는 유지했다. [증빙](evidence/low-jump-clean-restoration.json).
 
 2026-10-16 최신 소스 보관본: `Zombie Shoot VR/Builds/Reproduction/2d3f3e6-low-jump/source-with-local-assets.zip`. 점프1.35m와 시점1.15배, 최신 두 맵 배치를 포함한다. 2,856파일 CRC/SHA256 및 검증 캐시의 코드·씬·프리팹·자산241개 일치를 확인했다(C# 줄바꿈 정규화). ZIP의 새 Library 복원 검증은 위 최신 결과를 따른다. 외부 자산 포함 로컬 보관용이며 최종 제출 완료가 아니다. [증빙](evidence/low-jump-source-backup.json).
