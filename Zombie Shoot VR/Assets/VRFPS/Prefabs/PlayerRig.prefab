@@ -543,7 +543,7 @@ MonoBehaviour:
   turnAction: {fileID: -6493913391331992944, guid: c6e412fc9a1b3b44388a3a807143d865, type: 3}
   moveSpeed: 1.6
   turnSpeed: 60
-  jumpHeight: 2.2
+  jumpHeight: 1.35
 --- !u!114 &8027088641297360309
 MonoBehaviour:
   m_ObjectHideFlags: 0

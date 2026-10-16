@@ -11,7 +11,7 @@ namespace VRFPS.Player
         [SerializeField] InputActionReference turnAction;
         [SerializeField, Range(1f, 2f)] float moveSpeed = 1.6f;
         [SerializeField, Range(30f, 90f)] float turnSpeed = 60f;
-        [SerializeField] float jumpHeight = 2.2f;
+        [SerializeField] float jumpHeight = 1.35f;
         CharacterController capsule;
         bool locomotionEnabled = true;
         float verticalSpeed;
