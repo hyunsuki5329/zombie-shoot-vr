@@ -1,5 +1,7 @@
 # Goal 실행 현황
 
+2026-10-16 최신 소스 보관본: `Zombie Shoot VR/Builds/Reproduction/a7c149d-view-height-layout/source-with-local-assets.zip`. 시점1.15배·최신 사용자 배치·옛 충돌 제거 포함. 2,855파일 무결성 검사와 시험한 씬/NavMesh/플레이어 프리팹/높이 코드/의자 메시 일치 확인. ZIP 자체 새 캐시 재개방은 미실행. [보관 증빙](evidence/layout-height-source-backup.json).
+
 2026-10-16 후속: 사용자 재편집 배치를 그대로 보존해 충돌·NavMesh를 갱신하고 폐교의 보이지 않는 옛 충돌체5개를 제거했다. 시점 높이1.15배 보정을 추가했다. [변경·검증](layout-height-20261016.md). 이전519495c 소스 ZIP은 이번 변경 전 보관본이다.
 
 2026-10-16 최신 소스 보관본: `Zombie Shoot VR/Builds/Reproduction/519495c-map-scale/source-with-local-assets.zip`. 소스519495c와 로컬 외부 자산/meta를 포함한다. 2,842파일 CRC·SHA256 검증, 실제 시험한 캐시의 두 맵/미리보기·NavMesh·수정 의자 메시 일치 확인. ZIP 자체의 새 캐시 재개방은 미실행이며 이전83dc690 ZIP의 새 캐시 시험과 구분한다. [보관 증빙](evidence/map-scale-source-backup.json).
