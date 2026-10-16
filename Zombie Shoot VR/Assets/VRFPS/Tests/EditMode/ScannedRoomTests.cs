@@ -8,7 +8,7 @@ namespace VRFPS.Tests {
    try {
     var map=scene.GetRootGameObjects().SelectMany(x=>x.GetComponentsInChildren<MapRoot>()).Single();
     var floor=map.collisionRoot.Find("Floor").GetComponent<BoxCollider>();
-    Assert.That(floor.size.x,Is.EqualTo(10.75f).Within(.001));Assert.That(floor.size.z,Is.EqualTo(8.75f).Within(.001));
+    Assert.That(floor.bounds.size.x,Is.EqualTo(8.6f).Within(.001));Assert.That(floor.bounds.size.z,Is.EqualTo(7f).Within(.001));
     Assert.That(map.visualRoot.GetComponentsInChildren<Collider>(),Is.Empty);
     var theme=map.visualRoot.GetComponentInChildren<GeneratedThemeRoot>();
     if(theme!=null){Assert.That(theme.themeId,Is.EqualTo("AbandonedHouse"));Assert.That(AssetDatabase.GetDependencies(Path,true).Any(p=>p.Contains("External/RoomScan")),Is.False);}
@@ -53,16 +53,16 @@ namespace VRFPS.Tests {
     Assert.That(root.collisionRoot.Find("Corridor floor"),Is.Not.Null);
     var definition=AssetDatabase.LoadAssetAtPath<MapDefinition>("Assets/VRFPS/Configuration/Maps/Room.asset");
     var points=root.GetSpawnPositions(definition);Assert.That(points.Any(p=>p.z>3),Is.True);
-    Physics.SyncTransforms();Assert.That(Physics.Raycast(new Vector3(1.3f,1,1.1f)*2.5f,Vector3.forward,6.25f,LayerMask.GetMask("WorldSolid")),Is.False);
+    Physics.SyncTransforms();Assert.That(Physics.Raycast(new Vector3(1.3f,1,1.1f)*2f,Vector3.forward,6.25f,LayerMask.GetMask("WorldSolid")),Is.False);
    }finally{EditorSceneManager.CloseScene(scene,true);}
   }
   [Test] public void WallsCeilingAndBedBlockCombatRays(){
    var scene=EditorSceneManager.OpenScene(Path,OpenSceneMode.Additive);
    try {
     Physics.SyncTransforms();int mask=LayerMask.GetMask("WorldSolid");
-    Assert.That(Physics.Raycast(new Vector3(0,1,1.1f)*2.5f,Vector3.right,out var wall,7.5f,mask),Is.True);Assert.That(wall.collider.name,Does.StartWith("Side wall"));
-    Assert.That(Physics.Raycast(new Vector3(.2f,.3f,-.8f)*2.5f,Vector3.right,out var bed,5,mask),Is.True);Assert.That(bed.collider.transform.name=="Bed" || bed.collider.transform.parent.name=="Bed",Is.True);
-    Assert.That(Physics.Raycast(new Vector3(0,1.7f,1.1f)*2.5f,Vector3.up,out var ceiling,5,mask),Is.True);Assert.That(ceiling.collider.name,Is.EqualTo("Ceiling"));
+    Assert.That(Physics.Raycast(new Vector3(0,1,1.1f)*2f,Vector3.right,out var wall,7.5f,mask),Is.True);Assert.That(wall.collider.name,Does.StartWith("Side wall"));
+    Assert.That(Physics.Raycast(new Vector3(.2f,.3f,-.8f)*2f,Vector3.right,out var bed,5,mask),Is.True);Assert.That(bed.collider.transform.name=="Bed" || bed.collider.transform.parent.name=="Bed",Is.True);
+    Assert.That(Physics.Raycast(new Vector3(0,1.7f,1.1f)*2f,Vector3.up,out var ceiling,5,mask),Is.True);Assert.That(ceiling.collider.name,Is.EqualTo("Ceiling"));
    }finally{EditorSceneManager.CloseScene(scene,true);}
   }
  }

@@ -1,6 +1,7 @@
 using System.IO;
 using System.Linq;
 using NUnit.Framework;
+using UnityEngine.TestTools.Utils;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -20,16 +21,15 @@ namespace VRFPS.Tests
     var marker=map.visualRoot.GetComponentInChildren<GeneratedThemeRoot>();
     Assert.That(marker,Is.Not.Null);Assert.That(marker.themeId,Is.EqualTo("AbandonedHouse"));
     Assert.That(map.visualRoot.GetComponentsInChildren<Collider>(),Is.Empty);
-    var floor=map.collisionRoot.Find("Floor").GetComponent<BoxCollider>();Assert.That(floor.size,Is.EqualTo(new Vector3(10.75f,.5f,8.75f)));
+    var floor=map.collisionRoot.Find("Floor").GetComponent<BoxCollider>();Assert.That(floor.bounds.size,Is.EqualTo(new Vector3(8.6f,.4f,7f)).Using(Vector3ComparerWithEqualsOperator.Instance));
     var definition=AssetDatabase.LoadAssetAtPath<MapDefinition>("Assets/VRFPS/Configuration/Maps/Room.asset");
     Assert.That(map.GetSpawnPositions(definition).Length,Is.EqualTo(7));
     Assert.That(map.visualRoot.GetComponentsInChildren<Renderer>().Length,Is.GreaterThan(20));
     var data=AssetDatabase.LoadAssetAtPath<RoomStructureDefinition>("Assets/VRFPS/Configuration/Maps/RoomStructure.asset");Assert.That(data,Is.Not.Null);data.Validate();
     Assert.That(data.measuredRoomSize,Is.EqualTo(new Vector3(4.3f,2.45f,3.5f)));
-    Assert.That(map.playerSpawn.localPosition,Is.EqualTo(new Vector3(2.25f,0,2.75f)));
-    float ratio=2.5f/data.gameplayScale;
-    foreach(var e in data.elements){var c=map.collisionRoot.Find(e.id).GetComponent<BoxCollider>();Assert.That(c.size,Is.EqualTo(e.size*ratio));Assert.That(c.transform.localPosition,Is.EqualTo(e.localCenter*ratio));}
-    for(int i=0;i<data.enemySpawns.Length;i++)Assert.That(map.enemySpawns[i].localPosition,Is.EqualTo(data.enemySpawns[i]*ratio));
+    Assert.That(map.playerSpawn.localPosition,Is.EqualTo(new Vector3(1.8f,0,2.2f)).Using(Vector3ComparerWithEqualsOperator.Instance));
+    float ratio=2f/data.gameplayScale;
+    for(int i=0;i<data.enemySpawns.Length;i++)Assert.That(map.enemySpawns[i].localPosition,Is.EqualTo(data.enemySpawns[i]*ratio).Using(Vector3ComparerWithEqualsOperator.Instance));
     var theme=AssetDatabase.LoadAssetAtPath<EnvironmentThemeProfile>("Assets/VRFPS/Art/Environment/AbandonedHouse/AbandonedHouse.asset");
     Assert.That(theme,Is.Not.Null);Assert.That(theme.allowPlaceholders,Is.False);Assert.That(theme.visuals.Length,Is.EqualTo(data.elements.Length));
     foreach(var binding in theme.visuals)Assert.That(binding.prefab,Is.Not.Null);

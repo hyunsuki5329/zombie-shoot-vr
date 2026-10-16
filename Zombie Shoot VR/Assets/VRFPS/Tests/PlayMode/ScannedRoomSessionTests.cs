@@ -27,7 +27,7 @@ namespace VRFPS.Tests {
    entry.run.ApplyDamage(100,1,entry.run.ActiveTime);Assert.That(entry.Session.Results.SaveSucceeded,Is.True);
    Assert.That(new RecordStore(recordsPath).Read("room").reachedWave,Is.EqualTo(1));
    entry.menu.Retry();Assert.That(entry.run.Phase,Is.EqualTo(RunPhase.Preparing));Assert.That(entry.gun.Magazine.Rounds,Is.EqualTo(30));Assert.That(entry.run.Alive,Is.Zero);
-   Assert.That(Vector2.Distance(new Vector2(entry.rig.Head.position.x,entry.rig.Head.position.z),new Vector2(2.25f,2.75f)),Is.LessThan(.03f));
+   Assert.That(Vector2.Distance(new Vector2(entry.rig.Head.position.x,entry.rig.Head.position.z),new Vector2(1.8f,2.2f)),Is.LessThan(.03f));
   }
   [UnityTest] public IEnumerator ClassroomCombatAndTenTwoMapTransitions(){
    for(int i=0;i<10;i++){

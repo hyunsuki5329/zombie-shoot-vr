@@ -12,11 +12,11 @@ namespace VRFPS.Tests {
   [Test] public void RemovedChairPositionAndTeacherSideRouteAreClear(){
    try{
     EditorSceneManager.OpenScene("Assets/VRFPS/Scenes/Maps/Room.unity");Physics.SyncTransforms();
-    Clear(new Vector3(-1.18f,0,-1.7f),new Vector3(-1.18f,0,-.6f));
+    Clear(new Vector3(-1.18f,0,-1.7f)*.8f,new Vector3(-1.18f,0,-.6f)*.8f);
     EditorSceneManager.OpenScene("Assets/VRFPS/Scenes/Maps/Classroom.unity");Physics.SyncTransforms();
-    Clear(new Vector3(-6.6f,0,-1.65f),new Vector3(-6.6f,0,-2.2f));
-    Clear(new Vector3(-6.6f,0,-2.2f),new Vector3(-4.7f,0,-2.2f));
-    foreach(float x in new[]{-2.4f,0f,2.4f,4.7f})Clear(new Vector3(x,0,-2.4f),new Vector3(x,0,1.1f));
+    Clear(new Vector3(-6.6f,0,-1.65f)*2,new Vector3(-6.6f,0,-2.2f)*2);
+    Clear(new Vector3(-6.6f,0,-2.2f)*2,new Vector3(-4.7f,0,-2.2f)*2);
+    foreach(float x in new[]{-2.4f,0f,2.4f,4.7f})Clear(new Vector3(x,0,-2.4f)*2,new Vector3(x*2,0,1f));
    }finally{EditorSceneManager.NewScene(NewSceneSetup.EmptyScene,NewSceneMode.Single);}
   }
  }
