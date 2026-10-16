@@ -1,5 +1,7 @@
 # Goal 실행 현황
 
+2026-10-16 최신 소스 보관본: `Zombie Shoot VR/Builds/Reproduction/2d3f3e6-low-jump/source-with-local-assets.zip`. 점프1.35m와 시점1.15배, 최신 두 맵 배치를 포함한다. 2,856파일 CRC/SHA256 및 검증 캐시의 코드·씬·프리팹·자산241개 일치를 확인했다(C# 줄바꿈 정규화). ZIP을 새 Library로 다시 여는 시험은 미실행이다. 외부 자산 포함 로컬 보관용이며 최종 제출 완료가 아니다. [증빙](evidence/low-jump-source-backup.json).
+
 2026-10-16 점프 조정: 사용자 요청에 따라2.2m에서1.35m로 낮췄다. 1.2m 가구 착지·공중 재점프 차단을 포함한 PlayMode131/131 통과. 높이가 약1.7m인 폐가 책상까지 올라가는 설정은 아니다. 시점1.15배와 맵 배치는 유지한다. Windows GUID `4f8a62b0b3644f6595155f830491a59f`, 기존 AbandonedSchool.exe 경로에350파일 복사·해시 일치. 로그 `tmp/jump-low-20261016/play.xml`, `build.log`. 실제 VR 체감 확인은 대기다.
 
 2026-10-16 최신 소스 보관본: `Zombie Shoot VR/Builds/Reproduction/a7c149d-view-height-layout/source-with-local-assets.zip`. 시점1.15배·최신 사용자 배치·옛 충돌 제거 포함. 2,855파일 무결성 검사와 시험한 씬/NavMesh/플레이어 프리팹/높이 코드/의자 메시 일치 확인. ZIP 자체 새 캐시 재개방은 미실행. [보관 증빙](evidence/layout-height-source-backup.json).

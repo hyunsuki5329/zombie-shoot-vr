@@ -1,5 +1,7 @@
 # 소스 복원·시험·Windows 빌드
 
+2026-10-16 최신 소스 보관본: `Zombie Shoot VR/Builds/Reproduction/2d3f3e6-low-jump/source-with-local-assets.zip`. 점프1.35m와 시점1.15배, 최신 두 맵 배치를 포함한다. 2,856파일 CRC/SHA256 및 검증 캐시의 코드·씬·프리팹·자산241개 일치를 확인했다(C# 줄바꿈 정규화). ZIP을 새 Library로 다시 여는 시험은 미실행이다. 외부 자산 포함 로컬 보관용이며 최종 제출 완료가 아니다. [증빙](evidence/low-jump-source-backup.json).
+
 2026-10-16 최신 소스 보관본: `Zombie Shoot VR/Builds/Reproduction/a7c149d-view-height-layout/source-with-local-assets.zip`. 시점1.15배·최신 사용자 배치·옛 충돌 제거 포함. 2,855파일 무결성 검사와 시험한 씬/NavMesh/플레이어 프리팹/높이 코드/의자 메시 일치 확인. ZIP 자체 새 캐시 재개방은 미실행. [보관 증빙](evidence/layout-height-source-backup.json).
 
 2026-10-16 후속: 사용자 재편집 배치를 그대로 보존해 충돌·NavMesh를 갱신하고 폐교의 보이지 않는 옛 충돌체5개를 제거했다. 시점 높이1.15배 보정을 추가했다. [변경·검증](layout-height-20261016.md). 이전519495c 소스 ZIP은 이번 변경 전 보관본이다.
