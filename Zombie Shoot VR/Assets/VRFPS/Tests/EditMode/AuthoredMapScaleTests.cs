@@ -8,7 +8,9 @@ namespace VRFPS.Tests {
     if(name=="Room")foreach(var id in new[]{"Corridor left","Corridor right","Corridor end"}){var rs=map.visualRoot.GetComponentsInChildren<Transform>().Single(t=>t.name==id).GetComponentsInChildren<Renderer>();var b=rs[0].bounds;foreach(var r in rs)b.Encapsulate(r.bounds);Assert.That(b.size.y,Is.EqualTo(4.9f).Within(.02),id);}
     var theme=map.GetComponentsInChildren<Transform>().Single(t=>t.name==(name=="Room"?"ThemeGenerated":"SchoolThemeGenerated"));
     foreach(Transform t in theme){if(name=="Room"?new[]{"Chair","Bed","Desk","Wardrobe","Keyboard"}.Contains(t.name):t.name.StartsWith("Desk ")||t.name.StartsWith("Chair ")||t.name.StartsWith("Teacher ")){
-     Assert.That(t.localScale.x,Is.EqualTo(name=="Room"&&t.name=="Wardrobe"?.42f:furnitureScale).Within(.001),t.name);Assert.That(t.localScale.y,Is.EqualTo(furnitureScale).Within(.001),t.name);Assert.That(t.localScale.z,Is.EqualTo(furnitureScale).Within(.001),t.name);
+     var meshes=t.GetComponentsInChildren<MeshFilter>();var colliders=map.collisionRoot.Find(t.name).GetComponentsInChildren<MeshCollider>();Assert.That(colliders.Length,Is.EqualTo(meshes.Length),t.name);
+     for(int i=0;i<meshes.Length;i++){Assert.That(colliders[i].sharedMesh,Is.SameAs(meshes[i].sharedMesh),t.name);foreach(var point in new[]{Vector3.zero,Vector3.one,Vector3.up})Assert.That(Vector3.Distance(colliders[i].transform.TransformPoint(point),meshes[i].transform.TransformPoint(point)),Is.LessThan(.001f),t.name);}
+
     }}
    }finally{EditorSceneManager.NewScene(NewSceneSetup.EmptyScene,NewSceneMode.Single);}
   }

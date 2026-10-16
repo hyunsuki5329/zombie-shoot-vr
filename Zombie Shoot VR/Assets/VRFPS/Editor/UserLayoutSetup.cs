@@ -12,13 +12,17 @@ namespace VRFPS.Editor {
     var scene=EditorSceneManager.OpenScene("Assets/VRFPS/Scenes/Maps/"+name+".unity");
     var map=UnityEngine.Object.FindFirstObjectByType<MapRoot>();
     var theme=map.GetComponentsInChildren<Transform>(true).Single(t=>t.name==(name=="Room"?"ThemeGenerated":"SchoolThemeGenerated"));
-    if(name=="Classroom" && map.transform.Find("Student aisle clearance 40cm")==null){
-     var previous=map.transform.Find("Student aisle clearance applied");
-     float shift=previous!=null?.15f:.4f;
-     foreach(Transform item in theme)if(item.name.StartsWith("Desk ")||item.name.StartsWith("Chair "))item.position+=Vector3.back*shift;
-     if(previous!=null)UnityEngine.Object.DestroyImmediate(previous.gameObject);
-     new GameObject("Student aisle clearance 40cm").transform.SetParent(map.transform,false);
+    var visuals=theme.Cast<Transform>().ToArray();
+    if(visuals.Select(t=>t.name).Distinct().Count()!=visuals.Length)throw new InvalidOperationException("Duplicate furniture names: "+name);
+    var names=visuals.Select(t=>t.name).ToHashSet();
+    // Old manual duplicates lived directly under MapRoot, outside the generated collision root.
+    // Only strip invisible duplicates whose names match a current visual; preserve other authored objects.
+    foreach(var duplicate in map.transform.Cast<Transform>().Where(t=>names.Contains(t.name)&&t.GetComponentsInChildren<Renderer>(true).Length==0).ToArray()){
+     foreach(var collider in duplicate.GetComponentsInChildren<Collider>(true)){Debug.Log("REMOVED_STALE_COLLIDER "+name+"/"+duplicate.name);UnityEngine.Object.DestroyImmediate(collider);}
+     foreach(var modifier in duplicate.GetComponentsInChildren<NavMeshModifier>(true))UnityEngine.Object.DestroyImmediate(modifier);
     }
+
+    foreach(var stale in map.collisionRoot.Cast<Transform>().Where(t=>!names.Contains(t.name)).ToArray())UnityEngine.Object.DestroyImmediate(stale.gameObject);
     foreach(Transform visual in theme){
      var key=visual.name.ToLowerInvariant();
      if(key.Contains("floor")||key.Contains("ceiling")||key.Contains("wall")||key.Contains("lintel"))continue;
@@ -46,6 +50,7 @@ namespace VRFPS.Editor {
     Debug.Log("USER_LAYOUT_ANCHORS "+name+" "+count+"/"+map.enemySpawns.Length);
     EditorSceneManager.SaveScene(scene);Debug.Log("USER_LAYOUT_SYNCED "+name);
    }AssetDatabase.SaveAssets();
+   System.IO.File.Copy("Assets/VRFPS/Scenes/Maps/Room.unity",RoomHouseSetup.Preview,true);AssetDatabase.Refresh();
   }
  }
 }
