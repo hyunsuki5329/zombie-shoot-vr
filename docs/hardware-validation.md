@@ -1,6 +1,6 @@
 # Quest Pro 실기 검증 안내
 
-2026-10-17 폐가 추가 벽 수정: 책상 뒤 Door wall left (1)/(2)에 충돌체가 없어 통과하던 문제를 재현했다. UserLayoutSetup의 wall 제외 조건을 제거해 벽도 WorldSolid 충돌로 동기화하고 NavMesh를 갱신했다. 외형 배치 보존, 생성점 Room7/7·Classroom8/8, EditMode108통과/개인 스캔1제외. Windows GUID `9723fbe2fa094de7be98e4c75f72b1b2`, `Builds/Windows/WallFix/AbandonedSchool.exe`에350파일 해시 확인 후 배치. 기존 EXE가 사용 중이라 별도 폴더를 사용했다. 새 벽 VR 재확인은 대기. 사용자는 체감 성능이 충분하다고 확인했다. 보존한 Player.log에서 오류·예외·경고 표기는 없으며 .vrft/.jsonl은 없어 정량 성능 합격은 미확인이다. [증빙](evidence/room-wall-fix-20261017.json).
+2026-10-17 폐가 추가 벽 수정: 책상 뒤 Door wall left (1)/(2)에 충돌체가 없어 통과하던 문제를 재현했다. UserLayoutSetup의 wall 제외 조건을 제거해 벽도 WorldSolid 충돌로 동기화하고 NavMesh를 갱신했다. 외형 배치 보존, 생성점 Room7/7·Classroom8/8, EditMode108통과/개인 스캔1제외. Windows GUID `9723fbe2fa094de7be98e4c75f72b1b2`, `Builds/Windows/WallFix/AbandonedSchool.exe`에350파일 해시 확인 후 배치. 기존 EXE가 사용 중이라 별도 폴더를 사용했다. 후속 사용자 답변 “확인했어.”에 따라 책상 뒤 벽 수정의 실기 확인을 기록했다(추가 문제 보고 없음). 사용자는 체감 성능이 충분하다고 확인했다. 보존한 Player.log에서 오류·예외·경고 표기는 없으며 .vrft/.jsonl은 없어 정량 성능 합격은 미확인이다. [증빙](evidence/room-wall-fix-20261017.json).
 
 2026-10-16 사용자 실기 확인: 최신 AbandonedSchool.exe 안내에 이어 사용자가 시점·점프가 적당하다고 답했고, 두 맵의 가구 사이 이동과 좀비 접근도 문제없다고 확인했다. Room/Classroom의 해당 항목을 사용자 관찰 기준 통과로 기록한다. 현재 배포 파일 GUID는 `4f8a62b0b3644f6595155f830491a59f`이며 사용자가 별도로 GUID를 대조한 결과는 아니다. 시점1.15배·점프1.35m를 유지한다. 약1.7m 폐가 책상 착지, 전체 전투/기록/재도전 흐름, 72Hz CPU/GPU 측정과 각 맵30분·재도전/전환 반복 시험까지 통과한 것으로 확대하지 않는다.
 

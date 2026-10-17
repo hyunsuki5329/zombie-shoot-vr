@@ -17,5 +17,6 @@
   "performanceCaptureFilesFound": 0,
   "userPerformanceFeedback": "No notable heaviness; sufficient by user observation, not measured performance",
   "evidenceDirectory": "tmp/low-jump-clean-restore",
-  "newWallVrVerification": "pending"
+  "newWallVrVerification": "User confirmed verification in chat after being asked to check the repaired desk-back wall in WallFix build; no new issue reported",
+  "userConfirmation": "확인했어."
 }
