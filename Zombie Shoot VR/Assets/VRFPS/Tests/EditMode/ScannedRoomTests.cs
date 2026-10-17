@@ -60,7 +60,7 @@ namespace VRFPS.Tests {
    var scene=EditorSceneManager.OpenScene(Path,OpenSceneMode.Additive);
    try {
     Physics.SyncTransforms();int mask=LayerMask.GetMask("WorldSolid");
-    Assert.That(Physics.Raycast(new Vector3(0,1,1.1f)*2f,Vector3.right,out var wall,7.5f,mask),Is.True);Assert.That(wall.collider.name,Does.StartWith("Side wall"));
+    Assert.That(Physics.Raycast(new Vector3(0,1,1.1f)*2f,Vector3.right,out var wall,7.5f,mask),Is.True);Assert.That(wall.collider.transform.parent.name,Does.StartWith("Side wall"));
     Assert.That(Physics.Raycast(new Vector3(.2f,.3f,-.8f)*2f,Vector3.right,out var bed,5,mask),Is.True);Assert.That(bed.collider.transform.name=="Bed" || bed.collider.transform.parent.name=="Bed",Is.True);
     Assert.That(Physics.Raycast(new Vector3(0,1.7f,1.1f)*2f,Vector3.up,out var ceiling,5,mask),Is.True);Assert.That(ceiling.collider.name,Is.EqualTo("Ceiling"));
    }finally{EditorSceneManager.CloseScene(scene,true);}

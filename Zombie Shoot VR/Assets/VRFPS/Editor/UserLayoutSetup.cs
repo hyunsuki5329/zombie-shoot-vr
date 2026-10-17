@@ -25,7 +25,7 @@ namespace VRFPS.Editor {
     foreach(var stale in map.collisionRoot.Cast<Transform>().Where(t=>!names.Contains(t.name)).ToArray())UnityEngine.Object.DestroyImmediate(stale.gameObject);
     foreach(Transform visual in theme){
      var key=visual.name.ToLowerInvariant();
-     if(key.Contains("floor")||key.Contains("ceiling")||key.Contains("wall")||key.Contains("lintel"))continue;
+     if(key.Contains("floor")||key.Contains("ceiling")||key.Contains("lintel"))continue;
      var collision=map.collisionRoot.Find(visual.name);
      if(collision==null){collision=new GameObject(visual.name).transform;collision.SetParent(map.collisionRoot,false);}
      foreach(var c in collision.GetComponents<Collider>())UnityEngine.Object.DestroyImmediate(c);
