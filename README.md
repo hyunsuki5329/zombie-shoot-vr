@@ -2,7 +2,7 @@
 
 촬영한 방과 강의실을 전투 공간으로 사용하는 Unity PC VR 좀비 FPS 학기 프로젝트다. Quest Pro와 Virtual Desktop을 대상으로 K2 양손 사격, 왼손 수동 재장전, 근접·원거리 좀비와 무한 웨이브를 구현한다.
 
-**현재 상태: 폐가·폐교 두 맵에서 공통 전투를 실행할 수 있는 개발 빌드가 준비되어 있다.** 사용자 편집 가구 배치, 양손 사격·수동 재장전, 보스·크롤러, 맵별 기록, 시점 높이1.15배와1.35m 점프를 포함한다. 최신 두 맵의 VR 인수·성능·장시간 시험은 대기 중이며 최종 제출 완료가 아니다. [진행 기록](docs/progress.md)에서 검증 범위를 확인한다.
+**현재 상태: 폐가·폐교 두 맵에서 공통 전투를 실행할 수 있는 개발 빌드가 준비되어 있다.** 사용자 편집 가구 배치, 양손 사격·수동 재장전, 보스·크롤러, 맵별 기록, 시점 높이1.15배와1.35m 점프를 포함한다. 두 맵의 시점·점프·이동·좀비 접근 및 폐가 추가 벽 충돌은 사용자 확인을 받았다. 체감 성능은 충분하다는 평가이며, 정량 성능·장시간 시험과 나머지 최종 인수는 미완료다. [진행 기록](docs/progress.md)에서 검증 범위를 확인한다.
 
 ## 프로젝트 열기
 
@@ -15,9 +15,9 @@
 
 ## 최신 빌드 실행
 
-로컬 실행 파일: `Zombie Shoot VR/Builds/Windows/AbandonedSchool/AbandonedSchool.exe`.
+로컬 실행 파일: `Zombie Shoot VR/Builds/Windows/WallFix/AbandonedSchool.exe`.
 
-현재 기준 소스는 `c9c1ef5`, 빌드 GUID는 `4f8a62b0b3644f6595155f830491a59f`다. 개발용 Windows PC VR 빌드이며 Quest Pro·Virtual Desktop의 기존 연결 환경에서 실행한다. 첫 안내에서 Back으로 맵 선택에 돌아가 **Room(폐가)** 또는 **Classroom(폐교)**을 선택한다. 두 맵은 같은 실행 파일에 들어 있다. 실행 파일만 분리하지 말고 Data 폴더·DLL 등 빌드 폴더 전체를 함께 보관한다.
+현재 기준 소스는 `cdc635f`, 빌드 GUID는 `9723fbe2fa094de7be98e4c75f72b1b2`다. 개발용 Windows PC VR 빌드이며 Quest Pro·Virtual Desktop의 기존 연결 환경에서 실행한다. 첫 안내에서 Back으로 맵 선택에 돌아가 **Room(폐가)** 또는 **Classroom(폐교)**을 선택한다. 두 맵은 같은 실행 파일에 들어 있다. 실행 파일만 분리하지 말고 Data 폴더·DLL 등 빌드 폴더 전체를 함께 보관한다.
 
 | 조작 | 동작 |
 |---|---|
@@ -45,7 +45,7 @@ powershell -File scripts/Start-VrDiagnostics.ps1 -FrameTimings
 
 저장된 씬이 현재 가구 배치의 기준이다. 초기 `ClassroomSetup.Configure`, `RoomHouseSetup.ConfigurePreview`, `GrannyHouseSetup.Configure`를 다시 실행하면 수동 배치를 덮어쓸 수 있다. 가구를 수정한 뒤에는 현재 외형 기준으로 충돌·NavMesh를 동기화하고 경로를 검증해야 한다. 격리 배치 에디터에서 사용하는 도구는 `UserLayoutSetup.Configure`다.
 
-빌드와 일부 외부 자산은 Git에 포함되지 않는다. Git clone만으로 모든 외형이 복원되는 것은 아니다. 로컬 소스 ZIP에는 외부 자산/meta가 포함되며, [소스 복원 안내](docs/source-reproduction.md)에서 기준 커밋·검증 범위를 확인한다. 최신 로컬 보관본은 `2d3f3e6-low-jump`이며 점프1.35m 변경을 포함한다. 이 ZIP의 새 Library 복원·자동 검사·Windows 빌드를 확인했다. 같은 PC에서 검증했으며 실제 VR 인수는 대기 중이다.
+빌드와 일부 외부 자산은 Git에 포함되지 않는다. Git clone만으로 모든 외형이 복원되는 것은 아니다. 로컬 소스 ZIP에는 외부 자산/meta가 포함되며, [소스 복원 안내](docs/source-reproduction.md)에서 기준 커밋·검증 범위를 확인한다. 최신 로컬 보관본은 `2d3f3e6-low-jump`이며 점프1.35m 변경을 포함한다. 이 ZIP의 새 Library 복원·자동 검사·Windows 빌드를 확인했다. 단, 후속 벽 충돌 수정 전 보관본이므로 현재 Git의 코드·씬·NavMesh를 함께 적용해야 한다. 같은 PC에서 검증했으며 실제 VR 인수는 대기 중이다.
 
 ## 개발 문서
 
