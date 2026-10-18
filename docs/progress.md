@@ -1,5 +1,7 @@
 # Goal 실행 현황
 
+2026-10-18 최신 로컬 소스 묶음: `Zombie Shoot VR/Builds/Reproduction/cb1b0e7-wall-fix/source-with-local-assets.zip`. 벽 충돌 수정과5분 시험 기준 포함. 2,861개 파일 CRC/SHA256 검사 및 빌드 검증 작업본과 코드·씬·프리팹·자산241개 일치를 확인했다(C# 줄바꿈 정규화). 이 ZIP 자체의 새 Library 재개방은 미실행이며 이전 ZIP의 복원 검증과 구분한다. 외부 자산은 로컬 보관만 한다. 사용자 요청으로 로그 작업은 후순위로 두었다. [증빙](evidence/wall-fix-source-backup.json).
+
 2026-10-17 사용자 승인: 맵별 지속 플레이 시험은 기존30분에서 약5분으로 변경한다. 분석 시 각 맵의 실제 플레이 약300초와 정상 종료·오류·객체 상한을 확인하며, 장시간 안정성 검증으로 확대하지 않는다. 기존72Hz CPU/GPU 측정 및 재도전·맵 전환 횟수 기준은 별도이며 이번 답변으로 면제되지 않았다. 분석기의 thirty_minute_sample_span은 이전30분 참고 필드이므로 새5분 기준 실패로 해석하지 말고 sample_span_seconds와 실제 플레이 시간을 함께 확인한다.
 
 2026-10-17 폐가 추가 벽 수정: 책상 뒤 Door wall left (1)/(2)에 충돌체가 없어 통과하던 문제를 재현했다. UserLayoutSetup의 wall 제외 조건을 제거해 벽도 WorldSolid 충돌로 동기화하고 NavMesh를 갱신했다. 외형 배치 보존, 생성점 Room7/7·Classroom8/8, EditMode108통과/개인 스캔1제외. Windows GUID `9723fbe2fa094de7be98e4c75f72b1b2`, `Builds/Windows/WallFix/AbandonedSchool.exe`에350파일 해시 확인 후 배치. 기존 EXE가 사용 중이라 별도 폴더를 사용했다. 후속 사용자 답변 “확인했어.”에 따라 책상 뒤 벽 수정의 실기 확인을 기록했다(추가 문제 보고 없음). 사용자는 체감 성능이 충분하다고 확인했다. 보존한 Player.log에서 오류·예외·경고 표기는 없으며 .vrft/.jsonl은 없어 정량 성능 합격은 미확인이다. [증빙](evidence/room-wall-fix-20261017.json).

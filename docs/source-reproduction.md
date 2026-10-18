@@ -1,5 +1,7 @@
 # 소스 복원·시험·Windows 빌드
 
+2026-10-18 최신 로컬 소스 묶음: `Zombie Shoot VR/Builds/Reproduction/cb1b0e7-wall-fix/source-with-local-assets.zip`. 벽 충돌 수정과5분 시험 기준 포함. 2,861개 파일 CRC/SHA256 검사 및 빌드 검증 작업본과 코드·씬·프리팹·자산241개 일치를 확인했다(C# 줄바꿈 정규화). 이 ZIP 자체의 새 Library 재개방은 미실행이며 이전 ZIP의 복원 검증과 구분한다. 외부 자산은 로컬 보관만 한다. 사용자 요청으로 로그 작업은 후순위로 두었다. [증빙](evidence/wall-fix-source-backup.json).
+
 2026-10-16 최신 ZIP 복원 검증 완료: `2d3f3e6-low-jump`를 빈 폴더에 풀어 Library 없이 EditMode106통과/실패0/개인 스캔 검사1제외, PlayMode131/131, Windows 빌드 성공을 확인했다. 세 맵 씬은 ZIP과 동일하며 원본 스캔 빌드 포함0, 출처 안내문2개 동봉을 확인했다. 복원 빌드 GUID `eb43eaca52b4478fab7aaa28b29750c2`. 같은 PC의 패키지 캐시·라이선스를 사용했으며 새 PC 또는 실제 VR 검증은 아니다. 기존 실기용 빌드는 유지했다. [증빙](evidence/low-jump-clean-restoration.json).
 
 2026-10-16 최신 소스 보관본: `Zombie Shoot VR/Builds/Reproduction/2d3f3e6-low-jump/source-with-local-assets.zip`. 점프1.35m와 시점1.15배, 최신 두 맵 배치를 포함한다. 2,856파일 CRC/SHA256 및 검증 캐시의 코드·씬·프리팹·자산241개 일치를 확인했다(C# 줄바꿈 정규화). ZIP의 새 Library 복원 검증은 위 최신 결과를 따른다. 외부 자산 포함 로컬 보관용이며 최종 제출 완료가 아니다. [증빙](evidence/low-jump-source-backup.json).
