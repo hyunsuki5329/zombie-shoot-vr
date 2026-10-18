@@ -1,5 +1,7 @@
 # Goal 실행 현황
 
+2026-10-18 최신 ZIP 새 Library 복원 완료: cb1b0e7-wall-fix 원본을 빈 폴더에 풀어 EditMode108통과/개인 스캔1제외, PlayMode131/131, Windows 빌드 성공을 확인했다. 씬3개 원본 일치, 원본 스캔 포함0, 출처2개 동봉 확인. 복원 빌드 GUID `845dc8e7a5604288b78f8ed2d0727f49`. 동일 PC 캐시·라이선스를 사용했으며 기존 WallFix 실행본은 교체하지 않았다. [증빙](evidence/wall-fix-clean-restoration.json).
+
 2026-10-18 최신 로컬 소스 묶음: `Zombie Shoot VR/Builds/Reproduction/cb1b0e7-wall-fix/source-with-local-assets.zip`. 벽 충돌 수정과5분 시험 기준 포함. 2,861개 파일 CRC/SHA256 검사 및 빌드 검증 작업본과 코드·씬·프리팹·자산241개 일치를 확인했다(C# 줄바꿈 정규화). 이 ZIP 자체의 새 Library 재개방은 미실행이며 이전 ZIP의 복원 검증과 구분한다. 외부 자산은 로컬 보관만 한다. 사용자 요청으로 로그 작업은 후순위로 두었다. [증빙](evidence/wall-fix-source-backup.json).
 
 2026-10-17 사용자 승인: 맵별 지속 플레이 시험은 기존30분에서 약5분으로 변경한다. 분석 시 각 맵의 실제 플레이 약300초와 정상 종료·오류·객체 상한을 확인하며, 장시간 안정성 검증으로 확대하지 않는다. 기존72Hz CPU/GPU 측정 및 재도전·맵 전환 횟수 기준은 별도이며 이번 답변으로 면제되지 않았다. 분석기의 thirty_minute_sample_span은 이전30분 참고 필드이므로 새5분 기준 실패로 해석하지 말고 sample_span_seconds와 실제 플레이 시간을 함께 확인한다.

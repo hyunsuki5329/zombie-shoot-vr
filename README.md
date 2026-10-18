@@ -45,7 +45,7 @@ powershell -File scripts/Start-VrDiagnostics.ps1 -FrameTimings
 
 저장된 씬이 현재 가구 배치의 기준이다. 초기 `ClassroomSetup.Configure`, `RoomHouseSetup.ConfigurePreview`, `GrannyHouseSetup.Configure`를 다시 실행하면 수동 배치를 덮어쓸 수 있다. 가구를 수정한 뒤에는 현재 외형 기준으로 충돌·NavMesh를 동기화하고 경로를 검증해야 한다. 격리 배치 에디터에서 사용하는 도구는 `UserLayoutSetup.Configure`다.
 
-빌드와 일부 외부 자산은 Git에 포함되지 않는다. Git clone만으로 모든 외형이 복원되는 것은 아니다. 로컬 소스 ZIP에는 외부 자산/meta가 포함되며, [소스 복원 안내](docs/source-reproduction.md)에서 기준 커밋·검증 범위를 확인한다. 최신 로컬 보관본은 `cb1b0e7-wall-fix`이며 벽 충돌 수정까지 포함한다. 파일 무결성과 검증 작업본 일치는 확인했으며, 이 ZIP 자체의 새 Library 재개방은 미실행이다.
+빌드와 일부 외부 자산은 Git에 포함되지 않는다. Git clone만으로 모든 외형이 복원되는 것은 아니다. 로컬 소스 ZIP에는 외부 자산/meta가 포함되며, [소스 복원 안내](docs/source-reproduction.md)에서 기준 커밋·검증 범위를 확인한다. 최신 로컬 보관본은 `cb1b0e7-wall-fix`이며 벽 충돌 수정까지 포함한다. 파일 무결성과 검증 작업본 일치는 확인했으며, 이 ZIP의 새 Library 자동 검사와 Windows 빌드까지 확인했다(동일 PC).
 
 ## 개발 문서
 
