@@ -82,3 +82,13 @@ Mixamo의 `Zombie Reaction Hit` 중 Flinches 동작을 사용자 로그인 세�
 # 보스·돌연변이 자원 추가 (2026-10-08)
 
 사용자가 제공한 Mixamo 모델 Skeletonzombie T Avelange와 Zombiegirl W Kurniawan을 각각 5웨이브 주기 보스와 6웨이브 이후 크롤러에 사용한다. 사용자 로그인 세션에서 Zombie Crawl(In Place), Zombie Biting(Victim On The Ground)을 FBX for Unity / Without Skin / 30fps / 키프레임 축소 없음으로 내려받았다. 이전 Adobe/Mixamo 사용 조건 및 원본 Git 제외 원칙을 유지한다. 원본 4개의 SHA256은 [복원 스크립트](../scripts/Restore-EnemyVariants.py)에 기록했다. Humanoid 리타게팅, URP 재질 연결, 보스 크기 조정, 크롤러 접지 보정과 머리 판정을 적용했다. [상세 복원 절차](boss-crawler.md).
+
+
+## 전환 연출용 바이러스 후보 — 취득만 완료 (2026-10-19)
+
+- 모델: [Coronavirus // virus model](https://sketchfab.com/3d-models/coronavirus-virus-model-362ca23f5a584c5bb84dc9d9a25ff73e), 제작자 **anyaachan**.
+- 사용자 제공 다운로드 화면은 **CC Attribution**, 저작자 표시 필수·상업 이용 가능으로 안내한다. 세부 라이선스 버전은 화면에 없어 추정하지 않는다. 웹 직접 조회는403으로 실패했으며 화면 확인과 구분한다.
+- 원본: `C:/Users/User/Downloads/coronavirus-virus-model.zip`, 40,258,069바이트, SHA256 `d3e8d8817c2e7051ed12e2fb0ca9601a1fada27b9903190dac43ab553b32b8c3`.
+- 바깥 ZIP 및 내부 `source/model.zip` CRC 검사 통과. 내부에 `model.obj`, `model.mtl`, PNG3개가 있고 바깥에도 textures PNG3개가 있다.
+- MTL에 텍스처 경로가 없고 Kd가0이므로 추후 Unity 적용 시 재질·텍스처를 명시적으로 연결하고 외형을 검증해야 한다.
+- 현재 게임에 임포트·사용하지 않았다. 변경 없음. 원본은 로컬 Downloads에 유지하며 이번 커밋은 출처 기록만 포함한다. 실제 적용 시 빌드 크레딧에도 제작자·모델 링크·라이선스·변경 내역을 추가한다.
