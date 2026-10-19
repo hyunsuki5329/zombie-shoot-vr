@@ -70,3 +70,7 @@ powershell -File scripts/Start-VrDiagnostics.ps1 -FrameTimings
 [현재 자산 출처표](docs/asset-provenance.md)와 [보존한 라이선스/제3자 고지](docs/licenses/README.md)를 제출 준비에 사용한다. 미채택 모델 후보와 실제 포함 자산을 구분하며 최종 외형·스캔 출처는 추가 검증이 필요하다.
 
 단위별 자동 시험·빌드와 사용자 관찰은 [진행 기록](docs/progress.md) 및 `docs/evidence/`에 구분해 남긴다. 전체 완료나 성능 합격은 실제 두 맵과 최종 빌드의 인수 결과로 판정한다. 캐시 없는 소스 내보내기 검증은 [복원 안내](docs/source-reproduction.md)에 기록한다.
+
+## 설계 중인 확장: 현실 공간과 테마 맵 비교
+
+2026-10-20 사용자 요청에 따라 방 GS를 감상하다 큰 바이러스를 쏘면 암전 후 폐가로 전환되고 전투가 시작되는 P13을 문서화했다. [PRD](docs/vr-fps-project-docs/02-requirements.md), [상세 설계](docs/vr-fps-project-docs/11-gs-comparison-intro.md), [구현 계획](docs/vr-fps-project-docs/12-gs-comparison-plan.md)을 참고한다. **아직 구현되지 않았으며 위 WallFix 빌드에는 포함돼 있지 않다.**

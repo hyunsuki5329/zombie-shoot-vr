@@ -1,5 +1,7 @@
 # VR 좀비 FPS 개발 문서
 
+2026-10-20: [GS 비교 도입부 설계](vr-fps-project-docs/11-gs-comparison-intro.md)와 [P13 구현 계획](vr-fps-project-docs/12-gs-comparison-plan.md)을 추가했다. PRD·기술/촬영/검증/Goal에도 반영했다. 문서만 갱신했으며 최신 실행본은 WallFix다.
+
 2026-10-19 현재 맵 범위: **내 방 폐가 / 실제 강의실 폐교**. [고정 테마와 구조 제작 기준](VRShoot_Method_A_Codex_Guide.reviewed.md). 두 테마와 공통 전투는 구현됐으며 두 맵의 전체 플레이 흐름은 사용자 실기 확인을 받았다. 정량 성능과 맵별 약5분 시험 기록은 보류 상태다. 최신 실행 경로와 조작은 [프로젝트 실행 안내](../README.md)를 따른다.
 
 설계 기준: **2026-09-20, 문서 묶음 1.1**. 구현 현황은 아래 진행 기록의 최신 날짜를 따른다.
