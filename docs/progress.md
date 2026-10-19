@@ -1,19 +1,138 @@
 # Goal 실행 현황
 
-현재 상태: 보스·Zombiegirl 크롤러 구현과 자동 검증을 진행했으며 전체 목표는 미완료다. 아래 최신 요약을 우선하고 이전 날짜별 기록은 당시 증빙으로 읽는다.
+## 2026-10-19 비교 기능 도입 전 기존 작업 정리
+
+- 기준 HEAD `57f674e`, 기존 WallFix 플레이 빌드와 사용자 수정 씬은 유지한다. 새 비교/바이러스/암전 기능은 아직 구현하지 않았다.
+- 기존 사용자 인수와 소스 새 Library 복원 증빙을 대조했다. 기존 증빙은 EditMode108통과/개인 스캔1제외, PlayMode131/131 및 Windows 빌드 성공이며 이번에 Unity 시험을 재실행한 것은 아니다.
+- 실행기 `Start-VrDiagnostics.ps1 -CheckOnly -FrameTimings`가 WallFix 실행 파일을 정상 선택한다. 게임을 실행하거나 성능 로그를 수집하지 않았다.
+- README 두 곳의 오래된 실기 대기 표현을 최신 사용자 확인으로 수정하고 Goal 본문의30분 지침을 승인된 약5분으로 동기화했다. 역사적 기록은 유지한다.
+- 바이러스 원본 외부/내부 ZIP 무결성을 검사하고 출처·해시·재질 연결 주의점을 [출처 기록](asset-provenance.md)에 추가했다. 자산은 아직 Unity에 넣지 않았다.
+- 현재 보고된 미해결 게임 결함은 없다. 남은 기존 종료 항목은 보류된 성능/약5분·반복 시험 기록, 사용자 담당 발표/영상, 최종 제출/통합 판정이다. 이것을 완료로 간주하지 않으며 비교 기능 개발의 선행 코드 수정으로도 취급하지 않는다.
+- PR21은 OPEN/DRAFT/MERGEABLE로 확인했다. 기존 최종 인수 조건이 남아 병합하지 않는다. AGENTS에서 지정한 세 agent prompt 파일은 현재 저장소에서 찾지 못해 규칙을 추정하지 않았다.
+- 다음 작업: 승인된 실제 공간 → 바이러스 사격 → 암전 → 테마 맵/게임 시작 기능. 실제 공간 표시용 GS 자료 확보 여부와 현재 PCVR 렌더링 호환성을 먼저 확인한다. 이번 요청은 기존 작업 정리까지이므로 기능 추가는 착수하지 않았다.
+
+
+2026-10-18 전체 플레이 흐름 사용자 확인: 최신 WallFix 빌드의 폐가·폐교 각각 사격·재장전 → 웨이브 진행 → 사망 → 기록 표시 → 재도전에 대한 질문에 사용자가 “두 맵 모두 확인했고 정상”이라고 답했다. 해당 흐름을 사용자 실기 보고 기준 통과로 기록한다. 시험 시간, 반복 횟수, 앱 재실행 후 기록 보존, 정량 성능까지 확인한 것으로 확대하지 않는다. 성능 로그 작업은 사용자 요청에 따라 보류한다.
+
+2026-10-18 최신 ZIP 새 Library 복원 완료: cb1b0e7-wall-fix 원본을 빈 폴더에 풀어 EditMode108통과/개인 스캔1제외, PlayMode131/131, Windows 빌드 성공을 확인했다. 씬3개 원본 일치, 원본 스캔 포함0, 출처2개 동봉 확인. 복원 빌드 GUID `845dc8e7a5604288b78f8ed2d0727f49`. 동일 PC 캐시·라이선스를 사용했으며 기존 WallFix 실행본은 교체하지 않았다. [증빙](evidence/wall-fix-clean-restoration.json).
+
+2026-10-18 최신 로컬 소스 묶음: `Zombie Shoot VR/Builds/Reproduction/cb1b0e7-wall-fix/source-with-local-assets.zip`. 벽 충돌 수정과5분 시험 기준 포함. 2,861개 파일 CRC/SHA256 검사 및 빌드 검증 작업본과 코드·씬·프리팹·자산241개 일치를 확인했다(C# 줄바꿈 정규화). 이 ZIP 자체의 새 Library 재개방은 미실행이며 이전 ZIP의 복원 검증과 구분한다. 외부 자산은 로컬 보관만 한다. 사용자 요청으로 로그 작업은 후순위로 두었다. [증빙](evidence/wall-fix-source-backup.json).
+
+2026-10-17 사용자 승인: 맵별 지속 플레이 시험은 기존30분에서 약5분으로 변경한다. 분석 시 각 맵의 실제 플레이 약300초와 정상 종료·오류·객체 상한을 확인하며, 장시간 안정성 검증으로 확대하지 않는다. 기존72Hz CPU/GPU 측정 및 재도전·맵 전환 횟수 기준은 별도이며 이번 답변으로 면제되지 않았다. 분석기의 thirty_minute_sample_span은 이전30분 참고 필드이므로 새5분 기준 실패로 해석하지 말고 sample_span_seconds와 실제 플레이 시간을 함께 확인한다.
+
+2026-10-17 폐가 추가 벽 수정: 책상 뒤 Door wall left (1)/(2)에 충돌체가 없어 통과하던 문제를 재현했다. UserLayoutSetup의 wall 제외 조건을 제거해 벽도 WorldSolid 충돌로 동기화하고 NavMesh를 갱신했다. 외형 배치 보존, 생성점 Room7/7·Classroom8/8, EditMode108통과/개인 스캔1제외. Windows GUID `9723fbe2fa094de7be98e4c75f72b1b2`, `Builds/Windows/WallFix/AbandonedSchool.exe`에350파일 해시 확인 후 배치. 기존 EXE가 사용 중이라 별도 폴더를 사용했다. 후속 사용자 답변 “확인했어.”에 따라 책상 뒤 벽 수정의 실기 확인을 기록했다(추가 문제 보고 없음). 사용자는 체감 성능이 충분하다고 확인했다. 보존한 Player.log에서 오류·예외·경고 표기는 없으며 .vrft/.jsonl은 없어 정량 성능 합격은 미확인이다. [증빙](evidence/room-wall-fix-20261017.json).
+
+2026-10-16 사용자 실기 확인: 최신 AbandonedSchool.exe 안내에 이어 사용자가 시점·점프가 적당하다고 답했고, 두 맵의 가구 사이 이동과 좀비 접근도 문제없다고 확인했다. Room/Classroom의 해당 항목을 사용자 관찰 기준 통과로 기록한다. 현재 배포 파일 GUID는 `4f8a62b0b3644f6595155f830491a59f`이며 사용자가 별도로 GUID를 대조한 결과는 아니다. 시점1.15배·점프1.35m를 유지한다. 약1.7m 폐가 책상 착지, 전체 전투/기록/재도전 흐름, 72Hz CPU/GPU 측정과 각 맵30분·재도전/전환 반복 시험까지 통과한 것으로 확대하지 않는다.
+
+2026-10-16 최신 ZIP 복원 검증 완료: `2d3f3e6-low-jump`를 빈 폴더에 풀어 Library 없이 EditMode106통과/실패0/개인 스캔 검사1제외, PlayMode131/131, Windows 빌드 성공을 확인했다. 세 맵 씬은 ZIP과 동일하며 원본 스캔 빌드 포함0, 출처 안내문2개 동봉을 확인했다. 복원 빌드 GUID `eb43eaca52b4478fab7aaa28b29750c2`. 같은 PC의 패키지 캐시·라이선스를 사용했으며 새 PC 또는 실제 VR 검증은 아니다. 기존 실기용 빌드는 유지했다. [증빙](evidence/low-jump-clean-restoration.json).
+
+2026-10-16 최신 소스 보관본: `Zombie Shoot VR/Builds/Reproduction/2d3f3e6-low-jump/source-with-local-assets.zip`. 점프1.35m와 시점1.15배, 최신 두 맵 배치를 포함한다. 2,856파일 CRC/SHA256 및 검증 캐시의 코드·씬·프리팹·자산241개 일치를 확인했다(C# 줄바꿈 정규화). ZIP의 새 Library 복원 검증은 위 최신 결과를 따른다. 외부 자산 포함 로컬 보관용이며 최종 제출 완료가 아니다. [증빙](evidence/low-jump-source-backup.json).
+
+2026-10-16 점프 조정: 사용자 요청에 따라2.2m에서1.35m로 낮췄다. 1.2m 가구 착지·공중 재점프 차단을 포함한 PlayMode131/131 통과. 높이가 약1.7m인 폐가 책상까지 올라가는 설정은 아니다. 시점1.15배와 맵 배치는 유지한다. Windows GUID `4f8a62b0b3644f6595155f830491a59f`, 기존 AbandonedSchool.exe 경로에350파일 복사·해시 일치. 로그 `tmp/jump-low-20261016/play.xml`, `build.log`. 실제 VR 체감 확인은 대기다.
+
+2026-10-16 최신 소스 보관본: `Zombie Shoot VR/Builds/Reproduction/a7c149d-view-height-layout/source-with-local-assets.zip`. 시점1.15배·최신 사용자 배치·옛 충돌 제거 포함. 2,855파일 무결성 검사와 시험한 씬/NavMesh/플레이어 프리팹/높이 코드/의자 메시 일치 확인. ZIP 자체 새 캐시 재개방은 미실행. [보관 증빙](evidence/layout-height-source-backup.json).
+
+2026-10-16 후속: 사용자 재편집 배치를 그대로 보존해 충돌·NavMesh를 갱신하고 폐교의 보이지 않는 옛 충돌체5개를 제거했다. 시점 높이1.15배 보정을 추가했다. [변경·검증](layout-height-20261016.md). 이전519495c 소스 ZIP은 이번 변경 전 보관본이다.
+
+2026-10-16 최신 소스 보관본: `Zombie Shoot VR/Builds/Reproduction/519495c-map-scale/source-with-local-assets.zip`. 소스519495c와 로컬 외부 자산/meta를 포함한다. 2,842파일 CRC·SHA256 검증, 실제 시험한 캐시의 두 맵/미리보기·NavMesh·수정 의자 메시 일치 확인. ZIP 자체의 새 캐시 재개방은 미실행이며 이전83dc690 ZIP의 새 캐시 시험과 구분한다. [보관 증빙](evidence/map-scale-source-backup.json).
+
+2026-10-16 최신 기준: 폐가 공간2배·가구1.5배, 폐교 공간2배·책상/의자1.5배. 아래 이전 크기 설명보다 이 결정이 우선한다. [상세 변경](map-scale-20261016.md)
+
+## 2026-10-15 최신 ZIP 새 캐시 복원 검증
+
+소스83dc690과 외부 자산/meta를 담은 ZIP을 빈 폴더에 풀고 Library 없이 검증했다. 자산 재연결이나 씬 재생성 없이 EditMode99통과/실패0/개인 원본 스캔 검사1제외, PlayMode130/130, Windows 빌드 성공을 확인했다. Room/Classroom 씬은 ZIP 원본과 해시가 같으며 두 출처 안내문도 빌드에 동일하게 동봉됐다. 원본 스캔과 학교 원본 FBX의 빌드 포함은0이다. [복원 증빙](evidence/user-layout-clean-restoration.json).
+
+복원 검증 빌드 GUID는 `a7080199e5c04e3b9d2165f9064b5bc0`, 로그는 `tmp/user-layout-archive-validation/`에 있다. 동일 PC의 패키지 캐시·라이선스를 사용한 검증이며 다른 PC 검증이나 VR 인수가 아니다. 기존 사용자 테스트용 AbandonedSchool.exe(GUID `2a41ebb5739b4386b8b2b55ca4c66eca`)는 교체하지 않았다. 실제 두 맵 인수·성능·장시간 시험과 사용자 담당 발표/시연 자료, 최종 병합은 남아 있다.
+
+## 2026-10-15 저장된 가구 배치·A 점프 반영
+
+구현 커밋 `83dc690`, 소스 보관 안내 `aedee9e`. 사용자 저장 Room/Classroom 씬을 기준으로 메시 충돌과 NavMesh를 동기화했다. 폐가 옛 의자 자리와 폐교 교탁 옆·학생 가구 사이 통로를 자동 검사했으며, 학생 가구 묶음은 연결 확보를 위해 Z음수 방향으로40cm 이동했다. 오른손 A 접지 점프와 새 탄창 공급 진동을 포함한다. [변경·재동기화 안내](user-layout-jump.md).
+
+최종 자동 시험 XML을 확인했다: EditMode100/100, PlayMode130/130 (`tmp/user-layout-20261015/edit-clean.xml`, `play-final.xml`). 빌드는 `Zombie Shoot VR/Builds/Windows/AbandonedSchool/AbandonedSchool.exe`, GUID `2a41ebb5739b4386b8b2b55ca4c66eca`. [소스 보관 증빙](evidence/user-layout-source-backup.json)은2834파일 해시 검증 및 저장 씬 일치를 기록한다. 해당 ZIP 자체를 새 캐시로 다시 여는 시험은 아직 실행하지 않았다.
+
+사용자의 최신 답변은 **실행 전**이다. A입력·침대/책상 착지·통로·새 탄창 진동의 실기 인수, 두 맵 성능·장시간 시험은 미완료다. [PR21](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/21)은 초안 유지, 최신 변경 독립 소스 검토에서 조치할 결함은 확인되지 않았다. 정지/사망을 거친 재도전 시 수직 속도 초기화와 재동기화 간격 마커를 확인했으며, 이 검토는 Unity 재실행이나 기기 검증을 대신하지 않는다. 다음 작업은 기기 결과 검증과 남은 성능·장시간 시험이다. 발표자료는 사용자 담당이며 에이전트가 제작하지 않는다. 이 기록은 아래 이전 빌드 식별자를 대체한다.
+
+## 2026-10-15 새 탄창 공급 진동
+
+사용자 요청으로 왼손 새 탄창 공급 성공 시 강도0.3/0.07초 햅틱을 추가했다. 삽입음 없이 기존 왼손 HapticImpulsePlayer를 사용한다. 수정 전 신호0으로 실패 확인, 수정 후 PlayMode129/129 통과. 공급 실패·입력 차단·그립 유지·재도전의 중복 신호 방지 검사 포함. 두 맵 빌드 GUID `a3a2b52c2c6e4e2f879222bb330524bb`, 실제 진동 체감은 사용자 확인 대기. 로그 `tmp/supply-red.xml`, `tmp/supply-green.xml`, `tmp/supply-build.log`.
+
+## 2026-10-14 폐교 맵 통합 시제품
+
+사용자 추정 크기14×6.3m로 Classroom을 구성했다. 잘못된 세 돌출부 제외, 학교 가구·벽·바닥 적용, 메시 충돌과8개 유효 생성점, 두 맵 공통 전투 연결. 학생 가구20조와 천장3m는 추정이며 출입구·창문 상세는 미확정이다. EditMode99/99, PlayMode128/128(두 맵10회 전환 포함), Windows 빌드 성공 GUID `4a9f39b9fb7d411bb936441659b3c5df`. 원본 스캔/학교 FBX 빌드 포함0. 로그는 로컬 `tmp/school-source/map-editmode-clean.xml`, `map-playmode-final.xml`, `map-build-final.log`.
+
+최신 실행 파일은 `Zombie Shoot VR/Builds/Windows/AbandonedSchool/AbandonedSchool.exe`. Room/ Classroom 모두 선택 가능하다. 아래 이전 기록의 강의실 비활성·실측 대기 상태를 대체한다. 두 맵 VR 인수, 성능, 최신 소스의 전체 복원 검증과 제출물은 남아 있어 Goal과 PR21은 진행 중이다.
+
+
+2026-10-14 재질 후속: 임시 금속도/부드러움을 원본 Metalness/Roughness로 교체했다. 4타일 총16,777,216픽셀의 금속도·역거칠기 채널 일치, 실패 재현 후 영향 시험1/1 및 렌더 확인. 생성 자산 복사 해시 일치. 게임 맵 연결·VR 인수는 여전히 대기다.
+
+## 2026-10-14 폐교 가구 라이브러리 준비
+
+책상·의자·교탁·칠판·벽·바닥6개 프리팹을 원본 학교에서 분리해 로컬 프로젝트에 반영했다. UDIM 타일별 독립 메시와 URP BaseColor/Normal을 연결했다. 칠판 그룹의 떨어진 부품은 렌더 확인 후 실제 판면 선택으로 수정했다. [계획·복원](school-assets-plan.md), [검증](evidence/school-assets.json). EditMode98/98 후 최종 칠판 변경의 영향 시험1/1 재통과,6개 렌더 시각 확인 및 복사 파일 전체 SHA256 일치. 원본 FBX 의존성 배제 시험 통과.
+
+이는 시각 라이브러리 준비이며 Classroom 배치·충돌·NavMesh·빌드 연결은 아직 아니다. 실제 가로·세로 길이, 폐가 최신 VR 인수, 두 맵 성능 검증과 제출물은 남아 있다. 현재 실행 빌드는 변경하지 않았다.
+
+## 2026-10-14 강의실 참조 정리·폐교 자산 확보
+
+사용자가 표시한 실제로 없는 세 돌출부를 로컬 참조 메시에서 제외했다. 삼각형13,559개 제거·247,477개 보존, 원본 FBX 해시 불변을 확인했다. 배치도·파생 OBJ는 `tmp/classroom-inspection/`에 있으며 제거 좌표는 [원본 검사](evidence/classroom-scan-intake.json)에 기록했다. 실제 크기 보정·게임 적용은 아직 아니다.
+
+사용자 지정 `abandoned-school.zip`의 FBX1개·텍스처45개를 격리 Unity에서 정상 가져왔다(메시1,219개). 책상·의자·벽·문 개별 계층과1001~1009 UDIM 텍스처를 확인했다. 추출 시 UV·URP 재질 변환이 필요하다. 제작자kiyosueshi/CC BY4.0은 원본 페이지에서 확인했다([출처](licenses/AbandonedSchool-Attribution.md)). 실측 길이·폐교 런타임 제작·실기 인수는 남아 있다.
+
+## 2026-10-14 강의실 원본 확보
+
+사용자가 바탕화면 `Scaniverse 2026-10-13 165303.fbx`를 실제 강의실 스캔으로 확인했다. FBX7500, 정점153,581개·폴리곤261,036개와 내장 JPEG를 읽었으며 정점은 모두 유효한 유한수다. [원본 검사](evidence/classroom-scan-intake.json). 메시 경계는 약17.77×13.36m이나 벽 간 실측값으로 확정하지 않는다. 실제 가로·세로 길이와 배치 확인 후 폐교 구조를 제작한다. 원본은 로컬에 보존한다. 최신 Granny 폐가 빌드는 사용자가 아직 실행 전이라고 답했으므로 실기 인수 대기다.
+
+2026-10-14 P12 후속: Granny 출처 안내를 빌드 과정에 연결했다. 복원 프로젝트에서 Windows 재빌드 성공 및 자동 동봉 파일 SHA256 일치 확인(`tmp/granny-source/build-attribution.log`). 이 작업은 제출물 누락 방지이며 게임 내용/VR 인수 상태는 바꾸지 않는다.
+
+## 2026-10-14 Granny 가구·벽·마루 적용
+
+사용자 지정 ZIP에서 가구를 분리하고 벽·바닥 재질을 적용했다. 방 배치와2.5배 공간, 기존 충돌/경로/생성점은 유지한다. [자산·복원 안내](granny-house-assets.md), [검증](evidence/granny-house.json). 기존 AbandonedHouse 실행 경로에 새 빌드를 반영했다.
+
+- EditMode97/97, PlayMode127/127, Windows 빌드 성공. 리뷰의 걸레받이 겹침과 새 환경 프리팹 GUID 복원 문제를 재현·수정했다. 별도 복원에서 프리팹18개 GUID와 실제 Room 메시·재질 참조 시험1/1 통과.
+- 외부 자산341파일, 씬/빌드347파일 복사 해시 일치. 원본·추출 결과는 로컬 보관하고 Git에는 코드·씬·복원 metadata·문서만 포함한다.
+- 기존 게임 자산에 대한 업로더 권한은 확인되지 않아 공개 배포 전 출처 확인이 필요하다. 단순 가구 BoxCollider 및 실제 VR/성능 인수는 남아 있다. 최종 프로젝트 완료가 아니며 PR#21 초안 유지.
+
+## 2026-10-13 확대 소스 새 캐시 복원 검증
+
+62c7427 소스와 로컬 외부188파일을 새 폴더에 복원하고 Library 없이 Unity를 실행했다. EditMode95통과/실패0/원본 개인 스캔 검사1제외, PlayMode127통과, Windows 빌드 성공 및 packed RoomScan0을 확인했다. [증빙](evidence/clean-room-restoration.json), [복원 안내](source-reproduction.md). 제출 초안의 GS·다른 사용자 공간 확장 설명을 현재 고정 두 맵/Method A 범위로 수정했다. 동일 PC 새 캐시 검증이며 기기 인수와 최종 제출 완료를 뜻하지 않는다.
+
+## 2026-10-13 Room 2.5배 확대
+
+사용자가 폐가 빌드를 실행하고 맵이 작다고 확인하여, 원본 구조·가구 배치를 유지한 채 전체 게임 공간을2.5배 확대했다. 실내10.75×8.75m, 높이6.125m이며 복도·가구·충돌·생성점도 동일 비율이다. 플레이어·무기·적 크기와 이동 속도는 유지한다. 실측 원본4.3×3.5m는 그대로 보존한다.
+
+- EditMode96/96, PlayMode127/127 통과. 리뷰의 재캡처 배율 테스트 문제 수정 후 해당 테스트1/1 재통과. [확대 계획](room-gameplay-scale.md), [증빙](evidence/room-gameplay-scale.json).
+- Windows 빌드 성공, RoomScan packed 자산0. 기존 `Builds/Windows/AbandonedHouse/AbandonedHouse.exe`에 반영하고 생성 자산·빌드501파일 복사 해시 일치를 확인했다.
+- R16/P02/P09/T02/T03/T11/T16/T17 관련 변경이다. PR#21은 확대 버전의 Quest Pro 공간감·충돌·적 이동 및 성능 인수 전까지 초안으로 유지한다. Goal 전체는 미완료이며 실제 강의실·최종 미술·성능·제출물 작업이 남아 있다.
+
+아래 내용은 확대 전 작업 이력이다.
+
+## 2026-10-13 현재 재개 상태
+
+Goal `active` 확인. 내 방 구조 기반 **폐가 시제품**을 Room에 연결했다. 직접 제작한 프리팹18개/렌더러46개와 별도 NavMesh를 사용하며, 사진형 스캔 씬은 로컬 참조로 보존한다. 고정 테마 가이드와 요구사항·Goal 문서도 갱신했다.
+
+- 검증: 리뷰 결함2건 수정, EditMode91/91·PlayMode127/127. [새 증빙](evidence/method-a-house.json).
+- 원본 RoomScan 없는 재생성·Windows 빌드 성공, packed RoomScan 자산0. 런타임 기준7af6176을 push했고 PR #21을 초안으로 갱신했다. 로컬 복원 ZIP CRC/외부188파일 SHA256 검증 완료. 새 Library 복원은 아직 미실행.
+- 최신 실행 경로: `Zombie Shoot VR/Builds/Windows/AbandonedHouse/AbandonedHouse.exe`. [기기 확인 절차](hardware-validation.md).
+- 미완료: 폐가 최종 시각·VR/성능 인수, 실제 강의실 촬영 및 폐교 제작, 최종 발표·시연·제출 패키지. 시제품을 두 맵 완성이나 프로젝트 완료로 계산하지 않는다.
+
+아래 날짜별 항목은 당시 상태의 이력이다.
+
+2026-10-12 문서 범위 변경: **내 방→폐가, 실제 강의실→폐교**로 고정했다. [Method A 설계](VRShoot_Method_A_Codex_Guide.reviewed.md), Goal·요구사항·구현/시험 계획을 동기화했다. 테마 구현은 아직 시작하지 않았고 현재 Room 빌드는 기존 사진형 스캔이다. 2026-10-13 사용자가 개발과 Goal 재개를 요청했다. 도구에는 paused가 남아 있고 직접 재개 API는 없으므로 상태 변경을 주장하지 않으며, 승인된 개발은 재개한다. 강의실은 촬영 전이며, 다음 구현은 내 방 구조 분리와 폐가 외형부터 진행한다.
+
+현재 상태: 사용자 방 스캔을 공통 전투에 연결했고, 승인된1.5m 생성 거리와 방 밖 복도를 추가했다. Goal은 active이며 전체 목표는 미완료다. 아래 최신 요약을 우선하고 이전 날짜별 기록은 당시 증빙으로 읽는다.
 
 ## 현재 작업
 
-- 2026-10-09: 크롤러 정지 사망을 현재 자세에서 옆으로 쓰러지는1.05초 동작으로 교체했다. 이동/공격 중 사망·정지·시체 회수·재사용을 자동 검증했다. 새 실행 폴더는 `CrawlerDeathMenuLab`이며 실제 VR 인수는 대기 중이다. [증빙](evidence/crawler-death.json).
-- 현재 작업 브랜치: `codex/p06-boss-crawler`, 기준 통합 커밋 `2c1e47a52ec72791004236af7e01644720c1c73c`. 5웨이브마다 Skeleton 보스, 6웨이브부터 Zombiegirl 크롤러를 추가한다. [동작·복원 안내](boss-crawler.md).
-- 최신 자동 검증: EditMode69/69·PlayMode123/123 (2026-10-09 사망 모션 수정). 새 변형의 실제 VR 인수는 미확인이다. 빌드와 검증 해시는 [증빙](evidence/boss-crawler.json)을 따른다.
-- 사용자 확인: 옷 흰 테두리·탄창 정렬·투사체 속도·놓은 탄창10초 제거, 단발·연사·장전·빈 총 소리. 음원 PR #18과 소스 복원 PR #19는 통합 브랜치에 병합됐다. 전체 P단계 인수를 뜻하지 않는다.
-- 실제 공간은 아직 촬영 전이며 사용자 요청에 따라 다른 개발을 먼저 진행한다. 실제 Room/Classroom 맵, 두 맵의 전체 실기·성능·30분 시험과 최종 제출물이 남았다. 과제 지침은 제안서 PPT→PDF, 발표10분 이내, 동작 영상3분 이내(도입부 팀명·실명·프로젝트명)로 확인됐다.
-- [최신 실기 실행 안내](hardware-validation.md)와 [소스 복원 안내](source-reproduction.md)를 사용한다. 아래 과거 커밋·시험·PR 상태는 당시 이력이며 현재 원격 상태를 대신하지 않는다.
+- 2026-10-12 P02/P09: 실측 약4.3×3.5m Room, 단순 충돌/보수면/NavMesh, 실내5개·복도2개 생성점을 연결했다. 최신 브랜치 `codex/p09-scanned-room`, 기준 `aa09561`, PR base `codex/p06-boss-crawler`다. 구현 커밋 `6aaee2f`, [초안 PR #21](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/21)을 push·생성했다. [작업·복원 안내](room-scan.md).
+- 최신 자동 검증: EditMode74/74·PlayMode127/127. 중앙 생성 중단을 실패 재현한 뒤 사용자 승인1.5m 거리와 복도 확장으로 수정했다. 실제 Room의 기록·정지·재시작·10회 재로딩을 포함한다. [증빙](evidence/room-scan.json).
+- 새 빌드 대상은 `RoomScan/RoomScan.exe`다. 실제 Quest Pro의 스케일·양안 가림·복도/가구 경로·전투 난이도 및 성능은 대기다. PR은 실기 결과 전까지 초안으로 유지한다.
+- 보스·Zombiegirl 크롤러와1.05초 사망 동작은 새 Room 빌드에 포함된다. 이전 `CrawlerDeathMenuLab`은 비교용으로 보존한다. 새 변형의 실제 VR 인수는 아직 미확인이다.
+- 사용자 확인 완료: 옷 흰 테두리·탄창 정렬·투사체 속도·놓은 탄창10초 제거, 단발·연사·장전·빈 총 소리. 음원 PR #18과 소스 복원 PR #19는 통합 브랜치에 병합됐다. 전체 P단계 인수를 뜻하지 않는다.
+- 방 촬영본은 확보했다. 강의실 촬영본, 두 맵 전체 실기·성능·30분 시험 및 최종 제출물이 남았다. 과제 지침은 제안서 PPT→PDF, 발표10분 이내, 동작 영상3분 이내(도입부 팀명·실명·프로젝트명)다.
+- [최신 실기 안내](hardware-validation.md), [소스 복원](source-reproduction.md)을 사용한다. 아래 과거 커밋·시험·PR 상태는 당시 이력이며 현재 원격 상태를 대신하지 않는다.
 - P01-a 구현 커밋: `5a8dc1d844bf5aacd53a522a894bca3eee7c91d3`. [PR #1](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/1)은 원격에서 main에 병합됨(`e0e3be2`). GitHub CI는 없으며 로컬 Unity 검증 결과를 사용한다.
 - P01-a 구현·자동 검증 완료: Unity 환경 확인, EditMode 시험 어셈블리와 InteractionLab 구성, Windows Mono 개발 빌드. 증빙: [시험·빌드·소스 해시](evidence/p01-foundation.json), [환경 및 실행 절차](../Zombie%20Shoot%20VR/Docs/environment.md).
 - P01 실기 확인: 사용자가 VR 실행과 머리·양손 추적 정상 동작을 확인했다(2026-09-22). [VD 설정·실기 보고](evidence/2026-09-22-vd-hardware-check.md). 전용 입력 구성과 양안 가림 등 후속 검증까지 완료한 것으로 확대하지 않는다.
-- P02 실제 촬영본과 기준 길이 2개: 대기. 촬영 경로를 확인하고 나면 작은 공간 검증을 진행한다.
+- P02 실제 방 촬영본과 약4.3×3.5m 기준 길이 확보(2026-10-12). 텍스처 메시 경로의 자동 검증을 진행했으며 양안 가림·체감 크기·성능 실기 인수는 남았다.
 - P01-b: `47ceb4c`에서 프로젝트 전용 VRFPS.inputactions와 PlayerRig를 생성하고 Combat·InteractionLab에 연결했다. 입력 시험 3개가 연결 전 실패했고 연결 후 기존 시험을 포함한 EditMode 6/6이 통과했다. 아래 P03 빌드에도 포함되며 새 입력의 실기는 대기 중이다.
 - P03-a 구현·자동 검증: HMD 평면 방향 이동(1.6m/s), 머리 위치 중심 연속 회전(60도/s), CharacterController 높이·중심 갱신, 가상 이동 정지 인터페이스. 런타임·PlayMode 어셈블리 구성. EditMode 12/12, PlayMode 4/4 통과, Windows Mono 시험장 빌드 성공. [증빙](evidence/p03-locomotion.json).
 - P03-a 커밋: `e959ef4`, [PR #2](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/2)는 원격에서 codex/p01-environment에 병합됨(`9106a2d`). 해당 이동 변경을 main에 올리는 [PR #4](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/4)는 OPEN이다.
@@ -412,3 +531,15 @@ Windows 빌드 성공. `Builds/Windows/UserAudioMenuLab/WaveLab.exe`에 복사�
 `Zombie Shoot VR/Builds/Reproduction/1412b0a/`에 소스 ZIP·원본 ZIP·해시 manifest·복원 README를 로컬 보관했다. 배포용 소스 ZIP의 기존 검증 내보내기2027개 항목을 바이트 대조하고 원본9개도 ZIP 내부 SHA256을 대조했다. 외부 원본을 Git에 올리지 않았으며 사용자 확인 UserAudioMenuLab을 교체하지 않았다. 이 작업은 실제 두 맵이나 최종 제출 인수가 아니라 최신 개발 버전의 복원 검증이다.
 
 BootstrapPreview/WaveLab 빌드 모두 성공·종료0. 복원 WaveLab337개 파일을 보관본의 RestoredWaveLab에 복사하고 SHA256 일치 및 고지를 확인했다. 독립 증빙 리뷰에서 중요 지적 없음. C#106개 대조 범위는 VRFPS로 명확히 표기했다.
+
+
+## 2026-10-12 P12 중간 결과와 과제 형식 동기화
+
+방 맵 `6aaee2f`의 구현/시험·한계와 보스/크롤러를 결과보고서 초안에 반영했다. 이전5분 시연 계획을 최신 공지의3분 이내(초안2분50초), 발표10분 이내(초안9분20초)로 수정했다. 영상 도입부 팀명·실명·프로젝트 이름, 팀 업무분장 요구를 명시했다. 실제 최종 영상·발표자료가 제작된 것은 아니며 개인 정보·강의실·실기 측정은 미확인 상태를 유지한다.
+
+사용자 회신(2026-10-12): RoomScan 빌드는 아직 실행 전, 강의실은 아직 촬영 전이다. 해당 실기/두 번째 실제 맵을 통과 처리하지 않는다.
+
+
+## 2026-10-12 현재 작업 마감
+
+`c7eadf1-room` 로컬 소스/외부자산 백업을 새 폴더에 풀어 기존 Library 없이 EditMode74/74·PlayMode127/127을 통과했다. 외부 자산206개와 ZIP 무결성을 검증했다. 같은 PC 패키지 캐시/라이선스를 사용했으며 새 PC/완전 오프라인 검증 또는 복원본의 별도 빌드로 확대하지 않는다. 사용자 요청에 따라 방 맵·복원·문서·Git 정리까지만 마무리하며 추가 개발은 시작하지 않는다. Room 실기와 강의실 촬영은 미완료다.

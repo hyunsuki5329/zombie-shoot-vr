@@ -1,0 +1,42 @@
+{
+  "sourceCommit": "83dc690",
+  "sourceArchiveSha256": "17e1966c9693ae2932ab78f43681cfed645f515aeba3b13d567a06011370cccc",
+  "initialLibraryPresent": false,
+  "privateScansIncluded": false,
+  "scope": "Exact local source ZIP restored to empty directory; no scene regeneration or asset rebinding",
+  "tests": {
+    "edit": {
+      "result": "Skipped:Ignored",
+      "total": "100",
+      "passed": "99",
+      "failed": "0",
+      "skipped": "1",
+      "sha256": "2b774704cd62bef6e634ad3af43edb7ec5634548917d8942d93fe2280a7e385e"
+    },
+    "play": {
+      "result": "Passed",
+      "total": "130",
+      "passed": "130",
+      "failed": "0",
+      "skipped": "0",
+      "sha256": "e13d6c33f81214172501d2423c84c60e3172bcde6f19460d8cbf7215a0255f66"
+    }
+  },
+  "limitations": [
+    "Same PC package cache and Unity license",
+    "External generated assets and stable metadata included; not regenerated from originals",
+    "Headset acceptance and performance pending"
+  ],
+  "savedScenesUnchanged": {
+    "Room": true,
+    "Classroom": true
+  },
+  "buildGuid": "a7080199e5c04e3b9d2165f9064b5bc0",
+  "buildLogSha256": "0421c203196909ebba5ce735abafccf7187cc9cc7da9ff08ca2a64b354cb09f5",
+  "rawScanAndOriginalSchoolModelPacked": 0,
+  "attributionFilesMatch": {
+    "GrannyHouse-Attribution.txt": true,
+    "AbandonedSchool-Attribution.txt": true
+  },
+  "status": "Restored archive EditMode and PlayMode tests passed with one optional private scan skip; Windows build succeeded"
+}

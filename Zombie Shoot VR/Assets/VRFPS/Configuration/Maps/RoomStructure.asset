@@ -1,0 +1,176 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8c7dc159cf74ba181ec6eb3f60936db, type: 3}
+  m_Name: RoomStructure
+  m_EditorClassIdentifier: VRFPS.Runtime::VRFPS.RoomStructureDefinition
+  schemaVersion: 1
+  mapId: room
+  themeId: AbandonedHouse
+  measuredRoomSize: {x: 4.3, y: 2.45, z: 3.5}
+  ceilingHeightEstimated: 1
+  elements:
+  - id: Floor
+    kind: 0
+    origin: 0
+    localCenter: {x: 0, y: -0.1, z: 0}
+    localEuler: {x: -0, y: 0, z: 0}
+    size: {x: 4.3, y: 0.2, z: 3.5}
+    collision: 1
+    navigation: 1
+  - id: Ceiling
+    kind: 1
+    origin: 1
+    localCenter: {x: 0, y: 2.55, z: 0}
+    localEuler: {x: -0, y: 0, z: 0}
+    size: {x: 4.6, y: 0.2, z: 3.8}
+    collision: 1
+    navigation: 2
+  - id: Side wall -1
+    kind: 2
+    origin: 1
+    localCenter: {x: -2.225, y: 1.225, z: 0}
+    localEuler: {x: -0, y: 0, z: 0}
+    size: {x: 0.15, y: 2.45, z: 3.8}
+    collision: 1
+    navigation: 2
+  - id: End wall -1
+    kind: 2
+    origin: 1
+    localCenter: {x: 0, y: 1.225, z: -1.825}
+    localEuler: {x: -0, y: 0, z: 0}
+    size: {x: 4.6, y: 2.45, z: 0.15}
+    collision: 1
+    navigation: 2
+  - id: Side wall 1
+    kind: 2
+    origin: 1
+    localCenter: {x: 2.225, y: 1.225, z: 0}
+    localEuler: {x: -0, y: 0, z: 0}
+    size: {x: 0.15, y: 2.45, z: 3.8}
+    collision: 1
+    navigation: 2
+  - id: Door wall left
+    kind: 2
+    origin: 2
+    localCenter: {x: -0.775, y: 1.225, z: 1.825}
+    localEuler: {x: -0, y: 0, z: 0}
+    size: {x: 2.75, y: 2.45, z: 0.15}
+    collision: 1
+    navigation: 2
+  - id: Door wall right
+    kind: 2
+    origin: 2
+    localCenter: {x: 2.075, y: 1.225, z: 1.825}
+    localEuler: {x: -0, y: 0, z: 0}
+    size: {x: 0.15, y: 2.45, z: 0.15}
+    collision: 1
+    navigation: 2
+  - id: Door lintel
+    kind: 2
+    origin: 2
+    localCenter: {x: 1.3, y: 2.4, z: 1.825}
+    localEuler: {x: -0, y: 0, z: 0}
+    size: {x: 1.4, y: 0.1, z: 0.15}
+    collision: 1
+    navigation: 2
+  - id: Corridor floor
+    kind: 0
+    origin: 2
+    localCenter: {x: 1.05, y: -0.1, z: 3.15}
+    localEuler: {x: -0, y: 0, z: 0}
+    size: {x: 2.2, y: 0.2, z: 2.8}
+    collision: 1
+    navigation: 1
+  - id: Corridor ceiling
+    kind: 1
+    origin: 2
+    localCenter: {x: 1.05, y: 2.55, z: 3.15}
+    localEuler: {x: -0, y: 0, z: 0}
+    size: {x: 2.4, y: 0.2, z: 3}
+    collision: 1
+    navigation: 2
+  - id: Corridor left
+    kind: 2
+    origin: 2
+    localCenter: {x: -0.125, y: 1.225, z: 3.15}
+    localEuler: {x: -0, y: 0, z: 0}
+    size: {x: 0.15, y: 2.45, z: 2.8}
+    collision: 1
+    navigation: 2
+  - id: Corridor right
+    kind: 2
+    origin: 2
+    localCenter: {x: 2.225, y: 1.225, z: 3.15}
+    localEuler: {x: -0, y: 0, z: 0}
+    size: {x: 0.15, y: 2.45, z: 2.8}
+    collision: 1
+    navigation: 2
+  - id: Corridor end
+    kind: 2
+    origin: 2
+    localCenter: {x: 1.05, y: 1.225, z: 4.625}
+    localEuler: {x: -0, y: 0, z: 0}
+    size: {x: 2.5, y: 2.45, z: 0.15}
+    collision: 1
+    navigation: 2
+  - id: Bed
+    kind: 4
+    origin: 1
+    localCenter: {x: 1.54, y: 0.32, z: -0.76}
+    localEuler: {x: -0, y: 0, z: 0}
+    size: {x: 1.22, y: 0.64, z: 1.98}
+    collision: 1
+    navigation: 2
+  - id: Desk
+    kind: 5
+    origin: 1
+    localCenter: {x: -1.41, y: 0.42, z: 0.05}
+    localEuler: {x: -0, y: 0, z: 0}
+    size: {x: 1.48, y: 0.84, z: 1.22}
+    collision: 1
+    navigation: 2
+  - id: Chair
+    kind: 6
+    origin: 1
+    localCenter: {x: -0.47, y: 0.48, z: 0.04}
+    localEuler: {x: -0, y: 0, z: 0}
+    size: {x: 0.6, y: 0.96, z: 0.65}
+    collision: 1
+    navigation: 2
+  - id: Wardrobe
+    kind: 8
+    origin: 1
+    localCenter: {x: -1.42, y: 1.15, z: 1.22}
+    localEuler: {x: -0, y: 0, z: 0}
+    size: {x: 1.46, y: 2.3, z: 1.06}
+    collision: 1
+    navigation: 2
+  - id: Keyboard
+    kind: 8
+    origin: 1
+    localCenter: {x: -1.96, y: 0.45, z: -1.19}
+    localEuler: {x: -0, y: 0, z: 0}
+    size: {x: 0.38, y: 0.9, z: 1}
+    collision: 1
+    navigation: 2
+  playerSpawn: {x: 0.9, y: 0, z: 1.1}
+  playerEuler: {x: -0, y: 180, z: 0}
+  enemySpawns:
+  - {x: -0.95, y: 0, z: -1.1}
+  - {x: -0.3, y: 0, z: -1.15}
+  - {x: 0.3, y: 0, z: -1.1}
+  - {x: 1.5, y: 0, z: 1.15}
+  - {x: 0.1, y: 0, z: 1.1}
+  - {x: 0.65, y: 0, z: 3.7}
+  - {x: 1.55, y: 0, z: 3.7}
+  navigationAgentType: 0
+  navigationVoxelSize: 0.04

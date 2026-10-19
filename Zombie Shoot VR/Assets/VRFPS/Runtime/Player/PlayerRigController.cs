@@ -11,6 +11,7 @@ namespace VRFPS.Player
         [SerializeField] InputActionReference turnAction;
         [SerializeField, Range(1f, 2f)] float moveSpeed = 1.6f;
         [SerializeField, Range(30f, 90f)] float turnSpeed = 60f;
+        [SerializeField] float jumpHeight = 1.35f;
         CharacterController capsule;
         bool locomotionEnabled = true;
         float verticalSpeed;
@@ -28,8 +29,20 @@ namespace VRFPS.Player
         void Awake() => capsule = GetComponent<CharacterController>();
 
         // InputActionManager owns action lifetime; tracking actions remain enabled during pauses.
-        void Update() => Tick(moveAction != null ? moveAction.action.ReadValue<Vector2>() : Vector2.zero,
-            turnAction != null ? turnAction.action.ReadValue<Vector2>() : Vector2.zero, Time.deltaTime);
+        void Update()
+        {
+            var jump=turnAction!=null?turnAction.action.actionMap.FindAction("Jump",false):null;
+            if(jump!=null && jump.WasPressedThisFrame())TryJump();
+            Tick(moveAction!=null?moveAction.action.ReadValue<Vector2>():Vector2.zero,
+                turnAction!=null?turnAction.action.ReadValue<Vector2>():Vector2.zero,Time.deltaTime);
+        }
+        public bool TryJump()
+        {
+            if(capsule==null)capsule=GetComponent<CharacterController>();
+            if(!locomotionEnabled || !capsule.enabled || !capsule.isGrounded || verticalSpeed>0)return false;
+            verticalSpeed=Mathf.Sqrt(2f*Mathf.Abs(Physics.gravity.y)*jumpHeight);
+            return true;
+        }
 
         public static Vector3 GetPlanarMove(Vector3 headForward, Vector2 input)
         {

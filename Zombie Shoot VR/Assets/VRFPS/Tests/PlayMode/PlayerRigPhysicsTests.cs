@@ -39,6 +39,23 @@ namespace VRFPS.Tests
             if (wall != null) Object.DestroyImmediate(wall);
         }
 
+        [Test] public void JumpLandsOnFurnitureAndRejectsAirborneOrPausedRequests()
+        {
+            var jump=typeof(PlayerRigController).GetMethod("TryJump");
+            Assert.That(jump,Is.Not.Null,"A-button jump is missing");
+            for(int i=0;i<10;i++)movement.Tick(Vector2.zero,Vector2.zero,1f/60);
+            movement.SetLocomotionEnabled(false);Assert.That((bool)jump.Invoke(movement,null),Is.False);
+            movement.SetLocomotionEnabled(true);
+            Assert.That((bool)jump.Invoke(movement,null),Is.True);
+            Assert.That((bool)jump.Invoke(movement,null),Is.False);
+            wall=GameObject.CreatePrimitive(PrimitiveType.Cube);wall.transform.position=new Vector3(0,.6f,1);
+            wall.transform.localScale=new Vector3(3,1.2f,1);Physics.SyncTransforms();
+            for(int i=0;i<90;i++)movement.Tick(i<40?Vector2.up:Vector2.zero,Vector2.zero,1f/60);
+            Assert.That(rig.transform.position.y,Is.InRange(1.15f,1.3f));
+            Assert.That(head.localPosition,Is.EqualTo(new Vector3(0,1.7f,0)));
+            Assert.That((bool)jump.Invoke(movement,null),Is.True);
+        }
+
         [Test]
         public void StickMotionStopsAtWallAndFloor()
         {

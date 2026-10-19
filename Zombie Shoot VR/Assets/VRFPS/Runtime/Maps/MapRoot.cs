@@ -28,13 +28,15 @@ namespace VRFPS
             {
                 if(!Owned(spawn) || !Finite(spawn.position) ||
                     !NavMesh.SamplePosition(spawn.position,out var hit,.25f,filter) ||
-                    Vector3.Distance(hit.position,playerHit.position)<map.minSpawnDistance ||
                     !NavMesh.CalculatePath(hit.position,playerHit.position,filter,path) || path.status!=NavMeshPathStatus.PathComplete)
                 {RejectedSpawnCount++;continue;}
                 if(!valid.Contains(hit.position))valid.Add(hit.position);
                 else RejectedSpawnCount++;
             }
-            if(valid.Count==0)throw new InvalidOperationException("Map has no reachable enemy spawn candidates.");
+            // Preserve near-start anchors for later movement. SpawnDirector checks the
+            // distance from the current player before warning and again before spawning.
+            if(valid.Count==0 || !valid.Exists(p=>Vector3.Distance(p,playerHit.position)>=map.minSpawnDistance))
+                throw new InvalidOperationException("Map has no reachable opening enemy spawn candidates.");
             PlayerPosition=playerHit.position;
             return valid.ToArray();
         }

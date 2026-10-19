@@ -16,4 +16,4 @@ MonoBehaviour:
   sceneName: Assets/VRFPS/Scenes/Maps/Room.unity
   maxAlive: 4
   maxRangedAlive: 1
-  minSpawnDistance: 2
+  minSpawnDistance: 1.5

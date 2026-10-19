@@ -1,0 +1,22 @@
+{
+  "buildGuid": "9723fbe2fa094de7be98e4c75f72b1b2",
+  "buildPath": "Zombie Shoot VR\\Builds\\Windows\\WallFix\\AbandonedSchool.exe",
+  "copiedFiles": 350,
+  "editMode": {
+    "passed": 108,
+    "failed": 0,
+    "optionalPrivateScanSkipped": 1
+  },
+  "missingCollisionReproducedFor": [
+    "Door wall left (1)",
+    "Door wall left (2)"
+  ],
+  "visualPrefabOverridesUnchanged": true,
+  "playerLogSha256": "b5d876cb2e6188076113abad5034e2c989bdac5f4486bb4f6d6d7b7746cf81c5",
+  "errorExceptionWarningLines": 0,
+  "performanceCaptureFilesFound": 0,
+  "userPerformanceFeedback": "No notable heaviness; sufficient by user observation, not measured performance",
+  "evidenceDirectory": "tmp/low-jump-clean-restore",
+  "newWallVrVerification": "User confirmed verification in chat after being asked to check the repaired desk-back wall in WallFix build; no new issue reported",
+  "userConfirmation": "확인했어."
+}

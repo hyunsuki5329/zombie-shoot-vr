@@ -50,8 +50,8 @@ namespace VRFPS.Tests
             var guide=entry.view.transform.Find("Panel/InstructionPanel");
             Assert.That(guide,Is.Not.Null);Assert.That(guide.gameObject.activeInHierarchy,Is.True);
             entry.view.transform.Find("Panel/Back").GetComponent<UnityEngine.UI.Button>().onClick.Invoke();
-            Assert.That(entry.menu.Screen,Is.EqualTo(MenuScreen.MapSelection));Assert.That(entry.roomButton.interactable,Is.False);
-            Assert.That(entry.classroomButton.interactable,Is.False);
+            Assert.That(entry.menu.Screen,Is.EqualTo(MenuScreen.MapSelection));Assert.That(entry.roomButton.interactable,Is.True);
+            Assert.That(entry.classroomButton.interactable,Is.True);
             var fixture=ScriptableObject.CreateInstance<MapDefinition>();
             try
             {

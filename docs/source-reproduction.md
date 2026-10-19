@@ -1,5 +1,84 @@
 # 소스 복원·시험·Windows 빌드
 
+2026-10-18 최신 ZIP 새 Library 복원 완료: cb1b0e7-wall-fix 원본을 빈 폴더에 풀어 EditMode108통과/개인 스캔1제외, PlayMode131/131, Windows 빌드 성공을 확인했다. 씬3개 원본 일치, 원본 스캔 포함0, 출처2개 동봉 확인. 복원 빌드 GUID `845dc8e7a5604288b78f8ed2d0727f49`. 동일 PC 캐시·라이선스를 사용했으며 기존 WallFix 실행본은 교체하지 않았다. [증빙](evidence/wall-fix-clean-restoration.json).
+
+2026-10-18 최신 로컬 소스 묶음: `Zombie Shoot VR/Builds/Reproduction/cb1b0e7-wall-fix/source-with-local-assets.zip`. 벽 충돌 수정과5분 시험 기준 포함. 2,861개 파일 CRC/SHA256 검사 및 빌드 검증 작업본과 코드·씬·프리팹·자산241개 일치를 확인했다(C# 줄바꿈 정규화). 이 ZIP 자체의 새 Library 재개방은 미실행이며 이전 ZIP의 복원 검증과 구분한다. 외부 자산은 로컬 보관만 한다. 사용자 요청으로 로그 작업은 후순위로 두었다. [증빙](evidence/wall-fix-source-backup.json).
+
+2026-10-16 최신 ZIP 복원 검증 완료: `2d3f3e6-low-jump`를 빈 폴더에 풀어 Library 없이 EditMode106통과/실패0/개인 스캔 검사1제외, PlayMode131/131, Windows 빌드 성공을 확인했다. 세 맵 씬은 ZIP과 동일하며 원본 스캔 빌드 포함0, 출처 안내문2개 동봉을 확인했다. 복원 빌드 GUID `eb43eaca52b4478fab7aaa28b29750c2`. 같은 PC의 패키지 캐시·라이선스를 사용했으며 새 PC 또는 실제 VR 검증은 아니다. 기존 실기용 빌드는 유지했다. [증빙](evidence/low-jump-clean-restoration.json).
+
+2026-10-16 최신 소스 보관본: `Zombie Shoot VR/Builds/Reproduction/2d3f3e6-low-jump/source-with-local-assets.zip`. 점프1.35m와 시점1.15배, 최신 두 맵 배치를 포함한다. 2,856파일 CRC/SHA256 및 검증 캐시의 코드·씬·프리팹·자산241개 일치를 확인했다(C# 줄바꿈 정규화). ZIP의 새 Library 복원 검증은 위 최신 결과를 따른다. 외부 자산 포함 로컬 보관용이며 최종 제출 완료가 아니다. [증빙](evidence/low-jump-source-backup.json).
+
+2026-10-16 최신 소스 보관본: `Zombie Shoot VR/Builds/Reproduction/a7c149d-view-height-layout/source-with-local-assets.zip`. 시점1.15배·최신 사용자 배치·옛 충돌 제거 포함. 2,855파일 무결성 검사와 시험한 씬/NavMesh/플레이어 프리팹/높이 코드/의자 메시 일치 확인. ZIP 자체 새 캐시 재개방은 미실행. [보관 증빙](evidence/layout-height-source-backup.json).
+
+2026-10-16 후속: 사용자 재편집 배치를 그대로 보존해 충돌·NavMesh를 갱신하고 폐교의 보이지 않는 옛 충돌체5개를 제거했다. 시점 높이1.15배 보정을 추가했다. [변경·검증](layout-height-20261016.md). 이전519495c 소스 ZIP은 이번 변경 전 보관본이다.
+
+2026-10-16 최신 소스 보관본: `Zombie Shoot VR/Builds/Reproduction/519495c-map-scale/source-with-local-assets.zip`. 소스519495c와 로컬 외부 자산/meta를 포함한다. 2,842파일 CRC·SHA256 검증, 실제 시험한 캐시의 두 맵/미리보기·NavMesh·수정 의자 메시 일치 확인. ZIP 자체의 새 캐시 재개방은 미실행이며 이전83dc690 ZIP의 새 캐시 시험과 구분한다. [보관 증빙](evidence/map-scale-source-backup.json).
+
+2026-10-16 최신 기준: 폐가 공간2배·가구1.5배, 폐교 공간2배·책상/의자1.5배. 아래 이전 크기 설명보다 이 결정이 우선한다. [상세 변경](map-scale-20261016.md)
+
+## 2026-10-15 최신 ZIP 새 캐시 복원 검증
+
+소스83dc690과 외부 자산/meta를 담은 ZIP을 빈 폴더에 풀고 Library 없이 검증했다. 자산 재연결이나 씬 재생성 없이 EditMode99통과/실패0/개인 원본 스캔 검사1제외, PlayMode130/130, Windows 빌드 성공을 확인했다. Room/Classroom 씬은 ZIP 원본과 해시가 같으며 두 출처 안내문도 빌드에 동일하게 동봉됐다. 원본 스캔과 학교 원본 FBX의 빌드 포함은0이다. [복원 증빙](evidence/user-layout-clean-restoration.json).
+
+복원 검증 빌드 GUID는 `a7080199e5c04e3b9d2165f9064b5bc0`, 로그는 `tmp/user-layout-archive-validation/`에 있다. 동일 PC의 패키지 캐시·라이선스를 사용한 검증이며 다른 PC 검증이나 VR 인수가 아니다. 기존 사용자 테스트용 AbandonedSchool.exe(GUID `2a41ebb5739b4386b8b2b55ca4c66eca`)는 교체하지 않았다. 실제 두 맵 인수·성능·장시간 시험과 사용자 담당 발표/시연 자료, 최종 병합은 남아 있다.
+
+## 2026-10-15 수동 편집 씬 보존 우선
+
+현재 기준은 사용자 편집을 반영한83dc690의 Room/Classroom 씬이다. 아래10월14일 이전 재생성 절차는 당시 상태의 이력이며 최신 씬에 그대로 적용하지 않는다. ClassroomSetup.Configure, RoomHouseSetup.ConfigurePreview, GrannyHouseSetup.Configure는 초기 배치를 만들기 때문에 현재 씬을 덮어쓸 수 있다.
+
+최신 복원에서는 씬과 동일한 외부 자산/meta를 함께 확보해야 한다. 가구 배치·방향은 저장된 씬에서 읽고 `UserLayoutSetup.Configure`로 충돌/NavMesh만 동기화한다. 게임 빌드는 `ClassroomSetup.Build`를 사용한다. [배치·점프 변경](user-layout-jump.md).
+
+## 2026-10-14 Classroom 추가
+
+[학교 자산 복원](school-assets-plan.md)에 따라 로컬 학교 라이브러리를 먼저 생성한 뒤 격리 Unity에서 `VRFPS.Editor.ClassroomSetup.Configure`를 실행한다. 이 단계는 생성 프리팹 GUID로 Classroom 씬·구조·NavMesh 참조를 다시 연결한다. 기존 Granny Room도 복원한 상태에서 `VRFPS.Editor.ClassroomSetup.Build`를 실행하면 두 맵 Windows 빌드와 두 출처 안내문을 생성한다. `Assets/VRFPS/Documentation` 폴더에 두 Attribution.txt 파일이 필요하다.
+
+현재 캐시 프로젝트에서 EditMode99/99·PlayMode128/128·빌드는 통과했다. 후속으로 소스eaf2567의 새 Library에서 학교 재생성, EditMode98통과/개인 스캔1제외, PlayMode128통과 및 Windows 빌드까지 확인했다([증빙](evidence/school-clean-restoration.json)). 같은 PC에서 학교 외 자산532개는 기존 메타와 함께 복사했으므로 모든 원본의 신규 재생성이나 다른 PC 검증은 아니다. 검증한 복원본의 로컬 보관 ZIP도 생성했다. 아래 보관본 설명을 따른다. 외부 원본과 생성 라이브러리는 Git 제외이며 소스만 복제해서 즉시 실행 가능하다고 주장하지 않는다.
+
+
+### 새 캐시 복원에서 확인된 필수 재연결
+
+2026-10-14 소스 `eaf2567`을 Library 없는 별도 폴더로 풀어 검사했다. 기존 외부 자산/meta를 복사해도 Git 소스의 K2 모델과 무기 음원 참조가 다를 수 있다. 실제 첫 EditMode 결과는96통과/2실패/1제외였으며, 아래 두 단계를 실행한 뒤98통과/실패0/개인 스캔 검사1제외를 확인했다.
+
+- `VRFPS.Editor.GamgoVisualSetup.Configure`
+- `VRFPS.Editor.UserWeaponAudioSetup.Configure`
+
+학교는 원본 ZIP에서 새 메타로 SchoolAssetsSetup.Configure → ClassroomSetup.Configure를 성공시켰다. 기존 외부 자산 복사만으로 재현 완료를 판단하지 않고 전체 검사와 빌드를 이어서 확인한다. 증빙 로그는 `tmp/school-restore-validation/`에 있다.
+## Granny 가구·표면 적용 버전
+
+2026-10-13 추가: 사용자 제공 Granny ZIP의 가구와 재질로 Room 외형을 교체한다. 원본과 추출 결과는 Git 제외이며 이전62c7427 ZIP에는 포함되지 않는다. 현재 브랜치를 복원할 때 [가구 자산 복원 안내](granny-house-assets.md)를 먼저 따른다.
+
+```powershell
+python scripts/Restore-GrannyHouse.py --archive 'C:/Users/User/Downloads/dvloper-grannys-house-official-model.zip' --project '<복원 Unity 프로젝트>'
+# 기본 RoomHousePreview가 존재하는 상태에서 실행
+& 'D:/Unity editor/6000.3.23f1/Editor/Unity.exe' -batchmode -quit -projectPath '<복원 Unity 프로젝트>' -executeMethod VRFPS.Editor.GrannyHouseSetup.Configure -logFile granny-configure.log
+```
+
+성공 표식은 `GRANNY_THEME_CREATED`다. 이후 아래 `RoomHouseSetup.PromoteAndBuild`를 실행한다. 기본 `RoomHouseSetup.ConfigurePreview`만 실행하면 이전 자체 제작 외형으로 돌아가므로 GrannyHouseSetup.Configure를 이어 실행한다. 현재 빌드가 외부 모델 권리 관계를 검증했다는 의미는 아니며 공개 배포 전 출처 문서의 미확인 항목을 해결한다.
+
+## 최신 확대 버전 새 캐시 검증
+
+`Zombie Shoot VR/Builds/Reproduction/62c7427-house-scaled/`에 최신 확대 소스 ZIP·외부 자산 ZIP·manifest·README를 보관한다. 같은 새 폴더에 두 ZIP을 풀고 Unity6000.3.23f1로 연다. 2026-10-13 Library가 없는 새 복원 폴더에서 외부188파일 SHA256을 확인하고 EditMode95통과/실패0/개인 스캔 검사1제외, PlayMode127통과 및 Windows 빌드 성공을 확인했다. packed RoomScan 자산은0이다. [증빙](evidence/clean-room-restoration.json).
+
+동일 PC의 새 캐시 복원 시험이며 다른 PC·오프라인·라이선스 신규 설정 검증은 아니다. 외부 ZIP은 개인 로컬 복원용이다. 아래7af6176 묶음의 미실행 설명은 이전 백업에 대한 이력이며 최신 확대 소스의 결과와 구분한다.
+
+## 2026-10-13 폐가 로컬 백업
+
+`Zombie Shoot VR/Builds/Reproduction/7af6176-house/`에 소스7af6176 ZIP(약90MiB), 외부 자산 ZIP(약156MiB), manifest와 README를 보관했다. GAMGO·Mixamo·음원188파일과 meta를 포함하고 RoomScan은 필요하지 않아 제외했다. 두 ZIP CRC 및 전체 외부 파일 SHA256 대조를 통과했다. 이 묶음을 새 Unity Library에서 여는 시험은 미실행이며 최종 제출본으로 표시하지 않는다.
+
+## 2026-10-13 Method A 폐가 경로
+
+현재 Room은 내 방 구조 기반 폐가 시제품이며 게임 공간은2.5배 확대했다(커밋62c7427). 구조 자산·직접 만든 테마 프리팹/재질·독립 NavMesh는 Git으로 관리한다. 최신 크기 검증은 [확대 증빙](evidence/room-gameplay-scale.json), 이전 생성 과정은 [Method A 실행 기록](method-a-execution.md)을 따른다. 아래 사진형 RoomScan 복원은 이전 비교용 경로다.
+
+기존 GAMGO·Mixamo·음원 복원은 필요하지만 폐가 생성에는 원본 방 FBX가 필요하지 않다. `RoomStructure.asset`이 있으면 이를 사용한다. 다음 명령은 각 프로세스 종료·성공 로그를 확인하며 격리 프로젝트에서 순서대로 실행한다.
+
+```powershell
+& 'D:/Unity editor/6000.3.23f1/Editor/Unity.exe' -batchmode -quit -projectPath '<복원 프로젝트>' -executeMethod VRFPS.Editor.RoomHouseSetup.ConfigurePreview -logFile house-configure.log
+& 'D:/Unity editor/6000.3.23f1/Editor/Unity.exe' -batchmode -quit -projectPath '<복원 프로젝트>' -executeMethod VRFPS.Editor.RoomHouseSetup.PromoteAndBuild -logFile house-build.log
+```
+
+성공 표식은 `VRFPS_HOUSE_PREVIEW_CREATED`, `VRFPS_HOUSE_BUILD_SUCCEEDED`다. `Builds/Windows/AbandonedHouse/scan-dependency-check.txt`의 packed RoomScan 자산 0도 확인한다. 사진형 Room을 다시 생성하는 `ScannedRoomSetup.Configure`는 새 폐가를 덮어쓰므로 이 경로에서 실행하지 않는다.
+
+
 이 안내는 현재 개발 브랜치의 재현 절차다. 실제 두 맵과 최종 제출 인수는 아직 완료하지 않았다. 실행·조작 확인은 [실기 안내](hardware-validation.md), 단계별 상태는 [진행 기록](progress.md)을 따른다.
 
 ## 최신 복원 보관본 (2026-10-08)
@@ -13,6 +92,18 @@
 복원 순서는 원본3종 복사 → `GamgoVisualSetup.Configure` → `MixamoVisualSetup.Configure` → `UserWeaponAudioSetup.Configure` → EditMode/PlayMode → `InstructionSetup.Build`다. 각각 Unity 프로세스가 종료하고 성공했는지 확인한 다음 진행한다. 모든 Setup을 무차별 실행하는 절차는 아니다.
 
 이번 검증은 Git에서 내보낸 새 프로젝트에서 시작하고 기존 Library나 외부 자산 meta를 복사하지 않았다. 같은 PC의 전역 패키지 캐시·Unity 라이선스 사용은 허용하므로 새 PC·완전 오프라인 검증과 구분한다. 자세한 실제 결과와 해시는 [최신 복원 증빙](evidence/current-source-restoration.json)에 기록한다. 아래 `8a28aee` 예시는 이전 시점의 이력이다.
+
+## 2026-10-12 실제 방 소스 백업
+
+현재 로컬 묶음은 `Zombie Shoot VR/Builds/Reproduction/c7eadf1-room/`이다. 소스 기준 `c7eadf1`, 런타임 구현 `6aaee2f`이며 최종 제출본이 아니다.
+
+- `source-c7eadf1.zip`: Git의 Unity 소스·잠금 패키지·설정·문서·스크립트. 개인 미커밋 설정은 제외한다.
+- `external-assets-private-local-only.zip`: 현재 GAMGO·Mixamo·음원·RoomScan의 원본과 생성 자산206개 및 meta. 사용자 방을 포함하므로 로컬 전용이며 Git/공개 업로드하지 않는다.
+- `manifest.json`: 각 외부 자산과 ZIP의 SHA256. ZIP CRC와 외부 자산206개 전체 바이트를 대조했다.
+
+새 폴더 하나에 소스 ZIP과 외부 자산 ZIP을 차례로 풀어 `Zombie Shoot VR` 경로가 합쳐지도록 한다. meta를 유지하고 Unity6000.3.23f1로 연다. 생성 자산 GUID를 보존하는 복원이므로 모든 Setup을 일괄 실행하지 않는다. 새 Library에서의 실제 시험 결과는 [방 증빙](evidence/room-scan.json)을 따른다. 같은 PC의 패키지 캐시/라이선스를 사용한 검증이며 완전 오프라인·다른 PC 보장은 아니다.
+
+원본 FBX에서 방을 다시 생성하려면 [방 스캔 복원](room-scan.md)의 원본 복사 → `ScannedRoomSetup.Configure` → 시험 → `ScannedRoomSetup.Build`를 적용한다. 원본/가공 메시/텍스처/NavMesh는 Git에서 제외하고 생성 코드는 포함한다. 보스/크롤러 원본 복원은 [추가 절차](boss-crawler.md)를 따른다.
 
 ## 필요한 환경과 파일
 
@@ -95,7 +186,7 @@ $unityProcess.ExitCode
 - 컴파일 오류: 에디터 버전과 package lock이 유지됐는지, 로그의 첫 컴파일 오류부터 확인한다.
 - 패키지 복원 오류: 라이선스·네트워크·UPM 오류를 확인한다. 임의의 최신 버전 설치로 잠금을 바꾸지 않는다.
 - 화면/입력 오류: 성공한 Quest Pro/VD 연결과 활성 OpenXR 런타임, Player.log를 대조한다. headless 자동 시험은 실제 두 눈/추적 시험이 아니다.
-- 맵 버튼 비활성: 현재 실제 Room/Classroom 자산이 없기 때문에 정상인 미완료 상태다.
+- 맵 버튼 비활성: Classroom은 실제 스캔과 폐교 맵이 준비되지 않아 비활성이다. 최신 폐가 빌드의 Room도 비활성이면 정상으로 간주하지 말고 씬 등록·Room 정의·Player.log를 확인한다.
 - 진단 GPU 표본0: 측정 지원/환경을 확인하고0ms 합격으로 처리하지 않는다. [분석 지침](../Zombie%20Shoot%20VR/Docs/performance.md)을 따른다.
 
 ## 현재 복원 검증 상태
@@ -108,3 +199,13 @@ Unity의 PC 전역 패키지 캐시/라이선스는 공유할 수 있으므로 �
 ## GAMGO 외형 추가 이후의 필수 복원 단계
 
 P04 외형 브랜치부터 K2/탄창 프리팹은 Git 제외 자원을 참조한다. 기존8a28aee 복원 리허설 결과를 이 변경 이후의 완전 복원 증빙으로 확대하지 않는다. Unity 시험/빌드 전에 [GAMGO 원본 확보 및 복원·적용](gamgo-visual-restore.md)을 수행해야 한다. 원본 ZIP의 라이선스별 전달 조건을 지키고 해당 계정으로 다시 확보할 수 있는 링크·해시를 제공한다. 파일이 없으면 임시 도형으로 최종 빌드를 성공 처리하지 않는다. 외형 추가 후 Git 소스만 새 폴더로 복원하는 리허설에서 누락된 이전 모델 참조가 남는 결함을 발견해 수정했다. 수정 후 EditMode51/51과 Windows 빌드2개를 확인했다. [상세 증빙](evidence/p04-gamgo-restoration.json). 새 복원본 PlayMode·새 PC·오프라인 시험까지 통과한 것으로 확대하지 않는다.
+
+## 두 맵 로컬 소스 보관본 (2026-10-14)
+
+`Zombie Shoot VR/Builds/Reproduction/eaf2567-two-maps/`의 `restored-source-local-only.zip`, `manifest.json`, `README.md`를 함께 보관한다. 584,271,736바이트, 2,823개 파일의 CRC와 SHA256을 검증했다([증빙](evidence/two-map-source-bundle.json)). 소스 기준eaf2567에 학교 생성 및 K2/음원 참조 재연결을 적용한 스냅샷이다. 순수 Git archive나 최종 제출본과 구분한다. Unity Library·빌드·개인 스캔은 포함하지 않았다.
+
+빈 폴더에 압축을 풀고 `Zombie Shoot VR`을 Unity6000.3.23f1로 연다. 원본 복원본은 자동 검사와 빌드를 통과했고 압축 구성원은 바이트 단위로 검증했지만 이 ZIP을 다시 풀어 Unity를 여는 시험은 별도로 수행하지 않았다. 외부 자산이 포함되어 로컬 보관하며 공개 재배포 허가로 해석하지 않는다.
+
+### 수동 편집 배치 로컬 보관본
+
+`Zombie Shoot VR/Builds/Reproduction/83dc690-user-layout/`에 소스·로컬 자산 ZIP, manifest, README를 보관했다. 2,834개 파일 CRC/SHA256과 현재 두 씬의 바이트 일치를 확인했다. Library·개인 스캔·사용자의 무관한 미커밋 설정은 포함하지 않았다. 이 ZIP을 다시 연 Unity 시험은 미실행이며 최종 제출본으로 표시하지 않는다. [증빙](evidence/user-layout-source-backup.json).

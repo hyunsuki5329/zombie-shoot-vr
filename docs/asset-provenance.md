@@ -1,6 +1,12 @@
 # 현재 자산 출처와 제출 동봉 자료
 
+2026-10-13 추가: Room의 가구·벽·마루는 사용자가 제공한 `DVloper - Granny's House (Official Model)`에서 분리·재배치했다. Sketchfab 업로더danielthesecond, 원 게임 제작자 표기DVloper, 페이지 표기CC BY4.0. 원본과 추출 결과는 로컬 자산으로만 보관하며 Git에는 복원 코드·meta 참조만 포함한다. 업로더의 원 게임 자산 권한은 확인되지 않았다. 출처·변경 내용·복원 및 배포 전 확인 사항은 [Granny 자산 기록](granny-house-assets.md)을 따른다. 기존 자체 제작 폐가 기록은 이전 시제품의 이력이다.
+
 확인일: 2026-09-29. 기준 소스 `7fb378c`. 이 문서는 실제 저장소/설치 패키지의 조사 결과다. [기존 후보 목록](vr-fps-project-docs/07-assets-licenses.md)의 다운로드 후보를 채택한 것으로 표시하지 않는다. 최종 모델·스캔과 실제 빌드 포함 파일의 감사는 아직 남아 있다.
+
+## 2026-10-12 사용자 방 스캔
+
+사용자가 직접 촬영하고 Scaniverse에서 내보낸 `Scaniverse 2026-10-12 124954.fbx`를 Room 외형으로 사용한다. 원본·내장 텍스처·가공 메시·NavMesh는 로컬 전용이며 Git에 올리지 않는다. 스캔 복원은 Scaniverse, 실제 크기 보정·보수면·충돌·경로·게임 연결은 프로젝트 구현이다. 제작 도구를 자체 개발한 것으로 표시하지 않는다. [원본 해시와 복원 안내](room-scan.md).
 
 ## 게임에서 직접 만든 자산
 
@@ -76,3 +82,13 @@ Mixamo의 `Zombie Reaction Hit` 중 Flinches 동작을 사용자 로그인 세�
 # 보스·돌연변이 자원 추가 (2026-10-08)
 
 사용자가 제공한 Mixamo 모델 Skeletonzombie T Avelange와 Zombiegirl W Kurniawan을 각각 5웨이브 주기 보스와 6웨이브 이후 크롤러에 사용한다. 사용자 로그인 세션에서 Zombie Crawl(In Place), Zombie Biting(Victim On The Ground)을 FBX for Unity / Without Skin / 30fps / 키프레임 축소 없음으로 내려받았다. 이전 Adobe/Mixamo 사용 조건 및 원본 Git 제외 원칙을 유지한다. 원본 4개의 SHA256은 [복원 스크립트](../scripts/Restore-EnemyVariants.py)에 기록했다. Humanoid 리타게팅, URP 재질 연결, 보스 크기 조정, 크롤러 접지 보정과 머리 판정을 적용했다. [상세 복원 절차](boss-crawler.md).
+
+
+## 전환 연출용 바이러스 후보 — 취득만 완료 (2026-10-19)
+
+- 모델: [Coronavirus // virus model](https://sketchfab.com/3d-models/coronavirus-virus-model-362ca23f5a584c5bb84dc9d9a25ff73e), 제작자 **anyaachan**.
+- 사용자 제공 다운로드 화면은 **CC Attribution**, 저작자 표시 필수·상업 이용 가능으로 안내한다. 세부 라이선스 버전은 화면에 없어 추정하지 않는다. 웹 직접 조회는403으로 실패했으며 화면 확인과 구분한다.
+- 원본: `C:/Users/User/Downloads/coronavirus-virus-model.zip`, 40,258,069바이트, SHA256 `d3e8d8817c2e7051ed12e2fb0ca9601a1fada27b9903190dac43ab553b32b8c3`.
+- 바깥 ZIP 및 내부 `source/model.zip` CRC 검사 통과. 내부에 `model.obj`, `model.mtl`, PNG3개가 있고 바깥에도 textures PNG3개가 있다.
+- MTL에 텍스처 경로가 없고 Kd가0이므로 추후 Unity 적용 시 재질·텍스처를 명시적으로 연결하고 외형을 검증해야 한다.
+- 현재 게임에 임포트·사용하지 않았다. 변경 없음. 원본은 로컬 Downloads에 유지하며 이번 커밋은 출처 기록만 포함한다. 실제 적용 시 빌드 크레딧에도 제작자·모델 링크·라이선스·변경 내역을 추가한다.

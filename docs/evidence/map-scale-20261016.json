@@ -1,0 +1,44 @@
+{
+  "date": "2026-10-16",
+  "baselineCommit": "81d8448",
+  "room": {
+    "spaceScale": 2,
+    "furnitureScale": 1.5,
+    "floorMeters": [
+      8.6,
+      7
+    ],
+    "reachableSpawns": 7
+  },
+  "classroom": {
+    "spaceScale": 2,
+    "deskChairScale": 1.5,
+    "floorMeters": [
+      28,
+      12.6
+    ],
+    "reachableSpawns": 8
+  },
+  "chairRemovedTriangles": 10,
+  "repeatMigrationTransformsUnchanged": true,
+  "buildGuid": "92f1c447c0d446cc98e86203a1bb6d7d",
+  "deployedFilesHashVerified": 350,
+  "hardwareAcceptance": "pending",
+  "tests": {
+    "edit-clean": {
+      "total": "103",
+      "passed": "102",
+      "failed": "0",
+      "skipped": "1",
+      "sha256": "1c3ab5eec9fae21ecf39e47f7862340cc40457276c4f5c402951e51269dd644f"
+    },
+    "play-final": {
+      "total": "130",
+      "passed": "130",
+      "failed": "0",
+      "skipped": "0",
+      "sha256": "d80bdcfda735709d4630b581794d4423cfe7a8606b8e76d8c58cfc799303160a"
+    }
+  },
+  "buildLogSha256": "d5e03f958bd4b0f852ddce6ac5e61dd7415c592dac5e6b9f284eaa7d441940ad"
+}

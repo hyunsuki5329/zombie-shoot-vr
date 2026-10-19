@@ -1,0 +1,135 @@
+{
+  "date": "2026-10-13",
+  "scope": "Room structure to fixed abandoned-house prototype; Classroom not captured",
+  "baseline": "f496b84",
+  "tests": [
+    {
+      "file": "tmp\\method-a\\contracts-red.xml",
+      "result": "Failed(Child)",
+      "total": "7",
+      "passed": "0",
+      "failed": "7",
+      "sha256": "79bd1a6acff974500c614c59072bbd1f7ff6e2b3b872f91688511c67ec3e50af"
+    },
+    {
+      "file": "tmp\\method-a\\structure-green.xml",
+      "result": "Passed",
+      "total": "81",
+      "passed": "81",
+      "failed": "0",
+      "sha256": "88d9f92208c44b54e1842f20bafcdaf24ec27a949a3303f002a70d0f5fa5355a"
+    },
+    {
+      "file": "tmp\\method-a\\capture-red.xml",
+      "result": "Failed(Child)",
+      "total": "1",
+      "passed": "0",
+      "failed": "1",
+      "sha256": "cf6f1ee2ea6040feea8b62069799e3fc25545285c73ea3a15cb3f469432591ea"
+    },
+    {
+      "file": "tmp\\method-a\\capture-green.xml",
+      "result": "Passed",
+      "total": "82",
+      "passed": "82",
+      "failed": "0",
+      "sha256": "e61a3f2c817db989f67a8295d39ed33bf09293b01973dc093253cff07891c765"
+    },
+    {
+      "file": "tmp\\method-a\\theme-red.xml",
+      "result": "Failed(Child)",
+      "total": "1",
+      "passed": "0",
+      "failed": "1",
+      "sha256": "495a1df5e6fca575468b1f8149123ed57fc4cfa4acca81c47c62a22a756a9bb4"
+    },
+    {
+      "file": "tmp\\method-a\\theme-green.xml",
+      "result": "Passed",
+      "total": "83",
+      "passed": "83",
+      "failed": "0",
+      "sha256": "6b51271098d56089b9866bc47bebf414870ae5aa932c45dd328d8bd4963d8fc7"
+    },
+    {
+      "file": "tmp\\method-a\\preview-red.xml",
+      "result": "Failed(Child)",
+      "total": "1",
+      "passed": "0",
+      "failed": "1",
+      "sha256": "06196d68c04aa7ffd72483aa698d519ceaf61821a720ed07eae5c27bfb5b4cef"
+    },
+    {
+      "file": "tmp\\method-a\\preview-green.xml",
+      "result": "Passed",
+      "total": "84",
+      "passed": "84",
+      "failed": "0",
+      "sha256": "08f4694f22d224edf81d1faa4a623b0d5b4e1ad7ac28a45e973fe84ff38c1ec6"
+    },
+    {
+      "file": "tmp\\method-a\\final-edit.xml",
+      "result": "Passed",
+      "total": "85",
+      "passed": "85",
+      "failed": "0",
+      "sha256": "3e8cf0b6fa8e5620d64e8c4b90287ca2bdd6b9ffa693f56c4f07e1a960845227"
+    },
+    {
+      "file": "tmp\\method-a\\safety-red.xml",
+      "result": "Failed(Child)",
+      "total": "6",
+      "passed": "0",
+      "failed": "6",
+      "sha256": "414dbc800a1e42aa39ff3fc14f7b2382e44b000812fdbdc8d513da9c5d86727b"
+    },
+    {
+      "file": "tmp\\method-a\\review-fixed-edit.xml",
+      "result": "Passed",
+      "total": "91",
+      "passed": "91",
+      "failed": "0",
+      "sha256": "04bc68468de870deb15e6a8a8080537c6f9869927423b9ac04eaa2167e07f38e"
+    },
+    {
+      "file": "tmp\\method-a\\final-play.xml",
+      "result": "Passed",
+      "total": "127",
+      "passed": "127",
+      "failed": "0",
+      "sha256": "4a28f6837f93a3137b299a0d5cc6665b68ca0a29069482d9675cf1620d5a8024"
+    }
+  ],
+  "review": {
+    "reviewer": "review_method_a",
+    "findings": [
+      "Root transform prevalidation missing",
+      "Unchecked photo-reference backup/save"
+    ],
+    "resolution": "6 RED failures; final EditMode91/91 and PlayMode127/127 after fixes"
+  },
+  "visual_status": "First procedural environment prototype; final art and VR acceptance pending",
+  "no_scan_configure": "Succeeded with RoomScan directory outside project; existing Library/cache retained",
+  "hardware": "2026-10-13 user reply: not yet run",
+  "build": {
+    "result": "Succeeded",
+    "guid": "313ef653032c4d93bf721f66bf9f08ca",
+    "path": "Zombie Shoot VR\\Builds\\Windows\\AbandonedHouse\\AbandonedHouse.exe",
+    "packed_RoomScan_assets": 0,
+    "without_source_scan": true,
+    "build_log_sha256": "48602abcf9ccfcc802eef644f8df5a76db81363a06d4fcb25ff5135143b3eb96",
+    "exe_sha256": "56c28afba054092826b7a8a80ba3767daa87967f182c0c562eb2f98799175b7a",
+    "note": "Existing Library/cache retained; original scan files absent from Assets during generation/build. Executable hash alone does not identify Unity data files."
+  },
+  "no_scan_build": "Succeeded; packed private RoomScan assets 0; private folder restored after verification",
+  "source_commit": "7af6176883f55459308b731ea9c1ae8d572b0f8b",
+  "pull_request": "https://github.com/hyunsuki5329/zombie-shoot-vr/pull/21",
+  "backup": {
+    "path": "Zombie Shoot VR\\Builds\\Reproduction\\7af6176-house",
+    "source_sha256": "db09098164d4f8c24df6a5a6b106d1d9211f97053e677107b4d3317d83a94061",
+    "external_sha256": "602cb08814ef002e9eb1245c270abcea0148a852447e8596761b397d241627d8",
+    "external_file_count": 188,
+    "zip_crc_and_external_hashes": "Passed",
+    "fresh_unity_import": "Not run for this archive"
+  }
+}

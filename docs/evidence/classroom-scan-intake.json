@@ -1,0 +1,237 @@
+{
+  "source": "C:/Users/User/Desktop/Scaniverse 2026-10-13 165303.fbx",
+  "sha256": "9d257fcaead1b02f79b6bfa451f7062df3cfb2678de5cb21389dee1e986cc755",
+  "bytes": 23806560,
+  "version": 7500,
+  "meshes": [
+    {
+      "vertices": 153581,
+      "minimum": [
+        -8.77676773071289,
+        -0.16430675983428955,
+        -6.524698257446289
+      ],
+      "maximum": [
+        8.997074127197266,
+        3.4581756591796875,
+        6.836973190307617
+      ],
+      "finite": true
+    }
+  ],
+  "polygons": 261036,
+  "settings": [
+    [
+      "UpAxis",
+      "int",
+      "Integer",
+      "",
+      1
+    ],
+    [
+      "UpAxisSign",
+      "int",
+      "Integer",
+      "",
+      1
+    ],
+    [
+      "UnitScaleFactor",
+      "double",
+      "Number",
+      "",
+      100.0
+    ]
+  ],
+  "embedded_texture": true,
+  "calibration": "User approximate dimensions 14m X by 6.3m Z; ceiling 3m estimated",
+  "userConfirmedClassroom": true,
+  "status": "Classroom prototype generated; exact furniture count and VR acceptance pending",
+  "limitations": [
+    "Mesh bounds are scan extents, not measured wall-to-wall dimensions.",
+    "No classroom gameplay or VR acceptance is established by this inspection."
+  ],
+  "crop": {
+    "regions": [
+      {
+        "id": "upper_left",
+        "polygon": [
+          [
+            -9,
+            2.1
+          ],
+          [
+            -7.2,
+            2.1
+          ],
+          [
+            -4.8,
+            2.8
+          ],
+          [
+            -4.8,
+            8
+          ],
+          [
+            -9,
+            8
+          ]
+        ]
+      },
+      {
+        "id": "upper_right",
+        "polygon": [
+          [
+            3.3,
+            4.25
+          ],
+          [
+            9.5,
+            5.35
+          ],
+          [
+            10,
+            9
+          ],
+          [
+            3.3,
+            9
+          ]
+        ]
+      },
+      {
+        "id": "lower_right",
+        "polygon": [
+          [
+            4.5,
+            -3.75
+          ],
+          [
+            6.2,
+            -3.45
+          ],
+          [
+            7.8,
+            -4.0
+          ],
+          [
+            7.8,
+            -8
+          ],
+          [
+            4.5,
+            -8
+          ]
+        ]
+      }
+    ],
+    "originalTriangles": 261036,
+    "retainedTriangles": 247477,
+    "removedTriangles": 13559,
+    "retainedVertices": 145719,
+    "boundsMin": [
+      -8.997074127197266,
+      -0.16430675983428955,
+      -5.202434539794922
+    ],
+    "boundsMax": [
+      8.77676773071289,
+      3.4581756591796875,
+      5.052807807922363
+    ],
+    "method": "Exclude triangles touching a marked region, projected in Unity X/Z. Original FBX unchanged.",
+    "status": "Reference crop only; no measured dimensions or gameplay acceptance.",
+    "userInstruction": "Exclude the three red-marked nonexistent regions in the supplied annotated top view."
+  },
+  "layoutDraft": {
+    "coordinateSystem": "Unity X/Z reflected from FBX, then rotated -8 degrees for inspection only",
+    "calibrated": false,
+    "groups": [
+      {
+        "id": "A",
+        "minimumXZ": [
+          -7.65,
+          -2.35
+        ],
+        "sizeXZ": [
+          1.45,
+          3.6
+        ],
+        "origin": "ScanEstimated",
+        "role": "Furniture cluster; object identity/count not confirmed"
+      },
+      {
+        "id": "B",
+        "minimumXZ": [
+          -5.4,
+          -3.95
+        ],
+        "sizeXZ": [
+          1.95,
+          4.75
+        ],
+        "origin": "ScanEstimated",
+        "role": "Furniture cluster; object identity/count not confirmed"
+      },
+      {
+        "id": "C",
+        "minimumXZ": [
+          -2.85,
+          -3.95
+        ],
+        "sizeXZ": [
+          1.95,
+          4.7
+        ],
+        "origin": "ScanEstimated",
+        "role": "Furniture cluster; object identity/count not confirmed"
+      },
+      {
+        "id": "D",
+        "minimumXZ": [
+          0.3,
+          -4.05
+        ],
+        "sizeXZ": [
+          1.85,
+          4.85
+        ],
+        "origin": "ScanEstimated",
+        "role": "Furniture cluster; object identity/count not confirmed"
+      },
+      {
+        "id": "E",
+        "minimumXZ": [
+          3.15,
+          -4.1
+        ],
+        "sizeXZ": [
+          2.1,
+          4.9
+        ],
+        "origin": "ScanEstimated",
+        "role": "Furniture cluster; object identity/count not confirmed"
+      },
+      {
+        "id": "F",
+        "minimumXZ": [
+          5.85,
+          -3.95
+        ],
+        "sizeXZ": [
+          1.9,
+          5.35
+        ],
+        "origin": "ScanEstimated",
+        "role": "Furniture cluster; object identity/count not confirmed"
+      }
+    ],
+    "notes": [
+      "Do not feed these clusters directly into collision as solid blocks.",
+      "Six longitudinal furniture clusters visible in .45 to1.1 height slice.",
+      "Upper wall incomplete; do not convert scan extents to measured dimensions.",
+      "Individual desks/chairs require placement review before runtime promotion."
+    ],
+    "localPreview": "tmp/classroom-inspection/furniture-clusters.png"
+  }
+}

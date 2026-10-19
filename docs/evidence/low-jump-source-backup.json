@@ -1,0 +1,13 @@
+{
+  "sourceCommit": "2d3f3e6",
+  "filesVerified": 2856,
+  "archiveSha256": "23ab2258c648c0f8428aca86fb24a763bdcaeca8ec134356e3243b604eaef98f",
+  "archiveBytes": 584352601,
+  "scope": "Git source plus local external assets and stable metadata; user-edited scenes preserved",
+  "reopenTest": "not run",
+  "publicRedistribution": "not authorized by this backup",
+  "testedCacheComparedFiles": 241,
+  "comparisonScope": "VRFPS .cs (line endings normalized), .prefab, .unity, .asset, excluding Tests and Documentation; byte equality otherwise",
+  "buildGuid": "4f8a62b0b3644f6595155f830491a59f",
+  "path": "Zombie Shoot VR/Builds/Reproduction/2d3f3e6-low-jump"
+}

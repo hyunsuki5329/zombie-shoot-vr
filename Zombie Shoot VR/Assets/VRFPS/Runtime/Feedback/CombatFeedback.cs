@@ -60,6 +60,11 @@ namespace VRFPS
             Play(shots[nextShot],shotClip,rightHaptics,shotHaptic,.035f);
             nextShot=(nextShot+1)%shots.Length;
         }
+        public void OnFreshMagazineSupplied()
+        {
+            if(isActiveAndEnabled && gun!=null && (gun.Phase==RunPhase.Active || gun.Phase==RunPhase.Preparing))
+                Play(null,null,leftHaptics,.3f,.07f);
+        }
         void OnEmpty()=>Play(empty,emptyClip,null,0,0);
         void OnInsert()
         {

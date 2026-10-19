@@ -1,0 +1,62 @@
+{
+  "baselineCommit": "0513b6a",
+  "date": "2026-10-16",
+  "buildGuid": "2b1adfac2c9e49e6bb796bd133039e2f",
+  "viewHeightMultiplier": 1.15,
+  "userVisualTransformsPreserved": true,
+  "removedInvisibleColliders": [
+    "Teacher desk (1)",
+    "Teacher chair (1)",
+    "Board (1)",
+    "Board (2)",
+    "Board (3)"
+  ],
+  "reachableSpawns": {
+    "Room": 7,
+    "Classroom": 8
+  },
+  "schoolFrontSamples": {
+    "x": [
+      -8,
+      -4,
+      0,
+      4,
+      8
+    ],
+    "z": 2.4,
+    "connectedToPlayer": true
+  },
+  "tests": {
+    "red": {
+      "total": "1",
+      "passed": "0",
+      "failed": "1",
+      "skipped": "0",
+      "sha256": "adf7b88c132c3d4bfd7798cb867bd773b2480a41706f5ad80b2f598cef820409"
+    },
+    "nav-red": {
+      "total": "1",
+      "passed": "0",
+      "failed": "1",
+      "skipped": "0",
+      "sha256": "9798dd8aef89abfef5861f9c10259ac87a01109c4e1d7cdf4e532a036e6e0539"
+    },
+    "edit-final": {
+      "total": "107",
+      "passed": "106",
+      "failed": "0",
+      "skipped": "1",
+      "sha256": "98bf52fe9bd11c8926af389552279c4c03ed904b6ec0753533260197a6739551"
+    },
+    "play": {
+      "total": "131",
+      "passed": "131",
+      "failed": "0",
+      "skipped": "0",
+      "sha256": "d96643c0dba2d121daf0c7d16c6168611a45a8d95073432476457b66ac5b8f21"
+    }
+  },
+  "hardwareAcceptance": "pending",
+  "deployedFilesHashVerified": 350,
+  "buildLogSha256": "276961a26d5ad83af445d67ff396eb77a18adce224952d34c34ee39420e4df4e"
+}

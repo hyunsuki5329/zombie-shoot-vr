@@ -62,7 +62,11 @@ namespace VRFPS
             if (Owner == LeftHandOwner.None && pressed)
             {
                 HeldToken = socket.TryEject(left);
-                if (HeldToken == null) HeldToken = pouch.TrySupply(left);
+                if (HeldToken == null)
+                {
+                    HeldToken = pouch.TrySupply(left);
+                    if (HeldToken != null) gun.GetComponent<CombatFeedback>()?.OnFreshMagazineSupplied();
+                }
                 if (HeldToken == null)
                 {
                     var nearby = pouch.FindNearbyLoose(left);

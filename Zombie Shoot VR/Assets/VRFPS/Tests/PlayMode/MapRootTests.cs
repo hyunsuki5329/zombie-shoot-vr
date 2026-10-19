@@ -41,6 +41,12 @@ namespace VRFPS.Tests
             Assert.That(Vector3.Distance(positions[0],offset+Vector3.forward*4),Is.LessThan(.3f));
             Assert.That(Vector3.Distance(mapRoot.PlayerPosition,offset),Is.LessThan(.3f));
         }
+        [Test] public void KeepsReachableNearStartAnchorForLaterPlayerMovement()
+        {
+            mapRoot.enemySpawns=new[]{Child("Near start",offset+Vector3.right),Child("Far start",offset+Vector3.forward*4)};
+            var positions=mapRoot.GetSpawnPositions(definition);
+            Assert.That(positions.Length,Is.EqualTo(2),"Distance must be checked against the current player at spawn time, not permanently filter anchors near the initial spawn");
+        }
         [Test] public void RejectsMissingGeometryBadPlayerAndNoValidEnemies()
         {
             var visual=mapRoot.visualRoot;mapRoot.visualRoot=null;
