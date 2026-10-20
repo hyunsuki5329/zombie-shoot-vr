@@ -1,5 +1,21 @@
 # Goal 실행 현황
 
+## 2026-10-20 P13 실행 착수·입력 검사
+
+- PR22 병합 기반 `c407d83`에서 `codex/gs-comparison-intro` 격리 작업본을 만들었다.
+  원본 두 맵·WallFix·사용자 설정의 해시를 보존했다. main 통합은 아직 아니다.
+- 사용자가 제공한 room.ply/school.ply를 실제 검사했으며 XYZ/RGB 점군으로 확인했다.
+  GS 속성은 없어 채택하지 않았고 사용자는 Splat으로 새로 촬영하기로 했다.
+  [입력 증빙](evidence/gs-input-inspection.json), [실행 기록](gs-execution-ledger.md).
+- 새 Library 기준 EditMode108통과/개인 스캔1제외, PlayMode130통과/1실패.
+  EnemyLab 언로드 뒤 잔여 적2개 실패는 단독 재실행에서 통과했으므로 수명 경계를
+  조사한다. [기준 증빙](evidence/gs-baseline.json). 새 게임 기능 시험 결과가 아니다.
+- PLY 사전 검사와 개인 GS/바이러스 Git 제외를 추가했다. 독립 리뷰의 출력 경로
+  원본 덮어쓰기 지적을 실패 시험으로 재현하고 독점 파일 생성으로 수정했다.
+- 후보 GS revision을 고정한 별도 시험 프로젝트에서 DX12 초기화·컴파일을 확인했다.
+  렌더링·양안 인수는 미실행이며 기본 프로젝트 패키지/API는 변경하지 않았다.
+  다음은 호환성 렌더 시험과 자료 독립적인 도입부 구현이다. P13-a 전체는 미완료다.
+
 ## 2026-10-20 새 채팅 인계와 원격 상태 확인
 
 [새 채팅용 Goal](prompts/vr-zombie-fps-new-chat-goal.md)에 기존 빌드·사용자 인수·보류 조건·P13·자료 경로·검증·작업 단위별 Git 운영을 모았다. 문서 작성 요청이며 실제 Goal 생성/재개나 GS 구현은 수행하지 않았다.
