@@ -12,11 +12,42 @@ namespace VRFPS.Tests
     public class EnemyLabSceneTests
     {
         [UnityTest]
+        public IEnumerator RuntimeBelongsToOwnerEvenWhenAnotherSceneIsActive()
+        {
+            var active=SceneManager.GetActiveScene();
+            var owner=SceneManager.CreateScene("EnemyLabOwnership");
+            var host=new GameObject("Inactive lab");host.SetActive(false);
+            SceneManager.MoveGameObjectToScene(host,owner);
+            var session=host.AddComponent<EnemyLabSession>();
+            var field=typeof(EnemyLabSession).GetField("projectilePrefab",
+                System.Reflection.BindingFlags.NonPublic|System.Reflection.BindingFlags.Instance);
+            field.SetValue(session,UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>(
+                "Assets/VRFPS/Prefabs/Enemies/AcidProjectile.prefab").GetComponent<AcidProjectile>());
+            SceneManager.SetActiveScene(active);
+            GameObject runtime=null;
+            try
+            {
+                host.SetActive(true);
+                runtime=(GameObject)typeof(EnemyLabSession).GetField("actorRoot",
+                    System.Reflection.BindingFlags.NonPublic|System.Reflection.BindingFlags.Instance).GetValue(session);
+                Assert.That(runtime.scene,Is.EqualTo(owner),"Runtime ownership must not depend on the active scene.");
+            }
+            finally
+            {
+                Object.Destroy(host);
+                if(runtime!=null)Object.Destroy(runtime);
+                SceneManager.UnloadSceneAsync(owner);
+            }
+            yield return null;
+        }
+
+        [UnityTest]
         public IEnumerator AuthoredLabStartsAndResetsTwoEnemiesWithoutDuplicateObjects()
         {
             const string path = "Assets/VRFPS/Scenes/Tests/InteractionLab.unity";
             yield return EditorSceneManager.LoadSceneAsyncInPlayMode(path, new LoadSceneParameters(LoadSceneMode.Additive));
             var scene = SceneManager.GetSceneByPath(path);
+            AsyncOperation unload=null;
             try
             {
                 var session = Object.FindFirstObjectByType<EnemyLabSession>();
@@ -26,6 +57,8 @@ namespace VRFPS.Tests
                 Assert.That(actors.Length, Is.EqualTo(2));
                 foreach (var actor in actors)
                 {
+                    Assert.That(actor.gameObject.scene, Is.EqualTo(scene),
+                        "Lab runtime must belong to the lab scene so unloading owns its lifetime.");
                     Assert.That(actor.GetComponent<NavMeshAgent>().isOnNavMesh, Is.True);
                     Assert.That(actor.GetComponentInChildren<Animator>().applyRootMotion, Is.False);
                     var block = new MaterialPropertyBlock();
@@ -80,9 +113,9 @@ namespace VRFPS.Tests
             }
             finally
             {
-                if (scene.IsValid() && scene.isLoaded) SceneManager.UnloadSceneAsync(scene);
+                if (scene.IsValid() && scene.isLoaded) unload=SceneManager.UnloadSceneAsync(scene);
             }
-            while (scene.IsValid() && scene.isLoaded) yield return null;
+            if(unload!=null)yield return unload;
             yield return null;
             Assert.That(Object.FindObjectsByType<EnemyActor>(FindObjectsSortMode.None).Length, Is.Zero);
         }

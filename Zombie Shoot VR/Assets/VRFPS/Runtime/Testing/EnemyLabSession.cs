@@ -26,6 +26,7 @@ namespace VRFPS
             reset = new InputAction("EnemyLabReset", InputActionType.Button, "<XRController>{LeftHand}/secondaryButton");
             reset.AddBinding("<Keyboard>/f7");
             actorRoot = new GameObject("Enemy Lab Runtime");
+            UnityEngine.SceneManagement.SceneManager.MoveGameObjectToScene(actorRoot,gameObject.scene);
             pool = actorRoot.AddComponent<AcidProjectilePool>();
             pool.Configure(projectilePrefab, LayerMask.GetMask("WorldSolid"), LayerMask.GetMask("PlayerBody"));
         }
