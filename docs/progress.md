@@ -599,3 +599,8 @@ BootstrapPreview/WaveLab 빌드 모두 성공·종료0. 복원 WaveLab337개 파
 - PrepareMap은 전투를 시작하지 않으며, BeginPreparedRun은 첫 시작을1회만 수행한다. 첫 배치를 유지하고 재도전은 기본 스폰으로 돌아간다. Intro에서 회전만 허용하도록 이동 권한을 분리했다.
 - 독립 리뷰의 시작 실패 복구 및 테마 앵커 검증 누락을 실패 시험으로 재현·수정했다. PlayMode143/143, EditMode124통과/1제외. [증빙](evidence/prepared-combat.json). 원본 맵·사용자 설정·WallFix 해시 보존.
 - PR25 위 후속 draft 단위이며 암전·메뉴·비동기 취소·실제 GS/VR 연결은 아직 미완료다.
+
+## 2026-10-21 P13 화면 페이드
+
+- 정지·취소·요청 대체를 지원하는 unscaled 페이드와 월드 가림 셰이더를 추가했다. 실패 시험3개→통과, 전체 graphics PlayMode147/147, 리뷰 시험 보완 후 DX12 대상4/4통과. [증빙](evidence/screen-fade.json).
+- GPU 시험은 단안 배경/근접 물체의 검정·복원과 자원 해제를 확인했다. XR 양안·GS 합성·실제 손/총·메뉴 위 표시·빌드 포함은 미검증이다.

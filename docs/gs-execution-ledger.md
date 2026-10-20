@@ -121,3 +121,13 @@ Ruling: P13-a의 실제 GS/VR 인수 대기 중 데이터 독립적인 b~e 구�
 
 - 리뷰 보완 후 최종 PlayMode143/143, EditMode124통과/개인 스캔1제외. [증빙](evidence/prepared-combat.json). 원본 맵2개·사용자 설정2개·WallFix 실행파일 SHA256 보존 확인.
 - 경미한 시험 여지: 회전 권한은 실제 리그 시험으로 검증했고 router의 연결은 정적 확인했다. 전체 IntroController 상태 시험에서 router를 포함한 통합을 검증할 예정이며 아직 수행했다고 표기하지 않는다.
+
+## P13-d 화면 페이드 단위
+
+- PR26 draft: https://github.com/hyunsuki5329/zombie-shoot-vr/pull/26 (d79f6c0). 후속 codex/p13-screen-fade에서 진행.
+- 시간 배율0에서도 unscaled 진행, 일시정지 알파 고정, 취소·SetImmediate의 이전 요청 무효화, 잘못된 값 거부 시험3개 실패→통과.
+- 카메라 내부 구체와 ZTest Always/queue4999 셰이더로 월드·가까운 물체를 덮는 시각 구현을 추가했다. stereo instancing 매크로를 사용하지만 실제 양안 결과는 아직 미검증이다.
+- 단안 GPU(DX11/RTX4060Ti) 시험에서 배경+가까운 cube→모든 픽셀 검정→복원 및 시각 오브젝트 해제까지4/4통과. 실제 총/손, GS 합성, 메뉴의 상위 순서, XR 인수로 확대 해석하지 않는다.
+- Ruling: 페이드 전용 셰이더 queue4999를 예약하고 메뉴는 후속 통합에서 이보다 위에서 그려야 한다. 현재 메뉴가 페이드 위에 보인다고 주장하지 않는다. 카메라 레이어/클리핑 조건을 검증하며 설정 변경 시 재구성이 필요하다.
+
+- 전체 graphics PlayMode147/147통과. 독립 리뷰 중요 결함0, 경미한 FadeTo 간 대체 시험 제안을 반영했다. 이후 DX12 대상 시험4/4통과. [증빙](evidence/screen-fade.json). 전체147 시험은 추가 대체 assertion 전이며 런타임 코드는 동일하다.
