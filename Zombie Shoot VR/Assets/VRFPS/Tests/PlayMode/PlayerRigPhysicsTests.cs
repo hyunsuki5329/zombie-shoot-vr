@@ -39,6 +39,26 @@ namespace VRFPS.Tests
             if (wall != null) Object.DestroyImmediate(wall);
         }
 
+        [Test] public void PreviewAllowsTurnButBlocksTranslationAndJumpThenRestoresCombat()
+        {
+            for(int i=0;i<10;i++)movement.Tick(Vector2.zero,Vector2.zero,1f/60);
+            var before=rig.transform.position;var tracked=head.localPosition;
+            movement.SetLocomotionPermissions(false,true,false);
+            Assert.That(movement.TryJump(),Is.False);
+            movement.Tick(Vector2.one,Vector2.right,.1f);
+            Assert.That(Vector3.Distance(rig.transform.position,before),Is.LessThan(.001f));
+            Assert.That(Mathf.DeltaAngle(0,rig.transform.eulerAngles.y),Is.EqualTo(6).Within(.01f));
+            Assert.That(head.localPosition,Is.EqualTo(tracked));
+            movement.SetLocomotionEnabled(false);
+            movement.Tick(Vector2.one,Vector2.right,.1f);
+            Assert.That(Mathf.DeltaAngle(0,rig.transform.eulerAngles.y),Is.EqualTo(6).Within(.01f));
+            movement.SetLocomotionEnabled(true);
+            Assert.That(movement.TryJump(),Is.True);
+            movement.Tick(Vector2.up,Vector2.zero,.1f);
+            Assert.That(rig.transform.position.y,Is.GreaterThan(before.y));
+            Assert.That(Vector2.Distance(new Vector2(before.x,before.z),new Vector2(rig.transform.position.x,rig.transform.position.z)),Is.GreaterThan(.1f));
+        }
+
         [Test] public void JumpLandsOnFurnitureAndRejectsAirborneOrPausedRequests()
         {
             var jump=typeof(PlayerRigController).GetMethod("TryJump");

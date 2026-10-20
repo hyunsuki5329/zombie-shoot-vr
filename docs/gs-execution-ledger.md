@@ -106,3 +106,18 @@ Ruling: P13-a의 실제 GS/VR 인수 대기 중 데이터 독립적인 b~e 구�
 - 추가 재장전 시험의 종료에서 총이 먼저 파괴되면 router가 파괴된 참조에 접근하는 실패를 확인했다.
   Unity null 검사로 수명 경계를 보호한 뒤 전체 PlayMode138/138통과.
   실제 VR과 GS 공간의 결과는 여전히 미검증이다.
+
+## P13-d 준비 단계 분리 진행
+
+- PR25 draft: https://github.com/hyunsuki5329/zombie-shoot-vr/pull/25 (64700c2), c 자동 시험과 독립 리뷰 수정 포함. 실제 VR 미수행으로 병합하지 않았다.
+- 후속 브랜치는 PR25 위에 쌓은 codex/p13-prepared-combat이다.
+- 준비 중 RunStarted0, 첫 시작만1회, 준비8초·HP100·30발·기록0, 첫 시작 위치 유지와 재도전 기본 스폰 시험을 추가했다. 기존 구현 래퍼에서 새 시험2실패를 확인한 뒤 CombatSession을 분리했다. 관련4개 시험 통과; 전체 회귀는 아직 실행 전이다.
+- Ruling: PlacePreparedPlayer의 relativeYaw는 관찰 앵커에 대한 리그 yaw 차이로 전달한다. 테마 앵커 yaw에 이를 더하고 HMD 로컬 pose는 보존하여 실제 관찰 방향도 같은 차이로 이어진다. 호출자가 HMD yaw를 중복 적용하면 방향이 어긋나므로 전환 통합 시험에서 별도 확인한다.
+- 회전만 허용하는 리그 권한 분리 시험 진행 중. 암전·메뉴·비동기 취소 연결은 아직 미완료다.
+
+- 준비·회전 구현 후 전체 PlayMode141/141통과. 독립 리뷰에서 시작 예외 복구와 새 앵커 유효성 검사 누락(P2)2건을 받아 수정 중이다.
+- 시작 이벤트 예외를 주입한 시험은 실패를 재현했다. BeginPreparedRun은 오류/비활성 상태를 반환하고 기존 StartMap 래퍼는 소유 런타임·맵을 Shutdown으로 정리하도록 보완했다.
+- Ruling: 테마 앵커는 현재 MapRoot 하위의 활성 Transform이어야 하며 동일 agent의 NavMesh와 충분히 먼 도달 가능한 적 후보를 검사한다. 기본 스폰이 검증됐다고 새 위치도 안전하다고 간주하지 않는다. 프로필은 기존 playerSpawn을 참조할 수 있어 맵 배치를 변경할 필요는 없다.
+
+- 리뷰 보완 후 최종 PlayMode143/143, EditMode124통과/개인 스캔1제외. [증빙](evidence/prepared-combat.json). 원본 맵2개·사용자 설정2개·WallFix 실행파일 SHA256 보존 확인.
+- 경미한 시험 여지: 회전 권한은 실제 리그 시험으로 검증했고 router의 연결은 정적 확인했다. 전체 IntroController 상태 시험에서 router를 포함한 통합을 검증할 예정이며 아직 수행했다고 표기하지 않는다.
