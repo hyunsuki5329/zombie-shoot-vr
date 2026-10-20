@@ -1,5 +1,11 @@
 # Goal 실행 현황
 
+## 2026-10-20 새 채팅 인계와 원격 상태 확인
+
+[새 채팅용 Goal](prompts/vr-zombie-fps-new-chat-goal.md)에 기존 빌드·사용자 인수·보류 조건·P13·자료 경로·검증·작업 단위별 Git 운영을 모았다. 문서 작성 요청이며 실제 Goal 생성/재개나 GS 구현은 수행하지 않았다.
+
+원격 조회/fetch 결과 PR21은23eaa5a로 codex/p06-boss-crawler에 병합됐고 main은fc5ff33이었다. PR21에 포함된 마지막 소스는63b378b이며, 이후 GS 설계ae5b3d9는 별도였다. 병합된 게임 기준의 codex/goal-handoff 브랜치에 설계만dab5081로 이식해 인계 문서와 함께 새 문서 PR로 연결한다. 코드·씬은 동일하고 무관한 사용자 설정2개는 보존했다. 후속 실행은 실제 원격 상태를 다시 확인해야 한다.
+
 ## 2026-10-20 P13 GS 비교 도입부 문서화
 
 사용자 요청의 현실 공간→큰 바이러스 사격→암전→테마 등장/전투 흐름을 [11 상세 설계](vr-fps-project-docs/11-gs-comparison-intro.md)와 [12 작업 계획](vr-fps-project-docs/12-gs-comparison-plan.md)에 작성했다. PRD R21~R28·시험 T21~T28·P13-a~f를 연결하고01~10·Method A·Goal·문서 인덱스를 동기화했다. Room 우선/강의실 후속, 페이드·관찰 조작·재도전 정책은 설계 기본안으로 표시했다.
