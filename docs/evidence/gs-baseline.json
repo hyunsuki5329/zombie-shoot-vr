@@ -1,0 +1,33 @@
+{
+  "base": "c407d83157354d4d92cb307fbf5338550841bd19",
+  "originalHashes": {
+    "Zombie Shoot VR/Assets/VRFPS/Scenes/Maps/Room.unity": "f0c71f81cdd656126e92e8f8a89a6760621105c67b7e372740eff38cdd943ccb",
+    "Zombie Shoot VR/Assets/VRFPS/Scenes/Maps/Classroom.unity": "a4a3bfc67b8e627ef50d77592d423a1ee07858118184b9db9ce7969ea2c861ab",
+    "Zombie Shoot VR/Assets/XR/Settings/OpenXRPackageSettings.asset": "454d6cd1f8b9e5654d53300f7d3a6f047ea6d7da565b8a77b2d87498bf110320",
+    "Zombie Shoot VR/ProjectSettings/Packages/com.unity.learn.iet-framework/Settings.json": "0c692ce63564b3910af12989e413530658899fb866a20ac3287d4040eb3eb4f8",
+    "Zombie Shoot VR/Builds/Windows/WallFix/AbandonedSchool.exe": "56c28afba054092826b7a8a80ba3767daa87967f182c0c562eb2f98799175b7a"
+  },
+  "gsSearch": "No .ply/.spz in Desktop or Downloads; user path requested",
+  "rendererRevision": "2c6fed37da67a217367261fcfcd3316d34c73e76",
+  "vrAcceptance": "not performed",
+  "edit": {
+    "result": "Skipped:Ignored",
+    "total": "109",
+    "passed": "108",
+    "failed": "0",
+    "skipped": "1",
+    "xmlSha256": "b825b57baa5929450b5b8190b3d846f0910c467fc42514aad7b106ffcf631043"
+  },
+  "play": {
+    "result": "Failed(Child)",
+    "total": "131",
+    "passed": "130",
+    "failed": "1",
+    "skipped": "0",
+    "xmlSha256": "89d5f1edb6f80b1f60a23e12fbfb99c48746c56b20e57b32f19032bccbe0ecf3"
+  },
+  "gsInput": "room.ply and school.ply contain XYZ/RGB only. User confirms Mesh/Splat separate and will rescan.",
+  "sourceModified": false,
+  "freshLibrary": true,
+  "samePcPackageCacheAndLicense": true
+}

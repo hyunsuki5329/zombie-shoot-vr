@@ -1,0 +1,68 @@
+[
+  {
+    "fileName": "room.ply",
+    "bytes": 2661087,
+    "sha256": "4911a41dca68c34e1bee6ee9586b727203d94283f1feaef258527eee688615c2",
+    "vertexCount": 177390,
+    "vertexProperties": {
+      "x": "float",
+      "y": "float",
+      "z": "float",
+      "red": "uchar",
+      "green": "uchar",
+      "blue": "uchar"
+    },
+    "comments": [
+      "Created with Scaniverse - https://scaniverse.com"
+    ],
+    "gaussianHeader": false,
+    "missingGaussianProperties": [
+      "f_dc_0",
+      "f_dc_1",
+      "f_dc_2",
+      "opacity",
+      "scale_0",
+      "scale_1",
+      "scale_2",
+      "rot_0",
+      "rot_1",
+      "rot_2",
+      "rot_3"
+    ],
+    "classification": "point-cloud",
+    "rendererImport": "not-tested"
+  },
+  {
+    "fileName": "school.ply",
+    "bytes": 6219597,
+    "sha256": "1fffd19506a563216b6040e209b259e02af64c5f6047899dfd761b60260adeff",
+    "vertexCount": 414624,
+    "vertexProperties": {
+      "x": "float",
+      "y": "float",
+      "z": "float",
+      "red": "uchar",
+      "green": "uchar",
+      "blue": "uchar"
+    },
+    "comments": [
+      "Created with Scaniverse - https://scaniverse.com"
+    ],
+    "gaussianHeader": false,
+    "missingGaussianProperties": [
+      "f_dc_0",
+      "f_dc_1",
+      "f_dc_2",
+      "opacity",
+      "scale_0",
+      "scale_1",
+      "scale_2",
+      "rot_0",
+      "rot_1",
+      "rot_2",
+      "rot_3"
+    ],
+    "classification": "point-cloud",
+    "rendererImport": "not-tested"
+  }
+]

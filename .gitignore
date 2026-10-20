@@ -85,3 +85,9 @@ __pycache__/
 # User-supplied school source and extracted library are restored locally.
 **/Assets/VRFPS/External/AbandonedSchool/
 **/Assets/VRFPS/External/AbandonedSchool.meta
+
+# Private GS captures/processed buffers and externally supplied intro model.
+**/Assets/VRFPS/External/RealityGS/
+**/Assets/VRFPS/External/RealityGS.meta
+**/Assets/VRFPS/External/IntroVirus/
+**/Assets/VRFPS/External/IntroVirus.meta
