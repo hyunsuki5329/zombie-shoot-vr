@@ -8,11 +8,11 @@ namespace VRFPS
         [SerializeField] K2Controller gun;
         [SerializeField] PlayerRigController movement;
         [SerializeField] AmmoPouch pouch;
-        RunPhase previousPhase = RunPhase.Dead;
+        WeaponContextRouter router;
+        public WeaponContextRouter Router=>router;
 
         public void Configure(RunController run, K2Controller gun, PlayerRigController movement, AmmoPouch pouch)
         {
-            Unsubscribe();
             this.run = run; this.gun = gun; this.movement = movement; this.pouch = pouch;
             if (isActiveAndEnabled) Subscribe();
         }
@@ -21,28 +21,12 @@ namespace VRFPS
         void Subscribe()
         {
             if (run == null) return;
-            run.PhaseChanged += ApplyPhase;
-            ApplyPhase(run.Phase);
+            router=GetComponent<WeaponContextRouter>()??gameObject.AddComponent<WeaponContextRouter>();
+            router.enabled=true;router.Configure(run,gun,movement,pouch);
         }
-        void Unsubscribe() { if (run != null) run.PhaseChanged -= ApplyPhase; }
         void OnDisable()
         {
-            Unsubscribe();
-            ApplyPhase(RunPhase.Paused);
-        }
-        void ApplyPhase(RunPhase phase)
-        {
-            var simulationEnabled = phase == RunPhase.Active || phase == RunPhase.Preparing;
-            if (gun != null)
-            {
-                if (phase == RunPhase.Paused || phase == RunPhase.Dead ||
-                    previousPhase == RunPhase.Paused || previousPhase == RunPhase.Dead)
-                    gun.GetComponent<K2HandInput>()?.RequireTriggerRelease();
-                gun.SetPhase(phase);
-            }
-            previousPhase = phase;
-            if (movement != null) movement.SetLocomotionEnabled(simulationEnabled);
-            if (pouch != null) pouch.SetSimulationEnabled(simulationEnabled);
+            if(router!=null)router.enabled=false;
         }
     }
 }

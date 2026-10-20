@@ -14,9 +14,12 @@ namespace VRFPS
         // activeTime excludes pauses. A new run owns a new controller and magazine.
         // No queued shots: every request rechecks current grip, phase, obstruction and ammo.
         public bool TryFire(bool triggerHeld, bool leftGrip, RunPhase phase, bool muzzleBlocked, double activeTime)
+            =>TryFire(triggerHeld,leftGrip,phase==RunPhase.Active?WeaponContext.Combat:WeaponContext.Disabled,muzzleBlocked,activeTime);
+
+        public bool TryFire(bool triggerHeld, bool leftGrip, WeaponContext context, bool muzzleBlocked, double activeTime)
         {
             if (double.IsNaN(activeTime) || double.IsInfinity(activeTime) || activeTime < 0) return false;
-            if (!triggerHeld || !FireGate.CanFire(leftGrip, magazine.Inserted, magazine.Rounds, phase, muzzleBlocked)) return false;
+            if (!triggerHeld || !FireGate.CanFire(leftGrip, magazine.Inserted, magazine.Rounds, context, muzzleBlocked)) return false;
             if (activeTime + 1e-9 < nextShotTime) return false;
             if (!magazine.TryConsume()) return false;
             nextShotTime = activeTime + ShotInterval;

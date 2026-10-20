@@ -43,6 +43,34 @@ namespace VRFPS.Tests
         void GripAt(Vector3 position) { left.position = position; interactor.Tick(true, true); }
         void Release() => interactor.Tick(false, true);
 
+        [Test] public void IntroReloadUsesRealHandSocketAndPouchWhileRunStaysDead()
+        {
+            var run=Create("Intro run").AddComponent<RunController>();run.enabled=false;
+            var input=gun.gameObject.AddComponent<K2HandInput>();input.enabled=false;
+            input.Configure(gun,left,foregrip);
+            typeof(K2HandInput).GetField("leftHandOwnership",
+                System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic).SetValue(input,interactor);
+            var router=run.gameObject.AddComponent<WeaponContextRouter>();router.Configure(run,gun,null,pouch);
+            router.SetIntroState(true,false,0);
+            var feedback=gun.gameObject.AddComponent<CombatFeedback>();feedback.Configure(gun,socket);
+            for(var i=0;i<13;i++)gun.Magazine.TryConsume();
+            left.position=socket.transform.position;
+            input.TickInput(false,false,0);input.TickInput(true,false,0);
+            Assert.That(interactor.HeldToken.State,Is.EqualTo(MagazineTokenState.Discarded));
+            Assert.That(gun.Magazine.Rounds,Is.Zero);
+            input.TickInput(false,false,0);left.position=pouch.transform.position;
+            input.TickInput(true,false,0);
+            Assert.That(interactor.HeldToken.State,Is.EqualTo(MagazineTokenState.Fresh));
+            Assert.That(feedback.CueCount,Is.EqualTo(1));
+            left.position=socket.transform.position;input.TickInput(true,false,0);
+            Assert.That(gun.Magazine.Rounds,Is.EqualTo(30));
+            Assert.That(feedback.CueCount,Is.EqualTo(2));
+            Assert.That(interactor.Owner,Is.EqualTo(LeftHandOwner.None));
+            input.TickInput(false,false,0);left.position=foregrip.position;input.TickInput(true,false,0);
+            Assert.That(interactor.Owner,Is.EqualTo(LeftHandOwner.Foregrip));
+            Assert.That(run.Phase,Is.EqualTo(RunPhase.Dead));
+        }
+
         [Test] public void FreshSupplyCuesOnceButHeldGripBlockedInputAndRestartStaySilent()
         {
             var feedback=gun.gameObject.AddComponent<CombatFeedback>();feedback.Configure(gun,socket);
