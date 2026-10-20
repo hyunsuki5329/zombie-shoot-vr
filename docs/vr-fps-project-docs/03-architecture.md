@@ -1,5 +1,7 @@
 # 기술 설계
 
+2026-10-20 추가 설계: **현실 공간 GS 감상 → 큰 바이러스 사격 → 암전 → 테마 맵 등장 → 전투 시작**을 P13으로 추가한다. 상세 동작은 [11 설계](11-gs-comparison-intro.md), 작업 순서는 [12 계획](12-gs-comparison-plan.md)을 따른다. 현재 문서화 단계이며 구현·새 기기 검증은 미완료다. 1차 대상은 Room, Classroom GS는 별도 자료 확보 후 후속 적용한다.
+
 2026-10-12 범위 갱신: **내 방(`room`) → 폐가(`AbandonedHouse`), 실제 강의실(`classroom`) → 폐교(`AbandonedSchool`)**로 고정한다. 두 공간의 스캔·실측을 수동 구조 데이터로 정리하고, 그 위치·크기에 맞는 테마 프리팹으로 재구성한다. 다른 사용자의 공간 지원과 같은 맵의 테마 선택 기능은 범위에 포함하지 않는다. 세부 계약은 [Method A 가이드](../VRShoot_Method_A_Codex_Guide.reviewed.md)를 따른다. 이 갱신은 문서 변경이며 테마 구현 완료나 Goal 재개를 뜻하지 않는다.
 
 초안 2026-09-20 · 맵 설계 갱신 2026-10-12. 실제 구현·검증 상태는 progress.md를 따른다.
@@ -8,7 +10,7 @@
 
 기존 `D:/Unity Project/Zombie Shoot VR/Zombie Shoot VR/` 프로젝트를 사용한다. 2026-09-20 기준 Unity 6000.3.23f1, VR 템플릿 10.0.0, XR Interaction Toolkit 3.5.1, URP 17.3.0, OpenXR 1.17.1, Input System 1.20.0을 개발 기준으로 한다. XRI 3.5.1은 `Packages/manifest.json`과 `Packages/packages-lock.json`에서 확인했다. 같은 버전의 Starter Assets와 API를 사용하고, 추가로 필요한 AI Navigation·Unity Test Framework는 설치 여부와 호환 버전을 확인해 잠금 파일에 기록한다. 프리뷰 패키지는 기본 경로에서 제외한다. G0에서 Windows OpenXR 런타임·양쪽 입력·기기 빌드를 검증한다. 설치 버전 확인만으로 기기 호환성 통과로 표시하지 않는다. [XRI 3.5 문서](https://docs.unity3d.com/Packages/com.unity.xr.interaction.toolkit@3.5/manual/index.html)
 
-Windows x86_64 PC 빌드를 기준으로 하며 Quest 단독 Android 빌드는 만들지 않는다. 기존 URP/OpenXR 환경을 유지한다. 최종 환경은 스캔 기반 수동 구조 데이터와 테마 프리팹으로 구성한다. Room→AbandonedHouse, Classroom→AbandonedSchool 매핑을 고정하고 맵별 구조를 분리한다. 구조 생성기는 CollisionRoot·스폰·NavMesh를, 외형 생성기는 VisualRoot/ThemeGenerated만 관리한다. 외형 갱신은 구조를 수정하지 않으며 임시 생성·검증 후 소유한 결과만 교체한다. 원본 스캔은 빌드 밖 로컬 참조 씬에 보존한다.
+Windows x86_64 PC 빌드를 기준으로 하며 Quest 단독 Android 빌드는 만들지 않는다. 기존 URP/OpenXR 환경을 유지한다. 최종 환경은 스캔 기반 수동 구조 데이터와 테마 프리팹으로 구성한다. Room→AbandonedHouse, Classroom→AbandonedSchool 매핑을 고정하고 맵별 구조를 분리한다. 구조 생성기는 CollisionRoot·스폰·NavMesh를, 외형 생성기는 VisualRoot/ThemeGenerated만 관리한다. 외형 갱신은 구조를 수정하지 않으며 임시 생성·검증 후 소유한 결과만 교체한다. 구조 참조 FBX는 빌드 밖 로컬 참조 씬에 보존한다. P13용 가공 GS는 별도 관찰 씬에만 포함하며 이 예외를 테마 충돌/생성기 의존성에 전파하지 않는다.
 
 
 ```mermaid
@@ -160,3 +162,13 @@ stateDiagram-v2
 임시 파일 작성·닫기·검증 후 본 파일로 교체하고 이전 정상 파일은 `.bak`으로 보존한다. JSON 오류·지원하지 않는 스키마·음수 값을 만나면 백업을 시도하고 둘 다 실패하면 빈 기록으로 시작하며 오류를 알린다. 저장이 없는 맵의 Read는 reachedWave 0, kills 0인 BestRecord를 반환한다. 최고 비교 시 웨이브와 처치 수를 각각 다른 도전에서 조합하지 않는다. 저장 실패가 결과 화면을 막아서는 안 된다.
 
 메뉴에서 Combat과 선택 맵만 로드한다. 다른 맵으로 갈 때 기존 맵을 언로드하고 적·탄창·투사체·이벤트 구독을 해제한다. 재시작은 체력 100, 장착 탄창 30, 처치 0, 도달 0, 첫 준비 상태로 돌아간다. 영속 객체와 맵 객체를 섞어 파괴된 Transform 참조가 남지 않게 한다.
+
+## 8 P13 도입부 연결 설계
+
+[11 상세 설계](11-gs-comparison-intro.md)의 상태·인터페이스가 이 확장의 기준이다. 현재 `CombatSceneEntry.SelectMap`은 `CombatSession.StartMap`을 호출하고, 후자는 맵 로드 직후 `RunController.StartRun`으로 준비 시간을 시작한다. P13은 `PrepareMap`/`BeginPreparedRun`으로 이를 분리한다. 기본 직접 전투의 기존 StartMap은 래퍼로 유지한다.
+
+별도 IntroPhase가 RealityPreview→FadingOut→Switching→FadingIn을 담당하고, RunPhase는 실제 전투의 준비·전투·정지·사망을 계속 담당한다. `WeaponContextRouter`만 도입부/전투/메뉴의 우선순위를 결정한다. 현재 FireGate는 RunPhase.Active에만 발사를 허용하므로, 도입부 때문에 Run 자체를 Active로 바꾸지 않고 무기 컨텍스트를 별도로 전달한다. `K2HandInput`의 도입부 시계도 전투 ActiveTime과 분리한다.
+
+`IntroVirusTarget`은 기존 IDamageable을 구현하지만 Enemy/SpawnDirector/WaveProgress에는 등록하지 않는다. 현재 Raycast가 trigger를 무시하므로 피격 Collider는 비-trigger이고 별도 IntroTarget 레이어를 쓴다. Fade는 GS와 총/손을 모두 덮으며 메뉴 복구를 위한 UI만 그 위에 둔다. 모든 상태에서 XR 추적을 유지한다.
+
+GS→테마의 순차 해제/로드, 요청 세대에 따른 취소,30초 실패 복구, PrepareMap 시 리그 배치와 재도전 분리, GPU 버퍼 해제는11의 계약을 따른다. 현재 코드를 수정한 것은 아니며 기존03의 다른 예시 인터페이스와 실제 구현의 차이를 P13에서 무관하게 전면 개편하지 않는다.

@@ -118,3 +118,16 @@ Ruling: HP25를 처음 넘어서 내려가는 순간에만 저체력음을 내�
 ## 2026-10-08 보스·돌연변이 확장
 
 사용자가 Skeletonzombie T Avelange 모델을 5라운드마다 중간 보스로, 5라운드 이후 일부 근접 적을 빠른 Zombie Crawl 돌연변이로 추가하도록 요청했다. 기존 두 공격 분류는 유지하되 근접 분류에 Normal/Crawler/Boss 변형을 추가한다. 5의 배수 웨이브 첫 근접 슬롯1개는 보스, 6웨이브부터 매3번째 근접 슬롯은 돌연변이(보스 우선)로 대체한다. 총 적 할당량·동시 생존·원거리 상한은 유지한다. 종류별 재사용 풀을 분리하고 진단의 보관 객체 상한은 등록된 풀 용량 합계로 갱신한다. 새 적의 실제 VR 가독성·속도·난이도·성능은 추가 인수 대상이다.
+
+## 2026-10-20 D14~D17: GS 비교 도입부
+
+| ID | 결정·상태 | 이유·영향 |
+|---|---|---|
+| D14 | 사용자 지정: 현실 GS→공중 바이러스 사격→암전→테마 전투 | R21~R28/P13/T21~T28 추가. GS 내부 전투·임의 방 업로드는 제외 |
+| D15 | 설계 기본안: Room 먼저, 강의실 GS는 후속, 재도전은 테마부터 | 자료 부족을 Room 재사용으로 숨기지 않음. Classroom 기존 전투 유지 |
+| D16 | 기존 GS 도구·렌더러 활용, 직접 학습 알고리즘 개발 제외 | 직접 기여는 좌표·상호작용·전환·VR 통합/검증. 렌더러/API는 a 단계 검증 뒤 채택 |
+| D17 | Method A 빌드 제외 규칙의 제한된 예외 | 구조 참조 FBX 제외는 유지. 비교 관찰용 가공 GS는 별도 씬에 포함. 개인 자료 공개 허용으로 확대하지 않음 |
+
+[11 상세 설계](11-gs-comparison-intro.md)에 사용자 결정과 제안 초기값을 구분한다. 주요 위험은 DX11 기존 빌드와 후보 렌더러 API 차이, GS 데이터 미확보,8GB VRAM, 양안 페이드/가림, 도입부가 전투 시계를 시작하는 오류, 취소 후 늦은 로드 완료다. [12](12-gs-comparison-plan.md)의 a~f 검증 순서로 대응한다. 기존 파일의 취득이나 패키지 다운로드만으로 호환성 통과를 선언하지 않는다.
+
+2026-10-20 공식 자료 조회: [UnityGaussianSplatting](https://github.com/aras-p/UnityGaussianSplatting), [렌더 통합](https://github.com/aras-p/UnityGaussianSplatting/blob/main/docs/render-pipeline-integration.md), [Scaniverse](https://www.nianticspatial.com/docs/scaniverse/quickstart/). 페이지 설명과 본 프로젝트의 실제 검증 결과는 별도 기록한다.
