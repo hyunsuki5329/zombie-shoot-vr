@@ -815,6 +815,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 764d4ee1f39591d408035288ffc8e61c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: VRFPS.Runtime::VRFPS.MenuView
+  overlayMaterial: {fileID: 2100000, guid: b8d10de54a6f49c59128924b02177232, type: 2}
   menu: {fileID: 6124931524193623707}
   run: {fileID: 0}
   result: {fileID: 0}
