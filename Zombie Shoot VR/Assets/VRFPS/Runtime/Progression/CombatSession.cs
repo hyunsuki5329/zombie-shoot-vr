@@ -57,6 +57,20 @@ namespace VRFPS
             }
             finally{preservePreparedPlacement=false;}
         }
+        public Transform FindPreparedAnchor(string key)
+        {
+            if(!HasPreparedMap || loader.CurrentRoot==null)throw new InvalidOperationException("No prepared map.");
+            if(key=="playerSpawn")return loader.CurrentRoot.playerSpawn;
+            Transform found=null;
+            foreach(var candidate in loader.CurrentRoot.GetComponentsInChildren<Transform>())
+                if(candidate.name==key)
+                {
+                    if(found!=null)throw new InvalidOperationException("Theme anchor key is ambiguous.");
+                    found=candidate;
+                }
+            if(found==null)throw new InvalidOperationException("Theme anchor was not found.");
+            return found;
+        }
         public void PlacePreparedPlayer(Transform anchor,float relativeYaw)
         {
             if(!HasPreparedMap || IsSwitching || preparedRunStarted)
@@ -79,7 +93,7 @@ namespace VRFPS
         }
         static bool Finite(Vector3 value)=> !float.IsNaN(value.x)&&!float.IsInfinity(value.x)&&
             !float.IsNaN(value.y)&&!float.IsInfinity(value.y)&&!float.IsNaN(value.z)&&!float.IsInfinity(value.z);
-        public IEnumerator PrepareMap(MapDefinition map)
+        public IEnumerator PrepareMap(MapDefinition map,Func<bool> canCommit=null)
         {
             if(IsSwitching)yield break;
             if(!configured)throw new InvalidOperationException("Configure the combat session first.");
@@ -89,6 +103,7 @@ namespace VRFPS
                 run.EndRun();yield return RemoveRuntime();
                 yield return loader.Load(map,melee.GetComponent<NavMeshAgent>().agentTypeID);
                 if(loader.LastError!=null){LastError=loader.LastError;yield break;}
+                if(canCommit!=null&&!canCommit()){yield return loader.Unload();yield break;}
                 try
                 {
                     runtime=new GameObject("Combat Runtime");SceneManager.MoveGameObjectToScene(runtime,gameObject.scene);
@@ -137,10 +152,16 @@ namespace VRFPS
             }
             finally{body.enabled=wasEnabled;}
         }
+        static IEnumerator ReleaseOwnedMap(MapSceneLoader ownedLoader)
+        {
+            while(ownedLoader.IsLoading)yield return null;
+            yield return ownedLoader.Unload();
+        }
         void OnDestroy()
         {
             if(run!=null)run.RunStarted-=ResetPlayerAndWeapon;
             if(runtime!=null)Destroy(runtime);
+            IntroAsyncOperation.Start(ReleaseOwnedMap(loader));
         }
     }
 }

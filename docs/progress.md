@@ -609,3 +609,9 @@ BootstrapPreview/WaveLab 빌드 모두 성공·종료0. 복원 WaveLab337개 파
 
 - 요청자 파괴 후에도 비동기 씬 작업을 관찰하고 중첩 오류를 정리 경로로 전달하는 IntroAsyncOperation을 추가했다. 실제 씬 load/unload 및 전체 graphics PlayMode150/150통과, 독립 검토 중요 결함0. [증빙](evidence/intro-operation-drain.json).
 - 전체 전환 Controller/세대 취소/30초 제한과 메뉴 연결은 아직 미완료다.
+
+## 2026-10-21 P13 전환 Controller
+
+- 현실 미리보기→첫 명중→암전→현실 해제→테마 준비/배치→밝아짐→전투1회 흐름을 연결했다. 정지·중복·timeout·늦은 완료·정리 재시도·소유 씬 파괴 경계를 시험했다.
+- 독립 리뷰3건과 취소 후 배치 결함을 RED로 재현·수정했다. 최종 graphics PlayMode155/155, EditMode124통과/1제외. [증빙](evidence/comparison-controller.json).
+- 실제 CombatSession + fake 현실 어댑터 시험이며 실제 GS/메뉴/양안/전체반복 인수는 아직 미완료다.
