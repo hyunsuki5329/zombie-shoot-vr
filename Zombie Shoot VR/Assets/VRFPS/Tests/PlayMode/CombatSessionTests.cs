@@ -60,6 +60,50 @@ namespace VRFPS.Tests
         }
         static void DestroyComparisonData(FakeReality reality,RealityIntroProfile profile)
         {reality.hold=false;UnityEngine.Object.DestroyImmediate(reality.anchor.gameObject);UnityEngine.Object.DestroyImmediate(reality.virus.gameObject);UnityEngine.Object.DestroyImmediate(profile);}
+        [UnityTest] public IEnumerator MenuOwnsIntroPauseCancelAndBlocksCombatRetry()
+        {
+            var intro=MakeComparison(out var reality,out var profile,out var fade);
+            var menu=rig.gameObject.AddComponent<MenuController>();menu.Configure(run);menu.BindIntro(intro);
+            var panel=new GameObject("Intro menu panel");panel.transform.SetParent(rig.transform);
+            UnityEngine.UI.Button Button(string name){var obj=new GameObject(name,typeof(RectTransform));obj.transform.SetParent(panel.transform);return obj.AddComponent<UnityEngine.UI.Button>();}
+            UnityEngine.UI.Text Text(string name){var obj=new GameObject(name,typeof(RectTransform));obj.transform.SetParent(panel.transform);return obj.AddComponent<UnityEngine.UI.Text>();}
+            var resume=Button("Resume");var retry=Button("Retry");var settings=Button("Settings");var back=Button("Back");var maps=Button("Maps");var save=Button("Save");
+            var title=Text("Title");var details=Text("Details");var view=rig.gameObject.AddComponent<MenuView>();
+            view.Configure(menu,run,null,panel,title,details,resume,retry,settings,back,maps,save);
+            run.StartRun(map);var starts=0;run.RunStarted+=()=>starts++;
+            reality.hold=true;
+            try
+            {
+                var request=IntroAsyncOperation.Start(intro.Begin(profile,map));var deadline=Time.realtimeSinceStartup+3;
+                while(!reality.loading&&Time.realtimeSinceStartup<deadline)yield return null;
+                Assert.That(run.Phase,Is.EqualTo(RunPhase.Dead));Assert.That(menu.Screen,Is.EqualTo(MenuScreen.Hidden));
+                menu.Pause();Assert.That(menu.Screen,Is.EqualTo(MenuScreen.Pause));
+                Assert.That(retry.gameObject.activeSelf,Is.False);Assert.That(details.text,Does.Contain("Comparison paused"));
+                reality.hold=false;yield return null;yield return null;
+                Assert.That(intro.Phase,Is.EqualTo(IntroPhase.LoadingReality));
+                menu.Retry();Assert.That(starts,Is.Zero);
+                menu.OpenSettings();Assert.That(menu.Screen,Is.EqualTo(MenuScreen.Settings));
+                menu.CloseSettings();Assert.That(menu.Screen,Is.EqualTo(MenuScreen.Pause));
+                menu.Resume();
+                while(intro.Phase!=IntroPhase.RealityPreview&&Time.realtimeSinceStartup<deadline)yield return null;
+                Assert.That(menu.Screen,Is.EqualTo(MenuScreen.Hidden));
+                menu.Pause();Assert.That(reality.virus.ApplyDamage(1,gun.GetInstanceID(),0),Is.False);
+                menu.ShowMapSelection();Assert.That(menu.Screen,Is.EqualTo(MenuScreen.MapSelection));
+                while(!request.IsDone&&Time.realtimeSinceStartup<deadline)yield return null;
+                Assert.That(request.IsDone,Is.True);Assert.That(reality.unloaded,Is.True);
+                Assert.That(starts,Is.Zero);Assert.That(menu.Screen,Is.EqualTo(MenuScreen.MapSelection));
+                reality.hold=true;reality.failUnload=true;
+                var failed=IntroAsyncOperation.Start(intro.Begin(profile,map));deadline=Time.realtimeSinceStartup+3;
+                while(!reality.loading&&Time.realtimeSinceStartup<deadline)yield return null;
+                menu.ShowMapSelection();reality.hold=false;
+                while(intro.Phase!=IntroPhase.Failed&&Time.realtimeSinceStartup<deadline)yield return null;
+                Assert.That(retry.gameObject.activeSelf,Is.True);Assert.That(details.text,Does.Contain("Cleanup pending"));
+                reality.failUnload=false;retry.onClick.Invoke();
+                while(!failed.IsDone&&Time.realtimeSinceStartup<deadline)yield return null;
+                Assert.That(failed.IsDone,Is.True);Assert.That(intro.IsBusy,Is.False);Assert.That(menu.Screen,Is.EqualTo(MenuScreen.MapSelection));
+            }
+            finally{reality.failUnload=false;if(intro!=null)intro.Cancel();DestroyComparisonData(reality,profile);}
+        }
         [UnityTest] public IEnumerator ComparisonCleanupFailureCanBeRetried()
         {
             var intro=MakeComparison(out var reality,out var profile,out var fade);reality.hold=true;
