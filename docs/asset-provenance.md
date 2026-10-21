@@ -92,3 +92,12 @@ Mixamo의 `Zombie Reaction Hit` 중 Flinches 동작을 사용자 로그인 세�
 - 바깥 ZIP 및 내부 `source/model.zip` CRC 검사 통과. 내부에 `model.obj`, `model.mtl`, PNG3개가 있고 바깥에도 textures PNG3개가 있다.
 - MTL에 텍스처 경로가 없고 Kd가0이므로 추후 Unity 적용 시 재질·텍스처를 명시적으로 연결하고 외형을 검증해야 한다.
 - 현재 게임에 임포트·사용하지 않았다. 변경 없음. 원본은 로컬 Downloads에 유지하며 이번 커밋은 출처 기록만 포함한다. 실제 적용 시 빌드 크레딧에도 제작자·모델 링크·라이선스·변경 내역을 추가한다.
+
+## P13 바이러스 로컬 가공 (2026-10-21)
+
+- `IntroVirusSetup.Import`가 위 원본 SHA256을 검증하고 지정된 내부 파일만 별도 `Assets/VRFPS/External/IntroVirus/`에 추출한다. 원본은 수정하지 않는다.
+- 이미지 확인: source `color.png`는 녹색/붉은색 diffuse, `color11.png`는 tangent-space normal, `coron_initialShadingGroup_rough.png`는 roughness로 사용했다. 바깥 `cede.png`도 색상 후보지만 원본 source의 일관된 묶음을 채택했다. 이름만으로 color11을 색상에 연결하지 않았다.
+- URP Lit: 흰 tint, normal map, metallic=0, roughness R을 1−R의 smoothness alpha로 변환. 원본 기하(97,282 vertices/97,280 OBJ faces)는 간소화하지 않았다. 최대 외곽 직경0.8m·중심 원점·일반 구체 판정 반경0.32m로 가공했다.
+- DX12 단안 미리보기에서 녹색 몸체/붉은 돌기·표면 표현 확인. Sketchfab 직접 조회는 다시403으로 원본 웹뷰와 동일하다고 주장하지 않는다. 양안·성능·실제 GS 안 배치는 미검증이다.
+- 출처 고지: `Assets/VRFPS/Documentation/IntroVirus-Attribution.txt`. 현재 GS 빌드는 없으므로 실제 배포 포함은 후속 빌드에서 검증한다.
+- 로컬 보관 `Builds/Reproduction/p13-virus-20261021/`: 원본 ZIP, 생성물/meta ZIP, SHA manifest, preview. CRC/개별 SHA 일치 확인; 새 Unity 작업본 복원은 미실행. [증빙](evidence/intro-virus-assets.json).

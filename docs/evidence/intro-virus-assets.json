@@ -1,0 +1,50 @@
+{
+  "base": "5dbbd74",
+  "sourceArchiveSha256": "d3e8d8817c2e7051ed12e2fb0ca9601a1fada27b9903190dac43ab553b32b8c3",
+  "tests": {
+    "virus-asset-red": {
+      "result": "Failed(Child)",
+      "total": "1",
+      "passed": "0",
+      "failed": "1",
+      "skipped": "0",
+      "sha256": "bddecbcc82d86c260605f5ac718166699c66b4ff789c206c8ebdfa2dc5f61c48"
+    },
+    "virus-asset-edit": {
+      "result": "Skipped:Ignored",
+      "total": "126",
+      "passed": "125",
+      "failed": "0",
+      "skipped": "1",
+      "sha256": "a2f087dc67e30c6722c83d77b9fe135c014c93faaefff4c700a981cf5285a007"
+    }
+  },
+  "derivedFiles": {
+    "color.png": "72e8c51c2a3c7c619611ea6fdabd73b09306d27c07a6c662836d33d189e01519",
+    "color.png.meta": "27122a688ef12ad7fa0eb88c7fae01460e6c54f395b25220859609ba713c6da7",
+    "color11.png": "21f8ac97a1a007c800fe3ee482ac37ea7c0ccba8b49ab8122c92b3daa6a86307",
+    "color11.png.meta": "0edb169a099f25a2189921af5e99872a245f99ccc6fc49e80f3b303feab3d4a8",
+    "coron_initialShadingGroup_rough.png": "323d2b3033baa405f683a6367d7782c21ef62f8f4c296801b09d75c16a4f8f31",
+    "coron_initialShadingGroup_rough.png.meta": "6111e88d501eabf6d94b05ce5428510b9417d7b591c610a5db57c05b7f4343cd",
+    "IntroVirus.prefab": "3fdeb38aecb32f028449f4e16f2830d94a95944bf7e2548e40537f4db23d6334",
+    "IntroVirus.prefab.meta": "1a651ec98fc9634600af51e881e88ba518e4c71a990520213306133325f5b5f4",
+    "MetalSmooth.png": "c724e7140d798660c1b8be2af8fc81f3f4a59d5843a696167bcd1de15df4c438",
+    "MetalSmooth.png.meta": "3e969db662366469ac3c29606cc4adae438fb87fd2306e87e9f0b0c184378c84",
+    "model.mtl": "bab0abcefc5605102dabe286998ab7a4ed6f9206d2797406499854cfc3152566",
+    "model.mtl.meta": "11aaaf00b4ae3d4cf4057b80b55db4349584593b4a4fac74835db8cf9f59e06b",
+    "model.obj": "2a436a08fbfbc069427c82952cc92d5ef1061dd6376e711bf648eca8eda35761",
+    "model.obj.meta": "408e597afee92358400ed8dd1c0bb0803a86f173b0aee0eb948267cd8936aaf9",
+    "Virus.mat": "ef72ecff18b40c9d44eb4e56605a751b7b8e2345d0006f8df924a126f2cef3ba",
+    "Virus.mat.meta": "88dad3bc7ab0e9fa517cfd43a53aa376a8b3ca90a62794c8160e4b0693fbf716"
+  },
+  "previewSha256": "29d89466fa4cb7e2fe2ad521485204ebb7ebed1c4a524fd59815e3511c98e1d8",
+  "review": "Independent static review: no important findings.",
+  "backup": "Local original + derived-with-meta ZIP CRC and per-file SHA verified; fresh-project restoration not run.",
+  "unverified": [
+    "IntroTarget collision layer and weapon masks",
+    "Observation scene placement and real GS",
+    "XR stereo look and performance",
+    "Mesh simplification",
+    "Final build credits inclusion and fresh-source restoration"
+  ]
+}

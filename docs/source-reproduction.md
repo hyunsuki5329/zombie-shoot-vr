@@ -209,3 +209,7 @@ P04 외형 브랜치부터 K2/탄창 프리팹은 Git 제외 자원을 참조한
 ### 수동 편집 배치 로컬 보관본
 
 `Zombie Shoot VR/Builds/Reproduction/83dc690-user-layout/`에 소스·로컬 자산 ZIP, manifest, README를 보관했다. 2,834개 파일 CRC/SHA256과 현재 두 씬의 바이트 일치를 확인했다. Library·개인 스캔·사용자의 무관한 미커밋 설정은 포함하지 않았다. 이 ZIP을 다시 연 Unity 시험은 미실행이며 최종 제출본으로 표시하지 않는다. [증빙](evidence/user-layout-source-backup.json).
+
+## P13 바이러스 복원
+
+원본 ZIP 경로를 `VRFPS_VIRUS_ARCHIVE`로 지정하고 격리 Unity에서 `-batchmode -nographics -executeMethod VRFPS.Editor.IntroVirusSetup.Import -quit`를 실행한다. 원본 SHA가 다르면 거부한다. 외부 생성물은 `Assets/VRFPS/External/IntroVirus/`이며 Git 제외다. 기존 GUID를 보존하려면 로컬 `Builds/Reproduction/p13-virus-20261021/derived-with-meta.zip`을 해당 폴더로 복원한다. 새 import의 GUID가 달라지면 관찰 씬 참조를 재연결해야 한다. 현재 관찰 씬은 아직 연결하지 않았다. 보관 ZIP의 CRC/SHA 검증만 완료했으며 전체 새 소스 복원 검증으로 간주하지 않는다.

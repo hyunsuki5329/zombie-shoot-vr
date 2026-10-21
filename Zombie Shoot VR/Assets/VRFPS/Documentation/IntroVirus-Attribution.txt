@@ -1,0 +1,6 @@
+Coronavirus // virus model
+Author: anyaachan
+Source: https://sketchfab.com/3d-models/coronavirus-virus-model-362ca23f5a584c5bb84dc9d9a25ff73e
+License: CC Attribution (as displayed in the user-provided download screen; exact version not supplied).
+Changes: explicitly connected source color.png, color11.png normal map, and roughness converted to Unity smoothness alpha; URP Lit material; normalized maximum diameter to 0.8 m and centered origin; added a 0.32 m non-trigger hit sphere. Source geometry retained.
+The original archive and derived assets are restored locally, not distributed in this Git repository.
