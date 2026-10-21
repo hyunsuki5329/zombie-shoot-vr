@@ -604,3 +604,8 @@ BootstrapPreview/WaveLab 빌드 모두 성공·종료0. 복원 WaveLab337개 파
 
 - 정지·취소·요청 대체를 지원하는 unscaled 페이드와 월드 가림 셰이더를 추가했다. 실패 시험3개→통과, 전체 graphics PlayMode147/147, 리뷰 시험 보완 후 DX12 대상4/4통과. [증빙](evidence/screen-fade.json).
 - GPU 시험은 단안 배경/근접 물체의 검정·복원과 자원 해제를 확인했다. XR 양안·GS 합성·실제 손/총·메뉴 위 표시·빌드 포함은 미검증이다.
+
+## 2026-10-21 P13 비동기 작업 수명 기반
+
+- 요청자 파괴 후에도 비동기 씬 작업을 관찰하고 중첩 오류를 정리 경로로 전달하는 IntroAsyncOperation을 추가했다. 실제 씬 load/unload 및 전체 graphics PlayMode150/150통과, 독립 검토 중요 결함0. [증빙](evidence/intro-operation-drain.json).
+- 전체 전환 Controller/세대 취소/30초 제한과 메뉴 연결은 아직 미완료다.

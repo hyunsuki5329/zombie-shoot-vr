@@ -131,3 +131,11 @@ Ruling: P13-a의 실제 GS/VR 인수 대기 중 데이터 독립적인 b~e 구�
 - Ruling: 페이드 전용 셰이더 queue4999를 예약하고 메뉴는 후속 통합에서 이보다 위에서 그려야 한다. 현재 메뉴가 페이드 위에 보인다고 주장하지 않는다. 카메라 레이어/클리핑 조건을 검증하며 설정 변경 시 재구성이 필요하다.
 
 - 전체 graphics PlayMode147/147통과. 독립 리뷰 중요 결함0, 경미한 FadeTo 간 대체 시험 제안을 반영했다. 이후 DX12 대상 시험4/4통과. [증빙](evidence/screen-fade.json). 전체147 시험은 추가 대체 assertion 전이며 런타임 코드는 동일하다.
+
+## P13-e 비동기 작업 수명 기반
+
+- PR27 draft: https://github.com/hyunsuki5329/zombie-shoot-vr/pull/27 (e5bb4da). 후속 codex/p13-transition-lifecycle.
+- IntroAsyncOperation은 요청자와 독립된 임시 DontDestroyOnLoad 호스트에서 중첩 IEnumerator를 끝까지 실행한다. MoveNext/Current/Dispose 오류를 기록하고 열거자 finally와 호스트 반환을 보장한다.
+- 요청자 파괴 및 중첩 오류 시험2실패→2통과. 실제 SceneManager 비동기 로드→언로드 중 요청자 파괴 시험 포함 전체 graphics PlayMode150/150통과. [증빙](evidence/intro-operation-drain.json).
+- 독립 읽기 검토 중요 결함0. Controller/세대 무효화/timeout/메뉴 정리 연결은 아직 미완료다. 작업 대기를 멈추는 것을 실제 씬 취소로 오인하지 않도록 이 단위를 먼저 구성했다.
+- Ruling: 어댑터는 로드 코루틴을 IEnumerator로 반환한다. 별도 StartCoroutine에서 던진 예외는 Unity가 소유하므로 이 drain의 오류 포착 범위로 주장하지 않는다. 실제 GPU 자원 해제 증명은 렌더 어댑터 통합 단계에 남아 있다.
