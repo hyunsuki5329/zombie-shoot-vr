@@ -1,0 +1,54 @@
+{
+  "base": "714801a",
+  "scope": "Reality scene authoring contract only; not renderer readiness or loader integration",
+  "tests": {
+    "reality-root-red": {
+      "result": "Failed(Child)",
+      "total": "9",
+      "passed": "0",
+      "failed": "9",
+      "skipped": "0",
+      "sha256": "03f4e35c0d86c503a1c8d42fcf69513b38c1215ead2f6a7b84c7a7c3bec81a46"
+    },
+    "reality-root-contract-red": {
+      "result": "Failed(Child)",
+      "total": "9",
+      "passed": "1",
+      "failed": "8",
+      "skipped": "0",
+      "sha256": "35139baee71fa0a9e353cc1c6fba933f4bd075cce8646baa580a781f0ed525b4"
+    },
+    "reality-root-edit": {
+      "result": "Skipped:Ignored",
+      "total": "135",
+      "passed": "134",
+      "failed": "0",
+      "skipped": "1",
+      "sha256": "325c4a7f5d7a4f6225e536eb2d75499ae720b3157f59009126a983908d5c8213"
+    },
+    "reality-root-review-red": {
+      "result": "Failed(Child)",
+      "total": "12",
+      "passed": "9",
+      "failed": "3",
+      "skipped": "0",
+      "sha256": "75a171009251717500fff6a545fda01fd3324106ec7120bcd6a8b336b0033661"
+    },
+    "reality-root-edit-final": {
+      "result": "Skipped:Ignored",
+      "total": "138",
+      "passed": "137",
+      "failed": "0",
+      "skipped": "1",
+      "sha256": "6a736a2ce12fcd9879c2ad7c2cd4b38a03d7fb08fcc0dfd40951c33dffb3e8fc"
+    }
+  },
+  "harnessCorrection": "First run failed at setup because SceneManager.CreateScene is PlayMode-only; changed to isolated Editor preview scenes before contract RED.",
+  "reviewFix": "P2 fixed: absolute scale tolerance admitted zero/nonuniform/negative axes at tiny calibration. Three RED cases now checked with positive axes and relative tolerance.",
+  "unverified": [
+    "Scene loader calls this validator",
+    "Actual GS data identity and render readiness",
+    "Measured collision proxy/anchor alignment",
+    "XR and final Windows build"
+  ]
+}

@@ -639,3 +639,9 @@ BootstrapPreview/WaveLab 빌드 모두 성공·종료0. 복원 WaveLab337개 파
 - IntroTarget(layer13)을 추가해 물리 접촉을 끄고, K2 도입부 Raycast는 기존 worldSolidMask와 IntroTarget만 사용하도록 분리했다. 전투의 기존 shotMask는 유지한다. 로컬 바이러스 프리팹에도 전용 레이어를 적용했다.
 - 누락3건 RED→DX12 PlayMode161/161, EditMode125통과/1제외. 임포트한 바이러스 실제 Raycast, 물리 접촉 비활성, 벽/총구 차단과 전투 마스크 복귀 확인. 독립 리뷰 중요 지적0. [증빙](evidence/intro-hit-layers.json).
 - 실제 GS 충돌 프록시·VR 판정 외형·최종 빌드는 미완료다. 원본 맵/설정/WallFix 해시5개 보존 확인.
+
+## 2026-10-21 P13 관찰 씬 구성 검증
+
+- RealitySceneRoot에 map/dataId·소유/활성 참조·유일 앵커·배율·전용 충돌·씬 전체 중복 및 카메라/리그/전투 actor 혼입 검증을 추가했다. GS 준비 상태를 나타내는 값은 아니다.
+- 잘못된 구성8건 RED→통과. 독립 리뷰의 작은 배율 허용 결함은3건 RED로 재현하고 양수/상대 오차로 수정했다. 최종 EditMode137통과/개인 스캔1제외. [증빙](evidence/reality-scene-contract.json).
+- 관찰 씬 로더 호출 연결, 실제 GS 준비·충돌/앵커 실측·VR 인수는 미완료다.
