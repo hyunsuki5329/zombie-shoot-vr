@@ -1,0 +1,4 @@
+{
+  "name": "VRFPS.GaussianRendering",
+  "references": ["VRFPS.Runtime", "GaussianSplatting", "Unity.RenderPipelines.Core.Runtime", "Unity.RenderPipelines.Universal.Runtime"]
+}
