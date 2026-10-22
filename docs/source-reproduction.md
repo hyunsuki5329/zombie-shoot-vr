@@ -225,3 +225,5 @@ P13 전용 레이어 연결 이후 최신 바이러스 생성물은 `Builds/Repr
 3. 시험은 runtime에서만 pipeline을 선택하고 종료 후 원래 설정을 복원한다. 실제 GS 픽셀·가림·암전과 GPU 자원 수명을 검증하며 XR, Player stripping, 실제 방 보정은 별도다. 최종 전체 시험은 [증빙](evidence/gs-renderer-bridge.json)을 참조한다.
 
 생성기는 프로젝트 소유의 결정적 분석형 데이터를 만든다. 기존 GUID를 보존해야 하는 운영 GS는 별도 원본/가공본/meta 백업을 사용해야 한다. 생성기 임포트 종료의 Persistent allocation1 경고는 미진단이며, 이 단위를 전체 새 소스/Windows 복원 완료로 간주하지 않는다.
+
+P13 운영 경로 통합 시험은 같은 합성 fixture 생성 후 `-testFilter GaussianComparisonFlowTests`로 재현한다. 전체 PlayMode에 포함되며 기존 MapSceneTestSetup이 관찰용 shell을 시험 중에만 등록한다. 실제 GS 렌더→K2 명중→암전→Room 초기 준비10회와 Classroom 직접 진입을 검사한다. [증빙](evidence/gs-flow-integration.json). 실제 스캔/VR/Player 시험이 아니며, 이 시험에서 run clock은 초기 상태 검사를 위해 비활성화한다.
