@@ -4,6 +4,9 @@
     <type fullname="GaussianSplatting.Runtime.GaussianSplatURPFeature" preserve="all" />
   </assembly>
   <assembly fullname="Unity.RenderPipelines.Universal.Runtime">
+    <type fullname="UnityEngine.Rendering.Universal.UniversalAdditionalCameraData">
+      <field name="m_RendererIndex" />
+    </type>
     <type fullname="UnityEngine.Rendering.Universal.ScriptableRenderer">
       <property name="rendererFeatures" />
     </type>
