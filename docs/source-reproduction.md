@@ -237,3 +237,11 @@ P13 운영 경로 통합 시험은 같은 합성 fixture 생성 후 `-testFilter
 이 실행 파일은 `D:/VRFPS-Reproduction/gs-6ea502b/Zombie Shoot VR/Builds/Windows/BootstrapPreview/BootstrapPreview.exe`다. 기존 네 씬의 소스 빌드 재현 결과이며, 촬영본이 연결된 최종 GSComparison 빌드는 아니다. Player를 실행하지 않았으므로 실제 Player API/VR/GS stripping 통과를 주장하지 않는다. 동일 PC의 package cache·라이선스 사용도 명시한다.
 
 Unity 임포트/빌드가56개 파일을 다시 직렬화했고 누락은0이다. sample metadata뿐 아니라 Volume filter·URP shader prefilter/runtime settings·preloadedAssets 변경을 포함하므로 바이트가 같은 복원본이라고 표현하지 않는다. 맵과 게임 코드, 외부 자산은 변경 목록에 없다. 원본 프로젝트에는 반영하지 않았다. importer 종료 Persistent allocation1 경고는 미진단 상태로 남겨 두었다.
+
+## P13 Windows GS 진단 재현
+
+기준4c84f7d에서 앞서 설명한 합성 fixture를 생성한 후, 격리 프로젝트에 `-batchmode -force-d3d12 -executeMethod VRFPS.Editor.GaussianPlayerProbeSetup.Build -quit`와 명시적 projectPath/logFile을 지정한다. API automatic/list와 backend는 finally에서 복원된다. 생성한 관찰용 진단 씬은 Git 제외 RealityGS/PlayerProbe 아래에 있으며 기존 게임 씬을 바꾸지 않는다.
+
+출력은 격리 작업본의 `Zombie Shoot VR/Builds/Windows/GsCompatibilityProbe/`다. README와 GaussianSplatting-Attribution.txt를 함께 보관한다. 실행 옵션은 `-batchmode -force-d3d12 -vrfps-gs-probe -vrfps-gs-probe-result <새 절대 JSON 경로> -logFile <새 절대 로그 경로>`다. exit0/JSON success와 buildGuid를 함께 확인한다. 그래픽 없는 실패 경로는 force-d3d12 대신 nographics로 실행하며 exit1/실패JSON을 확인했다.
+
+[현재 증빙](evidence/gs-player-probe.json)은 Mono Development/managed stripping Disabled의 실제 DX12 단안 진단이다. 실제 촬영본·Quest Pro·최종 게임 배포 및 그 복원으로 확대하지 않는다. 이전6ea502b 복원 ZIP에는 이 후속 진단 코드가 없으며, 최종 제출본 복원은 모든 자산·기능 통합 후 다시 검증해야 한다.
