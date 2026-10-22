@@ -659,3 +659,10 @@ BootstrapPreview/WaveLab 빌드 모두 성공·종료0. 복원 WaveLab337개 파
 - 초기3건 RED→GREEN. 독립 리뷰 P2 두 건(실패한 sorter 캐시 잔존, 필수 buffer 누락을 ready로 오판)을 RED로 재현 후 수정했다. 최종 DX12 PlayMode182/182, EditMode137통과/개인스캔1제외. [증빙](evidence/gs-renderer-bridge.json).
 - 실제 GS 픽셀 출력/불투명 기하 가림/암전 복원, GPU수명10회,19buffer fields·5Unity objects·등록 해제 확인. 실제 방·XR·전체전환10회·Windows Player stripping·새복원 검증으로 확대하지 않는다.
 - Fixture 임포트 종료 시 Persistent allocation1 경고를 관찰했으며 원인은 미진단이다. 전체 프로세스 메모리 무누수로 주장하지 않는다. 다음은 도입부용 pipeline 선택/복원 및 운영 연결이다. 성능은 보류, 발표자료는 사용자 담당 유지.
+
+## 2026-10-22 P13 GS 렌더 설정 선택·복원
+
+- 소스 `2d98a8c`, [PR37](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/37) draft, base `codex/p13-gs-renderer`. GsPipelinePresentation이 관찰 중 quality override와 카메라 renderer index를 선택하고, 내부 자원 해제 성공 후 원래 값을 복원한다. 실패한 해제는 설정·소유권을 유지해 재시도한다.
+- 최초6건 RED→GREEN, 확장9통과/1실패에서 해제 중 ready가 남는 문제를 재현·수정했다. 최종 DX12 PlayMode192/192. 합성 GS 실제 렌더→해제→기존 게임 pipeline 렌더 복원, 품질 단계 변경/외부 override/카메라 삭제/요청자 폐기/재진입 시험 포함. [증빙](evidence/gs-pipeline-scope.json).
+- 독립 정적 리뷰 추가 P1/P2 없음. 원본 보존 해시5/5 일치, 작업본의 저장된 GraphicsSettings/QualitySettings/ProjectSettings diff 없음. runtime 변경만인 이번 단위에서 EditMode는 재실행하지 않았다.
+- 운영 Bootstrap·관찰 씬 연결, 실제 촬영본/앵커, XR/전체전환, Windows/Player stripping/새복원은 여전히 미완료다. 다음은 이 adapter를 실제 진입 경로에 연결하는 작업이다.

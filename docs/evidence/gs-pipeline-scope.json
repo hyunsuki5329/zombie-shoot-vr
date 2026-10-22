@@ -1,0 +1,57 @@
+{
+  "base": "2000540",
+  "source": "2d98a8c",
+  "pr": "https://github.com/hyunsuki5329/zombie-shoot-vr/pull/37",
+  "tests": {
+    "gs-pipeline-red": {
+      "result": "Failed(Child)",
+      "total": "6",
+      "passed": "0",
+      "failed": "6",
+      "skipped": "0",
+      "xmlSha256": "40e55381195941f6a7fe68325c9f916bf4ec86a7b414e67c06d8061809fe8d7f",
+      "logSha256": "b981078369e184d995862b3a7ae6d1c5323e6e301f62822f2cbd18b419f45483"
+    },
+    "gs-pipeline-green": {
+      "result": "Passed",
+      "total": "6",
+      "passed": "6",
+      "failed": "0",
+      "skipped": "0",
+      "xmlSha256": "110db7882846719be9f40ca388041573a074a40f766d61ad80d7882460e85724",
+      "logSha256": "35219d85d2bb7ab664c5764f8ad26315fbbceb871e5f50525129a368b72e678c"
+    },
+    "gs-pipeline-expanded": {
+      "result": "Failed(Child)",
+      "total": "10",
+      "passed": "9",
+      "failed": "1",
+      "skipped": "0",
+      "xmlSha256": "1169e1f88c4294ed2d820e14b92ee4c1c9590d24ca79016a89028a85a73e1def",
+      "logSha256": "bb609d4a0e8c3add0ca2c822bc626729897ee3a12a0b10eb34d48269f09db7d2"
+    },
+    "gs-pipeline-full": {
+      "result": "Passed",
+      "total": "192",
+      "passed": "192",
+      "failed": "0",
+      "skipped": "0",
+      "xmlSha256": "fafcd202cc9667fcb7a7aaec36b7fd1491216dd47fb8a568aefdd5c2b8786d0a",
+      "logSha256": "b969984c9e6288d4d19ff08195d6ca1aad5af4bc3d7f8dc86019e9ad2c566979"
+    }
+  },
+  "api": "Direct3D12",
+  "scope": "Runtime GS pipeline quality override/camera index lifecycle; actual synthetic GPU render then restored original pipeline render",
+  "fixed": "Failed unload retained ready=true; expanded RED 9 pass/1 fail then clear ready at unload start",
+  "review": "Independent static review: no additional P1/P2; no external GitHub approval",
+  "preservation": "Original baseline hashes5/5 unchanged; serialized GraphicsSettings/QualitySettings/ProjectSettings diff empty",
+  "editMode": "Not rerun for this runtime-only unit",
+  "unverified": [
+    "Production Bootstrap and observation scene binding",
+    "Real capture calibration",
+    "XR full transition and repeated acceptance",
+    "Vulkan and Player stripping",
+    "Windows build and fresh source restoration",
+    "Performance deferred"
+  ]
+}

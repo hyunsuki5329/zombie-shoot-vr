@@ -205,3 +205,10 @@ Ruling: P13-a의 실제 GS/VR 인수 대기 중 데이터 독립적인 b~e 구�
 - RED3건→GREEN3건, 추가 구성/비활성화/외부 소유/가림/암전 시험11통과. 독립 리뷰 P2 sorter invalid cache는11통과/1실패 RED, view buffer 누락은0통과/1실패 RED. Release에서 sorter cache 초기화, Initialize/IsReady에서 필수8buffer+4scratch+5objects+등록/정렬기 유효성 검사를 적용했다.
 - 최종 DX12 PlayMode182/182, EditMode137통과/1제외. 18자원손상 변형, 실제합성GS10수명회,opaque depth/fade 복원 포함. [증빙](evidence/gs-renderer-bridge.json). 정적 리뷰는 GitHub 승인이나 실기 인수가 아니다.
 - 임포터 종료 Persistent allocation1 경고의 원인은 아직 진단하지 않았다. Vulkan/Player stripping/실제방/XR/최종복원 미검증. 검증대상은 runtime owned GPU fields이며 전체VRAM/성능 측정이 아니다.
+
+## P13-d GS pipeline 수명 연결
+
+- base2000540 →2d98a8c, [PR37 draft](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/37). GsPipelinePresentation은 기존 IRealityPresentation을 감싸고, GS load 전에 quality override/카메라 renderer0을 선택한다. 내부 Unload 성공 뒤 원래 quality slot/index를 복원하며 default pipeline/asset 자체를 수정하지 않는다.
+- 최초6실패→6통과. 확장9통과/1실패는 failed Unload 후 stale ready; Unload 시작 시 ready=false로 수정. 최종 DX12 PlayMode192/192, actual synthetic GS pixel→기존 pipeline 렌더 복원 포함. [증빙](evidence/gs-pipeline-scope.json).
+- caller Dispose에도 persistent drain/잠금 유지, owner 중복과 동기 재진입 거부, 실패시 cleanup retry, qualitylevel이 바뀌어도 원래 slot만 복원/현재선택 유지, 외부 새 override 보존, 카메라파괴 cleanup 확인. 독립 정적 리뷰 추가중요지적0. 이번 runtime 범위에서 EditMode 재실행 없음.
+- 운영 진입/관찰씬/앵커와 실제VR/Player 검증은 다음 단계. 이 scoped adapter 시험을 사용자 전체 전환 인수로 바꾸지 않는다.
