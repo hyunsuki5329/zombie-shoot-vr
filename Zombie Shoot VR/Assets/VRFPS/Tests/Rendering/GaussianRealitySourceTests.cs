@@ -219,7 +219,8 @@ namespace VRFPS.Tests
         }
         [UnityTest] public IEnumerator ScopedPipelineRendersActualGsThenRestoresGamePipeline()
         {
-            var pipeline=AssetDatabase.LoadAssetAtPath<UniversalRenderPipelineAsset>(Folder+"/Pipeline.asset");
+            var pipeline=AssetDatabase.LoadAssetAtPath<UniversalRenderPipelineAsset>("Assets/VRFPS/Configuration/Intro/GsPipeline.asset");
+            Assert.That(pipeline,Is.Not.Null,"Production GS pipeline must be configured.");
             var scoped=new GsPipelinePresentation(new GpuPresentation(source),pipeline,camera);
             var target=new RenderTexture(128,128,24);target.Create();var image=new Texture2D(128,128,TextureFormat.RGB24,false);
             try
