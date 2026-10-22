@@ -1,0 +1,68 @@
+{
+  "base": "c40389c",
+  "source": "efc832c",
+  "pr": "https://github.com/hyunsuki5329/zombie-shoot-vr/pull/38",
+  "tests": {
+    "intro-bootstrap-red": {
+      "result": "Failed(Child)",
+      "total": "1",
+      "passed": "0",
+      "failed": "1",
+      "skipped": "0",
+      "xmlSha256": "3a00242d2f008bbc185cea1a52a2ba34a2c2ab2c7012fe12387ab6cfe80a45e5",
+      "logSha256": "188428e4710826aeb51376d55785aec6de8adfe214fc2581729aa9ce3f5a4e6a"
+    },
+    "intro-bootstrap-green": {
+      "result": "Failed(Child)",
+      "total": "3",
+      "passed": "1",
+      "failed": "2",
+      "skipped": "0",
+      "xmlSha256": "2b53217630ada5c9b148f8eb95ec040bc06ba3f47ba66e2fee220364d02c9ceb",
+      "logSha256": "43ad5779e6db93eb33587f675a57798ea88cbdc4477a4043a5f5bc46328900b0"
+    },
+    "intro-bootstrap-expanded": {
+      "result": "Passed",
+      "total": "3",
+      "passed": "3",
+      "failed": "0",
+      "skipped": "0",
+      "xmlSha256": "86342ae166acd83615931875a52d23e3a936636d229fc0f8f5fe5939edd14e83",
+      "logSha256": "388f80f1d48dc68e7f166647d2acf06eaecb3bac3d0093258cc8ee9e63ccd8d3"
+    },
+    "intro-bootstrap-full": {
+      "result": "Passed",
+      "total": "193",
+      "passed": "193",
+      "failed": "0",
+      "skipped": "0",
+      "xmlSha256": "1d388943311a63d5f4d86c1abc4798313e6dddb0b4b6f5048b3d2d19ac0daeb6",
+      "logSha256": "43f0a83a7b4bea7be1f3a60423500ecea69b5b059e45e4d9a20a22949d3ac219"
+    },
+    "intro-bootstrap-edit": {
+      "result": "Skipped:Ignored",
+      "total": "138",
+      "passed": "137",
+      "failed": "0",
+      "skipped": "1",
+      "xmlSha256": "f9795e71517a3dc16ac12c5fdaf00aa767f4329d0f876a260173003aa817b5a5",
+      "logSha256": "677a377dec5e8ad77d6fb85ff9f12c3a427e06cbc140de8f89f60ba7a0ae0163"
+    }
+  },
+  "menuImage": {
+    "path": "tmp/p13/intro-map-menu.png",
+    "sha256": "ea5b245ad5d86fe485e69657515a63c9a1110375d09f6c7b1e7a85d1986bd75d",
+    "inspection": "Actual mono menu capture viewed; both rows and reason text readable, no overlap; not XR acceptance"
+  },
+  "fixed": "Install before initial Controls screen: initial placement after OpenInstructions reset the screen to MapSelection (2 failing tests), corrected and rerun",
+  "review": "Independent static review: no additional P1/P2; not external GitHub approval",
+  "preservation": "Original baseline hashes5/5 unchanged; worktree Room/Classroom/GraphicsSettings/QualitySettings diff empty",
+  "unverified": [
+    "Real Splat capture and calibration",
+    "Successful real observation scene to theme integration",
+    "XR stereo and device acceptance",
+    "Windows Player stripping/build",
+    "Fresh source restoration",
+    "Performance deferred"
+  ]
+}
