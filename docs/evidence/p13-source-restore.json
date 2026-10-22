@@ -134,5 +134,7 @@
     "Performance deferred"
   ],
   "originalPreservation": "Baseline hashes5/5 unchanged",
-  "verificationUtcDate": "2026-10-22"
+  "verificationUtcDate": "2026-10-22",
+  "pr": "https://github.com/hyunsuki5329/zombie-shoot-vr/pull/40",
+  "review": "Independent review: P1/P2 none; rehashed all2991 restored files and351 build files, matched audit and GUID; no external GitHub approval"
 }

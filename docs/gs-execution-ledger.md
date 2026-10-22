@@ -232,3 +232,5 @@ Ruling: P13-a의 실제 GS/VR 인수 대기 중 데이터 독립적인 b~e 구�
 - 동일 PC 패키지 캐시/라이선스를 사용했다. Player 실행·실제 API·GS stripping·XR은 미검증이며 최종 GSComparison 배포본이 아니다. 성능 수집은 수행하지 않았다.
 - Unity 임포트/빌드 후56개 파일의 바이트 변경, 누락0을 기록했다. 샘플 메타 외 Volume filter/URP prefilter·runtime settings/preloadedAssets 변경을 포함한다. 기존 두 맵/게임 소스/외부 자산은 변경 목록에 없다. 원본 프로젝트에 복사하지 않았고 원본 기준 해시5/5 일치.
 - fixture importer 종료의 Persistent allocation1 경고가 재현됐다. 원인은 미진단이며 전체 메모리 무누수 주장은 하지 않는다. 실제 촬영본/앵커·VR·최종 빌드·그 최종본의 복원은 계속 남아 있다.
+
+- 복원 증빙 단위2366ca1, [PR40 draft](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/40), base codex/p13-gs-flow-integration. 독립 리뷰에서2991개 복원 파일과351개 빌드 파일을 재해시해 감사와 일치, P1/P2 없음. 외부 GitHub 승인과 실제 VR 인수는 아니다.
