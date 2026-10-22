@@ -699,3 +699,5 @@ BootstrapPreview/WaveLab 빌드 모두 성공·종료0. 복원 WaveLab337개 파
 - 기준2ae0bf4에서 정상·필수 속성 누락·잘린 PLY 각10회로 Persistent30개 누수를 재현하고 raw/실패 배열 해제로 수정했다. 같은30회 재실행에서 종료 누수 경고0, DX12 PlayMode197/197 통과. [증빙](evidence/gs-import-lifetime.json).
 - 고정 package1.1.1 revision2c6fed37을 embedded로 보관해 Git 소스 복원에 포함한다. 원본90파일 대조에서 reader2개와 package fingerprint 제거만 변경; runtime/shader/meta/MIT 보존. upstream 공백은 바이트 비교 보존을 위해 정리하지 않았다.
 - 독립 리뷰 P1/P2 없음. 원본 기준5해시 일치. Editor 임포트 한정 수정으로 이번 EditMode/Player 빌드·XR 재검증은 하지 않았으며, 후처리 예외는 코드 검토만 수행했다. 이전 빌드/복원 ZIP에는 이번 패치가 없다. 실제 GS/앵커와 최종 VR 인수는 계속 미완료.
+
+- 수정 소스62cf6db, [PR42](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/42), base codex/p13-gs-player-probe. 외부 GitHub review/CI 없음(실제 조회), 독립 정적 리뷰와 위 자동 검증으로 Editor 한정 단위의 병합 조건을 충족했다. 의존 브랜치로 병합하며 main/P13 전체 인수로 표시하지 않는다.
