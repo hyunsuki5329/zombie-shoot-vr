@@ -1,0 +1,55 @@
+{
+  "base": "2ae0bf4858f6a8a9872c0eab33d85d23b9661393",
+  "packageRevision": "2c6fed37da67a217367261fcfcd3316d34c73e76",
+  "packageSource": "embedded",
+  "red": "30 Persistent leaks for 30 imports; exit0",
+  "green": "30 imports; no Leak Detected report; exit0",
+  "play": {
+    "result": "Passed",
+    "total": "197",
+    "passed": "197",
+    "failed": "0",
+    "skipped": "0"
+  },
+  "upstreamComparison": {
+    "files": 90,
+    "changed": [
+      "Editor/Utils/GaussianFileReader.cs",
+      "Editor/Utils/PLYFileReader.cs",
+      "package.json"
+    ],
+    "missing": 0
+  },
+  "originalPreserved": {
+    "Zombie Shoot VR/Assets/VRFPS/Scenes/Maps/Room.unity": true,
+    "Zombie Shoot VR/Assets/VRFPS/Scenes/Maps/Classroom.unity": true,
+    "Zombie Shoot VR/Assets/XR/Settings/OpenXRPackageSettings.asset": true,
+    "Zombie Shoot VR/ProjectSettings/Packages/com.unity.learn.iet-framework/Settings.json": true,
+    "Zombie Shoot VR/Builds/Windows/WallFix/AbandonedSchool.exe": true
+  },
+  "review": "Independent reviewer: no P1/P2. No external GitHub approval claimed.",
+  "limitations": [
+    "Postprocessing exception ownership inspected, not fault injected",
+    "SPZ error lifetime not tested",
+    "No new Player build or XR validation",
+    "No whole-process memory or performance claim"
+  ],
+  "artifacts": {
+    "gs-import-lifetime-red.log": {
+      "path": "tmp\\p13\\gs-import-lifetime-red.log",
+      "sha256": "bc5b1ac45dd7771ae09d679db2ba33a4e32f6fc9b725f726c1a57a761caf9834"
+    },
+    "gs-import-lifetime-green.log": {
+      "path": "tmp\\p13\\gs-import-lifetime-green.log",
+      "sha256": "42cce04d80bf5681bf64269216ad1b9ed292eaa330bda0bd6d4f32434598336e"
+    },
+    "gs-import-play.xml": {
+      "path": "tmp\\p13\\gs-import-play.xml",
+      "sha256": "63a76d074d2535e8a9858af3a356e7753ea19632952d52ab6faae7371a4a5130"
+    },
+    "gs-import-play.log": {
+      "path": "tmp\\p13\\gs-import-play.log",
+      "sha256": "e30a789b3b897fcaccc66bbe9f024e8f191af314d4f4713a8525f06de1d5c463"
+    }
+  }
+}

@@ -693,3 +693,9 @@ BootstrapPreview/WaveLab 빌드 모두 성공·종료0. 복원 WaveLab337개 파
 - 초기2건 RED→GREEN. 독립 리뷰 P2(최종 inventory 관찰 예외가 보고/종료를 건너뜀)를2통과/1실패로 재현하고 전체 실행 오류를 실패 보고로 변환했다. 최종 DX12 PlayMode197/197. 재검토 응답에서 수정 확인·추가 P1/P2 없음; 이후 reviewer final은 사용량 제한으로 종료됐다.
 - 실제 Windows x64 Mono 개발 빌드 GUIDa02759d14b874012ab295b60a0454cdc: Direct3D12,10회/검정10프레임/최소 GS픽셀23648, 자원 반환·pipeline 복원 true, exit0. 같은 빌드 -nographics는 성공false/0회/정리true/exit1. 출처 포함343파일 SHA 기록. [증빙](evidence/gs-player-probe.json).
 - managed stripping=Disabled이며 이 조건에서 포함된 실제 셰이더·반사 경로를 검증했다. OpenXR는 HMD unavailable이었다. 실제 방·양안·full Player 게임 전환·IL2CPP/상위 stripping·최종 GSComparison 인수는 미완료다. 원본 해시5/5 일치. 진단 추가만인 이번 단위의 EditMode는 재실행하지 않았다.
+
+## 2026-10-23 P13 PLY 임포트 수명 수정
+
+- 기준2ae0bf4에서 정상·필수 속성 누락·잘린 PLY 각10회로 Persistent30개 누수를 재현하고 raw/실패 배열 해제로 수정했다. 같은30회 재실행에서 종료 누수 경고0, DX12 PlayMode197/197 통과. [증빙](evidence/gs-import-lifetime.json).
+- 고정 package1.1.1 revision2c6fed37을 embedded로 보관해 Git 소스 복원에 포함한다. 원본90파일 대조에서 reader2개와 package fingerprint 제거만 변경; runtime/shader/meta/MIT 보존. upstream 공백은 바이트 비교 보존을 위해 정리하지 않았다.
+- 독립 리뷰 P1/P2 없음. 원본 기준5해시 일치. Editor 임포트 한정 수정으로 이번 EditMode/Player 빌드·XR 재검증은 하지 않았으며, 후처리 예외는 코드 검토만 수행했다. 이전 빌드/복원 ZIP에는 이번 패치가 없다. 실제 GS/앵커와 최종 VR 인수는 계속 미완료.

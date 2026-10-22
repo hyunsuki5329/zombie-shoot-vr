@@ -245,3 +245,11 @@ Unity 임포트/빌드가56개 파일을 다시 직렬화했고 누락은0이다
 출력은 격리 작업본의 `Zombie Shoot VR/Builds/Windows/GsCompatibilityProbe/`다. README와 GaussianSplatting-Attribution.txt를 함께 보관한다. 실행 옵션은 `-batchmode -force-d3d12 -vrfps-gs-probe -vrfps-gs-probe-result <새 절대 JSON 경로> -logFile <새 절대 로그 경로>`다. exit0/JSON success와 buildGuid를 함께 확인한다. 그래픽 없는 실패 경로는 force-d3d12 대신 nographics로 실행하며 exit1/실패JSON을 확인했다.
 
 [현재 증빙](evidence/gs-player-probe.json)은 Mono Development/managed stripping Disabled의 실제 DX12 단안 진단이다. 실제 촬영본·Quest Pro·최종 게임 배포 및 그 복원으로 확대하지 않는다. 이전6ea502b 복원 ZIP에는 이 후속 진단 코드가 없으며, 최종 제출본 복원은 모든 자산·기능 통합 후 다시 검증해야 한다.
+
+## P13 PLY 임포트 수명 수정
+
+고정 revision2c6fed37의 package1.1.1을 `Packages/org.nesnausk.gaussian-splatting`에 embedded로 포함했다. Git archive에 패키지 소스·meta·MIT 라이선스가 함께 들어가며 별도 PackageCache 수정에 의존하지 않는다. runtime/shader 파일은 원본과 동일하다. 변경은 PLY raw 배열과 실패 시 변환 배열 해제이며 `VRFPS-PATCH.md`에 범위를 기록했다.
+
+격리 프로젝트에서 `-batchmode -nographics -executeMethod GaussianImportLifetimeCheck.Run -quit`로 재현한다. 정상/속성 누락/잘린 PLY를 각각10회 읽고 `GS_IMPORT_LIFETIME_CHECK` 마커와 종료 로그를 함께 확인한다. 수정 전에는 exit0이어도 Persistent30개 누수가 발생했으므로 종료 코드만으로 통과를 판단하지 않는다. 수정 후 같은30건에서 누수 경고가 없어졌다. 변환 후처리 예외는 코드 리뷰 범위이며 강제 주입 시험은 수행하지 않았다. SPZ 오류 수명·전체 프로세스 메모리·VR 성능 검증으로 확대하지 않는다.
+
+위의6ea502b 복원본과4c84f7d Player 빌드는 이 수정 이전 산출물이다. 최종 배포·복원은 실제 GS 자료 통합 이후 다시 검증한다.
