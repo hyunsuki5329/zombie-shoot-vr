@@ -224,3 +224,11 @@ Ruling: P13-a의 실제 GS/VR 인수 대기 중 데이터 독립적인 b~e 구�
 - 소스 `2e81403`, [PR39](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/39) draft, base `codex/p13-intro-bootstrap`. 운영 Bootstrap/adapter/씬 로더/실제 GPU GS/K2 Raycast/fade/기존 Room 준비 인계를10회 반복하고 Classroom 직접 진입도 확인했다. 관찰 자료는 합성256 GS이고 fixture 씬의 시험 중 구성만 바꿨다.
 - 최초 단독1/1 통과. 리뷰에서 RunStarted 순간 확인 누락과 실패시 시험 전역 설정 오염 가능성2건을 보강했다. 동기 시작 경계에서 alpha0/관찰씬 해제/GPU 자원 반환을 검사하고 teardown이 원래 quality slot/asset을 독립 복원한다. 최종 전체 DX12 PlayMode194/194. [증빙](evidence/gs-flow-integration.json).
 - 원본 해시5/5 일치, 기존 두 맵/저장된 Graphics·Quality 설정 diff 없음. 초기8초·HP100·30발·처치0을 확인하기 위해 run clock을 껐다. 이 시험을 Wave1 전투·컨트롤러 실입력·양안·실제 방 인수로 확대하지 않는다. EditMode는 시험만 추가한 이번 단위에서 재실행하지 않았다.
+
+## 2026-10-23 P13 새 소스 복원 리허설
+
+- 소스6ea502b를 Git archive로 내보내고 로컬 외부 자산687개 파일을 GUID/meta와 함께 별도 ZIP에 보관했다. 2,991개 파일을 `D:/VRFPS-Reproduction/gs-6ea502b/`에 복원하고 CRC/SHA를 대조했다. Library와 실제 촬영 GS는 포함하지 않았다. 합성 GS는 새 복원본에서 재생성했다.
+- 새 복원본 EditMode137통과/개인스캔1제외, DX12 PlayMode194/194. 기존 BootstrapSetup.Build의 Windows x64 Mono 개발 빌드 성공: GUID54d64a1919184786b7dc5d4befc087a6, 산출물351파일 SHA 기록. [증빙](evidence/p13-source-restore.json).
+- 동일 PC 패키지 캐시/라이선스를 사용했다. Player 실행·실제 API·GS stripping·XR은 미검증이며 최종 GSComparison 배포본이 아니다. 성능 수집은 수행하지 않았다.
+- Unity 임포트/빌드 후56개 파일의 바이트 변경, 누락0을 기록했다. 샘플 메타 외 Volume filter/URP prefilter·runtime settings/preloadedAssets 변경을 포함한다. 기존 두 맵/게임 소스/외부 자산은 변경 목록에 없다. 원본 프로젝트에 복사하지 않았고 원본 기준 해시5/5 일치.
+- fixture importer 종료의 Persistent allocation1 경고가 재현됐다. 원인은 미진단이며 전체 메모리 무누수 주장은 하지 않는다. 실제 촬영본/앵커·VR·최종 빌드·그 최종본의 복원은 계속 남아 있다.
