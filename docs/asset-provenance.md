@@ -101,3 +101,10 @@ Mixamo의 `Zombie Reaction Hit` 중 Flinches 동작을 사용자 로그인 세�
 - DX12 단안 미리보기에서 녹색 몸체/붉은 돌기·표면 표현 확인. Sketchfab 직접 조회는 다시403으로 원본 웹뷰와 동일하다고 주장하지 않는다. 양안·성능·실제 GS 안 배치는 미검증이다.
 - 출처 고지: `Assets/VRFPS/Documentation/IntroVirus-Attribution.txt`. 현재 GS 빌드는 없으므로 실제 배포 포함은 후속 빌드에서 검증한다.
 - 로컬 보관 `Builds/Reproduction/p13-virus-20261021/`: 원본 ZIP, 생성물/meta ZIP, SHA manifest, preview. CRC/개별 SHA 일치 확인; 새 Unity 작업본 복원은 미실행. [증빙](evidence/intro-virus-assets.json).
+
+## P13 GS viewer와 합성 시험 데이터 (2026-10-22)
+
+- [UnityGaussianSplatting](https://github.com/aras-p/UnityGaussianSplatting), Aras Pranckevičius, MIT. revision `2c6fed37da67a217367261fcfcd3316d34c73e76`, package1.1.1 고정. 소스/셰이더는 기존 오픈소스이며 프로젝트 자체 기여는 관찰 씬 수명·입력·전환 연결이다.
+- 고지/라이선스: `Assets/VRFPS/Documentation/GaussianSplatting-Attribution.txt`. 실제 배포 포함 검증은 새 빌드에서 수행한다.
+- `GaussianRealityFixtureSetup.Create`의 합성256 GS는 직접 생성한 분석형 시험 데이터다. 사용자 방 촬영 데이터나 GS 학습 결과가 아니다. 가공본은 외부 데이터와 동일한 Git 제외 위치에서 재생성한다.
+- 초기 별도 시험본의 [호환성 기록](evidence/gs-compatibility.json)과 후속 실제 bridge의 [검증 기록](evidence/gs-renderer-bridge.json)을 구분한다. 실제 방 Splat은 사용자 재촬영 대기다.

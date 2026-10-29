@@ -197,3 +197,11 @@ Ruling: P13-a의 실제 GS/VR 인수 대기 중 데이터 독립적인 b~e 구�
 - 파일은 그대로 둔 기존 fixture 씬 shell을 로드 콜백에서만 시험 구성으로 변환하여 실제 SceneManager 경로를 시험했다. 초기4실패→4통과. 구성/renderer identity/readiness 실패, 남은 자원, 외부 씬 보호, caller IEnumerator 폐기 후 실제 작업 지속을 포함한다.
 - 독립 리뷰 P2: StartCoroutine의 첫yield 전 Release 콜백 재진입.7통과/1실패로 재현하고 starting guard + current.IsDone 잠금으로 수정했다. wrapper 폐기가 실제 작업 잠금을 해제하지 않는다.
 - 최종 DX12 전체 PlayMode169/169. 실제씬10회 반복 후 sceneCount 기준 복귀 확인; fake resource flag를 실제GS GPU/양안/성능 검증으로 확대하지 않는다. [증빙](evidence/reality-scene-loader.json). 관찰씬/패키지bridge/Bootstrap 연결은 후속이다.
+
+## P13-b 실제 GS package bridge
+
+- base9395cd9 → f535106, [PR36 draft](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/36). pinned2c6fed37(1.1.1), 기존 package 버전 변화0. 기존 게임 pipeline 설정은 수정하지 않았다.
+- Ruling: 별도 합성 시험 pipeline에서 실제 bridge를 먼저 검증하고 운영 pipeline 선택/복원은 다음 단위에서 연결한다 — 원본 게임 MSAA4/API를 보존하며 자원 수명을 독립 검증하기 위함 — 비용은 다음 연결 단위가 끝날 때까지 메뉴에서 실제 GS를 시작할 수 없다는 점이다.
+- RED3건→GREEN3건, 추가 구성/비활성화/외부 소유/가림/암전 시험11통과. 독립 리뷰 P2 sorter invalid cache는11통과/1실패 RED, view buffer 누락은0통과/1실패 RED. Release에서 sorter cache 초기화, Initialize/IsReady에서 필수8buffer+4scratch+5objects+등록/정렬기 유효성 검사를 적용했다.
+- 최종 DX12 PlayMode182/182, EditMode137통과/1제외. 18자원손상 변형, 실제합성GS10수명회,opaque depth/fade 복원 포함. [증빙](evidence/gs-renderer-bridge.json). 정적 리뷰는 GitHub 승인이나 실기 인수가 아니다.
+- 임포터 종료 Persistent allocation1 경고의 원인은 아직 진단하지 않았다. Vulkan/Player stripping/실제방/XR/최종복원 미검증. 검증대상은 runtime owned GPU fields이며 전체VRAM/성능 측정이 아니다.

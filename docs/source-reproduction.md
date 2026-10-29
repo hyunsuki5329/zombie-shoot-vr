@@ -215,3 +215,13 @@ P04 외형 브랜치부터 K2/탄창 프리팹은 Git 제외 자원을 참조한
 원본 ZIP 경로를 `VRFPS_VIRUS_ARCHIVE`로 지정하고 격리 Unity에서 `-batchmode -nographics -executeMethod VRFPS.Editor.IntroVirusSetup.Import -quit`를 실행한다. 원본 SHA가 다르면 거부한다. 외부 생성물은 `Assets/VRFPS/External/IntroVirus/`이며 Git 제외다. 기존 GUID를 보존하려면 로컬 `Builds/Reproduction/p13-virus-20261021/derived-with-meta.zip`을 해당 폴더로 복원한다. 새 import의 GUID가 달라지면 관찰 씬 참조를 재연결해야 한다. 현재 관찰 씬은 아직 연결하지 않았다. 보관 ZIP의 CRC/SHA 검증만 완료했으며 전체 새 소스 복원 검증으로 간주하지 않는다.
 
 P13 전용 레이어 연결 이후 최신 바이러스 생성물은 `Builds/Reproduction/p13-virus-layer-20261021/derived-with-meta.zip`이다. 앞선 자산 보관본은 그대로 유지하며 새 보관본은 IntroTarget(layer13) Collider 설정을 포함한다. 기존 meta SHA는 유지됐고 새 ZIP CRC/파일 SHA 검증을 마쳤다. 새 프로젝트 실행 복원은 아직 미검증이다.
+
+## P13 GS 렌더러 시험 재현
+
+`Packages/manifest.json`과 lock은 UnityGaussianSplatting의 `2c6fed37da67a217367261fcfcd3316d34c73e76`을 가리킨다. Git/네트워크가 있는 격리 Unity6000.3.23f1 작업본에서 resolve한다. 다른 기존 패키지 버전은 변경하지 않았다. 원본 게임 pipeline/MSAA/API 설정도 보존한다.
+
+1. 격리 프로젝트에 `-batchmode -force-d3d12 -executeMethod GaussianRealityFixtureSetup.Create -quit`를 실행한다. `-projectPath`와 별도 `-logFile`을 지정한다. 합성256 GS와 시험 pipeline은 Git 제외 `Assets/VRFPS/External/RealityGS/SyntheticFixture/`에 생성된다. 사용자 촬영본을 대체하지 않는다.
+2. 새 Unity 프로세스에서 `-batchmode -force-d3d12 -runTests -testPlatform PlayMode -testFilter GaussianRealitySourceTests -testResults <절대 XML 경로> -logFile <절대 로그 경로>`로 실행한다. 시험에는 `-quit`를 붙이지 않는다. fixture 누락은 제외가 아니라 실패다.
+3. 시험은 runtime에서만 pipeline을 선택하고 종료 후 원래 설정을 복원한다. 실제 GS 픽셀·가림·암전과 GPU 자원 수명을 검증하며 XR, Player stripping, 실제 방 보정은 별도다. 최종 전체 시험은 [증빙](evidence/gs-renderer-bridge.json)을 참조한다.
+
+생성기는 프로젝트 소유의 결정적 분석형 데이터를 만든다. 기존 GUID를 보존해야 하는 운영 GS는 별도 원본/가공본/meta 백업을 사용해야 한다. 생성기 임포트 종료의 Persistent allocation1 경고는 미진단이며, 이 단위를 전체 새 소스/Windows 복원 완료로 간주하지 않는다.

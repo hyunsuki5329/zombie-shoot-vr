@@ -1,0 +1,110 @@
+{
+  "base": "9395cd9",
+  "scope": "Pinned actual GPU bridge; synthetic data; no production pipeline or scene binding",
+  "unity": "6000.3.23f1",
+  "urp": "17.3.0",
+  "rendererRevision": "2c6fed37da67a217367261fcfcd3316d34c73e76",
+  "api": "Direct3D12",
+  "data": "256 generated analytical Gaussians, not a capture",
+  "tests": {
+    "gs-source-red": {
+      "result": "Failed(Child)",
+      "total": "3",
+      "passed": "0",
+      "failed": "3",
+      "skipped": "0",
+      "xmlSha256": "3436a0e909528956c1dde37e0104a09b0071656d1ffc653c2af4bb2aea10e3bd",
+      "logSha256": "3f741869dc62a3e834b889c9235332e86b4fd9181d2aa027d8b4808586b2218f"
+    },
+    "gs-source-green": {
+      "result": "Passed",
+      "total": "3",
+      "passed": "3",
+      "failed": "0",
+      "skipped": "0",
+      "xmlSha256": "1cd45cd5715fee7c7c325b92ed943333a8a71e8e78e85d09688d15ede0f94bfb",
+      "logSha256": "08066454465d12a081d91a28485d88923785a14877d20cf5c0063c5dec793a04"
+    },
+    "gs-source-expanded": {
+      "result": "Passed",
+      "total": "11",
+      "passed": "11",
+      "failed": "0",
+      "skipped": "0",
+      "xmlSha256": "9017369bdd2c3e0d95b811685d72b2047a3836b9b07fe7842ee320df6bf96a37",
+      "logSha256": "b18a8cb54f0423f69dec51bfbdb4f64f11999751e8eb66668d041e2df8afb6be"
+    },
+    "gs-source-full": {
+      "result": "Passed",
+      "total": "180",
+      "passed": "180",
+      "failed": "0",
+      "skipped": "0",
+      "xmlSha256": "b3b342870101fae29adb5c57423dbd8e1fb3de68dabbb31bb411be9deb685e1b",
+      "logSha256": "7bdce116482821ff68a4ccbeb9587071b32ccd6f7f44ef17bd1487749798f021"
+    },
+    "gs-source-review-red": {
+      "result": "Failed(Child)",
+      "total": "12",
+      "passed": "11",
+      "failed": "1",
+      "skipped": "0",
+      "xmlSha256": "9fc2e9f709632a946fed0f90955ef029206cc7bb946e5ea0c8cefef3538d0dc5",
+      "logSha256": "d3eccf6e26790005921125ef586ce877a8e95972477e137a69735db7c3379f04"
+    },
+    "gs-source-readiness-red": {
+      "result": "Failed(Child)",
+      "total": "1",
+      "passed": "0",
+      "failed": "1",
+      "skipped": "0",
+      "xmlSha256": "d4df773daf946ffbf924297aa06d110613dd0e88cbd7c241b9bd43c9d8ec4f47",
+      "logSha256": "8b6b7f66d886d61caea5d1872a1327a04f9fbe0f00299060acc9809794a87973"
+    },
+    "gs-source-final": {
+      "result": "Passed",
+      "total": "182",
+      "passed": "182",
+      "failed": "0",
+      "skipped": "0",
+      "xmlSha256": "d9c7945aca3dc92e6912a48acc7a61dc5f9ddeced4e5059a0e0c3928fc1091b7",
+      "logSha256": "2d13e5eefa0ca1477eb5d15c44bee6225815632f2283b206c5b93b1372cf0eda"
+    },
+    "gs-source-edit": {
+      "result": "Skipped:Ignored",
+      "total": "138",
+      "passed": "137",
+      "failed": "0",
+      "skipped": "1",
+      "xmlSha256": "0a5d8e29ded60f542788c6e762e6a96b7d2af3574e8723976ac7cec6d3581a23",
+      "logSha256": "a4e72860eeea964157b58e7a61dbfdca3cc761bab1786a716109aa01ccf5593b"
+    }
+  },
+  "unchangedExistingPackageVersions": true,
+  "reviewFixes": [
+    "Invalid sorter cache survives upstream disable: failed initialization/retry RED then reset cache on release",
+    "Missing required view buffer still reported ready: RED then validate 8 required buffers, 4 scratch buffers, 5 objects, sorter and registration; 18 fault variants pass"
+  ],
+  "repeatScope": "10 actual synthetic GS render/init/release cycles; 15 direct buffers plus 4 scratch fields null, 5 Unity objects destroyed, registration false after each release",
+  "renderChecks": [
+    "GS red pixels above threshold",
+    "Opaque green geometry occludes GS",
+    "Black fade covers opaque and GS; removing fade restores GS"
+  ],
+  "importWarning": "Fixture import invocation logged one Persistent allocation leak at Editor exit; origin not diagnosed. Runtime field audit is not full-process memory accounting.",
+  "unverified": [
+    "Actual room capture/calibration",
+    "Production pipeline/camera/bootstrap observation scene binding",
+    "XR stereo, hands/menu interaction and full transition acceptance",
+    "Vulkan",
+    "Windows Player/linker stripping and clean source restoration",
+    "Performance deferred"
+  ],
+  "originalPreserved": {
+    "Zombie Shoot VR/Assets/XR/Settings/OpenXRPackageSettings.asset": "454d6cd1f8b9e5654d53300f7d3a6f047ea6d7da565b8a77b2d87498bf110320",
+    "Zombie Shoot VR/ProjectSettings/Packages/com.unity.learn.iet-framework/Settings.json": "0c692ce63564b3910af12989e413530658899fb866a20ac3287d4040eb3eb4f8",
+    "Zombie Shoot VR/Assets/VRFPS/Scenes/Maps/Room.unity": "f0c71f81cdd656126e92e8f8a89a6760621105c67b7e372740eff38cdd943ccb",
+    "Zombie Shoot VR/Assets/VRFPS/Scenes/Maps/Classroom.unity": "a4a3bfc67b8e627ef50d77592d423a1ee07858118184b9db9ce7969ea2c861ab",
+    "Zombie Shoot VR/Builds/Windows/WallFix/AbandonedSchool.exe": "56c28afba054092826b7a8a80ba3767daa87967f182c0c562eb2f98799175b7a"
+  }
+}

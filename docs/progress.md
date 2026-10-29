@@ -651,3 +651,11 @@ BootstrapPreview/WaveLab 빌드 모두 성공·종료0. 복원 WaveLab337개 파
 - SceneRealityPresentation이 실제 additive 씬 로드→RealitySceneRoot 검증→렌더러 identity/ready/resources 확인을 연결한다. 렌더 자원 해제 확인 전 씬을 해제하지 않으며 실패 시 소유권을 유지해 재시도한다. 다른 세션의 씬은 채택/해제하지 않는다.
 - 4건 RED→GREEN, 독립 리뷰의 동기 Release 재진입 결함1건 RED→시작 잠금 수정. 최종 DX12 PlayMode169/169. [증빙](evidence/reality-scene-loader.json).
 - 실제 씬10회 반복이지만 렌더러는 시험 대역이다. 실제 GS 버퍼 반복 검증·패키지 bridge·메뉴/Bootstrap 연결·XR·빌드는 미완료다.
+
+## 2026-10-22 P13 실제 GS 렌더러 수명
+
+- 소스 `f535106`, [PR36](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/36) draft, base `codex/p13-reality-loader`. UnityGaussianSplatting revision `2c6fed37` 고정; 기존 dependency 버전·게임 pipeline/MSAA/API 설정 및 원본 맵/설정/WallFix 해시5개 보존.
+- GaussianRealitySource가 실제 GPU 준비/해제를 확인한다. 재현 가능한 합성256 GS와 별도 시험 pipeline을 사용하며, 운영 씬/Bootstrap 연결은 아직 없다.
+- 초기3건 RED→GREEN. 독립 리뷰 P2 두 건(실패한 sorter 캐시 잔존, 필수 buffer 누락을 ready로 오판)을 RED로 재현 후 수정했다. 최종 DX12 PlayMode182/182, EditMode137통과/개인스캔1제외. [증빙](evidence/gs-renderer-bridge.json).
+- 실제 GS 픽셀 출력/불투명 기하 가림/암전 복원, GPU수명10회,19buffer fields·5Unity objects·등록 해제 확인. 실제 방·XR·전체전환10회·Windows Player stripping·새복원 검증으로 확대하지 않는다.
+- Fixture 임포트 종료 시 Persistent allocation1 경고를 관찰했으며 원인은 미진단이다. 전체 프로세스 메모리 무누수로 주장하지 않는다. 다음은 도입부용 pipeline 선택/복원 및 운영 연결이다. 성능은 보류, 발표자료는 사용자 담당 유지.
