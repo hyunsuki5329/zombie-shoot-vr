@@ -645,3 +645,9 @@ BootstrapPreview/WaveLab 빌드 모두 성공·종료0. 복원 WaveLab337개 파
 - RealitySceneRoot에 map/dataId·소유/활성 참조·유일 앵커·배율·전용 충돌·씬 전체 중복 및 카메라/리그/전투 actor 혼입 검증을 추가했다. GS 준비 상태를 나타내는 값은 아니다.
 - 잘못된 구성8건 RED→통과. 독립 리뷰의 작은 배율 허용 결함은3건 RED로 재현하고 양수/상대 오차로 수정했다. 최종 EditMode137통과/개인 스캔1제외. [증빙](evidence/reality-scene-contract.json).
 - 관찰 씬 로더 호출 연결, 실제 GS 준비·충돌/앵커 실측·VR 인수는 미완료다.
+
+## 2026-10-22 P13 관찰 씬 로더
+
+- SceneRealityPresentation이 실제 additive 씬 로드→RealitySceneRoot 검증→렌더러 identity/ready/resources 확인을 연결한다. 렌더 자원 해제 확인 전 씬을 해제하지 않으며 실패 시 소유권을 유지해 재시도한다. 다른 세션의 씬은 채택/해제하지 않는다.
+- 4건 RED→GREEN, 독립 리뷰의 동기 Release 재진입 결함1건 RED→시작 잠금 수정. 최종 DX12 PlayMode169/169. [증빙](evidence/reality-scene-loader.json).
+- 실제 씬10회 반복이지만 렌더러는 시험 대역이다. 실제 GS 버퍼 반복 검증·패키지 bridge·메뉴/Bootstrap 연결·XR·빌드는 미완료다.

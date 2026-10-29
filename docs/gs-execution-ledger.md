@@ -188,3 +188,12 @@ Ruling: P13-a의 실제 GS/VR 인수 대기 중 데이터 독립적인 b~e 구�
 - 첫 시험은 EditMode에서 PlayMode용 씬 생성 API를 사용한 setup 오류였고, 이를 기능 RED로 세지 않는다. PreviewScene으로 수정한 뒤 valid1통과/invalid8실패를 확인했다.
 - 독립 리뷰 P2: 고정 절대 오차가 작은 scale에서 축0·두배·음수를 허용. 세 사례9통과/3실패 RED 후 양수/상대 오차로 수정. 최종 EditMode137통과/1제외. [증빙](evidence/reality-scene-contract.json).
 - 실측 배치/GS identity 확인·렌더 준비·로더 연결·XR/빌드는 남아 있다. 이 구성 validator를 실제 GS 인수로 대체하지 않는다.
+
+## P13-b/e 관찰 씬 로드·렌더 수명 경계
+
+- PR34 draft: https://github.com/hyunsuki5329/zombie-shoot-vr/pull/34 (bfed8d4). 후속 codex/p13-reality-loader.
+- Downloads 및 하위에서 새 PLY/SPZ/SPLAT 없음 재확인. 사용자 재촬영 회신을 기다리며 질문을 반복하지 않았다.
+- SceneRealityPresentation은 경로 예약·소유씬·root.Validate·단일 활성 RealityRenderSource의 dataId/ready/resources 확인을 수행한다. Release는 초기화 전/부분 실패 후에도 idempotent여야 하고 HasResources=false를 확인해야 씬 해제한다. 실제 GS bridge는 아직 없다.
+- 파일은 그대로 둔 기존 fixture 씬 shell을 로드 콜백에서만 시험 구성으로 변환하여 실제 SceneManager 경로를 시험했다. 초기4실패→4통과. 구성/renderer identity/readiness 실패, 남은 자원, 외부 씬 보호, caller IEnumerator 폐기 후 실제 작업 지속을 포함한다.
+- 독립 리뷰 P2: StartCoroutine의 첫yield 전 Release 콜백 재진입.7통과/1실패로 재현하고 starting guard + current.IsDone 잠금으로 수정했다. wrapper 폐기가 실제 작업 잠금을 해제하지 않는다.
+- 최종 DX12 전체 PlayMode169/169. 실제씬10회 반복 후 sceneCount 기준 복귀 확인; fake resource flag를 실제GS GPU/양안/성능 검증으로 확대하지 않는다. [증빙](evidence/reality-scene-loader.json). 관찰씬/패키지bridge/Bootstrap 연결은 후속이다.

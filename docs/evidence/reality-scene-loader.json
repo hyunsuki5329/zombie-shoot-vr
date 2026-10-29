@@ -1,0 +1,46 @@
+{
+  "base": "bfed8d4",
+  "scope": "Actual additive scene lifecycle with test renderer; no GS renderer bridge installed",
+  "tests": {
+    "reality-loader-red": {
+      "result": "Failed(Child)",
+      "total": "4",
+      "passed": "0",
+      "failed": "4",
+      "skipped": "0",
+      "sha256": "2d3e65e0eff8b7fc79882d5e2f1b95ef42a3efe77366d1e9235607f9c53c1d32"
+    },
+    "reality-loader-green": {
+      "result": "Passed",
+      "total": "4",
+      "passed": "4",
+      "failed": "0",
+      "skipped": "0",
+      "sha256": "baaea2ae3b8b5dfdcfe679f24a5dc46579447a4f0bae8a0556bfba3d1ad0beb5"
+    },
+    "reality-loader-review-red": {
+      "result": "Failed(Child)",
+      "total": "8",
+      "passed": "7",
+      "failed": "1",
+      "skipped": "0",
+      "sha256": "c0230e41332adbed5cd3427ff4549a33abe2e305326f5685b7da8bd68465d3c1"
+    },
+    "reality-loader-play": {
+      "result": "Passed",
+      "total": "169",
+      "passed": "169",
+      "failed": "0",
+      "skipped": "0",
+      "sha256": "f6ce91b998eeb2c3b3c4c7095bb7d95f272b17fa159bc9dcf7114059abe3b31e"
+    }
+  },
+  "reviewFix": "P2 reentrant Release could start another core before current assignment. Reproduced 7 pass/1 fail, then starting guard reserves the synchronous start interval.",
+  "repeatScope": "10 actual scene load/validate/unload cycles assert scene count returns to baseline. Renderer resources are test flags, not actual GPU buffers.",
+  "unverified": [
+    "Package-specific GS bridge and GPU release",
+    "Real capture calibration",
+    "Combat/bootstrap binding and actual GS choice UI",
+    "XR and final build/restoration"
+  ]
+}
