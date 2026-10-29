@@ -615,3 +615,9 @@ BootstrapPreview/WaveLab 빌드 모두 성공·종료0. 복원 WaveLab337개 파
 - 현실 미리보기→첫 명중→암전→현실 해제→테마 준비/배치→밝아짐→전투1회 흐름을 연결했다. 정지·중복·timeout·늦은 완료·정리 재시도·소유 씬 파괴 경계를 시험했다.
 - 독립 리뷰3건과 취소 후 배치 결함을 RED로 재현·수정했다. 최종 graphics PlayMode155/155, EditMode124통과/1제외. [증빙](evidence/comparison-controller.json).
 - 실제 CombatSession + fake 현실 어댑터 시험이며 실제 GS/메뉴/양안/전체반복 인수는 아직 미완료다.
+
+## 2026-10-21 P13 비교 메뉴 연결
+
+- 비교 중 Run 종료 이벤트가 결과 화면을 열지 않도록 메뉴 소유권을 연결했다. 정지/설정/복귀, 전투 Retry 차단, 정리 실패 Retry, 새 진입 잠금과 자료 누락 안내를 구현했다.
+- 실제 SelectReality 진입과 버튼 정리 재시도까지 포함해 graphics PlayMode156/156, EditMode124통과/개인 스캔1제외. 독립 리뷰 중요 지적 없음. [증빙](evidence/intro-menu.json).
+- 실제 GS 선택 버튼/관찰 씬 바인딩, 암전 위 메뉴 표시, 양안 인수는 아직 미완료다. 사용자는 Splat으로 재촬영 예정이며 성능 로그 보류·발표자료 사용자 담당을 유지한다.

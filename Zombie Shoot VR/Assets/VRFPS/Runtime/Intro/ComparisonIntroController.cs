@@ -12,6 +12,8 @@ namespace VRFPS
         int generation;bool configured,paused,hit,cleanupFailed;double introTime;
         public IntroPhase Phase {get;private set;}
         public bool IsBusy {get;private set;}
+        public bool IsPaused=>paused;
+        public event Action<bool> BusyChanged;
         public string LastError {get;private set;}
         public event Action<IntroPhase> PhaseChanged;
         public void Configure(IRealityPresentation reality,CombatSession combat,PlayerRigController rig,K2Controller gun,WeaponContextRouter router,VrScreenFade fade)
@@ -29,7 +31,7 @@ namespace VRFPS
             try{if(profile==null)throw new ArgumentNullException(nameof(profile));profile.ValidateFor(map);map.Validate();}
             catch(Exception error){LastError=error.Message;}
             if(LastError!=null){SetPhase(IntroPhase.Failed);yield break;}
-            IsBusy=true;cleanupFailed=false;paused=false;hit=false;introTime=0;var request=++generation;
+            SetBusy(true);cleanupFailed=false;paused=false;hit=false;introTime=0;var request=++generation;
             IntroAsyncOperation.Start(RunRequest(request,profile,map));
             while(IsBusy)yield return null;
         }
@@ -45,7 +47,7 @@ namespace VRFPS
                 if(cleanup.Error!=null){cleanupFailed=true;Fail("Cleanup failed: "+cleanup.Error.Message);yield break;}
                 if(LastError==null)SetPhase(IntroPhase.Idle);
             }
-            IsBusy=false;
+            SetBusy(false);
         }
         IEnumerator Transition(int request,RealityIntroProfile profile,MapDefinition map)
         {
@@ -142,8 +144,10 @@ namespace VRFPS
         void UnsubscribeTarget(){if(target!=null)target.Triggered-=OnHit;target=null;}
         bool Cancelled(int request)=>this==null||request!=generation;
         void RefreshInput(){if(router!=null)router.SetIntroState(Phase==IntroPhase.RealityPreview&&!hit,paused||Phase==IntroPhase.Returning||Phase==IntroPhase.Failed,introTime);}
+        void SetBusy(bool value){IsBusy=value;if(this!=null)BusyChanged?.Invoke(value);}
         void SetPhase(IntroPhase phase){Phase=phase;if(this!=null)PhaseChanged?.Invoke(phase);}
         void Fail(string error){LastError=error;generation++;SetPhase(IntroPhase.Failed);if(fade!=null)fade.SetImmediate(0);UnsubscribeTarget();RefreshInput();}
+        public void ClearError(){if(!IsBusy){LastError=null;BusyChanged?.Invoke(false);}}
         public void SetPaused(bool value){paused=value;if(IsBusy)RefreshInput();}
         public void Cancel()
         {
@@ -156,7 +160,7 @@ namespace VRFPS
             if(IsBusy&&!cleanupFailed)
             {Cancel();while(IsBusy&&!cleanupFailed)yield return null;yield break;}
             if(!configured)yield break;
-            IsBusy=true;cleanupFailed=false;SetPhase(IntroPhase.Returning);
+            SetBusy(true);cleanupFailed=false;SetPhase(IntroPhase.Returning);
             IntroAsyncOperation.Start(FinishShutdown());
             while(IsBusy&&!cleanupFailed)yield return null;
         }
@@ -164,7 +168,7 @@ namespace VRFPS
         {
             var cleanup=IntroAsyncOperation.Start(Cleanup());while(!cleanup.IsDone)yield return null;
             if(cleanup.Error!=null){cleanupFailed=true;Fail(cleanup.Error.Message);yield break;}
-            LastError=null;SetPhase(IntroPhase.Idle);IsBusy=false;
+            LastError=null;SetPhase(IntroPhase.Idle);SetBusy(false);
         }
         void OnDisable()=>Cancel();
         void OnDestroy()=>Cancel();
