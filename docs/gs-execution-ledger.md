@@ -139,3 +139,16 @@ Ruling: P13-a의 실제 GS/VR 인수 대기 중 데이터 독립적인 b~e 구�
 - 요청자 파괴 및 중첩 오류 시험2실패→2통과. 실제 SceneManager 비동기 로드→언로드 중 요청자 파괴 시험 포함 전체 graphics PlayMode150/150통과. [증빙](evidence/intro-operation-drain.json).
 - 독립 읽기 검토 중요 결함0. Controller/세대 무효화/timeout/메뉴 정리 연결은 아직 미완료다. 작업 대기를 멈추는 것을 실제 씬 취소로 오인하지 않도록 이 단위를 먼저 구성했다.
 - Ruling: 어댑터는 로드 코루틴을 IEnumerator로 반환한다. 별도 StartCoroutine에서 던진 예외는 Unity가 소유하므로 이 drain의 오류 포착 범위로 주장하지 않는다. 실제 GPU 자원 해제 증명은 렌더 어댑터 통합 단계에 남아 있다.
+
+## P13-d/e 전환 Controller 통합
+
+- PR28 draft: https://github.com/hyunsuki5329/zombie-shoot-vr/pull/28 (72d5b6f). 후속 codex/p13-comparison-controller.
+- IRealityPresentation 경계와 ComparisonIntroController를 구현했다. 현실 준비→첫 유효 명중→암전→현실 해제→테마 준비/배치→밝아짐→새 전투1회 경로다. 실제 CombatSession과 fake 현실 어댑터를 사용하는 시험을 RED→GREEN으로 진행했다.
+- 정지 시 도입부 시계/명중 차단, 중복 명중·새 진입 거부, 설정된 단계 제한, 늦은 현실 로드 정리, Controller 파괴 경계를 시험했다. 테스트 timeout은 빠른 주입값 .03초이며 실제 기본30초 기다림을 실행했다고 주장하지 않는다.
+- 독립 리뷰 P2 3건: 정리 실패 후 영구 Busy, 페이드 중단을 성공으로 오인, 전체 소유 씬 파괴 시 테마 누수. 각 실패 시험을 확인한 뒤 정리 재시도·알파/활성 검사·독립 테마 해제로 수정했다.
+- 추가 자체 검토: 취소된 PrepareMap 완료가 기본 스폰 배치를 실행하던 경계를 RED로 확인했다. 선택적 canCommit predicate가 false면 런타임 생성/리그 배치 전에 소유 맵을 해제한다. 기존 호출은 호환된다.
+- Ruling: 정리 실패 시 새 Begin은 잠그고 Shutdown으로 잔여 정리를 재시도한다. 실제 리소스가 해제됐는지 모르는 상태에서 Busy를 무조건 해제하지 않는다. 메뉴는 후속 연결에서 재시도·오류를 표시해야 한다.
+- Ruling: 프로필 themeAnchorKey=playerSpawn은 기존 맵 시작점을 사용한다. 다른 키는 현재 MapRoot 하위 이름이 유일해야 하며 기존 PlacePreparedPlayer의 소유/NavMesh/도달성 검증을 통과해야 한다. 사용자 씬 배치는 변경하지 않는다.
+- 최종 graphics PlayMode155/155통과. 실제 GS 어댑터/자료, IntroTarget 마스크/충돌 레이어, 메뉴 소유권·오류 표시, 양안·전체10회 수명 실기는 아직 미완료다. fake 현실 시험을 GS 렌더 검증으로 대체하지 않는다.
+
+- 최종 EditMode124통과/개인 스캔1제외. [전환 증빙](evidence/comparison-controller.json).

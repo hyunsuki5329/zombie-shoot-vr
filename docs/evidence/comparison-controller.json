@@ -1,0 +1,83 @@
+{
+  "base": "72d5b6f",
+  "scope": "Comparison lifecycle with real CombatSession and fake reality adapter",
+  "tests": {
+    "controller-red": {
+      "result": "Failed(Child)",
+      "total": "1",
+      "passed": "0",
+      "failed": "1",
+      "skipped": "0",
+      "sha256": "3880b2af82b88dfc479b9fc2e049bc400940d5da0efdaa4a2ea918ca8e964c2c"
+    },
+    "controller-green": {
+      "result": "Passed",
+      "total": "1",
+      "passed": "1",
+      "failed": "0",
+      "skipped": "0",
+      "sha256": "5162ec05d0c121b735221f4a7f5c093d0d9ede1417acab6c8cbf7cc9fb80a74b"
+    },
+    "controller-lifecycle": {
+      "result": "Passed",
+      "total": "7",
+      "passed": "7",
+      "failed": "0",
+      "skipped": "0",
+      "sha256": "a70a2dec3be0dd4e35c801d7e847fc3ab859457b8fdc7d00903936634a11e7e3"
+    },
+    "controller-review-red": {
+      "result": "Failed(Child)",
+      "total": "10",
+      "passed": "7",
+      "failed": "3",
+      "skipped": "0",
+      "sha256": "a6898df2c632910a6b2f33575701cfb757b999c97659fcac620247d49e285456"
+    },
+    "controller-play-final": {
+      "result": "Passed",
+      "total": "154",
+      "passed": "154",
+      "failed": "0",
+      "skipped": "0",
+      "sha256": "80c4f9e4e443f18956c623f93aa9897718d994fd9a66afe5d9172bd06aa64dd4"
+    },
+    "controller-late-theme-red": {
+      "result": "Failed(Child)",
+      "total": "1",
+      "passed": "0",
+      "failed": "1",
+      "skipped": "0",
+      "sha256": "49ca260ea15cd96b0af076b2768130376725d84410ddd337534cc88d224bc002"
+    },
+    "controller-play-verified": {
+      "result": "Passed",
+      "total": "155",
+      "passed": "155",
+      "failed": "0",
+      "skipped": "0",
+      "sha256": "39b74f8ca1f8b7150ba3ae1a717e7ced2a1d1fac33bc33151573bb80c16f1007"
+    },
+    "controller-edit-final": {
+      "result": "Skipped:Ignored",
+      "total": "125",
+      "passed": "124",
+      "failed": "0",
+      "skipped": "1",
+      "sha256": "3284248f79011f7b4f5ec837a47387638e6fd2581eefe13a4ae4839319f7c7f4"
+    }
+  },
+  "reviewFixes": [
+    "Retry cleanup without unlocking new entry early",
+    "Validate fade alpha and active state at switching/start boundaries",
+    "Release owned theme after owner scene destruction"
+  ],
+  "additionalFix": "Cancelled map preparation cannot commit runtime or player placement",
+  "unverified": [
+    "Actual GS adapter/rendering",
+    "IntroTarget layer and masks in scene",
+    "Menu ownership and error/retry UI",
+    "XR stereo integration",
+    "10 full reality-theme cycles resource checks"
+  ]
+}

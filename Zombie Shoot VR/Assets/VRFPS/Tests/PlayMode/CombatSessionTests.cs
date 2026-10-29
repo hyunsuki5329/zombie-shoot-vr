@@ -41,6 +41,149 @@ namespace VRFPS.Tests
             var scene=SceneManager.GetSceneByPath(Map);if(scene.IsValid() && scene.isLoaded)yield return SceneManager.UnloadSceneAsync(scene);
             UnityEngine.Object.DestroyImmediate(map);if(Directory.Exists(directory))Directory.Delete(directory,true);
         }
+        sealed class FakeReality : IRealityPresentation
+        {
+            public bool ready,hold,unloaded,loading,failUnload;public int loads;public Transform anchor;public IntroVirusTarget virus;
+            public bool IsReady=>ready;public string LastError=>null;
+            public Transform ObservationAnchor=>anchor;public IntroVirusTarget Virus=>virus;
+            public IEnumerator Load(RealityIntroProfile profile){loading=true;loads++;while(hold)yield return null;ready=true;loading=false;}
+            public IEnumerator Unload(){if(failUnload)throw new InvalidOperationException("unload failure probe");ready=false;unloaded=true;yield break;}
+        }
+        ComparisonIntroController MakeComparison(out FakeReality reality,out RealityIntroProfile profile,out VrScreenFade fade)
+        {
+            reality=new FakeReality{anchor=new GameObject("Reality anchor").transform,virus=new GameObject("Virus").AddComponent<IntroVirusTarget>()};
+            profile=ScriptableObject.CreateInstance<RealityIntroProfile>();profile.mapId=map.mapId;
+            profile.realityScenePath="fake";profile.realityAnchorKey="anchor";profile.themeAnchorKey="playerSpawn";profile.dataId="test";
+            profile.fadeOutSeconds=.03f;profile.fadeInSeconds=.03f;profile.minBlackSeconds=.03f;
+            fade=rig.gameObject.AddComponent<VrScreenFade>();var intro=rig.gameObject.AddComponent<ComparisonIntroController>();
+            intro.Configure(reality,session,rig,gun,rig.GetComponent<WeaponContextRouter>(),fade);return intro;
+        }
+        static void DestroyComparisonData(FakeReality reality,RealityIntroProfile profile)
+        {reality.hold=false;UnityEngine.Object.DestroyImmediate(reality.anchor.gameObject);UnityEngine.Object.DestroyImmediate(reality.virus.gameObject);UnityEngine.Object.DestroyImmediate(profile);}
+        [UnityTest] public IEnumerator ComparisonCleanupFailureCanBeRetried()
+        {
+            var intro=MakeComparison(out var reality,out var profile,out var fade);reality.hold=true;
+            try
+            {
+                var request=IntroAsyncOperation.Start(intro.Begin(profile,map));var deadline=Time.realtimeSinceStartup+3;
+                while(!reality.loading&&Time.realtimeSinceStartup<deadline)yield return null;
+                reality.failUnload=true;intro.Cancel();reality.hold=false;
+                while(intro.Phase!=IntroPhase.Failed&&Time.realtimeSinceStartup<deadline)yield return null;
+                Assert.That(intro.LastError,Does.Contain("unload failure"));Assert.That(intro.IsBusy,Is.True);
+                reality.failUnload=false;var retry=IntroAsyncOperation.Start(intro.Shutdown());
+                while(!retry.IsDone&&Time.realtimeSinceStartup<deadline)yield return null;
+                Assert.That(retry.IsDone,Is.True);Assert.That(intro.IsBusy,Is.False);Assert.That(reality.unloaded,Is.True);
+                while(!request.IsDone&&Time.realtimeSinceStartup<deadline)yield return null;
+                Assert.That(request.IsDone,Is.True);
+            }
+            finally{reality.failUnload=false;if(intro!=null)intro.Cancel();DestroyComparisonData(reality,profile);}
+        }
+        [UnityTest] public IEnumerator ComparisonInterruptedFadeCannotStartCombat()
+        {
+            var intro=MakeComparison(out var reality,out var profile,out var fade);profile.fadeOutSeconds=.5f;var starts=0;run.RunStarted+=()=>starts++;
+            try
+            {
+                var request=IntroAsyncOperation.Start(intro.Begin(profile,map));var deadline=Time.realtimeSinceStartup+3;
+                while(intro.Phase!=IntroPhase.RealityPreview&&Time.realtimeSinceStartup<deadline)yield return null;
+                reality.virus.ApplyDamage(1,gun.GetInstanceID(),0);
+                while(intro.Phase!=IntroPhase.FadingOut&&Time.realtimeSinceStartup<deadline)yield return null;
+                fade.SetImmediate(0);
+                while(!request.IsDone&&Time.realtimeSinceStartup<deadline)yield return null;
+                Assert.That(request.IsDone,Is.True);Assert.That(starts,Is.Zero);Assert.That(intro.Phase,Is.EqualTo(IntroPhase.Failed));
+            }
+            finally{if(intro!=null)intro.Cancel();DestroyComparisonData(reality,profile);}
+        }
+        [UnityTest] public IEnumerator ComparisonOwnerSceneDestructionReleasesPreparedTheme()
+        {
+            var intro=MakeComparison(out var reality,out var profile,out var fade);var starts=0;run.RunStarted+=()=>starts++;
+            intro.PhaseChanged+=phase=>{if(phase==IntroPhase.FadingIn)intro.SetPaused(true);};
+            try
+            {
+                var request=IntroAsyncOperation.Start(intro.Begin(profile,map));var deadline=Time.realtimeSinceStartup+3;
+                while(intro.Phase!=IntroPhase.RealityPreview&&Time.realtimeSinceStartup<deadline)yield return null;
+                reality.virus.ApplyDamage(1,gun.GetInstanceID(),0);
+                while(intro.Phase!=IntroPhase.FadingIn&&Time.realtimeSinceStartup<deadline)yield return null;
+                Assert.That(session.HasPreparedMap,Is.True);yield return SceneManager.UnloadSceneAsync(lab);
+                while(SceneManager.GetSceneByPath(Map).isLoaded&&Time.realtimeSinceStartup<deadline)yield return null;
+                Assert.That(SceneManager.GetSceneByPath(Map).isLoaded,Is.False);Assert.That(starts,Is.Zero);
+                while(!request.IsDone&&Time.realtimeSinceStartup<deadline)yield return null;
+                Assert.That(request.IsDone,Is.True);
+            }
+            finally{if(intro!=null)intro.Cancel();DestroyComparisonData(reality,profile);}
+        }
+        [UnityTest] public IEnumerator IntroStartsOnlyAfterFadeAndCancellationDrainsLateLoad()
+        {
+            var anchor=new GameObject("Reality anchor");var target=new GameObject("Virus");
+            var presentation=new FakeReality{anchor=anchor.transform,virus=target.AddComponent<IntroVirusTarget>()};
+            var profile=ScriptableObject.CreateInstance<RealityIntroProfile>();
+            profile.mapId=map.mapId;profile.realityScenePath="fake";profile.realityAnchorKey="anchor";
+            profile.themeAnchorKey="playerSpawn";profile.dataId="test";
+            profile.fadeOutSeconds=.03f;profile.fadeInSeconds=.03f;profile.minBlackSeconds=.03f;
+            var fade=rig.gameObject.AddComponent<VrScreenFade>();
+            var intro=rig.gameObject.AddComponent<ComparisonIntroController>();
+            intro.Configure(presentation,session,rig,gun,rig.GetComponent<WeaponContextRouter>(),fade);
+            var starts=0;run.RunStarted+=()=>{starts++;Assert.That(fade.Alpha,Is.Zero);};
+            try
+            {
+                var request=IntroAsyncOperation.Start(intro.Begin(profile,map));
+                var deadline=Time.realtimeSinceStartup+5;
+                while(intro.Phase!=IntroPhase.RealityPreview && !request.IsDone && Time.realtimeSinceStartup<deadline)yield return null;
+                Assert.That(intro.Phase,Is.EqualTo(IntroPhase.RealityPreview));Assert.That(starts,Is.Zero);
+                Assert.That(run.Phase,Is.EqualTo(RunPhase.Dead));
+                intro.SetPaused(true);var clock=rig.GetComponent<WeaponContextRouter>().InputTime;
+                yield return null;yield return null;
+                Assert.That(rig.GetComponent<WeaponContextRouter>().InputTime,Is.EqualTo(clock));
+                Assert.That(presentation.virus.ApplyDamage(1,gun.GetInstanceID(),0),Is.False);
+                intro.SetPaused(false);
+                Assert.That(presentation.virus.ApplyDamage(1,gun.GetInstanceID(),0),Is.True);
+                Assert.That(presentation.virus.ApplyDamage(1,gun.GetInstanceID(),0),Is.False);
+                while(!request.IsDone && Time.realtimeSinceStartup<deadline)
+                {if(fade.Alpha>0)Assert.That(starts,Is.Zero);yield return null;}
+                Assert.That(request.IsDone,Is.True);Assert.That(request.Error,Is.Null);
+                Assert.That(intro.Phase,Is.EqualTo(IntroPhase.Complete));Assert.That(starts,Is.EqualTo(1));
+                Assert.That(presentation.unloaded,Is.True);Assert.That(run.PreparationRemaining,Is.EqualTo(8));
+                yield return intro.Shutdown();
+                presentation.hold=true;presentation.unloaded=false;
+                var late=IntroAsyncOperation.Start(intro.Begin(profile,map));
+                deadline=Time.realtimeSinceStartup+5;
+                while(!presentation.loading&&Time.realtimeSinceStartup<deadline)yield return null;
+                Assert.That(presentation.loading,Is.True);
+                intro.Cancel();yield return null;
+                Assert.That(intro.IsBusy,Is.True);Assert.That(fade.Alpha,Is.Zero);
+                presentation.hold=false;
+                deadline=Time.realtimeSinceStartup+5;
+                while(!late.IsDone && Time.realtimeSinceStartup<deadline)yield return null;
+                Assert.That(late.IsDone,Is.True);Assert.That(starts,Is.EqualTo(1));
+                Assert.That(presentation.unloaded,Is.True);Assert.That(intro.IsBusy,Is.False);
+                presentation.hold=true;presentation.unloaded=false;profile.loadTimeoutSeconds=.03f;
+                var timed=IntroAsyncOperation.Start(intro.Begin(profile,map));
+                deadline=Time.realtimeSinceStartup+5;
+                while(intro.Phase!=IntroPhase.Failed&&Time.realtimeSinceStartup<deadline)yield return null;
+                Assert.That(intro.Phase,Is.EqualTo(IntroPhase.Failed));Assert.That(intro.LastError,Does.Contain("timed out"));
+                Assert.That(intro.IsBusy,Is.True);Assert.That(fade.Alpha,Is.Zero);
+                var loadCount=presentation.loads;
+                yield return intro.Begin(profile,map);Assert.That(presentation.loads,Is.EqualTo(loadCount));
+                presentation.hold=false;
+                while(!timed.IsDone&&Time.realtimeSinceStartup<deadline)yield return null;
+                Assert.That(timed.IsDone,Is.True);Assert.That(presentation.unloaded,Is.True);Assert.That(starts,Is.EqualTo(1));
+                presentation.hold=true;presentation.unloaded=false;profile.loadTimeoutSeconds=30;
+                var destroyed=IntroAsyncOperation.Start(intro.Begin(profile,map));
+                deadline=Time.realtimeSinceStartup+5;
+                while(!presentation.loading&&Time.realtimeSinceStartup<deadline)yield return null;
+                UnityEngine.Object.Destroy(intro);yield return null;presentation.hold=false;
+                while(!destroyed.IsDone&&Time.realtimeSinceStartup<deadline)yield return null;
+                Assert.That(destroyed.IsDone,Is.True);Assert.That(presentation.unloaded,Is.True);Assert.That(starts,Is.EqualTo(1));
+            }
+            finally{presentation.hold=false;if(intro!=null)intro.Cancel();UnityEngine.Object.DestroyImmediate(anchor);UnityEngine.Object.DestroyImmediate(target);UnityEngine.Object.DestroyImmediate(profile);}
+        }
+        [UnityTest] public IEnumerator CancelledPreparationUnloadsWithoutMovingOrCreatingRuntime()
+        {
+            var position=rig.transform.position;var starts=0;run.RunStarted+=()=>starts++;
+            yield return session.PrepareMap(map,()=>false);
+            Assert.That(session.HasPreparedMap,Is.False);Assert.That(session.Director,Is.Null);
+            Assert.That(rig.transform.position,Is.EqualTo(position));Assert.That(starts,Is.Zero);
+            Assert.That(SceneManager.GetSceneByPath(Map).isLoaded,Is.False);
+        }
         [UnityTest] public IEnumerator PreparedMapDoesNotStartUntilRequestedAndStartsOnlyOnce()
         {
             var starts=0;run.RunStarted+=()=>starts++;
