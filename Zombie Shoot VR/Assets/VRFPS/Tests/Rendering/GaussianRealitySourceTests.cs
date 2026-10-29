@@ -206,6 +206,40 @@ namespace VRFPS.Tests
                 Assert.That((Object)typeof(GaussianSplatRenderer).GetField(name,flags).GetValue(renderer)==null,Is.True,name);
             Assert.That(typeof(GaussianSplatRenderer).GetField("m_Registered",flags).GetValue(renderer),Is.EqualTo(false));
         }
+        sealed class GpuPresentation : IRealityPresentation
+        {
+            readonly GaussianRealitySource source;
+            public GpuPresentation(GaussianRealitySource source){this.source=source;}
+            public bool IsReady=>source.IsReady;
+            public string LastError=>null;
+            public Transform ObservationAnchor=>null;
+            public IntroVirusTarget Virus=>null;
+            public IEnumerator Load(RealityIntroProfile profile)=>source.Initialize();
+            public IEnumerator Unload()=>source.Release();
+        }
+        [UnityTest] public IEnumerator ScopedPipelineRendersActualGsThenRestoresGamePipeline()
+        {
+            var pipeline=AssetDatabase.LoadAssetAtPath<UniversalRenderPipelineAsset>(Folder+"/Pipeline.asset");
+            var scoped=new GsPipelinePresentation(new GpuPresentation(source),pipeline,camera);
+            var target=new RenderTexture(128,128,24);target.Create();var image=new Texture2D(128,128,TextureFormat.RGB24,false);
+            try
+            {
+                yield return scoped.Load(null);Assert.That(scoped.IsReady,Is.True);yield return null;
+                RenderPipeline.SubmitRenderRequest(camera,new UniversalRenderPipeline.SingleCameraRequest{destination=target});
+                var old=RenderTexture.active;RenderTexture.active=target;image.ReadPixels(new Rect(0,0,128,128),0,0);image.Apply();RenderTexture.active=old;
+                Assert.That(image.GetPixels32().Count(p=>p.r>40),Is.GreaterThan(100));
+                yield return scoped.Unload();Assert.That(source.HasResources,Is.False);AssertReleasedIndependently();
+                Assert.That(QualitySettings.renderPipeline,Is.SameAs(originalQuality));Assert.That(GraphicsSettings.defaultRenderPipeline,Is.SameAs(originalDefault));
+                camera.backgroundColor=Color.green;
+                RenderPipeline.SubmitRenderRequest(camera,new UniversalRenderPipeline.SingleCameraRequest{destination=target});
+                old=RenderTexture.active;RenderTexture.active=target;image.ReadPixels(new Rect(0,0,128,128),0,0);image.Apply();RenderTexture.active=old;
+                Assert.That(image.GetPixels32().Count(p=>p.g>40&&p.r<10),Is.GreaterThan(1000),"Original game pipeline renders after restoration");
+            }
+            finally
+            {
+                IntroAsyncOperation.Start(scoped.Unload());target.Release();Object.DestroyImmediate(target);Object.DestroyImmediate(image);
+            }
+        }
     }
 }
 #endif
