@@ -686,3 +686,18 @@ BootstrapPreview/WaveLab 빌드 모두 성공·종료0. 복원 WaveLab337개 파
 - 동일 PC 패키지 캐시/라이선스를 사용했다. Player 실행·실제 API·GS stripping·XR은 미검증이며 최종 GSComparison 배포본이 아니다. 성능 수집은 수행하지 않았다.
 - Unity 임포트/빌드 후56개 파일의 바이트 변경, 누락0을 기록했다. 샘플 메타 외 Volume filter/URP prefilter·runtime settings/preloadedAssets 변경을 포함한다. 기존 두 맵/게임 소스/외부 자산은 변경 목록에 없다. 원본 프로젝트에 복사하지 않았고 원본 기준 해시5/5 일치.
 - fixture importer 종료의 Persistent allocation1 경고가 재현됐다. 원인은 미진단이며 전체 메모리 무누수 주장은 하지 않는다. 실제 촬영본/앵커·VR·최종 빌드·그 최종본의 복원은 계속 남아 있다.
+
+## 2026-10-23 P13 실제 Windows GS 진단
+
+- 소스4c84f7d, [PR41 draft](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/41), base codex/p13-source-restore. 전용 실행 옵션에서만 합성 GS 표시/검정/해제10회와 JSON·exitcode를 기록하는 별도 Player probe를 추가했다. 사용자 기록/성능 수집은 없다.
+- 초기2건 RED→GREEN. 독립 리뷰 P2(최종 inventory 관찰 예외가 보고/종료를 건너뜀)를2통과/1실패로 재현하고 전체 실행 오류를 실패 보고로 변환했다. 최종 DX12 PlayMode197/197. 재검토 응답에서 수정 확인·추가 P1/P2 없음; 이후 reviewer final은 사용량 제한으로 종료됐다.
+- 실제 Windows x64 Mono 개발 빌드 GUIDa02759d14b874012ab295b60a0454cdc: Direct3D12,10회/검정10프레임/최소 GS픽셀23648, 자원 반환·pipeline 복원 true, exit0. 같은 빌드 -nographics는 성공false/0회/정리true/exit1. 출처 포함343파일 SHA 기록. [증빙](evidence/gs-player-probe.json).
+- managed stripping=Disabled이며 이 조건에서 포함된 실제 셰이더·반사 경로를 검증했다. OpenXR는 HMD unavailable이었다. 실제 방·양안·full Player 게임 전환·IL2CPP/상위 stripping·최종 GSComparison 인수는 미완료다. 원본 해시5/5 일치. 진단 추가만인 이번 단위의 EditMode는 재실행하지 않았다.
+
+## 2026-10-23 P13 PLY 임포트 수명 수정
+
+- 기준2ae0bf4에서 정상·필수 속성 누락·잘린 PLY 각10회로 Persistent30개 누수를 재현하고 raw/실패 배열 해제로 수정했다. 같은30회 재실행에서 종료 누수 경고0, DX12 PlayMode197/197 통과. [증빙](evidence/gs-import-lifetime.json).
+- 고정 package1.1.1 revision2c6fed37을 embedded로 보관해 Git 소스 복원에 포함한다. 원본90파일 대조에서 reader2개와 package fingerprint 제거만 변경; runtime/shader/meta/MIT 보존. upstream 공백은 바이트 비교 보존을 위해 정리하지 않았다.
+- 독립 리뷰 P1/P2 없음. 원본 기준5해시 일치. Editor 임포트 한정 수정으로 이번 EditMode/Player 빌드·XR 재검증은 하지 않았으며, 후처리 예외는 코드 검토만 수행했다. 이전 빌드/복원 ZIP에는 이번 패치가 없다. 실제 GS/앵커와 최종 VR 인수는 계속 미완료.
+
+- 수정 소스62cf6db, [PR42](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/42), base codex/p13-gs-player-probe. 외부 GitHub review/CI 없음(실제 조회), 독립 정적 리뷰와 위 자동 검증으로 Editor 한정 단위의 병합 조건을 충족했다. 의존 브랜치로 병합하며 main/P13 전체 인수로 표시하지 않는다.

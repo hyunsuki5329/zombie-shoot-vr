@@ -234,3 +234,21 @@ Ruling: P13-a의 실제 GS/VR 인수 대기 중 데이터 독립적인 b~e 구�
 - fixture importer 종료의 Persistent allocation1 경고가 재현됐다. 원인은 미진단이며 전체 메모리 무누수 주장은 하지 않는다. 실제 촬영본/앵커·VR·최종 빌드·그 최종본의 복원은 계속 남아 있다.
 
 - 복원 증빙 단위2366ca1, [PR40 draft](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/40), base codex/p13-gs-flow-integration. 독립 리뷰에서2991개 복원 파일과351개 빌드 파일을 재해시해 감사와 일치, P1/P2 없음. 외부 GitHub 승인과 실제 VR 인수는 아니다.
+
+## P13-a/f Windows GS 진단 실행 계획
+
+- Ruling: 기존 승인된 호환성·별도 빌드 범위에서 합성 GS 전용 Player probe를 만든다 — 실제 Player의 GPU 출력과 포함된 셰이더/리플렉션 경로는 Editor 시험만으로 입증되지 않기 때문이다 — 실제 촬영본·양안·최종 GSComparison 인수를 대신하지 않는 제한을 결과에 명시한다.
+- 전용 실행 옵션으로만10회 GS 표시/검정/해제와 pipeline 복원을 실행하고 JSON 결과·빌드 GUID·실제 API를 기록한다. 별도 출력 폴더, DX12 빌드 설정은 종료 후 복원, 사용자 기록·성능 로그에는 접근하지 않는다. 먼저 실패 시험을 만들고 실제 native 실행 결과까지 확인한다.
+
+## 2026-10-23 P13 실제 Windows GS 진단
+
+- 소스4c84f7d, [PR41 draft](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/41), base codex/p13-source-restore. 전용 실행 옵션에서만 합성 GS 표시/검정/해제10회와 JSON·exitcode를 기록하는 별도 Player probe를 추가했다. 사용자 기록/성능 수집은 없다.
+- 초기2건 RED→GREEN. 독립 리뷰 P2(최종 inventory 관찰 예외가 보고/종료를 건너뜀)를2통과/1실패로 재현하고 전체 실행 오류를 실패 보고로 변환했다. 최종 DX12 PlayMode197/197. 재검토 응답에서 수정 확인·추가 P1/P2 없음; 이후 reviewer final은 사용량 제한으로 종료됐다.
+- 실제 Windows x64 Mono 개발 빌드 GUIDa02759d14b874012ab295b60a0454cdc: Direct3D12,10회/검정10프레임/최소 GS픽셀23648, 자원 반환·pipeline 복원 true, exit0. 같은 빌드 -nographics는 성공false/0회/정리true/exit1. 출처 포함343파일 SHA 기록. [증빙](evidence/gs-player-probe.json).
+- managed stripping=Disabled이며 이 조건에서 포함된 실제 셰이더·반사 경로를 검증했다. OpenXR는 HMD unavailable이었다. 실제 방·양안·full Player 게임 전환·IL2CPP/상위 stripping·최종 GSComparison 인수는 미완료다. 원본 해시5/5 일치. 진단 추가만인 이번 단위의 EditMode는 재실행하지 않았다.
+
+## 2026-10-23 P13 PLY 임포트 누수 수정
+
+- 직전 진단에서 PLYFileReader.ReadFile의 Persistent raw buffer가 GaussianFileReader에서 해제되지 않는 것을 스택으로 확인했다. 정상/속성 누락/잘린 PLY 각10회 재현에서30개 누수가 발생했다. exit0은 성공 판정에 불충분했다.
+- 원본 revision2c6fed37 package1.1.1을 embedded로 포함하고 raw read 실패 시 Dispose/reset, 변환 성공/실패 시 raw finally Dispose, 후처리 실패 시 splats Dispose를 적용했다. 런타임·셰이더·라이선스·meta는 원본과 동일하다. 독립 비교90파일 중 reader2개와 package fingerprint 제거만 변경됐다.
+- 같은30사례 재실행에서 누수 경고0. 독립 리뷰 P1/P2 없음. 후처리 예외 주입·SPZ 실패 수명·전체 메모리/실기 검증은 하지 않았다. 실제 GS 자료·최종 빌드·VR 인수는 계속 대기다.
