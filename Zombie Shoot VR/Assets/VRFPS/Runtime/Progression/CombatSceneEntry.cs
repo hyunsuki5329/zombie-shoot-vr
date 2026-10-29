@@ -13,6 +13,11 @@ namespace VRFPS
         public MenuView view;public MenuController menu;public GameObject mapControls;
         public Button roomButton,classroomButton;public Text roomLabel,classroomLabel,status;
         public MapDefinition room,classroom;
+        public Button roomRealityButton,classroomRealityButton;
+        public Text roomRealityLabel,classroomRealityLabel;
+        RealityIntroProfile roomReality,classroomReality;string comparisonUnavailable;
+        public event Action Initialized;
+        public bool IsInitialized=>ready;
         public CombatSession Session {get;private set;}
         RecordStore records;ComparisonIntroController intro;
         InputAction pause;
@@ -33,7 +38,10 @@ namespace VRFPS
             Session.Configure(run,rig,gun,hand,melee,ranged,projectile,records);
             menu.Configure(run);view.BindResult(Session.Results);
             roomButton.onClick.AddListener(SelectRoom);classroomButton.onClick.AddListener(SelectClassroom);
-            menu.ScreenChanged+=OnScreenChanged;menu.IntroStatusChanged+=Refresh;ready=true;menu.OpenInstructions();Refresh();
+            if(roomRealityButton!=null)roomRealityButton.onClick.AddListener(SelectRoomReality);
+            if(classroomRealityButton!=null)classroomRealityButton.onClick.AddListener(SelectClassroomReality);
+            menu.ScreenChanged+=OnScreenChanged;menu.IntroStatusChanged+=Refresh;ready=true;
+            Initialized?.Invoke();menu.OpenInstructions();Refresh();
         }
         void Update()
         {
@@ -44,6 +52,28 @@ namespace VRFPS
         }
         void SelectRoom()=>StartCoroutine(SelectMap(room));
         void SelectClassroom()=>StartCoroutine(SelectMap(classroom));
+        void SelectRoomReality()=>SelectRealityChoice(roomReality,room);
+        void SelectClassroomReality()=>SelectRealityChoice(classroomReality,classroom);
+        void SelectRealityChoice(RealityIntroProfile profile,MapDefinition map)
+        {
+            var reason=RealityUnavailable(profile,map);
+            if(reason!=null){mapError=reason;Refresh();return;}
+            StartCoroutine(SelectReality(profile,map));
+        }
+        public void ConfigureRealityOptions(RealityIntroProfile roomProfile,RealityIntroProfile classroomProfile,string unavailableReason=null)
+        {
+            roomReality=roomProfile;classroomReality=classroomProfile;comparisonUnavailable=unavailableReason;Refresh();
+        }
+        string RealityUnavailable(RealityIntroProfile profile,MapDefinition map)
+        {
+            if(profile==null)return "Capture not configured";
+            if(comparisonUnavailable!=null)return comparisonUnavailable;
+            if(intro==null)return "Comparison not configured";
+            if(!Available(map))return "Theme map unavailable";
+            try{profile.ValidateFor(map);}catch(ArgumentException){return "Invalid capture configuration";}
+            if(!Application.CanStreamedLevelBeLoaded(profile.realityScenePath))return "Observation scene not in build";
+            return null;
+        }
         public IEnumerator SelectReality(RealityIntroProfile profile,MapDefinition map)
         {
             if(!ready||busy||menu.IntroBusy)yield break;
@@ -78,14 +108,22 @@ namespace VRFPS
             var roomReady=Available(room);var classroomReady=Available(classroom);
             roomButton.interactable=!busy&&!menu.IntroBusy&&roomReady;classroomButton.interactable=!busy&&!menu.IntroBusy&&classroomReady;
             roomLabel.text=Label("Room",room,roomReady);classroomLabel.text=Label("Classroom",classroom,classroomReady);
+            RefreshRealityChoice(roomRealityButton,roomRealityLabel,"Room",roomReality,room);
+            RefreshRealityChoice(classroomRealityButton,classroomRealityLabel,"Classroom",classroomReality,classroom);
             status.text=menu.IntroBusy ? menu.IntroError!=null?menu.IntroError+"\nCleanup pending. Use Retry to retry cleanup.":"Returning to map selection..." : busy ? "Loading map..." : mapError ?? records.LastError ??
                 (roomReady || classroomReady ? "Choose a map to begin." : "Maps are not available in this build.");
         }
         static bool Available(MapDefinition map)=>map!=null && Application.CanStreamedLevelBeLoaded(map.sceneName);
+        void RefreshRealityChoice(Button button,Text label,string name,RealityIntroProfile profile,MapDefinition map)
+        {
+            if(button==null||label==null)return;
+            var reason=RealityUnavailable(profile,map);button.interactable=!busy&&!menu.IntroBusy&&reason==null;
+            label.text=name+"\nStart in Reality"+(reason==null?"": "\n"+reason);
+        }
         string Label(string name,MapDefinition map,bool available)
         {
             var record=records.Read(map.mapId);
-            return $"{name}\nBest WAVE {record.reachedWave} / KILLS {record.kills}"+(available ? "" : "\nUnavailable");
+            return $"{name}\nDirect Combat\nBest WAVE {record.reachedWave} / KILLS {record.kills}"+(available ? "" : "\nUnavailable");
         }
         public IEnumerator Shutdown()
         {
@@ -104,6 +142,8 @@ namespace VRFPS
             if(intro!=null)intro.Cancel();
             if(roomButton!=null)roomButton.onClick.RemoveListener(SelectRoom);
             if(classroomButton!=null)classroomButton.onClick.RemoveListener(SelectClassroom);
+            if(roomRealityButton!=null)roomRealityButton.onClick.RemoveListener(SelectRoomReality);
+            if(classroomRealityButton!=null)classroomRealityButton.onClick.RemoveListener(SelectClassroomReality);
             pause?.Dispose();
         }
     }

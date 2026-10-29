@@ -212,3 +212,9 @@ Ruling: P13-a의 실제 GS/VR 인수 대기 중 데이터 독립적인 b~e 구�
 - 최초6실패→6통과. 확장9통과/1실패는 failed Unload 후 stale ready; Unload 시작 시 ready=false로 수정. 최종 DX12 PlayMode192/192, actual synthetic GS pixel→기존 pipeline 렌더 복원 포함. [증빙](evidence/gs-pipeline-scope.json).
 - caller Dispose에도 persistent drain/잠금 유지, owner 중복과 동기 재진입 거부, 실패시 cleanup retry, qualitylevel이 바뀌어도 원래 slot만 복원/현재선택 유지, 외부 새 override 보존, 카메라파괴 cleanup 확인. 독립 정적 리뷰 추가중요지적0. 이번 runtime 범위에서 EditMode 재실행 없음.
 - 운영 진입/관찰씬/앵커와 실제VR/Player 검증은 다음 단계. 이 scoped adapter 시험을 사용자 전체 전환 인수로 바꾸지 않는다.
+
+## P13-d Bootstrap·메뉴 운영 연결
+
+- base c40389c → efc832c, [PR38 draft](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/38). ComparisonIntroInstaller가 기존 CombatSceneEntry 초기화 이벤트에서 실제 presentation adapter를 연결한다. GS profile은 생성하지 않았으며, 미설정/지원 API 오류는 현실 진입만 차단한다.
+- Controls 최초 표시 순서 결함2건을 재현하고 이벤트를 OpenInstructions 앞으로 이동했다. 실제 버튼의 잘못된 profile 차단과 이미 소유된 scene 로드 실패 후 메뉴/렌더 설정/직접 전투 복구 확인. 최종 Play193/193, Edit137/1제외. [증빙](evidence/intro-bootstrap.json).
+- 독립 리뷰 추가 중요 지적0. 메뉴 실제 mono 이미지에서 두 행·오류 이유·Settings/Controls를 확인했다. 이는 VR 가독성이나 실제 촬영본의 성공 전환 인수가 아니다. 다음은 실제 GS를 포함한 관찰 씬→기존 맵의 통합 검증이다.
