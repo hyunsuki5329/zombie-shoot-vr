@@ -159,3 +159,10 @@ Ruling: P13-a의 실제 GS/VR 인수 대기 중 데이터 독립적인 b~e 구�
 - Intro의 Run 종료가 Result를 열던 경계를 RED로 재현하고 메뉴 상태 소유권으로 수정했다. Intro 정지 중 전투 Retry를 숨기고 정리 실패 시 MapSelection에서 정리 Retry를 제공한다. 정리 완료 전 새 맵/현실 진입은 잠근다.
 - SelectReality는 자료/바인딩 누락을 명시하며 정상 진입과 전투 인계, 정지·설정·취소를 시험했다. 독립 리뷰 중요 지적0; 제안된 정상 entry 경로와 실제 Retry 버튼 시험을 추가했다.
 - 최종 graphics PlayMode156/156, EditMode124통과/1제외. [증빙](evidence/intro-menu.json). 실제 GS 버튼/씬 바인딩·메뉴 상위 렌더링·VR 인수는 미완료이며 fake 어댑터 시험을 실제 GS 검증으로 확대하지 않는다.
+
+## P13-d 메뉴 상위 렌더링
+
+- PR30 draft: https://github.com/hyunsuki5329/zombie-shoot-vr/pull/30 (3814bd0). 후속 codex/p13-menu-overlay.
+- 실제 Menus 프리팹 GPU 시험에서 검정 위 패널0픽셀 실패를 재현했다. 기존 추적 중인 XRI UI/NoZTest 셰이더 + queue5000 재질을 사용하여 페이드4999 이후 그린다. 비활성 설정/안내 UI까지 포함하고 runtime Material을 생성하지 않는다. 재생성 MenuSetup도 같은 자산 참조를 유지한다.
+- DX12 전체 PlayMode157/157통과. 이후 시험만 보강해 버튼 이미지를 제외하고 폰트와 패널·외부 검정을 각각 확인, 대상5/5통과. 독립 정적 리뷰 중요 지적0 및 프리팹/재질/셰이더 GUID 연결 확인.
+- [증빙](evidence/menu-overlay.json). Player 빌드 포함·XR 양안·실제 GS 합성과 암전 중 컨트롤러 메뉴 조작은 아직 미검증이다. 원본 보존5개 SHA256 재확인.

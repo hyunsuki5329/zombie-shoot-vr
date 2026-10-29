@@ -1,0 +1,48 @@
+{
+  "base": "3814bd0",
+  "scope": "Real menu prefab mono GPU rendering above comparison fade",
+  "tests": {
+    "menu-overlay-red": {
+      "result": "Failed(Child)",
+      "total": "1",
+      "passed": "0",
+      "failed": "1",
+      "skipped": "0",
+      "sha256": "3ef0b6b3061885771daeb29a04659698671b6087b9a4a9fdf094b77a314f2654"
+    },
+    "menu-overlay-green": {
+      "result": "Passed",
+      "total": "5",
+      "passed": "5",
+      "failed": "0",
+      "skipped": "0",
+      "sha256": "9c2fd303901a389fe27c7064d2c3d6dff19e720fae0110ed2045cfd9bebe4849"
+    },
+    "menu-overlay-play": {
+      "result": "Passed",
+      "total": "157",
+      "passed": "157",
+      "failed": "0",
+      "skipped": "0",
+      "sha256": "8a24192de42013d95bf94622b3332f7a662740f95b158f94d7fc2103865d1df4"
+    },
+    "menu-overlay-font": {
+      "result": "Passed",
+      "total": "5",
+      "passed": "5",
+      "failed": "0",
+      "skipped": "0",
+      "sha256": "866b27bb857014552867ea52323c3ede79cecf568e54eca3024e1a327d3ef4b4"
+    }
+  },
+  "graphics": "Full PlayMode and final font test: -force-d3d12; mono RenderPipeline render request, not XR",
+  "review": "Independent static review: no important findings. Prefab/material/tracked shader references and scene overrides checked.",
+  "preservation": "All five original hashes in gs-baseline.json rechecked unchanged.",
+  "testScope": "157 full PlayMode passed; afterward only test changed to hide bright button images, and targeted 5/5 passed. Runtime unchanged.",
+  "unverified": [
+    "Actual Player shader inclusion/build execution",
+    "XR stereo and controller pointing during fade",
+    "GS renderer composition",
+    "Final hardware acceptance"
+  ]
+}

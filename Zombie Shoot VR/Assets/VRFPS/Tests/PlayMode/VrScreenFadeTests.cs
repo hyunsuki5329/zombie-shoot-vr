@@ -63,6 +63,47 @@ namespace VRFPS.Tests
             }
             finally{target.Release();Object.Destroy(target);Object.Destroy(image);}
         }
+#if UNITY_EDITOR
+        [UnityTest] public IEnumerator RealMenuRemainsVisibleAboveBlackFade()
+        {
+            if(SystemInfo.graphicsDeviceType==UnityEngine.Rendering.GraphicsDeviceType.Null)
+                Assert.Ignore("Requires graphics; does not validate XR.");
+            var camera=host.AddComponent<Camera>();camera.enabled=false;
+            camera.clearFlags=CameraClearFlags.SolidColor;camera.backgroundColor=Color.magenta;
+            camera.nearClipPlane=.01f;camera.farClipPlane=10;
+            var prefab=UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>("Assets/VRFPS/Prefabs/UI/Menus.prefab");
+            var menus=Object.Instantiate(prefab,host.transform);
+            menus.transform.localPosition=new Vector3(0,0,1.2f);menus.transform.localRotation=Quaternion.identity;
+            menus.GetComponent<Canvas>().worldCamera=camera;
+            var panel=menus.transform.Find("Panel");panel.gameObject.SetActive(true);
+            panel.GetComponent<UnityEngine.UI.Image>().color=Color.green;
+            // Remove other bright image surfaces so white pixels prove font rendering.
+            foreach(var graphic in menus.GetComponentsInChildren<UnityEngine.UI.Image>(true))
+                if(graphic.transform!=panel)graphic.enabled=false;
+            var target=new RenderTexture(128,128,24);target.Create();
+            var image=new Texture2D(128,128,TextureFormat.RGB24,false);
+            try
+            {
+                fade.Configure(camera,Shader.Find("VRFPS/IntroScreenFade"));fade.SetImmediate(1);
+                yield return null;Canvas.ForceUpdateCanvases();
+                UnityEngine.Rendering.RenderPipeline.SubmitRenderRequest(camera,
+                    new UnityEngine.Rendering.RenderPipeline.StandardRequest{destination=target});
+                var previous=RenderTexture.active;RenderTexture.active=target;
+                image.ReadPixels(new Rect(0,0,128,128),0,0);image.Apply();RenderTexture.active=previous;
+                var green=0;var black=0;var bright=0;
+                foreach(var pixel in image.GetPixels32())
+                {
+                    if(pixel.g>100&&pixel.r<30&&pixel.b<30)green++;
+                    if(pixel.r<4&&pixel.g<4&&pixel.b<4)black++;
+                    if(pixel.r>100&&pixel.g>100&&pixel.b>100)bright++;
+                }
+                Assert.That(green,Is.GreaterThan(500),"Menu panel must remain visible over black.");
+                Assert.That(bright,Is.GreaterThan(10),"Menu text must remain visible.");
+                Assert.That(black,Is.GreaterThan(500),"World outside the menu remains black.");
+            }
+            finally{target.Release();Object.Destroy(target);Object.Destroy(image);}
+        }
+#endif
         [Test] public void RejectsInvalidAlphaAndDuration()
         {
             Assert.Throws<System.ArgumentOutOfRangeException>(()=>fade.SetImmediate(float.NaN));

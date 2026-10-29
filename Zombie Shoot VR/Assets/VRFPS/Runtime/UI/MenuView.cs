@@ -14,7 +14,15 @@ namespace VRFPS
         [SerializeField] Button resume, retry, settings, back, maps, retrySave;
         [SerializeField] Button instructions;
         [SerializeField] GameObject instructionPanel;
+        [SerializeField] Material overlayMaterial;
         bool subscribed;
+        void Awake()
+        {
+            // Queue 5000 draws the menu after the comparison fade (4999).
+            // The referenced XR UI shader keeps text/sprite sampling and disables depth testing.
+            if(overlayMaterial!=null)
+                foreach(var graphic in GetComponentsInChildren<Graphic>(true))graphic.material=overlayMaterial;
+        }
         public void Configure(MenuController menu, RunController run, RunRecordBinding result,
             GameObject panel, Text title, Text details, Button resume, Button retry, Button settings, Button back, Button maps, Button retrySave)
         {
