@@ -180,3 +180,11 @@ Ruling: P13-a의 실제 GS/VR 인수 대기 중 데이터 독립적인 b~e 구�
 - IntroTarget 미정의, 전용 표적 명중 누락, Intro의 Enemy 피격3건을 RED로 확인했다. layer13을 정의하고 물리 접촉 비활성, Intro 전용 worldSolidMask|IntroTarget을 적용했다. Combat의 직렬화 마스크와 총구 WorldSolid 검사는 보존했다.
 - 실제 private 모델 Raycast 시험까지 DX12 PlayMode161/161, EditMode125통과/1제외. 독립 검토에서63개의 layer13 관련 행렬 비트 외 변화0 확인, 중요 지적0. [증빙](evidence/intro-hit-layers.json).
 - 재임포트 후 기존 meta SHA 유지 확인. 최신 생성물은 로컬 p13-virus-layer-20261021 ZIP에 CRC/SHA 검증해 보관했다. 실제 GS 충돌 배치·VR·빌드 검증은 별도로 남는다.
+
+## P13-b 관찰 씬 계약
+
+- PR33 draft: https://github.com/hyunsuki5329/zombie-shoot-vr/pull/33 (714801a). 후속 codex/p13-reality-scene-contract.
+- RealitySceneRoot는 profile과 map/dataId 일치, 소유활성 참조, 유일 anchor key, root/anchor unit scale와 dataRoot의 profile 보정 scale, 선언한 non-trigger 충돌, 씬 전체의 중복/금지 component를 확인한다. actual GS renderer readiness와 구분하며 아직 로더에 연결하지 않았다.
+- 첫 시험은 EditMode에서 PlayMode용 씬 생성 API를 사용한 setup 오류였고, 이를 기능 RED로 세지 않는다. PreviewScene으로 수정한 뒤 valid1통과/invalid8실패를 확인했다.
+- 독립 리뷰 P2: 고정 절대 오차가 작은 scale에서 축0·두배·음수를 허용. 세 사례9통과/3실패 RED 후 양수/상대 오차로 수정. 최종 EditMode137통과/1제외. [증빙](evidence/reality-scene-contract.json).
+- 실측 배치/GS identity 확인·렌더 준비·로더 연결·XR/빌드는 남아 있다. 이 구성 validator를 실제 GS 인수로 대체하지 않는다.
