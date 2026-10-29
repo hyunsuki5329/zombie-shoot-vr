@@ -627,3 +627,9 @@ BootstrapPreview/WaveLab 빌드 모두 성공·종료0. 복원 WaveLab337개 파
 - 실제 Menus 프리팹이 암전에 가려지는 GPU 실패를 재현했다. 기존 XR UI/NoZTest 셰이더를 참조하는 전용 재질(queue5000)을 메뉴 Graphic에 공유하여 페이드4999 뒤에 표시한다.
 - DX12 전체 PlayMode157/157통과. 밝은 버튼 이미지를 제외해 폰트 픽셀만 검증하도록 보강한 후 대상5/5통과. 독립 리뷰 중요 지적 없음. [증빙](evidence/menu-overlay.json).
 - 단안 렌더 시험이며 실제 GS 합성·양안·암전 중 컨트롤러 조작·Player 빌드는 미검증이다. 원본 맵/설정/WallFix 해시5개 보존 확인.
+
+## 2026-10-21 P13 바이러스 자산 준비
+
+- 원본 SHA 검증/지정 파일 추출/URP 색상·노멀·smoothness/0.8m 프리팹 재생성 절차를 추가했다. 미존재 실패→EditMode125통과/개인 스캔1제외. DX12 단안 미리보기 확인 및 독립 리뷰 중요 지적0.
+- 원본·생성물/meta·preview를 로컬 복원 ZIP으로 보관하고 CRC/SHA 확인. [증빙](evidence/intro-virus-assets.json).
+- IntroTarget 레이어/마스크, 실제 관찰 씬 배치, 간소화·VR·빌드 및 새 소스 복원은 미완료다.

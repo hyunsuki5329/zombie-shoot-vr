@@ -166,3 +166,10 @@ Ruling: P13-a의 실제 GS/VR 인수 대기 중 데이터 독립적인 b~e 구�
 - 실제 Menus 프리팹 GPU 시험에서 검정 위 패널0픽셀 실패를 재현했다. 기존 추적 중인 XRI UI/NoZTest 셰이더 + queue5000 재질을 사용하여 페이드4999 이후 그린다. 비활성 설정/안내 UI까지 포함하고 runtime Material을 생성하지 않는다. 재생성 MenuSetup도 같은 자산 참조를 유지한다.
 - DX12 전체 PlayMode157/157통과. 이후 시험만 보강해 버튼 이미지를 제외하고 폰트와 패널·외부 검정을 각각 확인, 대상5/5통과. 독립 정적 리뷰 중요 지적0 및 프리팹/재질/셰이더 GUID 연결 확인.
 - [증빙](evidence/menu-overlay.json). Player 빌드 포함·XR 양안·실제 GS 합성과 암전 중 컨트롤러 메뉴 조작은 아직 미검증이다. 원본 보존5개 SHA256 재확인.
+
+## P13-b 바이러스 로컬 자산
+
+- PR31 draft: https://github.com/hyunsuki5329/zombie-shoot-vr/pull/31 (5dbbd74). 후속 codex/p13-virus-assets.
+- source color.png 색상, color11.png 노멀을 직접 이미지 확인했다. roughness→smoothness alpha 변환, URP Lit·크기0.8m·중앙정렬·비-trigger 반경0.32m의 재생성 utility를 작성했다. 기하 간소화는 아직 수행하지 않았다.
+- 자산 미존재 RED→전체 EditMode125통과/1제외. Preview의 unsaved-scene 오류를 확인하고 독립 PreviewScene으로 변경 후 DX12 렌더 이미지를 확인했다. 독립 정적 리뷰 중요 지적0.
+- private 생성물/meta 백업 CRC/SHA 확인 및 고지 파일 추가. [증빙](evidence/intro-virus-assets.json). layer/mask/GS 배치·양안·최종 빌드/복원은 미완료다.
