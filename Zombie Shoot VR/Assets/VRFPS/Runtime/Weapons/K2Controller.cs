@@ -15,6 +15,21 @@ namespace VRFPS
         K2FireControl fire;
         public MagazineState Magazine { get; } = new MagazineState(30);
         public RunPhase Phase => phase;
+        public WeaponContext Context { get; private set; } = WeaponContext.Preparing;
+        WeaponContext clockOwner=WeaponContext.Disabled;
+        public bool AllowsInteraction=>Context==WeaponContext.Intro || Context==WeaponContext.Combat || Context==WeaponContext.Preparing;
+        public event System.Action<WeaponContext> ContextChanged;
+        public void SetContext(WeaponContext value)
+        {
+            if(Context==value)return;
+            Context=value;leftGrip=false;previousTrigger=false;
+            if((value==WeaponContext.Intro || value==WeaponContext.Combat) && value!=clockOwner)
+            {
+                ResetInputClock();clockOwner=value;
+            }
+            ContextChanged?.Invoke(value);
+        }
+        public void ResetInputClock()=>fire=new K2FireControl(Magazine);
         public event System.Action<Vector3, Vector3> Fired;
         public event System.Action EmptyTriggered;
         public event System.Action<RunPhase> PhaseChanged;
@@ -41,6 +56,8 @@ namespace VRFPS
         {
             var changed=phase!=value;
             phase = value;
+            SetContext(value==RunPhase.Active?WeaponContext.Combat:
+                value==RunPhase.Preparing?WeaponContext.Preparing:WeaponContext.Disabled);
             if (phase != RunPhase.Active) leftGrip = false;
             if(changed)PhaseChanged?.Invoke(phase);
         }
@@ -71,9 +88,9 @@ namespace VRFPS
                 Physics.CheckSphere(muzzle.position, clearance, worldSolidMask, QueryTriggerInteraction.Ignore) ||
                 (barrel.sqrMagnitude > 0.000001f && Physics.SphereCast(rightAnchor.position, clearance,
                     barrel.normalized, out _, barrel.magnitude, worldSolidMask, QueryTriggerInteraction.Ignore));
-            if (!fire.TryFire(trigger, leftGrip, phase, blocked, activeTime))
+            if (!fire.TryFire(trigger, leftGrip, Context, blocked, activeTime))
             {
-                if(pressed && leftGrip && phase==RunPhase.Active && !blocked &&
+                if(pressed && leftGrip && (Context==WeaponContext.Combat || Context==WeaponContext.Intro) && !blocked &&
                     (!Magazine.Inserted || Magazine.Rounds==0) && !double.IsNaN(activeTime) && !double.IsInfinity(activeTime) && activeTime>=0)
                     EmptyTriggered?.Invoke();
                 return false;

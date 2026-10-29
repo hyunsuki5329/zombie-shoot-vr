@@ -15,11 +15,13 @@ namespace VRFPS
         double activeTime;
         float tracerUntil;
         RunController clock;
+        WeaponContextRouter context;
         bool triggerReleaseRequired;
         public int TracerObjectCount=>tracer!=null?1:0;
         public int ActiveTracerCount=>tracer!=null&&tracer.enabled&&tracer.gameObject.activeInHierarchy?1:0;
         public void RequireTriggerRelease() => triggerReleaseRequired = true;
         public void UseRunClock(RunController run) { clock = run; activeTime = 0; }
+        public void UseContext(WeaponContextRouter router){context=router;activeTime=0;RequireTriggerRelease();}
 
         public void Configure(K2Controller gun, Transform left, Transform foregrip)
         {
@@ -37,8 +39,9 @@ namespace VRFPS
         void LateUpdate()
         {
             if (gun == null) return;
-            if (clock != null) activeTime = clock.ActiveTime;
-            else if (gun.Phase == RunPhase.Active) activeTime += Time.deltaTime;
+            if (context != null) activeTime = context.InputTime;
+            else if (clock != null) activeTime = clock.ActiveTime;
+            else if (gun.Context == WeaponContext.Combat || gun.Context == WeaponContext.Intro) activeTime += Time.deltaTime;
             TickInput(gripAction != null && gripAction.action.IsPressed(),
                 triggerAction != null && triggerAction.action.IsPressed(), activeTime);
             if (tracer != null && Time.unscaledTime >= tracerUntil) tracer.enabled = false;
@@ -50,7 +53,7 @@ namespace VRFPS
             if (gun == null || left == null || foregrip == null) return false;
             gun.UpdatePose();
             if (leftHandOwnership != null)
-                leftHandOwnership.Tick(grip, gun.Phase == RunPhase.Active || gun.Phase == RunPhase.Preparing);
+                leftHandOwnership.Tick(grip, gun.AllowsInteraction);
             else
                 gun.SetLeftGrip(grip && Vector3.Distance(left.position, foregrip.position) <= 0.18f);
             return gun.Tick(trigger && !triggerReleaseRequired, time);

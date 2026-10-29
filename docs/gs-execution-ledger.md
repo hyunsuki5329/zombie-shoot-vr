@@ -41,7 +41,8 @@ Ruling: P13-a의 실제 GS/VR 인수 대기 중 데이터 독립적인 b~e 구�
   기존 RenderGraph 호환모드0, 두 URP 자산 MSAA4여서 시험본 변경 필요.
   소스상 OnDisable에서 GPU 버퍼 Dispose를 호출하지만 실제 회수 검증은 아직 없다.
 - P13-b: 대기. 실제 방 자료·척도/앵커 대응 미확인.
-- P13-c/d/e: 미착수.
+- P13-c: 데이터 독립 구현/자동 시험 완료, 독립 리뷰 진행 중. 실제 자산 연결은 대기.
+- P13-d/e: 미착수.
 - P13-f: 미착수. 실제 양안·기존 두 맵 새 API 인수·성능 미측정.
 
 ## 자료 수신·기준 시험 후속
@@ -66,3 +67,42 @@ Ruling: P13-a의 실제 GS/VR 인수 대기 중 데이터 독립적인 b~e 구�
 공식 근거:
 [renderer](https://github.com/aras-p/UnityGaussianSplatting/tree/2c6fed37da67a217367261fcfcd3316d34c73e76),
 [URP 통합](https://github.com/aras-p/UnityGaussianSplatting/blob/2c6fed37da67a217367261fcfcd3316d34c73e76/docs/render-pipeline-integration.md).
+
+## 구현·자동 시험 후속
+
+- PR23 입력 검사 병합 `88ed8c7`, PR24 시험장 소유권 수정 병합 `c0f1c9d`.
+  둘 다 `codex/p06-boss-crawler`가 대상이며 원격 CI/승인 리뷰는 없었다.
+  별도 에이전트의 정적 검토 결과를 GitHub 승인으로 표현하지 않는다.
+- 프로필 검증 및 첫 유효 바이러스 피격 처리: 새 시험13개 중 구현 전12실패,
+  구현 후 전체 EditMode121통과/개인 스캔1제외.
+- 총기의 Disabled/Preparing/Intro/Combat 컨텍스트를 분리했다. RunCombatBindings는
+  단일 router를 사용하고 K2HandInput/피드백도 같은 컨텍스트를 따른다.
+  미리보기는 RunPhase.Active를 시작하지 않는다. 컨텍스트 변경은 발사 시계를
+  재설정하고 실제 입력에서 트리거 해제를 요구한다.
+- 새 무기 규칙3개 실패→통과. 실제 Raycast/벽 가림/정지 후 트리거/기존 피드백 시험
+  포함 전체 PlayMode136/136. 최종 EditMode124통과/1제외.
+  [증빙](evidence/intro-weapon-context.json).
+- 중간 EditMode의 기존 RecordStore 복구 저장 시험이1회 실패했다. LastError를
+  실패 메시지에 포함한 재실행은 통과했다. 저장 런타임 변경은 없으며 원인을
+  확정하거나 저장 결함을 수정했다고 주장하지 않는다.
+- 실제 관찰 씬/바이러스 외형·메뉴·암전·전투 연결과 새 VR 인수는 미완료다.
+  관찰 중 회전 권한은 d에서 연결한다. 현재 단위만 게임 완성으로 표시하지 않는다.
+- 원본 두 씬·사용자 설정2개·WallFix 실행파일은 시작 시점 SHA256과 모두 같다.
+
+## 무기 컨텍스트 독립 리뷰
+
+- 일반 Preparing→Combat에도 트리거 해제를 요구하던 회귀(P2)를 새 실제 입력 시험으로
+  재현했다. 해제 요구를 Disabled/Intro 경계로 제한하여 기존 전투 준비의 입력을 유지한다.
+- Ruling: 정지 복귀가 남은 발사 간격을 지우는 의견은 기존 규칙 보존 요구에 해당해
+  수정 대상으로 판단했다. 같은 소유자의 정지 복귀0.01초 뒤 재발사 허용을 RED로 확인하고,
+  시계 소유자(Intro/Combat)가 바뀌거나 새 도입부를 시작할 때만 간격을 재설정한다.
+  잘못 판단하면 기존 연사 간격이 달라지므로 관련 시험으로 고정했다.
+- 실제 LeftHandInteractor→소켓→보급→삽입→앞부분 재잡기 경로의 Intro 시험을 추가했다.
+  미리보기 재장전에서 RunPhase.Dead를 유지하고 보급/삽입 피드백을 검사한다.
+- 경미한 제한: router를 다른 총에 재설정하면 이전 입력의 참조가 남을 수 있다.
+  현재 게임 구성은 세션마다 한 번 설정하며, 여러 총으로 교체하는 기능은 없다.
+  IntroTarget 전용 레이어/실제 관찰 씬 마스크 연결은 자산 통합 단계에 남아 있다.
+
+- 추가 재장전 시험의 종료에서 총이 먼저 파괴되면 router가 파괴된 참조에 접근하는 실패를 확인했다.
+  Unity null 검사로 수명 경계를 보호한 뒤 전체 PlayMode138/138통과.
+  실제 VR과 GS 공간의 결과는 여전히 미검증이다.

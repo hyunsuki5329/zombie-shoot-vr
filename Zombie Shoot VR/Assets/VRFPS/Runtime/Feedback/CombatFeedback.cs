@@ -37,17 +37,17 @@ namespace VRFPS
         void Subscribe()
         {
             if(subscribed || gun==null)return;
-            subscribed=true;gun.Fired+=OnShot;gun.EmptyTriggered+=OnEmpty;gun.PhaseChanged+=OnPhase;
+            subscribed=true;gun.Fired+=OnShot;gun.EmptyTriggered+=OnEmpty;gun.ContextChanged+=OnContext;
             if(socket!=null)socket.Inserted+=OnInsert;
         }
         void Unsubscribe()
         {
             if(!subscribed)return;subscribed=false;
-            if(gun!=null){gun.Fired-=OnShot;gun.EmptyTriggered-=OnEmpty;gun.PhaseChanged-=OnPhase;}
+            if(gun!=null){gun.Fired-=OnShot;gun.EmptyTriggered-=OnEmpty;gun.ContextChanged-=OnContext;}
             if(socket!=null)socket.Inserted-=OnInsert;
         }
         void OnDisable(){Unsubscribe();StopVoices();}
-        void OnPhase(RunPhase phase){if(phase==RunPhase.Paused || phase==RunPhase.Dead)StopVoices();}
+        void OnContext(WeaponContext context){if(context==WeaponContext.Disabled)StopVoices();}
         void StopVoices(){foreach(var voice in shots)if(voice!=null)voice.Stop();nextShot=0;if(empty!=null)empty.Stop();if(insert!=null)insert.Stop();}
         void Play(AudioSource source,AudioClip clip,HapticImpulsePlayer haptics,float amplitude,float duration)
         {
@@ -62,13 +62,13 @@ namespace VRFPS
         }
         public void OnFreshMagazineSupplied()
         {
-            if(isActiveAndEnabled && gun!=null && (gun.Phase==RunPhase.Active || gun.Phase==RunPhase.Preparing))
+            if(isActiveAndEnabled && gun!=null && gun.AllowsInteraction)
                 Play(null,null,leftHaptics,.3f,.07f);
         }
         void OnEmpty()=>Play(empty,emptyClip,null,0,0);
         void OnInsert()
         {
-            if(gun.Phase==RunPhase.Active || gun.Phase==RunPhase.Preparing)
+            if(gun.AllowsInteraction)
                 Play(insert,insertClip,leftHaptics,insertHaptic,.055f);
         }
     }

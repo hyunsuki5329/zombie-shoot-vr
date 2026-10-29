@@ -50,7 +50,7 @@ namespace VRFPS.Tests
             Assert.That(recovered.RecoveredFromBackup, Is.True);
             Assert.That(recovered.LastError, Is.Not.Null.And.Not.Empty);
             recovered.TryUpdate("room", 7, 1);
-            Assert.That(recovered.Save(), Is.True);
+            Assert.That(recovered.Save(), Is.True, recovered.LastError);
             Assert.That(File.ReadAllText(Main + ".bak"), Is.EqualTo(goodBackup));
             Assert.That(new RecordStore(directory).Read("room").reachedWave, Is.EqualTo(7));
         }

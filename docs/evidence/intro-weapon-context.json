@@ -1,0 +1,94 @@
+{
+  "base": "c0f1c9d",
+  "scope": "Profile validation, one-shot intro virus damage, weapon context routing and feedback; no actual GS/menu/fade integration yet",
+  "tests": {
+    "intro-assets-red": {
+      "result": "Failed(Child)",
+      "total": "13",
+      "passed": "1",
+      "failed": "12",
+      "skipped": "0",
+      "sha256": "e899150a8bc5d4aa44278eaac5d227a26e11f48dc6157674515134bb76011edf"
+    },
+    "intro-assets-green": {
+      "result": "Skipped:Ignored",
+      "total": "122",
+      "passed": "121",
+      "failed": "0",
+      "skipped": "1",
+      "sha256": "bca66b3a358b8aedc5e6e1fe83d9c20cab6d512ea581cb20e28cc45970ce2fe6"
+    },
+    "intro-weapons-red": {
+      "result": "Failed(Child)",
+      "total": "3",
+      "passed": "0",
+      "failed": "3",
+      "skipped": "0",
+      "sha256": "377f071d542a15e5398bf9bd7422a284da330d77f228f6a882225f9622c47b09"
+    },
+    "intro-weapons-edit-final": {
+      "result": "Skipped:Ignored",
+      "total": "125",
+      "passed": "124",
+      "failed": "0",
+      "skipped": "1",
+      "sha256": "d89236ea3ab2fd4d74e5cdea22e2fc12a95708612eab50f04b6a110bf9db9272"
+    },
+    "intro-weapons-play": {
+      "result": "Passed",
+      "total": "136",
+      "passed": "136",
+      "failed": "0",
+      "skipped": "0",
+      "sha256": "7bcb823ce448295b07f46c0ce50e2e9e2739fdf6d9b9e69b1abed44f1525c16d"
+    },
+    "held-trigger-red": {
+      "result": "Failed(Child)",
+      "total": "1",
+      "passed": "0",
+      "failed": "1",
+      "skipped": "0",
+      "sha256": "9e01cff4714a3f53d8a7239a59ebc9290b897310010401b3648bfd1f78f04bcd"
+    },
+    "pause-cadence-red": {
+      "result": "Failed(Child)",
+      "total": "1",
+      "passed": "0",
+      "failed": "1",
+      "skipped": "0",
+      "sha256": "99d79b8760a27bb061b9aff4b95eb2e1f58aea7e6fbf48c5d294bbd371b25a2d"
+    },
+    "intro-review-play": {
+      "result": "Failed(Child)",
+      "total": "138",
+      "passed": "137",
+      "failed": "1",
+      "skipped": "0",
+      "sha256": "fa141580535b372212e0f734d00007a6b56ee49745b1448dfff6418355d3a84c"
+    },
+    "intro-review-play-final": {
+      "result": "Passed",
+      "total": "138",
+      "passed": "138",
+      "failed": "0",
+      "skipped": "0",
+      "sha256": "be0afe4deabebb72eff57cf0a85e6f828fb57310ee0c74ba42e8cbb167f02f62"
+    },
+    "intro-review-edit-final": {
+      "result": "Skipped:Ignored",
+      "total": "125",
+      "passed": "124",
+      "failed": "0",
+      "skipped": "1",
+      "sha256": "9af2a4f6e4a2a7d2a4a268389fa5fad6083398486c42518d7ef250ee7f4cd84b"
+    }
+  },
+  "vrAcceptance": "not performed",
+  "mapScenesChanged": false,
+  "knownPriorAttempt": "intro-weapons-green.xml:123 passed,1 skipped,1 RecordStore.Save failure. No storage runtime change; final diagnostic rerun passed.",
+  "reviewFixes": [
+    "Preserve Preparing to Combat held-trigger behavior",
+    "Keep same-owner pause cadence",
+    "Use Unity null checks when gun is destroyed before router teardown"
+  ]
+}
