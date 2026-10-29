@@ -218,3 +218,9 @@ Ruling: P13-a의 실제 GS/VR 인수 대기 중 데이터 독립적인 b~e 구�
 - base c40389c → efc832c, [PR38 draft](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/38). ComparisonIntroInstaller가 기존 CombatSceneEntry 초기화 이벤트에서 실제 presentation adapter를 연결한다. GS profile은 생성하지 않았으며, 미설정/지원 API 오류는 현실 진입만 차단한다.
 - Controls 최초 표시 순서 결함2건을 재현하고 이벤트를 OpenInstructions 앞으로 이동했다. 실제 버튼의 잘못된 profile 차단과 이미 소유된 scene 로드 실패 후 메뉴/렌더 설정/직접 전투 복구 확인. 최종 Play193/193, Edit137/1제외. [증빙](evidence/intro-bootstrap.json).
 - 독립 리뷰 추가 중요 지적0. 메뉴 실제 mono 이미지에서 두 행·오류 이유·Settings/Controls를 확인했다. 이는 VR 가독성이나 실제 촬영본의 성공 전환 인수가 아니다. 다음은 실제 GS를 포함한 관찰 씬→기존 맵의 통합 검증이다.
+
+## 2026-10-22 P13 실제 GS 전환 통합 시험
+
+- 소스 `2e81403`, [PR39](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/39) draft, base `codex/p13-intro-bootstrap`. 운영 Bootstrap/adapter/씬 로더/실제 GPU GS/K2 Raycast/fade/기존 Room 준비 인계를10회 반복하고 Classroom 직접 진입도 확인했다. 관찰 자료는 합성256 GS이고 fixture 씬의 시험 중 구성만 바꿨다.
+- 최초 단독1/1 통과. 리뷰에서 RunStarted 순간 확인 누락과 실패시 시험 전역 설정 오염 가능성2건을 보강했다. 동기 시작 경계에서 alpha0/관찰씬 해제/GPU 자원 반환을 검사하고 teardown이 원래 quality slot/asset을 독립 복원한다. 최종 전체 DX12 PlayMode194/194. [증빙](evidence/gs-flow-integration.json).
+- 원본 해시5/5 일치, 기존 두 맵/저장된 Graphics·Quality 설정 diff 없음. 초기8초·HP100·30발·처치0을 확인하기 위해 run clock을 껐다. 이 시험을 Wave1 전투·컨트롤러 실입력·양안·실제 방 인수로 확대하지 않는다. EditMode는 시험만 추가한 이번 단위에서 재실행하지 않았다.

@@ -672,3 +672,9 @@ BootstrapPreview/WaveLab 빌드 모두 성공·종료0. 복원 WaveLab337개 파
 - 소스 `efc832c`, [PR38](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/38) draft, base `codex/p13-gs-pipeline-scope`. 기존 Combat 진입에서 Session 초기화 후 controller/실제 scene loader/scoped GS pipeline/fade를 연결한다. Room·Classroom의 현실 진입과 직접 전투 버튼을 분리하고, 촬영본 미설정 이유를 표시한다.
 - 첫 누락1건 RED, 연결 후 초기 Controls 화면이 사라지는2건 RED를 확인해 설치 이벤트 순서를 수정했다. 최종 DX12 PlayMode193/193, EditMode137통과/개인스캔1제외. 실제 메뉴 PNG를 확인했으며 운영 GS pipeline으로 합성 GS 픽셀 렌더 시험도 통과했다. [증빙](evidence/intro-bootstrap.json).
 - 독립 정적 리뷰 추가 P1/P2 없음. 원본 보존 해시5/5 일치, 기존 Room/Classroom·Graphics/Quality 설정 변경 없음. 실제 촬영본의 성공 경로·XR·Player·새복원은 미검증이므로 draft를 유지한다.
+
+## 2026-10-22 P13 실제 GS 전환 통합 시험
+
+- 소스 `2e81403`, [PR39](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/39) draft, base `codex/p13-intro-bootstrap`. 운영 Bootstrap/adapter/씬 로더/실제 GPU GS/K2 Raycast/fade/기존 Room 준비 인계를10회 반복하고 Classroom 직접 진입도 확인했다. 관찰 자료는 합성256 GS이고 fixture 씬의 시험 중 구성만 바꿨다.
+- 최초 단독1/1 통과. 리뷰에서 RunStarted 순간 확인 누락과 실패시 시험 전역 설정 오염 가능성2건을 보강했다. 동기 시작 경계에서 alpha0/관찰씬 해제/GPU 자원 반환을 검사하고 teardown이 원래 quality slot/asset을 독립 복원한다. 최종 전체 DX12 PlayMode194/194. [증빙](evidence/gs-flow-integration.json).
+- 원본 해시5/5 일치, 기존 두 맵/저장된 Graphics·Quality 설정 diff 없음. 초기8초·HP100·30발·처치0을 확인하기 위해 run clock을 껐다. 이 시험을 Wave1 전투·컨트롤러 실입력·양안·실제 방 인수로 확대하지 않는다. EditMode는 시험만 추가한 이번 단위에서 재실행하지 않았다.
