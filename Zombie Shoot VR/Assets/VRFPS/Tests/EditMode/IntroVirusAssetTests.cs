@@ -25,6 +25,7 @@ namespace VRFPS.Tests
                     Assert.That(m.GetTexture("_BaseMap"),Is.Not.Null);Assert.That(m.GetTexture("_BumpMap"),Is.Not.Null);
                     Assert.That(m.GetTexture("_MetallicGlossMap"),Is.Not.Null);
                 }
+                Assert.That(instance.layer,Is.EqualTo(LayerMask.NameToLayer("IntroTarget")));
                 var target=instance.GetComponent<IntroVirusTarget>();Assert.That(target,Is.Not.Null);
                 var hit=instance.GetComponent<SphereCollider>();Assert.That(hit,Is.Not.Null);
                 Assert.That(hit.isTrigger,Is.False);Assert.That(hit.radius,Is.InRange(.25f,.4f));

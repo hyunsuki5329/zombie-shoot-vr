@@ -18,6 +18,8 @@ namespace VRFPS.Editor
         public static void Import()
         {
             if(!Application.isBatchMode)throw new InvalidOperationException("Use an isolated batchmode project.");
+            var targetLayer=LayerMask.NameToLayer("IntroTarget");
+            if(targetLayer<0)throw new InvalidOperationException("IntroTarget layer is required.");
             var archive=Environment.GetEnvironmentVariable("VRFPS_VIRUS_ARCHIVE")??"C:/Users/User/Downloads/coronavirus-virus-model.zip";
             using(var sha=SHA256.Create())using(var stream=File.OpenRead(archive))
                 if(BitConverter.ToString(sha.ComputeHash(stream)).Replace("-","").ToLowerInvariant()!=ArchiveHash)
@@ -50,7 +52,7 @@ namespace VRFPS.Editor
             material.SetTexture("_BumpMap",normal);material.SetFloat("_BumpScale",1);material.EnableKeyword("_NORMALMAP");
             material.SetTexture("_MetallicGlossMap",smooth);material.SetFloat("_Metallic",0);material.SetFloat("_Smoothness",1);material.EnableKeyword("_METALLICSPECGLOSSMAP");
             EditorUtility.SetDirty(material);
-            var root=new GameObject("IntroVirus");
+            var root=new GameObject("IntroVirus"){layer=targetLayer};
             try
             {
                 var model=UnityEngine.Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>(Folder+"/model.obj"),root.transform);
@@ -64,7 +66,7 @@ namespace VRFPS.Editor
                 foreach(var r in renderers){r.sharedMaterials=Enumerable.Repeat(material,r.sharedMaterials.Length).ToArray();r.shadowCastingMode=ShadowCastingMode.Off;}
                 root.AddComponent<IntroVirusTarget>();root.AddComponent<SphereCollider>().radius=.32f;
                 PrefabUtility.SaveAsPrefabAsset(root,Folder+"/IntroVirus.prefab");
-                Debug.Log("VRFPS_VIRUS_IMPORTED: diameter=0.8m, collider=0.32m; IntroTarget layer/masks and observation placement remain integration work.");
+                Debug.Log("VRFPS_VIRUS_IMPORTED: diameter=0.8m, collider=0.32m; IntroTarget configured; observation placement remains integration work.");
             }
             finally{UnityEngine.Object.DestroyImmediate(root);}
             AssetDatabase.SaveAssets();

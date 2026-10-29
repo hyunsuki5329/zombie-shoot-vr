@@ -213,3 +213,5 @@ P04 외형 브랜치부터 K2/탄창 프리팹은 Git 제외 자원을 참조한
 ## P13 바이러스 복원
 
 원본 ZIP 경로를 `VRFPS_VIRUS_ARCHIVE`로 지정하고 격리 Unity에서 `-batchmode -nographics -executeMethod VRFPS.Editor.IntroVirusSetup.Import -quit`를 실행한다. 원본 SHA가 다르면 거부한다. 외부 생성물은 `Assets/VRFPS/External/IntroVirus/`이며 Git 제외다. 기존 GUID를 보존하려면 로컬 `Builds/Reproduction/p13-virus-20261021/derived-with-meta.zip`을 해당 폴더로 복원한다. 새 import의 GUID가 달라지면 관찰 씬 참조를 재연결해야 한다. 현재 관찰 씬은 아직 연결하지 않았다. 보관 ZIP의 CRC/SHA 검증만 완료했으며 전체 새 소스 복원 검증으로 간주하지 않는다.
+
+P13 전용 레이어 연결 이후 최신 바이러스 생성물은 `Builds/Reproduction/p13-virus-layer-20261021/derived-with-meta.zip`이다. 앞선 자산 보관본은 그대로 유지하며 새 보관본은 IntroTarget(layer13) Collider 설정을 포함한다. 기존 meta SHA는 유지됐고 새 ZIP CRC/파일 SHA 검증을 마쳤다. 새 프로젝트 실행 복원은 아직 미검증이다.

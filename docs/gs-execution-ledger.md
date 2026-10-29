@@ -173,3 +173,10 @@ Ruling: P13-a의 실제 GS/VR 인수 대기 중 데이터 독립적인 b~e 구�
 - source color.png 색상, color11.png 노멀을 직접 이미지 확인했다. roughness→smoothness alpha 변환, URP Lit·크기0.8m·중앙정렬·비-trigger 반경0.32m의 재생성 utility를 작성했다. 기하 간소화는 아직 수행하지 않았다.
 - 자산 미존재 RED→전체 EditMode125통과/1제외. Preview의 unsaved-scene 오류를 확인하고 독립 PreviewScene으로 변경 후 DX12 렌더 이미지를 확인했다. 독립 정적 리뷰 중요 지적0.
 - private 생성물/meta 백업 CRC/SHA 확인 및 고지 파일 추가. [증빙](evidence/intro-virus-assets.json). layer/mask/GS 배치·양안·최종 빌드/복원은 미완료다.
+
+## P13-c 전용 레이어·사격 마스크
+
+- PR32 draft: https://github.com/hyunsuki5329/zombie-shoot-vr/pull/32 (54191dc). 후속 codex/p13-intro-hit-layers.
+- IntroTarget 미정의, 전용 표적 명중 누락, Intro의 Enemy 피격3건을 RED로 확인했다. layer13을 정의하고 물리 접촉 비활성, Intro 전용 worldSolidMask|IntroTarget을 적용했다. Combat의 직렬화 마스크와 총구 WorldSolid 검사는 보존했다.
+- 실제 private 모델 Raycast 시험까지 DX12 PlayMode161/161, EditMode125통과/1제외. 독립 검토에서63개의 layer13 관련 행렬 비트 외 변화0 확인, 중요 지적0. [증빙](evidence/intro-hit-layers.json).
+- 재임포트 후 기존 meta SHA 유지 확인. 최신 생성물은 로컬 p13-virus-layer-20261021 ZIP에 CRC/SHA 검증해 보관했다. 실제 GS 충돌 배치·VR·빌드 검증은 별도로 남는다.

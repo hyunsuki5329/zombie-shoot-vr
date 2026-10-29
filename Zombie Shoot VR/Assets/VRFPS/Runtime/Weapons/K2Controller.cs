@@ -9,6 +9,7 @@ namespace VRFPS
         [SerializeField] Transform muzzle;
         [SerializeField] LayerMask worldSolidMask;
         [SerializeField] LayerMask shotMask;
+        int introTargetLayer=-1;
         bool leftGrip;
         bool previousTrigger;
         RunPhase phase = RunPhase.Preparing;
@@ -23,6 +24,7 @@ namespace VRFPS
         {
             if(Context==value)return;
             Context=value;leftGrip=false;previousTrigger=false;
+            if(value==WeaponContext.Intro)introTargetLayer=LayerMask.NameToLayer("IntroTarget");
             if((value==WeaponContext.Intro || value==WeaponContext.Combat) && value!=clockOwner)
             {
                 ResetInputClock();clockOwner=value;
@@ -81,6 +83,8 @@ namespace VRFPS
             var pressed=trigger && !previousTrigger;previousTrigger=trigger;
             UpdatePose();
             if (rightAnchor == null || leftAnchor == null || muzzle == null || worldSolidMask.value == 0 || shotMask.value == 0) return false;
+            if(Context==WeaponContext.Intro && introTargetLayer<0)return false;
+            var currentShotMask=Context==WeaponContext.Intro ? worldSolidMask.value|(1<<introTargetLayer) : shotMask.value;
             if (fire == null) fire = new K2FireControl(Magazine);
             var barrel = muzzle.position - rightAnchor.position;
             const float clearance = 0.01f;
@@ -96,7 +100,7 @@ namespace VRFPS
                 return false;
             }
             var end = muzzle.position + muzzle.forward * 60f;
-            if (Physics.Raycast(muzzle.position, muzzle.forward, out var hit, 60f, shotMask, QueryTriggerInteraction.Ignore))
+            if (Physics.Raycast(muzzle.position, muzzle.forward, out var hit, 60f, currentShotMask, QueryTriggerInteraction.Ignore))
             {
                 end = hit.point;
                 hit.collider.GetComponentInParent<IDamageable>()?.ApplyDamage(25, GetInstanceID(), activeTime);

@@ -1,0 +1,42 @@
+{
+  "base": "54191dc",
+  "scope": "IntroTarget collision layer, context-specific K2 raycast masks, actual imported virus hit",
+  "tests": {
+    "intro-layers-red": {
+      "result": "Failed(Child)",
+      "total": "8",
+      "passed": "5",
+      "failed": "3",
+      "skipped": "0",
+      "sha256": "c60da6f9317ffe3fb4299e123b2141e577cb05fdb5f001e3ab717dccf3a99603"
+    },
+    "intro-layers-play": {
+      "result": "Passed",
+      "total": "161",
+      "passed": "161",
+      "failed": "0",
+      "skipped": "0",
+      "sha256": "17239f448ec3ba97a8bfe59e4a3dd44c861bb61933c0c4d3565cbf025e3efb30"
+    },
+    "intro-layers-edit": {
+      "result": "Skipped:Ignored",
+      "total": "126",
+      "passed": "125",
+      "failed": "0",
+      "skipped": "1",
+      "sha256": "ebbc494de926a99909838752c08b26c295bb92e2d4c5d4a6e0af06cf2cb1e235"
+    }
+  },
+  "review": "Independent review found no important findings; only 63 directed collision bits for layer13 changed, all other pairs preserved.",
+  "backup": {
+    "path": "Builds/Reproduction/p13-virus-layer-20261021/derived-with-meta.zip",
+    "sha256": "7deb76fb8d841e72894ec83acc9b46e42d3bc66191e27acc5708d1f8fea95786",
+    "metaPreserved": true,
+    "crcAndPerFileShaVerified": true
+  },
+  "unverified": [
+    "Actual GS collision proxy alignment",
+    "XR visible hit shape and pointing",
+    "Final Windows build and fresh-source restoration"
+  ]
+}

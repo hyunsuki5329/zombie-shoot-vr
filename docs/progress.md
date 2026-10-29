@@ -633,3 +633,9 @@ BootstrapPreview/WaveLab 빌드 모두 성공·종료0. 복원 WaveLab337개 파
 - 원본 SHA 검증/지정 파일 추출/URP 색상·노멀·smoothness/0.8m 프리팹 재생성 절차를 추가했다. 미존재 실패→EditMode125통과/개인 스캔1제외. DX12 단안 미리보기 확인 및 독립 리뷰 중요 지적0.
 - 원본·생성물/meta·preview를 로컬 복원 ZIP으로 보관하고 CRC/SHA 확인. [증빙](evidence/intro-virus-assets.json).
 - IntroTarget 레이어/마스크, 실제 관찰 씬 배치, 간소화·VR·빌드 및 새 소스 복원은 미완료다.
+
+## 2026-10-21 P13 도입부 피격 레이어
+
+- IntroTarget(layer13)을 추가해 물리 접촉을 끄고, K2 도입부 Raycast는 기존 worldSolidMask와 IntroTarget만 사용하도록 분리했다. 전투의 기존 shotMask는 유지한다. 로컬 바이러스 프리팹에도 전용 레이어를 적용했다.
+- 누락3건 RED→DX12 PlayMode161/161, EditMode125통과/1제외. 임포트한 바이러스 실제 Raycast, 물리 접촉 비활성, 벽/총구 차단과 전투 마스크 복귀 확인. 독립 리뷰 중요 지적0. [증빙](evidence/intro-hit-layers.json).
+- 실제 GS 충돌 프록시·VR 판정 외형·최종 빌드는 미완료다. 원본 맵/설정/WallFix 해시5개 보존 확인.
