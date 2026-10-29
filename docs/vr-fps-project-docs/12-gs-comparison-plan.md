@@ -6,11 +6,11 @@
 
 **Architecture:** 하나의 XR 리그를 유지하며 GS 관찰 씬과 테마 맵을 순차 로드한다. 도입부 상태와 기존 전투 상태를 분리하고 무기 입력의 소유권을 한곳에서 결정한다. 완전히 밝아진 뒤에만 기존 전투를 시작한다.
 
-**Tech Stack:** Unity6000.3.23f1, XRI3.5.1, URP17.3.0, OpenXR1.17.1, Windows PC VR/Quest Pro/Virtual Desktop. UnityGaussianSplatting은 검증 후보이며 아직 설치하지 않았다.
+**Tech Stack:** Unity6000.3.23f1, XRI3.5.1, URP17.3.0, OpenXR1.17.1, Windows PC VR/Quest Pro/Virtual Desktop. UnityGaussianSplatting revision `2c6fed37da67a217367261fcfcd3316d34c73e76`을 격리 작업본에 설치했으며 DX12 합성 GS 자동 검증을 수행했다. Quest Pro 호환성 인수는 아직 남아 있다.
 
 **Spec:** [11 상세 설계](11-gs-comparison-intro.md), [02 PRD R21~R28](02-requirements.md), [08 T21~T28](08-test-plan.md).
 
-상태: **2026-10-20 문서 계획만 작성. 모든 구현 단계 미실행.** 방을 먼저 인수하고 Classroom GS는 자료 확보 후 같은 파이프라인의 후속 적용으로 분리한다.
+상태: **2026-10-22 부분 구현·자동 검증 진행, 실제 촬영본/VR/최종 빌드 인수 미완료.** 작업별 소스·RED/GREEN·PR·미실행 범위는 [실행 기록](../gs-execution-ledger.md)과 [진행 현황](../progress.md)을 따른다. 아래 체크박스는 해당 항목의 전체 조건을 충족한 증빙이 있을 때만 표시하며 부분 통과로 채우지 않는다. 방을 먼저 인수하고 Classroom GS는 자료 확보 후 같은 파이프라인의 후속 적용으로 분리한다.
 
 ## Global Constraints
 

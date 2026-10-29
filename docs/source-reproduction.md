@@ -227,3 +227,13 @@ P13 전용 레이어 연결 이후 최신 바이러스 생성물은 `Builds/Repr
 생성기는 프로젝트 소유의 결정적 분석형 데이터를 만든다. 기존 GUID를 보존해야 하는 운영 GS는 별도 원본/가공본/meta 백업을 사용해야 한다. 생성기 임포트 종료의 Persistent allocation1 경고는 미진단이며, 이 단위를 전체 새 소스/Windows 복원 완료로 간주하지 않는다.
 
 P13 운영 경로 통합 시험은 같은 합성 fixture 생성 후 `-testFilter GaussianComparisonFlowTests`로 재현한다. 전체 PlayMode에 포함되며 기존 MapSceneTestSetup이 관찰용 shell을 시험 중에만 등록한다. 실제 GS 렌더→K2 명중→암전→Room 초기 준비10회와 Classroom 직접 진입을 검사한다. [증빙](evidence/gs-flow-integration.json). 실제 스캔/VR/Player 시험이 아니며, 이 시험에서 run clock은 초기 상태 검사를 위해 비활성화한다.
+
+## P13 현재 소스·로컬 자산 복원 리허설 (2026-10-23)
+
+기준 `6ea502b`의 로컬 보관본은 격리 작업본의 `Zombie Shoot VR/Builds/Reproduction/p13-6ea502b/`에 있다. `tracked-source.zip`, `local-assets-with-meta.zip`, `manifest.json`, `post-unity-audit.json`, `README.md`를 함께 보관한다. 두 ZIP은 같은 새 빈 폴더에 풀고 중첩 `Zombie Shoot VR` 프로젝트를 연다. 외부 자산이 포함되므로 공개 재배포용이 아니다. 실제 촬영 GS·Library·빌드·사용자 무관 미커밋 설정은 제외했다.
+
+2,991파일을 실제로 새 폴더에 복원해 CRC/개별 SHA를 확인하고 합성 GS를 재생성했다. 새 Library에서 EditMode137통과/개인스캔1제외, DX12 PlayMode194/194를 확인했다. Windows BootstrapPreview 개발 빌드도 성공했고351파일 SHA와 GUID54d64a1919184786b7dc5d4befc087a6을 기록했다. [상세 증빙](evidence/p13-source-restore.json).
+
+이 실행 파일은 `D:/VRFPS-Reproduction/gs-6ea502b/Zombie Shoot VR/Builds/Windows/BootstrapPreview/BootstrapPreview.exe`다. 기존 네 씬의 소스 빌드 재현 결과이며, 촬영본이 연결된 최종 GSComparison 빌드는 아니다. Player를 실행하지 않았으므로 실제 Player API/VR/GS stripping 통과를 주장하지 않는다. 동일 PC의 package cache·라이선스 사용도 명시한다.
+
+Unity 임포트/빌드가56개 파일을 다시 직렬화했고 누락은0이다. sample metadata뿐 아니라 Volume filter·URP shader prefilter/runtime settings·preloadedAssets 변경을 포함하므로 바이트가 같은 복원본이라고 표현하지 않는다. 맵과 게임 코드, 외부 자산은 변경 목록에 없다. 원본 프로젝트에는 반영하지 않았다. importer 종료 Persistent allocation1 경고는 미진단 상태로 남겨 두었다.
