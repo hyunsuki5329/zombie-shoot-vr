@@ -1,0 +1,113 @@
+{
+  "date": "2026-10-31",
+  "source": "b221bcb17b3d9a206f04aeb978a24b23a443bdc9",
+  "capture": {
+    "path": "C:/Users/User/Downloads/room.ply",
+    "sha256": "65f2f8c9705d49a660d8223d9986f3c87cc62085d6bb86daa8a686d09ff75e56",
+    "vertices": 577950,
+    "bytes": 143333131,
+    "appVersion": "not supplied",
+    "userMeasurement": "Right wardrobe wall when facing wooden door approximately4.20m"
+  },
+  "calibration": "Initial visual fit only: X180deg, floorOffset0.85, scale1, wallz-1.8..2.4. HMD acceptance pending.",
+  "tests": {
+    "room-full-play.xml": {
+      "result": "Passed",
+      "total": "199",
+      "passed": "199",
+      "failed": "0",
+      "skipped": "0"
+    },
+    "room-edit.xml": {
+      "result": "Skipped:Ignored",
+      "total": "138",
+      "passed": "137",
+      "failed": "0",
+      "skipped": "1"
+    },
+    "room-preview-review-green.xml": {
+      "result": "Passed",
+      "total": "1",
+      "passed": "1",
+      "failed": "0",
+      "skipped": "0"
+    }
+  },
+  "review": "Two P2 fixed with RED/GREEN: missing output directory and machine-dependent import quality. Reviewer rechecked fixes; no additional issues.",
+  "build": {
+    "guid": "bcd55912a407424685af8703be58cc1d",
+    "platform": "Windows x64 Mono Development DX12",
+    "path": "C:\\Users\\User\\.codex\\worktrees\\gs-comparison-intro\\Zombie Shoot VR\\Zombie Shoot VR\\Builds\\Windows\\GSComparison\\AbandonedSchool.exe",
+    "files": 357,
+    "playerExecution": "not performed; Quest Pro user check requested",
+    "rawPlyPackaged": false
+  },
+  "preservation": {
+    "Zombie Shoot VR/Assets/VRFPS/Scenes/Maps/Room.unity": true,
+    "Zombie Shoot VR/Assets/VRFPS/Scenes/Maps/Classroom.unity": true,
+    "Zombie Shoot VR/Assets/XR/Settings/OpenXRPackageSettings.asset": true,
+    "Zombie Shoot VR/ProjectSettings/Packages/com.unity.learn.iet-framework/Settings.json": true,
+    "Zombie Shoot VR/Builds/Windows/WallFix/AbandonedSchool.exe": true
+  },
+  "restoration": {
+    "sourceFiles": 3123,
+    "externalFiles": 706,
+    "root": "D:/VRFPS-Reproduction/room-b221bcb",
+    "archiveCrcAndExtractedSha": "passed",
+    "freshUnityValidation": "in progress; not yet passed"
+  },
+  "limitations": [
+    "Quest Pro stereo/input/headset scale unaccepted",
+    "Raw scan has missing ceiling/wall areas",
+    "Performance logging remains deferred",
+    "Classroom GS not supplied; direct combat retained",
+    "main integration pending",
+    "Reimport payload bytes match; upstream asset dataHash metadata changes between imports"
+  ],
+  "artifacts": {
+    "room-import.log": {
+      "path": "tmp/p13/room-import.log",
+      "sha256": "e3efbc0a195433f4562f77d209c0f36789ec84a423c055be6b3871ecc13e9f4e"
+    },
+    "room-preview.xml": {
+      "path": "tmp/p13/room-preview.xml",
+      "sha256": "0bc6954e72ca639119c6b611484bffd661a34c032c07ee11ec1af29bf4397e60"
+    },
+    "room-flow.xml": {
+      "path": "tmp/p13/room-flow.xml",
+      "sha256": "646f29e6926e6d9c563e37c778ff3bd2da1e7e2aec8c360fd2a157a2c00407e7"
+    },
+    "room-full-play.xml": {
+      "path": "tmp/p13/room-full-play.xml",
+      "sha256": "5e5abbe45a81e281d03fe4fec263998e318c2215e84b9e0a4773e92288f6bcde"
+    },
+    "room-edit.xml": {
+      "path": "tmp/p13/room-edit.xml",
+      "sha256": "f0f66c658fdd95bb4ab3092ddc7cc22e464b693d36f7d7aedf1588fdba3aff52"
+    },
+    "room-preview-review-red.xml": {
+      "path": "tmp/p13/room-preview-review-red.xml",
+      "sha256": "5ba639bd1bebc21c268b527ac72c87b2d97fe7c0022472bbd11acceffb92ac83"
+    },
+    "room-preview-review-green.xml": {
+      "path": "tmp/p13/room-preview-review-green.xml",
+      "sha256": "e5647752139f95ae1ac5a63d2de00f1c12ec50ebe9a0e2512e23570dac9c2f41"
+    },
+    "room-import-review-red.log": {
+      "path": "tmp/p13/room-import-review-red.log",
+      "sha256": "22f036e06b9ee2cda611ca41d37028614da9e07a96e6ec6d0ff78516fbf4b0d9"
+    },
+    "room-import-review-green.log": {
+      "path": "tmp/p13/room-import-review-green.log",
+      "sha256": "32d3f030d2fc7b3b39add5471d77ee0953d799738cbf4f0396419dc651212289"
+    },
+    "room-build-final.log": {
+      "path": "tmp/p13/room-build-final.log",
+      "sha256": "b1e5c27a4eb75033c7320c83506e4b495b43c59095b7508d6f2617a40ac61f08"
+    },
+    "room-build-manifest.json": {
+      "path": "tmp/p13/room-build-manifest.json",
+      "sha256": "e076ee2d9f57335b9e724103d762314ad8b0d20b629a16afe46b7785d253ec81"
+    }
+  }
+}

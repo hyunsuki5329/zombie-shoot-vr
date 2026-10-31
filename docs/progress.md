@@ -701,3 +701,11 @@ BootstrapPreview/WaveLab 빌드 모두 성공·종료0. 복원 WaveLab337개 파
 - 독립 리뷰 P1/P2 없음. 원본 기준5해시 일치. Editor 임포트 한정 수정으로 이번 EditMode/Player 빌드·XR 재검증은 하지 않았으며, 후처리 예외는 코드 검토만 수행했다. 이전 빌드/복원 ZIP에는 이번 패치가 없다. 실제 GS/앵커와 최종 VR 인수는 계속 미완료.
 
 - 수정 소스62cf6db, [PR42](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/42), base codex/p13-gs-player-probe. 외부 GitHub review/CI 없음(실제 조회), 독립 정적 리뷰와 위 자동 검증으로 Editor 한정 단위의 병합 조건을 충족했다. 의존 브랜치로 병합하며 main/P13 전체 인수로 표시하지 않는다.
+
+## 2026-10-31 방 GS 연결
+
+소스b221bcb: 실제 방577950GS→기존K2 명중→암전→Room 준비10회 및 두맵 웨이브1 시작을 확인했다. 전체DX12 Play199/199, Edit137통과/1제외. 독립 리뷰 P2 두건(미리보기 폴더/임포트 품질) RED/GREEN 후 재검토 통과. 원본 기준5해시 일치. Combat 변경은 Room profile 연결1줄이며 기존맵 변경0.
+
+별도 Windows 빌드 GUIDbcd55912a407424685af8703be58cc1d,357파일 해시 기록, 원본PLY 패킹0. 실행 안내는 [실기 안내](hardware-validation.md), 상세는 [증빙](evidence/room-capture-integration.json). 실제 Player/XR 인수는 미실행으로 남기고 사용자에게 정확한 빌드를 안내했다. 초기420cm 기준 보정·촬영 누락 구간도 공개했다.
+
+소스/로컬 자산3123파일(외부706)을 Library 없이 새폴더 `D:/VRFPS-Reproduction/room-b221bcb`에 복원하고 CRC/SHA를 확인했다. 새 Unity 검증은 진행 중이다. 아직 최종 복원 완료나 main 통합 완료로 표시하지 않는다.
