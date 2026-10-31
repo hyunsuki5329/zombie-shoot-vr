@@ -31,6 +31,20 @@
       "passed": "1",
       "failed": "0",
       "skipped": "0"
+    },
+    "room-restored-edit.xml": {
+      "result": "Skipped:Ignored",
+      "total": "138",
+      "passed": "137",
+      "failed": "0",
+      "skipped": "1"
+    },
+    "room-restored-play.xml": {
+      "result": "Passed",
+      "total": "199",
+      "passed": "199",
+      "failed": "0",
+      "skipped": "0"
     }
   },
   "review": "Two P2 fixed with RED/GREEN: missing output directory and machine-dependent import quality. Reviewer rechecked fixes; no additional issues.",
@@ -54,7 +68,15 @@
     "externalFiles": 706,
     "root": "D:/VRFPS-Reproduction/room-b221bcb",
     "archiveCrcAndExtractedSha": "passed",
-    "freshUnityValidation": "in progress; not yet passed"
+    "freshUnityValidation": "passed: Configure, analytical fixture regeneration, EditMode, DX12 PlayMode, Windows build",
+    "samePcCacheAndLicense": true,
+    "postUnityChangedFiles": 58,
+    "postUnityMissingFiles": 0,
+    "buildGuid": "6d5a0401b78f467c912d9fd1af87ddd9",
+    "buildFiles": 356,
+    "playerExecution": "not performed; reproduction build is separate from user delivery",
+    "auditSha256": "98f2a47108ea5af7df515955dcb3f9b2b20c2c6889a3ece6cd6eca13f87911ab",
+    "manifestSha256": "99e137fb49fcdf0d7ad664dc07ae13f136bac516727aa0cfcefa826e769c5a2c"
   },
   "limitations": [
     "Quest Pro stereo/input/headset scale unaccepted",
@@ -108,6 +130,26 @@
     "room-build-manifest.json": {
       "path": "tmp/p13/room-build-manifest.json",
       "sha256": "e076ee2d9f57335b9e724103d762314ad8b0d20b629a16afe46b7785d253ec81"
+    },
+    "room-restored-configure.log": {
+      "path": "tmp/p13/room-restored-configure.log",
+      "sha256": "fc71f55a47f90ef553f5511db472a970954a70f48f94bc90a51400b3609fca9a"
+    },
+    "room-restored-fixture.log": {
+      "path": "tmp/p13/room-restored-fixture.log",
+      "sha256": "677d16af443002f14932a6d8654ce8d95f134483146cd3964e8ae37e48361ff7"
+    },
+    "room-restored-edit.xml": {
+      "path": "tmp/p13/room-restored-edit.xml",
+      "sha256": "9089b6046550ea0a2a89b5e134377d25fe6d02c7d3cc28722704e1323e215e02"
+    },
+    "room-restored-play.xml": {
+      "path": "tmp/p13/room-restored-play.xml",
+      "sha256": "4b669ea9ab739e3a2b88d81d3c781f5686525cd8354ad1dcb2bd408cc4bb1aa9"
+    },
+    "room-restored-build.log": {
+      "path": "tmp/p13/room-restored-build.log",
+      "sha256": "536425a5ed69f0bb04b1d30c133afc7d80092b8dd8dd80b709e6cf12e5d227ae"
     }
   }
 }

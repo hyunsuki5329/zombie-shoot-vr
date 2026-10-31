@@ -10,7 +10,7 @@
 
 **Spec:** [11 상세 설계](11-gs-comparison-intro.md), [02 PRD R21~R28](02-requirements.md), [08 T21~T28](08-test-plan.md).
 
-상태: **2026-10-22 부분 구현·자동 검증 진행, 실제 촬영본/VR/최종 빌드 인수 미완료.** 작업별 소스·RED/GREEN·PR·미실행 범위는 [실행 기록](../gs-execution-ledger.md)과 [진행 현황](../progress.md)을 따른다. 아래 체크박스는 해당 항목의 전체 조건을 충족한 증빙이 있을 때만 표시하며 부분 통과로 채우지 않는다. 방을 먼저 인수하고 Classroom GS는 자료 확보 후 같은 파이프라인의 후속 적용으로 분리한다.
+상태: **2026-10-31 실제 Room GS 연결·Windows 빌드·자동 검증 완료, Quest Pro 인수와 최종 통합 미완료.** 작업별 소스·RED/GREEN·PR·미실행 범위는 [실행 기록](../gs-execution-ledger.md)과 [진행 현황](../progress.md)을 따른다. 아래 체크박스는 해당 항목의 전체 조건을 충족한 증빙이 있을 때만 표시하며 부분 통과로 채우지 않는다. 방을 먼저 인수하고 Classroom GS는 자료 확보 후 같은 파이프라인의 후속 적용으로 분리한다.
 
 ## Global Constraints
 

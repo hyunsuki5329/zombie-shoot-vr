@@ -708,4 +708,6 @@ BootstrapPreview/WaveLab 빌드 모두 성공·종료0. 복원 WaveLab337개 파
 
 별도 Windows 빌드 GUIDbcd55912a407424685af8703be58cc1d,357파일 해시 기록, 원본PLY 패킹0. 실행 안내는 [실기 안내](hardware-validation.md), 상세는 [증빙](evidence/room-capture-integration.json). 실제 Player/XR 인수는 미실행으로 남기고 사용자에게 정확한 빌드를 안내했다. 초기420cm 기준 보정·촬영 누락 구간도 공개했다.
 
-소스/로컬 자산3123파일(외부706)을 Library 없이 새폴더 `D:/VRFPS-Reproduction/room-b221bcb`에 복원하고 CRC/SHA를 확인했다. 새 Unity 검증은 진행 중이다. 아직 최종 복원 완료나 main 통합 완료로 표시하지 않는다.
+소스/로컬 자산3123파일(외부706)을 Library 없이 새폴더 `D:/VRFPS-Reproduction/room-b221bcb`에 복원하고 CRC/SHA를 확인했다. 새 복원본 Edit137통과/1제외, DX12 Play199/199 및 Windows 빌드 GUID6d5a0401b78f467c912d9fd1af87ddd9까지 재현했다. 동일 PC 캐시/라이선스 조건이며 Player 실기/main 통합 완료를 뜻하지 않는다.
+
+- [PR43 draft](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/43), base codex/p13-gs-player-probe. 실기 전 병합하지 않는다. 복원 후 Unity 재직렬화/관찰씬 재구성58파일 변경·누락0을 기록했으며, 두 테마 맵/GS payload는 유지됐다. 사용자 전달 빌드는 GUIDbcd55912a407424685af8703be58cc1d로 그대로다.
