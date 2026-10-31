@@ -46,6 +46,8 @@ namespace VRFPS.Tests
             Assert.That(entry.GetComponents<WeaponContextRouter>().Length,Is.EqualTo(1));
             Assert.That(entry.rig.GetComponentsInChildren<Camera>(true).Length,Is.EqualTo(1));
             Assert.That(entry.menu.Screen,Is.EqualTo(MenuScreen.Instructions));
+            // Keep missing-capture recovery coverage independent of locally installed captures.
+            entry.ConfigureRealityOptions(null,null);
             entry.menu.ShowMapSelection();
             var room=entry.mapControls.transform.Find("Room Reality").GetComponent<Button>();
             var classroom=entry.mapControls.transform.Find("Classroom Reality").GetComponent<Button>();

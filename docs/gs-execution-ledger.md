@@ -252,3 +252,10 @@ Ruling: P13-a의 실제 GS/VR 인수 대기 중 데이터 독립적인 b~e 구�
 - 직전 진단에서 PLYFileReader.ReadFile의 Persistent raw buffer가 GaussianFileReader에서 해제되지 않는 것을 스택으로 확인했다. 정상/속성 누락/잘린 PLY 각10회 재현에서30개 누수가 발생했다. exit0은 성공 판정에 불충분했다.
 - 원본 revision2c6fed37 package1.1.1을 embedded로 포함하고 raw read 실패 시 Dispose/reset, 변환 성공/실패 시 raw finally Dispose, 후처리 실패 시 splats Dispose를 적용했다. 런타임·셰이더·라이선스·meta는 원본과 동일하다. 독립 비교90파일 중 reader2개와 package fingerprint 제거만 변경됐다.
 - 같은30사례 재실행에서 누수 경고0. 독립 리뷰 P1/P2 없음. 후처리 예외 주입·SPZ 실패 수명·전체 메모리/실기 검증은 하지 않았다. 실제 GS 자료·최종 빌드·VR 인수는 계속 대기다.
+
+## 2026-10-31 Room capture integration (in progress)
+
+- User supplied `C:/Users/User/Downloads/room.ply`, SHA256 `65f2f8c9705d49a660d8223d9986f3c87cc62085d6bb86daa8a686d09ff75e56`,143333131bytes,577950Gaussian vertices. Binary little-endian float fields include SH45,opacity,scale,rotation.11997 opacity logits are +infinity (sigmoid produces1); position/other attributes are finite. No raw data was silently discarded.
+- User measurement: wardrobe wall approximately4.20m, on the right when facing the wooden door. Initial visual fit uses X180deg, floor offset0.85m, unit scale1, wall z=-1.8..2.4m. This is an approximate authoring fit; actual HMD scale/eye alignment remains unaccepted. Scan has missing ceiling/wall regions visible in previews.
+- Ruling: preserve the scan and existing theme maps; author separate private RoomReality scene with independent observation anchor and collision proxies — avoids changing the user's enlarged theme geometry — approximate proxy/calibration fit must be checked on the headset.
+- Import generated577950splats without shutdown leak warning. Actual renderer four-direction preview1/1 passed; actual Room GS/K2/fade/prepared Room flow10cycles1/1 passed. Controller poses are simulated. Full regression and separate Windows build are in progress; no new VR/performance acceptance claimed.
