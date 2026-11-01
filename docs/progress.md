@@ -729,3 +729,5 @@ BootstrapPreview/WaveLab 빌드 모두 성공·종료0. 복원 WaveLab337개 파
 사용자 사진/단순 표면 보완 선택에 따라 원본을 보존하는 네 표면·네 컷아웃을 적용했다. 소스59ca570, Play202/202, Edit137통과/1제외, 독립 리뷰 카메라 지적 수정·재검토 통과. 별도 Windows GUID66012d6f6757434d8e3e6a8a03b9259b, GSComparison-Repair-20261101. [증빙](evidence/room-surface-repair.json), [PR46 draft](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/46), base codex/p13-room-movement-gun-scale. 보정 외형/수정 이동·총기 VR 인수 전이며 PR46→PR44→PR45 순서로 통합해야 한다. 일부 아래쪽 경계/누락 천장/기타 스캔 결손은 남는다. 기존 빌드·맵·원본PLY 보존, 성능 보류 유지.
 
 보정 overlay의 새 Library 복원도 검증했다:7파일 SHA 일치, 집중 Play2/2 및 Windows 재빌드GUIDf8e6f03fb5814b1baffef373a0923d71. 원본PLY/가공payload6개 해시 보존. 작업본 전체202/202와 복원본 집중2/2를 구분하며, 전달GUID66012d6f6757434d8e3e6a8a03b9259b은 교체하지 않았다. 사용자 VR 외형·수정 이동/총기 확인 및 최종 병합은 대기다.
+
+2026-11-02 원격 재확인: PR44는cec59f9로 codex/p13-gs-player-probe에, PR45는5cd400b로 codex/p06-boss-crawler에 이미 병합됐다. 보정 PR46의 base를 codex/p06-boss-crawler로 변경했다. 기본 통합 대비 보정/증빙11파일 차이이며 merge-tree 결과가 현재 HEAD tree와 동일해 충돌 없는 통합 경로를 확인했다. 이 원격 병합은 별도의 사용자 VR 결과나 main 통합 완료 증빙이 아니다. 보정 외형 인수 대기는 유지한다.
