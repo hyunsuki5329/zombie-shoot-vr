@@ -570,7 +570,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: VRFPS.GaussianRendering::VRFPS.ComparisonIntroInstaller
   pipeline: {fileID: 11400000, guid: 40aeb7a2975c11a4c8d035448d9624cf, type: 2}
   fadeShader: {fileID: 4800000, guid: 76cf337310d0b90438889ad1821658d7, type: 3}
-  roomProfile: {fileID: 0}
+  roomProfile: {fileID: 11400000, guid: 33eec02854ce64a49a973032aad9e79e, type: 2}
   classroomProfile: {fileID: 0}
 --- !u!1 &671839531
 GameObject:

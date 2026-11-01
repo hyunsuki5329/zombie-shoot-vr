@@ -253,3 +253,11 @@ Unity 임포트/빌드가56개 파일을 다시 직렬화했고 누락은0이다
 격리 프로젝트에서 `-batchmode -nographics -executeMethod GaussianImportLifetimeCheck.Run -quit`로 재현한다. 정상/속성 누락/잘린 PLY를 각각10회 읽고 `GS_IMPORT_LIFETIME_CHECK` 마커와 종료 로그를 함께 확인한다. 수정 전에는 exit0이어도 Persistent30개 누수가 발생했으므로 종료 코드만으로 통과를 판단하지 않는다. 수정 후 같은30건에서 누수 경고가 없어졌다. 변환 후처리 예외는 코드 리뷰 범위이며 강제 주입 시험은 수행하지 않았다. SPZ 오류 수명·전체 프로세스 메모리·VR 성능 검증으로 확대하지 않는다.
 
 위의6ea502b 복원본과4c84f7d Player 빌드는 이 수정 이전 산출물이다. 최종 배포·복원은 실제 GS 자료 통합 이후 다시 검증한다.
+
+## 실제 Room GS 복원 묶음 (소스 b221bcb)
+
+`Zombie Shoot VR/Builds/Reproduction/p13-room-b221bcb/`의 tracked-source.zip, local-assets-with-meta.zip, manifest.json을 함께 보존한다. 소스2417개와 로컬 외부 자산706개(기존 모델/오디오 및 Room 원본·가공본·scene/profile/meta)가 포함된다. 합성 fixture/Library는 제외했으며 자동 시험을 위해 합성 fixture만 별도 재생성한다.
+
+빈 폴더에 두 ZIP을 같은 루트로 풀고 manifest SHA를 확인한다. Unity6000.3.23f1에서 명시적 projectPath와 로그를 지정해 RoomRealitySetup.Configure로 관찰씬 등록/프로필 연결을 재현한다. 자동 시험에는 GaussianRealityFixtureSetup.Create 후 EditMode/PlayMode를 실행한다. 실제 게임 빌드는 RoomComparisonBuild.Build이며 합성 fixture는 그 빌드 씬 목록에 없다. 원본 PLY는 변환 재현 자료이며 Player 패킹 목록에서 제외됨을 확인했다.
+
+원본 재변환이 필요할 때만 VRFPS_ROOM_PLY 환경변수를 원본 경로로 설정하고 RoomRealitySetup.Import를 실행한다. 정확한 SHA를 확인하며 Medium 형식과 카메라 JSON 제외를 고정한다. 가공 payload bytes는 재변환 후 일치했지만 upstream m_DataHash 메타데이터는 달라졌으므로 전 자산 바이트 동일 재생성을 주장하지 않는다. 실제 제공된 묶음의 CRC/개별 SHA 복원은 검증했다. 새 Unity 시험/빌드 결과는 room-capture-integration.json과 후속 복원 증빙을 따른다.

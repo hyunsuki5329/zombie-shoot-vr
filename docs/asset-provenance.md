@@ -108,3 +108,9 @@ Mixamo의 `Zombie Reaction Hit` 중 Flinches 동작을 사용자 로그인 세�
 - 고지/라이선스: `Assets/VRFPS/Documentation/GaussianSplatting-Attribution.txt`. 실제 배포 포함 검증은 새 빌드에서 수행한다.
 - `GaussianRealityFixtureSetup.Create`의 합성256 GS는 직접 생성한 분석형 시험 데이터다. 사용자 방 촬영 데이터나 GS 학습 결과가 아니다. 가공본은 외부 데이터와 동일한 Git 제외 위치에서 재생성한다.
 - 초기 별도 시험본의 [호환성 기록](evidence/gs-compatibility.json)과 후속 실제 bridge의 [검증 기록](evidence/gs-renderer-bridge.json)을 구분한다. 실제 방 Splat은 사용자 재촬영 대기다.
+
+## 2026-10-31 실제 방 GS 자료
+
+사용자 제공 `C:/Users/User/Downloads/room.ply`, SHA256 `65f2f8c9705d49a660d8223d9986f3c87cc62085d6bb86daa8a686d09ff75e56`,143333131bytes/577950Gaussians. 생성 앱 버전은 미제공. 이전 일반 점군과 다른 자료다. 사용자 기준 치수는 방문을 바라볼 때 오른쪽 옷장 벽 약4.20m다.
+
+Medium 품질을 명시해 변환했으며 카메라 JSON 자동 임포트는 껐다. 원본/가공 bytes/scene/profile/meta는 Git 제외 `External/RealityGS/Room`과 로컬 복원 ZIP에 보존한다. 천장·일부 벽 누락을 원본 한계로 기록하며 임의로 복원했다고 주장하지 않는다. 초기 축척·바닥 맞춤과 실제 HMD 인수는 구분한다. [검증](evidence/room-capture-integration.json).
