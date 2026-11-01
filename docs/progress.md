@@ -721,3 +721,5 @@ BootstrapPreview/WaveLab 빌드 모두 성공·종료0. 복원 WaveLab337개 파
 통합 사전 검사: a123b64에서 git merge-tree --write-tree로 origin/codex/p06-boss-crawler 및 origin/main 각각과의 병합을 계산했다. 두 결과 모두 충돌 없이 현재 HEAD tree e189b162e27006f2a5642250340d395624e31c6a와 일치했다. 실제 브랜치 병합은 수행하지 않았으며 PR44 실기 대기를 유지한다.
 
 0088570 새 Library 복원 검증 완료:3124파일 최초SHA 일치, Edit137통과/1제외, DX12 Play201/201, Windows 재빌드GUID584af24cd30f4af99d2bd98e86fcdebf 성공. 최종 변경58/누락0; 코드·테마 맵·GS payload 보존. 상세는 room-walk-gun-scale.json. 복원 Player 실행·새 수정 VR 인수는 미실행이며 전달 빌드는 유지한다.
+
+최종 기본 브랜치 통합용 [PR45 draft](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/45)를 생성했다. base codex/p06-boss-crawler, head codex/p13-room-movement-gun-scale. PR44 실기 확인/정리 이후 병합 예정이며 main 반영은 후속 단계다. 생성 시233파일 누적 diff, 테마 맵 diff0, merge-tree가 head tree와 동일함을 재확인했다. 테스트된 코드0088570 이후 변경은 증빙 문서뿐이다.
