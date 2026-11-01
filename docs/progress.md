@@ -731,3 +731,5 @@ BootstrapPreview/WaveLab 빌드 모두 성공·종료0. 복원 WaveLab337개 파
 보정 overlay의 새 Library 복원도 검증했다:7파일 SHA 일치, 집중 Play2/2 및 Windows 재빌드GUIDf8e6f03fb5814b1baffef373a0923d71. 원본PLY/가공payload6개 해시 보존. 작업본 전체202/202와 복원본 집중2/2를 구분하며, 전달GUID66012d6f6757434d8e3e6a8a03b9259b은 교체하지 않았다. 사용자 VR 외형·수정 이동/총기 확인 및 최종 병합은 대기다.
 
 2026-11-02 원격 재확인: PR44는cec59f9로 codex/p13-gs-player-probe에, PR45는5cd400b로 codex/p06-boss-crawler에 이미 병합됐다. 보정 PR46의 base를 codex/p06-boss-crawler로 변경했다. 기본 통합 대비 보정/증빙11파일 차이이며 merge-tree 결과가 현재 HEAD tree와 동일해 충돌 없는 통합 경로를 확인했다. 이 원격 병합은 별도의 사용자 VR 결과나 main 통합 완료 증빙이 아니다. 보정 외형 인수 대기는 유지한다.
+
+2026-11-02 옷장 수정 사용자 피드백: 소스289b2b3에서 넓은 갈색 면/넓은 가림을 제거하고 원래GS를 복원했다. 벽3면은 보존,2.7m 위쪽 좁은 잡점 정리만 유지. 집중Play2/2, 별도Windows GUIDa72cded4a92d492a87565dce1a326e10(GSComparison-Wardrobe-20261102) 성공. 원본PLY 해시 보존. [증빙](evidence/room-wardrobe-revision.json). 최종 독립 재검토는 도구 사용량 제한으로 미완료, VR 확인도 대기. PR46을 최종 범위로 갱신했고 병합하지 않았다.

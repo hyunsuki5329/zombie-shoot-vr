@@ -1,0 +1,16 @@
+{
+  "tests": "Focused Play2/2 passed: RoomSurfaceRepairTests; RoomCaptureFlowTests. Full/Edit suite not repeated for this local authoring change.",
+  "testXmlSha256": "6F2A3783214939A82FD9B5B3CE8478F63A4ED47BF2E3BECBC545764659B653F7",
+  "rawPly": "SHA65f2f8c9 unchanged",
+  "review": "Independent re-review failed due tool usage limit; pending",
+  "source": "289b2b3dfbc9ca98c77edc1ec176d0486abc2c27",
+  "buildGuid": "a72cded4a92d492a87565dce1a326e10",
+  "buildManifestSha256": "AFCAD94B6068DDF65A5685683B8CBF686CB15C78553CB61E3D34564A516975CC",
+  "restoration": "Source and7-file local overlay CRC passed; new wardrobe revision fresh Library restore not run",
+  "buildDirectory": "C:\\Users\\User\\.codex\\worktrees\\gs-comparison-intro\\Zombie Shoot VR\\Zombie Shoot VR\\Builds\\Windows\\GSComparison-Wardrobe-20261102",
+  "date": "2026-11-02",
+  "buildLogSha256": "8AB4AC607316D8D52D1A2AD869D9AE840BFC6B7A1573404B1F4A4849892A973B",
+  "headset": "Pending",
+  "pr": "https://github.com/hyunsuki5329/zombie-shoot-vr/pull/46",
+  "preservation": "Compared scene serialized objects: only renderer cutout refs and repair group children changed among surviving objects. Wall nodes unchanged. Themes unchanged."
+}
