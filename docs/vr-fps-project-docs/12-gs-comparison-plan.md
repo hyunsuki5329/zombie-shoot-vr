@@ -10,7 +10,7 @@
 
 **Spec:** [11 상세 설계](11-gs-comparison-intro.md), [02 PRD R21~R28](02-requirements.md), [08 T21~T28](08-test-plan.md).
 
-상태: **2026-10-31 실제 Room GS 연결·Windows 빌드·자동 검증 완료, Quest Pro 인수와 최종 통합 미완료.** 작업별 소스·RED/GREEN·PR·미실행 범위는 [실행 기록](../gs-execution-ledger.md)과 [진행 현황](../progress.md)을 따른다. 아래 체크박스는 해당 항목의 전체 조건을 충족한 증빙이 있을 때만 표시하며 부분 통과로 채우지 않는다. 방을 먼저 인수하고 Classroom GS는 자료 확보 후 같은 파이프라인의 후속 적용으로 분리한다.
+상태: **2026-11-01 실제 Room GS 기존 빌드 사용자 VR 보고 확보. 후속 이동·총1.2배 수정은 자동 시험·Windows 빌드·새 Library 복원 완료, 수정 항목 VR 확인과 최종 통합 대기.** 작업별 소스·RED/GREEN·PR·미실행 범위는 [실행 기록](../gs-execution-ledger.md)과 [진행 현황](../progress.md)을 따른다. 아래 체크박스는 해당 항목의 전체 조건을 충족한 증빙이 있을 때만 표시하며 부분 통과로 채우지 않는다. 방을 먼저 인수하고 Classroom GS는 자료 확보 후 같은 파이프라인의 후속 적용으로 분리한다.
 
 ## Global Constraints
 
@@ -122,7 +122,7 @@ Runtime/Scenes/Tests는 `Zombie Shoot VR/Assets/VRFPS/` 기준이다. 새 어댑
 
 ## P13-f 별도 빌드·실기 인수·복원
 
-**Files:** 새 진단/복원 증빙, `docs/hardware-validation.md`, `docs/asset-provenance.md`, `docs/source-reproduction.md`, 실행 안내. 예정 산출물 `Builds/Windows/GSComparison/AbandonedSchool.exe`는 아직 없다.
+**Files:** 새 진단/복원 증빙, `docs/hardware-validation.md`, `docs/asset-provenance.md`, `docs/source-reproduction.md`, 실행 안내. 기존 산출물은 `Builds/Windows/GSComparison/AbandonedSchool.exe`이며, 최신 수정 전달본은 `Builds/Windows/GSComparison-Walk-20261101/AbandonedSchool.exe`(GUID298c029c12e347cf95ca51efe9dd5f57)다. [시험·복원 증빙](../evidence/room-walk-gun-scale.json)을 따른다.
 
 - [ ] 변경된 규칙의 EditMode/PlayMode와 기존 두 맵 회귀를 실행한다. BuildPipeline에 관찰 씬을 추가하되 개인 원본 FBX와 불필요 원본 이미지가 포함되지 않았는지 확인한다.
 - [ ] 검증된 API로 별도 Windows 빌드를 만들고 GUID·패키지 revision·파일 해시·크레딧을 기록한다. WallFix는 유지한다.
