@@ -10,7 +10,7 @@
 
 **Spec:** [11 상세 설계](11-gs-comparison-intro.md), [02 PRD R21~R28](02-requirements.md), [08 T21~T28](08-test-plan.md).
 
-상태: **2026-10-31 실제 Room GS 연결·Windows 빌드·자동 검증 완료, Quest Pro 인수와 최종 통합 미완료.** 작업별 소스·RED/GREEN·PR·미실행 범위는 [실행 기록](../gs-execution-ledger.md)과 [진행 현황](../progress.md)을 따른다. 아래 체크박스는 해당 항목의 전체 조건을 충족한 증빙이 있을 때만 표시하며 부분 통과로 채우지 않는다. 방을 먼저 인수하고 Classroom GS는 자료 확보 후 같은 파이프라인의 후속 적용으로 분리한다.
+상태: **2026-11-01 실제 Room GS 기존 빌드 사용자 VR 보고 확보. 후속 이동·총1.2배 수정은 자동 시험·Windows 빌드·새 Library 복원 완료, 수정 항목 VR 확인과 최종 통합 대기.** 작업별 소스·RED/GREEN·PR·미실행 범위는 [실행 기록](../gs-execution-ledger.md)과 [진행 현황](../progress.md)을 따른다. 아래 체크박스는 해당 항목의 전체 조건을 충족한 증빙이 있을 때만 표시하며 부분 통과로 채우지 않는다. 방을 먼저 인수하고 Classroom GS는 자료 확보 후 같은 파이프라인의 후속 적용으로 분리한다.
 
 ## Global Constraints
 
@@ -18,7 +18,7 @@
 - 1번 방식만 수행한다. GS 전투·임의 공간 업로드·자동 가구 인식·학습 알고리즘 자체 개발은 제외한다.
 - 자료 생성과 렌더러는 기존 도구를 사용하며 직접 구현 범위를 정확히 기록한다.
 - 도입부에서도 양손 사격·총구 막힘·수동 재장전 유지. 도입부 시계·피격은 웨이브/기록과 분리한다.
-- 시점1.15배 유지, 도입부 스틱 이동/A점프 차단·연속 회전 허용, 전투 점프1.35m 유지.
+- 시점1.15배 유지, 도입부 스틱 이동·연속 회전 허용/A점프 차단, 전투 점프1.35m 유지.
 - 페이드1.2초/검정 최소0.25초/밝아짐1.2초, 단계별 로드 제한30초는 설계 초기값이다. 준비8초는 밝아진 뒤 시작한다.
 - 앱 전체 API를 시험본에서 검증한다. DX11 실행 중에 DX12로 전환하는 설계를 하지 않는다.
 - 성능 수집 보류·발표자료 사용자 담당을 유지한다. 계획 작성으로 새 실기 통과나 Goal 완료를 표시하지 않는다.
@@ -100,7 +100,7 @@ Runtime/Scenes/Tests는 `Zombie Shoot VR/Assets/VRFPS/` 기준이다. 새 어댑
 - [ ] 명중 전/검정/밝아짐 중 StartRun0, 알파0 후 StartRun1, 첫 준비8초, HP100·30발·도달0·처치0 시험을 먼저 만든다. 현재 즉시 StartMap은 이 조건을 충족하지 않음을 확인한다.
 - [ ] CombatSession을 준비·위치 배치·시작으로 분리하고 기존 StartMap 및 재도전 시험을 유지한다. 화면이 밝은 뒤 리그가 재배치되지 않는 시험을 추가한다.
 - [ ] 세계·총·손을 가리는 양안 fade를 구현한다. unscaled 시간과 정지/취소 조건을 적용하고 알파1에서만 공간 교환한다.
-- [ ] 도입부는 연속 회전만 허용하고 스틱 이동/A점프를 차단하는 리그 권한을 연결한다. 두 스틱 동시 입력과 A를 넣어 이동/점프0·회전 정상, 전투 복귀 후 기존 조작 정상임을 시험한다.
+- [ ] 도입부는 스틱 이동·연속 회전을 허용하고 A점프를 차단하는 리그 권한을 연결한다. 두 스틱 동시 입력과 A를 넣어 이동/회전 정상·점프0, 전투 복귀 후 기존 조작 정상임을 시험한다.
 - [ ] 메뉴의 현실 진입/바로 전투를 연결한다. GS 미준비 메시지와 기존 Classroom 직접 전투를 유지한다.
 - [ ] 가짜 로더로 순서를 검사하고 실제 씬으로 준비·위치·기록 회귀를 실행한다. `feat(P13): transition reality into themed combat`으로 커밋한다.
 
@@ -122,7 +122,7 @@ Runtime/Scenes/Tests는 `Zombie Shoot VR/Assets/VRFPS/` 기준이다. 새 어댑
 
 ## P13-f 별도 빌드·실기 인수·복원
 
-**Files:** 새 진단/복원 증빙, `docs/hardware-validation.md`, `docs/asset-provenance.md`, `docs/source-reproduction.md`, 실행 안내. 예정 산출물 `Builds/Windows/GSComparison/AbandonedSchool.exe`는 아직 없다.
+**Files:** 새 진단/복원 증빙, `docs/hardware-validation.md`, `docs/asset-provenance.md`, `docs/source-reproduction.md`, 실행 안내. 기존 산출물은 `Builds/Windows/GSComparison/AbandonedSchool.exe`이며, 최신 수정 전달본은 `Builds/Windows/GSComparison-Walk-20261101/AbandonedSchool.exe`(GUID298c029c12e347cf95ca51efe9dd5f57)다. [시험·복원 증빙](../evidence/room-walk-gun-scale.json)을 따른다.
 
 - [ ] 변경된 규칙의 EditMode/PlayMode와 기존 두 맵 회귀를 실행한다. BuildPipeline에 관찰 씬을 추가하되 개인 원본 FBX와 불필요 원본 이미지가 포함되지 않았는지 확인한다.
 - [ ] 검증된 API로 별도 Windows 빌드를 만들고 GUID·패키지 revision·파일 해시·크레딧을 기록한다. WallFix는 유지한다.

@@ -711,3 +711,15 @@ BootstrapPreview/WaveLab 빌드 모두 성공·종료0. 복원 WaveLab337개 파
 소스/로컬 자산3123파일(외부706)을 Library 없이 새폴더 `D:/VRFPS-Reproduction/room-b221bcb`에 복원하고 CRC/SHA를 확인했다. 새 복원본 Edit137통과/1제외, DX12 Play199/199 및 Windows 빌드 GUID6d5a0401b78f467c912d9fd1af87ddd9까지 재현했다. 동일 PC 캐시/라이선스 조건이며 Player 실기/main 통합 완료를 뜻하지 않는다.
 
 - [PR43 draft](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/43), base codex/p13-gs-player-probe. 실기 전 병합하지 않는다. 복원 후 Unity 재직렬화/관찰씬 재구성58파일 변경·누락0을 기록했으며, 두 테마 맵/GS payload는 유지됐다. 사용자 전달 빌드는 GUIDbcd55912a407424685af8703be58cc1d로 그대로다.
+
+## 2026-11-01 GS 이동·총1.2배 수정
+
+사용자의 기존 방 GS VR 확인을 반영해 PR43을 의존 브랜치로 병합했다(64d4237). 새 소스0088570은 GS 스틱 이동을 허용하고 K2/탄창1.2배와 탈착 크기 보존을 구현했다. Play201/201, Edit137통과/1제외, 독립 리뷰 지적2건 반영/추가 P1/P2 없음. Windows 별도 GSComparison-Walk-20261101 GUID298c029c12e347cf95ca51efe9dd5f57 성공. 이전 빌드357파일 모두 보존, 원본5개 해시 일치. [증빙](evidence/room-walk-gun-scale.json), [PR44 draft](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/44). 외부 리뷰/CI 없음. 변경 항목 VR 확인·최종 통합·보류 성능은 완료하지 않았다.
+
+11/1 후속 통합 감사: PR25~41은10/29 앞쪽부터 병합되어 후속 변경이 기본 통합 브랜치에 전파되지 않았다. origin/codex/p06-boss-crawler=9b12e4e, origin/main=fc5ff33, 최신 수용된 Room GS=origin/codex/p13-gs-player-probe의64d4237이다. 두 맵 파일의 diff는0이지만 기본 통합 대비 GS 관련223파일 차이가 남는다. PR44 실기 후 최신 GS→기본 통합→main의 트리/검증을 별도로 진행해야 한다. 결과보고서에 현재 기능·실기·복원·미완료 범위를 갱신했다.
+
+통합 사전 검사: a123b64에서 git merge-tree --write-tree로 origin/codex/p06-boss-crawler 및 origin/main 각각과의 병합을 계산했다. 두 결과 모두 충돌 없이 현재 HEAD tree e189b162e27006f2a5642250340d395624e31c6a와 일치했다. 실제 브랜치 병합은 수행하지 않았으며 PR44 실기 대기를 유지한다.
+
+0088570 새 Library 복원 검증 완료:3124파일 최초SHA 일치, Edit137통과/1제외, DX12 Play201/201, Windows 재빌드GUID584af24cd30f4af99d2bd98e86fcdebf 성공. 최종 변경58/누락0; 코드·테마 맵·GS payload 보존. 상세는 room-walk-gun-scale.json. 복원 Player 실행·새 수정 VR 인수는 미실행이며 전달 빌드는 유지한다.
+
+최종 기본 브랜치 통합용 [PR45 draft](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/45)를 생성했다. base codex/p06-boss-crawler, head codex/p13-room-movement-gun-scale. PR44 실기 확인/정리 이후 병합 예정이며 main 반영은 후속 단계다. 생성 시233파일 누적 diff, 테마 맵 diff0, merge-tree가 head tree와 동일함을 재확인했다. 테스트된 코드0088570 이후 변경은 증빙 문서뿐이다.

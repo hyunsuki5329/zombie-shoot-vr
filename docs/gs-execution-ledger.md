@@ -261,3 +261,14 @@ Ruling: P13-a의 실제 GS/VR 인수 대기 중 데이터 독립적인 b~e 구�
 - Import generated577950splats without shutdown leak warning. Actual renderer four-direction preview1/1 passed; actual Room GS/K2/fade/prepared Room flow10cycles1/1 passed. Controller poses are simulated. Full regression and separate Windows build are in progress; no new VR/performance acceptance claimed.
 
 - Room 소스b221bcb, PR43 draft. Play199/199 및 Edit137/1제외, 리뷰2건 수정/재검토, Windows 전달GUIDbcd55912a407424685af8703be58cc1d. 실제자료 포함 새소스3123파일 복원 후 같은 시험과 Windows 재빌드GUID6d5a0401b78f467c912d9fd1af87ddd9 성공. 복원후 변경58/누락0, 원본 게임5해시 보존. Quest Pro 인수 요청은 대기이며 성능 보류 유지.
+
+## 2026-11-01 사용자 VR 확인 및 변경 승인
+
+사용자는 실제 방 GS 빌드를 VR로 확인하고 “그거 말고 다른거는 괜찮았어”라고 보고했다. 방 GS 조이스틱 이동 허용과 총 크기1.2배가 새 요구다. 이 회신은 기존 전달GUIDbcd55912a407424685af8703be58cc1d의 나머지 동작에 대한 사용자 실기 확인으로 기록한다. 정량 성능·약5분·반복 횟수·독립적으로 열거하지 않은 모든 세부 시험을 완료했다고 확대하지 않는다.
+
+Ruling: 기존 이동 속도/CharacterController 충돌로 GS 감상 중 이동·회전을 허용하고 점프는 계속 차단한다. 정지/전환 중 이동 차단은 유지한다. K2 prefab root를1.2배로 조정해 외형과 총구/손잡이/탄창소켓을 함께 확대한다. 리그 추적 설정·맵 배치·입력 매핑을 유지하며 초기 탄창 인스턴스 스케일만 중복 확대를 막도록 보정한다. 변경된 두 항목은 새 빌드 확인 대상이다.
+
+- 리뷰: 이동 시험이 Tick의0.1초 상한을 고려하지 않아 구현 후0.16m를 실패로 판정한 것을 확인하고2회 입력으로 수정했다. 탄창 재부모화의 크기 변경은 별도 RED로 재현한 뒤 world scale 보존/공급 탄창1.2배/초기 탄창 중복 확대 방지로 수정했다. 재검토 추가 P1/P2 없음.
+- 최종 focused PlayMode19/19, EditMode137통과/1제외. 이전 전체 PlayMode200/201에서 재활용 탄창 시험의 공급 template이 실제 prefab1.2와 달리1이었던 fixture 불일치를 수정했다. 전체 재실행 진행 중. 원본 프로젝트5개 기준 해시는 모두 일치, 테마 맵 diff0.
+- 기존 Room GS PR43은 사용자 VR 회신과 기존 자동시험/복원/독립 리뷰를 근거로 codex/p13-gs-player-probe에 병합했다(64d4237232590b70b8fe273349c387b73aef87f4). 외부 리뷰/CI 없음. main 통합이나 정량 성능 완료를 뜻하지 않는다. 이번 이동/총기 변경의 VR 확인은 별도 대기다.
+- 최종 전체 DX12 PlayMode201/201 통과(movement-all-green.xml), EditMode137통과/1제외(movement-edit.xml). 실제 Room 전환10회/두맵 Wave1 회귀 포함. 수정 빌드의 사용자 VR 확인은 아직 수행하지 않았다.
