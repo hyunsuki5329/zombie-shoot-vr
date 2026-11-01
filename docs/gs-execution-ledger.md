@@ -279,3 +279,9 @@ User supplied three screenshots and chose simple wall/wardrobe infill. After use
 Prototype captures revealed plane-only infill left foreground artifacts; restricted cutouts improved the walls. Initial test attempt failed because synchronous scene roots were read before their load frame, not a valid feature RED. Review then found untagged test camera; actual flow passed while preview failed. Fixed camera ownership/tag restoration and re-reviewed: no remaining P1/P2. Final Play202/202 and Edit137 passed/1 ignored. Eight paired views exported; four after views visually inspected. Door/bed/fan/shelves remain; flat infill, lower scan seams, missing ceiling and other uncaptured areas remain. This is authored approximation, not recovered photographic detail or full headset acceptance.
 
 Windows revision/build and local repair overlay packaging continue; performance deferred, presentation user owned.
+
+## 2026-11-02 옷장 보정 사용자 피드백 반영
+
+넓은 갈색 면의 이질감 지적으로 사용자가 원래 옷장 무늬 보존/튀는 부분만 정리 방향을 승인했다. RestoreWardrobeDetail은 기존scene/meta 백업 후 Wardrobe side backing과 넓은 Wardrobe side noise만 제거한다. 벽3면/가림3개를 보존하며 옷장 상단2.7m 이상만 좁게 가리는 컷아웃을 추가한다. 보정그룹이 이동/회전/확대됐으면 중단한다. 원본PLY는 수정하지 않는다.
+
+저장된 씬 검증 RED: 기대3면/실제4면. 수정 후 RoomSurfaceRepairTests+RoomCaptureFlowTests2/2 통과(실제GS전환10회/두맵Wave1 포함). 동일 시점 옷장/벽 캡처 확인. 변경 전후 YAML에서 기존 객체 중 GS렌더러 컷아웃목록과 보정그룹 자식목록만 변경됨을 확인(기존serialized7개 제거/새3개 추가). 전체202개/EditMode는 이번 국소 authoring 변경 뒤 반복하지 않았다. 독립 재검토 호출은 도구 사용량 제한으로 실패하여 미완료이며 이전 리뷰 통과를 재사용하지 않는다. VR 외형 인수와 병합은 대기다.

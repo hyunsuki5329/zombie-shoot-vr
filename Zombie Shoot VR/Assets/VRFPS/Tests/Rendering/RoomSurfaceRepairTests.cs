@@ -32,7 +32,11 @@ namespace VRFPS.Tests
                 var cuts=group.GetComponentsInChildren<GaussianCutout>(true);
                 Assert.That(cuts.Length,Is.EqualTo(4));Assert.That(cuts.All(x=>x.m_Invert),Is.True,"Remove inside volumes, not outside");
                 Assert.That(group.GetComponentsInChildren<Collider>(true),Is.Empty);
-                Assert.That(group.GetComponentsInChildren<MeshRenderer>().Length,Is.EqualTo(4));
+                Assert.That(group.GetComponentsInChildren<MeshRenderer>().Length,Is.EqualTo(3));
+                Assert.That(group.Find("Wardrobe side backing"),Is.Null);
+                Assert.That(group.Find("Wardrobe side noise"),Is.Null);
+                var overhead=group.Find("Wardrobe overhead noise");Assert.That(overhead,Is.Not.Null);
+                Assert.That(overhead.position.y-overhead.lossyScale.y,Is.GreaterThanOrEqualTo(2.69f),"Retain wardrobe detail below overhead cleanup");
                 var renderer=root.GetComponentInChildren<GaussianSplatRenderer>();
                 Assert.That(cuts.All(x=>renderer.m_Cutouts.Contains(x)),Is.True);
                 source=root.GetComponentInChildren<GaussianRealitySource>();
