@@ -272,3 +272,10 @@ Ruling: 기존 이동 속도/CharacterController 충돌로 GS 감상 중 이동�
 - 최종 focused PlayMode19/19, EditMode137통과/1제외. 이전 전체 PlayMode200/201에서 재활용 탄창 시험의 공급 template이 실제 prefab1.2와 달리1이었던 fixture 불일치를 수정했다. 전체 재실행 진행 중. 원본 프로젝트5개 기준 해시는 모두 일치, 테마 맵 diff0.
 - 기존 Room GS PR43은 사용자 VR 회신과 기존 자동시험/복원/독립 리뷰를 근거로 codex/p13-gs-player-probe에 병합했다(64d4237232590b70b8fe273349c387b73aef87f4). 외부 리뷰/CI 없음. main 통합이나 정량 성능 완료를 뜻하지 않는다. 이번 이동/총기 변경의 VR 확인은 별도 대기다.
 - 최종 전체 DX12 PlayMode201/201 통과(movement-all-green.xml), EditMode137통과/1제외(movement-edit.xml). 실제 Room 전환10회/두맵 Wave1 회귀 포함. 수정 빌드의 사용자 VR 확인은 아직 수행하지 않았다.
+## 2026-11-02 Room surface repair
+
+User supplied three screenshots and chose simple wall/wardrobe infill. After user saved/closed Editor, backed up private RoomReality scene+meta (pre-authoring scene SHA b907a8fcf7f1a9e4f25dfe5d5a0f614c6eae776de7698a6b10aa4c1b530124cf). Added reversible Room Surface Repairs group: four opaque panels, four inverted GaussianCutout volumes (inside removed). No raw deletion; originalPLY SHA65f2f8c9 unchanged, theme-map diff0. Source calibration guard rejects mismatched world pose/scale. Local materials persist separately; duplicate application fails rather than overwriting authored edits.
+
+Prototype captures revealed plane-only infill left foreground artifacts; restricted cutouts improved the walls. Initial test attempt failed because synchronous scene roots were read before their load frame, not a valid feature RED. Review then found untagged test camera; actual flow passed while preview failed. Fixed camera ownership/tag restoration and re-reviewed: no remaining P1/P2. Final Play202/202 and Edit137 passed/1 ignored. Eight paired views exported; four after views visually inspected. Door/bed/fan/shelves remain; flat infill, lower scan seams, missing ceiling and other uncaptured areas remain. This is authored approximation, not recovered photographic detail or full headset acceptance.
+
+Windows revision/build and local repair overlay packaging continue; performance deferred, presentation user owned.

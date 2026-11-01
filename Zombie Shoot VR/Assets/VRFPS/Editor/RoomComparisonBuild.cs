@@ -11,6 +11,7 @@ public static class RoomComparisonBuild
 {
     public static void Build() => BuildTo("GSComparison");
     public static void BuildMovementRevision() => BuildTo("GSComparison-Walk-20261101");
+    public static void BuildSurfaceRepairRevision() => BuildTo("GSComparison-Repair-20261101");
     static void BuildTo(string directory)
     {
         if(!Application.isBatchMode)throw new InvalidOperationException("Use isolated batch project.");
