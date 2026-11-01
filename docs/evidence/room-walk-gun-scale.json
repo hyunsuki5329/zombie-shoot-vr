@@ -6,15 +6,39 @@
   "buildFiles": 357,
   "buildManifestSha256": "550b33c274322a79f6cb0fbc76b1be57e53c383cbcaf38cfcffb7eb52e18ef54",
   "buildLogSha256": "6ae5fb29e9b62297a9a97042108cc452a2bf14dbd949b3a2942572e226dc7b64",
-  "playMode": {"passed":201,"failed":0,"sha256":"186c9d17e0f5642991e29336e7d3d03646fcce219f624ca50e197e659d1e2fce"},
-  "editMode": {"passed":137,"failed":0,"ignored":1,"sha256":"d40c10b075601679f8976287845426852b62df1bd1b2fa28de33c9d835e3f7f7"},
-  "previousBuild": {"filesChecked":357,"changed":0},
+  "playMode": {
+    "passed": 201,
+    "failed": 0,
+    "sha256": "186c9d17e0f5642991e29336e7d3d03646fcce219f624ca50e197e659d1e2fce"
+  },
+  "editMode": {
+    "passed": 137,
+    "failed": 0,
+    "ignored": 1,
+    "sha256": "d40c10b075601679f8976287845426852b62df1bd1b2fa28de33c9d835e3f7f7"
+  },
+  "previousBuild": {
+    "filesChecked": 357,
+    "changed": 0
+  },
   "originalProjectBaselineHashes": "5/5 unchanged",
   "sourceZipSha256": "08b462505b42e1a5635d1cd4baad9dc082e6502eb2a6ce768350766f1fcb9a85",
   "review": "Two P2 findings fixed; independent re-review no remaining P1/P2. External GitHub reviews/CI absent.",
   "pr": "https://github.com/hyunsuki5329/zombie-shoot-vr/pull/44",
   "headset": "Prior bcd559 build user reported other behavior okay. New movement/weapon revision awaits VR check.",
-  "restoration": "New tracked-source.zip exported; reuse prior local-assets-with-meta.zip. This revision has not been restored into fresh Library.",
+  "restoration": "Fresh Library restored from 2418 tracked +706 external files; all3124 initial SHA matched. Configure, fixture, Edit137 passed/1 ignored, DX12 Play201/201, Windows build succeeded. Same PC package cache/license; restored Player not executed.",
   "performance": "deferred",
-  "presentation": "user owned"
+  "presentation": "user owned",
+  "restoredBuildGuid": "584af24cd30f4af99d2bd98e86fcdebf",
+  "restoredBuildManifestSha256": "d89c77a7d4c1ade7143f464c394b130bd97ba30c4c26e79d5b8908538c31dc36",
+  "restoredPostUnityAudit": {
+    "changed": 58,
+    "missing": 0,
+    "sha256": "f935d83339c32ee076226152c54f1413aaf9aa3b5c0b4477ee65faf58772a2fb"
+  },
+  "restorationLogHashes": {
+    "movement-restored-edit.xml": "f3a8776c336334404a8c26d53f39dc8829241c0aac99945a6d16fc460bd5cb24",
+    "movement-restored-play.xml": "a42829c90625cc48deab40c7a0187143eb442e663adc8cab16ea1903fe180e22",
+    "movement-restored-build.log": "9b7ae88b5a0117e42b989be661bae380793a1f27e89e2d616c99b53a071f6752"
+  }
 }

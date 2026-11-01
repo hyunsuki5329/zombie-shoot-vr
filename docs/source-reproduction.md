@@ -266,3 +266,5 @@ Unity 임포트/빌드가56개 파일을 다시 직렬화했고 누락은0이다
 
 0088570 복원 진행: `D:/VRFPS-Reproduction/room-walk-0088570`에 소스2418파일과 기존 로컬 자산706파일을 새로 풀었다. ZIP 내부와 추출 파일의 SHA 비교3124/3124 일치, 최초 Library 없음 확인 후 Unity 구성을 시작했다. 이 단계는 파일 무결성 증빙이며 자동 시험·빌드 성공을 대신하지 않는다.
 복원본 RoomRealitySetup.Configure는 ROOM_REALITY_CONFIGURED 마커와 exit0으로 종료했다. 자동 시험 fixture 생성은 별도 단계로 진행한다.
+
+복원 검증 완료(0088570): 새 Library에서 Configure→fixture→EditMode137통과/1제외→DX12 PlayMode201/201→BuildMovementRevision이 성공했다. 복원 빌드 GUID584af24cd30f4af99d2bd98e86fcdebf,356파일 해시를 기록했다. 최종 archive 대조 변경58/누락0이며 게임 코드·두 테마 맵·GS payload는 유지됐다. 동일 PC 패키지 캐시/라이선스 조건이고 복원 Player는 실행하지 않았다. 사용자 전달GUID298c029c12e347cf95ca51efe9dd5f57은 교체하지 않았다. 위의 복원 미수행/진행 중 기록은 이 결과로 갱신한다.

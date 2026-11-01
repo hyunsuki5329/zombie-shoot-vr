@@ -8,7 +8,7 @@
 
 후속 소스0088570은 GS 조이스틱 이동과 K2/탄창1.2배를 반영했다. Windows 실행본은 격리 worktree의 `Zombie Shoot VR/Builds/Windows/GSComparison-Walk-20261101/AbandonedSchool.exe`, GUID298c029c12e347cf95ca51efe9dd5f57이다. DX12 PlayMode201/201, EditMode137통과/1제외 및 Windows 빌드 성공을 확인했다. 해당 수정의 VR 확인은 아직 받지 않았다. 기존 맵과 이전 실행본357파일은 보존됐다. [수정 증빙](evidence/room-walk-gun-scale.json).
 
-실제 자료를 포함한 이전 b221bcb 묶음은 새 Library 복원→자동 시험→Windows 빌드까지 확인했다. 최신0088570 소스 ZIP은 별도 보존했지만 해당 수정본의 새 Library 복원은 아직 수행하지 않았다. 정량 성능·약5분/반복 시험은 보류 상태이고 발표자료·영상은 사용자 담당이다. 실제 강의실 GS는 후속 자료 대기이며 기존 Classroom 직접 전투는 유지된다.
+실제 자료를 포함한 이전 b221bcb 묶음은 새 Library 복원→자동 시험→Windows 빌드까지 확인했다. 최신0088570 소스 ZIP도 새 Library에서 Edit137통과/1제외·Play201/201·Windows 재빌드GUID584af24cd30f4af99d2bd98e86fcdebf로 복원을 검증했다. 동일 PC 캐시/라이선스 조건이며 복원 Player는 실행하지 않았다. 정량 성능·약5분/반복 시험은 보류 상태이고 발표자료·영상은 사용자 담당이다. 실제 강의실 GS는 후속 자료 대기이며 기존 Classroom 직접 전투는 유지된다.
 
 Git의 PR 병합 표시는 전체 통합과 다르다. 11/1 확인에서 기본 통합 브랜치codex/p06-boss-crawler는9b12e4e, main은fc5ff33이며 최신 GS는codex/p13-gs-player-probe와 PR44에 있다. PR25~41이 앞쪽부터 병합되어 이후 변경은 자동으로 앞쪽 브랜치에 전파되지 않았다. 최신 브랜치→기본 통합 브랜치의 후속 통합과 main 반영을 별도로 검증해야 한다. 최종 완수/제출 완료로 표시하지 않는다.
 ## 이전 WallFix 결과 기준 (2026-10-18)
@@ -134,4 +134,3 @@ Yaku 옷 끝 흰 영역의 원인은 알파가 없는 RGB 텍스처 연결이었
 ## 사용자 무기 음원 후속 적용
 
 세 무기음은 사용자 제공 MP3로 교체했다. 실제 발사 이벤트에 맞춘0.38초 한 발 클립과 고정4채널 잔향 재생을 사용한다. 앞선 합성 무기음 설명은 초기 상태 기록이며 현재 출처/가공은 [음원 문서](user-weapon-audio.md)를 따른다. EditMode60/60·PlayMode118/118·Python23/23과 복원 실패 안전성을 확인했으며, 사용자는 후속 실행에서 단발·연사·장전·빈 총 소리가 모두 괜찮다고 확인했다. 최신 Room의 전체 실기는 별도 대기다.
-
