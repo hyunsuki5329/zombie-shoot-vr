@@ -9,7 +9,9 @@ using UnityEngine.Rendering;
 
 public static class RoomComparisonBuild
 {
-    public static void Build()
+    public static void Build() => BuildTo("GSComparison");
+    public static void BuildMovementRevision() => BuildTo("GSComparison-Walk-20261101");
+    static void BuildTo(string directory)
     {
         if(!Application.isBatchMode)throw new InvalidOperationException("Use isolated batch project.");
         var scenes=new[]{"Assets/VRFPS/Scenes/Bootstrap.unity","Assets/VRFPS/Scenes/Combat.unity","Assets/VRFPS/Scenes/Maps/Room.unity","Assets/VRFPS/Scenes/Maps/Classroom.unity",RoomRealitySetup.ScenePath};
@@ -19,7 +21,7 @@ public static class RoomComparisonBuild
         var target=BuildTarget.StandaloneWindows64;var named=NamedBuildTarget.Standalone;
         var automatic=PlayerSettings.GetUseDefaultGraphicsAPIs(target);var apis=PlayerSettings.GetGraphicsAPIs(target);
         var backend=PlayerSettings.GetScriptingBackend(named);
-        var output=Path.GetFullPath("Builds/Windows/GSComparison/AbandonedSchool.exe");Directory.CreateDirectory(Path.GetDirectoryName(output));
+        var output=Path.GetFullPath(Path.Combine("Builds/Windows",directory,"AbandonedSchool.exe"));Directory.CreateDirectory(Path.GetDirectoryName(output));
         try
         {
             PlayerSettings.SetUseDefaultGraphicsAPIs(target,false);PlayerSettings.SetGraphicsAPIs(target,new[]{GraphicsDeviceType.Direct3D12});

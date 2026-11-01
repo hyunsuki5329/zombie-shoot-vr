@@ -6,6 +6,8 @@ namespace VRFPS.Tests {
   [Test] public void ImportedVisualsPreserveInteractiveAnchorsAndHaveUsableGeometry() {
    var rig=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/VRFPS/Prefabs/PlayerRig.prefab");
    var gun=rig.GetComponentInChildren<K2Controller>(true);
+   Assert.That(gun.transform.localScale,Is.EqualTo(Vector3.one*1.2f));
+   Assert.That(Vector3.Distance(gun.GetComponentInChildren<MagazineToken>(true).transform.lossyScale,Vector3.one*1.2f),Is.LessThan(.0001f));
    var visual=gun.transform.Find("GAMGO Visual");
    Assert.That(visual,Is.Not.Null,"K2 final model missing");
    foreach(var path in new[]{"Assets/VRFPS/Prefabs/Weapons/K2.prefab","Assets/VRFPS/Prefabs/Weapons/Magazine.prefab"}) {
@@ -29,6 +31,7 @@ namespace VRFPS.Tests {
     }
    }
    var magazine=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/VRFPS/Prefabs/Weapons/Magazine.prefab");
+   Assert.That(magazine.transform.localScale,Is.EqualTo(Vector3.one*1.2f));
    var magVisual=magazine.transform.Find("GAMGO Visual");
    Assert.That(magVisual,Is.Not.Null);
    Assert.That(magazine.GetComponent<MagazineToken>(),Is.Not.Null);

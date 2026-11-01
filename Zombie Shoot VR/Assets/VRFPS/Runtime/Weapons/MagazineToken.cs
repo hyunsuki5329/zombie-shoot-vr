@@ -78,7 +78,7 @@ namespace VRFPS
         {
             HeldBy = hand;
             SetAttachedPhysics();
-            transform.SetParent(hand, false);
+            transform.SetParent(hand, true);
             transform.localPosition = Vector3.zero;
             transform.localRotation = Quaternion.identity;
         }
@@ -99,7 +99,7 @@ namespace VRFPS
             HeldBy = null;
             mountedIn = socket;
             SetAttachedPhysics();
-            transform.SetParent(socket.transform, false);
+            transform.SetParent(socket.transform, true);
             transform.localPosition = Vector3.zero;
             transform.localRotation = Quaternion.identity;
         }
