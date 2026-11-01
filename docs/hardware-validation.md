@@ -151,3 +151,20 @@ T15 팔 UI·포인터·가림:
 ## 2026-10-07 사용자 실기 확인 갱신
 
 최신 ClothingFixMenuLab에서 옷 흰 테두리·탄창 정렬·투사체 속도·놓은 탄창 10초 회수의 정상 동작을 사용자가 확인했다. [직접 보고와 확인 범위](evidence/2026-10-07-vr-fixes-confirmed.md). 이전 문단의 해당 네 항목 실기 대기는 이 기록으로 갱신한다. 전체 P단계, 성능, 실제 두 맵 및 최종 제출물의 완료 판정은 아니다.
+
+## 2026-10-31 방 GS Windows 빌드 — 실기 대기
+
+소스b221bcb, GUID `bcd55912a407424685af8703be58cc1d`, Windows x64 Mono Development/DX12. 실행 파일: `C:/Users/User/.codex/worktrees/gs-comparison-intro/Zombie Shoot VR/Zombie Shoot VR/Builds/Windows/GSComparison/AbandonedSchool.exe`. 같은 폴더 README-Room-GS.txt를 따른다. 이전 WallFix 인수를 이번 API/GS 인수로 대체하지 않는다.
+
+1. 기존 Quest Pro PC VR 연결 후 Controls를 닫고 Room의 Start in Reality를 선택한다. 양눈 GS·총·손, 고개/손 추적, 방 크기와 바닥 높이를 확인한다. 오른쪽 옷장 벽 약4.20m 기반 초기 배치이며 정확한 실기 보정은 미완료다.
+2. 이동/A점프는 차단, 회전·양손 사격·수동 재장전은 유지되는지 확인한다. 바이러스를 맞히면1.2초 암전→최소0.25초 검정→기존Room1.2초 밝아짐→8초 준비→웨이브1 순서다. 검정 중 양눈/총/손이 함께 가려져야 한다.
+3. X정지/복귀·메뉴 복귀/재진입·사망 후 Retry를 확인한다. Retry는 테마 전투로 바로 간다. Classroom은 Direct Combat을 사용한다.
+
+실기 결과는 아직 받지 않았다. 자동 Play199/199, Edit137통과/1제외는 이 사용자 검증을 대신하지 않는다. 성능 로그 보류·발표자료 사용자 담당을 유지한다.
+
+## 2026-11-01 사용자 확인과 수정 확인 범위
+
+사용자는 위 bcd559 빌드를 VR로 실행했고 “실제 방 gs 에서도 조이스틱으로 움직일 수 있게”, “총 크기도1.2배”, “그거 말고 다른거는 괜찮았어”라고 회신했다. 위 10/31 실기 대기는 이 보고 범위에서 해소됐다. 정량 성능/반복 횟수를 측정했다는 뜻은 아니다.
+
+후속 GSComparison-Walk-20261101 빌드에서는 Room Start in Reality에서 왼쪽 스틱 이동/벽 충돌, 총1.2배 외형과 양손 잡기, 탄창 탈착·떨어뜨리기·새 탄창 삽입의 크기를 확인한다. GS 점프는 계속 차단되며 정지/암전 중 이동은 차단한다. 이전에 괜찮다고 확인한 나머지 항목의 재확인을 별도로 요구하지 않는다. 새 빌드 GUID와 자동 시험 결과는 후속 증빙에 기록한다. 성능 로그 보류와 발표자료 사용자 담당은 유지한다.
+- 수정 빌드 식별자: 소스0088570, GUID298c029c12e347cf95ca51efe9dd5f57. 실행 파일은 기존 worktree의 Zombie Shoot VR/Builds/Windows/GSComparison-Walk-20261101/AbandonedSchool.exe이며 README-Room-GS.txt를 함께 제공한다.

@@ -593,3 +593,133 @@ BootstrapPreview/WaveLab 빌드 모두 성공·종료0. 복원 WaveLab337개 파
 - Intro에서 Run 시작 없이 기존 발사·재장전·피드백을 사용하도록 컨텍스트를 분리했다. 프로필 검증과 첫 유효 바이러스 피격 계약도 추가했다.
 - 리뷰의 준비→전투 입력 회귀, 정지 복귀의 발사 간격, 파괴 순서 오류를 실패 시험으로 재현하고 수정했다. 최종 EditMode124통과/개인 스캔1제외, PlayMode138/138. [증빙](evidence/intro-weapon-context.json).
 - 실제 GS는 사용자가 Splat으로 새로 촬영 예정. 실제 관찰 자산·암전·전투 연결·VR 인수는 미완료이며 draft PR 단계다. 성능 로그 보류 및 발표자료 사용자 담당을 유지한다.
+
+## 2026-10-21 P13 준비·배치·시작 분리
+
+- PrepareMap은 전투를 시작하지 않으며, BeginPreparedRun은 첫 시작을1회만 수행한다. 첫 배치를 유지하고 재도전은 기본 스폰으로 돌아간다. Intro에서 회전만 허용하도록 이동 권한을 분리했다.
+- 독립 리뷰의 시작 실패 복구 및 테마 앵커 검증 누락을 실패 시험으로 재현·수정했다. PlayMode143/143, EditMode124통과/1제외. [증빙](evidence/prepared-combat.json). 원본 맵·사용자 설정·WallFix 해시 보존.
+- PR25 위 후속 draft 단위이며 암전·메뉴·비동기 취소·실제 GS/VR 연결은 아직 미완료다.
+
+## 2026-10-21 P13 화면 페이드
+
+- 정지·취소·요청 대체를 지원하는 unscaled 페이드와 월드 가림 셰이더를 추가했다. 실패 시험3개→통과, 전체 graphics PlayMode147/147, 리뷰 시험 보완 후 DX12 대상4/4통과. [증빙](evidence/screen-fade.json).
+- GPU 시험은 단안 배경/근접 물체의 검정·복원과 자원 해제를 확인했다. XR 양안·GS 합성·실제 손/총·메뉴 위 표시·빌드 포함은 미검증이다.
+
+## 2026-10-21 P13 비동기 작업 수명 기반
+
+- 요청자 파괴 후에도 비동기 씬 작업을 관찰하고 중첩 오류를 정리 경로로 전달하는 IntroAsyncOperation을 추가했다. 실제 씬 load/unload 및 전체 graphics PlayMode150/150통과, 독립 검토 중요 결함0. [증빙](evidence/intro-operation-drain.json).
+- 전체 전환 Controller/세대 취소/30초 제한과 메뉴 연결은 아직 미완료다.
+
+## 2026-10-21 P13 전환 Controller
+
+- 현실 미리보기→첫 명중→암전→현실 해제→테마 준비/배치→밝아짐→전투1회 흐름을 연결했다. 정지·중복·timeout·늦은 완료·정리 재시도·소유 씬 파괴 경계를 시험했다.
+- 독립 리뷰3건과 취소 후 배치 결함을 RED로 재현·수정했다. 최종 graphics PlayMode155/155, EditMode124통과/1제외. [증빙](evidence/comparison-controller.json).
+- 실제 CombatSession + fake 현실 어댑터 시험이며 실제 GS/메뉴/양안/전체반복 인수는 아직 미완료다.
+
+## 2026-10-21 P13 비교 메뉴 연결
+
+- 비교 중 Run 종료 이벤트가 결과 화면을 열지 않도록 메뉴 소유권을 연결했다. 정지/설정/복귀, 전투 Retry 차단, 정리 실패 Retry, 새 진입 잠금과 자료 누락 안내를 구현했다.
+- 실제 SelectReality 진입과 버튼 정리 재시도까지 포함해 graphics PlayMode156/156, EditMode124통과/개인 스캔1제외. 독립 리뷰 중요 지적 없음. [증빙](evidence/intro-menu.json).
+- 실제 GS 선택 버튼/관찰 씬 바인딩, 암전 위 메뉴 표시, 양안 인수는 아직 미완료다. 사용자는 Splat으로 재촬영 예정이며 성능 로그 보류·발표자료 사용자 담당을 유지한다.
+
+## 2026-10-21 P13 암전 위 메뉴 표시
+
+- 실제 Menus 프리팹이 암전에 가려지는 GPU 실패를 재현했다. 기존 XR UI/NoZTest 셰이더를 참조하는 전용 재질(queue5000)을 메뉴 Graphic에 공유하여 페이드4999 뒤에 표시한다.
+- DX12 전체 PlayMode157/157통과. 밝은 버튼 이미지를 제외해 폰트 픽셀만 검증하도록 보강한 후 대상5/5통과. 독립 리뷰 중요 지적 없음. [증빙](evidence/menu-overlay.json).
+- 단안 렌더 시험이며 실제 GS 합성·양안·암전 중 컨트롤러 조작·Player 빌드는 미검증이다. 원본 맵/설정/WallFix 해시5개 보존 확인.
+
+## 2026-10-21 P13 바이러스 자산 준비
+
+- 원본 SHA 검증/지정 파일 추출/URP 색상·노멀·smoothness/0.8m 프리팹 재생성 절차를 추가했다. 미존재 실패→EditMode125통과/개인 스캔1제외. DX12 단안 미리보기 확인 및 독립 리뷰 중요 지적0.
+- 원본·생성물/meta·preview를 로컬 복원 ZIP으로 보관하고 CRC/SHA 확인. [증빙](evidence/intro-virus-assets.json).
+- IntroTarget 레이어/마스크, 실제 관찰 씬 배치, 간소화·VR·빌드 및 새 소스 복원은 미완료다.
+
+## 2026-10-21 P13 도입부 피격 레이어
+
+- IntroTarget(layer13)을 추가해 물리 접촉을 끄고, K2 도입부 Raycast는 기존 worldSolidMask와 IntroTarget만 사용하도록 분리했다. 전투의 기존 shotMask는 유지한다. 로컬 바이러스 프리팹에도 전용 레이어를 적용했다.
+- 누락3건 RED→DX12 PlayMode161/161, EditMode125통과/1제외. 임포트한 바이러스 실제 Raycast, 물리 접촉 비활성, 벽/총구 차단과 전투 마스크 복귀 확인. 독립 리뷰 중요 지적0. [증빙](evidence/intro-hit-layers.json).
+- 실제 GS 충돌 프록시·VR 판정 외형·최종 빌드는 미완료다. 원본 맵/설정/WallFix 해시5개 보존 확인.
+
+## 2026-10-21 P13 관찰 씬 구성 검증
+
+- RealitySceneRoot에 map/dataId·소유/활성 참조·유일 앵커·배율·전용 충돌·씬 전체 중복 및 카메라/리그/전투 actor 혼입 검증을 추가했다. GS 준비 상태를 나타내는 값은 아니다.
+- 잘못된 구성8건 RED→통과. 독립 리뷰의 작은 배율 허용 결함은3건 RED로 재현하고 양수/상대 오차로 수정했다. 최종 EditMode137통과/개인 스캔1제외. [증빙](evidence/reality-scene-contract.json).
+- 관찰 씬 로더 호출 연결, 실제 GS 준비·충돌/앵커 실측·VR 인수는 미완료다.
+
+## 2026-10-22 P13 관찰 씬 로더
+
+- SceneRealityPresentation이 실제 additive 씬 로드→RealitySceneRoot 검증→렌더러 identity/ready/resources 확인을 연결한다. 렌더 자원 해제 확인 전 씬을 해제하지 않으며 실패 시 소유권을 유지해 재시도한다. 다른 세션의 씬은 채택/해제하지 않는다.
+- 4건 RED→GREEN, 독립 리뷰의 동기 Release 재진입 결함1건 RED→시작 잠금 수정. 최종 DX12 PlayMode169/169. [증빙](evidence/reality-scene-loader.json).
+- 실제 씬10회 반복이지만 렌더러는 시험 대역이다. 실제 GS 버퍼 반복 검증·패키지 bridge·메뉴/Bootstrap 연결·XR·빌드는 미완료다.
+
+## 2026-10-22 P13 실제 GS 렌더러 수명
+
+- 소스 `f535106`, [PR36](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/36) draft, base `codex/p13-reality-loader`. UnityGaussianSplatting revision `2c6fed37` 고정; 기존 dependency 버전·게임 pipeline/MSAA/API 설정 및 원본 맵/설정/WallFix 해시5개 보존.
+- GaussianRealitySource가 실제 GPU 준비/해제를 확인한다. 재현 가능한 합성256 GS와 별도 시험 pipeline을 사용하며, 운영 씬/Bootstrap 연결은 아직 없다.
+- 초기3건 RED→GREEN. 독립 리뷰 P2 두 건(실패한 sorter 캐시 잔존, 필수 buffer 누락을 ready로 오판)을 RED로 재현 후 수정했다. 최종 DX12 PlayMode182/182, EditMode137통과/개인스캔1제외. [증빙](evidence/gs-renderer-bridge.json).
+- 실제 GS 픽셀 출력/불투명 기하 가림/암전 복원, GPU수명10회,19buffer fields·5Unity objects·등록 해제 확인. 실제 방·XR·전체전환10회·Windows Player stripping·새복원 검증으로 확대하지 않는다.
+- Fixture 임포트 종료 시 Persistent allocation1 경고를 관찰했으며 원인은 미진단이다. 전체 프로세스 메모리 무누수로 주장하지 않는다. 다음은 도입부용 pipeline 선택/복원 및 운영 연결이다. 성능은 보류, 발표자료는 사용자 담당 유지.
+
+## 2026-10-22 P13 GS 렌더 설정 선택·복원
+
+- 소스 `2d98a8c`, [PR37](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/37) draft, base `codex/p13-gs-renderer`. GsPipelinePresentation이 관찰 중 quality override와 카메라 renderer index를 선택하고, 내부 자원 해제 성공 후 원래 값을 복원한다. 실패한 해제는 설정·소유권을 유지해 재시도한다.
+- 최초6건 RED→GREEN, 확장9통과/1실패에서 해제 중 ready가 남는 문제를 재현·수정했다. 최종 DX12 PlayMode192/192. 합성 GS 실제 렌더→해제→기존 게임 pipeline 렌더 복원, 품질 단계 변경/외부 override/카메라 삭제/요청자 폐기/재진입 시험 포함. [증빙](evidence/gs-pipeline-scope.json).
+- 독립 정적 리뷰 추가 P1/P2 없음. 원본 보존 해시5/5 일치, 작업본의 저장된 GraphicsSettings/QualitySettings/ProjectSettings diff 없음. runtime 변경만인 이번 단위에서 EditMode는 재실행하지 않았다.
+- 운영 Bootstrap·관찰 씬 연결, 실제 촬영본/앵커, XR/전체전환, Windows/Player stripping/새복원은 여전히 미완료다. 다음은 이 adapter를 실제 진입 경로에 연결하는 작업이다.
+
+## 2026-10-22 P13 실제 진입 메뉴 연결
+
+- 소스 `efc832c`, [PR38](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/38) draft, base `codex/p13-gs-pipeline-scope`. 기존 Combat 진입에서 Session 초기화 후 controller/실제 scene loader/scoped GS pipeline/fade를 연결한다. Room·Classroom의 현실 진입과 직접 전투 버튼을 분리하고, 촬영본 미설정 이유를 표시한다.
+- 첫 누락1건 RED, 연결 후 초기 Controls 화면이 사라지는2건 RED를 확인해 설치 이벤트 순서를 수정했다. 최종 DX12 PlayMode193/193, EditMode137통과/개인스캔1제외. 실제 메뉴 PNG를 확인했으며 운영 GS pipeline으로 합성 GS 픽셀 렌더 시험도 통과했다. [증빙](evidence/intro-bootstrap.json).
+- 독립 정적 리뷰 추가 P1/P2 없음. 원본 보존 해시5/5 일치, 기존 Room/Classroom·Graphics/Quality 설정 변경 없음. 실제 촬영본의 성공 경로·XR·Player·새복원은 미검증이므로 draft를 유지한다.
+
+## 2026-10-22 P13 실제 GS 전환 통합 시험
+
+- 소스 `2e81403`, [PR39](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/39) draft, base `codex/p13-intro-bootstrap`. 운영 Bootstrap/adapter/씬 로더/실제 GPU GS/K2 Raycast/fade/기존 Room 준비 인계를10회 반복하고 Classroom 직접 진입도 확인했다. 관찰 자료는 합성256 GS이고 fixture 씬의 시험 중 구성만 바꿨다.
+- 최초 단독1/1 통과. 리뷰에서 RunStarted 순간 확인 누락과 실패시 시험 전역 설정 오염 가능성2건을 보강했다. 동기 시작 경계에서 alpha0/관찰씬 해제/GPU 자원 반환을 검사하고 teardown이 원래 quality slot/asset을 독립 복원한다. 최종 전체 DX12 PlayMode194/194. [증빙](evidence/gs-flow-integration.json).
+- 원본 해시5/5 일치, 기존 두 맵/저장된 Graphics·Quality 설정 diff 없음. 초기8초·HP100·30발·처치0을 확인하기 위해 run clock을 껐다. 이 시험을 Wave1 전투·컨트롤러 실입력·양안·실제 방 인수로 확대하지 않는다. EditMode는 시험만 추가한 이번 단위에서 재실행하지 않았다.
+
+## 2026-10-23 P13 새 소스 복원 리허설
+
+- 소스6ea502b를 Git archive로 내보내고 로컬 외부 자산687개 파일을 GUID/meta와 함께 별도 ZIP에 보관했다. 2,991개 파일을 `D:/VRFPS-Reproduction/gs-6ea502b/`에 복원하고 CRC/SHA를 대조했다. Library와 실제 촬영 GS는 포함하지 않았다. 합성 GS는 새 복원본에서 재생성했다.
+- 새 복원본 EditMode137통과/개인스캔1제외, DX12 PlayMode194/194. 기존 BootstrapSetup.Build의 Windows x64 Mono 개발 빌드 성공: GUID54d64a1919184786b7dc5d4befc087a6, 산출물351파일 SHA 기록. [증빙](evidence/p13-source-restore.json).
+- 동일 PC 패키지 캐시/라이선스를 사용했다. Player 실행·실제 API·GS stripping·XR은 미검증이며 최종 GSComparison 배포본이 아니다. 성능 수집은 수행하지 않았다.
+- Unity 임포트/빌드 후56개 파일의 바이트 변경, 누락0을 기록했다. 샘플 메타 외 Volume filter/URP prefilter·runtime settings/preloadedAssets 변경을 포함한다. 기존 두 맵/게임 소스/외부 자산은 변경 목록에 없다. 원본 프로젝트에 복사하지 않았고 원본 기준 해시5/5 일치.
+- fixture importer 종료의 Persistent allocation1 경고가 재현됐다. 원인은 미진단이며 전체 메모리 무누수 주장은 하지 않는다. 실제 촬영본/앵커·VR·최종 빌드·그 최종본의 복원은 계속 남아 있다.
+
+## 2026-10-23 P13 실제 Windows GS 진단
+
+- 소스4c84f7d, [PR41 draft](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/41), base codex/p13-source-restore. 전용 실행 옵션에서만 합성 GS 표시/검정/해제10회와 JSON·exitcode를 기록하는 별도 Player probe를 추가했다. 사용자 기록/성능 수집은 없다.
+- 초기2건 RED→GREEN. 독립 리뷰 P2(최종 inventory 관찰 예외가 보고/종료를 건너뜀)를2통과/1실패로 재현하고 전체 실행 오류를 실패 보고로 변환했다. 최종 DX12 PlayMode197/197. 재검토 응답에서 수정 확인·추가 P1/P2 없음; 이후 reviewer final은 사용량 제한으로 종료됐다.
+- 실제 Windows x64 Mono 개발 빌드 GUIDa02759d14b874012ab295b60a0454cdc: Direct3D12,10회/검정10프레임/최소 GS픽셀23648, 자원 반환·pipeline 복원 true, exit0. 같은 빌드 -nographics는 성공false/0회/정리true/exit1. 출처 포함343파일 SHA 기록. [증빙](evidence/gs-player-probe.json).
+- managed stripping=Disabled이며 이 조건에서 포함된 실제 셰이더·반사 경로를 검증했다. OpenXR는 HMD unavailable이었다. 실제 방·양안·full Player 게임 전환·IL2CPP/상위 stripping·최종 GSComparison 인수는 미완료다. 원본 해시5/5 일치. 진단 추가만인 이번 단위의 EditMode는 재실행하지 않았다.
+
+## 2026-10-23 P13 PLY 임포트 수명 수정
+
+- 기준2ae0bf4에서 정상·필수 속성 누락·잘린 PLY 각10회로 Persistent30개 누수를 재현하고 raw/실패 배열 해제로 수정했다. 같은30회 재실행에서 종료 누수 경고0, DX12 PlayMode197/197 통과. [증빙](evidence/gs-import-lifetime.json).
+- 고정 package1.1.1 revision2c6fed37을 embedded로 보관해 Git 소스 복원에 포함한다. 원본90파일 대조에서 reader2개와 package fingerprint 제거만 변경; runtime/shader/meta/MIT 보존. upstream 공백은 바이트 비교 보존을 위해 정리하지 않았다.
+- 독립 리뷰 P1/P2 없음. 원본 기준5해시 일치. Editor 임포트 한정 수정으로 이번 EditMode/Player 빌드·XR 재검증은 하지 않았으며, 후처리 예외는 코드 검토만 수행했다. 이전 빌드/복원 ZIP에는 이번 패치가 없다. 실제 GS/앵커와 최종 VR 인수는 계속 미완료.
+
+- 수정 소스62cf6db, [PR42](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/42), base codex/p13-gs-player-probe. 외부 GitHub review/CI 없음(실제 조회), 독립 정적 리뷰와 위 자동 검증으로 Editor 한정 단위의 병합 조건을 충족했다. 의존 브랜치로 병합하며 main/P13 전체 인수로 표시하지 않는다.
+
+## 2026-10-31 방 GS 연결
+
+소스b221bcb: 실제 방577950GS→기존K2 명중→암전→Room 준비10회 및 두맵 웨이브1 시작을 확인했다. 전체DX12 Play199/199, Edit137통과/1제외. 독립 리뷰 P2 두건(미리보기 폴더/임포트 품질) RED/GREEN 후 재검토 통과. 원본 기준5해시 일치. Combat 변경은 Room profile 연결1줄이며 기존맵 변경0.
+
+별도 Windows 빌드 GUIDbcd55912a407424685af8703be58cc1d,357파일 해시 기록, 원본PLY 패킹0. 실행 안내는 [실기 안내](hardware-validation.md), 상세는 [증빙](evidence/room-capture-integration.json). 실제 Player/XR 인수는 미실행으로 남기고 사용자에게 정확한 빌드를 안내했다. 초기420cm 기준 보정·촬영 누락 구간도 공개했다.
+
+소스/로컬 자산3123파일(외부706)을 Library 없이 새폴더 `D:/VRFPS-Reproduction/room-b221bcb`에 복원하고 CRC/SHA를 확인했다. 새 복원본 Edit137통과/1제외, DX12 Play199/199 및 Windows 빌드 GUID6d5a0401b78f467c912d9fd1af87ddd9까지 재현했다. 동일 PC 캐시/라이선스 조건이며 Player 실기/main 통합 완료를 뜻하지 않는다.
+
+- [PR43 draft](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/43), base codex/p13-gs-player-probe. 실기 전 병합하지 않는다. 복원 후 Unity 재직렬화/관찰씬 재구성58파일 변경·누락0을 기록했으며, 두 테마 맵/GS payload는 유지됐다. 사용자 전달 빌드는 GUIDbcd55912a407424685af8703be58cc1d로 그대로다.
+
+## 2026-11-01 GS 이동·총1.2배 수정
+
+사용자의 기존 방 GS VR 확인을 반영해 PR43을 의존 브랜치로 병합했다(64d4237). 새 소스0088570은 GS 스틱 이동을 허용하고 K2/탄창1.2배와 탈착 크기 보존을 구현했다. Play201/201, Edit137통과/1제외, 독립 리뷰 지적2건 반영/추가 P1/P2 없음. Windows 별도 GSComparison-Walk-20261101 GUID298c029c12e347cf95ca51efe9dd5f57 성공. 이전 빌드357파일 모두 보존, 원본5개 해시 일치. [증빙](evidence/room-walk-gun-scale.json), [PR44 draft](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/44). 외부 리뷰/CI 없음. 변경 항목 VR 확인·최종 통합·보류 성능은 완료하지 않았다.
+
+11/1 후속 통합 감사: PR25~41은10/29 앞쪽부터 병합되어 후속 변경이 기본 통합 브랜치에 전파되지 않았다. origin/codex/p06-boss-crawler=9b12e4e, origin/main=fc5ff33, 최신 수용된 Room GS=origin/codex/p13-gs-player-probe의64d4237이다. 두 맵 파일의 diff는0이지만 기본 통합 대비 GS 관련223파일 차이가 남는다. PR44 실기 후 최신 GS→기본 통합→main의 트리/검증을 별도로 진행해야 한다. 결과보고서에 현재 기능·실기·복원·미완료 범위를 갱신했다.
+
+통합 사전 검사: a123b64에서 git merge-tree --write-tree로 origin/codex/p06-boss-crawler 및 origin/main 각각과의 병합을 계산했다. 두 결과 모두 충돌 없이 현재 HEAD tree e189b162e27006f2a5642250340d395624e31c6a와 일치했다. 실제 브랜치 병합은 수행하지 않았으며 PR44 실기 대기를 유지한다.
+
+0088570 새 Library 복원 검증 완료:3124파일 최초SHA 일치, Edit137통과/1제외, DX12 Play201/201, Windows 재빌드GUID584af24cd30f4af99d2bd98e86fcdebf 성공. 최종 변경58/누락0; 코드·테마 맵·GS payload 보존. 상세는 room-walk-gun-scale.json. 복원 Player 실행·새 수정 VR 인수는 미실행이며 전달 빌드는 유지한다.
+
+최종 기본 브랜치 통합용 [PR45 draft](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/45)를 생성했다. base codex/p06-boss-crawler, head codex/p13-room-movement-gun-scale. PR44 실기 확인/정리 이후 병합 예정이며 main 반영은 후속 단계다. 생성 시233파일 누적 diff, 테마 맵 diff0, merge-tree가 head tree와 동일함을 재확인했다. 테스트된 코드0088570 이후 변경은 증빙 문서뿐이다.

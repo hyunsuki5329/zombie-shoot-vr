@@ -58,6 +58,7 @@ namespace VRFPS.Editor
                 foreach(var b in new[]{moveDown,moveUp,turnDown,turnUp})b.GetComponent<RectTransform>().sizeDelta=new Vector2(180,75);
                 root.AddComponent<SettingsView>().Configure(null,moveText,turnText,moveDown,moveUp,turnDown,turnUp);
                 var viewData=new SerializedObject(root.GetComponent<MenuView>());
+                viewData.FindProperty("overlayMaterial").objectReferenceValue=AssetDatabase.LoadAssetAtPath<Material>("Assets/VRFPS/UI/MenuOverlay.mat");
                 viewData.FindProperty("instructions").objectReferenceValue=help;
                 viewData.FindProperty("instructionPanel").objectReferenceValue=instructionInstance;
                 viewData.FindProperty("settingsControls").objectReferenceValue=controls;viewData.ApplyModifiedPropertiesWithoutUndo();

@@ -50,7 +50,12 @@ namespace VRFPS
                 RequireTriggerRelease();
             Context=next;
             if(gun!=null){if(ownsIntro)gun.SetContext(next);else gun.SetPhase(phase);}
-            if(rig!=null)rig.SetLocomotionEnabled(!ownsIntro&&next!=WeaponContext.Disabled);
+            if(rig!=null)
+            {
+                var combatMovement=!ownsIntro&&next!=WeaponContext.Disabled;
+                var previewMovement=next==WeaponContext.Intro;
+                rig.SetLocomotionPermissions(previewMovement||combatMovement,previewMovement||combatMovement,combatMovement);
+            }
             if(pouch!=null)pouch.SetSimulationEnabled(next!=WeaponContext.Disabled);
         }
     }

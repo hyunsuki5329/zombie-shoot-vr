@@ -14,7 +14,15 @@ namespace VRFPS
         [SerializeField] Button resume, retry, settings, back, maps, retrySave;
         [SerializeField] Button instructions;
         [SerializeField] GameObject instructionPanel;
+        [SerializeField] Material overlayMaterial;
         bool subscribed;
+        void Awake()
+        {
+            // Queue 5000 draws the menu after the comparison fade (4999).
+            // The referenced XR UI shader keeps text/sprite sampling and disables depth testing.
+            if(overlayMaterial!=null)
+                foreach(var graphic in GetComponentsInChildren<Graphic>(true))graphic.material=overlayMaterial;
+        }
         public void Configure(MenuController menu, RunController run, RunRecordBinding result,
             GameObject panel, Text title, Text details, Button resume, Button retry, Button settings, Button back, Button maps, Button retrySave)
         {
@@ -34,9 +42,9 @@ namespace VRFPS
             if(subscribed || menu==null || run==null || panel==null) return;
             subscribed=true;
             menu.Configure(run);
-            menu.ScreenChanged+=OnScreenChanged;
+            menu.ScreenChanged+=OnScreenChanged;menu.IntroStatusChanged+=Refresh;
             if(result!=null) result.ResultChanged+=Refresh;
-            resume.onClick.AddListener(menu.Resume); retry.onClick.AddListener(menu.Retry);
+            resume.onClick.AddListener(menu.Resume); retry.onClick.AddListener(Retry);
             settings.onClick.AddListener(menu.OpenSettings); back.onClick.AddListener(menu.CloseAuxiliary);
             if(instructions!=null)instructions.onClick.AddListener(menu.OpenInstructions);
             maps.onClick.AddListener(menu.ShowMapSelection); retrySave.onClick.AddListener(RetrySave);
@@ -47,8 +55,8 @@ namespace VRFPS
             if(!subscribed) return; subscribed=false;
             if(menu!=null)
             {
-                menu.ScreenChanged-=OnScreenChanged;
-                resume.onClick.RemoveListener(menu.Resume);retry.onClick.RemoveListener(menu.Retry);
+                menu.ScreenChanged-=OnScreenChanged;menu.IntroStatusChanged-=Refresh;
+                resume.onClick.RemoveListener(menu.Resume);retry.onClick.RemoveListener(Retry);
                 settings.onClick.RemoveListener(menu.OpenSettings);back.onClick.RemoveListener(menu.CloseAuxiliary);
                 if(instructions!=null)instructions.onClick.RemoveListener(menu.OpenInstructions);
                 maps.onClick.RemoveListener(menu.ShowMapSelection);
@@ -57,6 +65,7 @@ namespace VRFPS
             retrySave.onClick.RemoveListener(RetrySave);
         }
         void OnScreenChanged(MenuScreen screen) => Refresh();
+        void Retry(){if(menu.IntroOwnsMenu)menu.RetryIntroCleanup();else menu.Retry();}
         void RetrySave() { if(result!=null) result.RetrySave();Refresh(); }
         public void Refresh()
         {
@@ -79,7 +88,7 @@ namespace VRFPS
             if(screen==MenuScreen.Hidden)return;
             title.text=screen==MenuScreen.MapSelection ? "MAP SELECTION" : screen==MenuScreen.Pause ? "PAUSED" : screen.ToString().ToUpperInvariant();
             resume.gameObject.SetActive(screen==MenuScreen.Pause);
-            retry.gameObject.SetActive(screen==MenuScreen.Pause || screen==MenuScreen.Result);
+            retry.gameObject.SetActive(menu.IntroOwnsMenu ? screen==MenuScreen.MapSelection&&menu.IntroError!=null : screen==MenuScreen.Pause||screen==MenuScreen.Result);
             settings.gameObject.SetActive(screen!=MenuScreen.Settings && !showingInstructions);
             back.gameObject.SetActive(screen==MenuScreen.Settings || showingInstructions);
             maps.gameObject.SetActive(screen==MenuScreen.Pause || screen==MenuScreen.Result);
@@ -91,9 +100,10 @@ namespace VRFPS
                 var saved=result==null ? "Practice scores are not saved." : result.SaveSucceeded ? "Saved" : "Save failed. Retry saving below.";
                 details.text=$"WAVE {wave}   KILLS {kills}\n{saved}";
             }
-            else if(screen==MenuScreen.Pause) details.text="Combat paused. Move your hands to point at a button.";
+            else if(screen==MenuScreen.Pause) details.text=menu.IntroOwnsMenu ? "Comparison paused. Resume or return to map selection." : "Combat paused. Move your hands to point at a button.";
             else if(screen==MenuScreen.Settings) details.text="Continuous movement and continuous turning.";
-            else details.text="Choose a map to begin.";
+            else if(menu.IntroBusy)details.text=menu.IntroError!=null?menu.IntroError+"\nCleanup pending. Use Retry to retry cleanup.":"Returning to map selection...";
+            else details.text=menu.IntroError??"Choose a map to begin.";
         }
     }
 }

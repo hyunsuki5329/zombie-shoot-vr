@@ -92,3 +92,25 @@ Mixamo의 `Zombie Reaction Hit` 중 Flinches 동작을 사용자 로그인 세�
 - 바깥 ZIP 및 내부 `source/model.zip` CRC 검사 통과. 내부에 `model.obj`, `model.mtl`, PNG3개가 있고 바깥에도 textures PNG3개가 있다.
 - MTL에 텍스처 경로가 없고 Kd가0이므로 추후 Unity 적용 시 재질·텍스처를 명시적으로 연결하고 외형을 검증해야 한다.
 - 현재 게임에 임포트·사용하지 않았다. 변경 없음. 원본은 로컬 Downloads에 유지하며 이번 커밋은 출처 기록만 포함한다. 실제 적용 시 빌드 크레딧에도 제작자·모델 링크·라이선스·변경 내역을 추가한다.
+
+## P13 바이러스 로컬 가공 (2026-10-21)
+
+- `IntroVirusSetup.Import`가 위 원본 SHA256을 검증하고 지정된 내부 파일만 별도 `Assets/VRFPS/External/IntroVirus/`에 추출한다. 원본은 수정하지 않는다.
+- 이미지 확인: source `color.png`는 녹색/붉은색 diffuse, `color11.png`는 tangent-space normal, `coron_initialShadingGroup_rough.png`는 roughness로 사용했다. 바깥 `cede.png`도 색상 후보지만 원본 source의 일관된 묶음을 채택했다. 이름만으로 color11을 색상에 연결하지 않았다.
+- URP Lit: 흰 tint, normal map, metallic=0, roughness R을 1−R의 smoothness alpha로 변환. 원본 기하(97,282 vertices/97,280 OBJ faces)는 간소화하지 않았다. 최대 외곽 직경0.8m·중심 원점·일반 구체 판정 반경0.32m로 가공했다.
+- DX12 단안 미리보기에서 녹색 몸체/붉은 돌기·표면 표현 확인. Sketchfab 직접 조회는 다시403으로 원본 웹뷰와 동일하다고 주장하지 않는다. 양안·성능·실제 GS 안 배치는 미검증이다.
+- 출처 고지: `Assets/VRFPS/Documentation/IntroVirus-Attribution.txt`. 현재 GS 빌드는 없으므로 실제 배포 포함은 후속 빌드에서 검증한다.
+- 로컬 보관 `Builds/Reproduction/p13-virus-20261021/`: 원본 ZIP, 생성물/meta ZIP, SHA manifest, preview. CRC/개별 SHA 일치 확인; 새 Unity 작업본 복원은 미실행. [증빙](evidence/intro-virus-assets.json).
+
+## P13 GS viewer와 합성 시험 데이터 (2026-10-22)
+
+- [UnityGaussianSplatting](https://github.com/aras-p/UnityGaussianSplatting), Aras Pranckevičius, MIT. revision `2c6fed37da67a217367261fcfcd3316d34c73e76`, package1.1.1 고정. 소스/셰이더는 기존 오픈소스이며 프로젝트 자체 기여는 관찰 씬 수명·입력·전환 연결이다.
+- 고지/라이선스: `Assets/VRFPS/Documentation/GaussianSplatting-Attribution.txt`. 실제 배포 포함 검증은 새 빌드에서 수행한다.
+- `GaussianRealityFixtureSetup.Create`의 합성256 GS는 직접 생성한 분석형 시험 데이터다. 사용자 방 촬영 데이터나 GS 학습 결과가 아니다. 가공본은 외부 데이터와 동일한 Git 제외 위치에서 재생성한다.
+- 초기 별도 시험본의 [호환성 기록](evidence/gs-compatibility.json)과 후속 실제 bridge의 [검증 기록](evidence/gs-renderer-bridge.json)을 구분한다. 실제 방 Splat은 사용자 재촬영 대기다.
+
+## 2026-10-31 실제 방 GS 자료
+
+사용자 제공 `C:/Users/User/Downloads/room.ply`, SHA256 `65f2f8c9705d49a660d8223d9986f3c87cc62085d6bb86daa8a686d09ff75e56`,143333131bytes/577950Gaussians. 생성 앱 버전은 미제공. 이전 일반 점군과 다른 자료다. 사용자 기준 치수는 방문을 바라볼 때 오른쪽 옷장 벽 약4.20m다.
+
+Medium 품질을 명시해 변환했으며 카메라 JSON 자동 임포트는 껐다. 원본/가공 bytes/scene/profile/meta는 Git 제외 `External/RealityGS/Room`과 로컬 복원 ZIP에 보존한다. 천장·일부 벽 누락을 원본 한계로 기록하며 임의로 복원했다고 주장하지 않는다. 초기 축척·바닥 맞춤과 실제 HMD 인수는 구분한다. [검증](evidence/room-capture-integration.json).

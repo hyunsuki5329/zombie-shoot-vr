@@ -39,6 +39,48 @@ namespace VRFPS.Tests
             if (wall != null) Object.DestroyImmediate(wall);
         }
 
+        [Test] public void IntroRouterAllowsWalkingButPauseAndTransitionBlockIt()
+        {
+            var run=rig.AddComponent<RunController>();var gun=rig.AddComponent<K2Controller>();
+            var router=rig.AddComponent<WeaponContextRouter>();router.Configure(run,gun,movement,null);
+            router.SetIntroState(true,false,0);
+            for(int i=0;i<10;i++)movement.Tick(Vector2.zero,Vector2.zero,1f/60);
+            var before=rig.transform.position;
+            Assert.That(movement.TryJump(),Is.False);
+            for(int i=0;i<2;i++)movement.Tick(Vector2.up,Vector2.zero,.1f);
+            Assert.That(rig.transform.position.z,Is.GreaterThan(before.z+.2f));
+            wall=GameObject.CreatePrimitive(PrimitiveType.Cube);wall.transform.position=new Vector3(0,1,1);
+            wall.transform.localScale=new Vector3(4,2,.2f);Physics.SyncTransforms();
+            for(int i=0;i<60;i++)movement.Tick(Vector2.up,Vector2.zero,1f/60);
+            Assert.That(rig.transform.position.z,Is.LessThan(.85f),"Intro collision must stop the capsule at the wall");
+            foreach(var blocked in new[]{true,false})
+            {
+                router.SetIntroState(blocked,blocked,1); // paused preview, then transition
+                before=rig.transform.position;movement.Tick(Vector2.down,Vector2.right,.2f);
+                Assert.That(Vector3.Distance(rig.transform.position,before),Is.LessThan(.001f));
+            }
+        }
+
+        [Test] public void IndependentPermissionsCanAllowTurnOnlyThenRestoreCombat()
+        {
+            for(int i=0;i<10;i++)movement.Tick(Vector2.zero,Vector2.zero,1f/60);
+            var before=rig.transform.position;var tracked=head.localPosition;
+            movement.SetLocomotionPermissions(false,true,false);
+            Assert.That(movement.TryJump(),Is.False);
+            movement.Tick(Vector2.one,Vector2.right,.1f);
+            Assert.That(Vector3.Distance(rig.transform.position,before),Is.LessThan(.001f));
+            Assert.That(Mathf.DeltaAngle(0,rig.transform.eulerAngles.y),Is.EqualTo(6).Within(.01f));
+            Assert.That(head.localPosition,Is.EqualTo(tracked));
+            movement.SetLocomotionEnabled(false);
+            movement.Tick(Vector2.one,Vector2.right,.1f);
+            Assert.That(Mathf.DeltaAngle(0,rig.transform.eulerAngles.y),Is.EqualTo(6).Within(.01f));
+            movement.SetLocomotionEnabled(true);
+            Assert.That(movement.TryJump(),Is.True);
+            movement.Tick(Vector2.up,Vector2.zero,.1f);
+            Assert.That(rig.transform.position.y,Is.GreaterThan(before.y));
+            Assert.That(Vector2.Distance(new Vector2(before.x,before.z),new Vector2(rig.transform.position.x,rig.transform.position.z)),Is.GreaterThan(.1f));
+        }
+
         [Test] public void JumpLandsOnFurnitureAndRejectsAirborneOrPausedRequests()
         {
             var jump=typeof(PlayerRigController).GetMethod("TryJump");

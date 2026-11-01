@@ -71,6 +71,23 @@ namespace VRFPS.Tests
             Assert.That(run.Phase,Is.EqualTo(RunPhase.Dead));
         }
 
+        [Test] public void EnlargedGunPreservesMagazineSizeThroughEjectDropRecycleAndInsert()
+        {
+            gun.transform.localScale=Vector3.one*1.2f;
+            objects.Find(item=>item.name=="Template").transform.localScale=Vector3.one*1.2f;
+            socket.transform.SetParent(gun.transform,false);
+            var token=socket.Installed;token.transform.localScale=Vector3.one;
+            var size=token.transform.lossyScale;
+            GripAt(socket.transform.position);
+            Assert.That(Vector3.Distance(token.transform.lossyScale,size),Is.LessThan(.0001f),"Ejection size");
+            Release();Assert.That(Vector3.Distance(token.transform.lossyScale,size),Is.LessThan(.0001f),"Dropped size");
+            pouch.TickLifetime(10);
+            GripAt(pouch.transform.position);Assert.That(interactor.HeldToken,Is.SameAs(token));
+            Assert.That(Vector3.Distance(token.transform.lossyScale,size),Is.LessThan(.0001f),"Recycled size");
+            GripAt(socket.transform.position);Assert.That(socket.Installed,Is.SameAs(token));
+            Assert.That(Vector3.Distance(token.transform.lossyScale,size),Is.LessThan(.0001f),"Inserted size");
+        }
+
         [Test] public void FreshSupplyCuesOnceButHeldGripBlockedInputAndRestartStaySilent()
         {
             var feedback=gun.gameObject.AddComponent<CombatFeedback>();feedback.Configure(gun,socket);

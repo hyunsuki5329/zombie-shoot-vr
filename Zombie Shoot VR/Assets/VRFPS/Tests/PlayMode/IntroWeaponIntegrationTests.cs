@@ -18,7 +18,7 @@ namespace VRFPS.Tests
    input=root.AddComponent<K2HandInput>();input.enabled=false;input.Configure(gun,left,left);
    run=root.AddComponent<RunController>();run.enabled=false;
    router=root.AddComponent<WeaponContextRouter>();router.Configure(run,gun,null,null);
-   target=GameObject.CreatePrimitive(PrimitiveType.Sphere);target.layer=9;target.transform.position=Vector3.forward*3;
+   target=GameObject.CreatePrimitive(PrimitiveType.Sphere);target.layer=13;target.transform.position=Vector3.forward*3;
    preview=true;hits=0;
    var virus=target.AddComponent<IntroVirusTarget>();virus.Configure(gun.GetInstanceID(),()=>preview);
    virus.Triggered+=()=>hits++;
@@ -36,6 +36,38 @@ namespace VRFPS.Tests
    Assert.That(hits,Is.EqualTo(1));Assert.That(run.Phase,Is.EqualTo(RunPhase.Dead));
    Assert.That(run.Kills,Is.Zero);Assert.That(run.ReachedWave,Is.Zero);
   }
+  [Test] public void IntroTargetHasNoPhysicalContactsAndKeepsRaycastHits()
+  {
+   Assert.That(LayerMask.NameToLayer("IntroTarget"),Is.EqualTo(13));
+   for(var layer=0;layer<32;layer++)Assert.That(Physics.GetIgnoreLayerCollision(13,layer),Is.True,"Collision with layer "+layer);
+   Assert.That(target.GetComponent<Collider>().isTrigger,Is.False);
+   input.TickInput(true,false,0);Assert.That(input.TickInput(true,true,0),Is.True);Assert.That(hits,Is.EqualTo(1));
+  }
+  [Test] public void IntroExcludesEnemyAndCombatRestoresExistingMask()
+  {
+   target.layer=9;Physics.SyncTransforms();
+   input.TickInput(true,false,0);input.TickInput(true,true,0);Assert.That(hits,Is.Zero,"Enemy layer excluded during observation.");
+   gun.SetContext(WeaponContext.Combat);gun.SetLeftGrip(true);gun.Tick(true,0);Assert.That(hits,Is.EqualTo(1),"Existing combat enemy mask restored.");
+   hits=0;target.GetComponent<IntroVirusTarget>().ResetTarget();target.layer=13;Physics.SyncTransforms();
+   gun.Tick(true,.2);Assert.That(hits,Is.Zero,"Intro target excluded from combat mask.");
+  }
+  [Test] public void MuzzleInsideWorldStillCannotShootIntroTarget()
+  {
+   wall=GameObject.CreatePrimitive(PrimitiveType.Cube);wall.layer=8;wall.transform.position=Vector3.forward*.7f;
+   wall.transform.localScale=Vector3.one*.1f;Physics.SyncTransforms();input.TickInput(true,false,0);
+   Assert.That(input.TickInput(true,true,0),Is.False);Assert.That(hits,Is.Zero);Assert.That(gun.Magazine.Rounds,Is.EqualTo(30));
+  }
+#if UNITY_EDITOR
+  [Test] public void LocallyImportedVirusReceivesActualGunRaycast()
+  {
+   var prefab=UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>("Assets/VRFPS/External/IntroVirus/IntroVirus.prefab");
+   if(prefab==null)Assert.Ignore("Requires local virus asset restoration.");
+   Object.DestroyImmediate(target);target=Object.Instantiate(prefab);target.transform.position=Vector3.forward*3;
+   var virus=target.GetComponent<IntroVirusTarget>();virus.Configure(gun.GetInstanceID(),()=>preview);virus.Triggered+=()=>hits++;
+   Assert.That(target.layer,Is.EqualTo(LayerMask.NameToLayer("IntroTarget")));Physics.SyncTransforms();
+   input.TickInput(true,false,0);Assert.That(input.TickInput(true,true,0),Is.True);Assert.That(hits,Is.EqualTo(1));
+  }
+#endif
   [Test] public void WallOcclusionStillBlocksVirus()
   {
    wall=GameObject.CreatePrimitive(PrimitiveType.Cube);wall.layer=8;

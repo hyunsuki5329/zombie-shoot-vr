@@ -209,3 +209,62 @@ P04 외형 브랜치부터 K2/탄창 프리팹은 Git 제외 자원을 참조한
 ### 수동 편집 배치 로컬 보관본
 
 `Zombie Shoot VR/Builds/Reproduction/83dc690-user-layout/`에 소스·로컬 자산 ZIP, manifest, README를 보관했다. 2,834개 파일 CRC/SHA256과 현재 두 씬의 바이트 일치를 확인했다. Library·개인 스캔·사용자의 무관한 미커밋 설정은 포함하지 않았다. 이 ZIP을 다시 연 Unity 시험은 미실행이며 최종 제출본으로 표시하지 않는다. [증빙](evidence/user-layout-source-backup.json).
+
+## P13 바이러스 복원
+
+원본 ZIP 경로를 `VRFPS_VIRUS_ARCHIVE`로 지정하고 격리 Unity에서 `-batchmode -nographics -executeMethod VRFPS.Editor.IntroVirusSetup.Import -quit`를 실행한다. 원본 SHA가 다르면 거부한다. 외부 생성물은 `Assets/VRFPS/External/IntroVirus/`이며 Git 제외다. 기존 GUID를 보존하려면 로컬 `Builds/Reproduction/p13-virus-20261021/derived-with-meta.zip`을 해당 폴더로 복원한다. 새 import의 GUID가 달라지면 관찰 씬 참조를 재연결해야 한다. 현재 관찰 씬은 아직 연결하지 않았다. 보관 ZIP의 CRC/SHA 검증만 완료했으며 전체 새 소스 복원 검증으로 간주하지 않는다.
+
+P13 전용 레이어 연결 이후 최신 바이러스 생성물은 `Builds/Reproduction/p13-virus-layer-20261021/derived-with-meta.zip`이다. 앞선 자산 보관본은 그대로 유지하며 새 보관본은 IntroTarget(layer13) Collider 설정을 포함한다. 기존 meta SHA는 유지됐고 새 ZIP CRC/파일 SHA 검증을 마쳤다. 새 프로젝트 실행 복원은 아직 미검증이다.
+
+## P13 GS 렌더러 시험 재현
+
+`Packages/manifest.json`과 lock은 UnityGaussianSplatting의 `2c6fed37da67a217367261fcfcd3316d34c73e76`을 가리킨다. Git/네트워크가 있는 격리 Unity6000.3.23f1 작업본에서 resolve한다. 다른 기존 패키지 버전은 변경하지 않았다. 원본 게임 pipeline/MSAA/API 설정도 보존한다.
+
+1. 격리 프로젝트에 `-batchmode -force-d3d12 -executeMethod GaussianRealityFixtureSetup.Create -quit`를 실행한다. `-projectPath`와 별도 `-logFile`을 지정한다. 합성256 GS와 시험 pipeline은 Git 제외 `Assets/VRFPS/External/RealityGS/SyntheticFixture/`에 생성된다. 사용자 촬영본을 대체하지 않는다.
+2. 새 Unity 프로세스에서 `-batchmode -force-d3d12 -runTests -testPlatform PlayMode -testFilter GaussianRealitySourceTests -testResults <절대 XML 경로> -logFile <절대 로그 경로>`로 실행한다. 시험에는 `-quit`를 붙이지 않는다. fixture 누락은 제외가 아니라 실패다.
+3. 시험은 runtime에서만 pipeline을 선택하고 종료 후 원래 설정을 복원한다. 실제 GS 픽셀·가림·암전과 GPU 자원 수명을 검증하며 XR, Player stripping, 실제 방 보정은 별도다. 최종 전체 시험은 [증빙](evidence/gs-renderer-bridge.json)을 참조한다.
+
+생성기는 프로젝트 소유의 결정적 분석형 데이터를 만든다. 기존 GUID를 보존해야 하는 운영 GS는 별도 원본/가공본/meta 백업을 사용해야 한다. 생성기 임포트 종료의 Persistent allocation1 경고는 미진단이며, 이 단위를 전체 새 소스/Windows 복원 완료로 간주하지 않는다.
+
+P13 운영 경로 통합 시험은 같은 합성 fixture 생성 후 `-testFilter GaussianComparisonFlowTests`로 재현한다. 전체 PlayMode에 포함되며 기존 MapSceneTestSetup이 관찰용 shell을 시험 중에만 등록한다. 실제 GS 렌더→K2 명중→암전→Room 초기 준비10회와 Classroom 직접 진입을 검사한다. [증빙](evidence/gs-flow-integration.json). 실제 스캔/VR/Player 시험이 아니며, 이 시험에서 run clock은 초기 상태 검사를 위해 비활성화한다.
+
+## P13 현재 소스·로컬 자산 복원 리허설 (2026-10-23)
+
+기준 `6ea502b`의 로컬 보관본은 격리 작업본의 `Zombie Shoot VR/Builds/Reproduction/p13-6ea502b/`에 있다. `tracked-source.zip`, `local-assets-with-meta.zip`, `manifest.json`, `post-unity-audit.json`, `README.md`를 함께 보관한다. 두 ZIP은 같은 새 빈 폴더에 풀고 중첩 `Zombie Shoot VR` 프로젝트를 연다. 외부 자산이 포함되므로 공개 재배포용이 아니다. 실제 촬영 GS·Library·빌드·사용자 무관 미커밋 설정은 제외했다.
+
+2,991파일을 실제로 새 폴더에 복원해 CRC/개별 SHA를 확인하고 합성 GS를 재생성했다. 새 Library에서 EditMode137통과/개인스캔1제외, DX12 PlayMode194/194를 확인했다. Windows BootstrapPreview 개발 빌드도 성공했고351파일 SHA와 GUID54d64a1919184786b7dc5d4befc087a6을 기록했다. [상세 증빙](evidence/p13-source-restore.json).
+
+이 실행 파일은 `D:/VRFPS-Reproduction/gs-6ea502b/Zombie Shoot VR/Builds/Windows/BootstrapPreview/BootstrapPreview.exe`다. 기존 네 씬의 소스 빌드 재현 결과이며, 촬영본이 연결된 최종 GSComparison 빌드는 아니다. Player를 실행하지 않았으므로 실제 Player API/VR/GS stripping 통과를 주장하지 않는다. 동일 PC의 package cache·라이선스 사용도 명시한다.
+
+Unity 임포트/빌드가56개 파일을 다시 직렬화했고 누락은0이다. sample metadata뿐 아니라 Volume filter·URP shader prefilter/runtime settings·preloadedAssets 변경을 포함하므로 바이트가 같은 복원본이라고 표현하지 않는다. 맵과 게임 코드, 외부 자산은 변경 목록에 없다. 원본 프로젝트에는 반영하지 않았다. importer 종료 Persistent allocation1 경고는 미진단 상태로 남겨 두었다.
+
+## P13 Windows GS 진단 재현
+
+기준4c84f7d에서 앞서 설명한 합성 fixture를 생성한 후, 격리 프로젝트에 `-batchmode -force-d3d12 -executeMethod VRFPS.Editor.GaussianPlayerProbeSetup.Build -quit`와 명시적 projectPath/logFile을 지정한다. API automatic/list와 backend는 finally에서 복원된다. 생성한 관찰용 진단 씬은 Git 제외 RealityGS/PlayerProbe 아래에 있으며 기존 게임 씬을 바꾸지 않는다.
+
+출력은 격리 작업본의 `Zombie Shoot VR/Builds/Windows/GsCompatibilityProbe/`다. README와 GaussianSplatting-Attribution.txt를 함께 보관한다. 실행 옵션은 `-batchmode -force-d3d12 -vrfps-gs-probe -vrfps-gs-probe-result <새 절대 JSON 경로> -logFile <새 절대 로그 경로>`다. exit0/JSON success와 buildGuid를 함께 확인한다. 그래픽 없는 실패 경로는 force-d3d12 대신 nographics로 실행하며 exit1/실패JSON을 확인했다.
+
+[현재 증빙](evidence/gs-player-probe.json)은 Mono Development/managed stripping Disabled의 실제 DX12 단안 진단이다. 실제 촬영본·Quest Pro·최종 게임 배포 및 그 복원으로 확대하지 않는다. 이전6ea502b 복원 ZIP에는 이 후속 진단 코드가 없으며, 최종 제출본 복원은 모든 자산·기능 통합 후 다시 검증해야 한다.
+
+## P13 PLY 임포트 수명 수정
+
+고정 revision2c6fed37의 package1.1.1을 `Packages/org.nesnausk.gaussian-splatting`에 embedded로 포함했다. Git archive에 패키지 소스·meta·MIT 라이선스가 함께 들어가며 별도 PackageCache 수정에 의존하지 않는다. runtime/shader 파일은 원본과 동일하다. 변경은 PLY raw 배열과 실패 시 변환 배열 해제이며 `VRFPS-PATCH.md`에 범위를 기록했다.
+
+격리 프로젝트에서 `-batchmode -nographics -executeMethod GaussianImportLifetimeCheck.Run -quit`로 재현한다. 정상/속성 누락/잘린 PLY를 각각10회 읽고 `GS_IMPORT_LIFETIME_CHECK` 마커와 종료 로그를 함께 확인한다. 수정 전에는 exit0이어도 Persistent30개 누수가 발생했으므로 종료 코드만으로 통과를 판단하지 않는다. 수정 후 같은30건에서 누수 경고가 없어졌다. 변환 후처리 예외는 코드 리뷰 범위이며 강제 주입 시험은 수행하지 않았다. SPZ 오류 수명·전체 프로세스 메모리·VR 성능 검증으로 확대하지 않는다.
+
+위의6ea502b 복원본과4c84f7d Player 빌드는 이 수정 이전 산출물이다. 최종 배포·복원은 실제 GS 자료 통합 이후 다시 검증한다.
+
+## 실제 Room GS 복원 묶음 (소스 b221bcb)
+
+`Zombie Shoot VR/Builds/Reproduction/p13-room-b221bcb/`의 tracked-source.zip, local-assets-with-meta.zip, manifest.json을 함께 보존한다. 소스2417개와 로컬 외부 자산706개(기존 모델/오디오 및 Room 원본·가공본·scene/profile/meta)가 포함된다. 합성 fixture/Library는 제외했으며 자동 시험을 위해 합성 fixture만 별도 재생성한다.
+
+빈 폴더에 두 ZIP을 같은 루트로 풀고 manifest SHA를 확인한다. Unity6000.3.23f1에서 명시적 projectPath와 로그를 지정해 RoomRealitySetup.Configure로 관찰씬 등록/프로필 연결을 재현한다. 자동 시험에는 GaussianRealityFixtureSetup.Create 후 EditMode/PlayMode를 실행한다. 실제 게임 빌드는 RoomComparisonBuild.Build이며 합성 fixture는 그 빌드 씬 목록에 없다. 원본 PLY는 변환 재현 자료이며 Player 패킹 목록에서 제외됨을 확인했다.
+
+원본 재변환이 필요할 때만 VRFPS_ROOM_PLY 환경변수를 원본 경로로 설정하고 RoomRealitySetup.Import를 실행한다. 정확한 SHA를 확인하며 Medium 형식과 카메라 JSON 제외를 고정한다. 가공 payload bytes는 재변환 후 일치했지만 upstream m_DataHash 메타데이터는 달라졌으므로 전 자산 바이트 동일 재생성을 주장하지 않는다. 실제 제공된 묶음의 CRC/개별 SHA 복원은 검증했다. 새 Unity 시험/빌드 결과는 room-capture-integration.json과 후속 복원 증빙을 따른다.
+
+2026-11-01 수정 소스0088570의 Git archive는 `Builds/Reproduction/p13-room-walk-0088570/tracked-source.zip`에 보존했다(프로젝트 루트 기준). 기존 p13-room-b221bcb/local-assets-with-meta.zip을 함께 사용한다. 수정 빌드 명령은 RoomComparisonBuild.BuildMovementRevision이며 기존 GSComparison을 덮어쓰지 않는다. 이 수정본의 새 Library 복원 시험은 아직 수행하지 않았고, 기존 b221bcb 복원 결과와 구분한다.
+
+0088570 복원 진행: `D:/VRFPS-Reproduction/room-walk-0088570`에 소스2418파일과 기존 로컬 자산706파일을 새로 풀었다. ZIP 내부와 추출 파일의 SHA 비교3124/3124 일치, 최초 Library 없음 확인 후 Unity 구성을 시작했다. 이 단계는 파일 무결성 증빙이며 자동 시험·빌드 성공을 대신하지 않는다.
+복원본 RoomRealitySetup.Configure는 ROOM_REALITY_CONFIGURED 마커와 exit0으로 종료했다. 자동 시험 fixture 생성은 별도 단계로 진행한다.
+
+복원 검증 완료(0088570): 새 Library에서 Configure→fixture→EditMode137통과/1제외→DX12 PlayMode201/201→BuildMovementRevision이 성공했다. 복원 빌드 GUID584af24cd30f4af99d2bd98e86fcdebf,356파일 해시를 기록했다. 최종 archive 대조 변경58/누락0이며 게임 코드·두 테마 맵·GS payload는 유지됐다. 동일 PC 패키지 캐시/라이선스 조건이고 복원 Player는 실행하지 않았다. 사용자 전달GUID298c029c12e347cf95ca51efe9dd5f57은 교체하지 않았다. 위의 복원 미수행/진행 중 기록은 이 결과로 갱신한다.

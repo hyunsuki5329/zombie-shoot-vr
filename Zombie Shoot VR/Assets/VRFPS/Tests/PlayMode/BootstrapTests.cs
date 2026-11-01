@@ -12,6 +12,13 @@ namespace VRFPS.Tests
     [PrebuildSetup(typeof(MapSceneTestSetup)),PostBuildCleanup(typeof(MapSceneTestSetup))]
     public class BootstrapTests
     {
+        sealed class RealityFixture : IRealityPresentation
+        {
+            public GameObject root;public bool IsReady{get;private set;}public string LastError=>null;
+            public Transform ObservationAnchor=>root.transform;public IntroVirusTarget Virus=>root.GetComponent<IntroVirusTarget>();
+            public IEnumerator Load(RealityIntroProfile profile){IsReady=true;yield break;}
+            public IEnumerator Unload(){IsReady=false;yield break;}
+        }
         const string Boot="Assets/VRFPS/Scenes/Bootstrap.unity";
         GameBootstrap bootstrap;string directory;
         void InjectDirectory(Scene scene,LoadSceneMode mode)
@@ -57,6 +64,28 @@ namespace VRFPS.Tests
             {
                 fixture.mapId="room";fixture.sceneName="Assets/VRFPS/Tests/Fixtures/MapLoading/ValidMap.unity";
                 fixture.maxAlive=4;fixture.maxRangedAlive=1;fixture.minSpawnDistance=2;
+                yield return entry.SelectReality(null,fixture);
+                Assert.That(entry.Session.IsReady,Is.False);Assert.That(entry.status.text,Does.Contain("GS"));
+                var reality=new RealityFixture{root=new GameObject("Bootstrap reality fixture")};reality.root.AddComponent<IntroVirusTarget>();
+                var profile=ScriptableObject.CreateInstance<RealityIntroProfile>();
+                try
+                {
+                    profile.mapId="room";profile.dataId="test";profile.realityScenePath="fake";profile.realityAnchorKey="anchor";profile.themeAnchorKey="playerSpawn";
+                    profile.fadeInSeconds=.03f;profile.fadeOutSeconds=.03f;profile.minBlackSeconds=.03f;
+                    var fade=entry.gameObject.AddComponent<VrScreenFade>();var intro=entry.gameObject.AddComponent<ComparisonIntroController>();
+                    intro.Configure(reality,entry.Session,entry.rig,entry.gun,entry.run.GetComponent<WeaponContextRouter>(),fade);
+                    entry.BindComparison(intro);entry.run.enabled=false;
+                    var request=IntroAsyncOperation.Start(entry.SelectReality(profile,fixture));deadline=Time.realtimeSinceStartup+5;
+                    while(intro.Phase!=IntroPhase.RealityPreview&&!request.IsDone&&Time.realtimeSinceStartup<deadline)yield return null;
+                    Assert.That(intro.Phase,Is.EqualTo(IntroPhase.RealityPreview));entry.menu.Pause();
+                    Assert.That(entry.menu.Screen,Is.EqualTo(MenuScreen.Pause));entry.menu.Resume();
+                    Assert.That(reality.Virus.ApplyDamage(1,entry.gun.GetInstanceID(),0),Is.True);
+                    while(!request.IsDone&&Time.realtimeSinceStartup<deadline)yield return null;
+                    Assert.That(request.IsDone,Is.True);Assert.That(request.Error,Is.Null);
+                    Assert.That(entry.Session.IsReady,Is.True);Assert.That(entry.run.PreparationRemaining,Is.EqualTo(8));
+                    entry.menu.ShowMapSelection();
+                }
+                finally{UnityEngine.Object.DestroyImmediate(reality.root);UnityEngine.Object.DestroyImmediate(profile);}
                 yield return entry.SelectMap(fixture);
                 Assert.That(entry.Session.IsReady,Is.True);Assert.That(entry.menu.Screen,Is.EqualTo(MenuScreen.Hidden));
                 entry.run.enabled=false;entry.Session.Director.enabled=false;entry.run.Tick(8);entry.run.ApplyDamage(100,1,0);

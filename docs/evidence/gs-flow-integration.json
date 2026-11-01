@@ -1,0 +1,38 @@
+{
+  "base": "6ff869b",
+  "source": "2e81403",
+  "pr": "https://github.com/hyunsuki5329/zombie-shoot-vr/pull/39",
+  "tests": {
+    "gs-flow-first": {
+      "result": "Passed",
+      "total": "1",
+      "passed": "1",
+      "failed": "0",
+      "skipped": "0",
+      "xmlSha256": "b754e081761db0d4ba15f0e24f3713184d952d6e3003817510af05f8ec7c5976",
+      "logSha256": "3afcb811637d9ad9d1d3580e93ef3a7393a4f14585a9e543533a20e4369583ea"
+    },
+    "gs-flow-full": {
+      "result": "Passed",
+      "total": "194",
+      "passed": "194",
+      "failed": "0",
+      "skipped": "0",
+      "xmlSha256": "5af098ae5266338d579df37bd05056f585c10c55b24ecb588ad28aa9a1e968a9",
+      "logSha256": "366ed49c4ebc550a8326e2b6d87b338efacf7400adf5f60b829a95ea9d053d26"
+    }
+  },
+  "scope": "10 real adapter/scene/GPU/K2/fade/Room initial preparation cycles, then Classroom SelectMap; analytical GS and runtime-only observation fixture",
+  "review": "P2 test boundary false-negative risk and teardown global pollution addressed; re-review no additional P1/P2",
+  "resourceScope": "15 direct buffers,4 sorting buffers,5 objects,registration after scene unload and at RunStarted; release-before-unload ordering covered by existing source/loader unit tests",
+  "preservation": "Original hashes5/5 unchanged; maps and saved Graphics/Quality settings diff empty",
+  "editMode": "Not rerun: test-only change",
+  "unverified": [
+    "Real scan/calibration",
+    "Wave1 combat in this test (run clock disabled)",
+    "Controller hardware and XR stereo",
+    "Windows Player/stripping",
+    "Fresh source restoration",
+    "Performance deferred"
+  ]
+}

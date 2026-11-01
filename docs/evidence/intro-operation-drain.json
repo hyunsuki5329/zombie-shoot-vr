@@ -1,0 +1,38 @@
+{
+  "base": "e5bb4da",
+  "scope": "Independent coroutine drain for uncancellable scene operations; controller integration not implemented",
+  "tests": {
+    "intro-job-red": {
+      "result": "Failed(Child)",
+      "total": "2",
+      "passed": "0",
+      "failed": "2",
+      "skipped": "0",
+      "sha256": "f74270b51b384e928d7ef37607e80cf0bef9f228542c20271378b2d4a6d8ac9c"
+    },
+    "intro-job-green": {
+      "result": "Passed",
+      "total": "2",
+      "passed": "2",
+      "failed": "0",
+      "skipped": "0",
+      "sha256": "479bc094e6c6412a36d246589e449348ab5febce7e179cc245e39be4e8da7244"
+    },
+    "intro-job-play-final": {
+      "result": "Passed",
+      "total": "150",
+      "passed": "150",
+      "failed": "0",
+      "skipped": "0",
+      "sha256": "d4e79c27f0e534739bbe956f7238ab1be93a6bdb0f09b15a84690a598ca9ccab"
+    }
+  },
+  "review": "Independent read-only review: no important findings",
+  "remaining": [
+    "request generation invalidation",
+    "30 second stage timeout",
+    "controller cleanup after late completion",
+    "menu recovery",
+    "actual GS release"
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "base": "64700c2",
+  "scope": "Prepared combat lifecycle and preview locomotion permissions; no fade/menu/GS integration",
+  "tests": {
+    "prepared-combat-red": {
+      "result": "Failed(Child)",
+      "total": "4",
+      "passed": "2",
+      "failed": "2",
+      "skipped": "0",
+      "sha256": "b44b9b8c11993e74494aa02f55dcf5bcbe2b438d011f8668c43e6eaa4d0cc25f"
+    },
+    "prepared-combat-green": {
+      "result": "Passed",
+      "total": "4",
+      "passed": "4",
+      "failed": "0",
+      "skipped": "0",
+      "sha256": "ed049573ac70a261b5157b695d028b52383552aaa6b783be9c439f3edf3b23fb"
+    },
+    "preview-motion-red": {
+      "result": "Failed(Child)",
+      "total": "1",
+      "passed": "0",
+      "failed": "1",
+      "skipped": "0",
+      "sha256": "79e9ef802c47bbc00c6691c20a600eaf9c8cf2da90f65331fd2424a4c6214b62"
+    },
+    "prepared-motion-play": {
+      "result": "Passed",
+      "total": "141",
+      "passed": "141",
+      "failed": "0",
+      "skipped": "0",
+      "sha256": "aed143eb68da88e033761aba0f10d97037a852e4205f79ef509bdc7e4a9a5907"
+    },
+    "prepared-start-failure-red": {
+      "result": "Failed(Child)",
+      "total": "1",
+      "passed": "0",
+      "failed": "1",
+      "skipped": "0",
+      "sha256": "e216d9b96be856be12a0b20777702e252e5480fb42d95c781a708938260fa8f6"
+    },
+    "prepared-anchor-red": {
+      "result": "Failed(Child)",
+      "total": "1",
+      "passed": "0",
+      "failed": "1",
+      "skipped": "0",
+      "sha256": "7ea876c7c9a119563022806ead8f41c31f9ace0ef0952fcde4a093308fa5dca0"
+    },
+    "prepared-motion-final": {
+      "result": "Passed",
+      "total": "143",
+      "passed": "143",
+      "failed": "0",
+      "skipped": "0",
+      "sha256": "2958396f29cef0f3b2cc65e9231ab5b9ab51150165115b59965b1609b2a2e622"
+    },
+    "prepared-edit-final": {
+      "result": "Skipped:Ignored",
+      "total": "125",
+      "passed": "124",
+      "failed": "0",
+      "skipped": "1",
+      "sha256": "846639dd07a2e54e2766a57fc4b3f3bf4ad754ad53f0f0f91ae77cbd5c437896"
+    }
+  },
+  "review": "Independent static review: start error recovery and anchor validation addressed with failing regressions",
+  "vrAcceptance": "not performed",
+  "mapScenesChanged": false,
+  "originalPreservation": {
+    "Zombie Shoot VR/Assets/VRFPS/Scenes/Maps/Room.unity": true,
+    "Zombie Shoot VR/Assets/VRFPS/Scenes/Maps/Classroom.unity": true,
+    "Zombie Shoot VR/Assets/XR/Settings/OpenXRPackageSettings.asset": true,
+    "Zombie Shoot VR/ProjectSettings/Packages/com.unity.learn.iet-framework/Settings.json": true,
+    "Zombie Shoot VR/Builds/Windows/WallFix/AbandonedSchool.exe": true
+  }
+}

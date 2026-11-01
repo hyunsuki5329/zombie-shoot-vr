@@ -13,7 +13,7 @@ namespace VRFPS.Player
         [SerializeField, Range(30f, 90f)] float turnSpeed = 60f;
         [SerializeField] float jumpHeight = 1.35f;
         CharacterController capsule;
-        bool locomotionEnabled = true;
+        bool translateEnabled = true, turnEnabled = true, jumpEnabled = true;
         float verticalSpeed;
 
         public float MoveSpeed => moveSpeed;
@@ -39,7 +39,7 @@ namespace VRFPS.Player
         public bool TryJump()
         {
             if(capsule==null)capsule=GetComponent<CharacterController>();
-            if(!locomotionEnabled || !capsule.enabled || !capsule.isGrounded || verticalSpeed>0)return false;
+            if(!translateEnabled || !jumpEnabled || !capsule.enabled || !capsule.isGrounded || verticalSpeed>0)return false;
             verticalSpeed=Mathf.Sqrt(2f*Mathf.Abs(Physics.gravity.y)*jumpHeight);
             return true;
         }
@@ -52,10 +52,15 @@ namespace VRFPS.Player
             return Vector3.ClampMagnitude(forward * input.y + Vector3.Cross(Vector3.up, forward) * input.x, 1f);
         }
 
+        public void SetLocomotionPermissions(bool translate,bool turn,bool jump)
+        {
+            translateEnabled=translate;turnEnabled=turn;jumpEnabled=jump;
+            if(!translate)verticalSpeed=0;
+        }
+
         public void SetLocomotionEnabled(bool value)
         {
-            locomotionEnabled = value;
-            if (!value) verticalSpeed = 0;
+            SetLocomotionPermissions(value,value,value);
         }
 
         public void Tick(Vector2 move, Vector2 turn, float deltaTime)
@@ -88,12 +93,13 @@ namespace VRFPS.Player
                 }
             }
             capsule.center = new Vector3(headLocal.x, capsule.height * 0.5f, headLocal.z);
-            if (!locomotionEnabled || deltaTime <= 0 || !capsule.enabled) return;
+            if (deltaTime <= 0 || !capsule.enabled) return;
 
             // Avoid a large catch-up jump after a stalled frame. Never alter the tracked local pose.
             deltaTime = Mathf.Min(deltaTime, 0.1f);
             var pivot = new Vector3(head.position.x, transform.position.y, head.position.z);
-            transform.RotateAround(pivot, Vector3.up, Mathf.Clamp(turn.x, -1, 1) * turnSpeed * deltaTime);
+            if(turnEnabled)transform.RotateAround(pivot, Vector3.up, Mathf.Clamp(turn.x, -1, 1) * turnSpeed * deltaTime);
+            if(!translateEnabled)return;
             if (capsule.isGrounded && verticalSpeed < 0) verticalSpeed = -1f;
             verticalSpeed = Mathf.Max(verticalSpeed + Physics.gravity.y * deltaTime, -20f);
             var velocity = GetPlanarMove(head.forward, move) * moveSpeed + Vector3.up * verticalSpeed;
