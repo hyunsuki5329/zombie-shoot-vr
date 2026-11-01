@@ -1,0 +1,20 @@
+{
+  "date": "2026-11-01",
+  "source": "0088570a3b25d6b54cf85da6e939a1ac8a4d658e",
+  "buildGuid": "298c029c12e347cf95ca51efe9dd5f57",
+  "buildFolder": "Zombie Shoot VR/Builds/Windows/GSComparison-Walk-20261101",
+  "buildFiles": 357,
+  "buildManifestSha256": "550b33c274322a79f6cb0fbc76b1be57e53c383cbcaf38cfcffb7eb52e18ef54",
+  "buildLogSha256": "6ae5fb29e9b62297a9a97042108cc452a2bf14dbd949b3a2942572e226dc7b64",
+  "playMode": {"passed":201,"failed":0,"sha256":"186c9d17e0f5642991e29336e7d3d03646fcce219f624ca50e197e659d1e2fce"},
+  "editMode": {"passed":137,"failed":0,"ignored":1,"sha256":"d40c10b075601679f8976287845426852b62df1bd1b2fa28de33c9d835e3f7f7"},
+  "previousBuild": {"filesChecked":357,"changed":0},
+  "originalProjectBaselineHashes": "5/5 unchanged",
+  "sourceZipSha256": "08b462505b42e1a5635d1cd4baad9dc082e6502eb2a6ce768350766f1fcb9a85",
+  "review": "Two P2 findings fixed; independent re-review no remaining P1/P2. External GitHub reviews/CI absent.",
+  "pr": "https://github.com/hyunsuki5329/zombie-shoot-vr/pull/44",
+  "headset": "Prior bcd559 build user reported other behavior okay. New movement/weapon revision awaits VR check.",
+  "restoration": "New tracked-source.zip exported; reuse prior local-assets-with-meta.zip. This revision has not been restored into fresh Library.",
+  "performance": "deferred",
+  "presentation": "user owned"
+}

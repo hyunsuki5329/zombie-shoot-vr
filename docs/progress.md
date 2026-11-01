@@ -711,3 +711,7 @@ BootstrapPreview/WaveLab 빌드 모두 성공·종료0. 복원 WaveLab337개 파
 소스/로컬 자산3123파일(외부706)을 Library 없이 새폴더 `D:/VRFPS-Reproduction/room-b221bcb`에 복원하고 CRC/SHA를 확인했다. 새 복원본 Edit137통과/1제외, DX12 Play199/199 및 Windows 빌드 GUID6d5a0401b78f467c912d9fd1af87ddd9까지 재현했다. 동일 PC 캐시/라이선스 조건이며 Player 실기/main 통합 완료를 뜻하지 않는다.
 
 - [PR43 draft](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/43), base codex/p13-gs-player-probe. 실기 전 병합하지 않는다. 복원 후 Unity 재직렬화/관찰씬 재구성58파일 변경·누락0을 기록했으며, 두 테마 맵/GS payload는 유지됐다. 사용자 전달 빌드는 GUIDbcd55912a407424685af8703be58cc1d로 그대로다.
+
+## 2026-11-01 GS 이동·총1.2배 수정
+
+사용자의 기존 방 GS VR 확인을 반영해 PR43을 의존 브랜치로 병합했다(64d4237). 새 소스0088570은 GS 스틱 이동을 허용하고 K2/탄창1.2배와 탈착 크기 보존을 구현했다. Play201/201, Edit137통과/1제외, 독립 리뷰 지적2건 반영/추가 P1/P2 없음. Windows 별도 GSComparison-Walk-20261101 GUID298c029c12e347cf95ca51efe9dd5f57 성공. 이전 빌드357파일 모두 보존, 원본5개 해시 일치. [증빙](evidence/room-walk-gun-scale.json), [PR44 draft](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/44). 외부 리뷰/CI 없음. 변경 항목 VR 확인·최종 통합·보류 성능은 완료하지 않았다.
