@@ -263,3 +263,6 @@ Unity 임포트/빌드가56개 파일을 다시 직렬화했고 누락은0이다
 원본 재변환이 필요할 때만 VRFPS_ROOM_PLY 환경변수를 원본 경로로 설정하고 RoomRealitySetup.Import를 실행한다. 정확한 SHA를 확인하며 Medium 형식과 카메라 JSON 제외를 고정한다. 가공 payload bytes는 재변환 후 일치했지만 upstream m_DataHash 메타데이터는 달라졌으므로 전 자산 바이트 동일 재생성을 주장하지 않는다. 실제 제공된 묶음의 CRC/개별 SHA 복원은 검증했다. 새 Unity 시험/빌드 결과는 room-capture-integration.json과 후속 복원 증빙을 따른다.
 
 2026-11-01 수정 소스0088570의 Git archive는 `Builds/Reproduction/p13-room-walk-0088570/tracked-source.zip`에 보존했다(프로젝트 루트 기준). 기존 p13-room-b221bcb/local-assets-with-meta.zip을 함께 사용한다. 수정 빌드 명령은 RoomComparisonBuild.BuildMovementRevision이며 기존 GSComparison을 덮어쓰지 않는다. 이 수정본의 새 Library 복원 시험은 아직 수행하지 않았고, 기존 b221bcb 복원 결과와 구분한다.
+
+0088570 복원 진행: `D:/VRFPS-Reproduction/room-walk-0088570`에 소스2418파일과 기존 로컬 자산706파일을 새로 풀었다. ZIP 내부와 추출 파일의 SHA 비교3124/3124 일치, 최초 Library 없음 확인 후 Unity 구성을 시작했다. 이 단계는 파일 무결성 증빙이며 자동 시험·빌드 성공을 대신하지 않는다.
+복원본 RoomRealitySetup.Configure는 ROOM_REALITY_CONFIGURED 마커와 exit0으로 종료했다. 자동 시험 fixture 생성은 별도 단계로 진행한다.

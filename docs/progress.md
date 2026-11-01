@@ -717,3 +717,5 @@ BootstrapPreview/WaveLab 빌드 모두 성공·종료0. 복원 WaveLab337개 파
 사용자의 기존 방 GS VR 확인을 반영해 PR43을 의존 브랜치로 병합했다(64d4237). 새 소스0088570은 GS 스틱 이동을 허용하고 K2/탄창1.2배와 탈착 크기 보존을 구현했다. Play201/201, Edit137통과/1제외, 독립 리뷰 지적2건 반영/추가 P1/P2 없음. Windows 별도 GSComparison-Walk-20261101 GUID298c029c12e347cf95ca51efe9dd5f57 성공. 이전 빌드357파일 모두 보존, 원본5개 해시 일치. [증빙](evidence/room-walk-gun-scale.json), [PR44 draft](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/44). 외부 리뷰/CI 없음. 변경 항목 VR 확인·최종 통합·보류 성능은 완료하지 않았다.
 
 11/1 후속 통합 감사: PR25~41은10/29 앞쪽부터 병합되어 후속 변경이 기본 통합 브랜치에 전파되지 않았다. origin/codex/p06-boss-crawler=9b12e4e, origin/main=fc5ff33, 최신 수용된 Room GS=origin/codex/p13-gs-player-probe의64d4237이다. 두 맵 파일의 diff는0이지만 기본 통합 대비 GS 관련223파일 차이가 남는다. PR44 실기 후 최신 GS→기본 통합→main의 트리/검증을 별도로 진행해야 한다. 결과보고서에 현재 기능·실기·복원·미완료 범위를 갱신했다.
+
+통합 사전 검사: a123b64에서 git merge-tree --write-tree로 origin/codex/p06-boss-crawler 및 origin/main 각각과의 병합을 계산했다. 두 결과 모두 충돌 없이 현재 HEAD tree e189b162e27006f2a5642250340d395624e31c6a와 일치했다. 실제 브랜치 병합은 수행하지 않았으며 PR44 실기 대기를 유지한다.
