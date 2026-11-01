@@ -12,7 +12,6 @@
   "limits": [
     "Flat authored infill, lower seams and missing ceiling remain",
     "Headset visual acceptance pending",
-    "This repair revision has no fresh Library restore run",
     "Performance deferred; presentation user owned"
   ],
   "buildManifestSha256": "060B4658DE7430535065A230129B6B0B5EA8DF17354117BEB811048AC3D32ADC",
@@ -33,5 +32,15 @@
       "skipped": "0"
     }
   },
-  "sourceZipSha256": "5755e6d3eb2b04d05be52671f535db68069df4b4e99d69a9718fc3299fb9882d"
+  "sourceZipSha256": "5755e6d3eb2b04d05be52671f535db68069df4b4e99d69a9718fc3299fb9882d",
+  "restoration": {
+    "scope": "Source archive + baseline external archive, Configure then repair overlay. Overlay SHA7/7; PLY/payload SHA6/6. Focused tests2/2, not full suite rerun. Same PC cache/license; Player not executed.",
+    "testXmlSha256": "B89CBF0F431C2FCBF30807AA92BD0EC3673C16A9CB3CC54BDF234EF34FFFE0E5",
+    "buildManifestSha256": "F9F5D31D9FB90E8F451F5C55C817E439DE150AE0813860E7B8D2E26B291DEAE3",
+    "freshLibrary": true,
+    "buildLogSha256": "62B238034710A4293AB3D289E8A54B4DBBCB45FEDED5BBC579D967A9F58A2D45",
+    "files": 356,
+    "root": "D:/VRFPS-Reproduction/room-repair-59ca570",
+    "buildGuid": "f8e6f03fb5814b1baffef373a0923d71"
+  }
 }

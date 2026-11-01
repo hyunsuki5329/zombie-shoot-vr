@@ -274,3 +274,5 @@ Unity 임포트/빌드가56개 파일을 다시 직렬화했고 누락은0이다
 프로젝트의 Builds/Reproduction/p13-room-surface-repair/tracked-source.zip과 local-repair-overlay.zip을 보존한다. 빈 복원 폴더에 새 소스 ZIP, 기존 p13-room-b221bcb/local-assets-with-meta.zip을 풀고 **그 뒤** 보정 overlay7파일(scene/meta/재질)을 덮어쓴다. overlay CRC와 현 작업본7개 SHA 일치를 확인했으며, 이 보정본 새 Library 전체 복원은 아직 재실행하지 않았다. 기존 복원시험과 구분한다.
 
 씬 등록이 필요하면 RoomRealitySetup.Configure를 먼저 실행하고 overlay를 마지막에 적용해야 한다(Configure는 씬을 재생성한다). 원본 씬으로부터 보정을 재작성하려면 overlay 대신 RoomSurfaceRepair.Apply를 batchmode로 실행한다. Apply는 scene/meta를 Builds/Reproduction/RoomSurfaceRepair/<timestamp>에 백업하며, 기존 보정 그룹이 있거나 캘리브레이션이 다르면 거절한다. 빌드는 RoomComparisonBuild.BuildSurfaceRepairRevision이다. 원본PLY/GS payload는 바꾸지 않는다.
+
+59ca570 보정본 복원 검증 갱신: D:/VRFPS-Reproduction/room-repair-59ca570에 새 소스+기존 외부자산을 복원하고 Library 없는 상태에서 Configure를 실행했다. 이후 overlay7파일을 적용해 SHA7/7을 확인했다. 새 Library DX12 집중 시험 RoomSurfaceRepairTests/RoomCaptureFlowTests2/2(보정 토글·렌더·해제,실제GS전환10회,두맵Wave1), Windows 재빌드GUIDf8e6f03fb5814b1baffef373a0923d71 성공. 원본PLY/가공payload6개 해시 일치. 전체202개를 복원본에서 다시 실행한 것은 아니며, 동일 PC 캐시/라이선스 조건이고 복원 Player 실행·VR 인수는 미실행이다. 앞의 새 Library 미수행 기록은 이 범위에서 갱신한다.
