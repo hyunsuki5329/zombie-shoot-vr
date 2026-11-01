@@ -1,0 +1,37 @@
+{
+  "date": "2026-11-02",
+  "overlayFiles": 7,
+  "buildGuid": "66012d6f6757434d8e3e6a8a03b9259b",
+  "source": "59ca570202e43f9869e5ef97810d77e2f7b999b6",
+  "pr": "https://github.com/hyunsuki5329/zombie-shoot-vr/pull/46",
+  "buildFolder": "Zombie Shoot VR/Builds/Windows/GSComparison-Repair-20261101",
+  "rawPlySha256": "65f2f8c9705d49a660d8223d9986f3c87cc62085d6bb86daa8a686d09ff75e56",
+  "overlaySha256": "f0620ed0c36513a9dc908b9a1dcd59d1846769939c28b16ffb095f418df88775",
+  "sceneBackupSha256": "b907a8fcf7f1a9e4f25dfe5d5a0f614c6eae776de7698a6b10aa4c1b530124cf",
+  "review": "P2 preview camera ownership fixed; re-review no P1/P2",
+  "limits": [
+    "Flat authored infill, lower seams and missing ceiling remain",
+    "Headset visual acceptance pending",
+    "This repair revision has no fresh Library restore run",
+    "Performance deferred; presentation user owned"
+  ],
+  "buildManifestSha256": "060B4658DE7430535065A230129B6B0B5EA8DF17354117BEB811048AC3D32ADC",
+  "buildFiles": 356,
+  "buildLogSha256": "D55EEA27BF08E099B1BD337E080A048B03626B6111BC8A5476BA1624C9E10105",
+  "overlayVerification": "CRC and live-file SHA match",
+  "tests": {
+    "repair-edit.xml": {
+      "sha256": "C796324CD22631095A298FE4A09A042575C1949FE122D7F05B0D5C71B3AFC6EB",
+      "failed": "0",
+      "passed": "137",
+      "skipped": "1"
+    },
+    "repair-full-play.xml": {
+      "sha256": "E95451D34F4BA7A264C59F4740FB17C2775B9D6FFC9F60A1856000F780E4FC64",
+      "failed": "0",
+      "passed": "202",
+      "skipped": "0"
+    }
+  },
+  "sourceZipSha256": "5755e6d3eb2b04d05be52671f535db68069df4b4e99d69a9718fc3299fb9882d"
+}

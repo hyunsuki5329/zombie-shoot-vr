@@ -723,3 +723,7 @@ BootstrapPreview/WaveLab 빌드 모두 성공·종료0. 복원 WaveLab337개 파
 0088570 새 Library 복원 검증 완료:3124파일 최초SHA 일치, Edit137통과/1제외, DX12 Play201/201, Windows 재빌드GUID584af24cd30f4af99d2bd98e86fcdebf 성공. 최종 변경58/누락0; 코드·테마 맵·GS payload 보존. 상세는 room-walk-gun-scale.json. 복원 Player 실행·새 수정 VR 인수는 미실행이며 전달 빌드는 유지한다.
 
 최종 기본 브랜치 통합용 [PR45 draft](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/45)를 생성했다. base codex/p06-boss-crawler, head codex/p13-room-movement-gun-scale. PR44 실기 확인/정리 이후 병합 예정이며 main 반영은 후속 단계다. 생성 시233파일 누적 diff, 테마 맵 diff0, merge-tree가 head tree와 동일함을 재확인했다. 테스트된 코드0088570 이후 변경은 증빙 문서뿐이다.
+
+## 2026-11-02 방 GS 표면 보완
+
+사용자 사진/단순 표면 보완 선택에 따라 원본을 보존하는 네 표면·네 컷아웃을 적용했다. 소스59ca570, Play202/202, Edit137통과/1제외, 독립 리뷰 카메라 지적 수정·재검토 통과. 별도 Windows GUID66012d6f6757434d8e3e6a8a03b9259b, GSComparison-Repair-20261101. [증빙](evidence/room-surface-repair.json), [PR46 draft](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/46), base codex/p13-room-movement-gun-scale. 보정 외형/수정 이동·총기 VR 인수 전이며 PR46→PR44→PR45 순서로 통합해야 한다. 일부 아래쪽 경계/누락 천장/기타 스캔 결손은 남는다. 기존 빌드·맵·원본PLY 보존, 성능 보류 유지.

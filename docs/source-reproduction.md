@@ -268,3 +268,9 @@ Unity 임포트/빌드가56개 파일을 다시 직렬화했고 누락은0이다
 복원본 RoomRealitySetup.Configure는 ROOM_REALITY_CONFIGURED 마커와 exit0으로 종료했다. 자동 시험 fixture 생성은 별도 단계로 진행한다.
 
 복원 검증 완료(0088570): 새 Library에서 Configure→fixture→EditMode137통과/1제외→DX12 PlayMode201/201→BuildMovementRevision이 성공했다. 복원 빌드 GUID584af24cd30f4af99d2bd98e86fcdebf,356파일 해시를 기록했다. 최종 archive 대조 변경58/누락0이며 게임 코드·두 테마 맵·GS payload는 유지됐다. 동일 PC 패키지 캐시/라이선스 조건이고 복원 Player는 실행하지 않았다. 사용자 전달GUID298c029c12e347cf95ca51efe9dd5f57은 교체하지 않았다. 위의 복원 미수행/진행 중 기록은 이 결과로 갱신한다.
+
+## Room surface repair (59ca570)
+
+프로젝트의 Builds/Reproduction/p13-room-surface-repair/tracked-source.zip과 local-repair-overlay.zip을 보존한다. 빈 복원 폴더에 새 소스 ZIP, 기존 p13-room-b221bcb/local-assets-with-meta.zip을 풀고 **그 뒤** 보정 overlay7파일(scene/meta/재질)을 덮어쓴다. overlay CRC와 현 작업본7개 SHA 일치를 확인했으며, 이 보정본 새 Library 전체 복원은 아직 재실행하지 않았다. 기존 복원시험과 구분한다.
+
+씬 등록이 필요하면 RoomRealitySetup.Configure를 먼저 실행하고 overlay를 마지막에 적용해야 한다(Configure는 씬을 재생성한다). 원본 씬으로부터 보정을 재작성하려면 overlay 대신 RoomSurfaceRepair.Apply를 batchmode로 실행한다. Apply는 scene/meta를 Builds/Reproduction/RoomSurfaceRepair/<timestamp>에 백업하며, 기존 보정 그룹이 있거나 캘리브레이션이 다르면 거절한다. 빌드는 RoomComparisonBuild.BuildSurfaceRepairRevision이다. 원본PLY/GS payload는 바꾸지 않는다.

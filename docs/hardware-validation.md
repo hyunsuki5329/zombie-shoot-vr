@@ -168,3 +168,7 @@ T15 팔 UI·포인터·가림:
 
 후속 GSComparison-Walk-20261101 빌드에서는 Room Start in Reality에서 왼쪽 스틱 이동/벽 충돌, 총1.2배 외형과 양손 잡기, 탄창 탈착·떨어뜨리기·새 탄창 삽입의 크기를 확인한다. GS 점프는 계속 차단되며 정지/암전 중 이동은 차단한다. 이전에 괜찮다고 확인한 나머지 항목의 재확인을 별도로 요구하지 않는다. 새 빌드 GUID와 자동 시험 결과는 후속 증빙에 기록한다. 성능 로그 보류와 발표자료 사용자 담당은 유지한다.
 - 수정 빌드 식별자: 소스0088570, GUID298c029c12e347cf95ca51efe9dd5f57. 실행 파일은 기존 worktree의 Zombie Shoot VR/Builds/Windows/GSComparison-Walk-20261101/AbandonedSchool.exe이며 README-Room-GS.txt를 함께 제공한다.
+
+## Room GS 표면 보완 확인
+
+GSComparison-Repair-20261101/AbandonedSchool.exe, GUID66012d6f6757434d8e3e6a8a03b9259b. Back→Room Start in Reality. 침대 위/문 주변 벽과 옷장 옆면의 단순 보완이 실제 VR에서 적절한지, 걸으며 문·침대·선반을 가리지 않는지 확인 대상이다. 이 빌드에는 이전 스틱 이동/총1.2배도 포함된다. 정량 성능은 보류 유지. Unity 비교는 DX12로 실행하고 Room Reality/Room Surface Repairs 그룹을 토글한다. 원본데이터 삭제가 아닌 가림/표면 보완이므로 그룹을 끄면 원래 표현으로 돌아간다.
