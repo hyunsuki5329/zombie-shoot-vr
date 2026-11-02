@@ -1,0 +1,38 @@
+{
+  "date": "2026-11-02",
+  "roomPr": {
+    "number": 46,
+    "merge": "847a4b3089d8728c31f0859dedc2ba0ebe71b0c1"
+  },
+  "mainPr": {
+    "number": 47,
+    "merge": "dbc415d75c050f6709ffcf95643e28f04a379809"
+  },
+  "committedTree": "3ccced9f531032399a4f7ef89db1bdbf446a0ac1",
+  "comparison": "Both merges equal the reviewed tracked commit tree. Local user/Unity-generated settings were preserved and not staged. Private assets are supplied by local restoration archives.",
+  "source": "28f980862b5be25d2c980c2d2abde2e942443494",
+  "acceptedPlayerGuid": "64cd76ce780947a4a436c72dca0067e8",
+  "tests": {
+    "PlayMode": {
+      "passed": 203,
+      "failed": 0,
+      "skipped": 0,
+      "xmlSha256": "92697b178e8bbd73547bf15e4953979cd961ab7b4fa1b829b5003d5f9cc4cdb3"
+    },
+    "EditMode": {
+      "passed": 138,
+      "failed": 0,
+      "skipped": 0,
+      "xmlSha256": "804edc77e2deb98eb6c1d87b8dc760eb3a3a1238efb5d77fe47dd363d8994ee1"
+    }
+  },
+  "userAcceptance": "Latest wardrobe placement/appearance and front movement: 확인결과 이상 없어. Not a waiver of full-matrix/performance requirements.",
+  "review": "Independent code fixes and scoped integration/provenance review complete. No external GitHub reviewer or CI.",
+  "remaining": [
+    "Deferred performance and formal repetition evidence",
+    "User-owned presentation/video",
+    "Latest empty-Library restoration not repeated",
+    "Capture app version and precise dimensional reconciliation",
+    "Unenumerated manual matrix and distribution conditions"
+  ]
+}
