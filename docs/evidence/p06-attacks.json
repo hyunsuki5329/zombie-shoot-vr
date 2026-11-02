@@ -1,0 +1,45 @@
+{
+  "pending": [
+    "NavMesh movement and stuck recovery",
+    "Visible attack telegraphs and bounded projectile pool",
+    "Scene driver and two enemy prefabs",
+    "Windows integrated build and hardware acceptance"
+  ],
+  "date": "2026-09-23",
+  "tests": [
+    {
+      "path": "tmp/p06-attacks/red.xml",
+      "result": "Failed(Child)",
+      "failed": "9",
+      "passed": "0",
+      "sha256": "FC979409467C73A13BF066A48E2661F9C66868E9996DF1780528E090C1ECA6AF"
+    },
+    {
+      "path": "tmp/p06-attacks/green.xml",
+      "result": "Passed",
+      "failed": "0",
+      "passed": "34",
+      "sha256": "0DF822F8911A8BF7D3D86558AC7A045AB581C4F35D5E49D996153C9FB58A1FE9"
+    },
+    {
+      "path": "tmp/p06-attacks/final-play.xml",
+      "result": "Passed",
+      "passed": "40",
+      "failed": "0",
+      "sha256": "D9EA3CCDD38B6AF0A0FBFD7AC23ED9F915BDBECD4A57E8B40313DB1914A55BF4"
+    }
+  ],
+  "scope": "P06-a combat core / T10 T11",
+  "baseCommit": "bd809124d95098222629726f94050d5a927eba5c",
+  "sourceHashes": [
+    {
+      "sha256": "A820D4CFBF5F7AFB068A02756CE1952E49CE20FE04D59AFF60EFC38EC5B4CC20",
+      "file": "AcidProjectile.cs"
+    },
+    {
+      "sha256": "E971A7DEB48F7A8235AA89ACA95EB6380D74804D4F436822827208B0AE3DE163",
+      "file": "ZombieController.cs"
+    }
+  ],
+  "review": "Independent read-only review found no blocking defect; six additional boundary cases added for range, interval, speed/lifetime and origin overlap. Final PlayMode 40/40 passed."
+}

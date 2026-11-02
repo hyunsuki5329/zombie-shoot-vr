@@ -1,0 +1,87 @@
+{
+  "sources": [
+    {
+      "path": "Zombie Shoot VR\\Assets\\VRFPS\\Runtime\\Configuration\\GameBalance.cs",
+      "sha256": "705954C2C488361BCDE7A16200F052E2B11EC8A95E9688BA83394F1167CB9BAD"
+    },
+    {
+      "path": "Zombie Shoot VR\\Assets\\VRFPS\\Runtime\\Maps\\MapDefinition.cs",
+      "sha256": "3D41601CED453E283C346882E9CD667ED85C90A3791FE5C66898B99150D95858"
+    },
+    {
+      "path": "Zombie Shoot VR\\Assets\\VRFPS\\Runtime\\Progression\\SpawnDirector.cs",
+      "sha256": "316A915137B1F204D1D869CAF1506347D472C0AA72A3BA3475068E59F1E76351"
+    },
+    {
+      "path": "Zombie Shoot VR\\Assets\\VRFPS\\Runtime\\Enemies\\EnemyActor.cs",
+      "sha256": "ABB456E0613905738A3E2CAB42603A6DC1D0D3B964F8635316F53AF277BB3DF5"
+    },
+    {
+      "path": "Zombie Shoot VR\\Assets\\VRFPS\\Runtime\\Enemies\\ZombieController.cs",
+      "sha256": "B8F23D5DD9D2136F8BB8EE2047C2EF49B99C3692E95BC7870420275F764D6F9D"
+    },
+    {
+      "path": "Zombie Shoot VR\\Assets\\VRFPS\\Tests\\PlayMode\\SpawnDirectorTests.cs",
+      "sha256": "25519184455BDFD520C32CF06E997832F59F668063FA4A4FC30042AA019A0224"
+    }
+  ],
+  "limits": [
+    "Room allocation <=13; supported classroom allocation <=16; live limits remain map-specific",
+    "Existing InteractionLab scene/build still uses P06 driver",
+    "No new Windows build or Quest Pro results",
+    "Weapon/magazine restart and scene integration still pending",
+    "P02 real scans still pending"
+  ],
+  "reproduce": "Unity.exe -batchmode -nographics -projectPath <isolated project> -runTests -testPlatform <PlayMode|EditMode> -testResults <xml> -logFile <log>",
+  "regression": "Zero ranged capacity previously accepted and could stall wave 3; test failed then validation fixed",
+  "scope": [
+    "Real prefab spawning after 1.5-second warning, path, distance and solid checks",
+    "Successful-spawn accounting and per-type/concurrent quotas",
+    "Integer floor ranged quotas and ceiling health/damage scaling",
+    "Pause agents, animators, projectiles and warning time",
+    "Restart clears enemies/projectiles/warning and reuses actors",
+    "At most four visible corpses and bounded actor allocation"
+  ],
+  "unity": "6000.3.23f1",
+  "requirements": [
+    "R08/T08 partial",
+    "R09/T09",
+    "R12/T12 partial",
+    "R13/T13 partial",
+    "R17/T17 object bounds only"
+  ],
+  "baseCommit": "ceac5cf621ef2a016db2f93dd2638f45d5536d20",
+  "tests": [
+    {
+      "passed": 0,
+      "failed": 6,
+      "result": "Failed(Child)",
+      "path": "tmp/p07-spawning/red.xml",
+      "sha256": "3E578D0BEC91A4C9DD094A864367E1FFBDA0C508220BC63EDDAD02DF5435B436"
+    },
+    {
+      "passed": 8,
+      "failed": 1,
+      "result": "Failed(Child)",
+      "path": "tmp/p07-spawning/review.xml",
+      "sha256": "7CA9D6A907355988B08248F8E4CF10A3EB23105474E6E2BE0212AF62CE9CF169"
+    },
+    {
+      "passed": 67,
+      "failed": 0,
+      "result": "Passed",
+      "path": "tmp/p07-spawning/final-play.xml",
+      "sha256": "AE77D264DA6ECA5D8C3DA6EB50562F24C57EDC55A80D10FBFE71722D5394B82D"
+    },
+    {
+      "passed": 37,
+      "failed": 0,
+      "result": "Passed",
+      "path": "tmp/p07-spawning/final-edit.xml",
+      "sha256": "6F01C32A03CA34446025C428EBA85E4D2D6889DA5C4659CDE2EF68C2BA184127"
+    }
+  ],
+  "review": "Self-reviewed; independent review pending, no approval claimed",
+  "date": "2026-09-26",
+  "unit": "P07-c"
+}

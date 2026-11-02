@@ -2,16 +2,50 @@
 
 촬영한 방과 강의실을 전투 공간으로 사용하는 Unity PC VR 좀비 FPS 학기 프로젝트다. Quest Pro와 Virtual Desktop을 대상으로 K2 양손 사격, 왼손 수동 재장전, 근접·원거리 좀비와 무한 웨이브를 구현한다.
 
-**현재 상태: 기존 Unity VR 템플릿과 개발 문서의 초기 기준선.** 게임 기능 구현, 실제 공간 맵 제작, Windows 빌드와 Quest Pro 인수 시험은 아직 완료하지 않았다.
+**현재 상태: 폐가·폐교 두 맵에서 공통 전투를 실행할 수 있는 개발 빌드가 준비되어 있다.** 사용자 편집 가구 배치, 양손 사격·수동 재장전, 보스·크롤러, 맵별 기록, 시점 높이1.15배와1.35m 점프를 포함한다. 두 맵의 시점·점프·이동·좀비 접근 및 폐가 추가 벽 충돌은 사용자 확인을 받았다. 체감 성능은 충분하다는 평가이며, 두 맵의 사격·재장전·웨이브·사망·기록 표시·재도전도 사용자 확인을 받았다. 정량 성능과 맵별 약5분 시험 기록, 나머지 최종 제출 인수는 미완료다. [진행 기록](docs/progress.md)에서 검증 범위를 확인한다.
 
 ## 프로젝트 열기
 
 1. 이 저장소를 clone한다.
 2. Unity Hub에서 **`Zombie Shoot VR/` 하위 폴더**를 프로젝트로 추가한다. 저장소 루트는 문서를 함께 관리하는 상위 폴더다.
 3. Unity **6000.3.23f1**로 열고 패키지 복원과 에셋 임포트를 기다린다.
-4. [구현 계획](docs/vr-fps-project-docs/04-implementation-plan.md)의 P01부터 Windows PC VR 환경과 입력을 검증한다.
+4. [소스 복원·시험·빌드 안내](docs/source-reproduction.md)에 따라 저장된 씬을 사용한다. P01부터 초기 구성기를 전부 다시 실행할 필요는 없다.
 
 현재 패키지 기준은 XRI 3.5.1, URP 17.3.0, OpenXR 1.17.1, Input System 1.20.0이다. 정확한 의존성과 잠금 상태는 `Zombie Shoot VR/Packages/`에 보관한다.
+
+## 최신 빌드 실행
+
+로컬 실행 파일: `Zombie Shoot VR/Builds/Windows/WallFix/AbandonedSchool.exe`.
+
+현재 기준 소스는 `cdc635f`, 빌드 GUID는 `9723fbe2fa094de7be98e4c75f72b1b2`다. 개발용 Windows PC VR 빌드이며 Quest Pro·Virtual Desktop의 기존 연결 환경에서 실행한다. 첫 안내에서 Back으로 맵 선택에 돌아가 **Room(폐가)** 또는 **Classroom(폐교)**을 선택한다. 두 맵은 같은 실행 파일에 들어 있다. 실행 파일만 분리하지 말고 Data 폴더·DLL 등 빌드 폴더 전체를 함께 보관한다.
+
+| 조작 | 동작 |
+|---|---|
+| 왼쪽 스틱 / 오른쪽 스틱 | 연속 이동 / 연속 회전 |
+| 오른손 A | 접지 상태에서 점프(설정1.35m) |
+| 왼손으로 총 앞부분 잡기 + 오른손 트리거 | 양손 사격 |
+| 앞부분 해제 → 탄창 탈거 → 버리기 → 허리 새 탄창 → 삽입 | 수동 재장전, 다시 앞부분을 잡아 발사 |
+| 오른팔 UI | 체력·웨이브·처치 수 확인 |
+
+점프는 약1.2m 가구 착지로 검사했다. 약1.7m인 폐가 책상에 올라갈 수 있다고 보장하지 않는다. `MenuLab`, `BootstrapPreview` 등은 이전 단계 비교용이며 최신 시험에 사용하지 않는다.
+
+진단 로그를 남길 때는 저장소 루트에서 다음을 실행한다. 실행 환경만 점검하려면 `-CheckOnly`를 추가한다.
+
+```powershell
+powershell -File scripts/Start-VrDiagnostics.ps1 -FrameTimings
+```
+
+[최신 실기 절차](docs/hardware-validation.md)와 [결과 양식](docs/templates/hardware-session-result.md)에 따라 기록한다. 성능 판정은 고정72Hz·보간 끔 조건의 실제 측정이 필요하다.
+
+## 씬 편집과 복원
+
+- 폐가: `Zombie Shoot VR/Assets/VRFPS/Scenes/Maps/Room.unity`
+- 폐교: `Zombie Shoot VR/Assets/VRFPS/Scenes/Maps/Classroom.unity`
+- 시작 씬: `Zombie Shoot VR/Assets/VRFPS/Scenes/Bootstrap.unity`
+
+저장된 씬이 현재 가구 배치의 기준이다. 초기 `ClassroomSetup.Configure`, `RoomHouseSetup.ConfigurePreview`, `GrannyHouseSetup.Configure`를 다시 실행하면 수동 배치를 덮어쓸 수 있다. 가구를 수정한 뒤에는 현재 외형 기준으로 충돌·NavMesh를 동기화하고 경로를 검증해야 한다. 격리 배치 에디터에서 사용하는 도구는 `UserLayoutSetup.Configure`다.
+
+빌드와 일부 외부 자산은 Git에 포함되지 않는다. Git clone만으로 모든 외형이 복원되는 것은 아니다. 로컬 소스 ZIP에는 외부 자산/meta가 포함되며, [소스 복원 안내](docs/source-reproduction.md)에서 기준 커밋·검증 범위를 확인한다. 최신 로컬 보관본은 `cb1b0e7-wall-fix`이며 벽 충돌 수정까지 포함한다. 파일 무결성과 검증 작업본 일치는 확인했으며, 이 ZIP의 새 Library 자동 검사와 Windows 빌드까지 확인했다(동일 PC).
 
 ## 개발 문서
 
@@ -33,4 +67,10 @@
 
 현재 포함된 Unity 템플릿·패키지 샘플·폰트 등 외부 에셋에는 각각의 사용 조건이 적용된다. 저장소 전체에 임의의 오픈 소스 라이선스를 부여하지 않는다. 실제 게임용 에셋을 채택할 때 [출처 관리 문서](docs/vr-fps-project-docs/07-assets-licenses.md)를 갱신한다.
 
-초기 Git 설정에서는 추적 파일, 제외 대상, `.meta` 대응, 패키지 JSON과 문서 연결을 점검한다. 이는 Unity 실행·빌드·실제 기기 시험의 통과를 의미하지 않는다.
+[현재 자산 출처표](docs/asset-provenance.md)와 [보존한 라이선스/제3자 고지](docs/licenses/README.md)를 제출 준비에 사용한다. 미채택 모델 후보와 실제 포함 자산을 구분하며 최종 외형·스캔 출처는 추가 검증이 필요하다.
+
+단위별 자동 시험·빌드와 사용자 관찰은 [진행 기록](docs/progress.md) 및 `docs/evidence/`에 구분해 남긴다. 전체 완료나 성능 합격은 실제 두 맵과 최종 빌드의 인수 결과로 판정한다. 캐시 없는 소스 내보내기 검증은 [복원 안내](docs/source-reproduction.md)에 기록한다.
+
+## 설계 중인 확장: 현실 공간과 테마 맵 비교
+
+2026-10-20 사용자 요청에 따라 방 GS를 감상하다 큰 바이러스를 쏘면 암전 후 폐가로 전환되고 전투가 시작되는 P13을 문서화했다. [PRD](docs/vr-fps-project-docs/02-requirements.md), [상세 설계](docs/vr-fps-project-docs/11-gs-comparison-intro.md), [구현 계획](docs/vr-fps-project-docs/12-gs-comparison-plan.md)을 참고한다. **아직 구현되지 않았으며 위 WallFix 빌드에는 포함돼 있지 않다.**

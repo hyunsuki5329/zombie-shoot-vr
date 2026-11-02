@@ -1,0 +1,4 @@
+using NUnit.Framework;using UnityEditor;using UnityEngine;using VRFPS.Player;
+namespace VRFPS.Tests {public class ViewHeightPrefabTests {
+ [Test] public void SavedRigInstallsHeightLiftWithoutScalingPlayer(){var root=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/VRFPS/Prefabs/PlayerRig.prefab");var controller=root.GetComponent<PlayerRigController>();var height=root.GetComponent<ViewHeightAdjustment>();Assert.That(height,Is.Not.Null);Assert.That(height.enabled,Is.True);Assert.That(controller.Head.parent.name,Is.EqualTo("View Height Offset"));Assert.That(controller.Head.parent.parent.name,Is.EqualTo("Camera Offset"));Assert.That(root.transform.localScale,Is.EqualTo(Vector3.one));var serialized=new SerializedObject(height);Assert.That(serialized.FindProperty("heightMultiplier").floatValue,Is.EqualTo(1.15f));foreach(var name in new[]{"floorOffset","viewOffset","head"})Assert.That(serialized.FindProperty(name).objectReferenceValue,Is.Not.Null);}
+}}

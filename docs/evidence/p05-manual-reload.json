@@ -1,0 +1,68 @@
+{
+  "date": "2026-09-23",
+  "pending": [
+    "Quest Pro T06/T07 acceptance",
+    "Independent review incomplete: reviewer hit usage limit",
+    "P07 full pause/resume integration"
+  ],
+  "scope": "P05-b / R06 R07 / T06 T07: left-hand ownership, waist supply, bounded magazine lifetime and prefab integration",
+  "build": {
+    "exitCode": 0,
+    "log": "tmp/p05-hands/build.log",
+    "backend": "Windows x64 Mono development",
+    "result": "Succeeded"
+  },
+  "tests": {
+    "edit": {
+      "passed": "31",
+      "failed": "0",
+      "sha256": "4777FB63788B799AD2E0F541AE5FFD75B80200F70D5E0B96047BFA655CE7CAFC",
+      "path": "tmp/p05-hands/final-edit.xml",
+      "result": "Passed"
+    },
+    "play": {
+      "passed": "25",
+      "failed": "0",
+      "sha256": "5E336BCBF5A36D919185EA70E8CE5492DC17BBD34C9AAAEFBBF5CFBE9B301C4E",
+      "path": "tmp/p05-hands/final-play.xml",
+      "result": "Passed"
+    }
+  },
+  "generatedSettings": "Backed up in tmp/p05-hands/generated-backup then restored",
+  "baseCommit": "9dde1bb739cf79ae3a2b33a2639a808e33c9cfc0",
+  "hashes": [
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/Player/LeftHandInteractor.cs",
+      "sha256": "FCC664BAAB487FB9D84B68CF711D34144FEB3D7A60F6A959A7286F82E4418757"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/Weapons/AmmoPouch.cs",
+      "sha256": "CA7D96F08BF0FAB66530B868BB9F7327E27246436BE54B2D852DC145B8C7F836"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/Weapons/MagazineToken.cs",
+      "sha256": "B71E5196245CC6247C5A76A0B95A26CC5C753FD9586F79EC97B5F08BA5656CB1"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/Weapons/K2HandInput.cs",
+      "sha256": "36797EAF172CCCD2A00D06316C8928D8E3A366F2015805A3764D6F160876D8D0"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Prefabs/PlayerRig.prefab",
+      "sha256": "CB3B531D869F9D91F2011F69D574FD81C6B49D8F8F3A0C6F024A7B7E4BFB917C"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Prefabs/Weapons/Magazine.prefab",
+      "sha256": "F3F2F97B6E623B67EFADAD7DE8902557EBBD211B0157FA08436F46DFB441B0A9"
+    },
+    {
+      "path": "Zombie Shoot VR/Builds/Windows/InteractionLab/InteractionLab_Data/Managed/VRFPS.Runtime.dll",
+      "sha256": "E84BF53FBBEAFC330B89F6B8C48C23F0313DC0FBE78F572044C3F7EC77BE72AF"
+    },
+    {
+      "path": "Zombie Shoot VR/Builds/Windows/InteractionLab/InteractionLab_Data/level0",
+      "sha256": "2E70AA34E4B65922AEC2FF897D96E25F4989A43AD8937157DA5A9C32BB3C032B"
+    }
+  ],
+  "review": "Local source review completed; automated checks do not prove headset ergonomics"
+}

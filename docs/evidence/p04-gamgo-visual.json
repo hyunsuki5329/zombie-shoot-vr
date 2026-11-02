@@ -1,0 +1,38 @@
+{
+  "status": "hardware_acceptance_pending",
+  "date": "2026-09-29",
+  "base_commit": "188bb9b",
+  "editmode": {
+    "passed": 51,
+    "failed": 0
+  },
+  "playmode": {
+    "passed": 116,
+    "failed": 0,
+    "scope": "Visuals applied; later changes explicitly restore normal strength1 and Mikk/green defaults; runtime logic unchanged"
+  },
+  "files_copied_and_hash_verified": 338,
+  "build_directory": "Zombie Shoot VR\\Builds\\Windows\\GamgoMenuLab",
+  "runtime_assets_in_build_log": true,
+  "preview_finding": "Unchanged materials render incorrectly on first immediate camera render, correctly on later calls; normal strength1 retained. Not a headset result.",
+  "restore_safety_checks": [
+    "reject bad archive hash before writes",
+    "restore valid archives",
+    "reject and preserve edited asset"
+  ],
+  "remaining": [
+    "headset hands/reload/stereo/first-frame",
+    "opposite-side visual review",
+    "fresh-checkout restoration with generated GUIDs",
+    "independent review",
+    "final asset/license audit"
+  ],
+  "visual-final-editmode.xml": {
+    "sha256": "9c685b821738a06736719bcce09d7d7e0275026ae0100ba92cf42adb14384e7d",
+    "passed": "51"
+  },
+  "visual-playmode.xml": {
+    "sha256": "9b7eb1813535abe620fd06346fd67919ffca7fbdf3fb37dc1f53230761880258",
+    "passed": "116"
+  }
+}

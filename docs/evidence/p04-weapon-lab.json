@@ -1,0 +1,66 @@
+{
+  "date": "2026-09-22",
+  "scope": "P04-b / R04 R05 R11 / T04 T05 T11: weapon pose, foregrip, physics hits and hardware lab",
+  "baseCommit": "e13e10ecb7b1f624564bae7c8a01d0a0e22a2e54",
+  "red": {
+    "physics": "7 tests: 4 failed, 3 passed",
+    "hand": "1 test failed before proximity integration"
+  },
+  "tests": {
+    "edit": {
+      "xml": "tmp/p04-physics/final-edit.xml",
+      "result": "Passed",
+      "sha256": "4A9F83F17A14C59E860BBDED2C4559319ED0246F984DE908286766D8E6BFB582",
+      "passed": "30",
+      "failed": "0",
+      "total": "30"
+    },
+    "play": {
+      "xml": "tmp/p04-physics/final-play.xml",
+      "result": "Passed",
+      "sha256": "2F1670666E51C01A1FE3C026181542B8F57BE4A7DC05028F894B5249E5CC6285",
+      "passed": "13",
+      "failed": "0",
+      "total": "13"
+    }
+  },
+  "build": {
+    "exitCode": 0,
+    "log": "tmp/p04-physics/build.log",
+    "result": "Succeeded",
+    "backend": "Windows x64 Mono development"
+  },
+  "pending": [
+    "Headset acceptance and visual comfort",
+    "Independent code review",
+    "Physical reload ownership and sockets",
+    "Final licensed K2 model and damage hit zones"
+  ],
+  "prototype": "Self-authored primitive shapes, not final K2 representation; 30-round lab requires restart to refill",
+  "hashes": [
+    {
+      "sha256": "4DC92D4390FF610F8C57A1FE894AC273839D90B941F987BD52FD0FD3EEAE6144",
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/Weapons/K2Controller.cs"
+    },
+    {
+      "sha256": "F0CDC631E4F15A1467E880FAAE24E0139A7C054E4281398CFCD3FDDEC5401189",
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/Weapons/K2HandInput.cs"
+    },
+    {
+      "sha256": "FB795D5ABCBF51781066079B9010FCE2758AB4DF4C7EBD1813AB8F6B58787AD8",
+      "path": "Zombie Shoot VR/Assets/VRFPS/Prefabs/Weapons/K2.prefab"
+    },
+    {
+      "sha256": "933FB80620665D01ED8E44ACA7AA21EE4F884EB7949FAB0C5849865C44D41CF8",
+      "path": "Zombie Shoot VR/Assets/VRFPS/Scenes/Tests/InteractionLab.unity"
+    },
+    {
+      "sha256": "176A745A02A7E1DED180EFC619A8F71C0A1C8E13D90966B1B6CA05146560034D",
+      "path": "Zombie Shoot VR/Builds/Windows/InteractionLab/InteractionLab_Data/Managed/VRFPS.Runtime.dll"
+    },
+    {
+      "sha256": "BED53EF4B510BF31D5CCA379F66AD69E51FD386565B373991CF3774564CB74B7",
+      "path": "Zombie Shoot VR/Builds/Windows/InteractionLab/InteractionLab_Data/level0"
+    }
+  ]
+}

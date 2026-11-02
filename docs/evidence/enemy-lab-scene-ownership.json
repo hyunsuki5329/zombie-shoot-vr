@@ -1,0 +1,18 @@
+{
+  "baseline": "c407d83",
+  "initialFullPlayMode": {
+    "passed": 130,
+    "failed": 1
+  },
+  "ownershipRegressionBeforeFix": "RuntimeBelongsToOwnerEvenWhenAnotherSceneIsActive failed (wrong owner scene)",
+  "fix": "Assign EnemyLab runtime to its owner scene; await asynchronous unload in test",
+  "fullPlayModeAfterFix": {
+    "result": "Passed",
+    "total": "132",
+    "passed": "132",
+    "failed": "0"
+  },
+  "xmlSha256": "1d121327b43c02ab60a8c2fdba55b62e22048a4f88fc05ce352a5b7195dd3516",
+  "gameplayScenesChanged": false,
+  "vrTest": "not performed: lab lifetime correction only"
+}

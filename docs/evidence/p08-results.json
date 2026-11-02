@@ -1,0 +1,56 @@
+{
+  "sources": [
+    {
+      "path": "Zombie Shoot VR\\Assets\\VRFPS\\Runtime\\Persistence\\RunRecordBinding.cs",
+      "sha256": "68A4B31A2181EF7B5539F5EAF5513CD0BCC7A03902BD1E99CD9928767B53E2C5"
+    },
+    {
+      "path": "Zombie Shoot VR\\Assets\\VRFPS\\Tests\\PlayMode\\RunRecordTests.cs",
+      "sha256": "27CBE051CFADBC2B6AE28B55DC6B0A67AE1A73BFAFC3E653C7F50FAEAD0AB087"
+    }
+  ],
+  "requirements": [
+    "R13/T13 run result",
+    "R14/T14 save on end"
+  ],
+  "scope": [
+    "Capture actual reached wave and kills once on RunEnded",
+    "Persist before publishing result without blocking death on write failure",
+    "Retry only failed saves with frozen result values",
+    "Clear current result on restart and detach previous run subscriptions"
+  ],
+  "tests": [
+    {
+      "sha256": "833755ABB801AB3A3A304D9E673F5B56BC971336928161DC11651B8C6A3C2427",
+      "failed": 5,
+      "path": "tmp/p08-results/red.xml",
+      "result": "Failed(Child)",
+      "passed": 0
+    },
+    {
+      "sha256": "4EE78E19AF84B6EF1B8B983099EC55AC8E777E0ED34703FEFFE3FBC98B85C017",
+      "failed": 0,
+      "path": "tmp/p08-results/green-play.xml",
+      "result": "Passed",
+      "passed": 75
+    },
+    {
+      "sha256": "73BACFA17835D8492A53C38B2FA1AD19C678C7565E4079EB2929E1E8076BE7FB",
+      "failed": 0,
+      "path": "tmp/p08-results/green-edit.xml",
+      "result": "Passed",
+      "passed": 50
+    }
+  ],
+  "baseCommit": "541650762470e08ac0bcac765932a740089d5d14",
+  "unit": "P08-b",
+  "reproduce": "Unity.exe -batchmode -nographics -projectPath <isolated project> -runTests -testPlatform <PlayMode|EditMode> -testResults <xml> -logFile <log>",
+  "limitations": [
+    "Binding is verified with real RunController and disk storage, not yet authored into the UI scene",
+    "ResultChanged/LastError expose state; visible result/error panel pending",
+    "Forearm HUD/menu and new Windows build pending"
+  ],
+  "unity": "6000.3.23f1",
+  "review": "Self-review complete; independent branch review pending",
+  "date": "2026-09-27"
+}

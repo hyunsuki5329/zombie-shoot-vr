@@ -1,0 +1,13 @@
+{
+  "sourceCommit": "cb1b0e7",
+  "filesVerified": 2861,
+  "archiveSha256": "26c57ab29a9d8cde275d08d48009b900bebeb5854952e5041dffeeac21db99e5",
+  "archiveBytes": 584363539,
+  "scope": "Git source plus local external assets and stable metadata; user-edited scenes preserved",
+  "reopenTest": "not run",
+  "publicRedistribution": "not authorized by this backup",
+  "path": "Zombie Shoot VR/Builds/Reproduction/cb1b0e7-wall-fix",
+  "testedCacheComparedFiles": 241,
+  "comparison": "VRFPS code (normalized line endings), scenes, prefabs, assets; excludes tests/docs",
+  "buildGuid": "9723fbe2fa094de7be98e4c75f72b1b2"
+}

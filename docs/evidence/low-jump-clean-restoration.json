@@ -1,0 +1,40 @@
+{
+  "sourceCommit": "2d3f3e6",
+  "archiveSha256": "23ab2258c648c0f8428aca86fb24a763bdcaeca8ec134356e3243b604eaef98f",
+  "freshLibrary": true,
+  "samePcPackageCacheAndLicense": true,
+  "testResults": {
+    "edit": {
+      "result": "Skipped:Ignored",
+      "total": "107",
+      "passed": "106",
+      "failed": "0",
+      "skipped": "1",
+      "xmlSha256": "61aca616491e95b0da0873bc283b3ac403e450b502a208b9bb1cce58ccb30fef"
+    },
+    "play": {
+      "result": "Passed",
+      "total": "131",
+      "passed": "131",
+      "failed": "0",
+      "skipped": "0",
+      "xmlSha256": "fcaa0c922ed80cffee323030ae42fa00387d2bd2417134d28e84e14a1ab9eb54"
+    }
+  },
+  "optionalSkip": "LocalScanReferenceRetainsOriginalTextureWhenAvailable: private raw scan excluded",
+  "buildGuid": "eb43eaca52b4478fab7aaa28b29750c2",
+  "buildSucceeded": true,
+  "rawScansAndOriginalSchoolModelPacked": 0,
+  "notices": {
+    "GrannyHouse-Attribution.txt": "18e532a77f910a985269f33102c50aef986eafde8847e55cc467afde17fe5a64",
+    "AbandonedSchool-Attribution.txt": "c636255adbb8b8eb0850b3f77da23f28a923f1b629d6d5f7a85e90c1d9a9e45b"
+  },
+  "scenesUnchanged": {
+    "Room": "feb906dd33227785492f0baeab42bf05504527ccc0c1f0f95f7a4905a8d886d4",
+    "Classroom": "bfec276317da60a49920fd6cddb6f0f6372403f821803a88ad9508090ad96b23",
+    "RoomHousePreview": "feb906dd33227785492f0baeab42bf05504527ccc0c1f0f95f7a4905a8d886d4"
+  },
+  "evidenceDirectory": "tmp/low-jump-clean-restore",
+  "deployedUserBuildReplaced": false,
+  "vrAcceptance": "pending"
+}

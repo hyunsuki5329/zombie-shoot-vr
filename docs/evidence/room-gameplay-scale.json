@@ -1,0 +1,21 @@
+{
+  "date": "2026-10-13",
+  "baseCommit": "022101b",
+  "scope": "Room uniform gameplay scale 2.5; original layout and measured provenance retained",
+  "measuredRoomMeters": [4.3, 2.45, 3.5],
+  "gameRoomMeters": [10.75, 6.125, 8.75],
+  "scaleRed": {"failed": 5, "xml": "tmp/room-scale/red.xml"},
+  "scaleGreen": {"passed": 5, "xml": "tmp/room-scale/green.xml"},
+  "previewRed": {"failed": 1, "xml": "tmp/room-scale/preview-red.xml"},
+  "editMode": {"passed": 96, "failed": 0, "xml": "tmp/room-scale/editmode.xml"},
+  "playMode": {"passed": 127, "failed": 0, "xml": "tmp/room-scale/playmode.xml"},
+  "review": "Fresh reviewer found compounded recapture expectations in test; corrected ratio to target/source gameplayScale",
+  "postReviewTest": {"passed": 1, "failed": 0, "xml": "tmp/room-scale/preview-final.xml"},
+  "buildGuid": "1598929be6644dbe9a2aebc2c9ee4740",
+  "buildLog": "tmp/room-scale/build.log",
+  "build": "Zombie Shoot VR/Builds/Windows/AbandonedHouse/AbandonedHouse.exe",
+  "packedRoomScanAssets": 0,
+  "copiedFilesHashVerified": 501,
+  "hardwareAcceptance": "Pending enlarged build; previous build feedback was room too small",
+  "pr": "https://github.com/hyunsuki5329/zombie-shoot-vr/pull/21"
+}

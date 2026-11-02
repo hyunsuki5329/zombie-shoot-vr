@@ -1,0 +1,37 @@
+{
+  "sourceCommit": "eaf2567218d4f403d7d11e5c6eea660a14042a2d",
+  "sourceArchiveSha256": "e46b47a07ddd0a919ebd30607d92765745cd0a97ba41b33e1565f7d6912c78df",
+  "initialLibraryPresent": false,
+  "schoolRestoration": "original ZIP via Restore-SchoolAssets.py; new metadata/generated assets",
+  "privateScansIncluded": false,
+  "limitations": [
+    "same PC package cache and license",
+    "non-school external assets copied with existing metadata; not regenerated from originals"
+  ],
+  "nonSchoolExternalFilesHashVerified": 532,
+  "date": "2026-10-14",
+  "status": "restoration tests and Windows build passed",
+  "tests": {
+    "edit-final": {
+      "result": "Skipped:Ignored",
+      "total": "99",
+      "passed": "98",
+      "failed": "0",
+      "skipped": "1",
+      "sha256": "42933b42114e3ae3a4433cba28ce3b7498e6c5b18f9624a16e9b0c3786af794c"
+    },
+    "play": {
+      "result": "Passed",
+      "total": "128",
+      "passed": "128",
+      "failed": "0",
+      "skipped": "0",
+      "sha256": "52e1562c768475d832752573c5c4d9d369dde5cca3c7f092bff8fcf4474787cc"
+    }
+  },
+  "repair": "GamgoVisualSetup.Configure and UserWeaponAudioSetup.Configure required after external copy to reconnect source prefab references",
+  "buildGuid": "a360be84dec64497b948aac082c5e450",
+  "buildLogSha256": "0718c8d4f9c12dbfd17ed7b5ac388c5402fed70fc1505ac01e5a3a4a499907ba",
+  "rawScanAndOriginalSchoolModelPacked": 0,
+  "hardwareAcceptance": "pending: user has not run latest build"
+}

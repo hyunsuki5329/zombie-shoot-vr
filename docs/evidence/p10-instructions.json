@@ -1,0 +1,102 @@
+{
+  "unit": "P10-a first-use control guide",
+  "date": "2026-09-27",
+  "baseCommit": "813bc153eaef7fcecdc1bd5a54d1671ccf94c983",
+  "requirements": [
+    "P10",
+    "R19",
+    "T19"
+  ],
+  "scope": [
+    "Initial Bootstrap guide and repeatable Controls menu",
+    "Instructions pause combat and return without implicit resume",
+    "Guide describes movement, two-hand fire, manual reload, HUD and pause"
+  ],
+  "tests": [
+    {
+      "path": "tmp/p10-instructions/red.xml",
+      "sha256": "5FB6508CF20EA89EC7E0555A5F9FE3792D7ADE562C7AB92BEFFBCD1862EDFCDA",
+      "result": "Failed(Child)",
+      "passed": "0",
+      "failed": "1"
+    },
+    {
+      "path": "tmp/p10-instructions/green-play.xml",
+      "sha256": "815D923AFA59F93AB4DD603925044D2BF4E4488775FEC6E88A3C4C2BAE805FDA",
+      "result": "Passed",
+      "passed": "97",
+      "failed": "0"
+    }
+  ],
+  "build": {
+    "result": "Both builds succeeded",
+    "log": "tmp/p10-instructions/build.log",
+    "logSha256": "91622E9527E94558DB82DBE5841879D7B104877ED30D6EFEC66AC475D9B14AA6",
+    "manifest": "tmp/p10-instructions/build-manifest.json",
+    "manifestSha256": "BEDC3A6E462803B0DD1FEBB902D0413C9FAB27AFA0A8AADC2FC88DF7C19A1D9F",
+    "bootstrapMatchedFiles": 340,
+    "menuLabMatchedFiles": 337,
+    "hashMismatches": 0
+  },
+  "sources": [
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/UI/MenuController.cs",
+      "sha256": "90972DFC20781F5D6C7ED05B3F407A9983BBFAA5C55A08FB5655E75BC2C51A44"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/UI/MenuView.cs",
+      "sha256": "8BFDAD1A0C46A9E5CA8731686BD6676FDA9044AC62ED5BF47672F50D2230BF7A"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/Progression/CombatSceneEntry.cs",
+      "sha256": "35AE191DD7ADC8C90F25AEBA0F05E7BDF7B052381CC3B79695934358DC63CC4F"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/Testing/WaveLabSession.cs",
+      "sha256": "EC7FB02C4A7BA9506C26BA90DED47A09E134EDC12CD146F028AB3105A1C1EC23"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Editor/MenuSetup.cs",
+      "sha256": "BD6130D205EDE2A6F50450CBC58B33871C639C5A3B3C651E3E9E89277B50F3CD"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Editor/InstructionSetup.cs",
+      "sha256": "A250EC1C8C124DA5B889E5272ECED618CD32F0170A328587A4728C2DE370B955"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/UI/InstructionPanel.prefab",
+      "sha256": "DD0BFC1E88602DFDB6B4AA2AFB4330B68FA4C237F75C052EE35CE8E382A267B4"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Prefabs/UI/Menus.prefab",
+      "sha256": "3FA9375100ED2FB8484E10607FEA7C8B78263BAFB8B30DD7F5D65420787BBFE8"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Scenes/Combat.unity",
+      "sha256": "7D0B4E5F3EDA9172BFF19E883D37EEA645CE8593D3C423D7D597C96BBB5B8611"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Scenes/Tests/WaveLab.unity",
+      "sha256": "D36EBF116930F2BF621D6A4DBF54F758439210679FA4ABD0C836FC852077AB71"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Tests/PlayMode/InstructionMenuTests.cs",
+      "sha256": "F1AD2DCA90A889770124062A9B23504820AC548046A3AA348506E2730A7A0A14"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Tests/PlayMode/BootstrapTests.cs",
+      "sha256": "446CBC4EA4088F67C83E7D6C009C59AB0BCC40E3D67BA9B984A8674262E82D9D"
+    }
+  ],
+  "review": "Self-reviewed state transitions, event subscription, prefab/scene references and scope; independent review pending",
+  "limitations": [
+    "Actual novice user T19 observation pending; English guide readability/comprehension not yet verified",
+    "Actual Quest Pro pointer, binocular readability and occlusion pending",
+    "Audio, haptics and remaining combat feedback not implemented by this unit",
+    "Actual room/classroom scans and performance tests still pending"
+  ],
+  "reproduce": [
+    "Unity -batchmode -nographics -projectPath <isolated project> -runTests -testPlatform PlayMode -testResults <xml> -logFile <log>",
+    "Unity -batchmode -nographics -projectPath <isolated project> -executeMethod VRFPS.Editor.InstructionSetup.Build -quit -logFile <log>"
+  ]
+}

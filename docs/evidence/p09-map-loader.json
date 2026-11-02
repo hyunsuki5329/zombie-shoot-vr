@@ -1,0 +1,70 @@
+{
+  "unit": "P08/P09 additive map loader",
+  "date": "2026-09-27",
+  "baseCommit": "ab446b02794d12107db88630d758946479a4aa66",
+  "scope": [
+    "Load registered scene additively and expose only one validated MapRoot",
+    "Unload owned scenes; clear map state after validation failure",
+    "Preflight unavailable scene before replacing current map",
+    "Allow valid load after invalid scene cleanup"
+  ],
+  "tests": [
+    {
+      "sha256": "0B701218934E3CFF5E3039EF824A99A39DDD1CD23C0DCB9011C742500838F21F",
+      "passed": "0",
+      "path": "tmp/p09-map-loader/red.xml",
+      "result": "Failed(Child)",
+      "failed": "3"
+    },
+    {
+      "sha256": "FD2CEF2AC090D24F2C93E1A517A7B35BD81E95453B1E1CD8B147B841C10DC65F",
+      "passed": "90",
+      "path": "tmp/p09-map-loader/green-play.xml",
+      "result": "Failed(Child)",
+      "failed": "2"
+    },
+    {
+      "sha256": "51400775FAC383B124963B461F12DCECADC8564BE42C5ED4A43C610E1D63B313",
+      "passed": "92",
+      "path": "tmp/p09-map-loader/verified-play.xml",
+      "result": "Passed",
+      "failed": "0"
+    }
+  ],
+  "sources": [
+    {
+      "sha256": "138E29ADA1354A5CAE5DCA115E408EED1B8050482793E0C60C4FFB705DC735B6",
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/Maps/MapSceneLoader.cs"
+    },
+    {
+      "sha256": "6A2A11B4924EC0D8D9AC3ED9AE24CCFFD06B113FFF47A4065D378CEE0AEF6B94",
+      "path": "Zombie Shoot VR/Assets/VRFPS/Editor/MapLoaderFixtureSetup.cs"
+    },
+    {
+      "sha256": "996B33F23E74EC4F36F324236046D6105A27FD55EC41358F10086ABC90539FC6",
+      "path": "Zombie Shoot VR/Assets/VRFPS/Tests/PlayMode/MapSceneLoaderTests.cs"
+    },
+    {
+      "sha256": "CCCFB9065465BB3B5B9C09DE9C847DD03C316D5791498FBB948657417ABF30B5",
+      "path": "Zombie Shoot VR/Assets/VRFPS/Tests/Fixtures/MapLoading/ValidMap.unity"
+    },
+    {
+      "sha256": "091A72B282CC0602EFC8157BDAEE2EA9C82DE0B45AA0D32F657B8448F2625B7F",
+      "path": "Zombie Shoot VR/Assets/VRFPS/Tests/Fixtures/MapLoading/InvalidMap.unity"
+    },
+    {
+      "sha256": "85F339A6FE9AB2C9A2BB5A9EC687C20BFF36F0B2BD93553DA30CF77C1E255123",
+      "path": "Zombie Shoot VR/Assets/VRFPS/Tests/Fixtures/MapLoading/TestNavigation.asset"
+    }
+  ],
+  "reproduce": [
+    "In isolated project, run -batchmode -nographics -quit -executeMethod VRFPS.Editor.MapLoaderFixtureSetup.EnableForTests before entering PlayMode",
+    "Then run -runTests -testPlatform PlayMode -testResults <xml> -logFile <log>"
+  ],
+  "testCorrection": "First green was 90/92: EditorBuildSettings changes during PlayMode did not update load availability; registering fixtures before PlayMode yielded 92/92.",
+  "limitations": [
+    "Synthetic fixtures are not actual scans",
+    "Not yet connected to Bootstrap menu/Combat lifecycle",
+    "No new Windows build; headset and independent review pending"
+  ]
+}

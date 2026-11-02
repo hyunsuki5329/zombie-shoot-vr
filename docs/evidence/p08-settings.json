@@ -1,0 +1,74 @@
+{
+  "unit": "P08-g locomotion settings",
+  "date": "2026-09-27",
+  "baseCommit": "eb211d7d2af7fa9e622598d77a3e4f5b2c93c0f9",
+  "scope": [
+    "Move 1.0-2.0 m/s, turn 30-90 deg/s; nonfinite fallback 1.6/60",
+    "PlayerPrefs persistence with isolated test keys",
+    "Menu buttons apply and save immediately; endpoints disabled",
+    "Settings enabled in authored WaveLab"
+  ],
+  "tests": [
+    {
+      "path": "tmp/p08-settings/red.xml",
+      "failed": "2",
+      "result": "Failed(Child)",
+      "sha256": "55429AE13614D0085056B9940EAA1DB81DEE6B3BAA9C99188856E07C155D4E44",
+      "passed": "0"
+    },
+    {
+      "path": "tmp/p08-settings/green-play.xml",
+      "failed": "0",
+      "result": "Passed",
+      "sha256": "6389663012E417A3138025327E8018BAA5051E36CD234C41F18BB133D72677FF",
+      "passed": "86"
+    }
+  ],
+  "sources": [
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/Player/PlayerRigController.cs",
+      "sha256": "BC64B45D44BE9043802F1816B8C5BE91D767C1EAC3E5E1853DFEEC13EC2A4895"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/UI/LocomotionSettings.cs",
+      "sha256": "B0E1818D5374734020DF938100E6DDE771091959872569E38327A0E909BEFD01"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/UI/SettingsView.cs",
+      "sha256": "A3FA10CA0641086B520A55489A2D6183533EEA32744265A431B8D717B108516C"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/UI/MenuView.cs",
+      "sha256": "2219375E6F3373F1AED21953CB7576B56EEA4256C88D7A850A84B4425B6921A1"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Editor/MenuSetup.cs",
+      "sha256": "63C328060027217B63BB51647F7A4CD826977158C563396639730C97E40EF85A"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Tests/PlayMode/LocomotionSettingsTests.cs",
+      "sha256": "C6A23991B0994DB7870B428BEA2C9E9D2DA16874ADF461597D40EF1FB032A1E2"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Prefabs/UI/Menus.prefab",
+      "sha256": "DF48620F33E9781CC9224F253DFC9A747B7D5B4B715BACAE7C60D487F416EC53"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Scenes/Tests/WaveLab.unity",
+      "sha256": "4A66DD3E9BC23F91061ED62F1E64F9B152481D7A4AB87219B4A57FB4261C80A9"
+    }
+  ],
+  "build": {
+    "manifest": "tmp/p08-settings/build-manifest.json",
+    "result": "Succeeded, exit 0",
+    "log": "tmp/p08-settings/build.log",
+    "sha256": "0698ABF0E3450F43EED2B005FC7D870449FEFFFFF3400DA0D553451094506B93",
+    "path": "Zombie Shoot VR/Builds/Windows/MenuLab/WaveLab.exe",
+    "files": 337
+  },
+  "limitations": [
+    "XR visual/pointer/headset comfort verification pending",
+    "Map loading/Bootstrap/real-map record integration pending",
+    "Independent branch review pending"
+  ]
+}

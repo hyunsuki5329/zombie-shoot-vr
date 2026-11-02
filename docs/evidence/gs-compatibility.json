@@ -1,0 +1,29 @@
+{
+  "rendererRevision": "2c6fed37da67a217367261fcfcd3316d34c73e76",
+  "rendererVersion": "1.1.1",
+  "unity": "6000.3.23f1",
+  "urp": "17.3.0",
+  "api": "Direct3D12",
+  "gpu": "NVIDIA GeForce RTX 4060 Ti",
+  "data": "256 synthetic analytic Gaussians, NOT a room capture",
+  "renderPixelsAboveRed40": 103694,
+  "rendererGraphicsBufferFieldsAfterDisable": {
+    "inspected": 15,
+    "nonnull": 0
+  },
+  "xr": "not-tested",
+  "occlusion": "not-tested",
+  "tenTransitions": "not-tested",
+  "performance": "deferred",
+  "adoptedInGame": false,
+  "firstAttempt": "failed: no splats visible when pipeline created and rendered in same batch call",
+  "secondAttempt": "passed: saved pipeline/scene, reopened in fresh editor invocation",
+  "limits": "Only renderer buffer fields inspected, not complete process VRAM accounting; synthetic data not real scan acceptance",
+  "hashes": {
+    "tmp/p13/probe-import.log": "82a8d4060fc2da8be739c8dd86e99085a2c4774f4abb2f212369f94b7454e92a",
+    "tmp/p13/probe-render.log": "859ba37c9e805b8b9992ee6d11af214c81595483342156888bcf4ba445b37910",
+    "tmp/p13/probe-render2.log": "4aeb84e5e4b0e7cdbf4f90e5bb4bdbe2ffed51afb0528fa298420b09942e3170",
+    "tmp/p13/GsProbe/Evidence/synthetic.png": "e9dfdcd0ddc268a7fa9f2cc916bee3b985131c7ecb4ba59a92ed638f23ed84d9",
+    "tmp/p13/GsProbe/synthetic.ply": "cb35b735d134567818df9c7140b3a22dcb71b91cf1ad8ccf1706e5a1330191aa"
+  }
+}

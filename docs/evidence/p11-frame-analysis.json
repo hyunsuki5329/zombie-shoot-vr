@@ -1,0 +1,88 @@
+{
+  "unit": "P11-h raw frame timing analysis",
+  "date": "2026-09-28",
+  "baseCommit": "03ced903ef0a49f63ad6d8f7950e826ab3c5cd56",
+  "requirements": [
+    "P11",
+    "R17",
+    "T17"
+  ],
+  "pythonTests": {
+    "failed": 0,
+    "existingObjectAnalyzerTests": 11,
+    "newFrameAnalyzerTests": 9,
+    "passed": 20,
+    "command": "python -B -m unittest discover -s scripts/tests -p 'test_analyze_vr*.py' -v"
+  },
+  "red": {
+    "errors": 9,
+    "reason": "Analyzer not implemented",
+    "tests": 7
+  },
+  "unityTargetedTests": {
+    "failed": 0,
+    "runtimeChanged": false,
+    "filter": "VRFPS.Tests.FrameTimingLogTests",
+    "passed": 2
+  },
+  "crossLanguage": {
+    "duplicates": 1,
+    "zeroTimestamp": 1,
+    "gpuP95": 8,
+    "gpuValid": 1,
+    "cpuActiveWorkP95": null,
+    "cpuTotalP95": 14,
+    "source": "Actual Unity C# writer with synthetic known inputs, not hardware timing",
+    "frames": 2,
+    "cpuTotalValid": 1,
+    "performanceAcceptance": "unverified"
+  },
+  "artifacts": [
+    {
+      "path": "tmp/p11-frame-analysis/red.log",
+      "sha256": "88C705BD9031F219CAF5659D1BBB4E2FA782BD1FA2AA4E98C459952E1DB76491"
+    },
+    {
+      "path": "tmp/p11-frame-analysis/green.log",
+      "sha256": "CFF68D5DE5E9036AEA4591519CFC2C3C0F2ABCA121FE5BA36DE23DA18560DAC4"
+    },
+    {
+      "path": "tmp/p11-frame-analysis/unity-writer.xml",
+      "sha256": "1B362FEA87A838CDE7472B37EF5E3D05651AA113793248ADC3B855C1325C700B"
+    },
+    {
+      "path": "tmp/p11-frame-analysis/unity-writer-fixture.vrft",
+      "sha256": "4859102E6C63E60EF2AF8DB50BAA6330BBD5F1072997282071243FA390342B69"
+    },
+    {
+      "path": "tmp/p11-frame-analysis/unity-summary.json",
+      "sha256": "69D5FDE0D254E768C198961F9FE95AFC3E8AFDB034A3368D6BA85996987B77FD"
+    },
+    {
+      "path": "tmp/p11-frame-analysis/unity-frames.csv",
+      "sha256": "DF42DE83614F674356B17C3AE6A231FAC457685A883E21ECEC688D1D3AE2B177"
+    }
+  ],
+  "sources": [
+    {
+      "path": "scripts/analyze_vr_frame_timings.py",
+      "sha256": "3EF2C7FEC7FA31F13CDF8AAD6DC6037DE3804AB61FDB362A4468A8D5E86AEB85"
+    },
+    {
+      "path": "scripts/tests/test_analyze_vr_frame_timings.py",
+      "sha256": "B6637CC70D67D8C397E07240B935AFB8AB3C81ABA9DE648B998458262546BC13"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Tests/PlayMode/FrameTimingLogTests.cs",
+      "sha256": "F4AEA7D382D5132C6FC90684BEF9F7D0539EB457577E47D7EE3900C5EC9493D6"
+    }
+  ],
+  "review": "Self-review of binary layout, validity-mask parity, filters, footer counters, exclusive outputs and measurement semantics. Independent review pending.",
+  "historicalValidation": "Full PlayMode116/116 and Windows builds from 03ced90 retained; not rerun for Python/test-only change.",
+  "remaining": [
+    "Real Room/Classroom captures",
+    "72Hz SSW-off hardware timing and CPU metric validation",
+    "30 minutes per map, RAM/VRAM and measurement overhead",
+    "Independent review and integration"
+  ]
+}

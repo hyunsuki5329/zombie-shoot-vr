@@ -1,0 +1,58 @@
+{
+  "base": "d79f6c0",
+  "scope": "Fade timing and mono GPU masking, not complete intro integration",
+  "tests": {
+    "fade-red": {
+      "result": "Failed(Child)",
+      "total": "3",
+      "passed": "0",
+      "failed": "3",
+      "skipped": "0",
+      "sha256": "38a3060369e6d650d2d0ced76757f73900aeb5ec2f1b8f7280033bf689656391"
+    },
+    "fade-green": {
+      "result": "Passed",
+      "total": "3",
+      "passed": "3",
+      "failed": "0",
+      "skipped": "0",
+      "sha256": "a01771ce93c2143e7d63c7e2687d77200c5da8b8f484a684307f3740059d6eee"
+    },
+    "fade-render": {
+      "result": "Passed",
+      "total": "4",
+      "passed": "4",
+      "failed": "0",
+      "skipped": "0",
+      "sha256": "ee769c5f1cdad5b68bf1307f1784deb7469998496bb6f415f5a6b4305b4115a3"
+    },
+    "fade-play-final": {
+      "result": "Passed",
+      "total": "147",
+      "passed": "147",
+      "failed": "0",
+      "skipped": "0",
+      "sha256": "742d85d098d735f2f3dacafccf878682f8f5ad8ce816c28b9937397b279769d5"
+    },
+    "fade-dx12": {
+      "result": "Passed",
+      "total": "4",
+      "passed": "4",
+      "failed": "0",
+      "skipped": "0",
+      "sha256": "060c8dfbee3f9e5de0f9c96e3c6153e2450b01ce8d8f2aac57be67d480932dc4"
+    }
+  },
+  "graphics": {
+    "fade-render": "Direct3D11 RTX4060Ti mono",
+    "fade-dx12": "Direct3D12 RTX4060Ti mono"
+  },
+  "review": "No important findings; added direct FadeTo supersession assertion following minor review suggestion",
+  "unverified": [
+    "XR stereo",
+    "GS renderer composition",
+    "actual hand and gun render ordering",
+    "menu above fade",
+    "build shader inclusion"
+  ]
+}

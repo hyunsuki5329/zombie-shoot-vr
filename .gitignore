@@ -61,3 +61,33 @@ __pycache__/
 *.unitypackage
 
 # Keep Unity source assets, their .meta files, Packages, and ProjectSettings.
+
+# Restricted original models and generated materials: restore with Restore-GamgoAssets.py.
+**/Assets/VRFPS/External/GAMGO/
+**/Assets/VRFPS/External/GAMGO.meta
+
+# Mixamo originals and generated assets are restored locally.
+**/Assets/VRFPS/External/Mixamo/
+**/Assets/VRFPS/External/Mixamo.meta
+
+# User-provided originals and prepared audio are restored locally; see docs/user-weapon-audio.md.
+**/Assets/VRFPS/External/UserAudio/
+**/Assets/VRFPS/External/UserAudio.meta
+
+# Private room scan, textures, processed mesh and navigation: restore locally.
+**/Assets/VRFPS/External/RoomScan/
+**/Assets/VRFPS/External/RoomScan.meta
+
+# User-supplied Granny house originals and extracted derivatives are restored locally.
+**/Assets/VRFPS/External/GrannyHouse/
+**/Assets/VRFPS/External/GrannyHouse.meta
+
+# User-supplied school source and extracted library are restored locally.
+**/Assets/VRFPS/External/AbandonedSchool/
+**/Assets/VRFPS/External/AbandonedSchool.meta
+
+# Private GS captures/processed buffers and externally supplied intro model.
+**/Assets/VRFPS/External/RealityGS/
+**/Assets/VRFPS/External/RealityGS.meta
+**/Assets/VRFPS/External/IntroVirus/
+**/Assets/VRFPS/External/IntroVirus.meta

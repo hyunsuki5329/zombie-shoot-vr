@@ -1,0 +1,70 @@
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+namespace VRFPS
+{
+    public sealed class K2HandInput : MonoBehaviour
+    {
+        [SerializeField] K2Controller gun;
+        [SerializeField] Transform left;
+        [SerializeField] Transform foregrip;
+        [SerializeField] InputActionReference gripAction;
+        [SerializeField] InputActionReference triggerAction;
+        [SerializeField] LineRenderer tracer;
+        [SerializeField] LeftHandInteractor leftHandOwnership;
+        double activeTime;
+        float tracerUntil;
+        RunController clock;
+        WeaponContextRouter context;
+        bool triggerReleaseRequired;
+        public int TracerObjectCount=>tracer!=null?1:0;
+        public int ActiveTracerCount=>tracer!=null&&tracer.enabled&&tracer.gameObject.activeInHierarchy?1:0;
+        public void RequireTriggerRelease() => triggerReleaseRequired = true;
+        public void UseRunClock(RunController run) { clock = run; activeTime = 0; }
+        public void UseContext(WeaponContextRouter router){context=router;activeTime=0;RequireTriggerRelease();}
+
+        public void Configure(K2Controller gun, Transform left, Transform foregrip)
+        {
+            this.gun = gun; this.left = left; this.foregrip = foregrip;
+        }
+
+        void OnEnable() { if (gun != null) gun.Fired += ShowTracer; }
+        void OnDisable()
+        {
+            if (gun != null) { gun.Fired -= ShowTracer; gun.SetLeftGrip(false); }
+            if (leftHandOwnership != null) leftHandOwnership.ReleaseAll();
+            if (tracer != null) tracer.enabled = false;
+        }
+
+        void LateUpdate()
+        {
+            if (gun == null) return;
+            if (context != null) activeTime = context.InputTime;
+            else if (clock != null) activeTime = clock.ActiveTime;
+            else if (gun.Context == WeaponContext.Combat || gun.Context == WeaponContext.Intro) activeTime += Time.deltaTime;
+            TickInput(gripAction != null && gripAction.action.IsPressed(),
+                triggerAction != null && triggerAction.action.IsPressed(), activeTime);
+            if (tracer != null && Time.unscaledTime >= tracerUntil) tracer.enabled = false;
+        }
+
+        public bool TickInput(bool grip, bool trigger, double time)
+        {
+            if (!trigger) triggerReleaseRequired = false;
+            if (gun == null || left == null || foregrip == null) return false;
+            gun.UpdatePose();
+            if (leftHandOwnership != null)
+                leftHandOwnership.Tick(grip, gun.AllowsInteraction);
+            else
+                gun.SetLeftGrip(grip && Vector3.Distance(left.position, foregrip.position) <= 0.18f);
+            return gun.Tick(trigger && !triggerReleaseRequired, time);
+        }
+
+        void ShowTracer(Vector3 start, Vector3 end)
+        {
+            if (tracer == null) return;
+            tracer.SetPosition(0, start); tracer.SetPosition(1, end);
+            tracer.enabled = true;
+            tracerUntil = Time.unscaledTime + 0.05f;
+        }
+    }
+}

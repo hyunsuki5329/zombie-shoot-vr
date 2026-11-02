@@ -1,0 +1,41 @@
+{
+  "unit": "P08-e menu state",
+  "date": "2026-09-27",
+  "baseCommit": "c60e0d1c91fcf3a54473dea7fe9dd5f906589e8a",
+  "scope": [
+    "Settings opened during combat pause the run; closing settings returns to paused menu",
+    "Death shows result; resume cannot resurrect; retry resets same map",
+    "Map selection ends current run once"
+  ],
+  "tests": [
+    {
+      "result": "Failed(Child)",
+      "path": "tmp/p08-menu/red.xml",
+      "sha256": "270C5D487F36772E5227AF228384339CE1F673B2AA177C981D9AF8C9DE93B83D",
+      "failed": "3",
+      "passed": "0"
+    },
+    {
+      "result": "Passed",
+      "path": "tmp/p08-menu/green-play.xml",
+      "sha256": "6C098E47BD285D7C4D420F3C8166136283232A280C861C407BF0B096F4314011",
+      "failed": "0",
+      "passed": "81"
+    }
+  ],
+  "sources": [
+    {
+      "sha256": "BFDBB7F6C1344CDE85B2D8849164E8B7B0885E3C68741D89A3A775B93F7989E0",
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/UI/MenuController.cs"
+    },
+    {
+      "sha256": "12BBED816AC4976AA207B19D10349D7A884E55941ABA97C2532B74FD3B710C7E",
+      "path": "Zombie Shoot VR/Assets/VRFPS/Tests/PlayMode/MenuControllerTests.cs"
+    }
+  ],
+  "limitations": [
+    "Menu controller not yet wired into authored scene/buttons",
+    "Map loading, settings controls and result view pending",
+    "Headset and independent review pending"
+  ]
+}

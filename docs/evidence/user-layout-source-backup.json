@@ -1,0 +1,11 @@
+{
+  "sourceCommit": "83dc690",
+  "filesVerified": 2834,
+  "archiveSha256": "17e1966c9693ae2932ab78f43681cfed645f515aeba3b13d567a06011370cccc",
+  "archiveBytes": 584320831,
+  "scope": "Git source plus local external assets and stable metadata; user-edited scenes preserved",
+  "reopenTest": "passed: see user-layout-clean-restoration.json; EditMode99 passed/1 optional scan skipped, PlayMode130 passed, Windows build succeeded",
+  "publicRedistribution": "not authorized by this backup",
+  "path": "Zombie Shoot VR/Builds/Reproduction/83dc690-user-layout",
+  "savedScenesByteMatched": true
+}

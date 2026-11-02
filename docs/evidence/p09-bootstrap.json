@@ -1,0 +1,147 @@
+{
+  "unit": "P08/P09 Bootstrap and common combat scene integration",
+  "date": "2026-09-27",
+  "baseCommit": "1344f9a85f334371b9e3c340f4fb80c01a2bff1e",
+  "requirements": [
+    "P08",
+    "P09",
+    "R02",
+    "R14",
+    "R15",
+    "T02",
+    "T14",
+    "T15"
+  ],
+  "scope": [
+    "Bootstrap loads shared Combat scene; selection displays same-run map records",
+    "Unavailable real maps remain disabled; no synthetic fixture shipped as a real map",
+    "Synthetic scene exercises start, death, saved result, map menu and shutdown",
+    "Shutdown waits for in-flight startup and combat switching",
+    "PlayMode scene fixtures register automatically and restore original build settings"
+  ],
+  "tests": [
+    {
+      "path": "tmp/p09-bootstrap/red.xml",
+      "sha256": "5A2C7F252BCF4DFAAAA731BA38AB1EB9ED4D2784FE9F714E14AD90154003FFCC",
+      "result": "Failed(Child)",
+      "passed": "0",
+      "failed": "1"
+    },
+    {
+      "path": "tmp/p09-bootstrap/green-play.xml",
+      "sha256": "30B0591633AC0248131A6F1D12A10CA84980268E90A026D5FAC8B952BAD34B05",
+      "result": "Failed(Child)",
+      "passed": "93",
+      "failed": "2"
+    },
+    {
+      "path": "tmp/p09-bootstrap/verified-play.xml",
+      "sha256": "BDFD03ADDB60FC166386F091A7CC9AF0678CDCEB93454E90CB6FF30B9DD1BCB8",
+      "result": "Passed",
+      "passed": "95",
+      "failed": "0"
+    },
+    {
+      "path": "tmp/p09-bootstrap/verified-startup.xml",
+      "sha256": "DF2BB66C6CA92EF36A99BDD6A68AC782F43D7727AE8414040E83C82FFC6A1016",
+      "result": "Passed",
+      "passed": "2",
+      "failed": "0"
+    },
+    {
+      "path": "tmp/p09-bootstrap/final-play.xml",
+      "sha256": "F87E2FFAD204FB2A5DC4F85A6EE8A4B0284E663FD6ED029078D4D2396902B9B3",
+      "result": "Failed(Child)",
+      "passed": "91",
+      "failed": "5"
+    },
+    {
+      "path": "tmp/p09-bootstrap/automatic-play.xml",
+      "sha256": "E5044E47EED8028D648705A2B02739081A2A976AFC2E4A065D9AB5A9C0CFFFBB",
+      "result": "Passed",
+      "passed": "96",
+      "failed": "0"
+    },
+    {
+      "path": "tmp/p09-bootstrap/final-edit.xml",
+      "sha256": "8D62D400ADC9131F02A7FA3E10B8C6FA801027AFB94A10913E1F5A38E49ED64F",
+      "result": "Passed",
+      "passed": "50",
+      "failed": "0"
+    }
+  ],
+  "failureAnalysis": [
+    "Initial Bootstrap test failed before implementation",
+    "93/95 run exposed a frame-count startup timeout and consequent leaked-scene interference; changed to realtime deadline and awaited shutdown",
+    "91/96 run exposed undiscovered assembly setup attributes; class prebuild/postbuild hooks now register fixtures automatically"
+  ],
+  "build": {
+    "result": "Succeeded",
+    "log": "tmp/p09-bootstrap/build.log",
+    "logSha256": "A0216965FF76324D8F65004B661ABE7EF0A83AF8B2CEBCEE739DDEAC7BC1DDC0",
+    "executable": "Zombie Shoot VR/Builds/Windows/BootstrapPreview/BootstrapPreview.exe",
+    "manifest": "tmp/p09-bootstrap/build-manifest.json",
+    "manifestSha256": "B5749245D7B4CB7F0B4D9397DEFD64517F805208A146B2859563A8C7E6792815",
+    "copiedFiles": 340,
+    "hashMismatches": 0,
+    "kind": "Development Windows x64 Mono; menu preview without actual room/classroom scenes"
+  },
+  "verification": {
+    "buildSettingsRestored": true,
+    "sourceComparison": "All VRFPS files match verification checkout; four pre-existing files differ only in line endings/trailing whitespace",
+    "selfReview": "Reviewed lifecycle, menu binding, scene assets, configuration, tests and staged scope",
+    "independentReview": "Pending"
+  },
+  "sources": [
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/Progression/GameBootstrap.cs",
+      "sha256": "43CF0E2100C0C44F1CDB1A7552601706E8BEC6442A2A93A062F106CCF3812BB8"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/Progression/CombatSceneEntry.cs",
+      "sha256": "5A28A8C417B5C48DEFDB4402199EB8EE84AF4680A948855FE03E92E8932CC43F"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/UI/MenuView.cs",
+      "sha256": "3DCC70CC47B31502ADF6C869FD941AAEB4E0BFFB3D536F71BDDA6FB6FB3891DD"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Editor/BootstrapSetup.cs",
+      "sha256": "B46E5FE13CC5C853E51F76920AB0A853956FA222A40ADB4FA87B66A4570AFAC6"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Editor/MapLoaderFixtureSetup.cs",
+      "sha256": "648F5B2207F3753399C96E511579366A6A5AAF96E3D6A21E494BD4B31F77D38F"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Tests/PlayMode/BootstrapTests.cs",
+      "sha256": "4E803594E19D526BEB01EAB185F828A8B048CF0EF7BEF4713A97B5DAB8194E04"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Tests/PlayMode/MapSceneTestSetup.cs",
+      "sha256": "87DF4100504F128E5DE3643F5B184D67421225E289A2514B0A6DF3CCFBAD2DE5"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Scenes/Bootstrap.unity",
+      "sha256": "B8415B8C7578F1A378D83ECEED27368993A7AF0E463B6210C4EF5A59B857FCCF"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Scenes/Combat.unity",
+      "sha256": "D1B7E14ADA15AD9E87D4AB9480D5DC088C6C9ADD901CC39D012F3816865FEFE9"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Configuration/Maps/Room.asset",
+      "sha256": "DC29E0FB887F1DEC6FF90EC97F66D8C421D3812DE7AF3642286F2E976C0EE411"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Configuration/Maps/Classroom.asset",
+      "sha256": "C6EF9B5A161B8C500738C5D6744469CAD77C4E1B871F8E4A1E0C13BD3FD12D29"
+    }
+  ],
+  "limitations": [
+    "Actual room and classroom scans and two reference lengths are missing",
+    "Quest Pro menu readability, ray interaction, HUD occlusion, reload and progression hardware checks remain pending",
+    "72 Hz performance and 30-minute tests on each real map remain pending",
+    "BootstrapPreview is not a finished playable game; existing MenuLab remains the combat prototype"
+  ]
+}

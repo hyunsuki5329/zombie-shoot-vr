@@ -30,3 +30,6 @@
 *.otf binary
 *.pdf binary
 *.zip binary
+
+# Preserve upstream notice bytes, including original line endings.
+docs/licenses/** -text

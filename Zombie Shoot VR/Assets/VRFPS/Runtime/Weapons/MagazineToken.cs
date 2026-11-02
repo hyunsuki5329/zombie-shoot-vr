@@ -1,0 +1,116 @@
+using UnityEngine;
+
+namespace VRFPS
+{
+    public enum MagazineTokenState { Fresh, Inserted, Discarded }
+
+    [RequireComponent(typeof(Rigidbody), typeof(BoxCollider))]
+    public sealed class MagazineToken : MonoBehaviour
+    {
+        public MagazineTokenState State { get; private set; }
+        public Transform HeldBy { get; private set; }
+        MagazineSocket mountedIn;
+        bool simulationEnabled = true, suspendedDynamic;
+        Vector3 suspendedVelocity, suspendedAngularVelocity;
+
+        public void SetSimulationEnabled(bool enabled)
+        {
+            if (simulationEnabled == enabled) return;
+            simulationEnabled = enabled;
+            var body = GetComponent<Rigidbody>();
+            if (!enabled && !body.isKinematic)
+            {
+                suspendedDynamic = true;
+                suspendedVelocity = body.linearVelocity;
+                suspendedAngularVelocity = body.angularVelocity;
+                body.isKinematic = true;
+            }
+            else if (enabled && suspendedDynamic)
+            {
+                suspendedDynamic = false;
+                if (HeldBy == null && State != MagazineTokenState.Inserted)
+                {
+                    body.isKinematic = false;
+                    body.linearVelocity = suspendedVelocity;
+                    body.angularVelocity = suspendedAngularVelocity;
+                }
+            }
+        }
+
+        internal void ResetFresh()
+        {
+            if (HeldBy != null || State == MagazineTokenState.Inserted)
+                throw new System.InvalidOperationException("Cannot recycle an owned magazine.");
+            mountedIn = null;
+            State = MagazineTokenState.Fresh;
+        }
+
+        internal void ResetForRun()
+        {
+            HeldBy = null; mountedIn = null;
+            transform.SetParent(null, true);
+            State = MagazineTokenState.Fresh;
+            SetAttachedPhysics();
+        }
+
+        public bool TryGrab(Transform hand)
+        {
+            if (hand == null || HeldBy != null || State == MagazineTokenState.Inserted) return false;
+            Hold(hand);
+            return true;
+        }
+
+        public bool Release(Transform hand)
+        {
+            if (HeldBy == null || HeldBy != hand) return false;
+            HeldBy = null;
+            transform.SetParent(null, true);
+            var body = GetComponent<Rigidbody>();
+            body.isKinematic = !simulationEnabled;
+            suspendedDynamic = !simulationEnabled;
+            suspendedVelocity = suspendedAngularVelocity = Vector3.zero;
+            body.useGravity = true;
+            body.detectCollisions = true;
+            return true;
+        }
+
+        void Hold(Transform hand)
+        {
+            HeldBy = hand;
+            SetAttachedPhysics();
+            transform.SetParent(hand, true);
+            transform.localPosition = Vector3.zero;
+            transform.localRotation = Quaternion.identity;
+        }
+
+        void SetAttachedPhysics()
+        {
+            suspendedDynamic = false;
+            var body = GetComponent<Rigidbody>();
+            if (!body.isKinematic) { body.linearVelocity = Vector3.zero; body.angularVelocity = Vector3.zero; }
+            body.isKinematic = true;
+            body.detectCollisions = false;
+        }
+
+        internal void Mount(MagazineSocket socket)
+        {
+            if (State != MagazineTokenState.Fresh) throw new System.InvalidOperationException("Only a fresh magazine can be mounted.");
+            State = MagazineTokenState.Inserted;
+            HeldBy = null;
+            mountedIn = socket;
+            SetAttachedPhysics();
+            transform.SetParent(socket.transform, true);
+            transform.localPosition = Vector3.zero;
+            transform.localRotation = Quaternion.identity;
+        }
+
+        internal bool EjectToHand(MagazineSocket socket, Transform hand)
+        {
+            if (mountedIn != socket || State != MagazineTokenState.Inserted || hand == null) return false;
+            mountedIn = null;
+            State = MagazineTokenState.Discarded;
+            Hold(hand);
+            return true;
+        }
+    }
+}

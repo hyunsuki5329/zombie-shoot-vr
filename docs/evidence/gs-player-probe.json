@@ -1,0 +1,100 @@
+{
+  "date": "2026-10-23",
+  "base": "a0d3d2a",
+  "source": "4c84f7d",
+  "pr": "https://github.com/hyunsuki5329/zombie-shoot-vr/pull/41",
+  "tests": {
+    "player-probe-red2": {
+      "result": "Failed(Child)",
+      "total": "2",
+      "passed": "0",
+      "failed": "2",
+      "xmlSha256": "5300d083b59f9d5ecb898ebc254cbf078b6ba053e56a07225aaa7212ceb4b563",
+      "logSha256": "6f83904e8be7b1405cebc893b708402f6c22fd5345f574d3078a134ee7ca0db2"
+    },
+    "player-probe-green": {
+      "result": "Passed",
+      "total": "2",
+      "passed": "2",
+      "failed": "0",
+      "xmlSha256": "169a8d608c6f68acd1f36a84ce0f7e2db7489317ccf40dcd975e092cfd8357bf",
+      "logSha256": "f8c992c33c87b8b5bf397d8905b055105c26c884b1ea817321081351c5c5743e"
+    },
+    "player-probe-review-red": {
+      "result": "Failed(Child)",
+      "total": "3",
+      "passed": "2",
+      "failed": "1",
+      "xmlSha256": "d94bf8ea75c495f9b3d6507221190e3f4ccf4bcfd5a9b38cf29151ba4401e5b8",
+      "logSha256": "b5c9300f500680d885488a8ab5f853785a8f5a7ebf63e38bc04cb4660bab4a9d"
+    },
+    "player-probe-full": {
+      "result": "Passed",
+      "total": "197",
+      "passed": "197",
+      "failed": "0",
+      "xmlSha256": "1ca72ce2380b1869dab64af7e8dc1a23ee62f7278856ed3178e475e7a733ba63",
+      "logSha256": "2cdd754304c436d20c1c85e0100e77931b6526609aa2831c74f1a292c4c6d93f"
+    }
+  },
+  "nativeSuccess": {
+    "report": {
+      "success": true,
+      "resourcesReleased": true,
+      "pipelineRestored": true,
+      "completedCycles": 10,
+      "blackFrames": 10,
+      "minVisiblePixels": 23648,
+      "error": "",
+      "api": "Direct3D12",
+      "buildGuid": "a02759d14b874012ab295b60a0454cdc",
+      "unityVersion": "6000.3.23f1",
+      "scope": "Analytical GS, mono GPU lifecycle only; not real capture, XR or performance acceptance"
+    },
+    "exitCode": 0,
+    "jsonSha256": "ed7e3dcacd3638b036add8fe98572b038afc83b9f6946a61f45043395448a1fd",
+    "logSha256": "4a398513981b347857c6544112d10f3294a5077f2a425b4fa5974a03fb9577d3"
+  },
+  "nativeExpectedFailure": {
+    "report": {
+      "success": false,
+      "resourcesReleased": true,
+      "pipelineRestored": true,
+      "completedCycles": 0,
+      "blackFrames": 0,
+      "minVisiblePixels": 0,
+      "error": "This GS integration requires DX12 or Vulkan with compute support.",
+      "api": "Null",
+      "buildGuid": "a02759d14b874012ab295b60a0454cdc",
+      "unityVersion": "6000.3.23f1",
+      "scope": "Analytical GS, mono GPU lifecycle only; not real capture, XR or performance acceptance"
+    },
+    "exitCode": 1,
+    "jsonSha256": "1c32648ce94862b0a1861ba8eb0f973689df9d1698dbc813154fc5e7ae3ac565",
+    "logSha256": "19854fe96291673116072c6777c87bd12829ab1f1100b79310d6874acbcf622c"
+  },
+  "build": {
+    "path": "Zombie Shoot VR/Builds/Windows/GsCompatibilityProbe/GsCompatibilityProbe.exe",
+    "guid": "a02759d14b874012ab295b60a0454cdc",
+    "api": "Direct3D12",
+    "backend": "Mono",
+    "managedStripping": "Disabled",
+    "configuration": "Development",
+    "fileCount": 343,
+    "manifestPath": "tmp/p13/player-probe-build-manifest.json",
+    "manifestSha256": "6f3d85ab308e1410ac7d75cd0d42af89d9c41223977a4be110138b9cc79cca37",
+    "logSha256": "209de2634611512c78fa995c04ac9f3733bf7f42d3f80c6e276d5ccff8a1d011",
+    "attributionIncluded": true
+  },
+  "review": "P2 final observation exception bypassed JSON/exit: reproduced then outer operation boundary added. Follow-up reviewer message confirmed fix/no additional P1/P2; reviewer final turn later ended on usage limit. Not external GitHub approval.",
+  "preservation": "Original hashes5/5 unchanged; map and production GS asset diff empty. API/backend fields restored; Unity cleared preloadedAssets and generated incidental metadata/settings, excluded from commit.",
+  "editMode": "Not rerun for this diagnostic-only addition",
+  "unverified": [
+    "Real Splat capture/calibration",
+    "XR stereo/tracking (OpenXR headset unavailable)",
+    "Full Player game transition",
+    "Managed stripping above Disabled or IL2CPP",
+    "Final GSComparison build and its source restoration",
+    "Performance deferred"
+  ]
+}

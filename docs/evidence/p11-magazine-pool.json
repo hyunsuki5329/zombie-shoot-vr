@@ -1,0 +1,70 @@
+{
+  "unit": "P11-c magazine pooling and ownership",
+  "date": "2026-09-28",
+  "baseCommit": "fa6322ffe16e2829a7dfb0bb271578b96d156052",
+  "requirements": [
+    "P11",
+    "R17",
+    "T17",
+    "P05"
+  ],
+  "tests": [
+    {
+      "path": "tmp/p11-magazine-pool/red.xml",
+      "sha256": "ACE02915BEE7EE30073E3D68A1E3C9EAE5E092ABF584866C354008F24734BF6D",
+      "result": "Failed(Child)",
+      "passed": 10,
+      "failed": 2
+    },
+    {
+      "path": "tmp/p11-magazine-pool/green-play.xml",
+      "sha256": "D16B89B192DBB55F208B8E610F6209B96CAF40F8EC5C21FEB193E0EA52C10717",
+      "result": "Passed",
+      "passed": 111,
+      "failed": 0
+    }
+  ],
+  "coverage": [
+    "Existing mounted scene token adopted without transform or ownership changes",
+    "Duplicate adoption and cross-pool ownership rejected within registry",
+    "100 supply/release cycles keep total pool at most 10",
+    "Held and mounted tokens survive lifetime cleanup; only loose tokens expire",
+    "Returned magazine physics becomes kinematic; next supplied token fresh",
+    "Restart leaves one rented mounted token",
+    "Existing physical drop and pause/resume tests included"
+  ],
+  "build": {
+    "result": "Both Windows builds succeeded",
+    "log": "tmp/p11-magazine-pool/build.log",
+    "logSha256": "953AB8D6A952639B6621B5A044255FDAD0892FDC4D77E3C128C6FFD00203935B",
+    "manifest": "tmp/p11-magazine-pool/build-manifest.json",
+    "manifestSha256": "BB0D7D4112B195F3AAD83ACCAC49E77068C89688CEED347F4FE1987207A420DF",
+    "bootstrapMatchedFiles": 341,
+    "menuLabMatchedFiles": 338,
+    "hashMismatches": 0
+  },
+  "sources": [
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/Pooling/PoolRegistry.cs",
+      "sha256": "E9503EE80796BFE89E51C3E256DB5BD02F15CBDBD6DEC05A32CBBA478350BEB6"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Runtime/Weapons/AmmoPouch.cs",
+      "sha256": "F9403A8AA6A872C999CEAF1AAB3487689BAEA7147F7C03BCF913BF211CB111D4"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Tests/PlayMode/PoolLifecycleTests.cs",
+      "sha256": "C1F2D6D93501ADF3172687A7831EE302852E2485F7135B59F6F4119ACDF752A7"
+    },
+    {
+      "path": "Zombie Shoot VR/Assets/VRFPS/Tests/PlayMode/ManualReloadTests.cs",
+      "sha256": "1EEB4E24169B130DE611139F682CDA1FEDB43F5A0CB81DDF1951C56F6717B9D7"
+    }
+  ],
+  "limitations": [
+    "Registry integrated with projectiles and magazines; enemy/corpse/effect integration remains",
+    "Loose peak measured after lifetime/cap cleanup, not continuously",
+    "Actual VR manual reload and each-map 30 minute performance pending",
+    "Independent review pending; draft PR10"
+  ]
+}

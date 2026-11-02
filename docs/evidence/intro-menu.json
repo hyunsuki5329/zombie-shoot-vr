@@ -1,0 +1,53 @@
+{
+  "base": "1ebf4ac",
+  "scope": "Comparison entry and menu ownership with real CombatSession and fake reality presentation",
+  "tests": {
+    "intro-menu-red": {
+      "result": "Failed(Child)",
+      "total": "1",
+      "passed": "0",
+      "failed": "1",
+      "skipped": "0",
+      "sha256": "82f9cb006119a4d2c8ca74b1f9c3a93bd06d72e028336472681dc471bf0a286e"
+    },
+    "intro-menu-green": {
+      "result": "Passed",
+      "total": "1",
+      "passed": "1",
+      "failed": "0",
+      "skipped": "0",
+      "sha256": "43e9f865544218bfed7825a5eae9da0d88cbcbb1974c607d6cd4c22da7ec0145"
+    },
+    "intro-menu-ui-red": {
+      "result": "Failed(Child)",
+      "total": "2",
+      "passed": "0",
+      "failed": "2",
+      "skipped": "0",
+      "sha256": "1769f97a6b5c7f85be5c8cb4b8dd6ccb1173f50945cf0f4b8f3d212c3b9cbd5a"
+    },
+    "intro-menu-play-verified": {
+      "result": "Passed",
+      "total": "156",
+      "passed": "156",
+      "failed": "0",
+      "skipped": "0",
+      "sha256": "b651ed9848f38b3aba55d1f7fbc72a6c8f807bcbf1b023d69653d11464c8a9d7"
+    },
+    "intro-menu-edit": {
+      "result": "Skipped:Ignored",
+      "total": "125",
+      "passed": "124",
+      "failed": "0",
+      "skipped": "1",
+      "sha256": "2d739e672bd1f3b40d8c614fa1b7883a7f1f0bb39641f6911f62c80ebe0e7896"
+    }
+  },
+  "review": "Independent static review: no important findings; added normal SelectReality entry and actual cleanup Retry button coverage.",
+  "unverified": [
+    "Actual GS selection buttons and scene binding",
+    "Menu rendering above full black fade",
+    "Actual GS rendering and XR stereo",
+    "Final Windows build and hardware acceptance"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "sourceCommit": "519495c",
+  "filesVerified": 2842,
+  "archiveSha256": "46da12a5255dab33528c3b420548687311393cd237bbefc9fe9c5f12a9f697cc",
+  "archiveBytes": 584340546,
+  "scope": "Git source plus local external assets and stable metadata; user-edited scenes preserved",
+  "reopenTest": "not run",
+  "publicRedistribution": "not authorized by this backup",
+  "testedCacheFilesMatched": {
+    "Assets/VRFPS/Scenes/Maps/Room.unity": true,
+    "Assets/VRFPS/Scenes/Maps/Classroom.unity": true,
+    "Assets/VRFPS/Scenes/Maps/RoomHousePreview.unity": true,
+    "Assets/VRFPS/Configuration/Maps/RoomHouseNavigation.asset": true,
+    "Assets/VRFPS/Configuration/Maps/ClassroomNavigation.asset": true,
+    "Assets/VRFPS/External/GrannyHouse/Generated/Chair-0.asset": true
+  },
+  "path": "Zombie Shoot VR/Builds/Reproduction/519495c-map-scale"
+}

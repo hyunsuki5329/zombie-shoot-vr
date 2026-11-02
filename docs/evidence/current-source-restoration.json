@@ -1,0 +1,104 @@
+{
+  "source_commit": "1412b0ad9a6f22b665f3b98f23191110185302bf",
+  "archive_sha256": "0d1372b41a97fcd4885d0b1d0e078e7270032a07a04954d441ea8eb8a23ac580",
+  "initial_library_present": false,
+  "initial_external_meta_count": 0,
+  "original_sources": "hash-verified retained GAMGO/Mixamo originals and local UserAudio originals; Downloads GAMGO ZIP was absent",
+  "python_tests_passed": 23,
+  "date": "2026-10-08",
+  "status": "restoration_tests_and_windows_builds_passed",
+  "tests": {
+    "edit.xml": {
+      "passed": 60,
+      "failed": 0,
+      "end_time_utc": "2026-10-08 00:33:36Z",
+      "sha256": "a98941e04b1ca883b9e048bb9ef9fd33481a8adf05be2e7d5ca92c2a46c2a0b0"
+    },
+    "play.xml": {
+      "passed": 118,
+      "failed": 0,
+      "end_time_utc": "2026-10-08 00:34:07Z",
+      "sha256": "ec3c1d8fb4472e952f4175b4962c8f36517f9fa1158e4b547298e419ce55bd34"
+    }
+  },
+  "fresh_guids": {
+    "Mixamo/Yaku J Ignite.fbx.meta": {
+      "original_guid": "82d805f0bc2909242ab074f87be2eaf8",
+      "restored_guid": "d776a8d11e147934d9201910c4ef6723"
+    },
+    "Mixamo/Parasite L Starkie.fbx.meta": {
+      "original_guid": "32a716aaad1e9ea4fb0b516e19ee6426",
+      "restored_guid": "4738394b0f7faf843a328686d58c127e"
+    },
+    "UserAudio/Shot.wav.meta": {
+      "original_guid": "f676ec858c805404a8c7d1b1c4be9bae",
+      "restored_guid": "5128474eb0f5443418167f870559816e"
+    },
+    "UserAudio/Empty.wav.meta": {
+      "original_guid": "781086703a029334785a8f2c003ce612",
+      "restored_guid": "80ae00f44acfebc4db25eb9e92d3f4cd"
+    },
+    "UserAudio/Reload.wav.meta": {
+      "original_guid": "6a072fe7958936c4aad87728f1c7f071",
+      "restored_guid": "440425b1b594d604a9a7e48d47c1d60d"
+    }
+  },
+  "local_bundle": {
+    "source_commit": "1412b0ad9a6f22b665f3b98f23191110185302bf",
+    "scope": "Local source restoration rehearsal; not final submission or permission for public asset redistribution",
+    "originals": {
+      "gamgo/daewoo-k2.zip": "ddb70a33b9049d2f512dc35be7209362c4d5ade0f6b5d02bacdab01f80aaa243",
+      "gamgo/30-rounds-556mm-stanag-mag.zip": "10d802588b8f500bd15b40687e4dea6e30467523b96818d8f1e5758388145b16",
+      "mixamo/Yaku J Ignite.fbx": "7c7986bca670897a9d8dda69696613907898035051104886b8afac3ddc1ac0ef",
+      "mixamo/Parasite L Starkie.fbx": "0421651482d7c38dabd116e7980be4b055f67da0bf837a4074a68513d8afb356",
+      "mixamo/Scary Zombie Pack.zip": "39b00f79e526ed2ce71887b1323cedb0b2ac1c1d686b331fd275683c4b4bfba4",
+      "mixamo/Yaku J Ignite@Zombie Reaction Hit.fbx": "cdb0ccb2edc0327527829aaa5faa1121e95e05177bf5a66053b2804850ec02a1",
+      "audio/shoot sound.mp3": "b12aee9041391b0214bfdd67fc50d783ec66fad3d4cc89eae77ac900ea601e88",
+      "audio/empty shoot.mp3": "a15f0ce8251274aa4d33733fe94f408f681ee232c47598df257eba3e6b328ccc",
+      "audio/reload.mp3": "78067b1634a13133a218c1826769bfc90ff14c5efeb777d391013cad9b9ce950"
+    },
+    "packages": {
+      "external-originals-local-only.zip": {
+        "bytes": 59291126,
+        "sha256": "65dc9a24d55c5c0f2512483b617bbb9091360ebdcb8d06e3256dd9e3cb7e49c1"
+      },
+      "source-1412b0a.zip": {
+        "bytes": 93609808,
+        "sha256": "b64bd0787e2b8a7c66757c83963bc2f20deb9a716e749ecb680bb0fad3b59e86"
+      }
+    }
+  },
+  "limitations": [
+    "Same PC global package cache and Unity license may be reused; not offline or new-PC proof",
+    "No actual Room/Classroom scans, hardware performance or final submission acceptance",
+    "Existing user-accepted UserAudioMenuLab build unchanged"
+  ],
+  "exact_archived_vrfps_cs_files": 106,
+  "build": {
+    "exit_code": 0,
+    "log_sha256": "07d5d2b03843717dda5b99fadb8db0b01ea319dfc584ed2eb91b7eee9386bbe2",
+    "executables": {
+      "BootstrapPreview": {
+        "path": "tmp/current-source-restoration/Source/Zombie Shoot VR/Builds/Windows/BootstrapPreview/BootstrapPreview.exe",
+        "bytes": 667136,
+        "sha256": "56c28afba054092826b7a8a80ba3767daa87967f182c0c562eb2f98799175b7a"
+      },
+      "WaveLab": {
+        "path": "tmp/current-source-restoration/Source/Zombie Shoot VR/Builds/Windows/WaveLab/WaveLab.exe",
+        "bytes": 667136,
+        "sha256": "56c28afba054092826b7a8a80ba3767daa87967f182c0c562eb2f98799175b7a"
+      }
+    },
+    "copied_wave_lab": {
+      "path": "Zombie Shoot VR/Builds/Reproduction/1412b0a/RestoredWaveLab/WaveLab.exe",
+      "verified_source_files": 337,
+      "notices_added_separately": true
+    }
+  },
+  "apply_logs_sha256": {
+    "gamgo.log": "2cc1494e3400c1f6149c40669768fb7cdb5451651d8a6da344ce8493b2d91b9f",
+    "mixamo.log": "557fb2d942d0993c077136784d110db0021410742132dbcf36c7b691ca0fb2c6",
+    "audio.log": "7d4cc23b75b775b55bc41513cfda5ccb32328f10b40881aba71ffe3916a84c95"
+  },
+  "review": "Independent evidence/document review: no important findings. Clarified 106 C# count as VRFPS scope."
+}

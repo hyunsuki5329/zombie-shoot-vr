@@ -1,0 +1,20 @@
+{
+  "sourceCommit": "a7c149d",
+  "filesVerified": 2855,
+  "archiveSha256": "414bcb56c8cee46367fd8f81c4b19076bebe5f4faba0f15f81012d5dda763ad0",
+  "archiveBytes": 584350242,
+  "scope": "Git source plus local external assets and stable metadata; user-edited scenes preserved",
+  "reopenTest": "not run",
+  "publicRedistribution": "not authorized by this backup",
+  "testedCacheFilesMatched": {
+    "Assets/VRFPS/Scenes/Maps/Room.unity": true,
+    "Assets/VRFPS/Scenes/Maps/Classroom.unity": true,
+    "Assets/VRFPS/Scenes/Maps/RoomHousePreview.unity": true,
+    "Assets/VRFPS/Configuration/Maps/RoomHouseNavigation.asset": true,
+    "Assets/VRFPS/Configuration/Maps/ClassroomNavigation.asset": true,
+    "Assets/VRFPS/Prefabs/PlayerRig.prefab": true,
+    "Assets/VRFPS/External/GrannyHouse/Generated/Chair-0.asset": true
+  },
+  "sourceCodeLineEndingNormalizedMatch": true,
+  "path": "Zombie Shoot VR/Builds/Reproduction/a7c149d-view-height-layout"
+}
