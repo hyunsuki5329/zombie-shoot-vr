@@ -21,7 +21,7 @@ Latest code289b2b3, delivered Player GUIDa72cded4a92d492a87565dce1a326e10. This 
 | R22/T22 | Actual K2/virus flow, restrictions and duplicate hit tests | Latest Player fully enumerated headset hit/occlusion scope |
 | R23/T23 | Fade order/time/alpha automated cases; prior broad VR report | Latest Player per-eye/edge/full fade observation not individually enumerated |
 | R24/T24 | Actual Room ten-cycle test verifies start boundary, HP/ammo/preparation; both-map Wave1 | Latest Player direct observation remains separate |
-| R25/T25 | Wardrobe wall approximately4.20m, right when facing door; door/bed/desk identification, separate anchors | Second real reference length not provided; precise two-length/three-feature measurement comparison not complete |
+| R25/T25 | Wardrobe wall approximately4.20m, right when facing door; door/bed/desk identification, separate anchors | Historical room-scan record contains approximately4.3m ×3.5m; latest GS wall reference is4.20m. Reconciliation and precise two-length/three-feature comparison remain incomplete |
 | R26/T26 | Cancel/timeout/late completion/menu/cleanup cases in prior full suite; actual normal flow | Full headset interruption/retry matrix not individually recorded |
 | R27/T27 | Fixed renderer/API, GPU resource tests, actual Room10cycles, both-map regression | Headset repetitions, GS/per-transition performance (deferred), complete final two-map VR matrix |
 | R28/T28 | Raw/processed provenance, hashes, local-only assets;59ca570 fresh-Library overlay restoration | Capture app version not supplied; latest289b2b3 archive CRC exists but fresh-Library restore not rerun |

@@ -142,5 +142,3 @@ public static class RoomMirrorWardrobe
         return mesh;
     }
 }
-
-

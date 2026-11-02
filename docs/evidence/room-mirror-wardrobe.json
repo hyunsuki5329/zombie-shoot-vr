@@ -1,0 +1,36 @@
+{
+  "date": "2026-11-02",
+  "source": "f4cf87f51878d5ed3d0340b301a75a3550bfe55c",
+  "buildGuid": "3245056cb11244b6b6ac7995df40c1aa",
+  "buildDirectory": "C:\\Users\\User\\.codex\\worktrees\\gs-comparison-intro\\Zombie Shoot VR\\Zombie Shoot VR\\Builds\\Windows\\GSComparison-Mirror-FBX-20261102",
+  "tests": {
+    "passed": 3,
+    "failed": 0,
+    "scope": "Focused PlayMode: reflected room/texture/collision contract; paired repair render/toggle/release; actual Room K2/fade/ten cycles and both-map Wave1. Full suite and EditMode not repeated.",
+    "xmlSha256": "c839c07fdc8981ca5d8c16038c441f625eb9a3c885b1517498bd2df4ef6196f8"
+  },
+  "buildLogSha256": "de6533dcd47aac8c0483df23345563f75d94f4304a37a243a8cb7463c648f4a5",
+  "manifestSha256": "14aaab2a92105fdcf843fb17e3594d5b2c28b8c9214bbbeec6f2a260a1cb0484",
+  "buildFiles": 356,
+  "review": "Fresh independent static review: collision gap fixed and rechecked; no remaining blockers. Final sourceY mapping constant adjustment visually verified. No external GitHub review/CI.",
+  "preservation": {
+    "Assets/VRFPS/Scenes/Maps/Classroom.unity": "A4A3BFC67B8E627EF50D77592D423A1EE07858118184B9DB9CE7969EA2C861AB",
+    "Assets/VRFPS/External/RealityGS/Room/room.ply": "65F2F8C9705D49A660D8223D9986F3C87CC62085D6BB86DAA8A686D09FF75E56",
+    "Assets/VRFPS/Scenes/Maps/Room.unity": "F0C71F81CDD656126E92E8F8A89A6760621105C67B7E372740EFF38CDD943CCB"
+  },
+  "privateSceneSha256": "cdcd65d13157dd6ecf47caa7b413cadec31754aec4b77cfacf7d17504b215645",
+  "referenceFbxSha256": "245bbdb7284d6b755125b131be681891173ba791be3cf27b429726a048e1b2e8",
+  "restoration": {
+    "directory": "C:\\Users\\User\\.codex\\worktrees\\gs-comparison-intro\\Zombie Shoot VR\\Zombie Shoot VR\\Builds\\Reproduction\\p13-room-mirror-fbx-20261102",
+    "overlayFiles": 14,
+    "overlaySha256": "9aae8cedabd10fd9e6b7eda438a9c35e4785c32581c046a5368a3fbef2205617",
+    "referenceArchiveSha256": "d213db4617cfe5c07e7b5f4de2a15140d2193afd531a765355c36839e7de2ed4",
+    "CRC": "passed",
+    "freshLibrary": "not repeated for this revision; isolated existing restoration project authoring and main worktree final tests/build verified"
+  },
+  "visual": "Four final camera directions inspected. Door/bed handedness matches FBX reference. Wardrobe is an authored flat facade using original texture; upper panel/rail and damaged right pair reconstructed. Missing ceiling and other scan artifacts remain.",
+  "headset": "pending",
+  "performance": "deferred by user",
+  "pr": "https://github.com/hyunsuki5329/zombie-shoot-vr/pull/46",
+  "merge": "draft pending latest VR visual acceptance"
+}

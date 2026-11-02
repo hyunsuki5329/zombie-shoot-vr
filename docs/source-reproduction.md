@@ -278,3 +278,10 @@ Unity 임포트/빌드가56개 파일을 다시 직렬화했고 누락은0이다
 59ca570 보정본 복원 검증 갱신: D:/VRFPS-Reproduction/room-repair-59ca570에 새 소스+기존 외부자산을 복원하고 Library 없는 상태에서 Configure를 실행했다. 이후 overlay7파일을 적용해 SHA7/7을 확인했다. 새 Library DX12 집중 시험 RoomSurfaceRepairTests/RoomCaptureFlowTests2/2(보정 토글·렌더·해제,실제GS전환10회,두맵Wave1), Windows 재빌드GUIDf8e6f03fb5814b1baffef373a0923d71 성공. 원본PLY/가공payload6개 해시 일치. 전체202개를 복원본에서 다시 실행한 것은 아니며, 동일 PC 캐시/라이선스 조건이고 복원 Player 실행·VR 인수는 미실행이다. 앞의 새 Library 미수행 기록은 이 범위에서 갱신한다.
 
 옷장 수정289b2b3 최신 묶음: Builds/Reproduction/p13-room-wardrobe-289b2b3/tracked-source.zip + local-repair-overlay.zip. 새소스→기존외부자산→Configure→최신overlay 순서다. 두ZIP CRC 확인, 이번 국소 수정의 새Library 복원은 아직 미실행. 기존 보정 씬을 직접 갱신할 때는 RoomSurfaceRepair.RestoreWardrobeDetail을 batchmode로 실행한다(백업 생성, 기존 벽 보정 유지). 새로 원본씬에서 Apply하면 처음부터 옷장 평면 없는 보정을 생성한다. 빌드는 RoomComparisonBuild.BuildWardrobeRevision. 이전 Wood.mat는 복원 보존용으로 남지만 새Player 패킹에는 포함되지 않는다.
+
+## Room mirror + FBX wardrobe (f4cf87f)
+
+`Builds/Reproduction/p13-room-mirror-fbx-20261102` contains tracked-source.zip, local-room-overlay.zip (14 files), fbx-authoring-reference.zip (6 files), and overlay-manifest.json. Restore tracked source and the baseline p13-room-b221bcb external archive, run Configure only if scene registration is needed, then apply this overlay LAST. Do not run Configure or old repair authoring after the final overlay: those recreate or assume the unmirrored scene. Runtime overlay includes the baked wardrobe texture/mesh/material and does not require FBX at runtime. The reference archive is only required to re-author from the preceding unmirrored three-wall repair scene with RoomMirrorWardrobe.Apply. Source FBX/raw PLY remain unchanged.
+
+Overlay/reference ZIP CRC passed. Latest private scene hash and tests/build are in evidence/room-mirror-wardrobe.json. A new empty-Library restoration was not repeated for this revision. Windows build method: RoomComparisonBuild.BuildMirrorWardrobeRevision. Undo via Builds/Reproduction/RoomMirrorWardrobe/before-application-20261102/RoomReality.unity, preserving its meta. Keep generated assets until restored scene is verified; no raw deletion is necessary.
+
