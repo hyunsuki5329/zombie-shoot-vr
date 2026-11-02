@@ -272,3 +272,16 @@ Ruling: 기존 이동 속도/CharacterController 충돌로 GS 감상 중 이동�
 - 최종 focused PlayMode19/19, EditMode137통과/1제외. 이전 전체 PlayMode200/201에서 재활용 탄창 시험의 공급 template이 실제 prefab1.2와 달리1이었던 fixture 불일치를 수정했다. 전체 재실행 진행 중. 원본 프로젝트5개 기준 해시는 모두 일치, 테마 맵 diff0.
 - 기존 Room GS PR43은 사용자 VR 회신과 기존 자동시험/복원/독립 리뷰를 근거로 codex/p13-gs-player-probe에 병합했다(64d4237232590b70b8fe273349c387b73aef87f4). 외부 리뷰/CI 없음. main 통합이나 정량 성능 완료를 뜻하지 않는다. 이번 이동/총기 변경의 VR 확인은 별도 대기다.
 - 최종 전체 DX12 PlayMode201/201 통과(movement-all-green.xml), EditMode137통과/1제외(movement-edit.xml). 실제 Room 전환10회/두맵 Wave1 회귀 포함. 수정 빌드의 사용자 VR 확인은 아직 수행하지 않았다.
+## 2026-11-02 Room surface repair
+
+User supplied three screenshots and chose simple wall/wardrobe infill. After user saved/closed Editor, backed up private RoomReality scene+meta (pre-authoring scene SHA b907a8fcf7f1a9e4f25dfe5d5a0f614c6eae776de7698a6b10aa4c1b530124cf). Added reversible Room Surface Repairs group: four opaque panels, four inverted GaussianCutout volumes (inside removed). No raw deletion; originalPLY SHA65f2f8c9 unchanged, theme-map diff0. Source calibration guard rejects mismatched world pose/scale. Local materials persist separately; duplicate application fails rather than overwriting authored edits.
+
+Prototype captures revealed plane-only infill left foreground artifacts; restricted cutouts improved the walls. Initial test attempt failed because synchronous scene roots were read before their load frame, not a valid feature RED. Review then found untagged test camera; actual flow passed while preview failed. Fixed camera ownership/tag restoration and re-reviewed: no remaining P1/P2. Final Play202/202 and Edit137 passed/1 ignored. Eight paired views exported; four after views visually inspected. Door/bed/fan/shelves remain; flat infill, lower scan seams, missing ceiling and other uncaptured areas remain. This is authored approximation, not recovered photographic detail or full headset acceptance.
+
+Windows revision/build and local repair overlay packaging continue; performance deferred, presentation user owned.
+
+## 2026-11-02 옷장 보정 사용자 피드백 반영
+
+넓은 갈색 면의 이질감 지적으로 사용자가 원래 옷장 무늬 보존/튀는 부분만 정리 방향을 승인했다. RestoreWardrobeDetail은 기존scene/meta 백업 후 Wardrobe side backing과 넓은 Wardrobe side noise만 제거한다. 벽3면/가림3개를 보존하며 옷장 상단2.7m 이상만 좁게 가리는 컷아웃을 추가한다. 보정그룹이 이동/회전/확대됐으면 중단한다. 원본PLY는 수정하지 않는다.
+
+저장된 씬 검증 RED: 기대3면/실제4면. 수정 후 RoomSurfaceRepairTests+RoomCaptureFlowTests2/2 통과(실제GS전환10회/두맵Wave1 포함). 동일 시점 옷장/벽 캡처 확인. 변경 전후 YAML에서 기존 객체 중 GS렌더러 컷아웃목록과 보정그룹 자식목록만 변경됨을 확인(기존serialized7개 제거/새3개 추가). 전체202개/EditMode는 이번 국소 authoring 변경 뒤 반복하지 않았다. 독립 재검토 호출은 도구 사용량 제한으로 실패하여 미완료이며 이전 리뷰 통과를 재사용하지 않는다. VR 외형 인수와 병합은 대기다.

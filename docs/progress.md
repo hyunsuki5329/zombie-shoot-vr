@@ -723,3 +723,35 @@ BootstrapPreview/WaveLab 빌드 모두 성공·종료0. 복원 WaveLab337개 파
 0088570 새 Library 복원 검증 완료:3124파일 최초SHA 일치, Edit137통과/1제외, DX12 Play201/201, Windows 재빌드GUID584af24cd30f4af99d2bd98e86fcdebf 성공. 최종 변경58/누락0; 코드·테마 맵·GS payload 보존. 상세는 room-walk-gun-scale.json. 복원 Player 실행·새 수정 VR 인수는 미실행이며 전달 빌드는 유지한다.
 
 최종 기본 브랜치 통합용 [PR45 draft](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/45)를 생성했다. base codex/p06-boss-crawler, head codex/p13-room-movement-gun-scale. PR44 실기 확인/정리 이후 병합 예정이며 main 반영은 후속 단계다. 생성 시233파일 누적 diff, 테마 맵 diff0, merge-tree가 head tree와 동일함을 재확인했다. 테스트된 코드0088570 이후 변경은 증빙 문서뿐이다.
+
+## 2026-11-02 방 GS 표면 보완
+
+사용자 사진/단순 표면 보완 선택에 따라 원본을 보존하는 네 표면·네 컷아웃을 적용했다. 소스59ca570, Play202/202, Edit137통과/1제외, 독립 리뷰 카메라 지적 수정·재검토 통과. 별도 Windows GUID66012d6f6757434d8e3e6a8a03b9259b, GSComparison-Repair-20261101. [증빙](evidence/room-surface-repair.json), [PR46 draft](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/46), base codex/p13-room-movement-gun-scale. 보정 외형/수정 이동·총기 VR 인수 전이며 PR46→PR44→PR45 순서로 통합해야 한다. 일부 아래쪽 경계/누락 천장/기타 스캔 결손은 남는다. 기존 빌드·맵·원본PLY 보존, 성능 보류 유지.
+
+보정 overlay의 새 Library 복원도 검증했다:7파일 SHA 일치, 집중 Play2/2 및 Windows 재빌드GUIDf8e6f03fb5814b1baffef373a0923d71. 원본PLY/가공payload6개 해시 보존. 작업본 전체202/202와 복원본 집중2/2를 구분하며, 전달GUID66012d6f6757434d8e3e6a8a03b9259b은 교체하지 않았다. 사용자 VR 외형·수정 이동/총기 확인 및 최종 병합은 대기다.
+
+2026-11-02 원격 재확인: PR44는cec59f9로 codex/p13-gs-player-probe에, PR45는5cd400b로 codex/p06-boss-crawler에 이미 병합됐다. 보정 PR46의 base를 codex/p06-boss-crawler로 변경했다. 기본 통합 대비 보정/증빙11파일 차이이며 merge-tree 결과가 현재 HEAD tree와 동일해 충돌 없는 통합 경로를 확인했다. 이 원격 병합은 별도의 사용자 VR 결과나 main 통합 완료 증빙이 아니다. 보정 외형 인수 대기는 유지한다.
+
+2026-11-02 옷장 수정 사용자 피드백: 소스289b2b3에서 넓은 갈색 면/넓은 가림을 제거하고 원래GS를 복원했다. 벽3면은 보존,2.7m 위쪽 좁은 잡점 정리만 유지. 집중Play2/2, 별도Windows GUIDa72cded4a92d492a87565dce1a326e10(GSComparison-Wardrobe-20261102) 성공. 원본PLY 해시 보존. [증빙](evidence/room-wardrobe-revision.json). 최종 독립 재검토는 도구 사용량 제한으로 미완료, VR 확인도 대기. PR46을 최종 범위로 갱신했고 병합하지 않았다.
+
+R01~R28/T01~T28 완료 범위 대조를 [최종 인수 차이표](evidence/final-acceptance-gaps-20261102.md)에 기록했다. 특히 R25 기준거리2개 중1개만 확보, 촬영앱 버전 미제공, 최신 옷장 재검토/VR 인수 대기, 성능 보류/최종main 통합을 분리했다. 오래된 PRD의 문서화 단계 표현을 실제 진행 상태로 수정했으며 요구 수치나 완료 기준은 낮추지 않았다.
+
+## 2026-11-02 GS 좌우반전 + FBX 옷장 활용
+
+방문/문손잡이/침대를 같은 방향으로 렌더링해 GS와 FBX의 좌우 관계가 반대임을 확인했고, 사용자가 GS 반전 및 FBX 옷장 활용을 명시적으로 요청했다. 원본 Room.fbx SHA245bbdb7은 원래 D: 프로젝트에서 확인했다. FBX 문짝 텍스처를 UV 레이캐스트로 재투영한 정돈된 전면을 만들고, 누락 상단은 온전한 문짝 무늬로 연장하며 휘어진 오른쪽 한 쌍은 온전한 쌍으로 보완했다. 이는 스캔 형상 그대로가 아닌 사진 질감을 활용한 근사 보완이다.
+
+GS 렌더러만 반전된 자식에 두고 data/관찰 앵커 양수 단위 배율을 유지한다. 벽 보정·컷아웃·충돌체·관찰 위치·바이러스 위치를 함께 맞췄다. 옷장 표면 앞면과 맞춘 WorldSolid 박스를 추가했다. 원본 GS/FBX와 사용자 편집 Room/Classroom은 수정하지 않는다. RoomReality 씬은 적용 전 백업했다.
+
+독립 코드 리뷰의 충돌체25cm 틈 지적을 수정했으며 재검토에서 코드 차단 사항 없음. 최종 렌더/흐름 시험 및 별도 빌드 증빙은 room-mirror-wardrobe.json에 기록한다. VR 외형/이동 체감은 사용자 인수 대기이며 성능 보류·발표 사용자 담당을 유지한다. 이전 치수 감사의 '1개만 제공'은 정정한다: room-scan.md에 과거4.3×3.5m 기록이 있으며 최신4.20m GS 캘리브레이션과의 정밀 대조는 미완료다.
+
+최종 소스f4cf87f, 집중Play3/3(최종 충돌체/텍스처 포함), Windows GUID3245056cb11244b6b6ac7995df40c1aa 성공. GSComparison-Mirror-FBX-20261102 빌드와14파일 로컬overlay/6파일 FBX참조 ZIP CRC를 확인했다. 원본PLY 및 두 테마 씬 SHA3/3 유지. 원본FBX 패킹0/원본PLY 패킹0, 생성 옷장3자산 패킹 확인. 전체시험/새Library복원을 이번 국소수정에서 재실행했다고 주장하지 않는다. 상세 [증빙](evidence/room-mirror-wardrobe.json). PR46 draft 유지; 최신VR외형 확인 후 병합 판단.
+
+## 2026-11-02 사용자 옷장 위치
+
+소스28f9808: 스크린샷의 로컬Position(0.383,-0.126,0.212)을 저장하고 mask/solid를 정렬했다. 이전벽13.3cm 앞막힘을 RED 재현 후 옷장 밖/위 구간으로 분할, 독립 재검토 차단 지적 없음. 집중Play2/2 및 Windows GUID64cd76ce780947a4a436c72dca0067e8 성공. 원본PLY·두테마 SHA3/3 보존. 최신 증빙은 evidence/room-wardrobe-position.json. 복원은 p13-wardrobe-position-20261102 소스ZIP과14파일overlay를 사용하며 overlay를 마지막에 적용한다. VR 인수/PR46병합 대기. 성능 보류 유지.
+
+## 2026-11-02 최신 옷장 위치 사용자 인수
+
+사용자가 최신 위치·앞면 이동 확인 요청에 대해 '확인결과 이상 없어'라고 회신했다. GUID64cd76ce780947a4a436c72dca0067e8의 해당 변경 범위 인수로 기록한다. 정량 성능·전체반복/전체R01~R28 인수로 확대 해석하지 않는다. PR46과 최종main 병합 준비를 재개했으며 두 merge-tree는 현재HEAD와 동일하다. 전체자동회귀 확인 진행 중.
+
+最종 회귀: Play203/203, Edit138/138, 실패·제외0. 통합 전용 독립 리뷰에서 코드 차단 지적 없음; 최신 복원 안내를28f9808 위치overlay 기준으로 보완했다. 이전 검증을 재사용한 것이 아니라 accepted-final-play/edit.xml을 새로 실행했다. 사용자 편집/Unity자동변경은 stage하지 않는다.
