@@ -745,3 +745,7 @@ GS 렌더러만 반전된 자식에 두고 data/관찰 앵커 양수 단위 배�
 독립 코드 리뷰의 충돌체25cm 틈 지적을 수정했으며 재검토에서 코드 차단 사항 없음. 최종 렌더/흐름 시험 및 별도 빌드 증빙은 room-mirror-wardrobe.json에 기록한다. VR 외형/이동 체감은 사용자 인수 대기이며 성능 보류·발표 사용자 담당을 유지한다. 이전 치수 감사의 '1개만 제공'은 정정한다: room-scan.md에 과거4.3×3.5m 기록이 있으며 최신4.20m GS 캘리브레이션과의 정밀 대조는 미완료다.
 
 최종 소스f4cf87f, 집중Play3/3(최종 충돌체/텍스처 포함), Windows GUID3245056cb11244b6b6ac7995df40c1aa 성공. GSComparison-Mirror-FBX-20261102 빌드와14파일 로컬overlay/6파일 FBX참조 ZIP CRC를 확인했다. 원본PLY 및 두 테마 씬 SHA3/3 유지. 원본FBX 패킹0/원본PLY 패킹0, 생성 옷장3자산 패킹 확인. 전체시험/새Library복원을 이번 국소수정에서 재실행했다고 주장하지 않는다. 상세 [증빙](evidence/room-mirror-wardrobe.json). PR46 draft 유지; 최신VR외형 확인 후 병합 판단.
+
+## 2026-11-02 사용자 옷장 위치
+
+소스28f9808: 스크린샷의 로컬Position(0.383,-0.126,0.212)을 저장하고 mask/solid를 정렬했다. 이전벽13.3cm 앞막힘을 RED 재현 후 옷장 밖/위 구간으로 분할, 독립 재검토 차단 지적 없음. 집중Play2/2 및 Windows GUID64cd76ce780947a4a436c72dca0067e8 성공. 원본PLY·두테마 SHA3/3 보존. 최신 증빙은 evidence/room-wardrobe-position.json. 복원은 p13-wardrobe-position-20261102 소스ZIP과14파일overlay를 사용하며 overlay를 마지막에 적용한다. VR 인수/PR46병합 대기. 성능 보류 유지.
