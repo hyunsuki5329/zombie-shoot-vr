@@ -96,7 +96,7 @@ namespace VRFPS.Tests
                 var flags=BindingFlags.Instance|BindingFlags.NonPublic;
                 var right=(Transform)typeof(K2Controller).GetField("rightAnchor",flags).GetValue(entry.gun);
                 var left=(Transform)typeof(K2Controller).GetField("leftAnchor",flags).GetValue(entry.gun);
-                right.SetPositionAndRotation(new Vector3(.55f,1.35f,0),Quaternion.identity);
+                right.SetPositionAndRotation(virus.transform.position-Vector3.forward*1.25f,Quaternion.identity);
                 left.position=right.position+Vector3.forward*.3f;
                 entry.gun.SetLeftGrip(true);entry.gun.Tick(false,0);entry.gun.UpdatePose();Physics.SyncTransforms();
                 Assert.That(entry.gun.Tick(true,.2),Is.True);Assert.That(virus.ApplyDamage(25,entry.gun.GetInstanceID(),.2),Is.False);

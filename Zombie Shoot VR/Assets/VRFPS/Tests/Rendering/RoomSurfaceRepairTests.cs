@@ -29,6 +29,7 @@ namespace VRFPS.Tests
                 yield return null;
                 var root=scene.GetRootGameObjects().SelectMany(x=>x.GetComponentsInChildren<RealitySceneRoot>()).Single();
                 var group=root.transform.Find("Room Surface Repairs");Assert.That(group,Is.Not.Null,"Room repairs have not been authored");
+                var hybrid=root.transform.Find("FBX Wardrobe Repair"); Assert.That(hybrid,Is.Not.Null);
                 var cuts=group.GetComponentsInChildren<GaussianCutout>(true);
                 Assert.That(cuts.Length,Is.EqualTo(4));Assert.That(cuts.All(x=>x.m_Invert),Is.True,"Remove inside volumes, not outside");
                 Assert.That(group.GetComponentsInChildren<Collider>(true),Is.Empty);
@@ -46,12 +47,12 @@ namespace VRFPS.Tests
                 var camera=cameraObject.AddComponent<Camera>();camera.tag="MainCamera";camera.GetUniversalAdditionalCameraData();
                 Assert.That(Camera.main,Is.SameAs(camera));
                 camera.clearFlags=CameraClearFlags.SolidColor;camera.backgroundColor=Color.black;
-                camera.transform.position=new Vector3(.3f,1.6f,0);camera.fieldOfView=85;camera.aspect=1.5f;camera.nearClipPlane=.05f;camera.farClipPlane=30;
+                camera.transform.position=new Vector3(-.3f,1.6f,0);camera.fieldOfView=85;camera.aspect=1.5f;camera.nearClipPlane=.05f;camera.farClipPlane=30;
                 yield return source.Initialize();Assert.That(source.IsReady,Is.True);
-                var output=Path.GetFullPath("../tmp/p13/room-surface-repair");Directory.CreateDirectory(output);rt.Create();
+                var output=Path.GetFullPath("../tmp/p13/room-mirror-wardrobe");Directory.CreateDirectory(output);rt.Create();
                 for(var i=0;i<8;i++)
                 {
-                    group.gameObject.SetActive(i>=4);
+                    group.gameObject.SetActive(i>=4); hybrid.gameObject.SetActive(i>=4);
                     Assert.That(cuts.All(x=>x.isActiveAndEnabled==(i>=4)),Is.True);
                     camera.transform.rotation=Quaternion.Euler(0,(i%4)*90,0);yield return null;
                     RenderPipeline.SubmitRenderRequest(camera,new UniversalRenderPipeline.SingleCameraRequest{destination=rt});
