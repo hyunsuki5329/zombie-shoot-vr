@@ -14,6 +14,54 @@ public static class RoomMirrorWardrobe
 {
     const string Source = "Assets/VRFPS/External/RoomScan/";
     const string Output = RoomRealitySetup.Folder + "/WardrobeHybrid";
+    // Inspector local position supplied by the user on 2026-11-02.
+    static readonly Vector3 UserPosition = new Vector3(.383f, -.126f, .212f);
+    public static void ApplyUserPosition()
+    {
+        if (!Application.isBatchMode) throw new InvalidOperationException("Use closed-editor batch authoring.");
+        var scene = EditorSceneManager.OpenScene(RoomRealitySetup.ScenePath, OpenSceneMode.Single);
+        var root = scene.GetRootGameObjects().SelectMany(x => x.GetComponentsInChildren<RealitySceneRoot>()).Single();
+        var backup = Path.Combine("Builds/Reproduction/RoomMirrorWardrobe", DateTime.UtcNow.ToString("yyyyMMdd-HHmmss-ffff") + "-position");
+        Directory.CreateDirectory(backup);
+        File.Copy(RoomRealitySetup.ScenePath, Path.Combine(backup, "RoomReality.unity"));
+        File.Copy(RoomRealitySetup.ScenePath + ".meta", Path.Combine(backup, "RoomReality.unity.meta"));
+        PositionWardrobe(root);
+        root.Validate(AssetDatabase.LoadAssetAtPath<RealityIntroProfile>(RoomRealitySetup.ProfilePath));
+        EditorSceneManager.MarkSceneDirty(scene);
+        if (!EditorSceneManager.SaveScene(scene)) throw new IOException("Could not save wardrobe position.");
+        Debug.Log("ROOM_WARDROBE_POSITION_APPLIED local=" + UserPosition.ToString("F3") + " backup=" + Path.GetFullPath(backup));
+    }
+    static void PositionWardrobe(RealitySceneRoot root)
+    {
+        var patch = root.transform.Find("FBX Wardrobe Repair");
+        var solid = root.collisionRoot.Find("FBX Wardrobe solid");
+        if (!patch || !solid || !patch.Find("Wardrobe replacement mask"))
+            throw new InvalidOperationException("Mirrored wardrobe objects are missing.");
+        if (Quaternion.Angle(patch.localRotation, Quaternion.identity) > .01f || Vector3.Distance(patch.localScale, Vector3.one) > .001f)
+            throw new InvalidOperationException("Preserve changed wardrobe rotation/scale and align explicitly.");
+        if (Quaternion.Angle(root.transform.rotation, Quaternion.identity) > .01f || Vector3.Distance(root.transform.position, Vector3.zero) > .001f ||
+            Quaternion.Angle(root.collisionRoot.rotation, Quaternion.identity) > .01f || Vector3.Distance(root.collisionRoot.lossyScale, Vector3.one) > .001f)
+            throw new InvalidOperationException("Collision coordinate frame changed; preserve and realign explicitly.");
+        var wall = root.collisionRoot.Find("Left wall");
+        if (!wall || !wall.GetComponent<BoxCollider>()) throw new InvalidOperationException("Original wall proxy missing.");
+        patch.localPosition = UserPosition;
+        // The mask is already a child of the facade. The collider is owned separately.
+        solid.position = patch.TransformPoint(new Vector3(2.15f, 1.18f, -.35f));
+        // The old full wall would sit 13.3cm in front of the new facade. Retain its
+        // original plane outside the wardrobe span, including the strip above it.
+        var minZ = -1.65f + UserPosition.z; var maxZ = .95f + UserPosition.z;
+        var top = 2.32f + UserPosition.y;
+        void WallSegment(string name, Vector3 center, Vector3 size)
+        {
+            var node = root.collisionRoot.Find(name);
+            if (!node) { node = new GameObject(name).transform; node.SetParent(root.collisionRoot, false); node.gameObject.AddComponent<BoxCollider>(); }
+            node.gameObject.layer = LayerMask.NameToLayer("WorldSolid"); node.position = center;
+            node.GetComponent<BoxCollider>().size = size;
+        }
+        WallSegment("Left wall", new Vector3(2.25f, 1.2f, (-1.8f + minZ) * .5f), new Vector3(.12f, 2.4f, minZ + 1.8f));
+        WallSegment("Left wall beyond wardrobe", new Vector3(2.25f, 1.2f, (maxZ + 2.4f) * .5f), new Vector3(.12f, 2.4f, 2.4f - maxZ));
+        WallSegment("Left wall above wardrobe", new Vector3(2.25f, (top + 2.4f) * .5f, (minZ + maxZ) * .5f), new Vector3(.12f, 2.4f - top, maxZ - minZ));
+    }
     public static void Apply()
     {
         if (!Application.isBatchMode) throw new InvalidOperationException("Use closed-editor batch authoring.");
@@ -75,6 +123,7 @@ public static class RoomMirrorWardrobe
         cutObject.transform.localScale = new Vector3(.65f, 1.21f, 1.4f);
         var cut = cutObject.AddComponent<GaussianCutout>(); cut.m_Type = GaussianCutout.Type.Box; cut.m_Invert = true;
         gs.m_Cutouts = (gs.m_Cutouts ?? Array.Empty<GaussianCutout>()).Concat(new[] { cut }).ToArray();
+        PositionWardrobe(root);
         root.Validate(AssetDatabase.LoadAssetAtPath<RealityIntroProfile>(RoomRealitySetup.ProfilePath));
         AssetDatabase.SaveAssets(); EditorSceneManager.MarkSceneDirty(scene);
         if (!EditorSceneManager.SaveScene(scene)) throw new IOException("Could not save mirrored room.");

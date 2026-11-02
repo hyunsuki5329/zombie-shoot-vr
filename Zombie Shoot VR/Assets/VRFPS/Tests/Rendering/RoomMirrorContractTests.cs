@@ -32,6 +32,8 @@ namespace VRFPS.Tests
             Assert.That(root.virus.transform.position.x, Is.EqualTo(root.observationAnchor.position.x).Within(.001f));
             Assert.That(root.collisionRoot.Find("Bed").position.x, Is.GreaterThan(0));
             var patch = root.transform.Find("FBX Wardrobe Repair"); Assert.That(patch, Is.Not.Null);
+            Assert.That(Vector3.Distance(patch.localPosition, new Vector3(.383f, -.126f, .212f)), Is.LessThan(.0001f), "User Inspector position");
+            Assert.That(Vector3.Distance(patch.Find("Wardrobe replacement mask").localPosition, new Vector3(2.35f, 1.25f, -.3f)), Is.LessThan(.0001f), "Mask moves with the facade");
             var mesh = patch.GetComponent<MeshFilter>().sharedMesh;
             Assert.That(mesh.triangles.Length, Is.GreaterThanOrEqualTo(6));
             Assert.That(mesh.uv.Length, Is.EqualTo(mesh.vertexCount));
@@ -48,6 +50,13 @@ namespace VRFPS.Tests
             Assert.That(solid.bounds.max.y, Is.EqualTo(visual.max.y).Within(.001f));
             Assert.That(solid.bounds.min.z, Is.EqualTo(visual.min.z).Within(.001f));
             Assert.That(solid.bounds.max.z, Is.EqualTo(visual.max.z).Within(.001f));
+            Assert.That(Physics.Raycast(new Vector3(0, 1, visual.center.z), Vector3.right, out var nearest, 4, LayerMask.GetMask("WorldSolid")), Is.True);
+            Assert.That(nearest.point.x, Is.EqualTo(visual.min.x).Within(.001f), "No old wall proxy may block the relocated wardrobe front");
+            foreach (var origin in new[] { new Vector3(0, 1, -1.7f), new Vector3(0, 2.3f, 2), new Vector3(0, 2.3f, visual.center.z) })
+            {
+                Assert.That(Physics.Raycast(origin, Vector3.right, out var wallHit, 4, LayerMask.GetMask("WorldSolid")), Is.True);
+                Assert.That(wallHit.point.x, Is.EqualTo(2.19f).Within(.001f), "Retain wall collision outside the cabinet span");
+            }
         }
     }
 }
