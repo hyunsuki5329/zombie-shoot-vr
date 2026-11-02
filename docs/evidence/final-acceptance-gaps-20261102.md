@@ -1,6 +1,6 @@
 # Final acceptance gaps — 2026-11-02
 
-Latest position revision: source28f9808, GUID64cd76ce780947a4a436c72dca0067e8, focused2/2. See [position evidence](room-wardrobe-position.json). Latest VR position acceptance remains pending.
+Latest position revision: source28f9808, GUID64cd76ce780947a4a436c72dca0067e8, focused2/2. See [position evidence](room-wardrobe-position.json). User accepted the latest wardrobe position/appearance and movement at its front on2026-11-02 ("확인결과 이상 없어"). This is scoped acceptance, not completion of the full matrix.
 
 Prior gameplay/authoring source f4cf87f, delivered Player GUID3245056cb11244b6b6ac7995df40c1aa (GSComparison-Mirror-FBX-20261102). Evidence: [mirror/wardrobe revision](room-mirror-wardrobe.json). This is a completion audit, not acceptance. PR46 remains draft; merge is not evidence of headset validation.
 
@@ -28,8 +28,8 @@ Prior gameplay/authoring source f4cf87f, delivered Player GUID3245056cb11244b6b6
 | R27/T27 | Fixed renderer/API, GPU resource tests, actual Room10cycles, both-map regression | Headset repetitions, GS/per-transition performance (deferred), complete final two-map VR matrix |
 | R28/T28 | Raw/processed provenance, hashes, local-only assets;59ca570 fresh-Library overlay restoration | Capture app version not supplied; latest f4cf87f source/14-file overlay/6-file FBX reference archives have CRC validation; fresh-Library restore not rerun |
 
-Current actionable gate: user review of GS handedness, FBX-textured wardrobe appearance and movement at its front. Earlier movement/weapon acceptance remains separate. Do not request performance logs while the hold remains. Historical second-length data exists (4.3×3.5m); precise reconciliation with the latest GS4.20m reference remains unverified. Capture app version is still missing. Classroom GS is explicitly follow-on; existing Classroom direct combat remains in scope.
+Latest wardrobe placement/front-movement acceptance is now recorded. Current actionable work: final regression verification and integration; do not generalize this report to unperformed full-matrix or performance checks. Earlier movement/weapon acceptance remains separate. Do not request performance logs while the hold remains. Historical second-length data exists (4.3×3.5m); precise reconciliation with the latest GS4.20m reference remains unverified. Capture app version is still missing. Classroom GS is explicitly follow-on; existing Classroom direct combat remains in scope.
 
-Independent review: a fresh reviewer identified a25cm wardrobe collider gap; it was fixed and re-reviewed with no remaining code blockers. Final texture sampling constants were then visually checked. Latest focused tests3/3 and Windows build succeeded; full202/Edit137+1ignored belong to preceding59ca570 stage. This does not establish headset acceptance or a fresh-Library validation of the latest overlay.
+Independent review: a fresh reviewer identified a25cm wardrobe collider gap; it was fixed and re-reviewed with no remaining code blockers. Final texture sampling constants were then visually checked. After latest-position acceptance, final full PlayMode203/203 and EditMode138/138 passed with no skips. Latest accepted Windows build remains GUID64cd76ce780947a4a436c72dca0067e8; no gameplay changes were made after that build. This does not establish headset acceptance or a fresh-Library validation of the latest overlay.
 
 Integration: PR44/45 already merged into codex/p06-boss-crawler. PR46 targets that baseline. Main remains a separate integration step; do not infer it from dependency merges. Once visual acceptance/review permit PR46, compare merge trees and create/verify the final main integration. Do not merge an unaccepted visual change merely to finish the audit.

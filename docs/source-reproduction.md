@@ -285,3 +285,9 @@ Unity 임포트/빌드가56개 파일을 다시 직렬화했고 누락은0이다
 
 Overlay/reference ZIP CRC passed. Latest private scene hash and tests/build are in evidence/room-mirror-wardrobe.json. A new empty-Library restoration was not repeated for this revision. Windows build method: RoomComparisonBuild.BuildMirrorWardrobeRevision. Undo via Builds/Reproduction/RoomMirrorWardrobe/before-application-20261102/RoomReality.unity, preserving its meta. Keep generated assets until restored scene is verified; no raw deletion is necessary.
 
+
+## Accepted wardrobe position revision (28f9808)
+
+Latest accepted Player: GSComparison-WardrobePosition-20261102, GUID64cd76ce780947a4a436c72dca0067e8. Source and overlay: Builds/Reproduction/p13-wardrobe-position-20261102/tracked-source.zip and local-room-overlay.zip (14 files). Restore this source plus baseline p13-room-b221bcb external assets; run Configure only if needed for scene registration, then apply the latest position overlay LAST. Do not use the earlier f4cf87f overlay afterward. Source/overlay ZIP CRC passed; all14 live assets match overlay-manifest.json. Fresh-Library validation was not repeated for this revision.
+
+For an existing mirrored scene use RoomMirrorWardrobe.ApplyUserPosition (backups scene/meta, applies localPosition0.383/-0.126/0.212, aligns solid, splits the old wall around the wardrobe). Build via RoomComparisonBuild.BuildWardrobePositionRevision. Latest evidence: evidence/room-wardrobe-position.json. The earlier FBX authoring-reference ZIP is unchanged and only needed to regenerate textures. User acceptance on2026-11-02 covers the latest wardrobe placement/front movement; it does not waive deferred performance or other acceptance items.

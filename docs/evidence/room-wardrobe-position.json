@@ -1,7 +1,11 @@
 {
   "date": "2026-11-02",
   "source": "28f980862b5be25d2c980c2d2abde2e942443494",
-  "userLocalPosition": [0.383, -0.126, 0.212],
+  "userLocalPosition": [
+    0.383,
+    -0.126,
+    0.212
+  ],
   "buildGuid": "64cd76ce780947a4a436c72dca0067e8",
   "buildDirectory": "Zombie Shoot VR/Builds/Windows/GSComparison-WardrobePosition-20261102",
   "tests": "Focused PlayMode2/2: exact position, child mask, facade/collider alignment, nearest WorldSolid ray and retained outside/above wall collision; render/toggle/release. Prior ten-cycle flow test not repeated.",
@@ -10,7 +14,26 @@
   "review": "Old wall obstruction reproduced RED: expectedx2.323, actual2.19. Wall split outside/above wardrobe, fix independently reviewed with no further blockers.",
   "preservation": "Raw PLY and both edited theme SHA3/3 unchanged. Texture and mesh unchanged. Scene/meta backed up before authoring.",
   "restoration": "Builds/Reproduction/p13-wardrobe-position-20261102: source ZIP,14-file overlay and overlay manifest. Overlay CRC passed. Fresh Library not repeated.",
-  "headset": "pending",
+  "headset": {
+    "date": "2026-11-02",
+    "userReport": "확인결과 이상 없어",
+    "scope": "Latest wardrobe position/appearance and movement at its front, in response to the requested latest-build check. Does not certify the full R01-R28 matrix, performance or repetition counts."
+  },
   "performance": "deferred",
-  "pr": "https://github.com/hyunsuki5329/zombie-shoot-vr/pull/46"
+  "pr": "https://github.com/hyunsuki5329/zombie-shoot-vr/pull/46",
+  "finalRegression": {
+    "play": {
+      "passed": 203,
+      "failed": 0,
+      "skipped": 0,
+      "sha256": "92697b178e8bbd73547bf15e4953979cd961ab7b4fa1b829b5003d5f9cc4cdb3"
+    },
+    "edit": {
+      "passed": 138,
+      "failed": 0,
+      "skipped": 0,
+      "sha256": "804edc77e2deb98eb6c1d87b8dc760eb3a3a1238efb5d77fe47dd363d8994ee1"
+    }
+  },
+  "integrationReview": "Both baseline and main merge trees equal the tested HEAD; scoped independent integration/provenance review found no code blockers. Corrected latest restoration instructions. Not an exhaustive new review of989 historical files."
 }
