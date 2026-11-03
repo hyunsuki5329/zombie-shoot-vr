@@ -1,0 +1,67 @@
+{
+  "source": "7fa9cd41ec3463be117274f1f75e63a919564090",
+  "libraryInitiallyAbsent": true,
+  "archives": [
+    {
+      "archive": "C:\\Users\\User\\.codex\\worktrees\\gs-comparison-intro\\Zombie Shoot VR\\Zombie Shoot VR\\Builds\\Reproduction\\accepted-main-7fa9cd4\\tracked-source.zip",
+      "sha256": "035f0a3487158b2d2c29328232ceedf5830ca43f6872dfbaf6ef982fad7c74a6",
+      "entries": 2684
+    },
+    {
+      "archive": "C:\\Users\\User\\.codex\\worktrees\\gs-comparison-intro\\Zombie Shoot VR\\Zombie Shoot VR\\Builds\\Reproduction\\p13-room-b221bcb\\local-assets-with-meta.zip",
+      "sha256": "408a55ff7f650da000bdcd443b80ecb9d721edfac9cae775b07ca3084f60a6d4",
+      "entries": 706
+    },
+    {
+      "archive": "C:\\Users\\User\\.codex\\worktrees\\gs-comparison-intro\\Zombie Shoot VR\\Zombie Shoot VR\\Builds\\Reproduction\\p13-room-mirror-fbx-20261102\\fbx-authoring-reference.zip",
+      "sha256": "d213db4617cfe5c07e7b5f4de2a15140d2193afd531a765355c36839e7de2ed4",
+      "entries": 6
+    }
+  ],
+  "overlay": "Applied after Configure and fixture creation; 14 files matched",
+  "date": "2026-11-02",
+  "root": "D:\\VRFPS-Reproduction\\accepted-main-7fa9cd4",
+  "samePcPackageCacheAndLicense": true,
+  "restoreBuildGuid": "a670dc96ea35421fa07d038b631bbade",
+  "acceptedBuildGuid": "64cd76ce780947a4a436c72dca0067e8",
+  "acceptedBuildReplaced": false,
+  "playerExecuted": false,
+  "overlayFilesMatched": 14,
+  "buildFiles": 356,
+  "buildManifestSha256": "bb03c97a2389da581e5e354f87ecdeda31dd09298b7be448f4dca17cf76c2f92",
+  "buildLogSha256": "a2e0e36cbfab0c1ce23c0dc86c976a23325b8a81d924a70c7697438a72eadd54",
+  "packedComparison": {
+    "onlyRestored": [
+      "Assets/XR/Settings/XRSimulationSettings.asset",
+      "Packages/com.unity.xr.arfoundation/Editor/Simulation/XRSimulationSettings.cs"
+    ],
+    "onlyAccepted": []
+  },
+  "preservation": {
+    "sourceFilesMatched": 321,
+    "overlayMatched": 14,
+    "rawAndThemeMatched": 3,
+    "scope": "Source/overlay/raw/theme audit after tests; Windows build completed successfully."
+  },
+  "tests": {
+    "edit": {
+      "passed": 137,
+      "failed": 0,
+      "skipped": 1,
+      "sha256": "60c71e97a94060588d5e5b6feff850ffbff9b331b30ff86d15f4d48c3f98fc10"
+    },
+    "play": {
+      "passed": 203,
+      "failed": 0,
+      "skipped": 0,
+      "sha256": "02b2f41aaa34c6513c5620eb187d9439d6821b50e7b4f5a78a940d47e49c034b"
+    }
+  },
+  "ignoredTest": "ScannedRoomTests.LocalScanReferenceRetainsOriginalTextureWhenAvailable: optional ReferenceRoom.unity is not in the final themed build or restoration archive.",
+  "xrSettingsAudit": {
+    "loaderSettingsSha256": "356d997e0fd64b152eef3119246965e3b6abf669e621e6f0b5e129cc00da9668",
+    "currentAndRestoredMatch": true,
+    "standaloneLoader": "OpenXRLoader (17afc41331b61634396db4295dfabe3b)",
+    "interpretation": "Additional packed paths reference deprecated Editor XRSimulationSettings, whose Awake schedules an editor overlay toggle. Loader configuration still selects OpenXR only. No evidence of a changed selected loader; binary equivalence and restored Player VR behavior are not established."
+  }
+}
