@@ -2,7 +2,7 @@
 
 Latest position revision: source28f9808, GUID64cd76ce780947a4a436c72dca0067e8, focused2/2. See [position evidence](room-wardrobe-position.json). User accepted the latest wardrobe position/appearance and movement at its front on2026-11-02 ("확인결과 이상 없어"). This is scoped acceptance, not completion of the full matrix.
 
-Prior gameplay/authoring source f4cf87f, delivered Player GUID3245056cb11244b6b6ac7995df40c1aa (GSComparison-Mirror-FBX-20261102). Evidence: [mirror/wardrobe revision](room-mirror-wardrobe.json). This is a completion audit, not acceptance. PR46 remains draft; merge is not evidence of headset validation.
+Prior gameplay/authoring source f4cf87f, delivered Player GUID3245056cb11244b6b6ac7995df40c1aa (GSComparison-Mirror-FBX-20261102). Evidence: [mirror/wardrobe revision](room-mirror-wardrobe.json). This is a completion audit, not acceptance. PR46 subsequently merged; its merge is not evidence of full headset validation.
 
 | Requirements | Evidence available | Still unproven at the full required scope |
 |---|---|---|
