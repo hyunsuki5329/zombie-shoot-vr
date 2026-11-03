@@ -759,3 +759,10 @@ GS 렌더러만 반전된 자식에 두고 data/관찰 앵커 양수 단위 배�
 ## 2026-11-02 main 통합 완료
 
 PR46→847a4b3, 최종 통합PR47→dbc415d 병합 완료. 두 병합의 커밋트리가 검토한3ccced9와 동일하며 게임 소스/패키지/설정의 커밋간 diff0을 확인했다. 기존 작업본의 사용자·Unity자동설정 변경은 보존·미stage했다. Play203/203·Edit138/138, 사용자 최신옷장 인수와 별개로 성능 보류/전체인수 차이는 유지한다. 증빙: evidence/main-integration-20261102.json. 전체 Goal/제출 완료로 선언하지 않는다.
+
+
+## 2026-11-04 복원 검증 병합 확인 및 재개 지점
+
+PR49(https://github.com/hyunsuki5329/zombie-shoot-vr/pull/49)의 원격 main 병합9785055를 확인했다. 복원 검증 소스7fa9cd4, Library 없는 동일 PC 폴더에서 Edit137통과/선택적 ReferenceRoom 검사1제외, Play203통과, Windows GUIDa670dc96ea35421fa07d038b631bbade 성공. 증빙 해시와 OpenXR 로더 동일성을 대조했고 독립 리뷰 차단 지적은 없었다. 추가 패킹된 에디터 XRSimulationSettings 두 경로를 공개했으며 바이너리 동일성·복원 Player VR 실행은 주장하지 않는다. 사용자 인수 빌드 GUID64cd76ce780947a4a436c72dca0067e8과 원본 맵은 보존했다. 상세 복원 순서와 한계는 source-reproduction.md 및 evidence/accepted-main-clean-restoration.json에 있다.
+
+다음 재개 지점은 final-acceptance-gaps-20261102.md의 미증빙 요구다. 촬영 앱 버전/정밀 치수 대조, 아직 기록되지 않은 실제 양안·컨트롤러 인수, 배포 조건 확인에는 사용자 자료가 필요하다. 성능/정식 반복은 사용자 보류를 유지하며 발표/영상은 사용자 담당이다. 같은 빌드에 대한 이미 확인한 옷장 검사를 반복 요청하지 않고, 독립 구현 결함이 확인되지 않은 상태에서 재빌드나 전체시험을 반복하지 않는다. 전체 Goal은 완료 처리하지 않는다.
