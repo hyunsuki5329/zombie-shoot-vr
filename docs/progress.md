@@ -773,3 +773,7 @@ PR49(https://github.com/hyunsuki5329/zombie-shoot-vr/pull/49)의 원격 main 병
 사용자 classroom.ply(459968 splats, SHA f8d591a9)를 새 private Classroom 폴더에 임포트했다. 기존 FBX에서 보존한 cropped mesh/UV/texture와 회전·반전8후보를 비교해 방향을 맞췄다. 원본FBX Desktop 경로는 없어 파생 참조 사용임을 명시했다. 약14×6.3m 직사각형 경계, 단순 벽·바닥·추정3m 천장 보완을 별도 씬에 작성했다. 원본PLY/기존RoomGS/사용자두테마는 수정하지 않았다.
 
 Configure 중 씬 교체로 프로필 참조가 해제되는 실패를 확인했고 영속 자산을 다시 로드해 해결했다. configure-3와 boundary 배치 성공, 최신 DX12 preview PlayMode1/1 통과·제외0; 네방향 보정전후8렌더를 검사했다. 좌표/크기/중심 보정과 한계는 evidence/classroom-gs-intake.json에 기록했다. 로컬 복원 ZIP+manifest는 Builds/Reproduction/p14-classroom-gs. 원본 재생성·게임메뉴 연결·새Windows빌드·실제VR 인수는 아직 미실행이며 현재는 독립 관찰씬이다. 다음 작업은 새 강의실 프로필 연결과 실제 GS→폐교 전환 회귀/별도빌드. 성능 보류·발표 사용자 담당 유지.
+
+## 2026-11-11 강의실 메뉴 연결
+
+강의실 GS에서 K2로 바이러스 명중 후 암전, 폐교 맵과 8초 준비로 이어지는 경로를 검증했다. DX12에서 방 10회와 강의실 1회를 포함한 두 시험이 통과했다. Windows 빌드 GUID 26a0ac6bc41e46d0893f46fda1399b21, GSComparison-Classroom/AbandonedSchool.exe. 두 가공 GS 포함, 원본 PLY 패킹 0. 복원 ZIP 24개 항목 SHA와 CRC 일치. 기존 방 복원 후 강의실 overlay를 적용하고 ClassroomRealitySetup.Connect 및 RoomComparisonBuild.BuildClassroomRevision을 실행한다. PR51은 VR 인수 대기 중인 초안이다.

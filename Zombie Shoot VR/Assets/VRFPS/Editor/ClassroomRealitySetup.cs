@@ -125,4 +125,20 @@ public static class ClassroomRealitySetup
         root.Validate(AssetDatabase.LoadAssetAtPath<RealityIntroProfile>(ProfilePath));EditorSceneManager.SaveScene(scene);AssetDatabase.SaveAssets();
         Debug.Log("CLASSROOM_BOUNDARY_FINISHED: reversible ceiling/floor backing; approximate height 3m");
     }
+    public static void Connect()
+    {
+        if (!Application.isBatchMode) throw new InvalidOperationException("Use batch editor.");
+        var observation = EditorSceneManager.OpenScene(ScenePath);
+        var root = observation.GetRootGameObjects().SelectMany(go => go.GetComponentsInChildren<RealitySceneRoot>()).Single();
+        root.Validate(AssetDatabase.LoadAssetAtPath<RealityIntroProfile>(ProfilePath));
+        var combat = EditorSceneManager.OpenScene("Assets/VRFPS/Scenes/Combat.unity");
+        var installer = combat.GetRootGameObjects().SelectMany(go => go.GetComponentsInChildren<ComparisonIntroInstaller>(true)).Single();
+        installer.classroomProfile = AssetDatabase.LoadAssetAtPath<RealityIntroProfile>(ProfilePath);
+        if (!installer.classroomProfile) throw new InvalidOperationException("Missing classroom profile.");
+        EditorSceneManager.MarkSceneDirty(combat);
+        if (!EditorSceneManager.SaveScene(combat)) throw new IOException("Unable to save classroom menu binding.");
+        EditorBuildSettings.scenes = EditorBuildSettings.scenes.Where(scene => scene.path != ScenePath)
+            .Append(new EditorBuildSettingsScene(ScenePath, true)).ToArray();
+        Debug.Log("CLASSROOM_REALITY_CONNECTED");
+    }
 }

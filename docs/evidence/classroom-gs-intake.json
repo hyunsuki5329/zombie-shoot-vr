@@ -2,6 +2,16 @@
   "source": "C:/Users/User/Downloads/classroom.ply",
   "sha256": "f8d591a9f6ddb478f003f46b0ad015751f4925e62938624407581485e93ff9b2",
   "splats": 459968,
+  "gameIntegration": {
+    "buildGuid": "26a0ac6bc41e46d0893f46fda1399b21",
+    "output": "Builds/Windows/GSComparison-Classroom/AbandonedSchool.exe",
+    "flowTestResult": "2 passed, 0 failed, 0 skipped. Room ten cycles, Classroom one cycle.",
+    "xml": "tmp/p14/both-flows.xml",
+    "buildLog": "tmp/p14/classroom-build.log",
+    "packedProcessedMaps": ["Room", "Classroom"],
+    "rawPlyPacked": false,
+    "headsetAcceptance": "pending"
+  },
   "floatFields": 62,
   "positiveInfiniteOpacity": 1658,
   "reference": "Saved FBX-derived cropped geometry, UV and texture; original Desktop FBX path unavailable",
