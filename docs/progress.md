@@ -777,3 +777,5 @@ Configure 중 씬 교체로 프로필 참조가 해제되는 실패를 확인했
 ## 2026-11-11 강의실 메뉴 연결
 
 강의실 GS에서 K2로 바이러스 명중 후 암전, 폐교 맵과 8초 준비로 이어지는 경로를 검증했다. DX12에서 방 10회와 강의실 1회를 포함한 두 시험이 통과했다. Windows 빌드 GUID 26a0ac6bc41e46d0893f46fda1399b21, GSComparison-Classroom/AbandonedSchool.exe. 두 가공 GS 포함, 원본 PLY 패킹 0. 복원 ZIP 24개 항목 SHA와 CRC 일치. 기존 방 복원 후 강의실 overlay를 적용하고 ClassroomRealitySetup.Connect 및 RoomComparisonBuild.BuildClassroomRevision을 실행한다. PR51은 VR 인수 대기 중인 초안이다.
+
+별도 폴더 classroom-b01ae00에서 빈 Library로 복원한 결과 EditMode 137개 통과, 선택적 원본 방 참조 검사 1개 제외, PlayMode 205개 통과를 확인했다. 재빌드 GUID f97a4783a93a4c1185a97f080d720b57. 패킹 목록에 방·강의실 가공 GS가 있고 원본 PLY는 0개였다. 동일 PC 패키지 캐시와 라이선스를 사용했다. 복원 Player 기기 실행은 미수행이다. [복원 증빙](evidence/classroom-clean-restoration.json).
