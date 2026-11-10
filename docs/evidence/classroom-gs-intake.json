@@ -1,0 +1,278 @@
+{
+  "source": "C:/Users/User/Downloads/classroom.ply",
+  "sha256": "f8d591a9f6ddb478f003f46b0ad015751f4925e62938624407581485e93ff9b2",
+  "splats": 459968,
+  "floatFields": 62,
+  "positiveInfiniteOpacity": 1658,
+  "reference": "Saved FBX-derived cropped geometry, UV and texture; original Desktop FBX path unavailable",
+  "referenceFiles": {
+    "cropped-geometry.npz": "b2870a93a0486d16885c6e16ecb56baacb6b6eca022626135b5a9ba42778b1e2",
+    "texture.jpg": "3ea5283881625f92c698bdc7839fce4efa7812121fa4f6fb529c4ea15ce0298d",
+    "crop_reference.py": "eb54afabdf289e4aca65e9f23e8ec622229869ed61a665b68a5927527dda7332"
+  },
+  "candidates": [
+    {
+      "reflection": -1,
+      "angle": 270,
+      "score": 0.25345393830917023,
+      "matrix": [
+        [
+          0.040403138645098105,
+          4.910633410553771e-09,
+          1.0126598510763598
+        ],
+        [
+          4.0357173158867e-10,
+          1.0000001203760436,
+          -6.937106350468625e-08
+        ],
+        [
+          1.012659874576274,
+          2.224106676607107e-09,
+          -0.04040315687189544
+        ],
+        [
+          1.0205716397323281,
+          0.1564954371096226,
+          1.4538150716831952
+        ]
+      ]
+    },
+    {
+      "reflection": 1,
+      "angle": 90,
+      "score": 0.3700731833484747,
+      "matrix": [
+        [
+          -0.10477577567223992,
+          -1.586016764201905e-09,
+          0.9701024201160151
+        ],
+        [
+          -3.348773747191558e-08,
+          1.0000001352517731,
+          -8.039888521604865e-08
+        ],
+        [
+          -0.9701023499285613,
+          2.380978636473685e-09,
+          -0.10477576511280584
+        ],
+        [
+          1.1876508285983147,
+          0.19012635652552812,
+          1.3034141085945634
+        ]
+      ]
+    },
+    {
+      "reflection": -1,
+      "angle": 90,
+      "score": 0.397062186729968,
+      "matrix": [
+        [
+          -0.04520014167529804,
+          -3.041515895046256e-09,
+          -0.766026549963253
+        ],
+        [
+          -7.398674561898133e-09,
+          0.9999997950454084,
+          1.992165854503014e-08
+        ],
+        [
+          -0.766026557023785,
+          -2.9262087197778897e-09,
+          0.045200134929563096
+        ],
+        [
+          0.9720470332422166,
+          0.17488697847942103,
+          -2.8596464637309897
+        ]
+      ]
+    },
+    {
+      "reflection": 1,
+      "angle": 270,
+      "score": 0.4182729258642376,
+      "matrix": [
+        [
+          0.13218438496267318,
+          2.5642901303176403e-09,
+          -0.8993798893907026
+        ],
+        [
+          -1.8204247831388187e-07,
+          1.0000002008996165,
+          -5.692344873242661e-08
+        ],
+        [
+          0.8993798281908456,
+          4.918055962477297e-10,
+          0.13218444049553812
+        ],
+        [
+          1.4079122514249205,
+          0.11682162569018184,
+          -3.074663268953086
+        ]
+      ]
+    },
+    {
+      "reflection": 1,
+      "angle": 180,
+      "score": 0.47738780107820894,
+      "matrix": [
+        [
+          -0.7480169166283576,
+          6.976451425265574e-09,
+          0.3435493931302823
+        ],
+        [
+          1.2598575031830261e-07,
+          1.0000001314353044,
+          -4.975654466221613e-08
+        ],
+        [
+          -0.3435494159251491,
+          -4.771945061321503e-10,
+          -0.7480169311523517
+        ],
+        [
+          -1.1771106114419507,
+          0.1023499947051818,
+          -0.3151791584474679
+        ]
+      ]
+    },
+    {
+      "reflection": -1,
+      "angle": 0,
+      "score": 0.4826437094794707,
+      "matrix": [
+        [
+          -0.6905001136647123,
+          -1.4252996138548545e-09,
+          -0.39561896903371757
+        ],
+        [
+          -7.927162815057898e-10,
+          0.9999999077229019,
+          -1.0903699432240899e-07
+        ],
+        [
+          -0.3956189583253047,
+          -1.3909451368476766e-09,
+          0.6905001733902066
+        ],
+        [
+          -1.1192497830828874,
+          0.12352013079257418,
+          -1.8530174916714541
+        ]
+      ]
+    },
+    {
+      "reflection": -1,
+      "angle": 180,
+      "score": 0.49399684638806673,
+      "matrix": [
+        [
+          0.6944572201712346,
+          -1.064736358623409e-09,
+          0.3365374395155195
+        ],
+        [
+          6.573716060387369e-08,
+          0.9999998046853493,
+          -1.4117184077289124e-07
+        ],
+        [
+          0.33653750265216315,
+          -1.2589468356694056e-09,
+          -0.6944571525163601
+        ],
+        [
+          3.5488069940799183,
+          0.12122863386476135,
+          -0.4452409793137751
+        ]
+      ]
+    },
+    {
+      "reflection": 1,
+      "angle": 0,
+      "score": 0.5256431098124332,
+      "matrix": [
+        [
+          0.8075094016476572,
+          1.4714656043940388e-09,
+          -0.09057131620415088
+        ],
+        [
+          -5.442916672926401e-08,
+          1.0000000157490536,
+          -7.386967726397131e-08
+        ],
+        [
+          0.09057128804425818,
+          -4.099920403177748e-10,
+          0.8075094666943873
+        ],
+        [
+          3.2377027553314512,
+          0.06353529582239964,
+          -0.7599592742976828
+        ]
+      ]
+    }
+  ],
+  "registrationScope": "Trimmed color-assisted nearest-neighbor alignment plus visual top-view comparison; score is not surveyed dimensional accuracy. Four in-engine views inspected; missing wall detail filled with flat backing and some bright scan-edge splats remain.",
+  "preserved": "Original PLY and both theme scenes unchanged; independent private observation scene.",
+  "authoredTransform": {
+    "calibrationScale": 0.83,
+    "childPosition": [
+      1.070572,
+      0.156495,
+      1.853815
+    ],
+    "childEuler": [
+      180,
+      92.285,
+      0
+    ],
+    "childScale": [
+      -1.013465,
+      1,
+      1.013465
+    ],
+    "fitTranslationAdjustment": [
+      0.05,
+      0,
+      0.4
+    ],
+    "reason": "Center FBX reference bounds approximately x[-8.4,8.3], z[-4.3,3.5] before uniform approximate 14x6.3m framing; no precision survey claim.",
+    "cropCenter": [
+      0,
+      1.45,
+      0
+    ],
+    "cropHalfExtents": [
+      7.08,
+      1.55,
+      3.23
+    ],
+    "ceilingHeightEstimated": 3,
+    "warning": "Cutout filters centers, not full Gaussian footprints; boundary bleed and missing scan detail remain possible."
+  },
+  "previewTest": {
+    "passed": 1,
+    "failed": 0,
+    "skipped": 0,
+    "xmlSha256": "81ad7943b9622925f6eb29a2eb125bcb363c15feb832da020afa8ba41531433b",
+    "scope": "Four directions before/after rectangle and backing; renderer initialization and release; no VR or game integration validation."
+  },
+  "overlayFiles": 24,
+  "overlayArchiveSha256": "2211e2f5d67435816e1b0b7dfbea3e11882bbb41f28ed936c35bd3c6eebb8dd5"
+}
