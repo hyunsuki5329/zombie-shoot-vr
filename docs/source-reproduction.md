@@ -313,3 +313,7 @@ ZIP은 검토 프로젝트의 `Builds/Reproduction` 아래에 있다. 아래 순
 5. Windows DX12 빌드는 `RoomComparisonBuild.BuildClassroomRevision`으로 생성한다. `Builds/Windows/GSComparison-Classroom/AbandonedSchool.exe`를 실행하고 Back → Classroom → Start in Reality를 선택한다.
 
 이 순서로 만든 재빌드 GUID는 `f97a4783a93a4c1185a97f080d720b57`이다. 복원 시 Unity가 동일 PC의 패키지 캐시와 라이선스를 사용했다. [시험 결과와 보존 해시](evidence/classroom-clean-restoration.json)
+
+## 인수된 classroom hybrid (3c7e479)
+
+최신 소스: Builds/Reproduction/p14-classroom-hybrid/tracked-source-3c7e479.zip. 위 b01ae00 순서에서 소스를 이 ZIP으로, classroom overlay를 p14-classroom-hybrid/local-classroom-hybrid.zip(33파일)으로 대체한다. 최종 Room overlay 및 ClassroomRealitySetup.Connect 순서는 유지한다. 빌드 메서드는 RoomComparisonBuild.BuildClassroomHybridRevision이다. ZIP CRC와 manifest33개가 일치한다. 현 자산은32개 일치하고 GapMaterial은 Unity 재질 정규화 차이가 있다(상세 evidence/classroom-hybrid-repair.json). 최신 overlay의 새 Library 전체 회귀/재빌드는 미반복이다. 사용자는 전달 hybrid를 VR로 확인했다.

@@ -783,3 +783,7 @@ Configure 중 씬 교체로 프로필 참조가 해제되는 실패를 확인했
 ## 2026-11-12 강의실 FBX 결손 보완
 
 사용자 요청에 따라 FBX에서 보존한 메시와 촬영 텍스처로 빈 벽·장비·주변 책상 구역을 채웠다. FBX gap repairs 그룹에 111835개 삼각형을 배치했다. 일부 원본 스캔 결손과 GS 번짐은 남아 있다. 보완 전후4방향 렌더와 실제 강의실 K2 전환 시험2개 통과, 새 빌드 GSComparison-Classroom-Hybrid GUID aacd2a9f59f545fbbae798302d047920 성공. 독립 리뷰에서 발견한 이전 메시 복구 문제는 자산·meta 백업으로 수정했다. 생성 스크립트 재실행의 메시 바이트가 일치하고 로컬 보완 ZIP33파일을 보관했다. 자세한 근거는 evidence/classroom-hybrid-repair.json이다. 새 실기 인수는 대기한다.
+
+## 2026-11-12 — 강의실 hybrid VR 인수
+
+소스3c7e479, Windows GSComparison-Classroom-Hybrid/AbandonedSchool.exe, GUIDaacd2a9f59f545fbbae798302d047920. 사용자가 최신 강의실 보완본을 VR로 확인하고 크게 이상 없다고 보고했다. 외형/VR 인수로 기록하며 정량 성능이나 정식 반복 시험 완료로 확대하지 않는다. 기존 집중 시험2/2 및 빌드 증빙을 유지한다. 이전 b01ae00 새 Library Edit137통과/1제외·Play205통과와 구분하며 hybrid 새 Library 전체 회귀는 미반복이다. ZIP CRC 및 manifest33개 일치, 현 자산32개 일치와 GapMaterial의 Unity 재질 정규화 차이를 확인했다. 성능 로그는 보류, 발표/영상은 사용자 담당이다. PR51 인수 기록을 갱신하고 병합 조건을 확인한다.

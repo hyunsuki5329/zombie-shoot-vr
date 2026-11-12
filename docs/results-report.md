@@ -1,5 +1,9 @@
 # 현실 공간 촬영 기반 VR 좀비 생존 FPS — 결과보고서 초안
 
+## 최신 강의실 hybrid 인수 (2026-11-12)
+
+소스3c7e479, Windows GSComparison-Classroom-Hybrid/AbandonedSchool.exe, GUIDaacd2a9f59f545fbbae798302d047920. 사용자가 최신 강의실 보완본을 VR로 확인하고 크게 이상 없다고 보고했다. 외형/VR 인수로 기록하며 정량 성능이나 정식 반복 시험 완료로 확대하지 않는다. 기존 집중 시험2/2 및 빌드 증빙을 유지한다. 이전 b01ae00 새 Library Edit137통과/1제외·Play205통과와 구분하며 hybrid 새 Library 전체 회귀는 미반복이다. ZIP CRC 및 manifest33개 일치, 현 자산32개 일치와 GapMaterial의 Unity 재질 정규화 차이를 확인했다. 성능 로그는 보류, 발표/영상은 사용자 담당이다. 아래 이전 시점의 강의실 인수 대기 기록은 이 결과로 갱신한다. [증빙](evidence/classroom-hybrid-repair.json).
+
 2026-10-18 최신 ZIP 새 Library 복원 완료: cb1b0e7-wall-fix 원본을 빈 폴더에 풀어 EditMode108통과/개인 스캔1제외, PlayMode131/131, Windows 빌드 성공을 확인했다. 씬3개 원본 일치, 원본 스캔 포함0, 출처2개 동봉 확인. 복원 빌드 GUID `845dc8e7a5604288b78f8ed2d0727f49`. 동일 PC 캐시·라이선스를 사용했으며 기존 WallFix 실행본은 교체하지 않았다. [증빙](evidence/wall-fix-clean-restoration.json).
 
 ## 강의실 GS 검토 빌드 (2026-11-11)
