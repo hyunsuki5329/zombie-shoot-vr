@@ -779,3 +779,7 @@ Configure 중 씬 교체로 프로필 참조가 해제되는 실패를 확인했
 강의실 GS에서 K2로 바이러스 명중 후 암전, 폐교 맵과 8초 준비로 이어지는 경로를 검증했다. DX12에서 방 10회와 강의실 1회를 포함한 두 시험이 통과했다. Windows 빌드 GUID 26a0ac6bc41e46d0893f46fda1399b21, GSComparison-Classroom/AbandonedSchool.exe. 두 가공 GS 포함, 원본 PLY 패킹 0. 복원 ZIP 24개 항목 SHA와 CRC 일치. 기존 방 복원 후 강의실 overlay를 적용하고 ClassroomRealitySetup.Connect 및 RoomComparisonBuild.BuildClassroomRevision을 실행한다. PR51은 VR 인수 대기 중인 초안이다.
 
 별도 폴더 classroom-b01ae00에서 빈 Library로 복원한 결과 EditMode 137개 통과, 선택적 원본 방 참조 검사 1개 제외, PlayMode 205개 통과를 확인했다. 재빌드 GUID f97a4783a93a4c1185a97f080d720b57. 패킹 목록에 방·강의실 가공 GS가 있고 원본 PLY는 0개였다. 동일 PC 패키지 캐시와 라이선스를 사용했다. 복원 Player 기기 실행은 미수행이다. [복원 증빙](evidence/classroom-clean-restoration.json).
+
+## 2026-11-12 강의실 FBX 결손 보완
+
+사용자 요청에 따라 FBX에서 보존한 메시와 촬영 텍스처로 빈 벽·장비·주변 책상 구역을 채웠다. FBX gap repairs 그룹에 111835개 삼각형을 배치했다. 일부 원본 스캔 결손과 GS 번짐은 남아 있다. 보완 전후4방향 렌더와 실제 강의실 K2 전환 시험2개 통과, 새 빌드 GSComparison-Classroom-Hybrid GUID aacd2a9f59f545fbbae798302d047920 성공. 독립 리뷰에서 발견한 이전 메시 복구 문제는 자산·meta 백업으로 수정했다. 생성 스크립트 재실행의 메시 바이트가 일치하고 로컬 보완 ZIP33파일을 보관했다. 자세한 근거는 evidence/classroom-hybrid-repair.json이다. 새 실기 인수는 대기한다.

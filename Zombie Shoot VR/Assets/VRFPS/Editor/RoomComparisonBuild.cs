@@ -15,6 +15,7 @@ public static class RoomComparisonBuild
     public static void BuildWardrobeRevision() => BuildTo("GSComparison-Wardrobe-20261102");
     public static void BuildMirrorWardrobeRevision() => BuildTo("GSComparison-Mirror-FBX-20261102");
     public static void BuildWardrobePositionRevision() => BuildTo("GSComparison-WardrobePosition-20261102");
+    public static void BuildClassroomHybridRevision() => BuildTo("GSComparison-Classroom-Hybrid", true);
     public static void BuildClassroomRevision() => BuildTo("GSComparison-Classroom", true);
     static void BuildTo(string directory, bool includeClassroom = false)
     {

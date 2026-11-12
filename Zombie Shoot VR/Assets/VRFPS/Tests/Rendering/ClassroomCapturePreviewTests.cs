@@ -43,11 +43,15 @@ namespace VRFPS.Tests
                 camera.clearFlags=CameraClearFlags.SolidColor;camera.backgroundColor=Color.black;
                 camera.transform.position=new Vector3(-3.8f,1.6f,1.65f);camera.fieldOfView=85;camera.aspect=1.5f;camera.nearClipPlane=.05f;camera.farClipPlane=30;
                 yield return source.Initialize();Assert.That(source.IsReady,Is.True);
-                var output=Path.GetFullPath("../tmp/p14/classroom-preview");Directory.CreateDirectory(output);rt.Create();
+                var output=Path.GetFullPath("../tmp/p14/hybrid-preview");Directory.CreateDirectory(output);rt.Create();
                 for(var i=0;i<8;i++)
                 {
-                    renderer.m_Cutouts[0].gameObject.SetActive(i>=4);
-                    foreach(var surface in root.collisionRoot.GetComponentsInChildren<MeshRenderer>())surface.enabled=i>=4;
+                    renderer.m_Cutouts[0].gameObject.SetActive(true);
+                    var hybrid = root.transform.Find("FBX gap repairs");
+                    Assert.That(hybrid, Is.Not.Null);
+                    Assert.That(hybrid.GetComponent<MeshFilter>().sharedMesh.vertexCount, Is.GreaterThan(0));
+                    hybrid.gameObject.SetActive(i >= 4);
+                    foreach(var surface in root.collisionRoot.GetComponentsInChildren<MeshRenderer>())surface.enabled=true;
                     camera.transform.rotation=Quaternion.Euler(0,(i%4)*90,0);yield return null;
                     RenderPipeline.SubmitRenderRequest(camera,new UniversalRenderPipeline.SingleCameraRequest{destination=rt});
                     var old=RenderTexture.active;
