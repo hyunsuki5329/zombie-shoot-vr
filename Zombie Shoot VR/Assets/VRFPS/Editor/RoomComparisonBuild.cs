@@ -15,10 +15,13 @@ public static class RoomComparisonBuild
     public static void BuildWardrobeRevision() => BuildTo("GSComparison-Wardrobe-20261102");
     public static void BuildMirrorWardrobeRevision() => BuildTo("GSComparison-Mirror-FBX-20261102");
     public static void BuildWardrobePositionRevision() => BuildTo("GSComparison-WardrobePosition-20261102");
-    static void BuildTo(string directory)
+    public static void BuildClassroomHybridRevision() => BuildTo("GSComparison-Classroom-Hybrid", true);
+    public static void BuildClassroomRevision() => BuildTo("GSComparison-Classroom", true);
+    static void BuildTo(string directory, bool includeClassroom = false)
     {
         if(!Application.isBatchMode)throw new InvalidOperationException("Use isolated batch project.");
         var scenes=new[]{"Assets/VRFPS/Scenes/Bootstrap.unity","Assets/VRFPS/Scenes/Combat.unity","Assets/VRFPS/Scenes/Maps/Room.unity","Assets/VRFPS/Scenes/Maps/Classroom.unity",RoomRealitySetup.ScenePath};
+        if (includeClassroom) scenes = scenes.Append(ClassroomRealitySetup.ScenePath).ToArray();
         foreach(var scene in scenes)if(!File.Exists(scene))throw new FileNotFoundException("Required build scene missing",scene);
         var profile=AssetDatabase.LoadAssetAtPath<VRFPS.RealityIntroProfile>(RoomRealitySetup.ProfilePath);
         if(!profile||profile.dataId!="room-"+RoomRealitySetup.CaptureSha256)throw new InvalidOperationException("Verified Room profile required.");

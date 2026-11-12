@@ -1,0 +1,34 @@
+{
+  "buildGuid": "aacd2a9f59f545fbbae798302d047920",
+  "triangles": 111835,
+  "vertices": 67454,
+  "selection": "Peripheral desk/wall regions and floor below2.05m, rectangle14x6.3; FBX-derived scan texture",
+  "tests": {
+    "passed": "2",
+    "failed": "0",
+    "skipped": "0"
+  },
+  "xmlSha256": "3a415d7423e6414b96bc28de986640e72bdcf1b28d9876a9e7d1c1ead44b030b",
+  "meshBytesSha256": "0616c67489f29287a12cfa93ce7023f07596c7a81503d73b301837423fc9dda3",
+  "backup": "Zombie Shoot VR\\Builds\\Reproduction\\ClassroomHybrid\\20261112-104228-047",
+  "overlayFiles": 33,
+  "archiveSha256": "af67eac0a7f6aaec41b75ea6fec87f98f8a8ef722a17afa540353fbf62d9e408",
+  "limitations": [
+    "FBX scan contains missing and distorted surfaces.",
+    "GS blur and scan edges remain in partially captured areas."
+  ],
+  "review": "Scene-only rollback issue fixed with asset/meta backup. Verified saved mesh/texture/meta identities and prior material presence. Unity material upgrade changes legacy aliases on reimport.",
+  "userAcceptance": {
+    "date": "2026-11-12",
+    "quote": "이정도면 괜찮은 것 같아. 이어서 작업해줘. vr로도 확인했고 크게 이상 없었어",
+    "scope": "Latest classroom GS/FBX hybrid visual and VR acceptance; no quantitative performance or formal repetition claim."
+  },
+  "restorationVerification": {
+    "archiveCRC": "passed",
+    "manifestFilesMatched": 33,
+    "liveFilesMatched": 32,
+    "liveDifference": "GapMaterial.mat Unity normalization: legacy texture/color aliases, double-sided GI, RenderType and motion-vector pass. BaseMap, BaseColor and Cull unchanged. Archive retains delivered pre-normalization material.",
+    "sourceArchive": "tracked-source-3c7e479.zip",
+    "emptyLibraryHybridRun": "not repeated"
+  }
+}

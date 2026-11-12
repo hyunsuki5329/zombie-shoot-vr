@@ -766,3 +766,24 @@ PR46→847a4b3, 최종 통합PR47→dbc415d 병합 완료. 두 병합의 커밋�
 PR49(https://github.com/hyunsuki5329/zombie-shoot-vr/pull/49)의 원격 main 병합9785055를 확인했다. 복원 검증 소스7fa9cd4, Library 없는 동일 PC 폴더에서 Edit137통과/선택적 ReferenceRoom 검사1제외, Play203통과, Windows GUIDa670dc96ea35421fa07d038b631bbade 성공. 증빙 해시와 OpenXR 로더 동일성을 대조했고 독립 리뷰 차단 지적은 없었다. 추가 패킹된 에디터 XRSimulationSettings 두 경로를 공개했으며 바이너리 동일성·복원 Player VR 실행은 주장하지 않는다. 사용자 인수 빌드 GUID64cd76ce780947a4a436c72dca0067e8과 원본 맵은 보존했다. 상세 복원 순서와 한계는 source-reproduction.md 및 evidence/accepted-main-clean-restoration.json에 있다.
 
 다음 재개 지점은 final-acceptance-gaps-20261102.md의 미증빙 요구다. 촬영 앱 버전/정밀 치수 대조, 아직 기록되지 않은 실제 양안·컨트롤러 인수, 배포 조건 확인에는 사용자 자료가 필요하다. 성능/정식 반복은 사용자 보류를 유지하며 발표/영상은 사용자 담당이다. 같은 빌드에 대한 이미 확인한 옷장 검사를 반복 요청하지 않고, 독립 구현 결함이 확인되지 않은 상태에서 재빌드나 전체시험을 반복하지 않는다. 전체 Goal은 완료 처리하지 않는다.
+
+
+## 2026-11-06 강의실 GS 첫 보정
+
+사용자 classroom.ply(459968 splats, SHA f8d591a9)를 새 private Classroom 폴더에 임포트했다. 기존 FBX에서 보존한 cropped mesh/UV/texture와 회전·반전8후보를 비교해 방향을 맞췄다. 원본FBX Desktop 경로는 없어 파생 참조 사용임을 명시했다. 약14×6.3m 직사각형 경계, 단순 벽·바닥·추정3m 천장 보완을 별도 씬에 작성했다. 원본PLY/기존RoomGS/사용자두테마는 수정하지 않았다.
+
+Configure 중 씬 교체로 프로필 참조가 해제되는 실패를 확인했고 영속 자산을 다시 로드해 해결했다. configure-3와 boundary 배치 성공, 최신 DX12 preview PlayMode1/1 통과·제외0; 네방향 보정전후8렌더를 검사했다. 좌표/크기/중심 보정과 한계는 evidence/classroom-gs-intake.json에 기록했다. 로컬 복원 ZIP+manifest는 Builds/Reproduction/p14-classroom-gs. 원본 재생성·게임메뉴 연결·새Windows빌드·실제VR 인수는 아직 미실행이며 현재는 독립 관찰씬이다. 다음 작업은 새 강의실 프로필 연결과 실제 GS→폐교 전환 회귀/별도빌드. 성능 보류·발표 사용자 담당 유지.
+
+## 2026-11-11 강의실 메뉴 연결
+
+강의실 GS에서 K2로 바이러스 명중 후 암전, 폐교 맵과 8초 준비로 이어지는 경로를 검증했다. DX12에서 방 10회와 강의실 1회를 포함한 두 시험이 통과했다. Windows 빌드 GUID 26a0ac6bc41e46d0893f46fda1399b21, GSComparison-Classroom/AbandonedSchool.exe. 두 가공 GS 포함, 원본 PLY 패킹 0. 복원 ZIP 24개 항목 SHA와 CRC 일치. 기존 방 복원 후 강의실 overlay를 적용하고 ClassroomRealitySetup.Connect 및 RoomComparisonBuild.BuildClassroomRevision을 실행한다. PR51은 VR 인수 대기 중인 초안이다.
+
+별도 폴더 classroom-b01ae00에서 빈 Library로 복원한 결과 EditMode 137개 통과, 선택적 원본 방 참조 검사 1개 제외, PlayMode 205개 통과를 확인했다. 재빌드 GUID f97a4783a93a4c1185a97f080d720b57. 패킹 목록에 방·강의실 가공 GS가 있고 원본 PLY는 0개였다. 동일 PC 패키지 캐시와 라이선스를 사용했다. 복원 Player 기기 실행은 미수행이다. [복원 증빙](evidence/classroom-clean-restoration.json).
+
+## 2026-11-12 강의실 FBX 결손 보완
+
+사용자 요청에 따라 FBX에서 보존한 메시와 촬영 텍스처로 빈 벽·장비·주변 책상 구역을 채웠다. FBX gap repairs 그룹에 111835개 삼각형을 배치했다. 일부 원본 스캔 결손과 GS 번짐은 남아 있다. 보완 전후4방향 렌더와 실제 강의실 K2 전환 시험2개 통과, 새 빌드 GSComparison-Classroom-Hybrid GUID aacd2a9f59f545fbbae798302d047920 성공. 독립 리뷰에서 발견한 이전 메시 복구 문제는 자산·meta 백업으로 수정했다. 생성 스크립트 재실행의 메시 바이트가 일치하고 로컬 보완 ZIP33파일을 보관했다. 자세한 근거는 evidence/classroom-hybrid-repair.json이다. 새 실기 인수는 대기한다.
+
+## 2026-11-12 — 강의실 hybrid VR 인수
+
+소스3c7e479, Windows GSComparison-Classroom-Hybrid/AbandonedSchool.exe, GUIDaacd2a9f59f545fbbae798302d047920. 사용자가 최신 강의실 보완본을 VR로 확인하고 크게 이상 없다고 보고했다. 외형/VR 인수로 기록하며 정량 성능이나 정식 반복 시험 완료로 확대하지 않는다. 기존 집중 시험2/2 및 빌드 증빙을 유지한다. 이전 b01ae00 새 Library Edit137통과/1제외·Play205통과와 구분하며 hybrid 새 Library 전체 회귀는 미반복이다. ZIP CRC 및 manifest33개 일치, 현 자산32개 일치와 GapMaterial의 Unity 재질 정규화 차이를 확인했다. 성능 로그는 보류, 발표/영상은 사용자 담당이다. PR51 인수 기록을 갱신하고 병합 조건을 확인한다.

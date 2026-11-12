@@ -23,7 +23,7 @@ namespace VRFPS.Tests
     public class RoomCaptureFlowTests
     {
         const string Boot="Assets/VRFPS/Scenes/Bootstrap.unity";
-        const string Observation="Assets/VRFPS/External/RealityGS/Room/RoomReality.unity";
+        string Observation="Assets/VRFPS/External/RealityGS/Room/RoomReality.unity";
         const string Package="Packages/org.nesnausk.gaussian-splatting/";
         GameBootstrap bootstrap;string directory;RealityIntroProfile profile;
         GaussianRealitySource source;GaussianSplatRenderer splats;IntroVirusTarget virus;
@@ -58,9 +58,14 @@ namespace VRFPS.Tests
                 if(directory!=null&&Directory.Exists(directory))Directory.Delete(directory,true);
             }
         }
-        [UnityTest] public IEnumerator CapturedRoomThroughK2FadeAndCombatTenCycles()
+        [UnityTest] public IEnumerator CapturedRoomThroughK2FadeAndCombatTenCycles() => CaptureFlow(false);
+        [UnityTest] public IEnumerator CapturedClassroomThroughK2FadeAndCombat() => CaptureFlow(true);
+
+        IEnumerator CaptureFlow(bool classroom)
         {
             Assert.That(SystemInfo.graphicsDeviceType,Is.EqualTo(GraphicsDeviceType.Direct3D12));
+            var folder = classroom ? "Classroom" : "Room";
+            Observation = $"Assets/VRFPS/External/RealityGS/{folder}/{folder}Reality.unity";
             directory=Path.Combine(Path.GetTempPath(),"VRFPS-gs-flow-"+Guid.NewGuid().ToString("N"));
             SceneManager.sceneLoaded+=Loaded;
             yield return EditorSceneManager.LoadSceneAsyncInPlayMode(Boot,new LoadSceneParameters(LoadSceneMode.Additive));
@@ -70,8 +75,11 @@ namespace VRFPS.Tests
             var entry=bootstrap.Entry;var intro=entry.GetComponent<ComparisonIntroController>();var fade=entry.GetComponent<VrScreenFade>();
             var camera=entry.rig.Head.GetComponent<Camera>();var originalPipeline=QualitySettings.renderPipeline;
             entry.run.enabled=false; // Freeze the run clock so the exact initial 8 seconds can be inspected.
-            profile=AssetDatabase.LoadAssetAtPath<RealityIntroProfile>("Assets/VRFPS/External/RealityGS/Room/RoomIntro.asset");
-            Assert.That(profile,Is.Not.Null);Assert.That(entry.GetComponent<ComparisonIntroInstaller>().roomProfile,Is.SameAs(profile));
+            profile=AssetDatabase.LoadAssetAtPath<RealityIntroProfile>($"Assets/VRFPS/External/RealityGS/{folder}/{folder}Intro.asset");
+            Assert.That(profile,Is.Not.Null);var installer = entry.GetComponent<ComparisonIntroInstaller>();
+            Assert.That(classroom ? installer.classroomProfile : installer.roomProfile, Is.SameAs(profile));
+            var selectedMap = classroom ? entry.classroom : entry.room;
+            var button = classroom ? entry.classroomRealityButton : entry.roomRealityButton;
             entry.menu.ShowMapSelection();
             var starts=0;var startBoundaryValid=true;
             entry.run.RunStarted+=()=>
@@ -81,9 +89,9 @@ namespace VRFPS.Tests
                 startBoundaryValid &= fade.Alpha==0&&!SceneManager.GetSceneByPath(Observation).isLoaded&&Released(splats);
             };
             var baselineScenes=SceneManager.sceneCount;
-            for(var cycle=0;cycle<10;cycle++)
+            for(var cycle=0;cycle<(classroom ? 1 : 10);cycle++)
             {
-                Assert.That(entry.roomRealityButton.interactable,Is.True);entry.roomRealityButton.onClick.Invoke();
+                Assert.That(button.interactable,Is.True);button.onClick.Invoke();
                 deadline=Time.realtimeSinceStartup+30;
                 while(intro.Phase!=IntroPhase.RealityPreview&&intro.IsBusy&&Time.realtimeSinceStartup<deadline)yield return null;
                 Assert.That(intro.Phase,Is.EqualTo(IntroPhase.RealityPreview),intro.LastError);Assert.That(starts,Is.EqualTo(cycle));
@@ -117,13 +125,13 @@ namespace VRFPS.Tests
                 Assert.That(startBoundaryValid,Is.True,"RunStarted requires alpha0, observation unloaded and GS buffers released");
                 Assert.That(SceneManager.GetSceneByPath(Observation).isLoaded,Is.False);
                 Assert.That(QualitySettings.renderPipeline,Is.SameAs(originalPipeline));AssertReleased(splats);
-                Assert.That(entry.Session.IsReady,Is.True);Assert.That(entry.run.Map,Is.SameAs(entry.room));
+                Assert.That(entry.Session.IsReady,Is.True);Assert.That(entry.run.Map,Is.SameAs(selectedMap));
                 Assert.That(entry.run.PreparationRemaining,Is.EqualTo(8));Assert.That(entry.run.Health,Is.EqualTo(100));
                 Assert.That(entry.gun.Magazine.Rounds,Is.EqualTo(30));Assert.That(entry.run.ReachedWave,Is.Zero);Assert.That(entry.run.Kills,Is.Zero);
                 Assert.That(entry.rig.GetComponentsInChildren<Camera>(true).Length,Is.EqualTo(1));
                 entry.menu.ShowMapSelection();yield return entry.Session.Shutdown();yield return null;
                 Assert.That(SceneManager.sceneCount,Is.EqualTo(baselineScenes));
-                var record=new RecordStore(directory).Read("room");Assert.That(record.kills,Is.Zero);Assert.That(record.reachedWave,Is.Zero);
+                var record=new RecordStore(directory).Read(selectedMap.mapId);Assert.That(record.kills,Is.Zero);Assert.That(record.reachedWave,Is.Zero);
             }
             yield return entry.SelectMap(entry.classroom);
             Assert.That(entry.Session.IsReady,Is.True,entry.Session.LastError);Assert.That(entry.run.Map,Is.SameAs(entry.classroom));

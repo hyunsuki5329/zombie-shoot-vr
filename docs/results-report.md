@@ -1,8 +1,20 @@
 # 현실 공간 촬영 기반 VR 좀비 생존 FPS — 결과보고서 초안
 
+## 최신 강의실 hybrid 인수 (2026-11-12)
+
+소스3c7e479, Windows GSComparison-Classroom-Hybrid/AbandonedSchool.exe, GUIDaacd2a9f59f545fbbae798302d047920. 사용자가 최신 강의실 보완본을 VR로 확인하고 크게 이상 없다고 보고했다. 외형/VR 인수로 기록하며 정량 성능이나 정식 반복 시험 완료로 확대하지 않는다. 기존 집중 시험2/2 및 빌드 증빙을 유지한다. 이전 b01ae00 새 Library Edit137통과/1제외·Play205통과와 구분하며 hybrid 새 Library 전체 회귀는 미반복이다. ZIP CRC 및 manifest33개 일치, 현 자산32개 일치와 GapMaterial의 Unity 재질 정규화 차이를 확인했다. 성능 로그는 보류, 발표/영상은 사용자 담당이다. 아래 이전 시점의 강의실 인수 대기 기록은 이 결과로 갱신한다. [증빙](evidence/classroom-hybrid-repair.json).
+
 2026-10-18 최신 ZIP 새 Library 복원 완료: cb1b0e7-wall-fix 원본을 빈 폴더에 풀어 EditMode108통과/개인 스캔1제외, PlayMode131/131, Windows 빌드 성공을 확인했다. 씬3개 원본 일치, 원본 스캔 포함0, 출처2개 동봉 확인. 복원 빌드 GUID `845dc8e7a5604288b78f8ed2d0727f49`. 동일 PC 캐시·라이선스를 사용했으며 기존 WallFix 실행본은 교체하지 않았다. [증빙](evidence/wall-fix-clean-restoration.json).
 
-## 최신 결과 기준 (2026-11-02)
+## 강의실 GS 검토 빌드 (2026-11-11)
+
+`Classroom → Start in Reality`를 선택하면 강의실 GS가 열린다. K2로 바이러스를 맞히면 암전 중 폐교 맵으로 전환하며 밝아진 뒤 8초 준비를 시작한다. 방 경로와 두 테마의 직접 전투도 선택할 수 있다. 검토용 실행 파일은 `Builds/Windows/GSComparison-Classroom/AbandonedSchool.exe`이며 빌드 GUID는 `26a0ac6bc41e46d0893f46fda1399b21`이다.
+
+사용자가 제공한 강의실 Gaussian 459,968개의 방향을 기존 FBX에서 추출한 메시·텍스처와 대조했다. 책상 열과 벽 배치를 기준으로 회전·반전 후보 8개를 비교했다. 약 14 × 6.3m 직사각형 바깥 잡영을 가리고 누락된 표면을 보완했다. 천장 높이 3m는 추정치이며 일부 벽의 촬영 질감과 경계의 번짐은 보정 후에도 남아 있다. [강의실 정렬 근거](evidence/classroom-gs-intake.json)
+
+메뉴에서 방 10회와 강의실 1회의 사격·전환을 자동 검증했다. 같은 PC의 새 Library 복원본에서 PlayMode 205개와 EditMode 137개가 통과했다. 선택적인 옛 방 참조 씬 검사 1개는 제외됐다. Windows 재빌드와 원본 PLY 두 개·사용자 편집 테마 씬 두 개의 해시를 확인했다. 강의실의 양안 배치·이동감·전환 실기는 사용자 확인 대기 중이다. 정량 성능 로그는 보류하며 발표와 영상은 사용자가 담당한다. [복원 시험](evidence/classroom-clean-restoration.json) · [초안 PR 51](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/51)
+
+## 방 옷장 위치 인수 기준 (2026-11-02)
 
 현실 방 GS 감상 → 기존 K2로 바이러스 명중 → 암전 → 사용자 편집 Room 테마 맵 → 준비 시간 → 전투 흐름을 구현했다. GS 관찰 중 왼쪽 스틱 이동을 허용하고 총/탄창 외형1.2배를 반영했다. 사용자 요청에 따라 GS를 좌우반전하고 FBX 옷장 텍스처로 결손을 보완했으며, 옷장 로컬 위치는 스크린샷 값(0.383,-0.126,0.212)으로 맞췄다. 가림과 충돌체를 함께 정렬했고 기존 Room/Classroom 게임 맵과 원본 스캔은 보존했다. 옷장은 사진 질감을 활용한 근사 표면이며 원본의 모든 형상을 복구한 것은 아니다.
 

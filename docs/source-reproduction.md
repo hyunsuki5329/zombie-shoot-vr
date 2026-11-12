@@ -300,3 +300,20 @@ Source archive: `Builds/Reproduction/accepted-main-7fa9cd4/tracked-source.zip`. 
 Verified at `D:/VRFPS-Reproduction/accepted-main-7fa9cd4` with Library initially absent: EditMode137 passed/1 ignored (optional legacy ReferenceRoom.unity absent), PlayMode203/203, Windows build GUIDa670dc96ea35421fa07d038b631bbade. Source321 files, overlay14 files and raw/theme3 hashes matched. This supersedes the earlier latest-position fresh-Library pending statement. It uses the same PC package cache/license, not a clean offline PC.
 
 Two extra packed paths are the deprecated editor XRSimulationSettings asset/script. Standalone loader settings match the working project byte-for-byte and select OpenXR only. Binary equivalence and restored Player VR operation are not claimed. Accepted Player GUID64cd76ce780947a4a436c72dca0067e8 was preserved. Evidence: [restoration audit](evidence/accepted-main-clean-restoration.json).
+
+
+## 두 GS를 포함한 강의실 빌드 복원 (b01ae00)
+
+ZIP은 검토 프로젝트의 `Builds/Reproduction` 아래에 있다. 아래 순서로 같은 PC의 빈 폴더에서 복원했다.
+
+1. `p14-classroom-gs/tracked-source-b01ae00.zip`과 `p13-room-b221bcb/local-assets-with-meta.zip`을 같은 바깥 폴더에 푼다. 그 안의 `Zombie Shoot VR`이 Unity 프로젝트다.
+2. `p13-room-mirror-fbx-20261102/fbx-authoring-reference.zip`과 `p14-classroom-gs/local-classroom-overlay.zip`을 Unity 프로젝트에 푼다.
+3. Unity 6000.3.23f1에서 `RoomRealitySetup.Configure`를 배치 실행한다. 전체 시험을 실행할 때는 `GaussianRealityFixtureSetup.Create`도 실행한다.
+4. `p13-wardrobe-position-20261102/local-room-overlay.zip`을 Unity 프로젝트에 풀어 최종 옷장 위치를 적용한 뒤 `ClassroomRealitySetup.Connect`를 배치 실행한다.
+5. Windows DX12 빌드는 `RoomComparisonBuild.BuildClassroomRevision`으로 생성한다. `Builds/Windows/GSComparison-Classroom/AbandonedSchool.exe`를 실행하고 Back → Classroom → Start in Reality를 선택한다.
+
+이 순서로 만든 재빌드 GUID는 `f97a4783a93a4c1185a97f080d720b57`이다. 복원 시 Unity가 동일 PC의 패키지 캐시와 라이선스를 사용했다. [시험 결과와 보존 해시](evidence/classroom-clean-restoration.json)
+
+## 인수된 classroom hybrid (3c7e479)
+
+최신 소스: Builds/Reproduction/p14-classroom-hybrid/tracked-source-3c7e479.zip. 위 b01ae00 순서에서 소스를 이 ZIP으로, classroom overlay를 p14-classroom-hybrid/local-classroom-hybrid.zip(33파일)으로 대체한다. 최종 Room overlay 및 ClassroomRealitySetup.Connect 순서는 유지한다. 빌드 메서드는 RoomComparisonBuild.BuildClassroomHybridRevision이다. ZIP CRC와 manifest33개가 일치한다. 현 자산은32개 일치하고 GapMaterial은 Unity 재질 정규화 차이가 있다(상세 evidence/classroom-hybrid-repair.json). 최신 overlay의 새 Library 전체 회귀/재빌드는 미반복이다. 사용자는 전달 hybrid를 VR로 확인했다.
