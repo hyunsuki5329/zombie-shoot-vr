@@ -15,6 +15,7 @@ public static class RoomComparisonBuild
     public static void BuildWardrobeRevision() => BuildTo("GSComparison-Wardrobe-20261102");
     public static void BuildMirrorWardrobeRevision() => BuildTo("GSComparison-Mirror-FBX-20261102");
     public static void BuildWardrobePositionRevision() => BuildTo("GSComparison-WardrobePosition-20261102");
+    public static void BuildKoreanMenuRevision() => BuildTo("GSComparison-Korean-20261113", true);
     public static void BuildClassroomHybridRevision() => BuildTo("GSComparison-Classroom-Hybrid", true);
     public static void BuildClassroomRevision() => BuildTo("GSComparison-Classroom", true);
     static void BuildTo(string directory, bool includeClassroom = false)
@@ -39,6 +40,7 @@ public static class RoomComparisonBuild
             File.WriteAllLines(Path.Combine(Path.GetDirectoryName(output),"packed-assets.txt"),packed);
             if(packed.Any(p=>p.EndsWith(".ply",StringComparison.OrdinalIgnoreCase)))throw new InvalidOperationException("Raw PLY unexpectedly included in player.");
             File.Copy("Assets/VRFPS/Documentation/GaussianSplatting-Attribution.txt",Path.Combine(Path.GetDirectoryName(output),"GaussianSplatting-Attribution.txt"),true);
+            File.Copy("Assets/VRFPS/Resources/Fonts/OFL.txt",Path.Combine(Path.GetDirectoryName(output),"NanumGothic-OFL.txt"),true);
             Debug.Log("ROOM_COMPARISON_BUILD_SUCCEEDED guid="+report.summary.guid+" path="+output+" capture="+RoomRealitySetup.CaptureSha256);
         }
         finally

@@ -46,7 +46,7 @@ namespace VRFPS.Tests
                 Assert.That(menuView, Is.Not.Null, "WaveLab must include the authored menu.");
                 var menuPanel = menuView.transform.Find("Panel");
                 Assert.That(menuPanel.gameObject.activeSelf, Is.True);
-                Assert.That(menuPanel.Find("Title").GetComponent<Text>().text, Is.EqualTo("PAUSED"));
+                Assert.That(menuPanel.Find("Title").GetComponent<Text>().text, Is.EqualTo("일시정지"));
                 menuPanel.Find("Resume").GetComponent<Button>().onClick.Invoke();
                 Assert.That(run.Phase, Is.EqualTo(RunPhase.Active));
                 Assert.That(menuPanel.gameObject.activeSelf, Is.False);

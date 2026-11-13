@@ -18,6 +18,7 @@ namespace VRFPS
         bool subscribed;
         void Awake()
         {
+            KoreanUi.Apply(transform);
             // Queue 5000 draws the menu after the comparison fade (4999).
             // The referenced XR UI shader keeps text/sprite sampling and disables depth testing.
             if(overlayMaterial!=null)
@@ -86,7 +87,7 @@ namespace VRFPS
             details.gameObject.SetActive(!showingInstructions);
             if(instructions!=null)instructions.gameObject.SetActive(!showingInstructions && screen!=MenuScreen.Settings);
             if(screen==MenuScreen.Hidden)return;
-            title.text=screen==MenuScreen.MapSelection ? "MAP SELECTION" : screen==MenuScreen.Pause ? "PAUSED" : screen.ToString().ToUpperInvariant();
+            title.text=screen==MenuScreen.MapSelection ? "맵 선택" : screen==MenuScreen.Pause ? "일시정지" : screen==MenuScreen.Settings ? "설정" : screen==MenuScreen.Instructions ? "조작 방법" : "전투 결과";
             resume.gameObject.SetActive(screen==MenuScreen.Pause);
             retry.gameObject.SetActive(menu.IntroOwnsMenu ? screen==MenuScreen.MapSelection&&menu.IntroError!=null : screen==MenuScreen.Pause||screen==MenuScreen.Result);
             settings.gameObject.SetActive(screen!=MenuScreen.Settings && !showingInstructions);
@@ -97,13 +98,13 @@ namespace VRFPS
             {
                 var wave=result!=null && result.HasResult ? result.Result.reachedWave : run.ReachedWave;
                 var kills=result!=null && result.HasResult ? result.Result.kills : run.Kills;
-                var saved=result==null ? "Practice scores are not saved." : result.SaveSucceeded ? "Saved" : "Save failed. Retry saving below.";
-                details.text=$"WAVE {wave}   KILLS {kills}\n{saved}";
+                var saved=result==null ? "연습 기록은 저장되지 않습니다." : result.SaveSucceeded ? "저장 완료" : "저장에 실패했습니다. 아래에서 다시 시도하세요.";
+                details.text=$"웨이브 {wave}   처치 {kills}\n{saved}";
             }
-            else if(screen==MenuScreen.Pause) details.text=menu.IntroOwnsMenu ? "Comparison paused. Resume or return to map selection." : "Combat paused. Move your hands to point at a button.";
-            else if(screen==MenuScreen.Settings) details.text="Continuous movement and continuous turning.";
-            else if(menu.IntroBusy)details.text=menu.IntroError!=null?menu.IntroError+"\nCleanup pending. Use Retry to retry cleanup.":"Returning to map selection...";
-            else details.text=menu.IntroError??"Choose a map to begin.";
+            else if(screen==MenuScreen.Pause) details.text=menu.IntroOwnsMenu ? "현실 공간에서 일시정지했습니다. 계속하거나 맵 선택으로 돌아가세요." : "전투를 일시정지했습니다. 포인터로 버튼을 선택하세요.";
+            else if(screen==MenuScreen.Settings) details.text="스틱 이동과 회전 속도를 조절하세요.";
+            else if(menu.IntroBusy)details.text=menu.IntroError!=null?"현실 공간을 정리하지 못했습니다. 다시 시작 버튼으로 재시도하세요.":"맵 선택으로 돌아가는 중…";
+            else details.text=menu.IntroError!=null ? "현실 공간을 불러오지 못했습니다. 맵을 다시 선택하세요." : "맵과 시작 방식을 선택하세요.";
         }
     }
 }

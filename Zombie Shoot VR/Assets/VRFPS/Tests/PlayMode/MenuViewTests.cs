@@ -39,11 +39,11 @@ namespace VRFPS.Tests
         {
             run.StartRun(map);view.Refresh();Assert.That(panel.activeSelf,Is.False);
             menu.Pause();view.Refresh();Assert.That(panel.activeSelf,Is.True);
-            Assert.That(title.text,Is.EqualTo("PAUSED"));
-            settings.onClick.Invoke();view.Refresh();Assert.That(title.text,Is.EqualTo("SETTINGS"));
+            Assert.That(title.text,Is.EqualTo("일시정지"));
+            settings.onClick.Invoke();view.Refresh();Assert.That(title.text,Is.EqualTo("설정"));
             back.onClick.Invoke();resume.onClick.Invoke();view.Refresh();Assert.That(panel.activeSelf,Is.False);
             run.Tick(8);run.RegisterSpawn(1);run.ResolveEnemy(1,true);run.ApplyDamage(100,1,0);view.Refresh();
-            Assert.That(details.text,Does.Contain("WAVE 1").And.Contain("KILLS 1").And.Contain("Saved"));
+            Assert.That(details.text,Does.Contain("웨이브 1").And.Contain("처치 1").And.Contain("저장 완료"));
             Assert.That(resume.gameObject.activeSelf,Is.False);
             retry.onClick.Invoke();view.Refresh();Assert.That(panel.activeSelf,Is.False);
             Assert.That(run.Health,Is.EqualTo(100));Assert.That(run.Kills,Is.Zero);
@@ -52,10 +52,10 @@ namespace VRFPS.Tests
         {
             File.WriteAllText(directory,"block record directory");
             run.StartRun(map);run.Tick(8);run.EndRun();view.Refresh();
-            Assert.That(details.text,Does.Contain("Save failed"));
+            Assert.That(details.text,Does.Contain("저장에 실패"));
             Assert.That(retrySave.gameObject.activeSelf,Is.True);
             File.Delete(directory);retrySave.onClick.Invoke();view.Refresh();
-            Assert.That(details.text,Does.Contain("Saved"));Assert.That(retrySave.gameObject.activeSelf,Is.False);
+            Assert.That(details.text,Does.Contain("저장 완료"));Assert.That(retrySave.gameObject.activeSelf,Is.False);
             Assert.That(run.Phase,Is.EqualTo(RunPhase.Dead));
             Assert.That(new RecordStore(directory).Read("room").reachedWave,Is.EqualTo(1));
         }

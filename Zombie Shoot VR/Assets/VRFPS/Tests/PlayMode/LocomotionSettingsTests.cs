@@ -47,7 +47,7 @@ namespace VRFPS.Tests
             var down=Child<Button>();var up=Child<Button>();var left=Child<Button>();var right=Child<Button>();
             root.AddComponent<SettingsView>().Configure(rig,move,turn,down,up,left,right,key);
             right.onClick.Invoke();right.onClick.Invoke();
-            Assert.That(turn.text,Is.EqualTo("Turn 90 deg/s"));Assert.That(right.interactable,Is.False);
+            Assert.That(turn.text,Is.EqualTo("회전 90 °/s"));Assert.That(right.interactable,Is.False);
             down.onClick.Invoke();Assert.That(rig.MoveSpeed,Is.EqualTo(1.5f).Within(.001f));
             rig.SetSpeeds(1,30);new LocomotionSettings(rig,key);
             Assert.That(rig.TurnSpeed,Is.EqualTo(90));Assert.That(rig.MoveSpeed,Is.EqualTo(1.5f).Within(.001f));

@@ -78,7 +78,7 @@ namespace VRFPS.Tests
                 while(!reality.loading&&Time.realtimeSinceStartup<deadline)yield return null;
                 Assert.That(run.Phase,Is.EqualTo(RunPhase.Dead));Assert.That(menu.Screen,Is.EqualTo(MenuScreen.Hidden));
                 menu.Pause();Assert.That(menu.Screen,Is.EqualTo(MenuScreen.Pause));
-                Assert.That(retry.gameObject.activeSelf,Is.False);Assert.That(details.text,Does.Contain("Comparison paused"));
+                Assert.That(retry.gameObject.activeSelf,Is.False);Assert.That(details.text,Does.Contain("현실 공간에서 일시정지"));
                 reality.hold=false;yield return null;yield return null;
                 Assert.That(intro.Phase,Is.EqualTo(IntroPhase.LoadingReality));
                 menu.Retry();Assert.That(starts,Is.Zero);
@@ -97,7 +97,7 @@ namespace VRFPS.Tests
                 while(!reality.loading&&Time.realtimeSinceStartup<deadline)yield return null;
                 menu.ShowMapSelection();reality.hold=false;
                 while(intro.Phase!=IntroPhase.Failed&&Time.realtimeSinceStartup<deadline)yield return null;
-                Assert.That(retry.gameObject.activeSelf,Is.True);Assert.That(details.text,Does.Contain("Cleanup pending"));
+                Assert.That(retry.gameObject.activeSelf,Is.True);Assert.That(details.text,Does.Contain("현실 공간을 정리하지 못했습니다."));
                 reality.failUnload=false;retry.onClick.Invoke();
                 while(!failed.IsDone&&Time.realtimeSinceStartup<deadline)yield return null;
                 Assert.That(failed.IsDone,Is.True);Assert.That(intro.IsBusy,Is.False);Assert.That(menu.Screen,Is.EqualTo(MenuScreen.MapSelection));

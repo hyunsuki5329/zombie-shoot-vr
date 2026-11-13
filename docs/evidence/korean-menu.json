@@ -1,0 +1,23 @@
+{
+  "buildGuid": "f6acd745513f4cc09961b2968a8747e2",
+  "buildPath": "D:\\VRFPS-Reproduction\\classroom-hybrid-26f31cb\\Zombie Shoot VR\\Builds\\Windows\\GSComparison-Korean-20261113\\AbandonedSchool.exe",
+  "playMode": {
+    "total": "206",
+    "passed": "206",
+    "failed": "0",
+    "skipped": "0",
+    "xmlSha256": "b06704b433c9263de9e94cf2e0473cba091f28148549dc1a448cb30d81284a9c"
+  },
+  "font": "NanumGothic-Regular.ttf",
+  "fontSource": "https://github.com/google/fonts/tree/main/ofl/nanumgothic",
+  "license": "SIL OFL 1.1; copied alongside executable",
+  "previews": "D:/VRFPS-Reproduction/classroom-hybrid-26f31cb/tmp/korean-menu",
+  "limitations": [
+    "New Korean Player not yet checked in VR.",
+    "Pixel checks establish visible marks, not complete glyph correctness; screenshots were also inspected."
+  ],
+  "userRequestedGuideChange": "Removed (30발) only; magazine capacity unchanged.",
+  "buildLogSha256": "2cbcf327730b15f242f44aada41965788bb5ac810153a4ca877c68be8bfbc9e7",
+  "previewFinding": "Full image preview sometimes appeared to omit text, but same-PNG crops and pixel data contained readable labels. Speculative font workaround removed.",
+  "review": "Independent review: no remaining code blockers after failure-safe preview teardown and localized fallback messages."
+}

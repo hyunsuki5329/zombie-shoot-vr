@@ -90,7 +90,7 @@ namespace VRFPS.Tests
                 Assert.That(entry.Session.IsReady,Is.True);Assert.That(entry.menu.Screen,Is.EqualTo(MenuScreen.Hidden));
                 entry.run.enabled=false;entry.Session.Director.enabled=false;entry.run.Tick(8);entry.run.ApplyDamage(100,1,0);
                 Assert.That(entry.menu.Screen,Is.EqualTo(MenuScreen.Result));
-                Assert.That(entry.status.text,Does.Contain("Saved"));
+                Assert.That(entry.status.text,Does.Contain("저장 완료"));
                 Assert.That(new RecordStore(directory).Read("room").reachedWave,Is.EqualTo(1));
                 var maps=entry.view.transform.Find("Panel/Maps unavailable").GetComponent<UnityEngine.UI.Button>();
                 Assert.That(maps.interactable,Is.True);maps.onClick.Invoke();
