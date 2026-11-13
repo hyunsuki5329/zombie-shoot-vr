@@ -317,3 +317,7 @@ ZIP은 검토 프로젝트의 `Builds/Reproduction` 아래에 있다. 아래 순
 ## 인수된 classroom hybrid (3c7e479)
 
 최신 소스: Builds/Reproduction/p14-classroom-hybrid/tracked-source-3c7e479.zip. 위 b01ae00 순서에서 소스를 이 ZIP으로, classroom overlay를 p14-classroom-hybrid/local-classroom-hybrid.zip(33파일)으로 대체한다. 최종 Room overlay 및 ClassroomRealitySetup.Connect 순서는 유지한다. 빌드 메서드는 RoomComparisonBuild.BuildClassroomHybridRevision이다. ZIP CRC와 manifest33개가 일치한다. 현 자산은32개 일치하고 GapMaterial은 Unity 재질 정규화 차이가 있다(상세 evidence/classroom-hybrid-repair.json). 최신 overlay의 새 Library 전체 회귀/재빌드는 미반복이다. 사용자는 전달 hybrid를 VR로 확인했다.
+
+## 2026-11-12 — 최종 hybrid 새 Library 복원 검증
+
+main26f31cb를 D:/VRFPS-Reproduction/classroom-hybrid-26f31cb에 새 Library로 복원했다. EditMode137통과/선택적 legacy ReferenceRoom 검사1제외, PlayMode205/205, Windows 재빌드GUIDe01ed8565dce447aa8bf4d59c37d0c0e 성공. 소스319개 및 테마맵2개·원본PLY2개 해시 일치. Room/Classroom GS와 hybrid mesh/texture 패킹 확인, 원본PLY 패킹 없음. 동일 PC 캐시/라이선스 조건이며 복원 Player의 VR 실행은 하지 않았다. 사용자 인수 Player aacd2a9f59f545fbbae798302d047920은 보존했다. 이전 hybrid 새 Library 미반복 기록은 이 범위에서 갱신한다. [증빙](evidence/classroom-hybrid-clean-restoration.json). 성능/정식 반복은 보류, 발표/영상은 사용자 담당이며 전체 제출 완료를 뜻하지 않는다.

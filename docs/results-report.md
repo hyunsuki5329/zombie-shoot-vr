@@ -158,3 +158,7 @@ Yaku 옷 끝 흰 영역의 원인은 알파가 없는 RGB 텍스처 연결이었
 ## 사용자 무기 음원 후속 적용
 
 세 무기음은 사용자 제공 MP3로 교체했다. 실제 발사 이벤트에 맞춘0.38초 한 발 클립과 고정4채널 잔향 재생을 사용한다. 앞선 합성 무기음 설명은 초기 상태 기록이며 현재 출처/가공은 [음원 문서](user-weapon-audio.md)를 따른다. EditMode60/60·PlayMode118/118·Python23/23과 복원 실패 안전성을 확인했으며, 사용자는 후속 실행에서 단발·연사·장전·빈 총 소리가 모두 괜찮다고 확인했다. 최신 Room의 전체 실기는 별도 대기다.
+
+## 2026-11-12 — 최종 hybrid 새 Library 복원 검증
+
+main26f31cb를 D:/VRFPS-Reproduction/classroom-hybrid-26f31cb에 새 Library로 복원했다. EditMode137통과/선택적 legacy ReferenceRoom 검사1제외, PlayMode205/205, Windows 재빌드GUIDe01ed8565dce447aa8bf4d59c37d0c0e 성공. 소스319개 및 테마맵2개·원본PLY2개 해시 일치. Room/Classroom GS와 hybrid mesh/texture 패킹 확인, 원본PLY 패킹 없음. 동일 PC 캐시/라이선스 조건이며 복원 Player의 VR 실행은 하지 않았다. 사용자 인수 Player aacd2a9f59f545fbbae798302d047920은 보존했다. 이전 hybrid 새 Library 미반복 기록은 이 범위에서 갱신한다. [증빙](evidence/classroom-hybrid-clean-restoration.json). 성능/정식 반복은 보류, 발표/영상은 사용자 담당이며 전체 제출 완료를 뜻하지 않는다.
