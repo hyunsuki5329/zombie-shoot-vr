@@ -321,3 +321,9 @@ ZIP은 검토 프로젝트의 `Builds/Reproduction` 아래에 있다. 아래 순
 ## 2026-11-12 — 최종 hybrid 새 Library 복원 검증
 
 main26f31cb를 D:/VRFPS-Reproduction/classroom-hybrid-26f31cb에 새 Library로 복원했다. EditMode137통과/선택적 legacy ReferenceRoom 검사1제외, PlayMode205/205, Windows 재빌드GUIDe01ed8565dce447aa8bf4d59c37d0c0e 성공. 소스319개 및 테마맵2개·원본PLY2개 해시 일치. Room/Classroom GS와 hybrid mesh/texture 패킹 확인, 원본PLY 패킹 없음. 동일 PC 캐시/라이선스 조건이며 복원 Player의 VR 실행은 하지 않았다. 사용자 인수 Player aacd2a9f59f545fbbae798302d047920은 보존했다. 이전 hybrid 새 Library 미반복 기록은 이 범위에서 갱신한다. [증빙](evidence/classroom-hybrid-clean-restoration.json). 성능/정식 반복은 보류, 발표/영상은 사용자 담당이며 전체 제출 완료를 뜻하지 않는다.
+
+## 한국어 메뉴 소스 복원 (bb3c40a)
+
+검토 worktree Unity 프로젝트의 `Builds/Reproduction/korean-menu-bb3c40a/tracked-source.zip`에 소스를 보존했다. ZIP CRC를 확인했다. 위 classroom hybrid 복원 순서에서 소스 ZIP만 이 파일로 대체하고 동일한 baseline 외부자산, 최신 Room overlay, classroom hybrid overlay를 사용한다. 새 폰트와 OFL은 소스 ZIP에 포함되므로 별도 OS 폰트 설치가 필요 없다. 빌드는 `RoomComparisonBuild.BuildKoreanMenuRevision`이며 기존 인수 빌드를 덮어쓰지 않는다.
+
+한국어 변경은 앞에서 새 Library 복원한 작업본에 적용해 PlayMode206/206 및 Windows 빌드를 검증했다. 한국어 소스 ZIP 자체로 Library 없는 복원을 다시 수행한 것은 아니다. 관련 증빙과 실행 경로는 [korean-menu.json](evidence/korean-menu.json)에 기록했다.

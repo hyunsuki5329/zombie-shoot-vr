@@ -19,5 +19,12 @@
   "userRequestedGuideChange": "Removed (30발) only; magazine capacity unchanged.",
   "buildLogSha256": "2cbcf327730b15f242f44aada41965788bb5ac810153a4ca877c68be8bfbc9e7",
   "previewFinding": "Full image preview sometimes appeared to omit text, but same-PNG crops and pixel data contained readable labels. Speculative font workaround removed.",
-  "review": "Independent review: no remaining code blockers after failure-safe preview teardown and localized fallback messages."
+  "review": "Independent review: no remaining code blockers after failure-safe preview teardown and localized fallback messages.",
+  "source": "bb3c40a",
+  "sourceArchive": {
+    "path": "C:\\Users\\User\\.codex\\worktrees\\gs-comparison-intro\\Zombie Shoot VR\\Zombie Shoot VR\\Builds\\Reproduction\\korean-menu-bb3c40a\\tracked-source.zip",
+    "sha256": "120028fd3e903673906127fb044c68b65192699e43bacadef42d0a25ba5512d4",
+    "crc": "passed",
+    "freshLibraryFromThisZip": false
+  }
 }
