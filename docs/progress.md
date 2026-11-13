@@ -787,3 +787,7 @@ Configure 중 씬 교체로 프로필 참조가 해제되는 실패를 확인했
 ## 2026-11-12 — 강의실 hybrid VR 인수
 
 소스3c7e479, Windows GSComparison-Classroom-Hybrid/AbandonedSchool.exe, GUIDaacd2a9f59f545fbbae798302d047920. 사용자가 최신 강의실 보완본을 VR로 확인하고 크게 이상 없다고 보고했다. 외형/VR 인수로 기록하며 정량 성능이나 정식 반복 시험 완료로 확대하지 않는다. 기존 집중 시험2/2 및 빌드 증빙을 유지한다. 이전 b01ae00 새 Library Edit137통과/1제외·Play205통과와 구분하며 hybrid 새 Library 전체 회귀는 미반복이다. ZIP CRC 및 manifest33개 일치, 현 자산32개 일치와 GapMaterial의 Unity 재질 정규화 차이를 확인했다. 성능 로그는 보류, 발표/영상은 사용자 담당이다. PR51 인수 기록을 갱신하고 병합 조건을 확인한다.
+
+## 2026-11-12 — 최종 hybrid 새 Library 복원 검증
+
+main26f31cb를 D:/VRFPS-Reproduction/classroom-hybrid-26f31cb에 새 Library로 복원했다. EditMode137통과/선택적 legacy ReferenceRoom 검사1제외, PlayMode205/205, Windows 재빌드GUIDe01ed8565dce447aa8bf4d59c37d0c0e 성공. 소스319개 및 테마맵2개·원본PLY2개 해시 일치. Room/Classroom GS와 hybrid mesh/texture 패킹 확인, 원본PLY 패킹 없음. 동일 PC 캐시/라이선스 조건이며 복원 Player의 VR 실행은 하지 않았다. 사용자 인수 Player aacd2a9f59f545fbbae798302d047920은 보존했다. 이전 hybrid 새 Library 미반복 기록은 이 범위에서 갱신한다. [증빙](evidence/classroom-hybrid-clean-restoration.json). 성능/정식 반복은 보류, 발표/영상은 사용자 담당이며 전체 제출 완료를 뜻하지 않는다.

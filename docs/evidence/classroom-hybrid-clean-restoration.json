@@ -1,0 +1,44 @@
+{
+  "source": "26f31cb",
+  "sourceFilesMatched": 319,
+  "preservedAssets": {
+    "Scenes/Maps/Room.unity": "f0c71f81cdd656126e92e8f8a89a6760621105c67b7e372740eff38cdd943ccb",
+    "Scenes/Maps/Classroom.unity": "a4a3bfc67b8e627ef50d77592d423a1ee07858118184b9db9ce7969ea2c861ab",
+    "External/RealityGS/Room/room.ply": "65f2f8c9705d49a660d8223d9986f3c87cc62085d6bb86daa8a686d09ff75e56",
+    "External/RealityGS/Classroom/classroom.ply": "f8d591a9f6ddb478f003f46b0ad015751f4925e62938624407581485e93ff9b2"
+  },
+  "initialLibraryAbsent": true,
+  "samePcCacheAndLicense": true,
+  "tests": {
+    "EditMode": {
+      "total": "138",
+      "passed": "137",
+      "failed": "0",
+      "skipped": "1",
+      "sha256": "2d8bcae4b62a844df24306bcbeb2ed5ad9d43865da30bca9812e6d43cef47140",
+      "ignored": [
+        "VRFPS.Tests.ScannedRoomTests.LocalScanReferenceRetainsOriginalTextureWhenAvailable"
+      ]
+    },
+    "PlayMode": {
+      "total": "205",
+      "passed": "205",
+      "failed": "0",
+      "skipped": "0",
+      "sha256": "f169e8126441ec0db8590a57226c9b5aee90dfcd7a89585327174d4cd4ac14d4",
+      "ignored": []
+    }
+  },
+  "buildGuid": "e01ed8565dce447aa8bf4d59c37d0c0e",
+  "buildLogSha256": "b86c4a0d90aba55667f2f8c47ff39af7c81ba6941bbff95550ad9128f7c9ef1b",
+  "packedAssets": [
+    "Assets/VRFPS/External/RealityGS/Room/room.asset",
+    "Assets/VRFPS/External/RealityGS/Classroom/classroom.asset",
+    "Assets/VRFPS/External/RealityGS/Classroom/Hybrid/GapMesh.asset",
+    "Assets/VRFPS/External/RealityGS/Classroom/Hybrid/ReferenceTexture.jpg"
+  ],
+  "rawPlyPacked": false,
+  "restoredPlayerExecuted": false,
+  "restorationRoot": "D:\\VRFPS-Reproduction\\classroom-hybrid-26f31cb",
+  "acceptedPlayerUnchanged": "aacd2a9f59f545fbbae798302d047920"
+}
