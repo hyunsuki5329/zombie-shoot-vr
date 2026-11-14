@@ -15,9 +15,14 @@
 
 ## 최신 빌드 실행
 
-로컬 실행 파일: `Zombie Shoot VR/Builds/Windows/WallFix/AbandonedSchool.exe`.
+방·강의실 GS에서 바이러스를 사격하면 암전을 거쳐 해당 테마 전투로 진입한다. 기존 직접 전투도 유지한다. GS는 DX12 실행 환경을 사용한다.
 
-현재 기준 소스는 `cdc635f`, 빌드 GUID는 `9723fbe2fa094de7be98e4c75f72b1b2`다. 개발용 Windows PC VR 빌드이며 Quest Pro·Virtual Desktop의 기존 연결 환경에서 실행한다. 첫 안내에서 Back으로 맵 선택에 돌아가 **Room(폐가)** 또는 **Classroom(폐교)**을 선택한다. 두 맵은 같은 실행 파일에 들어 있다. 실행 파일만 분리하지 말고 Data 폴더·DLL 등 빌드 폴더 전체를 함께 보관한다.
+- 사용자 VR 인수 빌드: `C:/Users/User/.codex/worktrees/gs-comparison-intro/Zombie Shoot VR/Zombie Shoot VR/Builds/Windows/GSComparison-Classroom-Hybrid/AbandonedSchool.exe`. 구현 소스 `3c7e479`, GUID `aacd2a9f59f545fbbae798302d047920`.
+- 최신 한국어 메뉴 인수 빌드: `D:/VRFPS-Reproduction/classroom-hybrid-26f31cb/Zombie Shoot VR/Builds/Windows/GSComparison-Korean-20261113/AbandonedSchool.exe`. 소스 `bb3c40a`, GUID `f6acd745513f4cc09961b2968a8747e2`. 자동 PlayMode206/206 및 빌드 검증 완료, 2026-11-14 사용자가 VR 메뉴와 실제 플레이에서 문제 없음을 확인했다. [변경 및 증빙](docs/evidence/korean-menu.json).
+
+Quest Pro·Virtual Desktop의 기존 연결 환경에서 실행한다. 한국어 빌드는 **조작 방법 → 뒤로 → 방/강의실 → 현실 공간에서 시작**을 선택한다. **바로 전투 시작**은 GS 도입부를 생략한다. 영어 인수 빌드의 동일 메뉴는 Back / Room·Classroom / Start in Reality·Direct Combat이다. 실행 파일만 분리하지 말고 Data 폴더·DLL·출처 고지를 포함한 빌드 폴더 전체를 보관한다.
+
+기존 `Builds/Windows/WallFix`는 보존된 이전 실행본이며 최신 GS 빌드가 아니다. 성능 로그와 정식 반복 시험 보류, 발표·영상 사용자 담당은 유지한다.
 
 | 조작 | 동작 |
 |---|---|

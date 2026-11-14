@@ -52,11 +52,11 @@ namespace VRFPS.Tests
             var room=entry.mapControls.transform.Find("Room Reality").GetComponent<Button>();
             var classroom=entry.mapControls.transform.Find("Classroom Reality").GetComponent<Button>();
             Assert.That(room.interactable,Is.False);Assert.That(classroom.interactable,Is.False);
-            Assert.That(room.GetComponentInChildren<Text>().text,Does.Contain("Capture not configured"));
-            Assert.That(classroom.GetComponentInChildren<Text>().text,Does.Contain("Capture not configured"));
+            Assert.That(room.GetComponentInChildren<Text>().text,Does.Contain("촬영 자료가 설정되지 않았습니다."));
+            Assert.That(classroom.GetComponentInChildren<Text>().text,Does.Contain("촬영 자료가 설정되지 않았습니다."));
             Assert.That(entry.roomButton.interactable,Is.True);Assert.That(entry.classroomButton.interactable,Is.True);
-            Assert.That(entry.roomLabel.text,Does.Contain("Direct Combat"));
-            Assert.That(entry.classroomLabel.text,Does.Contain("Direct Combat"));
+            Assert.That(entry.roomLabel.text,Does.Contain("바로 전투 시작"));
+            Assert.That(entry.classroomLabel.text,Does.Contain("바로 전투 시작"));
             var fade=entry.GetComponent<VrScreenFade>();Assert.That(fade,Is.Not.Null);Assert.That(fade.Alpha,Is.Zero);
             Assert.That(entry.run.Phase,Is.Not.EqualTo(RunPhase.Active));
             CaptureMenu(entry);
@@ -66,7 +66,7 @@ namespace VRFPS.Tests
                 profile.mapId="wrong";profile.dataId="test";profile.realityScenePath="Assets/VRFPS/Scenes/Combat.unity";
                 profile.realityAnchorKey="anchor";profile.themeAnchorKey="playerSpawn";
                 entry.ConfigureRealityOptions(profile,null);
-                Assert.That(room.interactable,Is.False);Assert.That(room.GetComponentInChildren<Text>().text,Does.Contain("Invalid capture"));
+                Assert.That(room.interactable,Is.False);Assert.That(room.GetComponentInChildren<Text>().text,Does.Contain("촬영 자료 설정을 확인"));
                 room.onClick.Invoke();Assert.That(entry.GetComponent<ComparisonIntroController>().IsBusy,Is.False);
                 // A valid-looking profile that targets the already owned Combat scene must
                 // reach the real loader through the button, fail safely, and retain direct play.

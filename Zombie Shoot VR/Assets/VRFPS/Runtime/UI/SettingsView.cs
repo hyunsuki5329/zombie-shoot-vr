@@ -41,7 +41,7 @@ namespace VRFPS
         }
         void Refresh()
         {
-            moveLabel.text=$"Move {rig.MoveSpeed:0.0} m/s";turnLabel.text=$"Turn {rig.TurnSpeed:0} deg/s";
+            moveLabel.text=$"이동 {rig.MoveSpeed:0.0} m/s";turnLabel.text=$"회전 {rig.TurnSpeed:0} °/s";
             moveDown.interactable=rig.MoveSpeed>1.001f;moveUp.interactable=rig.MoveSpeed<1.999f;
             turnDown.interactable=rig.TurnSpeed>30;turnUp.interactable=rig.TurnSpeed<90;
         }
