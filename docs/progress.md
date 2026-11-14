@@ -799,3 +799,7 @@ main26f31cb를 D:/VRFPS-Reproduction/classroom-hybrid-26f31cb에 새 Library로 
 ## 2026-11-14 한국어 메뉴와 실제 플레이 VR 확인
 
 사용자가 한국어 빌드의 메뉴와 실제 플레이를 VR에서 확인하고 문제가 없다고 보고했다. 실행본 GUID는 `f6acd745513f4cc09961b2968a8747e2`, 구현 소스는 `bb3c40a`다. 맵별 시험 시간과 정식 반복 횟수는 미기록이며 정량 성능 측정은 보류 중이다. [인수 기록](evidence/korean-menu.json) · [PR #53](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/53)
+
+## 2026-11-14 한국어 빌드 로컬 전달 묶음
+
+인수 실행본, main c942dc9 소스, 복원용 로컬 자산 ZIP, 문서, 출처 고지와 시험 XML을 묶었다. 파일 SHA256 및 소스 ZIP CRC를 확인했다. 복사된 Player 실행은 미수행이며 외부 배포 조건은 미확정이다. [검증 기록](evidence/korean-local-delivery.json).
