@@ -1,0 +1,42 @@
+{
+  "matchedSourceAndFontFiles": 324,
+  "preservedAssets": {
+    "Scenes/Maps/Room.unity": "f0c71f81cdd656126e92e8f8a89a6760621105c67b7e372740eff38cdd943ccb",
+    "Scenes/Maps/Classroom.unity": "a4a3bfc67b8e627ef50d77592d423a1ee07858118184b9db9ce7969ea2c861ab",
+    "External/RealityGS/Room/room.ply": "65f2f8c9705d49a660d8223d9986f3c87cc62085d6bb86daa8a686d09ff75e56",
+    "External/RealityGS/Classroom/classroom.ply": "f8d591a9f6ddb478f003f46b0ad015751f4925e62938624407581485e93ff9b2"
+  },
+  "source": "c942dc9",
+  "root": "D:\\VRFPS-Reproduction\\korean-delivery-c942dc9",
+  "initialLibraryAbsent": true,
+  "samePc": true,
+  "buildGuid": "4bec6035d0b041938f55d2dd8642115f",
+  "buildLogSha256": "a4884c2e7f616e25eae0bd0ff31a4aef78f10006ef07fea983f626c27abb9ca3",
+  "packed": [
+    "Assets/VRFPS/External/RealityGS/Room/room.asset",
+    "Assets/VRFPS/External/RealityGS/Classroom/classroom.asset",
+    "Assets/VRFPS/External/RealityGS/Classroom/Hybrid/GapMesh.asset",
+    "Assets/VRFPS/External/RealityGS/Classroom/Hybrid/ReferenceTexture.jpg",
+    "Assets/VRFPS/Resources/Fonts/NanumGothic-Regular.ttf"
+  ],
+  "rawPlyPacked": false,
+  "restoredPlayerExecuted": false,
+  "tests": {
+    "EditMode": {
+      "passed": "137",
+      "failed": "0",
+      "skipped": "1",
+      "xmlSha256": "4f06a768ef30b4eb6743648f337afb3f09ecf27d1274a1c5218101b96be965c9",
+      "ignored": [
+        "VRFPS.Tests.ScannedRoomTests.LocalScanReferenceRetainsOriginalTextureWhenAvailable"
+      ]
+    },
+    "PlayMode": {
+      "passed": "206",
+      "failed": "0",
+      "skipped": "0",
+      "xmlSha256": "1323ccf043e668b4d43672ce779a718ffc9b1dc1172adb6643740bfb1c64b695",
+      "ignored": []
+    }
+  }
+}

@@ -327,3 +327,7 @@ main26f31cb를 D:/VRFPS-Reproduction/classroom-hybrid-26f31cb에 새 Library로 
 검토 worktree Unity 프로젝트의 `Builds/Reproduction/korean-menu-bb3c40a/tracked-source.zip`에 소스를 보존했다. ZIP CRC를 확인했다. 위 classroom hybrid 복원 순서에서 소스 ZIP만 이 파일로 대체하고 동일한 baseline 외부자산, 최신 Room overlay, classroom hybrid overlay를 사용한다. 새 폰트와 OFL은 소스 ZIP에 포함되므로 별도 OS 폰트 설치가 필요 없다. 빌드는 `RoomComparisonBuild.BuildKoreanMenuRevision`이며 기존 인수 빌드를 덮어쓰지 않는다.
 
 한국어 변경은 앞에서 새 Library 복원한 작업본에 적용해 PlayMode206/206 및 Windows 빌드를 검증했다. 한국어 소스 ZIP 자체로 Library 없는 복원을 다시 수행한 것은 아니다. 관련 증빙과 실행 경로는 [korean-menu.json](evidence/korean-menu.json)에 기록했다.
+
+## 2026-11-14 한국어 전달 ZIP 복원 결과
+
+전달 폴더의 main `c942dc9` 소스와 로컬 자산 ZIP을 새 폴더에 복원해 같은 PC에서 검증했다. EditMode 137개 통과·선택적 참조 검사 1개 제외, PlayMode 206개 통과. Windows 재빌드 GUID `4bec6035d0b041938f55d2dd8642115f`. 테스트에 사용한 소스·폰트 등 324개와 원본 맵·PLY 4개의 해시가 일치했다. 패킹 목록에서 두 GS, 강의실 보완 메시·텍스처, 한글 폰트를 확인했다. 재빌드 실행본의 헤드셋 시험은 미수행이다. [검증 기록](evidence/korean-delivery-restoration.json).
