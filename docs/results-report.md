@@ -162,3 +162,7 @@ Yaku 옷 끝 흰 영역의 원인은 알파가 없는 RGB 텍스처 연결이었
 ## 2026-11-12 — 최종 hybrid 새 Library 복원 검증
 
 main26f31cb를 D:/VRFPS-Reproduction/classroom-hybrid-26f31cb에 새 Library로 복원했다. EditMode137통과/선택적 legacy ReferenceRoom 검사1제외, PlayMode205/205, Windows 재빌드GUIDe01ed8565dce447aa8bf4d59c37d0c0e 성공. 소스319개 및 테마맵2개·원본PLY2개 해시 일치. Room/Classroom GS와 hybrid mesh/texture 패킹 확인, 원본PLY 패킹 없음. 동일 PC 캐시/라이선스 조건이며 복원 Player의 VR 실행은 하지 않았다. 사용자 인수 Player aacd2a9f59f545fbbae798302d047920은 보존했다. 이전 hybrid 새 Library 미반복 기록은 이 범위에서 갱신한다. [증빙](evidence/classroom-hybrid-clean-restoration.json). 성능/정식 반복은 보류, 발표/영상은 사용자 담당이며 전체 제출 완료를 뜻하지 않는다.
+
+## 2026-11-14 한국어 메뉴와 실제 플레이 VR 확인
+
+사용자가 한국어 빌드의 메뉴와 실제 플레이를 VR에서 확인하고 문제가 없다고 보고했다. 실행본 GUID는 `f6acd745513f4cc09961b2968a8747e2`, 구현 소스는 `bb3c40a`다. 맵별 시험 시간과 정식 반복 횟수는 미기록이며 정량 성능 측정은 보류 중이다. [인수 기록](evidence/korean-menu.json) · [PR #53](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/53)

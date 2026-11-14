@@ -795,3 +795,7 @@ main26f31cb를 D:/VRFPS-Reproduction/classroom-hybrid-26f31cb에 새 Library로 
 ## 2026-11-13 — 한국어 메뉴 및 설명
 
 맵 선택·조작 방법·설정·일시정지·결과와 오류 안내를 한국어로 변경하고 NanumGothic/OFL을 포함했다. 사용자 요청으로 새 탄창 설명의 (30발)만 제거했다. 실제 용량·맵·게임 규칙은 유지한다. PlayMode206/206 및 별도 Windows 빌드 f6acd745513f4cc09961b2968a8747e2 성공. 화면5종을3회 전환해 표시 픽셀 검사를 수행했다. 전체 이미지 미리보기에서 누락처럼 보였으나 PNG 영역 픽셀·확대 확인에서는 글자가 존재했다. 근거 부족한 폰트 보완 코드는 제거했으며 새 Player VR 확인은 대기다. [증빙](evidence/korean-menu.json).
+
+## 2026-11-14 한국어 메뉴와 실제 플레이 VR 확인
+
+사용자가 한국어 빌드의 메뉴와 실제 플레이를 VR에서 확인하고 문제가 없다고 보고했다. 실행본 GUID는 `f6acd745513f4cc09961b2968a8747e2`, 구현 소스는 `bb3c40a`다. 맵별 시험 시간과 정식 반복 횟수는 미기록이며 정량 성능 측정은 보류 중이다. [인수 기록](evidence/korean-menu.json) · [PR #53](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/53)

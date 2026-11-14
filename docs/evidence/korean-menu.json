@@ -13,7 +13,6 @@
   "license": "SIL OFL 1.1; copied alongside executable",
   "previews": "D:/VRFPS-Reproduction/classroom-hybrid-26f31cb/tmp/korean-menu",
   "limitations": [
-    "New Korean Player not yet checked in VR.",
     "Pixel checks establish visible marks, not complete glyph correctness; screenshots were also inspected."
   ],
   "userRequestedGuideChange": "Removed (30발) only; magazine capacity unchanged.",
@@ -26,5 +25,10 @@
     "sha256": "120028fd3e903673906127fb044c68b65192699e43bacadef42d0a25ba5512d4",
     "crc": "passed",
     "freshLibraryFromThisZip": false
+  },
+  "userAcceptance": {
+    "date": "2026-11-14",
+    "quote": "VR로 메뉴 확인과 실제 플레이까지 문제 없는거 확인했어",
+    "scope": "Korean menus and actual gameplay in VR. Duration and repetition counts unspecified."
   }
 }
