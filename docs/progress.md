@@ -803,3 +803,7 @@ main26f31cb를 D:/VRFPS-Reproduction/classroom-hybrid-26f31cb에 새 Library로 
 ## 2026-11-14 한국어 빌드 로컬 전달 묶음
 
 인수 실행본, main c942dc9 소스, 복원용 로컬 자산 ZIP, 문서, 출처 고지와 시험 XML을 묶었다. 파일 SHA256 및 소스 ZIP CRC를 확인했다. 복사된 Player 실행은 미수행이며 외부 배포 조건은 미확정이다. [검증 기록](evidence/korean-local-delivery.json).
+
+## 2026-11-14 한국어 전달 ZIP 복원 결과
+
+전달 폴더의 main `c942dc9` 소스와 로컬 자산 ZIP을 새 폴더에 복원해 같은 PC에서 검증했다. EditMode 137개 통과·선택적 참조 검사 1개 제외, PlayMode 206개 통과. Windows 재빌드 GUID `4bec6035d0b041938f55d2dd8642115f`. 테스트에 사용한 소스·폰트 등 324개와 원본 맵·PLY 4개의 해시가 일치했다. 패킹 목록에서 두 GS, 강의실 보완 메시·텍스처, 한글 폰트를 확인했다. 재빌드 실행본의 헤드셋 시험은 미수행이다. [검증 기록](evidence/korean-delivery-restoration.json).
