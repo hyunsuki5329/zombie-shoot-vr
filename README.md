@@ -1,4 +1,6 @@
-# Zombie Shoot VR
+# ZomV
+
+Windows 데모는 `ZomV.zip` 전체를 풀고 `ZomV.exe`를 실행한다.
 
 촬영한 방과 강의실을 전투 공간으로 사용하는 Unity PC VR 좀비 FPS 학기 프로젝트다. Quest Pro와 Virtual Desktop을 대상으로 K2 양손 사격, 왼손 수동 재장전, 근접·원거리 좀비와 무한 웨이브를 구현한다.
 

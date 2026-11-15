@@ -93,7 +93,7 @@ namespace VRFPS.Editor {
    try{
     PlayerSettings.SetScriptingBackend(UnityEditor.Build.NamedBuildTarget.Standalone,ScriptingImplementation.Mono2x);PlayerSettings.enableFrameTimingStats=true;
     const string dir="Builds/Windows/AbandonedSchool/";Directory.CreateDirectory(dir);
-    var report=BuildPipeline.BuildPlayer(new BuildPlayerOptions{scenes=scenes,locationPathName=dir+"AbandonedSchool.exe",target=BuildTarget.StandaloneWindows64,options=BuildOptions.Development});
+    var report=BuildPipeline.BuildPlayer(new BuildPlayerOptions{scenes=scenes,locationPathName=dir+PlayerSettings.productName + ".exe",target=BuildTarget.StandaloneWindows64,options=BuildOptions.Development});
     if(report.summary.result!=UnityEditor.Build.Reporting.BuildResult.Succeeded)throw new InvalidOperationException("Two-map build failed");
     var bad=report.packedAssets.SelectMany(p=>p.contents).Where(p=>p.sourceAssetPath.Contains("External/RoomScan")||p.sourceAssetPath.Contains("ClassroomScan")||p.sourceAssetPath==SchoolAssetsSetup.Source+"source/model.fbx").ToArray();
     if(bad.Length!=0)throw new InvalidOperationException("Raw scan/source model leaked into build");
