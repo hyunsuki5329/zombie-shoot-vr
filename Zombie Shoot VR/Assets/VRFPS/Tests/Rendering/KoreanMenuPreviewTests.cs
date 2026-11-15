@@ -59,8 +59,15 @@ namespace VRFPS.Tests
      int i=iteration%5;
      if(i==0&&iteration>0){entry.menu.ShowMapSelection();entry.menu.OpenInstructions();}
      if(i==1)entry.menu.CloseInstructions();
-     if(i==2)entry.menu.OpenSettings();
-     if(i==3){entry.menu.CloseSettings();entry.run.StartRun(entry.room);entry.menu.Pause();}
+     if(i==2)
+     {
+      var left=entry.view.transform.Find("Panel/Settings").GetComponent<Button>();
+      var right=entry.view.transform.Find("Panel/Controls").GetComponent<Button>();
+      Assert.That(left.GetComponentInChildren<Text>().text,Is.EqualTo("조작 방법"));
+      Assert.That(right.GetComponentInChildren<Text>().text,Is.EqualTo("게임 종료"));
+      left.onClick.Invoke();
+     }
+     if(i==3){entry.menu.CloseInstructions();entry.run.StartRun(entry.room);entry.menu.Pause();}
      if(i==4){entry.menu.Resume();entry.run.EndRun();}
      entry.view.Refresh();entry.view.transform.SetPositionAndRotation(Vector3.zero,Quaternion.identity);entry.view.transform.localScale=Vector3.one*.001f;
      Canvas.ForceUpdateCanvases();yield return null;yield return null;Canvas.ForceUpdateCanvases();
@@ -68,7 +75,7 @@ namespace VRFPS.Tests
      Canvas.ForceUpdateCanvases();yield return null;
      foreach(var label in entry.view.GetComponentsInChildren<Text>(true))
       foreach(char c in label.text)if(c>=0xAC00&&c<=0xD7A3)Assert.That(label.font.HasCharacter(c),Is.True,"Missing Korean glyph "+c);
-     Assert.That(entry.view.transform.Find("Panel/Title").GetComponent<Text>().text,Is.EqualTo(new[]{"조작 방법","맵 선택","설정","일시정지","전투 결과"}[i]));
+     Assert.That(entry.view.transform.Find("Panel/Title").GetComponent<Text>().text,Is.EqualTo(new[]{"조작 방법","맵 선택","조작 방법","일시정지","전투 결과"}[i]));
      yield return new WaitForSecondsRealtime(.2f);
 
      yield return null;yield return null;
@@ -83,7 +90,7 @@ namespace VRFPS.Tests
        {var color=image.GetPixel(x,y);if(color.r>.65f&&color.g>.65f&&color.b>.65f)white++;}
       Assert.That(white,Is.GreaterThan(10),"No readable text pixels: "+iteration+" "+label.name+" "+label.text);
      }
-     File.WriteAllBytes(Path.Combine(output,new[]{"instructions","maps","settings","pause","result"}[i]+".png"),image.EncodeToPNG());
+     File.WriteAllBytes(Path.Combine(output,new[]{"instructions","maps","guide-from-menu","pause","result"}[i]+".png"),image.EncodeToPNG());
     }
    }
    finally{SceneManager.sceneLoaded-=Inject;UnityEngine.Object.DestroyImmediate(cameraObject);rt.Release();UnityEngine.Object.DestroyImmediate(rt);UnityEngine.Object.DestroyImmediate(image);}

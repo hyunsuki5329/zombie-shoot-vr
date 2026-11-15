@@ -40,7 +40,7 @@ namespace VRFPS.Tests
             run.StartRun(map);view.Refresh();Assert.That(panel.activeSelf,Is.False);
             menu.Pause();view.Refresh();Assert.That(panel.activeSelf,Is.True);
             Assert.That(title.text,Is.EqualTo("일시정지"));
-            settings.onClick.Invoke();view.Refresh();Assert.That(title.text,Is.EqualTo("설정"));
+            settings.onClick.Invoke();view.Refresh();Assert.That(title.text,Is.EqualTo("조작 방법"));
             back.onClick.Invoke();resume.onClick.Invoke();view.Refresh();Assert.That(panel.activeSelf,Is.False);
             run.Tick(8);run.RegisterSpawn(1);run.ResolveEnemy(1,true);run.ApplyDamage(100,1,0);view.Refresh();
             Assert.That(details.text,Does.Contain("웨이브 1").And.Contain("처치 1").And.Contain("저장 완료"));

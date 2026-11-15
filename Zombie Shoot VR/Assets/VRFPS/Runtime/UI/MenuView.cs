@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Serialization;
 namespace VRFPS
 {
     public sealed class MenuView : MonoBehaviour
@@ -11,8 +12,9 @@ namespace VRFPS
         [SerializeField] Transform viewer;
         [SerializeField] GameObject settingsControls;
         [SerializeField] Text title, details;
-        [SerializeField] Button resume, retry, settings, back, maps, retrySave;
-        [SerializeField] Button instructions;
+        [SerializeField] Button resume, retry, back, maps, retrySave;
+        [FormerlySerializedAs("settings"), SerializeField] Button guideButton;
+        [FormerlySerializedAs("instructions"), SerializeField] Button quitButton;
         [SerializeField] GameObject instructionPanel;
         [SerializeField] Material overlayMaterial;
         bool subscribed;
@@ -28,7 +30,7 @@ namespace VRFPS
             GameObject panel, Text title, Text details, Button resume, Button retry, Button settings, Button back, Button maps, Button retrySave)
         {
             Unsubscribe(); this.menu=menu;this.run=run;this.result=result;this.panel=panel;
-            this.title=title;this.details=details;this.resume=resume;this.retry=retry;this.settings=settings;
+            this.title=title;this.details=details;this.resume=resume;this.retry=retry;this.guideButton=settings;
             this.back=back;this.maps=maps;this.retrySave=retrySave;
             if(isActiveAndEnabled) Subscribe();
         }
@@ -46,8 +48,8 @@ namespace VRFPS
             menu.ScreenChanged+=OnScreenChanged;menu.IntroStatusChanged+=Refresh;
             if(result!=null) result.ResultChanged+=Refresh;
             resume.onClick.AddListener(menu.Resume); retry.onClick.AddListener(Retry);
-            settings.onClick.AddListener(menu.OpenSettings); back.onClick.AddListener(menu.CloseAuxiliary);
-            if(instructions!=null)instructions.onClick.AddListener(menu.OpenInstructions);
+            guideButton.onClick.AddListener(menu.OpenInstructions); back.onClick.AddListener(menu.CloseAuxiliary);
+            if(quitButton!=null)quitButton.onClick.AddListener(QuitGame);
             maps.onClick.AddListener(menu.ShowMapSelection); retrySave.onClick.AddListener(RetrySave);
             Refresh();
         }
@@ -58,14 +60,22 @@ namespace VRFPS
             {
                 menu.ScreenChanged-=OnScreenChanged;menu.IntroStatusChanged-=Refresh;
                 resume.onClick.RemoveListener(menu.Resume);retry.onClick.RemoveListener(Retry);
-                settings.onClick.RemoveListener(menu.OpenSettings);back.onClick.RemoveListener(menu.CloseAuxiliary);
-                if(instructions!=null)instructions.onClick.RemoveListener(menu.OpenInstructions);
+                guideButton.onClick.RemoveListener(menu.OpenInstructions);back.onClick.RemoveListener(menu.CloseAuxiliary);
+                if(quitButton!=null)quitButton.onClick.RemoveListener(QuitGame);
                 maps.onClick.RemoveListener(menu.ShowMapSelection);
             }
             if(result!=null)result.ResultChanged-=Refresh;
             retrySave.onClick.RemoveListener(RetrySave);
         }
         void OnScreenChanged(MenuScreen screen) => Refresh();
+        static void QuitGame()
+        {
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#else
+            Application.Quit();
+#endif
+        }
         void Retry(){if(menu.IntroOwnsMenu)menu.RetryIntroCleanup();else menu.Retry();}
         void RetrySave() { if(result!=null) result.RetrySave();Refresh(); }
         public void Refresh()
@@ -85,12 +95,12 @@ namespace VRFPS
             var showingInstructions=screen==MenuScreen.Instructions;
             if(instructionPanel!=null)instructionPanel.SetActive(showingInstructions);
             details.gameObject.SetActive(!showingInstructions);
-            if(instructions!=null)instructions.gameObject.SetActive(!showingInstructions && screen!=MenuScreen.Settings);
+            if(quitButton!=null)quitButton.gameObject.SetActive(!showingInstructions && screen!=MenuScreen.Settings);
             if(screen==MenuScreen.Hidden)return;
             title.text=screen==MenuScreen.MapSelection ? "맵 선택" : screen==MenuScreen.Pause ? "일시정지" : screen==MenuScreen.Settings ? "설정" : screen==MenuScreen.Instructions ? "조작 방법" : "전투 결과";
             resume.gameObject.SetActive(screen==MenuScreen.Pause);
             retry.gameObject.SetActive(menu.IntroOwnsMenu ? screen==MenuScreen.MapSelection&&menu.IntroError!=null : screen==MenuScreen.Pause||screen==MenuScreen.Result);
-            settings.gameObject.SetActive(screen!=MenuScreen.Settings && !showingInstructions);
+            guideButton.gameObject.SetActive(screen!=MenuScreen.Settings && !showingInstructions);
             back.gameObject.SetActive(screen==MenuScreen.Settings || showingInstructions);
             maps.gameObject.SetActive(screen==MenuScreen.Pause || screen==MenuScreen.Result);
             retrySave.gameObject.SetActive(screen==MenuScreen.Result && result!=null && result.HasResult && !result.SaveSucceeded);

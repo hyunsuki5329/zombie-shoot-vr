@@ -59,7 +59,7 @@ namespace VRFPS.Editor
                 root.AddComponent<SettingsView>().Configure(null,moveText,turnText,moveDown,moveUp,turnDown,turnUp);
                 var viewData=new SerializedObject(root.GetComponent<MenuView>());
                 viewData.FindProperty("overlayMaterial").objectReferenceValue=AssetDatabase.LoadAssetAtPath<Material>("Assets/VRFPS/UI/MenuOverlay.mat");
-                viewData.FindProperty("instructions").objectReferenceValue=help;
+                viewData.FindProperty("quitButton").objectReferenceValue=help;
                 viewData.FindProperty("instructionPanel").objectReferenceValue=instructionInstance;
                 viewData.FindProperty("settingsControls").objectReferenceValue=controls;viewData.ApplyModifiedPropertiesWithoutUndo();
                 controls.SetActive(false);

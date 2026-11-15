@@ -23,8 +23,8 @@ namespace VRFPS
                 case "Resume": return "계속하기";
                 case "Retry": return "다시 시작";
                 case "Retry save": return "저장 재시도";
-                case "Settings": return "설정";
-                case "Controls": return "조작 방법";
+                case "Settings": return "조작 방법";
+                case "Controls": return "게임 종료";
                 case "Maps unavailable": case "Map selection": case "Maps": return "맵 선택";
                 case "Move -": return "이동 −";
                 case "Move +": return "이동 +";
