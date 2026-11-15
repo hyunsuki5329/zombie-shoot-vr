@@ -30,7 +30,7 @@ public static class RoomComparisonBuild
         var target=BuildTarget.StandaloneWindows64;var named=NamedBuildTarget.Standalone;
         var automatic=PlayerSettings.GetUseDefaultGraphicsAPIs(target);var apis=PlayerSettings.GetGraphicsAPIs(target);
         var backend=PlayerSettings.GetScriptingBackend(named);
-        var output=Path.GetFullPath(Path.Combine("Builds/Windows",directory,"AbandonedSchool.exe"));Directory.CreateDirectory(Path.GetDirectoryName(output));
+        var output=Path.GetFullPath(Path.Combine("Builds/Windows",directory,PlayerSettings.productName + ".exe"));Directory.CreateDirectory(Path.GetDirectoryName(output));
         try
         {
             PlayerSettings.SetUseDefaultGraphicsAPIs(target,false);PlayerSettings.SetGraphicsAPIs(target,new[]{GraphicsDeviceType.Direct3D12});
