@@ -807,3 +807,9 @@ main26f31cb를 D:/VRFPS-Reproduction/classroom-hybrid-26f31cb에 새 Library로 
 ## 2026-11-14 한국어 전달 ZIP 복원 결과
 
 전달 폴더의 main `c942dc9` 소스와 로컬 자산 ZIP을 새 폴더에 복원해 같은 PC에서 검증했다. EditMode 137개 통과·선택적 참조 검사 1개 제외, PlayMode 206개 통과. Windows 재빌드 GUID `4bec6035d0b041938f55d2dd8642115f`. 테스트에 사용한 소스·폰트 등 324개와 원본 맵·PLY 4개의 해시가 일치했다. 패킹 목록에서 두 GS, 강의실 보완 메시·텍스처, 한글 폰트를 확인했다. 재빌드 실행본의 헤드셋 시험은 미수행이다. [검증 기록](evidence/korean-delivery-restoration.json).
+
+## 2026-11-15 시연 메뉴
+
+하단 왼쪽 조작 방법, 오른쪽 게임 종료. Unity 메뉴 집중 시험 3개 통과. 일반 Windows 빌드 c5d0e9ef41ed4afa8801ff3f828b615b 및 시연 ZIP 284개 항목 CRC 확인. 일반 빌드 사전 실행에서 Meta XR 직렬화 오류 12건이 파일 로그에 남았다. 최신 메뉴의 헤드셋 종료 버튼 실기는 대기 중이다.
+
+2026-11-15 사용자는 시연 ZIP의 VR 조작 방법 → 뒤로 → 게임 종료 확인 요청에 ‘확인했고 이상없어’라고 회신했다. 빌드 GUID c5d0e9ef41ed4afa8801ff3f828b615b의 메뉴와 종료 동작을 인수했다. 사전 실행 파일 로그의 Meta XR 직렬화 오류 12건은 기존 기록대로 남긴다. [PR #56](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/56)
