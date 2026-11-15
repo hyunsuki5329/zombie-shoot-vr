@@ -811,3 +811,5 @@ main26f31cb를 D:/VRFPS-Reproduction/classroom-hybrid-26f31cb에 새 Library로 
 ## 2026-11-15 시연 메뉴
 
 하단 왼쪽 조작 방법, 오른쪽 게임 종료. Unity 메뉴 집중 시험 3개 통과. 일반 Windows 빌드 c5d0e9ef41ed4afa8801ff3f828b615b 및 시연 ZIP 284개 항목 CRC 확인. 일반 빌드 사전 실행에서 Meta XR 직렬화 오류 12건이 파일 로그에 남았다. 최신 메뉴의 헤드셋 종료 버튼 실기는 대기 중이다.
+
+2026-11-15 사용자는 시연 ZIP의 VR 조작 방법 → 뒤로 → 게임 종료 확인 요청에 ‘확인했고 이상없어’라고 회신했다. 빌드 GUID c5d0e9ef41ed4afa8801ff3f828b615b의 메뉴와 종료 동작을 인수했다. 사전 실행 파일 로그의 Meta XR 직렬화 오류 12건은 기존 기록대로 남긴다. [PR #56](https://github.com/hyunsuki5329/zombie-shoot-vr/pull/56)
