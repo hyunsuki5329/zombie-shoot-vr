@@ -5,19 +5,24 @@ namespace VRFPS
     {
         public const int MaxHealth = 100, HealPerClear = 20;
         public const double ProtectionSeconds = 0.5, PreparationSeconds = 8;
+#if ZOMV_RECORDING
+        const int FirstRangedWave = 2, FirstCrawlerWave = 4, BossInterval = 3;
+#else
+        const int FirstRangedWave = 3, FirstCrawlerWave = 6, BossInterval = 5;
+#endif
         public static int RangedQuotaForWave(int wave)
         {
             var quota = QuotaForWave(wave);
-            if (wave < 3) return 0;
+            if (wave < FirstRangedWave) return 0;
             // Integer percentages avoid floating-point flooring/ceiling at exact boundaries.
-            var percent = System.Math.Min(30L, 10L + (wave - 3L) * 2);
+            var percent = System.Math.Min(30L, 10L + (wave - (long)FirstRangedWave) * 2);
             return (int)System.Math.Max(1, quota * percent / 100);
         }
         public static EnemyVariant MeleeVariantForWave(int wave, int index)
         {
             if(wave<=0 || index<0) throw new System.ArgumentOutOfRangeException();
-            if(wave%5==0 && index==0)return EnemyVariant.Boss;
-            return wave>5 && index%3==0 ? EnemyVariant.Crawler : EnemyVariant.Normal;
+            if(wave % BossInterval == 0 && index==0)return EnemyVariant.Boss;
+            return wave >= FirstCrawlerWave && index%3==0 ? EnemyVariant.Crawler : EnemyVariant.Normal;
         }
         public static float EnemySpeed(EnemyKind kind, EnemyVariant variant) => variant==EnemyVariant.Crawler?2.2f:variant==EnemyVariant.Boss?.9f:kind==EnemyKind.Melee?1.1f:.85f;
         public static float AttackWindup(EnemyKind kind,EnemyVariant variant) => variant==EnemyVariant.Boss?1f:variant==EnemyVariant.Crawler?.45f:kind==EnemyKind.Melee?.65f:.8f;

@@ -19,7 +19,8 @@ public static class RoomComparisonBuild
     public static void BuildClassroomHybridRevision() => BuildTo("GSComparison-Classroom-Hybrid", true);
     public static void BuildClassroomRevision() => BuildTo("GSComparison-Classroom", true);
     public static void BuildWindowsDemo() => BuildTo("WindowsDemo", true, BuildOptions.None);
-    static void BuildTo(string directory, bool includeClassroom = false, BuildOptions options = BuildOptions.Development)
+    public static void BuildRecordingDemo() => BuildTo("RecordingDemo", true, BuildOptions.None, new[] { "ZOMV_RECORDING" });
+    static void BuildTo(string directory, bool includeClassroom = false, BuildOptions options = BuildOptions.Development, string[] extraDefines = null)
     {
         if(!Application.isBatchMode)throw new InvalidOperationException("Use isolated batch project.");
         var scenes=new[]{"Assets/VRFPS/Scenes/Bootstrap.unity","Assets/VRFPS/Scenes/Combat.unity","Assets/VRFPS/Scenes/Maps/Room.unity","Assets/VRFPS/Scenes/Maps/Classroom.unity",RoomRealitySetup.ScenePath};
@@ -35,7 +36,7 @@ public static class RoomComparisonBuild
         {
             PlayerSettings.SetUseDefaultGraphicsAPIs(target,false);PlayerSettings.SetGraphicsAPIs(target,new[]{GraphicsDeviceType.Direct3D12});
             PlayerSettings.SetScriptingBackend(named,ScriptingImplementation.Mono2x);
-            var report=BuildPipeline.BuildPlayer(new BuildPlayerOptions{scenes=scenes,locationPathName=output,target=target,options=options});
+            var report=BuildPipeline.BuildPlayer(new BuildPlayerOptions{scenes=scenes,locationPathName=output,target=target,options=options,extraScriptingDefines=extraDefines ?? Array.Empty<string>()});
             if(report.summary.result!=BuildResult.Succeeded)throw new InvalidOperationException("GSComparison build failed: "+report.summary.result);
             var packed=report.packedAssets.SelectMany(p=>p.contents).Select(c=>c.sourceAssetPath).Distinct().OrderBy(p=>p).ToArray();
             File.WriteAllLines(Path.Combine(Path.GetDirectoryName(output),"packed-assets.txt"),packed);
